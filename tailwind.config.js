@@ -10,6 +10,7 @@ module.exports = {
       ...colors,
       cosmosLight: '#20c997',
       cosmosDark: "#008C8C",
+      cosmosDarker: "#006666",
     },
     extend: {
       minHeight: {

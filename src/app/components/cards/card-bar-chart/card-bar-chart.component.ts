@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
-import { Chart } from "chart.js";
+import { Chart } from "chart.js/auto";
 
 @Component({
   selector: "app-card-bar-chart",
