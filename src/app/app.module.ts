@@ -47,11 +47,20 @@ import { PagesDropdownComponent } from "./components/dropdowns/pages-dropdown/pa
 import { NotificationDropdownComponent } from "./components/dropdowns/notification-dropdown/notification-dropdown.component";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthService } from "./services/authentication/auth.service";
+import { AuthGuard } from "./services/authentication/auth.guard";
+import { AuthInterceptor } from "./services/authentication/auth.interceptor";
+import { AssemblyComponent } from "./views/admin/assembly/index/assembly.component";
+import { UserComponent } from "./layouts/user/user.component";
+import { PaginationComponent } from "./components/cards/card-pagination/pagination.component";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
+    PaginationComponent,
     CardBarChartComponent,
     CardLineChartComponent,
     IndexDropdownComponent,
@@ -75,18 +84,26 @@ import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user
     AdminNavbarComponent,
     IndexNavbarComponent,
     AdminComponent,
+    UserComponent,
     AuthComponent,
     MapsComponent,
     SettingsComponent,
     TablesComponent,
+    AssemblyComponent,
     LoginComponent,
     RegisterComponent,
     IndexComponent,
     LandingComponent,
     ProfileComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  providers: [AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

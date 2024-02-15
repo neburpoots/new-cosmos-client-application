@@ -1,3 +1,10 @@
+@import 'font-awesome/css/font-awesome.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5; /* or any other styling to indicate it's disabled */
+}

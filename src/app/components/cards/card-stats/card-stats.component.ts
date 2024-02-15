@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 
+
 @Component({
   selector: "app-card-stats",
   templateUrl: "./card-stats.component.html",
@@ -51,9 +52,9 @@ export class CardStatsComponent implements OnInit {
   }
   set statPercentColor(statPercentColor: string) {
     this._statPercentColor =
-      statPercentColor === undefined ? "text-emerald-500" : statPercentColor;
+      statPercentColor === undefined ? "text-cosmosDarker" : statPercentColor;
   }
-  private _statPercentColor = "text-emerald-500";
+  private _statPercentColor = "text-cosmosDarker";
 
   @Input()
   get statDescripiron(): string {

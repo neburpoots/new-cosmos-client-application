@@ -6,10 +6,18 @@ import { Component, OnInit } from "@angular/core";
 })
 export class SidebarComponent implements OnInit {
   collapseShow = "hidden";
+  favoritesDropdownActive: boolean = false;
+
   constructor() {}
 
   ngOnInit() {}
   toggleCollapseShow(classes : any) {
     this.collapseShow = classes;
+  }
+
+
+  // Method to toggle the dropdown state
+  toggleFavoritesDropdown() {
+    this.favoritesDropdownActive = !this.favoritesDropdownActive;
   }
 }

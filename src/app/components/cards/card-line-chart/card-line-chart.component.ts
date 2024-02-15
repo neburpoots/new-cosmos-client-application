@@ -25,16 +25,16 @@ export class CardLineChartComponent implements OnInit {
         datasets: [
           {
             label: new Date().getFullYear(),
-            backgroundColor: "#4c51bf",
-            borderColor: "#4c51bf",
+            backgroundColor: "#20c997",
+            borderColor: "#20c997",
             data: [65, 78, 66, 44, 56, 67, 75],
             fill: false,
           },
           {
             label: new Date().getFullYear() - 1,
             fill: false,
-            backgroundColor: "#fff",
-            borderColor: "#fff",
+            backgroundColor: "#006666",
+            borderColor: "#006666",
             data: [40, 68, 86, 74, 56, 60, 87],
           },
         ],

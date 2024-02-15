@@ -5,16 +5,19 @@ import { Component, OnInit, Input } from "@angular/core";
   templateUrl: "./card-table.component.html",
 })
 export class CardTableComponent implements OnInit {
-  @Input()
-  get color(): string {
-    return this._color;
-  }
-  set color(color: string) {
-    this._color = color !== "light" && color !== "dark" ? "light" : color;
-  }
-  private _color = "light";
+  @Input() columns: string[] = [];
+  @Input() data: any[] = [];
+  @Input() title: string = "";
+  @Input() paginationInfo: any = {};
+  @Input() color: string = "light";
+
+  
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  isObject(value: any): boolean {
+    return typeof value === 'object' && value !== null;
+  }
 }
