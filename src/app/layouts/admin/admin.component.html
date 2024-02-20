@@ -1,10 +1,12 @@
-<div>
+<div class="bg-cosmosDarker">
   <app-sidebar></app-sidebar>
-  <div class="relative min-h-screen md:ml-64 bg-slate-100">
-    <app-admin-navbar></app-admin-navbar>
-    <div class="mx-auto min-h-screen w-full">
-      <router-outlet></router-outlet>
-      <app-footer-admin></app-footer-admin>
+  <div class="md:ml-64 bg-cosmosDark rounded-l-[60px]">
+
+    <div class="relative min-h-screen md:ml-4 shadow-xl rounded-l-[60px] bg-stone-200">
+      <app-admin-navbar></app-admin-navbar>
+      <div class="mx-auto min-h-screen w-full">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>

@@ -1,34 +1,45 @@
-<div
-  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-white bg-opacity-50 backdrop-blur-lg p-4"
-  [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'"
->
+<div class="mb-5 flex justify-between items-center">
+  <div class="relative flex w-full flex-wrap md:w-[200px]">
+    <span
+      class="z-10 h-full leading-snug font-normal absolute text-center text-slate-300 absolute bg-transparent rounded-2xl text-base items-center justify-center w-8 pl-3 py-3"><i
+        class="fa fa-search"></i></span>
+    <input (ngModelChange)="loadData($event)" [(ngModel)]="searchCriteria.searchValue" type="text"
+      placeholder="Search here..."
+      class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded-2xl text-sm  w-full pl-10" />
+  </div>
+  <div (click)="openCreateModal()" class="bg-cosmosDark rounded-full text-sm text-white px-3 py-2 cursor-pointer">
+    Add {{ title }}+
+  </div>
+</div>
+<div [@fadeInOut]="true"
+  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-slate-50 p-4"
+  [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
   <div class="block w-full overflow-x-auto">
     <div class="text-slate-900 text-lg font-semibold mb-2">{{ title }} </div>
     <div class="rounded-2xl overflow-hidden">
       <table class="items-center w-full bg-transparent border-collapse">
         <thead>
-          <tr class="bg-slate-50 bg-opacity-50 text-slate-800">
-            <th
-              *ngFor="let column of columns; let i = index"
-              class="px-6 align-middle py-3 text-xs uppercase whitespace-nowrap font-semibold text-left
+          <tr class="bg-slate-100 rounded-lg text-slate-800">
+            <th *ngFor="let column of columns; let i = index" class="px-6 align-middle py-3 text-xs uppercase whitespace-nowrap font-semibold text-left
                       {{ i === 0 ? 'rounded-tl-lg rounded-bl-lg' : '' }}
-                      {{ i === columns.length - 1 ? 'rounded-tr-lg rounded-br-lg' : '' }}"
-            >
+                      {{ i === columns.length - 1 ? 'rounded-tr-lg rounded-br-lg' : '' }}">
               {{ column }}
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="data.length > 0">
           <tr *ngFor="let item of data">
-            <td
-              *ngFor="let column of columns"
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4"
-            >
+            <td *ngFor="let column of columns"
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
               {{ item[column] }}
             </td>
           </tr>
         </tbody>
+
       </table>
+      <div *ngIf="data.length === 0" class="text-center text-slate-400 text-lg p-4">
+        No results matched the search criteria
+      </div>
     </div>
   </div>
 </div>

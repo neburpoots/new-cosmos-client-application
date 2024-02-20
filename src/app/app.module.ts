@@ -54,7 +54,10 @@ import { AuthInterceptor } from "./services/authentication/auth.interceptor";
 import { AssemblyComponent } from "./views/admin/assembly/index/assembly.component";
 import { UserComponent } from "./layouts/user/user.component";
 import { PaginationComponent } from "./components/cards/card-pagination/pagination.component";
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { ModalComponent } from "./components/modal/modal.component";
+import { AssemblyCreateComponent } from "./views/admin/assembly/create/assembly-create.component";
 
 @NgModule({
   declarations: [
@@ -95,8 +98,10 @@ import { PaginationComponent } from "./components/cards/card-pagination/paginati
     IndexComponent,
     LandingComponent,
     ProfileComponent,
+    ModalComponent,
+    AssemblyCreateComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule],
   providers: [AuthService,
     AuthGuard,
     {

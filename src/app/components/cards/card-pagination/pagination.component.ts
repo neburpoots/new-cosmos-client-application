@@ -1,10 +1,20 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PaginatedResult } from '../../../models/utils/pagination';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  styleUrls: ['./pagination.component.css'],
+  animations: [
+    trigger("fadeInOut", [
+      state("void", style({
+        opacity: 0,
+        transform: "translateX(-20px)",
+      })),
+      transition("void <=> *", animate(400)),
+    ]),
+  ],
 })
 export class PaginationComponent {
 
