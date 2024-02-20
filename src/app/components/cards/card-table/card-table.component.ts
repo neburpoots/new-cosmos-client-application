@@ -42,6 +42,10 @@ export class CardTableComponent implements OnInit {
   openCreateModal(): void {
     this.create.emit();
   }
+  
+  isBoolean(value: any): boolean {
+    return typeof value === 'boolean';
+  }
 
   ngOnInit(): void { }
 

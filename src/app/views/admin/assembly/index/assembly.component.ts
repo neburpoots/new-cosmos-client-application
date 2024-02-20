@@ -37,20 +37,29 @@ export class AssemblyComponent implements OnInit {
 
   
   get assembliesTableHeaders(): string[] {
-    return ['id', 'code', 'checked', 'quantity', 'assemblyType']
+    return ['code', 'assemblyType', 'cdartikel', 'startSerialNumber', 'quantity', 'voorraad', 'gereserveerd', 'minvoorraad', 'maxvoorraad', 'checked', 'po', 'created'];
   }
 
 
   constructor(private assemblyService: AssemblyService) { }
 
   mapAssembliesToTableData(assemblies: any[]): any[] {
+    console.log(assemblies)
     return assemblies.map((assembly) => {
       return {
         id: assembly.id,
         code: assembly.code,
+        assemblyType: assembly.assemblyType.name,
+        cdartikel: assembly?.assemblyType?.stock?.cdartikel,
+        startSerialNumber: assembly.startSerialNumber,
         checked: assembly.checked,
         quantity: assembly.quantity,
-        assemblyType: assembly.assemblyType.name,
+        voorraad: assembly?.assemblyType?.stock?.voorraad,
+        gereserveerd: assembly?.assemblyType?.stock?.gereserveerd,
+        maxvoorraad: assembly?.assemblyType?.stock?.maxvoorraad,
+        minvoorraad: assembly?.assemblyType?.stock?.minvoorraad,
+        po: assembly.po,
+        created: assembly.created,
       };
     });
   }

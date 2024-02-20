@@ -1,0 +1,29 @@
+<h2 class="text-xl mb-2 font-semibold">Create Assembly</h2>
+<form [formGroup]="myForm" class="flex flex-col gap-5" (ngSubmit)="onSubmit()">
+  <div class="flex flex-col gap-1 mt-2">
+    <select class="rounded-2xl focus:border-0 rounded-2xl focus:ring-0 focus:outline-cosmosDark " id="selectedOption"
+      formControlName="selectedOption">
+      <option [value]="null" disabled>Selecteer een assembly type</option>
+      <option *ngFor="let option of assemblyTypes" [value]="option.id">{{ option.name }}</option>
+    </select>
+  </div>
+
+
+  <input-component [form]="myForm" [name]="'batch'" [displayName]="'Batch'" [touched]="myForm.controls['batch'].touched"
+    [errors]="[{ name: 'required', message: 'Batch is required' }, { name: 'minlength' ,
+    message: 'Batch must be at least 2 characters' }]"></input-component>
+
+  <input-component [form]="myForm" [name]="'start_serial_number'" [displayName]="'Start S/N'"
+    [touched]="myForm.controls['start_serial_number'].touched" [errors]="[{ name: 'required', message: 'Start serial number is required' }, { name: 'pattern' ,
+message: 'Start serial number is not a valid number' }]"></input-component>
+
+  <input-component [form]="myForm" [name]="'quantity'" [displayName]="'Start S/N'"
+    [touched]="myForm.controls['quantity'].touched" [errors]="[{ name: 'required', message: 'Quantity is required' }, { name: 'pattern' ,
+message: 'Quantity is not a valid number' }]"></input-component>
+
+
+
+  <!-- Dynamic component that does not work yet -->
+
+  <button type="submit" [disabled]="myForm.invalid">Submit</button>
+</form>

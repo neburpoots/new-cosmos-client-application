@@ -16,7 +16,7 @@
   [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
   <div class="block w-full overflow-x-auto">
     <div class="text-slate-900 text-lg font-semibold mb-2">{{ title }} </div>
-    <div class="rounded-2xl overflow-hidden">
+    <div class="rounded-2xl overflow-auto">
       <table class="items-center w-full bg-transparent border-collapse">
         <thead>
           <tr class="bg-slate-100 rounded-lg text-slate-800">
@@ -31,7 +31,11 @@
           <tr *ngFor="let item of data">
             <td *ngFor="let column of columns"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-              {{ item[column] }}
+              <ng-container *ngIf="isBoolean(item[column]); else defaultContent">
+                <span class="text-base" *ngIf="item[column]"><i class="fa fa-md fa-check-circle text-green-700 text-lg w-8"></i></span>
+                <span class="text-base" *ngIf="!item[column]"><i class="fa fa-md fa-times-circle text-red-600 text-lg w-8"></i></span>
+              </ng-container>
+              <ng-template #defaultContent>{{ item[column] }}</ng-template>
             </td>
           </tr>
         </tbody>

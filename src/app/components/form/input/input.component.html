@@ -1,0 +1,22 @@
+<div [formGroup]="form" class="flex flex-col gap-1">
+    <label [for]="name" [ngClass]="{
+        'text-red-500': form?.get(name)?.errors && form && form.controls[name].touched,
+        'text-green-600': form?.get(name)?.valid && form && form.controls[name].touched,
+        'text-slate-800': !form?.get(name)?.touched
+      }">{{displayName}}</label>
+    <input [ngClass]="{
+      'border-red-500 focus:outline-red-500': form?.get(name)?.errors && form && form.controls[name].touched,
+      'border-green-600 focus:outline-green-600': form?.get(name)?.valid && form && form.controls[name].touched,
+      'border-slate-300 focus:outline-slate-300': !form?.get(name)?.touched
+    }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+        type="text" [id]="name" [formControlName]="name">
+
+    <ng-container *ngFor="let error of errors">
+        <div class="text-red-500">
+            <div *ngIf="form?.get(name)?.hasError(error.name) && form && form.controls[name].touched">
+                {{error.message}}
+            </div>
+        </div>
+    </ng-container>
+
+</div>

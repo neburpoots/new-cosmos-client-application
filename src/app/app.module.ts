@@ -55,9 +55,10 @@ import { AssemblyComponent } from "./views/admin/assembly/index/assembly.compone
 import { UserComponent } from "./layouts/user/user.component";
 import { PaginationComponent } from "./components/cards/card-pagination/pagination.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from "./components/modal/modal.component";
 import { AssemblyCreateComponent } from "./views/admin/assembly/create/assembly-create.component";
+import { InputComponent } from "./components/form/input/input.component";
 
 @NgModule({
   declarations: [
@@ -99,9 +100,10 @@ import { AssemblyCreateComponent } from "./views/admin/assembly/create/assembly-
     LandingComponent,
     ProfileComponent,
     ModalComponent,
-    AssemblyCreateComponent
+    AssemblyCreateComponent,
+    InputComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule],
+  imports: [ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule],
   providers: [AuthService,
     AuthGuard,
     {
