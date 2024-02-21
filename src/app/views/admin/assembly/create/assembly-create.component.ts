@@ -5,6 +5,7 @@ import { AssemblyService } from '../../../../services/assembly/assembly.service'
 import { ToastrService } from 'ngx-toastr';
 import AssemblyType from '../../../../models/entities/assemblyType';
 import { AssemblyCreateDto } from '../../../../models/dto/assemblyCreateDto';
+import { ErrorResponse } from '../../../../models/utils/errorResponse';
 
 @Component({
     selector: 'assembly-create',
@@ -14,12 +15,13 @@ import { AssemblyCreateDto } from '../../../../models/dto/assemblyCreateDto';
 export class AssemblyCreateComponent {
 
     @Output() closeModal = new EventEmitter<void>();
+    @Output() refreshAssemblies = new EventEmitter<void>();
 
     myForm: FormGroup;
 
     assemblyTypes: AssemblyType[] = [];
 
-    
+
     assembly = {
         batch: '',
         start_serial_number: '',
@@ -33,58 +35,69 @@ export class AssemblyCreateComponent {
             start_serial_number: [this.assembly.start_serial_number, [Validators.required, Validators.pattern('^[0-9]+$')]],
             quantity: [this.assembly.quantity, [Validators.required, Validators.pattern('^[0-9]+$')]],
             selectedOption: [this.assembly.selectedOption, Validators.required], // Add a form control for the select component
-            
+
         });
     }
 
     close(): void {
         this.myForm.reset();
-        
+
         this.closeModal.emit();
     }
 
     onSubmit(): void {
-        if (this.myForm.valid) {
-            // Access form values using the 'value' property
-            this.myForm.value;
+        try {
 
-            //get the assemblytype from the array
-            let selectedAssemblyType = this.assemblyTypes.find((assemblyType) => assemblyType.id === +this.myForm.value.selectedOption);
 
-            if(!selectedAssemblyType) {
-                this.toastr.error('Please select an assembly type', 'Error');
-                return;
+            if (this.myForm.valid) {
+                // Access form values using the 'value' property
+                this.myForm.value;
+
+                //get the assemblytype from the array
+                let selectedAssemblyType = this.assemblyTypes.find((assemblyType) => assemblyType.id === +this.myForm.value.selectedOption);
+
+                if (!selectedAssemblyType) {
+                    this.toastr.error('Please select an assembly type', 'Error');
+                    return;
+                }
+
+                let assemblyData: AssemblyCreateDto = {
+                    batch: this.myForm.value.batch,
+                    start_serial_number: +this.myForm.value.start_serial_number,
+                    assemblyType: selectedAssemblyType,
+                    quantity: this.myForm.value.quantity
+                }
+
+                console.log(assemblyData);
+
+                this.assemblyService.createAssembly(assemblyData).subscribe(
+                    (response) => {
+                        console.log('Response:', response);
+                        this.toastr.success('Assembly created successfully', 'Success');
+                        this.myForm.reset();
+                        this.closeModal.emit();
+                        this.refreshAssemblies.emit();
+                    },
+                    (error) => {
+                        this.toastr.error(error.error.message, 'Error');
+                    }
+                );
             }
-
-            let assemblyData : AssemblyCreateDto = {
-                batch: this.myForm.value.batch,
-                start_serial_number: +this.myForm.value.start_serial_number,
-                assemblyType: selectedAssemblyType,
-                quantity: this.myForm.value.quantity
-            }
-
-            console.log(assemblyData);
-
-            this.assemblyService.createAssembly(assemblyData).subscribe((response) => {
-                console.log(response);
-                // this.close();
-                this.toastr.success('Form submitted successfully', 'Success');
-
-            });
-
-            // console.log('Form submitted:', this.myForm.value);
+        } catch (error) {
+            // this.toastr.error(error.message, 'Error');
+            console.error(error);
         }
     }
 
     async loadAssemblyTypes(): Promise<void> {
         try {
-          const response = await this.assemblyTypeService.getAssemblyTypes().toPromise();
-          this.assemblyTypes = response!;
-          console.log(this.assemblyTypes);
+            const response = await this.assemblyTypeService.getAssemblyTypes().toPromise();
+            this.assemblyTypes = response!;
+            console.log(this.assemblyTypes);
         } catch (error) {
-          console.error('Error fetching assemblyTypes', error);
+            console.error('Error fetching assemblyTypes', error);
         }
-      }
+    }
 
     ngOnInit(): void {
         this.loadAssemblyTypes();

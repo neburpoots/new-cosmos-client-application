@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { PaginatedResult } from '../../models/utils/pagination';
 import { SearchCriteria } from '../../models/utils/searchCriteria';
 import { Assembly } from '../../models/entities/assembly';
@@ -15,6 +15,13 @@ export class AssemblyService {
 
   constructor(private http: HttpClient) {}
 
+  handleError(operation = 'operation') {
+    return (error: any) => {
+      console.error(error);
+      return [];
+    };
+  }
+  
   createAssembly(assemblyData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/api/assemblies`, assemblyData);
   }

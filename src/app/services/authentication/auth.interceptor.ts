@@ -44,13 +44,12 @@ export class AuthInterceptor implements HttpInterceptor {
             catchError((refreshError) => {
               // Handle refresh error, possibly redirect to login
               // or propagate the error depending on your application logic
-              throw new Error();
-              return throwError(() => Error('Refresh token failed'));
+              return throwError(refreshError);
             })
           );
         }
 
-        return throwError(() => Error(error.message));
+        return throwError(error);
       })
     );
   }
