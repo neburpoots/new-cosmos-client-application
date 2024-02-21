@@ -4,6 +4,7 @@ import { HttpResponse } from "@angular/common/http";
 import { PaginatedResult } from "../../../../models/utils/pagination";
 import { SearchCriteria } from "../../../../models/utils/searchCriteria";
 import { ModalWidth } from "../../../../models/enums/modalWidth.enum";
+import { Assembly } from "../../../../models/entities/assembly";
 @Component({
   selector: "app-assembly",
   templateUrl: "./assembly.component.html",
@@ -11,7 +12,7 @@ import { ModalWidth } from "../../../../models/enums/modalWidth.enum";
 
 export class AssemblyComponent implements OnInit {
 
-  assemblies: PaginatedResult<any> = {
+  assemblies: PaginatedResult<Assembly> = {
     page: 1,
     limit: 10,
     total: 0,
@@ -94,6 +95,7 @@ export class AssemblyComponent implements OnInit {
   }
 
   closeModal(): void {
+    console.log('test')
     this.isModalVisible = false;
   }
 }

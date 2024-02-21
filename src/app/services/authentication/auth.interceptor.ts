@@ -8,7 +8,7 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable()
@@ -32,12 +32,25 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
-          // Handle token refresh or redirect to login
-          // Example: this.authService.refreshToken();
-          this.authService.refresh();
+          return this.authService.refresh().pipe(
+            switchMap(() => {
+              // Retry the original request with the new token
+              return next.handle(request.clone({
+                setHeaders: {
+                  Authorization: `Bearer ${this.authService.getToken()}`,
+                },
+              }));
+            }),
+            catchError((refreshError) => {
+              // Handle refresh error, possibly redirect to login
+              // or propagate the error depending on your application logic
+              throw new Error();
+              return throwError(() => Error('Refresh token failed'));
+            })
+          );
         }
 
-        return throwError(error);
+        return throwError(() => Error(error.message));
       })
     );
   }

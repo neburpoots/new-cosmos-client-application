@@ -9,7 +9,7 @@
             <app-pagination [paginatedResult]="assemblies" (pageChanged)="onPageChanged($event)"></app-pagination>
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isModalVisible" (onClose)="closeModal()">
-                <assembly-create></assembly-create>
+                <assembly-create (closeModal)="closeModal()"></assembly-create>
             </modal-component>
         </div>
     </div>

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from '../../models/utils/pagination';
 import { SearchCriteria } from '../../models/utils/searchCriteria';
+import AssemblyType from '../../models/entities/assemblyType';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class AssemblyTypeService {
 
   constructor(private http: HttpClient) {}
 
+  //used for post and edit assembly
   getAssemblyTypes(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/api/assembly-types`);
+    return this.http.get<AssemblyType[]>(`${this.apiUrl}/api/assembly-types`);
   }
 }

@@ -22,7 +22,7 @@ export class ModalComponent {
     ModalWidth = ModalWidth; // Expose the enum
 
     closeModal(): void {
-        this.isVisible = false;
+        // this.isVisible = false;
         this.onClose.emit();
     }
 

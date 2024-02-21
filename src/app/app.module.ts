@@ -59,6 +59,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from "./components/modal/modal.component";
 import { AssemblyCreateComponent } from "./views/admin/assembly/create/assembly-create.component";
 import { InputComponent } from "./components/form/input/input.component";
+import { SelectComponent } from "./components/form/select/select.component";
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -102,8 +104,16 @@ import { InputComponent } from "./components/form/input/input.component";
     ModalComponent,
     AssemblyCreateComponent,
     InputComponent,
+    SelectComponent,
   ],
-  imports: [ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule],
+  imports: [ToastrModule.forRoot({
+    timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)
+    positionClass: 'toast-bottom-right', // Set the position of the toastr
+    closeButton: true, // Show or hide the close button
+    progressBar: true, // Show or hide the progress bar
+    progressAnimation: 'increasing', // Set the animation type for the progress bar ('increasing' or 'decreasing')
+    preventDuplicates: true, // Prevent duplicate toastrs from being shown
+  }), ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule],
   providers: [AuthService,
     AuthGuard,
     {

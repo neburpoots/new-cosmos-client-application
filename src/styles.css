@@ -1,10 +1,31 @@
 @import 'font-awesome/css/font-awesome.css';
+@import 'ngx-toastr/toastr';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 .disabled {
     pointer-events: none;
-    opacity: 0.5; /* or any other styling to indicate it's disabled */
+    opacity: 0.5;
+    /* or any other styling to indicate it's disabled */
+}
+
+/* styles.css */
+.toast-success {
+    border-radius: 20px !important;
+    background-color: #008C8C !important;
+    /* Change the background color for success toasts */
+    color: #ffffff !important;
+
+    /* Change the text color for success toasts */
+}
+
+.toast-error {
+    background-color: #dc3545 !important;
+    border-radius: 20px !important;
+    /* Change the background color for error toasts */
+    color: #ffffff !important;
+    /* Change the text color for error toasts */
 }
