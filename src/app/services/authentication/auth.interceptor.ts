@@ -10,10 +10,12 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
+  private isRefreshing = false;
 
   intercept(
     request: HttpRequest<any>,
@@ -32,6 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
+
           return this.authService.refresh().pipe(
             switchMap(() => {
               // Retry the original request with the new token
@@ -42,14 +45,18 @@ export class AuthInterceptor implements HttpInterceptor {
               }));
             }),
             catchError((refreshError) => {
+              
+              console.log('test')
               // Handle refresh error, possibly redirect to login
               // or propagate the error depending on your application logic
+              this.authService.logout();
               return throwError(refreshError);
             })
           );
         }
 
         return throwError(error);
+
       })
     );
   }

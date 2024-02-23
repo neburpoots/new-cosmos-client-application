@@ -16,7 +16,7 @@
             <li class="page-item">
                 <a class="page-link text-xl">{{ paginatedResult.page }}</a>
             </li>
-            <li [class.disabled]="paginatedResult.page === paginatedResult.totalPages">
+            <li [class.disabled]="+paginatedResult.page === +paginatedResult.totalPages">
 
                 <a class="page-link" (click)="onPageChange(+paginatedResult.page + 1)" aria-label="Next">
                     <div class="shadow-lg rounded-2xl bg-cosmosDark p-4 cursor-pointer">

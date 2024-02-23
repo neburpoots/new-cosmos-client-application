@@ -1,50 +1,26 @@
-<a
-  class="text-slate-500 block"
-  href="#pablo"
-  (click)="toggleDropdown($event)"
-  #btnDropdownRef
->
-  <div class="items-center flex">
-    <span
-      class="w-12 h-12 text-sm text-white bg-slate-200 inline-flex items-center justify-center rounded-full"
-    >
-      <img
-        alt="..."
-        class="w-full rounded-full align-middle border-none shadow-lg"
-        src="assets/img/team-1-800x800.jpg"
-      />
-    </span>
-  </div>
-</a>
-<div class="min-w-48 z-50" #popoverDropdownRef>
-  <div
-    class="bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1 min-w-48"
-    [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'"
-  >
-    <a
-      href="#pablo"
-      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-    >
-      Action
-    </a>
-    <a
-      href="#pablo"
-      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-    >
-      Another action
-    </a>
-    <a
-      href="#pablo"
-      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-    >
-      Something else here
-    </a>
-    <div class="h-0 my-2 border border-solid border-slate-100"></div>
-    <a
-      href="#pablo"
-      class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-slate-700"
-    >
-      Seprated link
-    </a>
+<div (mouseleave)="toggleDropdown($event)">
+  <a class="text-slate-500 block" (mouseenter)="toggleDropdown($event)" #btnDropdownRef>
+    <div class="items-center flex transition ease-in-out hover:scale-110">
+      <span
+        class="text-xl h-12 w-12 text-sm p-4 text-white bg-cosmosDark inline-flex items-center justify-center rounded-full">
+        <i class="fa fa-user"></i>
+      </span>
+    </div>
+  </a>
+  <div class="min-w-48 z-50" #popoverDropdownRef>
+    <div
+      class="bg-cosmosDark rounded-xl transition ease-in-out hover:scale-110 text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
+      [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'">
+      <li (click)="logout()">
+        <div [routerLink]="['/user/assembly']" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
+          adminDashboard.isActive
+            ? 'text-white hover:text-white'
+            : 'text-white hover:text-white'
+        " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
+          class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg cursor-pointer "><i
+            class="mr-2 fa fa-sign-out" aria-hidden="true"></i>
+          Sign out</div>
+      </li>
+    </div>
   </div>
 </div>

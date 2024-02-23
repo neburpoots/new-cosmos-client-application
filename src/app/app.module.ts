@@ -61,6 +61,7 @@ import { AssemblyCreateComponent } from "./views/admin/assembly/create/assembly-
 import { InputComponent } from "./components/form/input/input.component";
 import { SelectComponent } from "./components/form/select/select.component";
 import { ToastrModule } from 'ngx-toastr';
+import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { ToastrModule } from 'ngx-toastr';
     AssemblyCreateComponent,
     InputComponent,
     SelectComponent,
+    CalibrationGasesComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

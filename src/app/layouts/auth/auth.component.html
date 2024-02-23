@@ -1,13 +1,11 @@
 <div>
-  <app-auth-navbar></app-auth-navbar>
   <main>
-    <section class="relative w-full h-full py-40 min-h-screen">
+    <section class="relative w-full flex flex-col justify-center h-full min-h-screen">
       <div
         class="absolute top-0 w-full h-full bg-slate-800 bg-no-repeat bg-full"
-        style="background-image: url('assets/img/register_bg_2.png')"
+        style="background-image: radial-gradient(circle at top right, rgb(0,102,102) 0%, rgb(0,102,102) 28%,rgb(0,140,140) 28%, rgb(0,140,140) 45%,rgb(32,201,151) 45%, rgb(32,201,151) 63%,rgb(65,246,182) 63%, rgb(65,246,182) 100%);"
       ></div>
       <router-outlet></router-outlet>
-      <app-footer-small [absolute]="true"></app-footer-small>
     </section>
   </main>
 </div>

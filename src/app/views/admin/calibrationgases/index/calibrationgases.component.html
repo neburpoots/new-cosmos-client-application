@@ -1,0 +1,16 @@
+<div class="min-h-[100vh] flex items-center  px-4 md:px-10 justify-center">
+
+    <div class="h-full w-full flex items-center">
+        <div class="w-full mb-12 px-4">
+            <app-card-table (create)="openModal()" (searchCriteriaChange)="loadFilteredAssemblies($event)" [searchCriteria]="searchCriteria" [columns]="assembliesTableHeaders" [data]="assembliesTableData"
+                [title]="'Assemblies'"></app-card-table>
+            <!-- Your table content here -->
+
+            <app-pagination [paginatedResult]="assemblies" (pageChanged)="onPageChanged($event)"></app-pagination>
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isModalVisible" (onClose)="closeModal()">
+                <assembly-create (refreshAssemblies)="loadAssemblies()" (closeModal)="closeModal()"></assembly-create>
+            </modal-component>
+        </div>
+    </div>
+</div>

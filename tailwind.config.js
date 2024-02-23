@@ -19,6 +19,9 @@ module.exports = {
       fontSize: {
         55: "55rem",
       },
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
       opacity: {
         80: ".8",
       },

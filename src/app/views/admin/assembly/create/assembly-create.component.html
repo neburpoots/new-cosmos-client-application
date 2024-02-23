@@ -2,7 +2,7 @@
 <form [formGroup]="myForm" class="flex flex-col gap-5" (ngSubmit)="onSubmit()">
 
   <select-component [form]="myForm" [name]="'selectedOption'" [displayName]="'Assembly Type'" [options]="assemblyTypes"
-    [placeholder]="'Selecteer een assembly type'" [touched]="myForm.controls['selectedOption'].touched"
+    [placeholder]="'Select an assembly type'" [touched]="myForm.controls['selectedOption'].touched"
     [errors]="[{ name: 'required', message: 'Assembly type is required' }]">
   </select-component>
 

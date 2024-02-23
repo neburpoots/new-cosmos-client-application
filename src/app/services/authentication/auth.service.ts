@@ -23,7 +23,6 @@ export class AuthService {
         this.setToken(token);
       })
     );
-    this.router.navigate(['/user/dashboard']); // Add this line
     return result;
 
   }
@@ -39,7 +38,7 @@ export class AuthService {
 
   logout(): void {
     this.removeToken();
-    // Add additional cleanup logic if needed
+    this.router.navigate(['/auth/login']);
   }
 
   getToken(): string | null {

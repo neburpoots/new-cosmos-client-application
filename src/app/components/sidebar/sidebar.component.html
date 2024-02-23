@@ -55,10 +55,6 @@
 
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />
-      <!-- Heading -->
-      <h6 class="md:min-w-full text-white text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-        Admin Layout Pages
-      </h6>
       <!-- Navigation -->
 
       <ul class="md:flex-col md:min-w-full flex flex-col list-none">
@@ -78,7 +74,7 @@
         <div class="relative">
           <button class="text-md text-slate-200 py-3  font-semibold block hover:text-white" type="button"
             (click)="toggleFavoritesDropdown()">
-            <i class="fa fa-star  mr-2 "></i>Favorites
+            <i class="fa fa-star   mr-2 "></i>Favorites
           </button>
           <div *ngIf="favoritesDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
             <ul class="list-none">
@@ -87,9 +83,36 @@
                 ? 'text-white hover:text-white'
                 : 'text-white hover:text-white'
             " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i class="mr-2 fa fa-cog"
-                    aria-hidden="true"></i>
+                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
+                    class="mr-2 fa fa-cog" aria-hidden="true"></i>
                   Assembly</a></li>
+
+            </ul>
+          </div>
+        </div>
+        <div class="relative">
+          <button class="text-md text-slate-200 py-3  font-semibold block hover:text-white" type="button"
+            (click)="toggleAssembliesDropdown()">
+            <i class="fa fa-cog  mr-2 "></i>Assembly
+          </button>
+          <div *ngIf="assembleDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
+            <ul class="list-none">
+              <li><a [routerLink]="['/user/assembly']" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
+              adminDashboard.isActive
+                ? 'text-white hover:text-white'
+                : 'text-white hover:text-white'
+            " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
+                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
+                    class="mr-2 fa fa-cog" aria-hidden="true"></i>
+                  Assembly</a></li>
+              <li><a [routerLink]="['/user/calibrationgases']" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
+                    adminDashboard.isActive
+                      ? 'text-white hover:text-white'
+                      : 'text-white hover:text-white'
+                  " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
+                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
+                    class="mr-2 fa fa-cloud" aria-hidden="true"></i>
+                  Calibration gases</a></li>
 
             </ul>
           </div>
@@ -166,25 +189,21 @@
 
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />
-      <!-- Heading -->
-      <h6 class="md:min-w-full text-white text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-        No Layout Pages
-      </h6>
-      <!-- Navigation -->
+
 
       <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-        <li class="items-center">
-          <a [routerLink]="['/landing']" class="text-slate-200 hover:text-white text-xs uppercase py-3 font-bold block">
-            <i class="fa fa-newspaper text-slate-300 mr-2 text-sm"></i>
-            Landing Page
-          </a>
-        </li>
 
-        <li class="items-center">
-          <a [routerLink]="['/profile']" class="text-slate-200 hover:text-white text-xs uppercase py-3 font-bold block">
-            <i class="fa fa-user-circle text-slate-300 mr-2 text-sm"></i>
-            Profile Page
-          </a>
+        <li (click)="logout()" class="cursor-pointer items-center">
+          <div class="text-md py-3 font-semibold block" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
+              adminDashboard.isActive
+                ? 'text-white hover:text-white'
+                : 'text-slate-200 hover:text-white'
+            ">
+            <i class="fa fa-sign-out mr-2 text-sm" [ngClass]="
+                adminDashboard.isActive ? 'text-white' : 'text-slate-100'
+              "></i>
+            Sign out
+          </div>
         </li>
       </ul>
 

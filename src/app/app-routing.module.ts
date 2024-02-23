@@ -20,15 +20,19 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
+import { AuthGuard } from "./services/authentication/auth.guard";
+import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
 
 const routes: Routes = [
   // user views
   {
     path: "user",
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: "dashboard", component: DashboardComponent },
       { path: "assembly", component: AssemblyComponent },
+      { path: "calibrationgases", component: CalibrationGasesComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },
       { path: "maps", component: MapsComponent },
