@@ -19,6 +19,7 @@ export class CardTableComponent implements OnInit {
   @Input() columns: string[] = [];
   @Input() data: any[] = [];
   @Input() title: string = "";
+  @Input() object: string = "";
   @Input() paginationInfo: any = {};
   @Input() isEditable: boolean = false;
   @Input() isDeletable: boolean = false;
@@ -29,7 +30,8 @@ export class CardTableComponent implements OnInit {
       orderBy: { orderByColumn: null, orderByDirection: null }
     };
   // @Input() criteriaChangeFunction: Function = () => { console.log("test")};
-  @Output() searchCriteriaChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() searchCriteriaChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() 
   @Output() create = new EventEmitter<void>();
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
@@ -37,8 +39,18 @@ export class CardTableComponent implements OnInit {
   constructor() { }
   
   loadData(searchString : string) : any {
-    console.log(searchString);
-    this.searchCriteriaChange.emit(searchString);
+    this.searchCriteria.searchValue = searchString;
+
+    this.searchCriteriaChange.emit(this.searchCriteria);
+  }
+
+  removeOrderBy(event : any): void {
+    console.log('test')
+    this.searchCriteria.orderBy.orderByColumn = 'id';
+
+    this.searchCriteriaChange.emit(this.searchCriteria);
+    event.stopPropagation();
+
   }
 
   openCreateModal(): void {
@@ -65,5 +77,16 @@ export class CardTableComponent implements OnInit {
 
   isObject(value: any): boolean {
     return typeof value === 'object' && value !== null;
+  }
+
+  orderByColumn(column: string): void {
+    if (this.searchCriteria.orderBy.orderByColumn === column) {
+      this.searchCriteria.orderBy.orderByDirection = this.searchCriteria.orderBy.orderByDirection === "asc" ? "desc" : "asc";
+    } else {
+      this.searchCriteria.orderBy.orderByColumn = column;
+      this.searchCriteria.orderBy.orderByDirection = "asc";
+    }
+    this.searchCriteriaChange.emit(this.searchCriteria);
+
   }
 }

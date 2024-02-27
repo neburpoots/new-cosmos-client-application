@@ -8,7 +8,7 @@
       class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded-2xl text-sm  w-full pl-10" />
   </div>
   <div (click)="openCreateModal()" class="bg-cosmosDark rounded-full text-sm text-white px-3 py-2 cursor-pointer">
-    Add {{ title }} +
+    Add {{ object }} +
   </div>
 </div>
 <div [@fadeInOut]="true"
@@ -21,13 +21,33 @@
         <thead>
           <tr class="bg-slate-100 font-roboto  rounded-lg text-slate-800">
 
-            <th *ngFor="let column of columns; let i = index" class="px-6 align-middle py-3 text-xs uppercase whitespace-nowrap font-semibold text-left
+            <th (click)="orderByColumn(column)" *ngFor="let column of columns; let i = index" class="cursor-pointer px-6 align-middle py-3 text-xs uppercase whitespace-nowrap font-semibold text-left
                       {{ i === 0 ? 'rounded-tl-lg rounded-bl-lg' : '' }}
+                      {{ this.searchCriteria.orderBy.orderByColumn === column ? 'bg-cosmosDark text-white' : '' }}
                       {{ i === columns.length - 1 && !isEditable ? 'rounded-tr-lg rounded-br-lg' : '' }}">
-              {{ column }}
+
+              <div class="flex gap-5 items-center justify-between"> 
+                <div class="flex items-center gap-1">
+                  {{ column }}
+                  <div class="">
+
+                    <i *ngIf="this.searchCriteria.orderBy.orderByColumn == column"
+                      class="fa fa-md {{this.searchCriteria.orderBy.orderByDirection === 'asc' ? 'fa-arrow-up' : 'fa-arrow-down'}}"></i>
+                  </div>
+
+                </div>
+                <div>
+                  <i (click)="removeOrderBy($event)" *ngIf="this.searchCriteria.orderBy.orderByColumn == column"
+                    class="fa fa-lg fa-close"></i>
+                </div>
+              </div>
+              <div>
+
+              </div>
             </th>
             <th class="bg-slate-100 sticky right-0 rounded-tr-lg text-slate-800 rounded-br-lg">
-              <div class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-4">
+              <div
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-4">
                 Actions
               </div>
             </th>
@@ -60,11 +80,14 @@
 
             </td>
             <!-- Fixed edit column on the right -->
-            <td *ngIf="isDeletable || isEditable" class="mt-2 sticky right-0 flex bg-white gap-1 items-center justify-center">
-              <div *ngIf="isEditable" class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
+            <td *ngIf="isDeletable || isEditable"
+              class="mt-2 sticky right-0 flex bg-white gap-1 items-center justify-center">
+              <div *ngIf="isEditable" (click)="openEditModal(item['id']?.value)"
+                class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
                 <i class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i>
               </div>
-              <div *ngIf="isDeletable" (click)="openDeleteModal(item['id']?.value)" class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
+              <div *ngIf="isDeletable" (click)="openDeleteModal(item['id']?.value)"
+                class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
                 <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
               </div>
             </td>

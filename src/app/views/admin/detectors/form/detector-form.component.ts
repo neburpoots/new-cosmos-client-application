@@ -1,41 +1,41 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AssemblyTypeService } from '../../../../services/assemblyType/assemblyType.service';
 import { AssemblyService } from '../../../../services/assembly/assembly.service';
 import { ToastrService } from 'ngx-toastr';
 import AssemblyType from '../../../../models/entities/assemblyType';
-import { ErrorResponse } from '../../../../models/utils/errorResponse';
 import { AssemblyDto } from '../../../../models/dto/assemblyDto';
+import { ErrorResponse } from '../../../../models/utils/errorResponse';
+import { Assembly } from '../../../../models/entities/assembly';
 
 @Component({
-    selector: 'assembly-create',
-    templateUrl: './assembly-create.component.html',
+    selector: 'detector-form',
+    templateUrl: './detector-form.component.html',
     styles: []
 })
-export class AssemblyCreateComponent {
+export class DetectorFormComponent {
 
     @Output() closeModal = new EventEmitter<void>();
     @Output() refreshAssemblies = new EventEmitter<void>();
 
-    myForm: FormGroup;
-
-    assemblyTypes: AssemblyType[] = [];
-
-
-    assembly = {
+    @Input() assembly: any = {
+        id: null,
         batch: '',
         start_serial_number: '',
         selectedOption: null,
         quantity: '',
     };
 
+    myForm: FormGroup;
+
+    assemblyTypes: AssemblyType[] = [];
+
     constructor(private toastr: ToastrService, private fb: FormBuilder, private assemblyTypeService: AssemblyTypeService, private assemblyService: AssemblyService) {
         this.myForm = this.fb.group({
             batch: [this.assembly.batch, [Validators.required, Validators.minLength(2)]],
             start_serial_number: [this.assembly.start_serial_number, [Validators.required, Validators.pattern('^[0-9]+$')]],
             quantity: [this.assembly.quantity, [Validators.required, Validators.pattern('^[0-9]+$')]],
-            selectedOption: [this.assembly.selectedOption, Validators.required], // Add a form control for the select component
-
+            selectedOption: [this.assembly.selectedOption, Validators.required],
         });
     }
 
@@ -47,8 +47,6 @@ export class AssemblyCreateComponent {
 
     onSubmit(): void {
         try {
-
-
             if (this.myForm.valid) {
                 // Access form values using the 'value' property
                 this.myForm.value;
@@ -65,28 +63,54 @@ export class AssemblyCreateComponent {
                     batch: this.myForm.value.batch,
                     start_serial_number: +this.myForm.value.start_serial_number,
                     assemblyType: selectedAssemblyType,
-                    quantity: this.myForm.value.quantity
+                    quantity: +this.myForm.value.quantity
                 }
 
+                console.log(this.assembly.id);
                 console.log(assemblyData);
 
-                this.assemblyService.createAssembly(assemblyData).subscribe(
-                    (response) => {
-                        console.log('Response:', response);
-                        this.toastr.success('Assembly created successfully', 'Success');
-                        this.myForm.reset();
-                        this.closeModal.emit();
-                        this.refreshAssemblies.emit();
-                    },
-                    (error) => {
-                        this.toastr.error(error.error.message, 'Error');
-                    }
-                );
+                if (this.assembly.id) {
+                    this.updateAssembly(assemblyData);
+                } else {
+                    this.createAssembly(assemblyData);
+                }
             }
         } catch (error) {
             // this.toastr.error(error.message, 'Error');
             console.error(error);
         }
+    }
+
+
+    async createAssembly(assemblyData: AssemblyDto): Promise<void> {
+        this.assemblyService.createAssembly(assemblyData).subscribe(
+            (response) => {
+                console.log('Response:', response);
+                this.toastr.success('Assembly created successfully', 'Success');
+                this.myForm.reset();
+                this.closeModal.emit();
+                this.refreshAssemblies.emit();
+            },
+            (error) => {
+                this.toastr.error(error.error.message, 'Error');
+            }
+        );
+    }
+
+    async updateAssembly(assemblyData: AssemblyDto): Promise<void> {
+
+        this.assemblyService.updateAssembly(this.assembly.id, assemblyData).subscribe(
+            (response) => {
+                console.log('Response:', response);
+                this.toastr.success('Assembly updated successfully', 'Success');
+                this.myForm.reset();
+                this.closeModal.emit();
+                this.refreshAssemblies.emit();
+            },
+            (error) => {
+                this.toastr.error(error.error.message, 'Error');
+            }
+        );
     }
 
     async loadAssemblyTypes(): Promise<void> {
@@ -101,5 +125,15 @@ export class AssemblyCreateComponent {
 
     ngOnInit(): void {
         this.loadAssemblyTypes();
+    }
+
+    //on edit set to selected assembly
+    setEditData(changes: any): void {
+        this.myForm.patchValue({
+            batch: changes.batch,
+            start_serial_number: changes.start_serial_number,
+            quantity: changes.quantity,
+            selectedOption: changes.selectedOption
+        });
     }
 }

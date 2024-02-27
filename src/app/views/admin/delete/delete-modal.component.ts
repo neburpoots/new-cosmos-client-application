@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DeleteModalComponent<T> {
 
     @Input() selectedItem: T | undefined;
+    @Input() objectSingle: string | undefined;
+    @Input() objectSingleLowerCase: string | undefined;
     @Output() closeModal = new EventEmitter<void>();
     @Output() deleteHandler = new EventEmitter<T>();
 

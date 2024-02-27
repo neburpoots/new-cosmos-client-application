@@ -6,6 +6,7 @@ import { Observable, catchError } from 'rxjs';
 import { PaginatedResult } from '../../models/utils/pagination';
 import { SearchCriteria } from '../../models/utils/searchCriteria';
 import { Assembly } from '../../models/entities/assembly';
+import { AssemblyDto } from '../../models/dto/assemblyDto';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,12 @@ export class AssemblyService {
 
   constructor(private http: HttpClient) {}
 
-  createAssembly(assemblyData: any): Observable<any> {
+  createAssembly(assemblyData: AssemblyDto): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/api/assemblies`, assemblyData);
+  }
+
+  updateAssembly(id: number, assemblyData: AssemblyDto): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/api/assemblies/${id}`, assemblyData);
   }
 
   getAssemblies(page: number = 1, searchCriteria : SearchCriteria): Observable<PaginatedResult<Assembly>> {

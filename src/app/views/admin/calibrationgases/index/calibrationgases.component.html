@@ -7,10 +7,7 @@
             <!-- Your table content here -->
 
             <app-pagination [paginatedResult]="calGasses" (pageChanged)="onPageChanged($event)"></app-pagination>
-            <modal-component [width]="ModalWidth.Large
-            " [isVisible]="isModalVisible" (onClose)="closeModal()">
-                <assembly-create (refreshAssemblies)="loadCalGases()" (closeModal)="closeModal()"></assembly-create>
-            </modal-component>
+
         </div>
     </div>
 </div>

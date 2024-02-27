@@ -8,10 +8,7 @@
             <!-- Your table content here -->
 
             <app-pagination [paginatedResult]="data" (pageChanged)="onPageChanged($event)"></app-pagination>
-            <modal-component [width]="ModalWidth.Large
-            " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <assembly-create (refreshAssemblies)="loadItems()" (closeModal)="closeCreateModal()"></assembly-create>
-            </modal-component>
+
         </div>
     </div>
 </div>

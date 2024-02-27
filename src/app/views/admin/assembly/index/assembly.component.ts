@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from "@angular/core";
+import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { AssemblyService } from "../../../../services/assembly/assembly.service";
 import { HttpResponse } from "@angular/common/http";
 import { PaginatedResult } from "../../../../models/utils/pagination";
@@ -10,12 +10,15 @@ import { AbstractComponent } from "../../abstract/abstract.component";
 import { AbstractService } from "../../../../services/abstract/abstract.service";
 import { IAbstractComponent } from "../../../../models/interface/IAbstractComponent";
 import { ToastrService } from "ngx-toastr";
+import { AssemblyFormComponent } from "../form/assembly-form.component";
 @Component({
   selector: "app-assembly",
   templateUrl: "./assembly.component.html",
 })
 
 export class AssemblyComponent extends AbstractComponent<Assembly> implements OnInit, IAbstractComponent<Assembly> {
+
+  @ViewChild('assemblyEdit') childComponent!: AssemblyFormComponent;
 
   tableHeaders = ['code', 'assemblyType', 'cdartikel', 'startSerialNumber', 'quantity', 'voorraad', 'gereserveerd', 'minvoorraad', 'maxvoorraad', 'checked', 'po', 'created'];
   objectSingle = 'Assembly';
@@ -27,7 +30,21 @@ export class AssemblyComponent extends AbstractComponent<Assembly> implements On
     this.abstractService = assemblyService;
 
     this.url = 'api/assemblies';
+  }
 
+  override setEditData() {
+    console.log(this.editData)
+    this.childComponent.setEditData(this.editData);
+  }
+  
+  get editData(): any {
+    return {
+      id: this.selectedItem?.id,
+      batch: this.selectedItem?.code,
+      start_serial_number: this.selectedItem?.startSerialNumber,
+      selectedOption: this.selectedItem?.assemblyType.id,
+      quantity: this.selectedItem?.quantity,
+    };
   }
 
   mapTableData(assemblies: Assembly[]): any[] {
@@ -52,6 +69,6 @@ export class AssemblyComponent extends AbstractComponent<Assembly> implements On
   }
 
   override createUrlParams(): string {
-    return `${this.url}?page=${this.data.page}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
+    return `${this.url}?orderBy=${this.searchCriteria.orderBy.orderByColumn}&sort=${this.searchCriteria.orderBy.orderByDirection}&page=${this.data.page}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
   }
 }

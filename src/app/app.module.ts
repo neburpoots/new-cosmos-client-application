@@ -65,6 +65,8 @@ import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/
 import { AbstractComponent } from "./views/admin/abstract/abstract.component";
 import { DetectorComponent } from "./views/admin/detectors/detector.component";
 import { DeleteModalComponent } from "./views/admin/delete/delete-modal.component";
+import { AssemblyFormComponent } from "./views/admin/assembly/form/assembly-form.component";
+import { DetectorFormComponent } from "./views/admin/detectors/form/detector-form.component";
 
 @NgModule({
   declarations: [
@@ -106,12 +108,13 @@ import { DeleteModalComponent } from "./views/admin/delete/delete-modal.componen
     LandingComponent,
     ProfileComponent,
     ModalComponent,
-    AssemblyCreateComponent,
     InputComponent,
     SelectComponent,
     CalibrationGasesComponent,
     DetectorComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    AssemblyFormComponent,
+    DetectorFormComponent,
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

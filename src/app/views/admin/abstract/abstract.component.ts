@@ -47,8 +47,8 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
   searchCriteria: SearchCriteria = {
     searchValue: "",
     orderBy: {
-      orderByColumn: null,
-      orderByDirection: null,
+      orderByColumn: 'id',
+      orderByDirection: 'asc',
     }
   }
 
@@ -70,15 +70,21 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   abstract mapTableData(data: any[]): any[];
 
+  setEditData(): any {
+
+  };
+
   abstract createUrlParams(): string;
 
   async ngOnInit(): Promise<void> {
     await this.loadItems();
   }
 
-  async loadFilteredItems(searchValue: any): Promise<void> {
+  async loadFilteredItems(searchCriteria : SearchCriteria): Promise<void> {
     this.data.page = 1;
-    this.searchCriteria.searchValue = searchValue;
+    this.searchCriteria.searchValue = searchCriteria.searchValue;
+    this.searchCriteria.orderBy = searchCriteria.orderBy;
+    // Assuming you want to use the `test` parameter as well, you can do something with it here...
     await this.loadItems();
   }
 
@@ -96,9 +102,9 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
     this.abstractService.delete(this.url, input.id).subscribe((response: HttpResponse<any>) => {
       this.loadItems();
       this.closeDeleteModal();
-      this.toastr.success('Assembly deleted successfully', 'Success');
+      this.toastr.success(`${this.objectSingle} deleted successfully`, 'Success');
     }, (error) => {
-      this.toastr.error('Error deleting assembly', 'Error');
+      this.toastr.error(`Error deleting ${this.objectSingleLowerCase}`, 'Error');
       console.log(error);
     });
   }
@@ -108,11 +114,15 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
     await this.loadItems();
   }
 
-  openEditModal(): void {
+  async openEditModal(id: number): Promise<void> {
+    await this.setSelectedItem(id);
+    console.log(this.selectedItem);
+    await this.setEditData();
     this.isEditModalVisible = true;
   }
 
   closeEditModal(): void {
+    this.selectedItem = undefined;
     this.isEditModalVisible = false;
   }
 
@@ -121,9 +131,7 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
   }
 
   openDeleteModal(id: number): void {
-
     this.setSelectedItem(id);
-
     this.isDeleteModalVisible = true;
   }
 
