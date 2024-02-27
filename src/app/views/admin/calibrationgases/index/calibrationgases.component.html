@@ -2,14 +2,14 @@
 
     <div class="h-full w-full flex items-center">
         <div class="w-full mb-12 px-4">
-            <app-card-table (create)="openModal()" (searchCriteriaChange)="loadFilteredAssemblies($event)" [searchCriteria]="searchCriteria" [columns]="assembliesTableHeaders" [data]="assembliesTableData"
-                [title]="'Assemblies'"></app-card-table>
+            <app-card-table (create)="openModal()" (searchCriteriaChange)="loadFilteredGalGasses($event)" [searchCriteria]="searchCriteria" [columns]="calGasTableHeaders" [data]="galGasTableData"
+                [title]="'Calibration gases'"></app-card-table>
             <!-- Your table content here -->
 
-            <app-pagination [paginatedResult]="assemblies" (pageChanged)="onPageChanged($event)"></app-pagination>
+            <app-pagination [paginatedResult]="calGasses" (pageChanged)="onPageChanged($event)"></app-pagination>
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isModalVisible" (onClose)="closeModal()">
-                <assembly-create (refreshAssemblies)="loadAssemblies()" (closeModal)="closeModal()"></assembly-create>
+                <assembly-create (refreshAssemblies)="loadCalGases()" (closeModal)="closeModal()"></assembly-create>
             </modal-component>
         </div>
     </div>

@@ -20,23 +20,55 @@
       <table class="items-center w-full bg-transparent border-collapse">
         <thead>
           <tr class="bg-slate-100 font-roboto  rounded-lg text-slate-800">
+
             <th *ngFor="let column of columns; let i = index" class="px-6 align-middle py-3 text-xs uppercase whitespace-nowrap font-semibold text-left
                       {{ i === 0 ? 'rounded-tl-lg rounded-bl-lg' : '' }}
-                      {{ i === columns.length - 1 ? 'rounded-tr-lg rounded-br-lg' : '' }}">
+                      {{ i === columns.length - 1 && !isEditable ? 'rounded-tr-lg rounded-br-lg' : '' }}">
               {{ column }}
+            </th>
+            <th class="bg-slate-100 sticky right-0 rounded-tr-lg text-slate-800 rounded-br-lg">
+              <div class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-4">
+                Actions
+              </div>
             </th>
           </tr>
         </thead>
         <tbody *ngIf="data.length > 0">
           <tr *ngFor="let item of data">
+
             <td *ngFor="let column of columns"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-4">
-              <ng-container *ngIf="isBoolean(item[column]); else defaultContent">
-                <span class="text-base" *ngIf="item[column]"><i class="fa fa-md fa-check-circle text-green-700 text-lg w-8"></i></span>
-                <span class="text-base" *ngIf="!item[column]"><i class="fa fa-md fa-times-circle text-red-600 text-lg w-8"></i></span>
+              <ng-container *ngIf="isBoolean(item[column]['value']); else defaultContent">
+                <span class="text-base" *ngIf="item[column]['value']"><i
+                    class="fa fa-md fa-check-circle text-green-700 text-lg w-8"></i></span>
+                <span class="text-base" *ngIf="!item[column]['value']"><i
+                    class="fa fa-md fa-times-circle text-red-600 text-lg w-8"></i></span>
               </ng-container>
-              <ng-template #defaultContent>{{ item[column] }}</ng-template>
+
+
+
+
+
+              <ng-template #defaultContent>
+                <ng-container *ngIf="item[column]['url']; else innerContent">
+                  <a [routerLink]="item[column]['url']">{{ item[column]['value'] }}</a>
+                </ng-container>
+                <ng-template #innerContent>
+                  {{ item[column]['value'] }}
+                </ng-template>
+              </ng-template>
+
             </td>
+            <!-- Fixed edit column on the right -->
+            <td *ngIf="isDeletable || isEditable" class="mt-2 sticky right-0 flex bg-white gap-1 items-center justify-center">
+              <div *ngIf="isEditable" class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
+                <i class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i>
+              </div>
+              <div *ngIf="isDeletable" (click)="openDeleteModal(item['id']?.value)" class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
+                <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
+              </div>
+            </td>
+
           </tr>
         </tbody>
 

@@ -22,6 +22,7 @@ export class ModalComponent {
     ModalWidth = ModalWidth; // Expose the enum
 
     closeModal(): void {
+        console.log(this.width)
         // this.isVisible = false;
         this.onClose.emit();
     }

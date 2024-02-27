@@ -1,10 +1,12 @@
 import { Component, OnInit, SimpleChanges } from "@angular/core";
-import { AssemblyService } from "../../../../services/assembly/assembly.service";
 import { HttpResponse } from "@angular/common/http";
 import { PaginatedResult } from "../../../../models/utils/pagination";
 import { SearchCriteria } from "../../../../models/utils/searchCriteria";
 import { ModalWidth } from "../../../../models/enums/modalWidth.enum";
 import { Assembly } from "../../../../models/entities/assembly";
+import { CalGasService } from "../../../../services/calgas/calgas.service";
+import { CalGas } from "../../../../models/entities/calgas";
+import { TableField } from "../../../../models/utils/tableField";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -13,7 +15,7 @@ import { Assembly } from "../../../../models/entities/assembly";
 
 export class CalibrationGasesComponent implements OnInit {
 
-  assemblies: PaginatedResult<Assembly> = {
+  calGasses: PaginatedResult<CalGas> = {
     page: 1,
     limit: 10,
     total: 0,
@@ -31,64 +33,58 @@ export class CalibrationGasesComponent implements OnInit {
 
   isModalVisible: boolean = false;
 
-  assembliesTableData: any[] = [];
+  galGasTableData: any[] = [];
 
   ModalWidth = ModalWidth;
 
   modalWidth: ModalWidth = ModalWidth.Large;
 
   
-  get assembliesTableHeaders(): string[] {
-    return ['code', 'assemblyType', 'cdartikel', 'startSerialNumber', 'quantity', 'voorraad', 'gereserveerd', 'minvoorraad', 'maxvoorraad', 'checked', 'po', 'created'];
+  get calGasTableHeaders(): string[] {
+    return ['gas', 'concentration', 'engineering_units', 'created', 'cdartikel', 'by'];
   }
 
 
-  constructor(private assemblyService: AssemblyService) { }
+  constructor(private galGasesService: CalGasService) { }
 
-  mapAssembliesToTableData(assemblies: any[]): any[] {
-    console.log(assemblies)
-    return assemblies.map((assembly) => {
+  mapCalGassesToTableData(calGasses: CalGas[]): any[] {
+    console.log(calGasses)
+    return calGasses.map((calgas: CalGas) => {
       return {
-        id: assembly.id,
-        code: assembly.code,
-        assemblyType: assembly.assemblyType.name,
-        cdartikel: assembly?.assemblyType?.stock?.cdartikel,
-        startSerialNumber: assembly.startSerialNumber,
-        checked: assembly.checked,
-        quantity: assembly.quantity,
-        voorraad: assembly?.assemblyType?.stock?.voorraad,
-        gereserveerd: assembly?.assemblyType?.stock?.gereserveerd,
-        maxvoorraad: assembly?.assemblyType?.stock?.maxvoorraad,
-        minvoorraad: assembly?.assemblyType?.stock?.minvoorraad,
-        po: assembly.po,
-        created: assembly.created,
+        id: { url: 'api/calGasses', value: calgas.id } as TableField,
+        gas: { url: null, value: calgas?.gas?.name } as TableField,
+        concentration: { url: null, value: calgas?.concentration } as TableField,
+        engineering_units: { url: null, value: calgas?.engineering_units } as TableField,
+        cdartikel: { url: null, value: calgas?.cdartikel } as TableField,
+        created: { url: null, value: calgas.created } as TableField,
+        by: { url: null, value: calgas?.owner?.initials } as TableField,
       };
     });
   }
 
   async ngOnInit(): Promise<void> {
-    await this.loadAssemblies();
+    await this.loadCalGases();
   }
 
-  async loadFilteredAssemblies(searchValue : any): Promise<void> {
-    this.assemblies.page = 1;
+  async loadFilteredGalGasses(searchValue : any): Promise<void> {
+    this.calGasses.page = 1;
     this.searchCriteria.searchValue = searchValue;
-    await this.loadAssemblies();
+    await this.loadCalGases();
   }
 
-  async loadAssemblies(): Promise<void> {
+  async loadCalGases(): Promise<void> {
     try {
-      const response = await this.assemblyService.getAssemblies(this.assemblies.page, this.searchCriteria).toPromise();
-      this.assemblies = response!;
-      this.assembliesTableData = this.mapAssembliesToTableData(this.assemblies.data);
+      const response = await this.galGasesService.getCalGasses(this.calGasses.page, this.searchCriteria).toPromise();
+      this.calGasses = response!;
+      this.galGasTableData = this.mapCalGassesToTableData(this.calGasses.data);
     } catch (error) {
       console.error('Error fetching assemblies', error);
     }
   }
 
   async onPageChanged(page: number): Promise<void> {
-    this.assemblies.page = page;
-    await this.loadAssemblies();
+    this.calGasses.page = page;
+    await this.loadCalGases();
   }
 
   openModal(): void {

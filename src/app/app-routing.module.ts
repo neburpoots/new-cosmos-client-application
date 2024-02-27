@@ -22,6 +22,7 @@ import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { AuthGuard } from "./services/authentication/auth.guard";
 import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
+import { DetectorComponent } from "./views/admin/detectors/detector.component";
 
 const routes: Routes = [
   // user views
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: "dashboard", component: DashboardComponent },
       { path: "assembly", component: AssemblyComponent },
       { path: "calibrationgases", component: CalibrationGasesComponent },
+      { path: "detectors", component: DetectorComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },
       { path: "maps", component: MapsComponent },

@@ -2,15 +2,21 @@
 
     <div class="h-full w-full flex items-center">
         <div class="w-full mb-12 px-4">
-            <app-card-table (create)="openModal()" (searchCriteriaChange)="loadFilteredAssemblies($event)" [searchCriteria]="searchCriteria" [columns]="assembliesTableHeaders" [data]="assembliesTableData"
+            <app-card-table [isEditable]="true" [isDeletable]="true" (create)="openCreateModal()" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"
                 [title]="'Assemblies'"></app-card-table>
             <!-- Your table content here -->
 
-            <app-pagination [paginatedResult]="assemblies" (pageChanged)="onPageChanged($event)"></app-pagination>
+            <app-pagination [paginatedResult]="data" (pageChanged)="onPageChanged($event)"></app-pagination>
             <modal-component [width]="ModalWidth.Large
-            " [isVisible]="isModalVisible" (onClose)="closeModal()">
-                <assembly-create (refreshAssemblies)="loadAssemblies()" (closeModal)="closeModal()"></assembly-create>
+            " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
+                <assembly-create (refreshAssemblies)="loadItems()" (closeModal)="closeCreateModal()"></assembly-create>
             </modal-component>
+            <modal-component
+            [width]="ModalWidth.Small
+            " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
+                <delete-modal [selectedItem]="selectedItem" (deleteHandler)="delete($event)" (closeModal)="closeDeleteModal()"></delete-modal>
+            </modal-component>
+
         </div>
     </div>
 </div>

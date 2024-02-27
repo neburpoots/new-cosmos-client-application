@@ -65,7 +65,7 @@
                 ? 'text-white hover:text-white'
                 : 'text-slate-200 hover:text-white'
             ">
-            <i class="fa fa-area-chart mr-2 text-sm" [ngClass]="
+            <i class="fa fa-dashboard mr-2 text-sm" [ngClass]="
                 adminDashboard.isActive ? 'text-white' : 'text-slate-100'
               "></i>
             Dashboard
@@ -97,22 +97,32 @@
           </button>
           <div *ngIf="assembleDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
             <ul class="list-none">
-              <li><a [routerLink]="['/user/assembly']" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
-              adminDashboard.isActive
+              <li><a [routerLink]="['/user/assembly']" routerLinkActive #adminAssembly="routerLinkActive" [ngClass]="
+              adminAssembly.isActive
                 ? 'text-white hover:text-white'
                 : 'text-white hover:text-white'
-            " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
+            " [ngClass]="adminAssembly.isActive ? 'bg-cosmosDark text-white' : ''"
                   class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
                     class="mr-2 fa fa-cog" aria-hidden="true"></i>
                   Assembly</a></li>
-              <li><a [routerLink]="['/user/calibrationgases']" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
-                    adminDashboard.isActive
+              <li><a [routerLink]="['/user/calibrationgases']" routerLinkActive #adminCalGas="routerLinkActive"
+                  [ngClass]="
+                    adminCalGas.isActive
                       ? 'text-white hover:text-white'
                       : 'text-white hover:text-white'
-                  " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
+                  " [ngClass]="adminCalGas.isActive ? 'bg-cosmosDark text-white' : ''"
                   class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
                     class="mr-2 fa fa-cloud" aria-hidden="true"></i>
                   Calibration gases</a></li>
+              <li><a [routerLink]="['/user/detectors']" routerLinkActive #adminDetectors="routerLinkActive"
+                  [ngClass]="
+                    adminDetectors.isActive
+                      ? 'text-white hover:text-white'
+                      : 'text-white hover:text-white'
+                  " [ngClass]="adminDetectors.isActive ? 'bg-cosmosDark text-white' : ''"
+                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
+                    class="mr-2 fa fa-area-chart" aria-hidden="true"></i>
+                  Detectors</a></li>
 
             </ul>
           </div>

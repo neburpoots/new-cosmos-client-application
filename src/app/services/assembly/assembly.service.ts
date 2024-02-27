@@ -15,13 +15,6 @@ export class AssemblyService {
 
   constructor(private http: HttpClient) {}
 
-  handleError(operation = 'operation') {
-    return (error: any) => {
-      console.error(error);
-      return [];
-    };
-  }
-  
   createAssembly(assemblyData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/api/assemblies`, assemblyData);
   }

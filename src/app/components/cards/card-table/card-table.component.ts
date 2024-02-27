@@ -20,6 +20,8 @@ export class CardTableComponent implements OnInit {
   @Input() data: any[] = [];
   @Input() title: string = "";
   @Input() paginationInfo: any = {};
+  @Input() isEditable: boolean = false;
+  @Input() isDeletable: boolean = false;
   @Input() color: string = "light";
   @Input() searchCriteria: SearchCriteria =
     {
@@ -42,11 +44,23 @@ export class CardTableComponent implements OnInit {
   openCreateModal(): void {
     this.create.emit();
   }
+
+  openEditModal(id: number): void {
+    this.edit.emit(id);
+  }
+
+  openDeleteModal(id: number): void {
+    this.delete.emit(id);
+  }
   
   isBoolean(value: any): boolean {
     return typeof value === 'boolean';
   }
 
+  isDate(value: any): boolean {
+    return false;
+
+  }
   ngOnInit(): void { }
 
   isObject(value: any): boolean {

@@ -5,97 +5,53 @@ import { PaginatedResult } from "../../../../models/utils/pagination";
 import { SearchCriteria } from "../../../../models/utils/searchCriteria";
 import { ModalWidth } from "../../../../models/enums/modalWidth.enum";
 import { Assembly } from "../../../../models/entities/assembly";
+import { TableField } from "../../../../models/utils/tableField";
+import { AbstractComponent } from "../../abstract/abstract.component";
+import { AbstractService } from "../../../../services/abstract/abstract.service";
+import { IAbstractComponent } from "../../../../models/interface/IAbstractComponent";
+import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-assembly",
   templateUrl: "./assembly.component.html",
 })
 
-export class AssemblyComponent implements OnInit {
+export class AssemblyComponent extends AbstractComponent<Assembly> implements OnInit, IAbstractComponent<Assembly> {
 
-  assemblies: PaginatedResult<Assembly> = {
-    page: 1,
-    limit: 10,
-    total: 0,
-    totalPages: 0,
-    data: [],
-  };
+  tableHeaders = ['code', 'assemblyType', 'cdartikel', 'startSerialNumber', 'quantity', 'voorraad', 'gereserveerd', 'minvoorraad', 'maxvoorraad', 'checked', 'po', 'created'];
+  objectSingle = 'Assembly';
+  objectPlural = 'Assemblies';
 
-  searchCriteria : SearchCriteria = {
-    searchValue: "",
-    orderBy: {
-      orderByColumn: null,
-      orderByDirection: null,
-    }
+  constructor(protected override toastr: ToastrService, private assemblyService: AbstractService<Assembly>) {
+    super(toastr, assemblyService);
+    this.toastr = toastr;
+    this.abstractService = assemblyService;
+
+    this.url = 'api/assemblies';
+
   }
 
-  isModalVisible: boolean = false;
-
-  assembliesTableData: any[] = [];
-
-  ModalWidth = ModalWidth;
-
-  modalWidth: ModalWidth = ModalWidth.Large;
-
-  
-  get assembliesTableHeaders(): string[] {
-    return ['code', 'assemblyType', 'cdartikel', 'startSerialNumber', 'quantity', 'voorraad', 'gereserveerd', 'minvoorraad', 'maxvoorraad', 'checked', 'po', 'created'];
-  }
-
-
-  constructor(private assemblyService: AssemblyService) { }
-
-  mapAssembliesToTableData(assemblies: any[]): any[] {
+  mapTableData(assemblies: Assembly[]): any[] {
     console.log(assemblies)
     return assemblies.map((assembly) => {
       return {
-        id: assembly.id,
-        code: assembly.code,
-        assemblyType: assembly.assemblyType.name,
-        cdartikel: assembly?.assemblyType?.stock?.cdartikel,
-        startSerialNumber: assembly.startSerialNumber,
-        checked: assembly.checked,
-        quantity: assembly.quantity,
-        voorraad: assembly?.assemblyType?.stock?.voorraad,
-        gereserveerd: assembly?.assemblyType?.stock?.gereserveerd,
-        maxvoorraad: assembly?.assemblyType?.stock?.maxvoorraad,
-        minvoorraad: assembly?.assemblyType?.stock?.minvoorraad,
-        po: assembly.po,
-        created: assembly.created,
+        id: { url: 'api/assemblies', value: assembly.id } as TableField,
+        code: { url: null, value: assembly.code } as TableField,
+        assemblyType: { url: null, value: assembly.assemblyType.name } as TableField,
+        cdartikel: { url: null, value: assembly?.assemblyType?.stock?.cdartikel } as TableField,
+        startSerialNumber: { url: null, value: assembly.startSerialNumber } as TableField,
+        checked: { url: null, value: assembly.checked } as TableField,
+        quantity: { url: null, value: assembly.quantity } as TableField,
+        voorraad: { url: null, value: assembly?.assemblyType?.stock?.voorraad } as TableField,
+        gereserveerd: { url: null, value: assembly?.assemblyType?.stock?.gereserveerd } as TableField,
+        maxvoorraad: { url: null, value: assembly?.assemblyType?.stock?.maxvoorraad } as TableField,
+        minvoorraad: { url: null, value: assembly?.assemblyType?.stock?.minvoorraad } as TableField,
+        po: { url: null, value: assembly.po } as TableField,
+        created: { url: null, value: assembly.created } as TableField,
       };
     });
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.loadAssemblies();
-  }
-
-  async loadFilteredAssemblies(searchValue : any): Promise<void> {
-    this.assemblies.page = 1;
-    this.searchCriteria.searchValue = searchValue;
-    await this.loadAssemblies();
-  }
-
-  async loadAssemblies(): Promise<void> {
-    try {
-      const response = await this.assemblyService.getAssemblies(this.assemblies.page, this.searchCriteria).toPromise();
-      this.assemblies = response!;
-      this.assembliesTableData = this.mapAssembliesToTableData(this.assemblies.data);
-    } catch (error) {
-      console.error('Error fetching assemblies', error);
-    }
-  }
-
-  async onPageChanged(page: number): Promise<void> {
-    this.assemblies.page = page;
-    await this.loadAssemblies();
-  }
-
-  openModal(): void {
-    this.isModalVisible = true;
-  }
-
-  closeModal(): void {
-    console.log('test')
-    this.isModalVisible = false;
+  override createUrlParams(): string {
+    return `${this.url}?page=${this.data.page}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
   }
 }
