@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from "@angular/core";
+import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { HttpResponse } from "@angular/common/http";
 import { PaginatedResult } from "../../../../models/utils/pagination";
 import { SearchCriteria } from "../../../../models/utils/searchCriteria";
@@ -7,47 +7,50 @@ import { Assembly } from "../../../../models/entities/assembly";
 import { CalGasService } from "../../../../services/calgas/calgas.service";
 import { CalGas } from "../../../../models/entities/calgas";
 import { TableField } from "../../../../models/utils/tableField";
+import { AbstractComponent } from "../../abstract/abstract.component";
+import { IAbstractComponent } from "../../../../models/interface/IAbstractComponent";
+import { AbstractService } from "../../../../services/abstract/abstract.service";
+import { ToastrService } from "ngx-toastr";
+import { CalibrationGasesFormComponent } from "../form/calibrationgases-form.component";
 
 @Component({
   selector: "app-calibrationgasses",
   templateUrl: "./calibrationgases.component.html",
 })
 
-export class CalibrationGasesComponent implements OnInit {
+export class CalibrationGasesComponent extends AbstractComponent<CalGas> implements OnInit, IAbstractComponent<CalGas> {
 
-  calGasses: PaginatedResult<CalGas> = {
-    page: 1,
-    limit: 10,
-    total: 0,
-    totalPages: 0,
-    data: [],
-  };
 
-  searchCriteria : SearchCriteria = {
-    searchValue: "",
-    orderBy: {
-      orderByColumn: null,
-      orderByDirection: null,
-    }
+  @ViewChild('calibrationGasEdit') childComponent!: CalibrationGasesFormComponent;
+
+  objectSingle = 'Calibration gas';
+  objectPlural = 'Calibration gases';
+
+  override setEditData() {
+    console.log(this.editData)
+    this.childComponent.setEditData(this.editData);
   }
 
-  isModalVisible: boolean = false;
-
-  galGasTableData: any[] = [];
-
-  ModalWidth = ModalWidth;
-
-  modalWidth: ModalWidth = ModalWidth.Large;
-
+  get editData(): any {
+    return {
+      id: this.selectedItem?.id,
+      gas: this.selectedItem?.gas?.id,
+      concentration: this.selectedItem?.concentration,
+      cdartikel: this.selectedItem?.cdartikel,
+      engineering_units: this.selectedItem?.engineering_units,
+    };
+  }
   
-  get calGasTableHeaders(): string[] {
-    return ['gas', 'concentration', 'engineering_units', 'created', 'cdartikel', 'by'];
+
+  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<CalGas>) {
+      super(toastr, calgasService);
+      this.abstractService = calgasService;
+      this.url = 'api/calgas';
   }
 
+  tableHeaders : string[] = ['gas', 'concentration', 'engineering_units', 'created', 'cdartikel', 'by'];
 
-  constructor(private galGasesService: CalGasService) { }
-
-  mapCalGassesToTableData(calGasses: CalGas[]): any[] {
+  mapTableData(calGasses: CalGas[]): any[] {
     console.log(calGasses)
     return calGasses.map((calgas: CalGas) => {
       return {
@@ -62,37 +65,8 @@ export class CalibrationGasesComponent implements OnInit {
     });
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.loadCalGases();
+  override createUrlParams(): string {
+    return `${this.url}?orderBy=${this.searchCriteria.orderBy.orderByColumn}&sort=${this.searchCriteria.orderBy.orderByDirection}&page=${this.data.page}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
   }
 
-  async loadFilteredGalGasses(searchValue : any): Promise<void> {
-    this.calGasses.page = 1;
-    this.searchCriteria.searchValue = searchValue;
-    await this.loadCalGases();
-  }
-
-  async loadCalGases(): Promise<void> {
-    try {
-      const response = await this.galGasesService.getCalGasses(this.calGasses.page, this.searchCriteria).toPromise();
-      this.calGasses = response!;
-      this.galGasTableData = this.mapCalGassesToTableData(this.calGasses.data);
-    } catch (error) {
-      console.error('Error fetching assemblies', error);
-    }
-  }
-
-  async onPageChanged(page: number): Promise<void> {
-    this.calGasses.page = page;
-    await this.loadCalGases();
-  }
-
-  openModal(): void {
-    this.isModalVisible = true;
-  }
-
-  closeModal(): void {
-    console.log('test')
-    this.isModalVisible = false;
-  }
 }

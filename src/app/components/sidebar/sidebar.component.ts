@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit() { }
+  
   toggleCollapseShow(classes: any) {
     this.collapseShow = classes;
   }

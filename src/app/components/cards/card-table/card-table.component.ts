@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from "@angular/core";
 import { trigger, state, style, animate, transition } from "@angular/animations";
 import { SearchCriteria } from "../../../models/utils/searchCriteria";
+import { faCoffee, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { SatPopover } from "@ncstate/sat-popover";
 
 @Component({
   selector: "app-card-table",
@@ -23,18 +25,29 @@ export class CardTableComponent implements OnInit {
   @Input() paginationInfo: any = {};
   @Input() isEditable: boolean = false;
   @Input() isDeletable: boolean = false;
+  @Input() isCreatable: boolean = true;
+  @Input() isViewable: boolean = false;
   @Input() color: string = "light";
   @Input() searchCriteria: SearchCriteria =
     {
       searchValue: "",
       orderBy: { orderByColumn: null, orderByDirection: null }
     };
+  @Input() popoverComponent: any; // 'any' is used for flexibility; you can use a more specific type if needed
+
   // @Input() criteriaChangeFunction: Function = () => { console.log("test")};
   @Output() searchCriteriaChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() 
   @Output() create = new EventEmitter<void>();
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
+  @Output() view = new EventEmitter<number>();
+  @Output() closeView = new EventEmitter<void>();
+
+  @ViewChild('popover') popover: SatPopover | undefined;
+
+
+  faMagnifyingGlass = faMagnifyingGlass;
 
   constructor() { }
   
@@ -63,6 +76,16 @@ export class CardTableComponent implements OnInit {
 
   openDeleteModal(id: number): void {
     this.delete.emit(id);
+  }
+
+
+  openViewModal(id: number): void {
+    this.view.emit(id);
+  }
+
+  
+  closeViewModal(): void {
+    this.closeView.emit();
   }
   
   isBoolean(value: any): boolean {

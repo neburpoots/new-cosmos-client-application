@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from "@angular/core";
+import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { HttpResponse } from "@angular/common/http";
 import { PaginatedResult } from "../../../models/utils/pagination";
 import { CalGas } from "../../../models/entities/calgas";
@@ -11,6 +11,7 @@ import { Detector } from "../../../models/entities/detector";
 import { AbstractComponent } from "../abstract/abstract.component";
 import { TableField } from "../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
+import { DetectorFormComponent } from "./form/detector-form.component";
 
 @Component({
     selector: "app-detector",
@@ -18,6 +19,8 @@ import { ToastrService } from "ngx-toastr";
 })
 
 export class DetectorComponent extends AbstractComponent<Detector> implements OnInit, IAbstractComponent<Detector> {
+
+    @ViewChild('detectorEdit') childComponent!: DetectorFormComponent;
 
     tableHeaders: string[] = ['detectorType', 'serial_number', 'label_date', 'created', 'by'];
 
@@ -30,17 +33,28 @@ export class DetectorComponent extends AbstractComponent<Detector> implements On
         this.url = 'api/detectors';
     }
 
-    override createUrlParams(): string {
-
-        return `${this.url}?page=${this.data.page}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
+    override setEditData() {
+        console.log(this.editData)
+        this.childComponent.setEditData(this.editData);
     }
 
+    get editData(): any {
+        return {
+            id: this.selectedItem?.id,
+            // batch: this.selectedItem?.code,
+            // start_serial_number: this.selectedItem?.startSerialNumber,
+            // selectedOption: this.selectedItem?.assemblyType.id,
+            // quantity: this.selectedItem?.quantity,
+        };
+    }
+
+    override createUrlParams(): string {
+        return `${this.url}?orderBy=${this.searchCriteria.orderBy.orderByColumn}&sort=${this.searchCriteria.orderBy.orderByDirection}&page=${this.data.page}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
+    }
+    
     mapTableData(detectors: Detector[]): any[] {
         console.log(detectors)
         return detectors.map((detector: Detector) => {
-
-
-
             return {
                 id: { url: 'api/detectors', value: detector.id } as TableField,
                 detectorType: { url: 'api/detectorType', value: `${detector?.detectorType?.prefix ?? ''}${detector?.detectorType?.code ?? ''}${detector?.detectorType?.suffix ?? ''}` } as TableField,

@@ -2,13 +2,22 @@
 
     <div class="h-full w-full flex items-center">
         <div class="w-full mb-12 px-4">
-            <app-card-table (create)="openCreateModal()" (searchCriteriaChange)="loadFilteredItems($event)"
-                [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"
-                [title]="'Detectors'"></app-card-table>
-            <!-- Your table content here -->
+                <app-card-table [isDeletable]="true" (create)="openCreateModal()" (edit)="openEditModal($event)" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"
+                [title]="objectPlural" [object]="objectSingle"></app-card-table>
 
+            <!-- Your table content here -->
             <app-pagination [paginatedResult]="data" (pageChanged)="onPageChanged($event)"></app-pagination>
 
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
+                <detector-form [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refreshAssemblies)="loadItems()" (closeModal)="closeCreateModal()"></detector-form>
+            </modal-component>
+
+            <modal-component
+            [width]="ModalWidth.Small
+            " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
+                <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase" [selectedItem]="selectedItem" (deleteHandler)="delete($event)" (closeModal)="closeDeleteModal()"></delete-modal>
+            </modal-component>
         </div>
     </div>
 </div>

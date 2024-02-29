@@ -55,6 +55,7 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
   isCreateModalVisible: boolean = false;
   isEditModalVisible: boolean = false;
   isDeleteModalVisible: boolean = false;
+  isViewModalVisible: boolean = false;
 
 
   tableData: any[] = [];
@@ -70,9 +71,10 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   abstract mapTableData(data: any[]): any[];
 
-  setEditData(): any {
+  //cannot be abstract because it is not used in all components
+  setEditData(): any {};
 
-  };
+  loadDetailData(id : any): void {};
 
   abstract createUrlParams(): string;
 
@@ -116,7 +118,6 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   async openEditModal(id: number): Promise<void> {
     await this.setSelectedItem(id);
-    console.log(this.selectedItem);
     await this.setEditData();
     this.isEditModalVisible = true;
   }
@@ -145,5 +146,15 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   closeCreateModal(): void {
     this.isCreateModalVisible = false;
+  }
+
+  openViewModal(id: number): void {
+    this.setSelectedItem(id);
+    this.loadDetailData(id);
+    this.isViewModalVisible = true;
+  }
+
+  closeViewModal(): void {
+    this.isViewModalVisible = false;
   }
 }

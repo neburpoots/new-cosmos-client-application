@@ -13,7 +13,7 @@
             </modal-component>
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-                <assembly-form #assemblyEdit [assembly]="editData" (refreshAssemblies)="loadItems()" (closeModal)="closeEditModal()"></assembly-form>
+                <assembly-form #assemblyEdit  [assembly]="editData" (refreshAssemblies)="loadItems()" (closeModal)="closeEditModal()"></assembly-form>
             </modal-component>
             <modal-component
             [width]="ModalWidth.Small

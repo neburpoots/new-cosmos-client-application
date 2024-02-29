@@ -1,0 +1,30 @@
+<h2 class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
+<form [formGroup]="myForm" class="flex flex-col gap-5" (ngSubmit)="onSubmit()">
+
+
+    <select-component [form]="myForm" [name]="'gas'" [displayName]="'Gas'" [options]="gases"
+    [placeholder]="'Select a gas'" [touched]="myForm.controls['gas'].touched"
+    [errors]="[{ name: 'required', message: 'Gas is required' }]">
+    </select-component>
+
+
+    <input-component [form]="myForm" [name]="'concentration'" [displayName]="'Concentration'" [touched]="myForm.controls['concentration'].touched"
+    [errors]="[{ name: 'required', message: 'Concentration is required' }, { name: 'pattern' ,
+    message: 'Concentration must be a number' }]"></input-component>
+
+    <input-component [form]="myForm" [name]="'engineering_units'" [displayName]="'Engineering Units'" [touched]="myForm.controls['engineering_units'].touched"
+    [errors]="[{ name: 'required', message: 'Engineering units is required' }, { name: 'pattern' ,
+    message: 'Serial number must be a number' }]"></input-component>
+
+    <input-component [form]="myForm" [name]="'cdartikel'" [displayName]="'CD artikel'" [touched]="myForm.controls['cdartikel'].touched"
+    [errors]="[]"></input-component>
+
+    <div class="flex flex-row mt-auto justify-end items-center gap-2">
+        <button type="button" (click)="close()"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Close</button>
+        <button type="submit" 
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">{{id
+            ? "Edit" : "Add"}} {{objectSingle}}</button>
+    </div>
+
+</form>

@@ -18,8 +18,20 @@ export abstract class AbstractService<T> {
     this.url = 'http://localhost:8080';
   }
 
+  create(prefix : string, data: T): Observable<any> {
+    return this.http.post<any>(`${this.url}/${prefix}`, data);
+  }
+
+  update(prefix : string, id: number, data: T): Observable<any> {
+    return this.http.put<any>(`${this.url}/${prefix}/${id}`, data);
+  }
+
   get(prefix: string): Observable<PaginatedResult<T>> {
     return this.http.get<PaginatedResult<T>>(`${this.url}/${prefix}`);
+  }
+
+  getDependentData(prefix: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/${prefix}`);
   }
 
   delete(prefix : string, id: number): Observable<any> {

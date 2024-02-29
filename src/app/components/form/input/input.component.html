@@ -3,13 +3,30 @@
         'text-red-500': form.get(name)?.errors && form && form.controls[name].touched,
         'text-green-600': form.get(name)?.valid && form && form.controls[name].touched,
         'text-slate-800': !form.get(name)?.touched
-      }">{{displayName}}</label>
-    <input [ngClass]="{
-      'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
-      'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
-      'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
-    }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
-        type="text" [id]="name" [formControlName]="name">
+    }">{{displayName}}</label>
+    
+    <ng-container [ngSwitch]="inputType">
+        <textarea *ngSwitchCase="'textarea'" [ngClass]="{
+          'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
+          'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
+          'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
+        }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+            [id]="name" [formControlName]="name"></textarea>
+
+        <input *ngSwitchCase="'date'" type="date" [ngClass]="{
+          'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
+          'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
+          'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
+        }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+            [id]="name" [formControlName]="name">
+
+        <input *ngSwitchDefault type="text" [ngClass]="{
+          'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
+          'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
+          'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
+        }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+            [id]="name" [formControlName]="name">
+    </ng-container>
 
     <ng-container *ngFor="let error of errors">
         <div class="text-red-500">
@@ -18,5 +35,4 @@
             </div>
         </div>
     </ng-container>
-
 </div>

@@ -7,125 +7,72 @@ import AssemblyType from '../../../../models/entities/assemblyType';
 import { AssemblyDto } from '../../../../models/dto/assemblyDto';
 import { ErrorResponse } from '../../../../models/utils/errorResponse';
 import { Assembly } from '../../../../models/entities/assembly';
+import { DetectorTypeService } from '../../../../services/detectorType/detectorType.service';
+import DetectorType from '../../../../models/entities/detectorType';
+import { DetectorDto } from '../../../../models/dto/detectorDto';
+import { AbstractFormComponent } from '../../abstract/form/abstract-form.component';
+import { IAbstractForm } from '../../../../models/interface/IAbstractForm';
+import { AbstractService } from '../../../../services/abstract/abstract.service';
 
 @Component({
     selector: 'detector-form',
     templateUrl: './detector-form.component.html',
     styles: []
 })
-export class DetectorFormComponent {
+export class DetectorFormComponent extends AbstractFormComponent<DetectorDto> implements IAbstractForm<DetectorDto> {
 
-    @Output() closeModal = new EventEmitter<void>();
-    @Output() refreshAssemblies = new EventEmitter<void>();
+    override url = 'api/detectors';
 
-    @Input() assembly: any = {
-        id: null,
-        batch: '',
-        start_serial_number: '',
-        selectedOption: null,
-        quantity: '',
+    @Input() object: DetectorDto = {
+        invoiceAssignment: '',
+        detectorType: null,
+        serial_number: '',
+        label_date: new Date(),
+        remark: '',
     };
 
     myForm: FormGroup;
 
-    assemblyTypes: AssemblyType[] = [];
+    detectorTypes: DetectorType[] = [];
 
-    constructor(private toastr: ToastrService, private fb: FormBuilder, private assemblyTypeService: AssemblyTypeService, private assemblyService: AssemblyService) {
+    constructor(protected override toastr: ToastrService, protected override fb: FormBuilder, private detectorTypeService: DetectorTypeService, protected override abstractService: AbstractService<DetectorDto>) {
+        super(toastr, fb, abstractService)
         this.myForm = this.fb.group({
-            batch: [this.assembly.batch, [Validators.required, Validators.minLength(2)]],
-            start_serial_number: [this.assembly.start_serial_number, [Validators.required, Validators.pattern('^[0-9]+$')]],
-            quantity: [this.assembly.quantity, [Validators.required, Validators.pattern('^[0-9]+$')]],
-            selectedOption: [this.assembly.selectedOption, Validators.required],
+            invoiceAssignment: [this.object.invoiceAssignment, [Validators.required, Validators.minLength(6)]],
+            detectorType: [this.object.detectorType, [Validators.required]],
+            serial_number: [this.object.serial_number, [Validators.required, Validators.pattern('^[0-9]+$')]],
+            label_date: [this.object.label_date, [Validators.required]],
+            remark: [this.object.remark]
         });
     }
 
-    close(): void {
-        this.myForm.reset();
+    createDto(): DetectorDto {
 
-        this.closeModal.emit();
-    }
+        //get the detectorType from the array
+        let selectedDetectorType = this.detectorTypes.find((detectorType) => detectorType.id === +this.myForm.value.detectorType);
 
-    onSubmit(): void {
-        try {
-            if (this.myForm.valid) {
-                // Access form values using the 'value' property
-                this.myForm.value;
-
-                //get the assemblytype from the array
-                let selectedAssemblyType = this.assemblyTypes.find((assemblyType) => assemblyType.id === +this.myForm.value.selectedOption);
-
-                if (!selectedAssemblyType) {
-                    this.toastr.error('Please select an assembly type', 'Error');
-                    return;
-                }
-
-                let assemblyData: AssemblyDto = {
-                    batch: this.myForm.value.batch,
-                    start_serial_number: +this.myForm.value.start_serial_number,
-                    assemblyType: selectedAssemblyType,
-                    quantity: +this.myForm.value.quantity
-                }
-
-                console.log(this.assembly.id);
-                console.log(assemblyData);
-
-                if (this.assembly.id) {
-                    this.updateAssembly(assemblyData);
-                } else {
-                    this.createAssembly(assemblyData);
-                }
-            }
-        } catch (error) {
-            // this.toastr.error(error.message, 'Error');
-            console.error(error);
+        if (!selectedDetectorType) {
+            this.toastr.error('Please select an detector Type', 'Error');
+            throw new Error('Please select an detector Type');
         }
-    }
 
-
-    async createAssembly(assemblyData: AssemblyDto): Promise<void> {
-        this.assemblyService.createAssembly(assemblyData).subscribe(
-            (response) => {
-                console.log('Response:', response);
-                this.toastr.success('Assembly created successfully', 'Success');
-                this.myForm.reset();
-                this.closeModal.emit();
-                this.refreshAssemblies.emit();
-            },
-            (error) => {
-                this.toastr.error(error.error.message, 'Error');
-            }
-        );
-    }
-
-    async updateAssembly(assemblyData: AssemblyDto): Promise<void> {
-
-        this.assemblyService.updateAssembly(this.assembly.id, assemblyData).subscribe(
-            (response) => {
-                console.log('Response:', response);
-                this.toastr.success('Assembly updated successfully', 'Success');
-                this.myForm.reset();
-                this.closeModal.emit();
-                this.refreshAssemblies.emit();
-            },
-            (error) => {
-                this.toastr.error(error.error.message, 'Error');
-            }
-        );
-    }
-
-    async loadAssemblyTypes(): Promise<void> {
-        try {
-            const response = await this.assemblyTypeService.getAssemblyTypes().toPromise();
-            this.assemblyTypes = response!;
-            console.log(this.assemblyTypes);
-        } catch (error) {
-            console.error('Error fetching assemblyTypes', error);
+        return {
+            invoiceAssignment: this.myForm.value.invoiceAssignment,
+            detectorType: selectedDetectorType,
+            serial_number: this.myForm.value.serial_number,
+            label_date: new Date(this.myForm.value.label_date),
+            remark: this.myForm.value.remark,
         }
     }
 
     ngOnInit(): void {
-        this.loadAssemblyTypes();
+        this.setUpDependentData();
     }
+
+    async setUpDependentData(): Promise<void> {
+        this.detectorTypes = await this.getDependentData('api/detector-types');
+    }
+
 
     //on edit set to selected assembly
     setEditData(changes: any): void {

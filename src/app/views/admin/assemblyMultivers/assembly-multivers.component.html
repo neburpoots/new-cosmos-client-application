@@ -1,0 +1,19 @@
+<div class="min-h-[100vh] flex items-center  px-4 md:px-10 justify-center">
+
+    <div class="h-full w-full flex items-center">
+        <div class="w-full mb-12 pt-12 px-4">
+            <app-card-table (closeView)="closeViewModal()" [isViewable]="true" (view)="openViewModal($event)"
+                [isCreatable]="false" [isEditable]="false" [isDeletable]="false" (create)="openCreateModal()"
+                (edit)="openEditModal($event)" (delete)="openDeleteModal($event)"
+                (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria"
+                [columns]="tableHeaders" [data]="tableData" [title]="objectPlural" [object]="objectSingle">
+                <assembly-multivers-detail [assemblyMultiversLine]="assemblyMultiversLine" [item]="selectedItem"></assembly-multivers-detail>
+            </app-card-table>
+            <!-- Your table content here -->
+
+            <app-pagination [paginatedResult]="data" (pageChanged)="onPageChanged($event)"></app-pagination>
+
+
+        </div>
+    </div>
+</div>

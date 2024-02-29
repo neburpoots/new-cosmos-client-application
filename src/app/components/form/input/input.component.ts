@@ -12,5 +12,5 @@ export class InputComponent {
   @Input() errors: any[] = [];
   @Input() form: FormGroup = new FormGroup({});
   @Input() touched: any = false;
-
+  @Input() inputType: string = 'text';
 }

@@ -67,6 +67,13 @@ import { DetectorComponent } from "./views/admin/detectors/detector.component";
 import { DeleteModalComponent } from "./views/admin/delete/delete-modal.component";
 import { AssemblyFormComponent } from "./views/admin/assembly/form/assembly-form.component";
 import { DetectorFormComponent } from "./views/admin/detectors/form/detector-form.component";
+import { CalibrationGasesFormComponent } from "./views/admin/calibrationgases/form/calibrationgases-form.component";
+import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/assembly-multivers.component";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { PopOverComponent } from "./components/popover/popover.component";
+import { SatPopoverModule } from '@ncstate/sat-popover';
+import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
 
 @NgModule({
   declarations: [
@@ -115,6 +122,10 @@ import { DetectorFormComponent } from "./views/admin/detectors/form/detector-for
     DeleteModalComponent,
     AssemblyFormComponent,
     DetectorFormComponent,
+    CalibrationGasesFormComponent,
+    AssemblyMultiversComponent,
+    PopOverComponent,
+    AssemblyMultiversDetailComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)
@@ -123,7 +134,7 @@ import { DetectorFormComponent } from "./views/admin/detectors/form/detector-for
     progressBar: true, // Show or hide the progress bar
     progressAnimation: 'increasing', // Set the animation type for the progress bar ('increasing' or 'decreasing')
     preventDuplicates: true, // Prevent duplicate toastrs from being shown
-  }), ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule],
+  }), ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule, FontAwesomeModule, SatPopoverModule],
   providers: [AuthService,
     AuthGuard,
     {

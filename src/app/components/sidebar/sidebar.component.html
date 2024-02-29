@@ -105,6 +105,14 @@
                   class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
                     class="mr-2 fa fa-cog" aria-hidden="true"></i>
                   Assembly</a></li>
+              <li><a [routerLink]="['/user/assemblymultivers']" routerLinkActive #adminAssemblyMultivers="routerLinkActive" [ngClass]="
+                      adminAssemblyMultivers.isActive
+                        ? 'text-white hover:text-white'
+                        : 'text-white hover:text-white'
+                    " [ngClass]="adminAssemblyMultivers.isActive ? 'bg-cosmosDark text-white' : ''"
+                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
+                    class="mr-2 fa fa-gears" aria-hidden="true"></i>
+                  Assembly MV</a></li>
               <li><a [routerLink]="['/user/calibrationgases']" routerLinkActive #adminCalGas="routerLinkActive"
                   [ngClass]="
                     adminCalGas.isActive
@@ -114,8 +122,7 @@
                   class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
                     class="mr-2 fa fa-cloud" aria-hidden="true"></i>
                   Calibration gases</a></li>
-              <li><a [routerLink]="['/user/detectors']" routerLinkActive #adminDetectors="routerLinkActive"
-                  [ngClass]="
+              <li><a [routerLink]="['/user/detectors']" routerLinkActive #adminDetectors="routerLinkActive" [ngClass]="
                     adminDetectors.isActive
                       ? 'text-white hover:text-white'
                       : 'text-white hover:text-white'
@@ -123,6 +130,8 @@
                   class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
                     class="mr-2 fa fa-area-chart" aria-hidden="true"></i>
                   Detectors</a></li>
+
+
 
             </ul>
           </div>
