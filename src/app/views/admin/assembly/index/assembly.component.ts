@@ -20,7 +20,7 @@ export class AssemblyComponent extends AbstractComponent<Assembly> implements On
 
   @ViewChild('assemblyEdit') childComponent!: AssemblyFormComponent;
 
-  tableHeaders = ['code', 'assemblyType', 'cdartikel', 'startSerialNumber', 'quantity', 'voorraad', 'gereserveerd', 'minvoorraad', 'maxvoorraad', 'checked', 'po', 'created'];
+  tableHeaders = ['code', 'assemblyType', 'cdartikel', 'start_serial_number', 'quantity', 'voorraad', 'gereserveerd', 'minvoorraad', 'maxvoorraad', 'checked', 'po', 'created'];
   objectSingle = 'Assembly';
   objectPlural = 'Assemblies';
 
@@ -40,8 +40,8 @@ export class AssemblyComponent extends AbstractComponent<Assembly> implements On
   get editData(): any {
     return {
       id: this.selectedItem?.id,
-      batch: this.selectedItem?.code,
-      start_serial_number: this.selectedItem?.startSerialNumber,
+      code: this.selectedItem?.code,
+      start_serial_number: this.selectedItem?.start_serial_number,
       selectedOption: this.selectedItem?.assemblyType.id,
       quantity: this.selectedItem?.quantity,
     };
@@ -55,7 +55,7 @@ export class AssemblyComponent extends AbstractComponent<Assembly> implements On
         code: { url: null, value: assembly.code } as TableField,
         assemblyType: { url: null, value: assembly.assemblyType.name } as TableField,
         cdartikel: { url: null, value: assembly?.assemblyType?.stock?.cdartikel } as TableField,
-        startSerialNumber: { url: null, value: assembly.startSerialNumber } as TableField,
+        start_serial_number: { url: null, value: assembly.start_serial_number } as TableField,
         checked: { url: null, value: assembly.checked } as TableField,
         quantity: { url: null, value: assembly.quantity } as TableField,
         voorraad: { url: null, value: assembly?.assemblyType?.stock?.voorraad } as TableField,

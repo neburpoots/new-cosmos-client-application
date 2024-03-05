@@ -1,31 +1,31 @@
 <h2 class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} Detector</h2>
 <form [formGroup]="myForm" class="flex flex-col gap-5" (ngSubmit)="onSubmit()">
 
-    <input-component [form]="myForm" [name]="'invoiceAssignment'" [displayName]="'Factuuropdracht'" [touched]="myForm.controls['invoiceAssignment'].touched"
-    [errors]="[{ name: 'required', message: 'Factuuropdracht is required' }, { name: 'minlength' ,
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'invoiceAssignment'"
+        [displayName]="'Factuuropdracht'" [touched]="myForm.controls['invoiceAssignment'].touched" [errors]="[{ name: 'required', message: 'Factuuropdracht is required' }, { name: 'minlength' ,
     message: 'Factuuropdracht must be at least 6 characters' }]"></input-component>
 
     <select-component [form]="myForm" [name]="'detectorType'" [displayName]="'Detector Type'" [options]="detectorTypes"
-    [placeholder]="'Select an detector type'" [touched]="myForm.controls['detectorType'].touched"
-    [errors]="[{ name: 'required', message: 'Detector type is required' }]">
+        [placeholder]="'Select an detector type'" [touched]="myForm.controls['detectorType'].touched"
+        [errors]="[{ name: 'required', message: 'Detector type is required' }]">
     </select-component>
 
-    <input-component [form]="myForm" [name]="'serial_number'" [displayName]="'S/N'" [touched]="myForm.controls['serial_number'].touched"
-    [errors]="[{ name: 'required', message: 'Serial number is required' }, { name: 'pattern' ,
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'serial_number'" [displayName]="'S/N'"
+        [touched]="myForm.controls['serial_number'].touched" [errors]="[{ name: 'required', message: 'Serial number is required' }, { name: 'pattern' ,
     message: 'Serial number must be a number' }]"></input-component>
 
-    <input-component [inputType]="'date'" [form]="myForm" [name]="'label_date'" [displayName]="'Label date'" [touched]="myForm.controls['label_date'].touched"
-    [errors]="[{ name: 'required', message: ' is required' }, { name: 'minlength' ,
+    <input-component [isSubmitted]="isSubmitted" [inputType]="'date'" [form]="myForm" [name]="'label_date'"
+        [displayName]="'Label date'" [touched]="myForm.controls['label_date'].touched" [errors]="[{ name: 'required', message: 'Label date is required' }, { name: 'minlength' ,
     message: 'Factuuropdracht must be at least 2 characters' }]"></input-component>
 
-    <input-component [inputType]="'textarea'" [form]="myForm" [name]="'remark'" [displayName]="'Remarks'" [touched]="myForm.controls['remark'].touched"
-    [errors]="[{ name: 'required', message: ' is required' }, { name: 'minlength' ,
+    <input-component [isSubmitted]="isSubmitted" [inputType]="'textarea'" [form]="myForm" [name]="'remark'"
+        [displayName]="'Remarks'" [touched]="myForm.controls['remark'].touched" [errors]="[{ name: 'required', message: ' is required' }, { name: 'minlength' ,
     message: 'Remark must be at least 2 characters' }]"></input-component>
 
     <div class="flex flex-row mt-auto justify-end items-center gap-2">
         <button type="button" (click)="close()"
             class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Close</button>
-        <button type="submit" 
+        <button type="submit" (click)="setSubmitted()"
             class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">{{id
             ? "Edit" : "Add"}} Detector</button>
     </div>

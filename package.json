@@ -26,6 +26,7 @@
     "@popperjs/core": "^2.11.8",
     "@types/chart.js": "^2.9.41",
     "chart.js": "^4.4.1",
+    "dayjs": "^1.11.10",
     "font-awesome": "^4.7.0",
     "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",

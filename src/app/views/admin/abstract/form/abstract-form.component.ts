@@ -41,6 +41,8 @@ export abstract class AbstractFormComponent<T> implements IAbstractForm<T> {
 
     abstract url: string;
 
+    protected isSubmitted = false;
+
     constructor(protected toastr: ToastrService, protected fb: FormBuilder, protected abstractService: AbstractService<T>) {
 
     }
@@ -49,6 +51,10 @@ export abstract class AbstractFormComponent<T> implements IAbstractForm<T> {
         this.myForm.reset();
 
         this.closeModal.emit();
+    }
+
+    setSubmitted(): void {
+        this.isSubmitted = true;
     }
 
     async create(data: T): Promise<void> {

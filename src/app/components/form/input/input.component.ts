@@ -13,4 +13,5 @@ export class InputComponent {
   @Input() form: FormGroup = new FormGroup({});
   @Input() touched: any = false;
   @Input() inputType: string = 'text';
+  @Input() isSubmitted: boolean = false;
 }

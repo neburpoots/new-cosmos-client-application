@@ -1,4 +1,4 @@
-import ProductDescription from "./productDescription";
+import { AssemblyMultiversLine } from "./assemblyMultiversLine";
 
 
 interface AssemblyMultivers {
@@ -24,6 +24,8 @@ interface AssemblyMultivers {
     maxvoorraad: string;
     gereserveerd: string;
     voorraad: string;
+    productDescription: string;
+    assemblyMultiversLines: AssemblyMultiversLine[];
 }
 
 export default AssemblyMultivers;

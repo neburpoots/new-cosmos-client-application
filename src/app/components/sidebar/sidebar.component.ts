@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/authentication/auth.service";
+import { faSatelliteDish, faVial } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-sidebar",
@@ -11,6 +12,9 @@ export class SidebarComponent implements OnInit {
   assembleDropdownActive: boolean = false;
 
   constructor(private authService: AuthService) { }
+
+  faVial = faVial
+  faSatelliteDish = faSatelliteDish
 
   ngOnInit() { }
   

@@ -7,30 +7,31 @@
     
     <ng-container [ngSwitch]="inputType">
         <textarea *ngSwitchCase="'textarea'" [ngClass]="{
-          'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
+          'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
           'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
           'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
         }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
             [id]="name" [formControlName]="name"></textarea>
 
         <input *ngSwitchCase="'date'" type="date" [ngClass]="{
-          'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
+          'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
           'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
           'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
         }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
             [id]="name" [formControlName]="name">
-
+            
         <input *ngSwitchDefault type="text" [ngClass]="{
           'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
+          'border-red-500 test focus:outline-red-500': isSubmitted && form.get(name)?.errors,
           'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
-          'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
+          'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched && !isSubmitted
         }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
             [id]="name" [formControlName]="name">
     </ng-container>
 
     <ng-container *ngFor="let error of errors">
         <div class="text-red-500">
-            <div *ngIf="form.get(name)?.hasError(error.name) && form && form.controls[name].touched">
+            <div *ngIf="(form.get(name)?.hasError(error.name) && form && form.controls[name].touched) || (form.get(name)?.hasError(error.name) && isSubmitted)">
                 {{error.message}}
             </div>
         </div>

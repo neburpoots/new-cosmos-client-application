@@ -2,12 +2,12 @@
 
     <div class="h-full w-full flex items-center">
         <div class="w-full mb-12 pt-12 px-4">
-            <app-card-table (closeView)="closeViewModal()" [isViewable]="true" (view)="openViewModal($event)"
+            <app-card-table (pdf)="downloadPdf($event)" [isPdf]="true" [detailPagePrefix]="'/user/assemblymultivers/'" (closeView)="closeViewModal()" [isViewable]="true" (view)="openViewModal($event)"
                 [isCreatable]="false" [isEditable]="false" [isDeletable]="false" (create)="openCreateModal()"
                 (edit)="openEditModal($event)" (delete)="openDeleteModal($event)"
                 (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria"
                 [columns]="tableHeaders" [data]="tableData" [title]="objectPlural" [object]="objectSingle">
-                <assembly-multivers-detail [assemblyMultiversLine]="assemblyMultiversLine" [item]="selectedItem"></assembly-multivers-detail>
+                <assembly-multivers-popover  [assemblyMultiversLine]="assemblyMultiversLine" [item]="selectedItem"></assembly-multivers-popover>
             </app-card-table>
             <!-- Your table content here -->
 

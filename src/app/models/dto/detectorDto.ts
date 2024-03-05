@@ -5,6 +5,6 @@ export interface DetectorDto {
     invoiceAssignment: string;
     detectorType: DetectorType | null;
     serial_number: string;
-    label_date: Date
+    label_date: Date | null;
     remark: string;
 }

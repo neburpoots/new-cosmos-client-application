@@ -32,7 +32,8 @@ export class AuthService {
       tap((response: any) => {
         const token = response.access_token;
         this.setToken(token);
-      })
+      }, (error) => this.logout())
+
     );
   }
 

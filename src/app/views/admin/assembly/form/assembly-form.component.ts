@@ -18,9 +18,11 @@ export class AssemblyFormComponent {
     @Output() closeModal = new EventEmitter<void>();
     @Output() refreshAssemblies = new EventEmitter<void>();
 
+    isSubmitted = false;
+
     @Input() assembly: any = {
         id: null,
-        batch: '',
+        code: '',
         start_serial_number: '',
         selectedOption: null,
         quantity: '',
@@ -32,7 +34,7 @@ export class AssemblyFormComponent {
 
     constructor(private toastr: ToastrService, private fb: FormBuilder, private assemblyTypeService: AssemblyTypeService, private assemblyService: AssemblyService) {
         this.myForm = this.fb.group({
-            batch: [this.assembly.batch, [Validators.required, Validators.minLength(2)]],
+            code: [this.assembly.code, [Validators.required, Validators.minLength(2)]],
             start_serial_number: [this.assembly.start_serial_number, [Validators.required, Validators.pattern('^[0-9]+$')]],
             quantity: [this.assembly.quantity, [Validators.required, Validators.pattern('^[0-9]+$')]],
             selectedOption: [this.assembly.selectedOption, Validators.required],
@@ -45,7 +47,13 @@ export class AssemblyFormComponent {
         this.closeModal.emit();
     }
 
+    setSubmitted(): void {
+        console.log('setSubmitted');
+        this.isSubmitted = true;
+    }
+
     onSubmit(): void {
+        console.log(this.isSubmitted)
         try {
             if (this.myForm.valid) {
                 // Access form values using the 'value' property
@@ -60,7 +68,7 @@ export class AssemblyFormComponent {
                 }
 
                 let assemblyData: AssemblyDto = {
-                    batch: this.myForm.value.batch,
+                    code: this.myForm.value.code,
                     start_serial_number: +this.myForm.value.start_serial_number,
                     assemblyType: selectedAssemblyType,
                     quantity: +this.myForm.value.quantity
@@ -130,7 +138,7 @@ export class AssemblyFormComponent {
     //on edit set to selected assembly
     setEditData(changes: any): void {
         this.myForm.patchValue({
-            batch: changes.batch,
+            code: changes.code,
             start_serial_number: changes.start_serial_number,
             quantity: changes.quantity,
             selectedOption: changes.selectedOption

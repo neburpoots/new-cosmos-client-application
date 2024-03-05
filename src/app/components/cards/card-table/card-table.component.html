@@ -7,13 +7,13 @@
       placeholder="Search here..."
       class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded-2xl text-sm  w-full pl-10" />
   </div>
-  <div *ngIf="isCreatable" (click)="openCreateModal()"
-    class="bg-cosmosDark rounded-full text-sm text-white px-3 py-2 cursor-pointer">
-    Add {{ object }} +
-  </div>
+
+  <button type="button" *ngIf="isCreatable" (click)="openCreateModal()"
+    class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
+    Add {{ object }} +</button>
 </div>
 <div [@fadeInOut]="true"
-  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-slate-50 p-4"
+  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm rounded-2xl bg-slate-50 p-4"
   [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
   <div class="block w-full overflow-x-auto">
     <div class="text-slate-900 text-lg font-semibold mb-2">{{ title }} </div>
@@ -59,29 +59,24 @@
 
             <td *ngFor="let column of columns"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-4">
-              <ng-container *ngIf="isBoolean(item[column]['value']); else defaultContent">
-                <span class="text-base" *ngIf="item[column]['value']"><i
-                    class="fa fa-md fa-check-circle text-green-700 text-lg w-8"></i></span>
-                <span class="text-base" *ngIf="!item[column]['value']"><i
-                    class="fa fa-md fa-times-circle text-red-600 text-lg w-8"></i></span>
-              </ng-container>
+              @if (isBoolean(item[column]['value'])) {
+              <span class="text-base" *ngIf="item[column]['value']"><i
+                  class="fa fa-md fa-check-circle text-green-700 text-lg w-8"></i></span>
+              <span class="text-base" *ngIf="!item[column]['value']"><i
+                  class="fa fa-md fa-times-circle text-red-600 text-lg w-8"></i></span>
+              } @else if (item[column]['url']) {
+              <a [routerLink]="item[column]['url']">{{ item[column]['value'] }}</a>
 
-
-
-
-
-              <ng-template #defaultContent>
-                <ng-container *ngIf="item[column]['url']; else innerContent">
-                  <a [routerLink]="item[column]['url']">{{ item[column]['value'] }}</a>
-                </ng-container>
-                <ng-template #innerContent>
-                  {{ item[column]['value'] ? item[column]['value'] : '-'}}
-                </ng-template>
-              </ng-template>
+              } @else if (isValidDate(item[column]['value'])) {
+              {{ formattedDate(item[column]['value'])}}
+              }
+              @else {
+              {{ item[column]['value'] ? item[column]['value'] : '-'}}
+              }
 
             </td>
             <!-- Fixed edit column on the right -->
-            <td *ngIf="isDeletable || isEditable || isViewable"
+            <td *ngIf="isDeletable || isEditable || isViewable || isPdf"
               class="mt-2 sticky right-0 flex bg-white gap-1 items-center justify-center">
               <div *ngIf="isEditable" (click)="openEditModal(item['id']?.value)"
                 class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
@@ -91,14 +86,19 @@
                 class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
                 <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
               </div>
-              <div *ngIf="isViewable" [satPopoverAnchor]="popover" (mouseover)="popover.open()"
-                (mouseover)="openViewModal(item['id'].value)" (mouseleave)="popover.close()"
-                class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
-                <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
-                <sat-popover verticalAlign="center" horizontalAlign="before" #popover>
-                  <ng-content></ng-content>
-                </sat-popover>
-              </div>
+              <a [routerLink]="detailPagePrefix + item['id']?.value">
+                <div *ngIf="isViewable" [satPopoverAnchor]="popover" (mouseover)="popover.open()"
+                  (mouseover)="openViewModal(item['id'].value)" (mouseleave)="popover.close()"
+                  class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
+                  <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
+                  <sat-popover verticalAlign="center" horizontalAlign="before" #popover>
+                    <ng-content></ng-content>
+                  </sat-popover>
+                </div>
+              </a>
+              <button *ngIf="isPdf" (click)="downloadPdf(item['id'].value)" class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] pl-[8px] pr-[5px] ">
+                <fa-icon [icon]="faFilePdf"></fa-icon>
+              </button>
             </td>
 
           </tr>

@@ -10,7 +10,7 @@
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <detector-form [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refreshAssemblies)="loadItems()" (closeModal)="closeCreateModal()"></detector-form>
+                <detector-form [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refresh)="loadItems()" (closeModal)="closeCreateModal()"></detector-form>
             </modal-component>
 
             <modal-component

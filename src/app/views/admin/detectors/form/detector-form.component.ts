@@ -27,7 +27,7 @@ export class DetectorFormComponent extends AbstractFormComponent<DetectorDto> im
         invoiceAssignment: '',
         detectorType: null,
         serial_number: '',
-        label_date: new Date(),
+        label_date: null,
         remark: '',
     };
 

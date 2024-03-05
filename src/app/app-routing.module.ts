@@ -24,6 +24,8 @@ import { AuthGuard } from "./services/authentication/auth.guard";
 import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
 import { DetectorComponent } from "./views/admin/detectors/detector.component";
 import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/assembly-multivers.component";
+import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
+import { SensorBaseTypeComponent } from "./views/admin/sensorBaseType/sensorBaseType.component";
 
 const routes: Routes = [
   // user views
@@ -35,11 +37,13 @@ const routes: Routes = [
       { path: "dashboard", component: DashboardComponent },
       { path: "assembly", component: AssemblyComponent },
       { path: "assemblymultivers", component: AssemblyMultiversComponent },
+      { path: "assemblymultivers/:id", component: AssemblyMultiversDetailComponent }, // Add the dynamic parameter ":userId"
       { path: "calibrationgases", component: CalibrationGasesComponent },
       { path: "detectors", component: DetectorComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },
       { path: "maps", component: MapsComponent },
+      { path: "sensor-base-types", component: SensorBaseTypeComponent},
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

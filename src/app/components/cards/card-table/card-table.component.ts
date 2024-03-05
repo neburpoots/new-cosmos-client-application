@@ -1,8 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from "@angular/core";
 import { trigger, state, style, animate, transition } from "@angular/animations";
 import { SearchCriteria } from "../../../models/utils/searchCriteria";
-import { faCoffee, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCoffee, faFilePdf, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { SatPopover } from "@ncstate/sat-popover";
+import dayjs from "dayjs";
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 
 @Component({
   selector: "app-card-table",
@@ -27,6 +30,8 @@ export class CardTableComponent implements OnInit {
   @Input() isDeletable: boolean = false;
   @Input() isCreatable: boolean = true;
   @Input() isViewable: boolean = false;
+  @Input() isPdf: boolean = false;
+  @Input() detailPagePrefix: string = "";
   @Input() color: string = "light";
   @Input() searchCriteria: SearchCriteria =
     {
@@ -34,7 +39,7 @@ export class CardTableComponent implements OnInit {
       orderBy: { orderByColumn: null, orderByDirection: null }
     };
   @Input() popoverComponent: any; // 'any' is used for flexibility; you can use a more specific type if needed
-
+  @Output() pdf = new EventEmitter<number>();
   // @Input() criteriaChangeFunction: Function = () => { console.log("test")};
   @Output() searchCriteriaChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() 
@@ -46,10 +51,26 @@ export class CardTableComponent implements OnInit {
 
   @ViewChild('popover') popover: SatPopover | undefined;
 
-
   faMagnifyingGlass = faMagnifyingGlass;
+  faFilePdf = faFilePdf;
+
 
   constructor() { }
+
+  formattedDate(date: string): string {
+    const hasTime = date.includes('00:00'); // Check if the date string includes a time component
+    const isTime = date.includes('T'); // Check if the date string includes a time component
+    
+    if (!hasTime && isTime) {
+      return dayjs(date).format('DD-MM-YYYY HH:mm:ss'); // Include time in the format
+    }
+    return dayjs(date).format('DD-MM-YYYY'); // Format without time
+  }
+
+  isValidDate(date: string): boolean {
+    const validFormats = ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DDTHH:mm:ss.SSSZ'];
+    return dayjs(date, validFormats, false).isValid();
+  }
   
   loadData(searchString : string) : any {
     this.searchCriteria.searchValue = searchString;
@@ -110,6 +131,9 @@ export class CardTableComponent implements OnInit {
       this.searchCriteria.orderBy.orderByDirection = "asc";
     }
     this.searchCriteriaChange.emit(this.searchCriteria);
+  }
 
+  downloadPdf(id: number): void {
+    this.pdf.emit(id);
   }
 }

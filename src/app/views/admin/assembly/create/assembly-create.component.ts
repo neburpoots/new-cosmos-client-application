@@ -23,7 +23,7 @@ export class AssemblyCreateComponent {
 
 
     assembly = {
-        batch: '',
+        code: '',
         start_serial_number: '',
         selectedOption: null,
         quantity: '',
@@ -31,7 +31,7 @@ export class AssemblyCreateComponent {
 
     constructor(private toastr: ToastrService, private fb: FormBuilder, private assemblyTypeService: AssemblyTypeService, private assemblyService: AssemblyService) {
         this.myForm = this.fb.group({
-            batch: [this.assembly.batch, [Validators.required, Validators.minLength(2)]],
+            code: [this.assembly.code, [Validators.required, Validators.minLength(2)]],
             start_serial_number: [this.assembly.start_serial_number, [Validators.required, Validators.pattern('^[0-9]+$')]],
             quantity: [this.assembly.quantity, [Validators.required, Validators.pattern('^[0-9]+$')]],
             selectedOption: [this.assembly.selectedOption, Validators.required], // Add a form control for the select component
@@ -62,7 +62,7 @@ export class AssemblyCreateComponent {
                 }
 
                 let assemblyData: AssemblyDto = {
-                    batch: this.myForm.value.batch,
+                    code: this.myForm.value.code,
                     start_serial_number: +this.myForm.value.start_serial_number,
                     assemblyType: selectedAssemblyType,
                     quantity: this.myForm.value.quantity

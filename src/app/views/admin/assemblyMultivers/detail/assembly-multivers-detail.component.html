@@ -1,38 +1,51 @@
-<div class="bg-white rounded-lg shadow-lg p-4">
-    <div class="card">
-        <div class="card-header text-base font-normal">
-            Assembly Details
-        </div>
-        <div class="card-body">
-            <div class="grid grid-cols-2 gap-2 mb-2">
-                <div class="col">
-                    <label class="p-1">Part</label>
+<div class="min-h-[100vh] flex px-4 md:px-10 justify-center">
+
+    <div class="h-full w-full flex items-center">
+        <div class="w-full mb-12 pt-12 px-4">
+            <div class="pt-12 flex flex-col gap-6">
+                <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
+                    <h1 class="text-2xl text-roboto font-bold text-gray-800">Assembly Multivers ({{item?.assemblage_order}} / {{item?.commentaar}})</h1>
+                    <p>View the details of the assembly here.</p>
                 </div>
-                <div class="col">
-                    <label class="p-1">Description</label>
+                <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
+                    <div class="flex gap-20">
+                        <div class="flex flex-col items-center justify-center">
+                            <p class="font-bold">Order datum</p>
+                            <p>{{formattedDate}}</p>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <p class="font-bold">MV Code</p>
+                            <p>{{item?.productDescription}}</p>
+                        </div>
+                        <div class="flex flex-col items-center justify-center">
+                            <p class="font-bold">Status</p>
+                            <p>{{item?.status}}</p>
+                        </div>
+                    </div>
+                    <hr class="mt-4">
+                    @for (line of item?.assemblyMultiversLines; track line.assemblage_order) {
+                        <div class="card mb-4">
+                            <div class="card-header text-lg my-2 font-semibold">
+                              Assembly Line ({{ line.omschr }})
+                            </div>
+                            <div class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 card-body gap-x-4">
+                              <p>Part: {{ line.cdartcomponent }}</p>
+                              <p>Assemblage Date: {{ line.assemblageDatum | date }}</p>
+                              <p>CD Magazijn: {{ line.cdmagazijn }}</p>
+                              <p>Number of Norm: {{ line.aantalNorm }}</p>
+                              <p>Number Used: {{ line.aantalGebruikt }}</p>
+                              <p>Used Value: {{ line.waardeGebruikt | currency }}</p>
+                              <p>Number of Assembly: {{ line.aantalSamenstelling }}</p>
+                              <p>Number Reserved: {{ line.aantalgereservaf }}</p>
+                            </div>
+                          </div>
+                          <hr>
+                    } @empty {
+                        <p class="text-gray-500">Empty list of assembly details</p>
+                    }
+        
                 </div>
-                <!-- Add other labels for each column -->
             </div>
-
-            @for (line of assemblyMultiversLine.slice(0, 10); track line.assemblage_order) {
-                <div class="grid grid-cols-2 gap-2 mb-2">
-                    <div class="col">
-                        <p class="p-1">{{ line?.cdartcomponent }}</p>
-                    </div>
-                    <div class="col">
-                        <p class="p-1">{{ line?.omschr }}</p>
-                    </div>
-                    <!-- Add other <div class="col"> elements for each column -->
-                </div>
-            } @empty {
-                <p class="text-gray-500">Empty list of assembly details</p>
-            }
-
-            @if(assemblyMultiversLine.length > 10) {
-                <div class="flex justify-end text-lg text-cosmosDarker">
-                    {{assemblyMultiversLine.length - 10}} more
-                </div>
-            }
         </div>
     </div>
 </div>

@@ -73,7 +73,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { PopOverComponent } from "./components/popover/popover.component";
 import { SatPopoverModule } from '@ncstate/sat-popover';
+import { AssemblyMultiversPopoverComponent } from "./views/admin/assemblyMultivers/popover/assembly-multivers-popover.component";
 import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
+import { SensorBaseTypeComponent } from "./views/admin/sensorBaseType/sensorBaseType.component";
+import { SensorBaseTypeFormComponent } from "./views/admin/sensorBaseType/form/sensorBaseTypeForm.component";
 
 @NgModule({
   declarations: [
@@ -125,7 +128,10 @@ import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultiver
     CalibrationGasesFormComponent,
     AssemblyMultiversComponent,
     PopOverComponent,
-    AssemblyMultiversDetailComponent
+    AssemblyMultiversPopoverComponent,
+    AssemblyMultiversDetailComponent,
+    SensorBaseTypeComponent,
+    SensorBaseTypeFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)
