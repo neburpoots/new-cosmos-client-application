@@ -1,5 +1,10 @@
 <div [formGroup]="form" class="flex flex-col gap-1">
-    <select [ngClass]="{'border-green-600 border' : form.get('selectedOption')?.value}" class="rounded-2xl focus:border-0 rounded-2xl focus:ring-0 focus:outline-cosmosDark " id="selectedOption"
+    <select [ngClass]="{
+        'border-green-600 border' : form.get('selectedOption')?.value,
+        'text-sm': inline,
+    }     
+    " 
+    class="rounded-2xl focus:border-0 rounded-2xl focus:ring-0 focus:outline-cosmosDark " id="selectedOption"
         [formControlName]="name">
         <option [value]="null" disabled>{{placeholder}}</option>
         <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>

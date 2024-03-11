@@ -8,6 +8,7 @@ import { CalGasService } from "../../../services/calgas/calgas.service";
 import { IAbstractComponent } from "../../../models/interface/IAbstractComponent";
 import { AbstractService } from "../../../services/abstract/abstract.service";
 import { ToastrService } from "ngx-toastr";
+import { TableHeader } from "../../../models/utils/tableHeader";
 
 @Component({
   selector: "app-abstractview",
@@ -64,7 +65,12 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   modalWidth: ModalWidth = ModalWidth.Large;
 
-  abstract tableHeaders: string[];
+  //table widths for inline editing and creating
+  cellWidths: number[] = [];
+  isInlineCreating: boolean = false;
+
+
+  abstract tableHeaders: TableHeader[];
 
   constructor(protected toastr: ToastrService, protected abstractService: AbstractService<T>) {
   }
@@ -88,6 +94,8 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
     this.searchCriteria.orderBy = searchCriteria.orderBy;
     // Assuming you want to use the `test` parameter as well, you can do something with it here...
     await this.loadItems();
+
+    
   }
 
   async loadItems(): Promise<void> {
@@ -157,4 +165,15 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
   closeViewModal(): void {
     this.isViewModalVisible = false;
   }
+
+  //sets the column widths for the table for inline editing and creating
+  setTableWidths(cellWidths: number[]): void {
+    console.log(cellWidths)
+    this.cellWidths = cellWidths;
+  }
+
+  toggleInlineCreating() {
+    this.isInlineCreating = !this.isInlineCreating;
+  }
+
 }

@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from '../../models/utils/pagination';
 import { SearchCriteria } from '../../models/utils/searchCriteria';
-import AssemblyType from '../../models/entities/assemblyType';
 import DetectorType from '../../models/entities/detectorType';
 
 @Injectable({

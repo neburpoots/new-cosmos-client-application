@@ -35,8 +35,8 @@ export class CalibrationGasesFormComponent extends AbstractFormComponent<CalgasD
         this.myForm = this.fb.group({
             gas: [this.object.gas, [Validators.required]],
             concentration: [this.object.concentration, [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
-            cdartikel: [this.object.cdartikel, [Validators.required, Validators.minLength(2)]],
-            engineering_units: [this.object.engineering_units, [Validators.required, Validators.minLength(2)]],
+            cdartikel: [this.object.cdartikel, []],
+            engineering_units: [this.object.engineering_units, [Validators.required]],
         });
     }
 

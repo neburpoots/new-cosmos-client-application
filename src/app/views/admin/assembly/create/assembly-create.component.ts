@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import AssemblyType from '../../../../models/entities/assemblyType';
 import { ErrorResponse } from '../../../../models/utils/errorResponse';
 import { AssemblyDto } from '../../../../models/dto/assemblyDto';
+import { TableHeader } from '../../../../models/utils/tableHeader';
 
 @Component({
     selector: 'assembly-create',
@@ -17,9 +18,17 @@ export class AssemblyCreateComponent {
     @Output() closeModal = new EventEmitter<void>();
     @Output() refreshAssemblies = new EventEmitter<void>();
 
+    @Input() cellWidths : number[] = [];
+    @Input() isInlineCreating: boolean = false;
+    @Output() toggleInlineCreating = new EventEmitter<void>();
+
     myForm: FormGroup;
 
+    isSubmitted = false;
+
     assemblyTypes: AssemblyType[] = [];
+
+    
 
 
     assembly = {
@@ -39,11 +48,26 @@ export class AssemblyCreateComponent {
         });
     }
 
+    get selectedOption(): AssemblyType | null {
+        let selectedAssemblyType = this.assemblyTypes.find((assemblyType) => assemblyType.id === +this.myForm.value.selectedOption);
+        if(selectedAssemblyType) {
+            return selectedAssemblyType;
+
+        }
+        return null;
+    }
+
     close(): void {
         this.myForm.reset();
 
         this.closeModal.emit();
     }
+
+    setSubmitted(): void {
+        console.log('setSubmitted');
+        this.isSubmitted = true;
+    }
+
 
     onSubmit(): void {
         try {
@@ -98,7 +122,7 @@ export class AssemblyCreateComponent {
             console.error('Error fetching assemblyTypes', error);
         }
     }
-
+    
     ngOnInit(): void {
         this.loadAssemblyTypes();
     }

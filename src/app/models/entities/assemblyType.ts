@@ -1,12 +1,11 @@
-import { Stock } from "./stock";
+import { CDArtikel } from "./cdArtikel";
 
 interface AssemblyType {
   id: number;
   name: string;
   created: Date;
   modified?: Date;
-  stock?: Stock;
-
+  cdartikel?: CDArtikel;
 }
 
 export default AssemblyType;

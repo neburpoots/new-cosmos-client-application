@@ -12,6 +12,8 @@ export interface Stock {
     gereserveerd?: number;
     assemblbij?: number;
     assemblaf?: number;
+    advice?: number;
+
   }
   
   

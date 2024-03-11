@@ -17,6 +17,6 @@ export class AssemblyTypeService {
 
   //used for post and edit assembly
   getAssemblyTypes(): Observable<any> {
-    return this.http.get<AssemblyType[]>(`${this.apiUrl}/api/assembly-types`);
+    return this.http.get<AssemblyType[]>(`${this.apiUrl}/api/assembly-types/all`);
   }
 }

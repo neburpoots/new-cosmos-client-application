@@ -12,6 +12,7 @@ import { IAbstractComponent } from "../../../../models/interface/IAbstractCompon
 import { AbstractService } from "../../../../services/abstract/abstract.service";
 import { ToastrService } from "ngx-toastr";
 import { CalibrationGasesFormComponent } from "../form/calibrationgases-form.component";
+import { TableHeader } from "../../../../models/utils/tableHeader";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -48,7 +49,15 @@ export class CalibrationGasesComponent extends AbstractComponent<CalGas> impleme
       this.url = 'api/calgas';
   }
 
-  tableHeaders : string[] = ['gas', 'concentration', 'engineering_units', 'created', 'cdartikel', 'by'];
+  tableHeaders : TableHeader[] = [
+    { displayName: 'Gas', sortValue: 'gas.name', key: 'gas'  },
+    { displayName: 'Concentration', sortValue: 'concentration', key: 'concentration'},
+    { displayName: 'Engineering Units', sortValue: 'engineering_units', key: 'engineering_units'},
+    { displayName: 'CD Artikel', sortValue: 'cdartikel', key: 'cdartikel'},
+    { displayName: 'Created', sortValue: 'created', key: 'created'},
+    { displayName: 'By', sortValue: 'owner.initials', key: 'by'},
+  ];
+
 
   mapTableData(calGasses: CalGas[]): any[] {
     console.log(calGasses)

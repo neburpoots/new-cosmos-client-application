@@ -5,6 +5,8 @@ import { faCoffee, faFilePdf, faMagnifyingGlass } from "@fortawesome/free-solid-
 import { SatPopover } from "@ncstate/sat-popover";
 import dayjs from "dayjs";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { TableHeader } from "../../../models/utils/tableHeader";
+import { ToastrService } from "ngx-toastr";
 dayjs.extend(customParseFormat);
 
 @Component({
@@ -20,8 +22,8 @@ dayjs.extend(customParseFormat);
     ]),
   ],
 })
-export class CardTableComponent implements OnInit {
-  @Input() columns: string[] = [];
+export class CardTableComponent {
+  @Input() columns: TableHeader[] = [];
   @Input() data: any[] = [];
   @Input() title: string = "";
   @Input() object: string = "";
@@ -32,6 +34,7 @@ export class CardTableComponent implements OnInit {
   @Input() isViewable: boolean = false;
   @Input() isPdf: boolean = false;
   @Input() detailPagePrefix: string = "";
+  @Input() isInlineCreating: boolean = false;
   @Input() color: string = "light";
   @Input() searchCriteria: SearchCriteria =
     {
@@ -42,25 +45,28 @@ export class CardTableComponent implements OnInit {
   @Output() pdf = new EventEmitter<number>();
   // @Input() criteriaChangeFunction: Function = () => { console.log("test")};
   @Output() searchCriteriaChange: EventEmitter<any> = new EventEmitter<any>();
-  @Output() 
+  @Output()
   @Output() create = new EventEmitter<void>();
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
   @Output() view = new EventEmitter<number>();
   @Output() closeView = new EventEmitter<void>();
 
+  @Output() toggleInlineCreating = new EventEmitter<void>();
+
+  @Output() setTableWidths = new EventEmitter<number[]>();
+
   @ViewChild('popover') popover: SatPopover | undefined;
 
   faMagnifyingGlass = faMagnifyingGlass;
   faFilePdf = faFilePdf;
 
-
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   formattedDate(date: string): string {
     const hasTime = date.includes('00:00'); // Check if the date string includes a time component
     const isTime = date.includes('T'); // Check if the date string includes a time component
-    
+
     if (!hasTime && isTime) {
       return dayjs(date).format('DD-MM-YYYY HH:mm:ss'); // Include time in the format
     }
@@ -71,15 +77,20 @@ export class CardTableComponent implements OnInit {
     const validFormats = ['YYYY-MM-DD HH:mm:ss', 'YYYY-MM-DDTHH:mm:ss.SSSZ'];
     return dayjs(date, validFormats, false).isValid();
   }
-  
-  loadData(searchString : string) : any {
+
+  loadData(searchString: string): any {
     this.searchCriteria.searchValue = searchString;
 
     this.searchCriteriaChange.emit(this.searchCriteria);
   }
 
-  removeOrderBy(event : any): void {
-    console.log('test')
+  removeOrderBy(event: any): void {
+
+    if(this.isInlineCreating) {
+      this.toastr.error('Please finish creating the new item before sorting', 'Error');
+      return;
+    }
+
     this.searchCriteria.orderBy.orderByColumn = 'id';
 
     this.searchCriteriaChange.emit(this.searchCriteria);
@@ -104,11 +115,11 @@ export class CardTableComponent implements OnInit {
     this.view.emit(id);
   }
 
-  
+
   closeViewModal(): void {
     this.closeView.emit();
   }
-  
+
   isBoolean(value: any): boolean {
     return typeof value === 'boolean';
   }
@@ -117,13 +128,21 @@ export class CardTableComponent implements OnInit {
     return false;
 
   }
-  ngOnInit(): void { }
+
 
   isObject(value: any): boolean {
     return typeof value === 'object' && value !== null;
   }
 
   orderByColumn(column: string): void {
+
+    //Disable sorting on inline editing since this will change the column sizing
+    //Future fix would have to rescale the columns after the data is received 
+    if(this.isInlineCreating) {
+      this.toastr.error('Please finish creating the new item before sorting', 'Error');
+      return;
+    }
+
     if (this.searchCriteria.orderBy.orderByColumn === column) {
       this.searchCriteria.orderBy.orderByDirection = this.searchCriteria.orderBy.orderByDirection === "asc" ? "desc" : "asc";
     } else {
@@ -135,5 +154,44 @@ export class CardTableComponent implements OnInit {
 
   downloadPdf(id: number): void {
     this.pdf.emit(id);
+  }
+
+  // ngAfterViewChecked() {
+  //   this.tableWidths();
+  // }
+
+  totalWidth: number = 0;
+
+  //function to calculate table width is needed for inline editing.
+  async setInlineCreating() : Promise<void> {
+
+    this.toggleInlineCreating.emit();
+
+    // Assuming you have a table element with an id 'myTable'
+    const table = document.getElementById('myTable');
+
+    if (table) {
+
+      // Assuming the first row contains the headers and the actual data starts from the second row
+      const rows = table.getElementsByTagName('tr');
+
+      if(rows.length < 2) return;
+
+      //first row header second row edit third row data... I think
+      const firstRow = rows[2];
+      const cells = firstRow.getElementsByTagName('td');
+
+      // Array to store the width of each td
+      const cellWidths = [];
+
+      for (let i = 0; i < cells.length; i++) {
+        // Get the width of each td and push it to the array
+        const width = cells[i].offsetWidth;
+        cellWidths.push(width);
+      }
+      if(this.totalWidth == 0)  this.totalWidth = cellWidths.reduce((a, b) => a + b, 0);
+     
+      this.setTableWidths.emit(cellWidths);
+    }
   }
 }

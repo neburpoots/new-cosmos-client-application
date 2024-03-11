@@ -7,6 +7,7 @@ import { TableField } from "../../../models/utils/tableField";
 import AssemblyMultivers from "../../../models/entities/assemblyMultivers";
 import { AssemblyMultiversLine } from "../../../models/entities/assemblyMultiversLine";
 import { SearchCriteria } from "../../../models/utils/searchCriteria";
+import { TableHeader } from "../../../models/utils/tableHeader";
 
 @Component({
   selector: "app-assembly-multivers",
@@ -14,8 +15,21 @@ import { SearchCriteria } from "../../../models/utils/searchCriteria";
 })
 
 export class AssemblyMultiversComponent extends AbstractComponent<AssemblyMultivers> implements OnInit, IAbstractComponent<AssemblyMultivers> {
+  
+  tableHeaders : TableHeader[] = [
+    { displayName: 'Date', sortValue: 'order_datum', key: 'date'  },
+    { displayName: 'Batch', sortValue: 'assemblage_order', key: 'batch'},
+    { displayName: 'Type', sortValue: 'omschr', key: 'type'},
+    { displayName: 'Article', sortValue: 'cdartikel', key: 'cdartikel'},
+    { displayName: 'Serial Number', sortValue: 'commentaar', key: 'serial_number'},
+    { displayName: 'Qty', sortValue: 'aantal', key: 'qty'},
+    { displayName: 'Free', sortValue: 'voorraad', key: 'free'},
+    { displayName: 'Res', sortValue: 'gereserveerd', key: 'res'},
+    { displayName: 'Min', sortValue: 'minvoorraad', key: 'min'},
+    { displayName: 'Max', sortValue: 'maxvoorraad', key: 'max'},
+    { displayName: 'Status', sortValue: 'status', key: 'status'},
+  ];
 
-  tableHeaders = ['date', 'batch', 'type', 'cdartikel', 'serial_number', 'qty', 'free', 'res', 'min', 'max', 'status'];
   objectSingle = 'Assembly Multivers';
   objectPlural = 'Assemblies Multivers';
   

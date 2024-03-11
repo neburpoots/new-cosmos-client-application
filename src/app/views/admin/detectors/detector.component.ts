@@ -12,6 +12,7 @@ import { AbstractComponent } from "../abstract/abstract.component";
 import { TableField } from "../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { DetectorFormComponent } from "./form/detector-form.component";
+import { TableHeader } from "../../../models/utils/tableHeader";
 
 @Component({
     selector: "app-detector",
@@ -22,7 +23,14 @@ export class DetectorComponent extends AbstractComponent<Detector> implements On
 
     @ViewChild('detectorEdit') childComponent!: DetectorFormComponent;
 
-    tableHeaders: string[] = ['detectorType', 'serial_number', 'label_date', 'created', 'by'];
+    tableHeaders: TableHeader[] = [
+        { displayName: 'Detector Type', sortValue: 'detectorType.prefix', key: 'detectorType' },
+        { displayName: 'Serial Number', sortValue: 'serial_number', key: 'serial_number' },
+        { displayName: 'Label Date', sortValue: 'label_date', key: 'label_date' },
+        { displayName: 'Created', sortValue: 'created', key: 'created' },
+        { displayName: 'By', sortValue: 'owner.initials', key: 'by' },
+    ];
+
 
     objectSingle = 'Detector';
     objectPlural = 'Detectors';

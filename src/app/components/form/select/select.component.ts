@@ -8,7 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SelectComponent {
   @Input() displayName: string = '';
-  @Input() name: string = '';
+  @Input() name: string = '';  
+  @Input() inline: boolean = false;
   @Input() errors: any[] = [];
   @Input() form: FormGroup = new FormGroup({});
   @Input() touched: any = false;

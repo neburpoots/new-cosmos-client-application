@@ -26,6 +26,7 @@ import { DetectorComponent } from "./views/admin/detectors/detector.component";
 import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/assembly-multivers.component";
 import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
 import { SensorBaseTypeComponent } from "./views/admin/sensorBaseType/sensorBaseType.component";
+import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.component";
 
 const routes: Routes = [
   // user views
@@ -39,6 +40,7 @@ const routes: Routes = [
       { path: "assemblymultivers", component: AssemblyMultiversComponent },
       { path: "assemblymultivers/:id", component: AssemblyMultiversDetailComponent }, // Add the dynamic parameter ":userId"
       { path: "calibrationgases", component: CalibrationGasesComponent },
+      { path: "assembly-types", component: AssemblyTypeComponent },
       { path: "detectors", component: DetectorComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },

@@ -8,6 +8,7 @@ import { CalibrationGasesFormComponent } from "../calibrationgases/form/calibrat
 import { ToastrService } from "ngx-toastr";
 import { TableField } from "../../../models/utils/tableField";
 import { SensorBaseTypeFormComponent } from "./form/sensorBaseTypeForm.component";
+import { TableHeader } from "../../../models/utils/tableHeader";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -49,7 +50,17 @@ export class SensorBaseTypeComponent extends AbstractComponent<SensorBaseType> i
       this.url = 'api/sensor-base-types';
   }
 
-  tableHeaders : string[] = ['prefix', 'suffix', 'series', 'maintenance_interval', 'replacement_interval', 'quotation_interval', 'principle', 'volume'];
+  tableHeaders : TableHeader[] = [
+    { displayName: 'Prefix', sortValue: 'prefix', key: 'prefix'  },
+    { displayName: 'Suffix', sortValue: 'suffix', key: 'suffix'},
+    { displayName: 'Series', sortValue: 'series', key: 'series'},
+    { displayName: 'Maintenance Interval', sortValue: 'maintenance_interval', key: 'maintenance_interval'},
+    { displayName: 'Replacement Interval', sortValue: 'replacement_interval', key: 'replacement_interval'},
+    { displayName: 'Quotation Interval', sortValue: 'quotation_interval', key: 'quotation_interval'},
+    { displayName: 'Principle', sortValue: 'principle', key: 'principle'},
+    { displayName: 'Volume', sortValue: 'volume', key: 'volume'},
+  ];
+
 
   mapTableData(sensorBaseTypes: SensorBaseType[]): any[] {
     console.log(sensorBaseTypes)

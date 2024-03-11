@@ -8,9 +8,15 @@
       class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded-2xl text-sm  w-full pl-10" />
   </div>
 
-  <button type="button" *ngIf="isCreatable" (click)="openCreateModal()"
-    class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
-    Add {{ object }} +</button>
+  <div>
+    <button type="button" *ngIf="isCreatable" (click)="openCreateModal()"
+      class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-l-full text-sm pl-5 pr-2 py-2.5 text-center mb-2">
+      Add {{ object }}</button>
+    <button type="button" *ngIf="isCreatable" (click)="setInlineCreating()"
+      class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-r-full text-sm pr-5 pl-2 py-2.5 text-center mb-2">
+      +</button>
+  </div>
+
 </div>
 <div [@fadeInOut]="true"
   class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm rounded-2xl bg-slate-50 p-4"
@@ -18,28 +24,30 @@
   <div class="block w-full overflow-x-auto">
     <div class="text-slate-900 text-lg font-semibold mb-2">{{ title }} </div>
     <div class="rounded-2xl overflow-auto">
-      <table class="items-center w-full bg-transparent border-collapse">
+      <table id="myTable" class="items-center w-full bg-transparent border-collapse">
         <thead>
           <tr class="bg-slate-100 font-roboto  rounded-lg text-slate-800">
 
-            <th (click)="orderByColumn(column)" *ngFor="let column of columns; let i = index" class="cursor-pointer px-6 align-middle py-3 text-xs uppercase whitespace-nowrap font-semibold text-left
+            <th  (click)="orderByColumn(column['sortValue'])" *ngFor="let column of columns; let i = index" class="cursor-pointer px-6 align-middle py-3 text-xs uppercase whitespace-nowrap font-semibold text-left
                       {{ i === 0 ? 'rounded-tl-lg rounded-bl-lg' : '' }}
-                      {{ this.searchCriteria.orderBy.orderByColumn === column ? 'bg-cosmosDark text-white' : '' }}
+                      {{ this.searchCriteria.orderBy.orderByColumn === column['sortValue'] ? 'bg-cosmosDark text-white' : '' }}
                       {{ i === columns.length - 1 && !isEditable ? 'rounded-tr-lg rounded-br-lg' : '' }}">
 
               <div class="flex gap-5 items-center justify-between">
                 <div class="flex items-center gap-1">
-                  {{ column }}
+                  {{ column['displayName'] }}
                   <div class="">
 
-                    <i *ngIf="this.searchCriteria.orderBy.orderByColumn == column"
+                    <i *ngIf="this.searchCriteria.orderBy.orderByColumn == column['sortValue']"
                       class="fa fa-md {{this.searchCriteria.orderBy.orderByDirection === 'asc' ? 'fa-arrow-up' : 'fa-arrow-down'}}"></i>
                   </div>
 
                 </div>
                 <div>
-                  <i (click)="removeOrderBy($event)" *ngIf="this.searchCriteria.orderBy.orderByColumn == column"
+                  <i (click)="removeOrderBy($event)"
+                    *ngIf="this.searchCriteria.orderBy.orderByColumn == column['sortValue']"
                     class="fa fa-lg fa-close"></i>
+
                 </div>
               </div>
               <div>
@@ -54,28 +62,34 @@
             </th>
           </tr>
         </thead>
+
+
+
         <tbody *ngIf="data.length > 0">
+
+          <tr [style.max-width.px]="totalWidth"><td [attr.colspan]="columns.length + 1"><ng-content select="assembly-create"></ng-content></td></tr>
+
+
           <tr *ngFor="let item of data">
 
             <td *ngFor="let column of columns"
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-4">
-              @if (isBoolean(item[column]['value'])) {
-              <span class="text-base" *ngIf="item[column]['value']"><i
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-3">
+              @if (isBoolean(item[column['key']]['value'])) {
+              <span class="text-base" *ngIf="item[column['key']]['value']"><i
                   class="fa fa-md fa-check-circle text-green-700 text-lg w-8"></i></span>
-              <span class="text-base" *ngIf="!item[column]['value']"><i
+              <span class="text-base" *ngIf="!item[column['key']]['value']"><i
                   class="fa fa-md fa-times-circle text-red-600 text-lg w-8"></i></span>
-              } @else if (item[column]['url']) {
-              <a [routerLink]="item[column]['url']">{{ item[column]['value'] }}</a>
+              } @else if (item[column['key']]['url']) {
+              <a [routerLink]="item[column['key']]['url']">{{ item[column['key']]['value'] }}</a>
 
-              } @else if (isValidDate(item[column]['value'])) {
-              {{ formattedDate(item[column]['value'])}}
+              } @else if (isValidDate(item[column['key']]['value'])) {
+              {{ formattedDate(item[column['key']]['value'])}}
               }
               @else {
-              {{ item[column]['value'] ? item[column]['value'] : '-'}}
+              {{ item[column['key']]['value'] ? item[column['key']]['value'] : '-'}}
               }
 
             </td>
-            <!-- Fixed edit column on the right -->
             <td *ngIf="isDeletable || isEditable || isViewable || isPdf"
               class="mt-2 sticky right-0 flex bg-white gap-1 items-center justify-center">
               <div *ngIf="isEditable" (click)="openEditModal(item['id']?.value)"
@@ -92,11 +106,12 @@
                   class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
                   <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
                   <sat-popover verticalAlign="center" horizontalAlign="before" #popover>
-                    <ng-content></ng-content>
+                    <ng-content select="assembly-multivers-popover"></ng-content>
                   </sat-popover>
                 </div>
               </a>
-              <button *ngIf="isPdf" (click)="downloadPdf(item['id'].value)" class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] pl-[8px] pr-[5px] ">
+              <button *ngIf="isPdf" (click)="downloadPdf(item['id'].value)"
+                class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] pl-[8px] pr-[5px] ">
                 <fa-icon [icon]="faFilePdf"></fa-icon>
               </button>
             </td>
@@ -105,6 +120,7 @@
         </tbody>
 
       </table>
+
       <div *ngIf="data.length === 0" class="text-center text-slate-400 text-lg p-4">
         No results matched the search criteria
       </div>
