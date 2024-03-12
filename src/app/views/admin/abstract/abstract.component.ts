@@ -9,6 +9,7 @@ import { IAbstractComponent } from "../../../models/interface/IAbstractComponent
 import { AbstractService } from "../../../services/abstract/abstract.service";
 import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../models/utils/tableHeader";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-abstractview",
@@ -72,7 +73,7 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   abstract tableHeaders: TableHeader[];
 
-  constructor(protected toastr: ToastrService, protected abstractService: AbstractService<T>) {
+  constructor(protected toastr: ToastrService, protected abstractService: AbstractService<T>, protected route: ActivatedRoute) {
   }
 
   abstract mapTableData(data: any[]): any[];
@@ -84,7 +85,26 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   abstract createUrlParams(): string;
 
+  async checkQueryParams(): Promise<void> {
+    this.route.queryParams.subscribe(params => {
+      const editId = params['edit'];
+  
+      if (editId) {
+        // Open your modal with the specified ID
+        this.openEditModal(editId);
+      }
+
+      const page = params['page'];
+
+      if (page) {
+        this.data.page = page;
+      }
+    });
+  }
+
   async ngOnInit(): Promise<void> {
+    await this.checkQueryParams();
+
     await this.loadItems();
   }
 
@@ -94,12 +114,16 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
     this.searchCriteria.orderBy = searchCriteria.orderBy;
     // Assuming you want to use the `test` parameter as well, you can do something with it here...
     await this.loadItems();
-
-    
   }
 
-  async loadItems(): Promise<void> {
+  async loadItems(searchCriteria?: SearchCriteria): Promise<void> {
     try {
+
+      //allow for optional search criteria
+      if(searchCriteria){
+        this.searchCriteria = searchCriteria;
+      }
+
       const response = await this.abstractService.get(await this.createUrlParams()).toPromise();
       this.data = response!;
       this.tableData = this.mapTableData(this.data.data);

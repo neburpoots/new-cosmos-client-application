@@ -13,6 +13,7 @@ import { AbstractService } from "../../../../services/abstract/abstract.service"
 import { ToastrService } from "ngx-toastr";
 import { CalibrationGasesFormComponent } from "../form/calibrationgases-form.component";
 import { TableHeader } from "../../../../models/utils/tableHeader";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -40,11 +41,10 @@ export class CalibrationGasesComponent extends AbstractComponent<CalGas> impleme
       cdartikel: this.selectedItem?.cdartikel,
       engineering_units: this.selectedItem?.engineering_units,
     };
-  }
-  
+  }  
 
-  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<CalGas>) {
-      super(toastr, calgasService);
+  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<CalGas>, protected override route: ActivatedRoute) {
+      super(toastr, calgasService, route);
       this.abstractService = calgasService;
       this.url = 'api/calgas';
   }

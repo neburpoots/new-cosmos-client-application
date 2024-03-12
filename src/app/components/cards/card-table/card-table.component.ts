@@ -61,6 +61,10 @@ export class CardTableComponent {
   faMagnifyingGlass = faMagnifyingGlass;
   faFilePdf = faFilePdf;
 
+  //totalwidth of all columns used for inline editing
+  totalWidth: number = 0;
+
+
   constructor(private toastr: ToastrService) { }
 
   formattedDate(date: string): string {
@@ -124,12 +128,6 @@ export class CardTableComponent {
     return typeof value === 'boolean';
   }
 
-  isDate(value: any): boolean {
-    return false;
-
-  }
-
-
   isObject(value: any): boolean {
     return typeof value === 'object' && value !== null;
   }
@@ -143,12 +141,14 @@ export class CardTableComponent {
       return;
     }
 
+    //toggles the order by direction onclick of the same column
     if (this.searchCriteria.orderBy.orderByColumn === column) {
       this.searchCriteria.orderBy.orderByDirection = this.searchCriteria.orderBy.orderByDirection === "asc" ? "desc" : "asc";
     } else {
       this.searchCriteria.orderBy.orderByColumn = column;
       this.searchCriteria.orderBy.orderByDirection = "asc";
     }
+
     this.searchCriteriaChange.emit(this.searchCriteria);
   }
 
@@ -156,11 +156,6 @@ export class CardTableComponent {
     this.pdf.emit(id);
   }
 
-  // ngAfterViewChecked() {
-  //   this.tableWidths();
-  // }
-
-  totalWidth: number = 0;
 
   //function to calculate table width is needed for inline editing.
   async setInlineCreating() : Promise<void> {

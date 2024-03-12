@@ -12,6 +12,7 @@ import DetectorType from '../../../../models/entities/detectorType';
 import { DetectorDto } from '../../../../models/dto/detectorDto';
 import { AbstractService } from '../../../../services/abstract/abstract.service';
 import { IAbstractForm } from '../../../../models/interface/IAbstractForm';
+import { SearchCriteria } from '../../../../models/utils/searchCriteria';
 
 @Component({
     selector: 'abstract-form',
@@ -21,11 +22,15 @@ import { IAbstractForm } from '../../../../models/interface/IAbstractForm';
 export abstract class AbstractFormComponent<T> implements IAbstractForm<T> {
 
     @Output() closeModal = new EventEmitter<void>();
-    @Output() refresh = new EventEmitter<void>();
+    @Output() refresh = new EventEmitter<SearchCriteria | undefined>();
+    @Output() toggleInlineCreating = new EventEmitter<void>();
 
 
     @Input() objectSingle: string = '';
     @Input() objectPlural: string = '';
+
+    //used for the inline table create
+    @Input() isInlineCreating: boolean = false;
 
     get objectSingleLowerCase(): string {
         return this.objectSingle!.toLowerCase();
@@ -40,6 +45,16 @@ export abstract class AbstractFormComponent<T> implements IAbstractForm<T> {
     abstract object: T;
 
     abstract url: string;
+
+    //when the form is submitted this is the criteria to be used to refresh the data used id as standard since it is the most common
+    //override this incase of a different primary key
+    refreshCriteria: SearchCriteria = {
+        searchValue: "",
+        orderBy: {
+          orderByColumn: 'id',
+          orderByDirection: 'desc',
+        }
+    }
 
     protected isSubmitted = false;
 
@@ -57,6 +72,17 @@ export abstract class AbstractFormComponent<T> implements IAbstractForm<T> {
         this.isSubmitted = true;
     }
 
+    //refreshes the data
+    async refreshData(): Promise<void> {
+        if(this.isInlineCreating){
+            this.refresh.emit(this.refreshCriteria);
+            this.toggleInlineCreating.emit();
+        } else {
+            this.refresh.emit();
+        }    
+    }
+
+
     async create(data: T): Promise<void> {
         this.abstractService.create(this.url, data).subscribe(
             (response) => {
@@ -64,13 +90,16 @@ export abstract class AbstractFormComponent<T> implements IAbstractForm<T> {
                 this.toastr.success(`${this.objectSingle} created successfully`, 'Success');
                 this.myForm.reset();
                 this.closeModal.emit();
-                this.refresh.emit();
+
+                this.refreshData();
+
             },
             (error) => {
                 this.toastr.error(error.error.message, 'Error');
             }
         );
     }
+
 
     get id(): number {
         return (this.object as any).id;
@@ -83,7 +112,7 @@ export abstract class AbstractFormComponent<T> implements IAbstractForm<T> {
                 this.toastr.success(`${this.objectSingle} updated successfully`, 'Success');
                 this.myForm.reset();
                 this.closeModal.emit();
-                this.refresh.emit();
+                this.refreshData();
             },
             (error) => {
                 this.toastr.error(error.error.message, 'Error');
@@ -127,5 +156,6 @@ export abstract class AbstractFormComponent<T> implements IAbstractForm<T> {
     //gets called oninit to load dependent data
     abstract setUpDependentData(): void;
 
+    //sets the edit data to the form
     abstract setEditData(changes: any): void;
 }

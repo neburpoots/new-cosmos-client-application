@@ -15,7 +15,7 @@
                         </div>
                         <div class="flex flex-col items-center justify-center">
                             <p class="font-bold">MV Code</p>
-                            <p>{{item?.productDescription}}</p>
+                            <p>{{item?.cdartikel?.cdartikel}}</p>
                         </div>
                         <div class="flex flex-col items-center justify-center">
                             <p class="font-bold">Status</p>
@@ -23,16 +23,18 @@
                         </div>
                     </div>
                     <hr class="mt-4">
-                    @for (line of item?.assemblyMultiversLines; track line.assemblage_order) {
+                    @for (line of item?.assemblyMultiversLines; track line.assemblageOrder) {
                         <div class="card mb-4">
                             <div class="card-header text-lg my-2 font-semibold">
-                              Assembly Line ({{ line.omschr }})
+                              Assembly Line ({{ line?.cdartikel?.product?.omschr }})
                             </div>
                             <div class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 card-body gap-x-4">
-                              <p>Part: {{ line.cdartcomponent }}</p>
-                              <p>Assemblage Date: {{ line.assemblageDatum | date }}</p>
-                              <p>CD Magazijn: {{ line.cdmagazijn }}</p>
-                              <p>Number of Norm: {{ line.aantalNorm }}</p>
+                              <p>Part: {{ line.cdartikel?.cdartikel }}</p>
+                              <p>Supplier: {{ line.cdartikel?.purchasingData?.creditor?.zoeknaam }}</p>
+                              <p>Order Code: {{line.cdartikel?.purchasingData?.bestcode}}</p>
+                              <p>Free: {{line.cdartikel?.stock?.voorraad}}</p>
+                              <p>PO(N): {{line.cdartikel?.stock?.inkopen}}</p>
+                              <p>Q(n): {{ line.aantalNorm }}</p>
                               <p>Number Used: {{ line.aantalGebruikt }}</p>
                               <p>Used Value: {{ line.waardeGebruikt | currency }}</p>
                               <p>Number of Assembly: {{ line.aantalSamenstelling }}</p>

@@ -21,9 +21,9 @@
 <div [@fadeInOut]="true"
   class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm rounded-2xl bg-slate-50 p-4"
   [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
-  <div class="block w-full overflow-x-auto">
+  <div class="block w-full overflow-x-auto overflow-y-hidden">
     <div class="text-slate-900 text-lg font-semibold mb-2">{{ title }} </div>
-    <div class="rounded-2xl overflow-auto">
+    <div class="rounded-2xl overflow-auto overflow-y-hidden">
       <table id="myTable" class="items-center w-full bg-transparent border-collapse">
         <thead>
           <tr class="bg-slate-100 font-roboto  rounded-lg text-slate-800">

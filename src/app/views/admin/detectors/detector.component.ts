@@ -13,6 +13,7 @@ import { TableField } from "../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { DetectorFormComponent } from "./form/detector-form.component";
 import { TableHeader } from "../../../models/utils/tableHeader";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "app-detector",
@@ -35,8 +36,8 @@ export class DetectorComponent extends AbstractComponent<Detector> implements On
     objectSingle = 'Detector';
     objectPlural = 'Detectors';
 
-    constructor(protected override toastr: ToastrService, private detectorService: AbstractService<Detector>) {
-        super(toastr, detectorService);
+    constructor(protected override toastr: ToastrService, private detectorService: AbstractService<Detector>, protected override route: ActivatedRoute) {
+        super(toastr, detectorService, route);
         this.abstractService = detectorService;
         this.url = 'api/detectors';
     }

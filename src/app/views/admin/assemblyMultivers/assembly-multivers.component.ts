@@ -4,10 +4,11 @@ import { IAbstractComponent } from "../../../models/interface/IAbstractComponent
 import { AbstractService } from "../../../services/abstract/abstract.service";
 import { ToastrService } from "ngx-toastr";
 import { TableField } from "../../../models/utils/tableField";
-import AssemblyMultivers from "../../../models/entities/assemblyMultivers";
 import { AssemblyMultiversLine } from "../../../models/entities/assemblyMultiversLine";
 import { SearchCriteria } from "../../../models/utils/searchCriteria";
 import { TableHeader } from "../../../models/utils/tableHeader";
+import { ActivatedRoute } from "@angular/router";
+import { AssemblyMultivers } from "../../../models/entities/assemblyMultivers";
 
 @Component({
   selector: "app-assembly-multivers",
@@ -19,14 +20,14 @@ export class AssemblyMultiversComponent extends AbstractComponent<AssemblyMultiv
   tableHeaders : TableHeader[] = [
     { displayName: 'Date', sortValue: 'order_datum', key: 'date'  },
     { displayName: 'Batch', sortValue: 'assemblage_order', key: 'batch'},
-    { displayName: 'Type', sortValue: 'omschr', key: 'type'},
-    { displayName: 'Article', sortValue: 'cdartikel', key: 'cdartikel'},
+    { displayName: 'Type', sortValue: 'cdartikel.product.omschr', key: 'type'},
+    { displayName: 'CDArtikel', sortValue: 'cdartikel.cdartikel', key: 'cdartikel'},
     { displayName: 'Serial Number', sortValue: 'commentaar', key: 'serial_number'},
     { displayName: 'Qty', sortValue: 'aantal', key: 'qty'},
-    { displayName: 'Free', sortValue: 'voorraad', key: 'free'},
-    { displayName: 'Res', sortValue: 'gereserveerd', key: 'res'},
-    { displayName: 'Min', sortValue: 'minvoorraad', key: 'min'},
-    { displayName: 'Max', sortValue: 'maxvoorraad', key: 'max'},
+    { displayName: 'Free', sortValue: 'cdartikel.stock.voorraad', key: 'free'},
+    { displayName: 'Res', sortValue: 'cdartikel.stock.gereserveerd', key: 'res'},
+    { displayName: 'Min', sortValue: 'cdartikel.stock.minvoorraad', key: 'min'},
+    { displayName: 'Max', sortValue: 'cdartikel.stock.maxvoorraad', key: 'max'},
     { displayName: 'Status', sortValue: 'status', key: 'status'},
   ];
 
@@ -45,17 +46,17 @@ export class AssemblyMultiversComponent extends AbstractComponent<AssemblyMultiv
 
   assemblyMultiversLine : AssemblyMultiversLine[] = [];
   
-  constructor(protected override toastr: ToastrService, private assemblyService: AbstractService<AssemblyMultivers>) {
-    super(toastr, assemblyService);
+  constructor(protected override toastr: ToastrService, private assemblyService: AbstractService<AssemblyMultivers>, protected override route: ActivatedRoute) {
+    super(toastr, assemblyService, route);
     this.toastr = toastr;
     this.abstractService = assemblyService;
 
     this.url = 'api/assembliesmultivers';
   }
 
-  override async loadDetailData(id : number): Promise<void> {
+  override async loadDetailData(id : string): Promise<void> {
     try {
-      if(id === this.assemblyMultiversLine[0]?.assemblage_order) return;
+      if(id === this.assemblyMultiversLine[0]?.assemblageOrder) return;
       console.log(id);
       this.assemblyMultiversLine = await this.abstractService.getDependentData(`api/assembliesmultivers/multiverslines/${id}`).toPromise();
       console.log(this.assemblyMultiversLine);
@@ -89,14 +90,14 @@ export class AssemblyMultiversComponent extends AbstractComponent<AssemblyMultiv
         id: { url: 'api/assemblies', value: assembly.assemblage_order} as TableField,
         date: { url: null, value: assembly.order_datum } as TableField,
         batch: { url: null, value: assembly.assemblage_order } as TableField,
-        type: { url: null, value: assembly.omschr } as TableField,
-        cdartikel: { url: null, value: assembly.cdartikel } as TableField,
+        type: { url: null, value: assembly.cdartikel?.product?.omschr } as TableField,
+        cdartikel: { url: null, value: assembly.cdartikel?.cdartikel } as TableField,
         serial_number: { url: null, value: assembly.commentaar } as TableField,
         qty: { url: null, value: assembly.aantal } as TableField,
-        free: { url: null, value: assembly.voorraad } as TableField,
-        res: { url: null, value: assembly.gereserveerd } as TableField,
-        min: { url: null, value: assembly.minvoorraad } as TableField,
-        max: { url: null, value: assembly.maxvoorraad } as TableField,
+        free: { url: null, value: assembly.cdartikel?.stock?.voorraad } as TableField,
+        res: { url: null, value: assembly.cdartikel?.stock?.gereserveerd } as TableField,
+        min: { url: null, value: assembly.cdartikel?.stock?.minvoorraad } as TableField,
+        max: { url: null, value: assembly.cdartikel?.stock?.maxvoorraad } as TableField,
         status: { url: null, value: assembly.status } as TableField,
       };
     });

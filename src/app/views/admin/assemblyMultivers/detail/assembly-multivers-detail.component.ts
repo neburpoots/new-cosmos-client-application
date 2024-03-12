@@ -5,8 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AbstractService } from '../../../../services/abstract/abstract.service';
 import { AssembliesMultivers } from '../../../../services/assembiesMultivers/assembliesMultivers.service';
 import { ToastrService } from 'ngx-toastr';
-import AssemblyMultivers from '../../../../models/entities/assemblyMultivers';
 import dayjs from 'dayjs';
+import { AssemblyMultivers } from '../../../../models/entities/assemblyMultivers';
 
 @Component({
     selector: 'assembly-multivers-detail',

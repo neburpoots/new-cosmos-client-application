@@ -9,6 +9,7 @@ import { ToastrService } from "ngx-toastr";
 import { TableField } from "../../../models/utils/tableField";
 import { SensorBaseTypeFormComponent } from "./form/sensorBaseTypeForm.component";
 import { TableHeader } from "../../../models/utils/tableHeader";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -44,8 +45,8 @@ export class SensorBaseTypeComponent extends AbstractComponent<SensorBaseType> i
   }
   
 
-  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<SensorBaseType>) {
-      super(toastr, calgasService);
+  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<SensorBaseType>, protected override route: ActivatedRoute) {
+      super(toastr, calgasService, route);
       this.abstractService = calgasService;
       this.url = 'api/sensor-base-types';
   }

@@ -1,13 +1,13 @@
+import { CDArtikel } from "./cdArtikel";
+
 export interface AssemblyMultiversLine {
-    assemblage_order: number;
-    cdartcomponent: string;
-    assemblageDatum: Date;
-    cdmagazijn: string;
-    aantalNorm: number;
-    aantalGebruikt: number;
-    waardeGebruikt: number;
-    aantalSamenstelling: number;
-    aantalgereservaf: number;
-    omschr: string;
-  }
-  
+  assemblageOrder: string;
+  cdartikel?: CDArtikel;
+  assemblageDatum?: Date;
+  cdmagazijn?: string;
+  aantalNorm?: number;
+  aantalGebruikt?: number;
+  waardeGebruikt?: number;
+  aantalSamenstelling?: number;
+  aantalgereservaf?: number;
+}

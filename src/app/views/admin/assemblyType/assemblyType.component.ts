@@ -8,6 +8,7 @@ import { AbstractService } from "../../../services/abstract/abstract.service";
 import { TableField } from "../../../models/utils/tableField";
 import { IAbstractComponent } from "../../../models/interface/IAbstractComponent";
 import { TableHeader } from "../../../models/utils/tableHeader";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -35,13 +36,11 @@ export class AssemblyTypeComponent extends AbstractComponent<AssemblyType> imple
   }
   
 
-  constructor(protected override toastr: ToastrService, private assemblyTypeService: AbstractService<AssemblyType>) {
-      super(toastr, assemblyTypeService);
+  constructor(protected override toastr: ToastrService, private assemblyTypeService: AbstractService<AssemblyType>, protected override route: ActivatedRoute) {
+      super(toastr, assemblyTypeService, route);
       this.abstractService = assemblyTypeService;
       this.url = 'api/assembly-types';
   }
-
-  // tableHeaders : string[] = ['name', 'cdartikel', 'free', 'res', 'min', 'max', 'advice', 'created'];
 
   tableHeaders : TableHeader[] = [
     { displayName: 'Name', sortValue: 'name', key: 'name'  },

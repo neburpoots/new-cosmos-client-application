@@ -14,7 +14,7 @@
 
             </li>
             <li class="page-item">
-                <a class="page-link text-xl">{{ paginatedResult.page }}</a>
+                <a class="page-link text-xl">{{ paginatedResult.page }}/{{paginatedResult.totalPages}}</a>
             </li>
             <li [class.disabled]="+paginatedResult.page === +paginatedResult.totalPages">
 

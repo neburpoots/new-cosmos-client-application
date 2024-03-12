@@ -9,6 +9,7 @@ import { IAbstractForm } from '../../../../models/interface/IAbstractForm';
 import { AbstractService } from '../../../../services/abstract/abstract.service';
 import { CalgasDto } from '../../../../models/dto/calgasDto';
 import { Gas } from '../../../../models/entities/gas';
+import { SearchCriteria } from '../../../../models/utils/searchCriteria';
 
 @Component({
     selector: 'calgas-form',

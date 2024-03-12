@@ -1,31 +1,23 @@
 import { AssemblyMultiversLine } from "./assemblyMultiversLine";
+import { CDArtikel } from "./cdArtikel";
 
 
-interface AssemblyMultivers {
-    assemblage_order: string;
-    cdartikel: string;
-    order_datum: string;
-    cdmagazijn: string;
-    aantal: string;
-    commentaar: null | string;
-    assemblage_datum: string;
-    aantal_geassembleerd: string;
-    waarde_geassembleerd: string;
-    afdruk_assemblage_bon: string;
-    status: string;
-    guid_item: null | string;
-    sys_create: null | string;
-    sys_update: null | string;
-    aantalgereservbij: string;
-    cdtaal: string;
-    omschr: string;
-    eenheid: string;
-    minvoorraad: string;
-    maxvoorraad: string;
-    gereserveerd: string;
-    voorraad: string;
-    productDescription: string;
-    assemblyMultiversLines: AssemblyMultiversLine[];
+export interface AssemblyMultivers {
+
+  assemblage_order: string;
+  order_datum: Date;
+  cdartikel?: CDArtikel;
+  cdmagazijn: string;
+  aantal: number;
+  commentaar: string;
+  assemblage_datum: Date;
+  aantal_geassembleerd: number;
+  waarde_geassembleerd: number;
+  afdruk_assemblage_bon: string;
+  status: string;
+  guid_item: string;
+  sys_create: string;
+  sys_update: string;
+  aantalgereservbij: number;
+  assemblyMultiversLines?: AssemblyMultiversLine[];
 }
-
-export default AssemblyMultivers;

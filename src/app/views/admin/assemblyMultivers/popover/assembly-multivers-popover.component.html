@@ -14,13 +14,13 @@
                 <!-- Add other labels for each column -->
             </div>
 
-            @for (line of assemblyMultiversLine.slice(0, 10); track line.assemblage_order) {
+            @for (line of assemblyMultiversLine.slice(0, 10); track line.assemblageOrder) {
                 <div class="grid grid-cols-2 gap-2 mb-2" >
                     <div class="col">
-                        <p class="p-1">{{ line?.cdartcomponent }}</p>
+                        <p class="p-1">{{ line?.cdartikel?.cdartikel }}</p>
                     </div>
                     <div class="col">
-                        <p class="p-1">{{ line?.omschr }}</p>
+                        <p class="p-1">{{ line?.cdartikel?.product?.omschr }}</p>
                     </div>
                     <!-- Add other <div class="col"> elements for each column -->
                 </div>

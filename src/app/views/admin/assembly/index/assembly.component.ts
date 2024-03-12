@@ -12,6 +12,7 @@ import { IAbstractComponent } from "../../../../models/interface/IAbstractCompon
 import { ToastrService } from "ngx-toastr";
 import { AssemblyFormComponent } from "../form/assembly-form.component";
 import { TableHeader } from "../../../../models/utils/tableHeader";
+import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: "app-assembly",
   templateUrl: "./assembly.component.html",
@@ -44,8 +45,8 @@ export class AssemblyComponent extends AbstractComponent<Assembly> implements On
   objectSingle = 'Assembly';
   objectPlural = 'Assemblies';
 
-  constructor(protected override toastr: ToastrService, private assemblyService: AbstractService<Assembly>) {
-    super(toastr, assemblyService);
+  constructor(protected override toastr: ToastrService, private assemblyService: AbstractService<Assembly>, protected override route: ActivatedRoute) {
+    super(toastr, assemblyService, route);
     this.toastr = toastr;
     this.abstractService = assemblyService;
 

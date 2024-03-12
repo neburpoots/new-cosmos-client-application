@@ -13,6 +13,7 @@ import { DetectorDto } from '../../../../models/dto/detectorDto';
 import { AbstractFormComponent } from '../../abstract/form/abstract-form.component';
 import { IAbstractForm } from '../../../../models/interface/IAbstractForm';
 import { AbstractService } from '../../../../services/abstract/abstract.service';
+import { SearchCriteria } from '../../../../models/utils/searchCriteria';
 
 @Component({
     selector: 'detector-form',
@@ -34,6 +35,8 @@ export class DetectorFormComponent extends AbstractFormComponent<DetectorDto> im
     myForm: FormGroup;
 
     detectorTypes: DetectorType[] = [];
+
+
 
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder, private detectorTypeService: DetectorTypeService, protected override abstractService: AbstractService<DetectorDto>) {
         super(toastr, fb, abstractService)

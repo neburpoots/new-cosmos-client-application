@@ -1,4 +1,4 @@
-<div class="flex items-center">
+<form class="flex items-start pt-1" [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <!-- @for (header of cellWidths.slice(0, cellWidths.length - 1); track header) {
   <div [style.min-width.px]="header" [style.max-width.px]="header">
     <input-component [inline]="true" [form]="myForm" [name]="'selectedOption'" [displayName]="'Assembly Type'"
@@ -32,7 +32,7 @@ message: 'Quantity is not a valid number' }]"></input-component> -->
     message: 'Batch must be at least 2 characters' }]"></input-component>
   </div>
 
-  <div [style.min-width.px]="cellWidths[1]" [style.max-width.px]="cellWidths[1]">
+  <div [style.min-width.px]="cellWidths[1]" [style.max-width.px]="cellWidths[1]" class="p-1">
     <select-component [inline]="true" [form]="myForm" [name]="'selectedOption'" [displayName]="'Assembly Type'"
       [options]="assemblyTypes" [placeholder]="'Select an assembly type'"
       [touched]="myForm.controls['selectedOption'].touched"
@@ -55,8 +55,8 @@ message: 'Quantity is not a valid number' }]"></input-component> -->
   </div>
 
   <div [style.min-width.px]="cellWidths[4]" [style.max-width.px]="cellWidths[4]">
-    <input-component [inline]="true" [isSubmitted]="isSubmitted" [form]="myForm" [name]="'quantity'" [displayName]="'Quantity'"
-      [touched]="myForm.controls['quantity'].touched" [errors]="[{ name: 'required', message: 'Quantity is required' }, { name: 'pattern' ,
+    <input-component [inline]="true" [isSubmitted]="isSubmitted" [form]="myForm" [name]="'quantity'"
+      [displayName]="'Quantity'" [touched]="myForm.controls['quantity'].touched" [errors]="[{ name: 'required', message: 'Quantity is required' }, { name: 'pattern' ,
   message: 'Quantity is not a valid number' }]"></input-component>
 
 
@@ -66,7 +66,7 @@ message: 'Quantity is not a valid number' }]"></input-component> -->
 
 
   <div [style.min-width.px]="cellWidths[cellWidths.length - 1]" [style.max-width.px]="cellWidths[cellWidths.length - 1]"
-    class="h-full sticky right-0 flex bg-white gap-1 items-center p-3 justify-center">
+    class="h-full sticky right-0 flex bg-white gap-1 items-start p-1 pt-1 justify-center ml-auto">
     <button type="submit" (click)="setSubmitted()"
       class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
       <i class="fa fa-lg fa-check" aria-hidden="true"></i>
@@ -77,22 +77,4 @@ message: 'Quantity is not a valid number' }]"></input-component> -->
     </div>
   </div>
 
-</div>
-
-
-<!-- <select-component [form]="myForm" [name]="'selectedOption'" [displayName]="'Assembly Type'" [options]="assemblyTypes"
-    [placeholder]="'Select an assembly type'" [touched]="myForm.controls['selectedOption'].touched"
-    [errors]="[{ name: 'required', message: 'Assembly type is required' }]">
-  </select-component>
-
-  <input-component [form]="myForm" [name]="'batch'" [displayName]="'Batch'" [touched]="myForm.controls['batch'].touched"
-    [errors]="[{ name: 'required', message: 'Batch is required' }, { name: 'minlength' ,
-    message: 'Batch must be at least 2 characters' }]"></input-component>
-
-  <input-component [form]="myForm" [name]="'start_serial_number'" [displayName]="'Start S/N'"
-    [touched]="myForm.controls['start_serial_number'].touched" [errors]="[{ name: 'required', message: 'Start serial number is required' }, { name: 'pattern' ,
-message: 'Start serial number is not a valid number' }]"></input-component>
-
-  <input-component [form]="myForm" [name]="'quantity'" [displayName]="'Quantity'"
-    [touched]="myForm.controls['quantity'].touched" [errors]="[{ name: 'required', message: 'Quantity is required' }, { name: 'pattern' ,
-message: 'Quantity is not a valid number' }]"></input-component> -->
+</form>
