@@ -26,13 +26,19 @@ export class PaginationComponent {
     data: [],
   }
 
-  @Output() pageChanged: EventEmitter<number> = new EventEmitter();
+  @Output() paginationChange: EventEmitter<PaginatedResult<any>> = new EventEmitter();
 
   constructor() {}
 
   onPageChange(pageNumber: number): void {
-    this.pageChanged.emit(pageNumber);
+    this.paginatedResult.page = pageNumber;
+    this.paginationChange.emit(this.paginatedResult);
   }
+
+  limitChange(limit: number) {
+    this.paginatedResult.limit = limit;
+    this.paginationChange.emit(this.paginatedResult);
+	}
 
   getPages(): number[] {
     return Array(this.paginatedResult.totalPages).fill(0).map((_, index) => index + 1);

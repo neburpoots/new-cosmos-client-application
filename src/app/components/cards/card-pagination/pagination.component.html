@@ -1,31 +1,49 @@
-<div [@fadeInOut]="true" class="flex justify-center items-center mt-4">
-    <nav aria-label="Pagination">
-        <ul class="pagination flex items-center justify-center gap-5">
-            <li [class.disabled]="+paginatedResult.page === 1">
-                <a class="page-link" (click)="onPageChange(+paginatedResult.page - 1)" aria-label="Previous">
+<div class="flex justify-between items-center mt-4">
+    <div>
 
-                    <div class="shadow-lg rounded-2xl bg-cosmosDark p-4 cursor-pointer">
+    </div>
+    <div [@fadeInOut]="true" class="flex justify-center items-center ">
+        <nav aria-label="Pagination">
+            <ul class="pagination flex items-center justify-center gap-5">
+                <li [class.disabled]="+paginatedResult.page === 1">
+                    <a class="page-link" (click)="onPageChange(+paginatedResult.page - 1)" aria-label="Previous">
 
-                        <i class="fa fa-arrow-left text-white" aria-hidden="true"></i>
+                        <div class="shadow-lg rounded-2xl bg-cosmosDark p-4 cursor-pointer">
+
+                            <i class="fa fa-arrow-left text-white" aria-hidden="true"></i>
 
 
-                    </div>
-                </a>
+                        </div>
+                    </a>
 
-            </li>
-            <li class="page-item">
-                <a class="page-link text-xl">{{ paginatedResult.page }}/{{paginatedResult.totalPages}}</a>
-            </li>
-            <li [class.disabled]="+paginatedResult.page === +paginatedResult.totalPages">
+                </li>
+                <li class="page-item">
+                    <a class="page-link text-xl">{{ paginatedResult.page }}/{{paginatedResult.totalPages}}</a>
+                </li>
+                <li [class.disabled]="+paginatedResult.page === +paginatedResult.totalPages">
 
-                <a class="page-link" (click)="onPageChange(+paginatedResult.page + 1)" aria-label="Next">
-                    <div class="shadow-lg rounded-2xl bg-cosmosDark p-4 cursor-pointer">
-                        <i class="fa fa-arrow-right text-white" aria-hidden="true"></i>
+                    <a class="page-link" (click)="onPageChange(+paginatedResult.page + 1)" aria-label="Next">
+                        <div class="shadow-lg rounded-2xl bg-cosmosDark p-4 cursor-pointer">
+                            <i class="fa fa-arrow-right text-white" aria-hidden="true"></i>
 
-                    </div>
-                </a>
+                        </div>
+                    </a>
 
-            </li>
-        </ul>
-    </nav>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+    <div>
+        <div class="flex items-center gap-2">
+            <select
+                class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDark border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
+                id="selectedOption" #offset (change)="limitChange(+offset.value)">
+                <!-- (change)="onPageSizeChange($event)"> -->
+                <option [defaultSelected]="10" [value]="10" >10 items per page</option>
+                <option [value]="20">20 items per page</option>
+                <option [value]="50">50 items per page</option>
+            </select>
+        </div>
+    </div>
 </div>

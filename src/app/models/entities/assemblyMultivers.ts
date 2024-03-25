@@ -1,9 +1,7 @@
 import { AssemblyMultiversLine } from "./assemblyMultiversLine";
 import { CDArtikel } from "./cdArtikel";
 
-
 export interface AssemblyMultivers {
-
   assemblage_order: string;
   order_datum: Date;
   cdartikel?: CDArtikel;

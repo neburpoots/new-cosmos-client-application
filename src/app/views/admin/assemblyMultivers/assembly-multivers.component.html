@@ -1,7 +1,7 @@
-<div class="min-h-[100vh] flex items-center  px-4 md:px-10 justify-center">
+<div class="min-h-[100vh] flex px-4 md:px-10 justify-center">
 
     <div class="h-full w-full flex items-center">
-        <div class="w-full mb-12 pt-12 px-4">
+        <div class="mt-[100px] w-full mb-12 px-4">
             <app-card-table (pdf)="downloadPdf($event)" [isPdf]="true" [detailPagePrefix]="'/user/assemblymultivers/'" (closeView)="closeViewModal()" [isViewable]="true" (view)="openViewModal($event)"
                 [isCreatable]="false" [isEditable]="false" [isDeletable]="false" (create)="openCreateModal()"
                 (edit)="openEditModal($event)" (delete)="openDeleteModal($event)"
@@ -11,7 +11,7 @@
             </app-card-table>
             <!-- Your table content here -->
 
-            <app-pagination [paginatedResult]="data" (pageChanged)="onPageChanged($event)"></app-pagination>
+            <app-pagination [paginatedResult]="data" (paginationChange)="onPaginationChange($event)"></app-pagination>
 
 
         </div>

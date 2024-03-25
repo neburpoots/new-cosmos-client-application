@@ -50,7 +50,7 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
     searchValue: "",
     orderBy: {
       orderByColumn: 'id',
-      orderByDirection: 'asc',
+      orderByDirection: 'desc',
     }
   }
 
@@ -104,7 +104,6 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   async ngOnInit(): Promise<void> {
     await this.checkQueryParams();
-
     await this.loadItems();
   }
 
@@ -143,9 +142,10 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
     });
   }
 
-  async onPageChanged(page: number): Promise<void> {
-    this.data.page = page;
+  async onPaginationChange(result: PaginatedResult<T>): Promise<void> {
+    this.data = result;
     await this.loadItems();
+    
   }
 
   async openEditModal(id: number): Promise<void> {

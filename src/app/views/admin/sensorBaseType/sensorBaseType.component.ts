@@ -55,9 +55,9 @@ export class SensorBaseTypeComponent extends AbstractComponent<SensorBaseType> i
     { displayName: 'Prefix', sortValue: 'prefix', key: 'prefix'  },
     { displayName: 'Suffix', sortValue: 'suffix', key: 'suffix'},
     { displayName: 'Series', sortValue: 'series', key: 'series'},
-    { displayName: 'Maintenance Interval', sortValue: 'maintenance_interval', key: 'maintenance_interval'},
-    { displayName: 'Replacement Interval', sortValue: 'replacement_interval', key: 'replacement_interval'},
-    { displayName: 'Quotation Interval', sortValue: 'quotation_interval', key: 'quotation_interval'},
+    { displayName: 'Maintenance Interval', sortValue: 'maintenance_interval_months', key: 'maintenance_interval'},
+    { displayName: 'Replacement Interval', sortValue: 'replacement_interval_months', key: 'replacement_interval'},
+    { displayName: 'Quotation Interval', sortValue: 'quotation_interval_months', key: 'quotation_interval'},
     { displayName: 'Principle', sortValue: 'principle', key: 'principle'},
     { displayName: 'Volume', sortValue: 'volume', key: 'volume'},
   ];
@@ -81,7 +81,7 @@ export class SensorBaseTypeComponent extends AbstractComponent<SensorBaseType> i
   }
 
   override createUrlParams(): string {
-    return `${this.url}?orderBy=${this.searchCriteria.orderBy.orderByColumn}&sort=${this.searchCriteria.orderBy.orderByDirection}&page=${this.data.page}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
+    return `${this.url}?orderBy=${this.searchCriteria.orderBy.orderByColumn}&sort=${this.searchCriteria.orderBy.orderByDirection}&page=${this.data.page}&limit=${this.data.limit}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
   }
 
 }

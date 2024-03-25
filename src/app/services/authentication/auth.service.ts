@@ -11,6 +11,7 @@ import { Router } from '@angular/router'; // Import the Router
 export class AuthService {
   private apiUrl = 'http://localhost:8080'; // Replace with your API URL
   private readonly TOKEN_KEY = 'access_token';
+  private readonly REFRESH_KEY = 'refresh_token';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -52,6 +53,7 @@ export class AuthService {
 
   removeToken(): void {
     localStorage.removeItem(this.TOKEN_KEY);
+    sessionStorage.removeItem(this.REFRESH_KEY);
   }
 
   // Add methods for refreshing token, checking authentication state, etc.

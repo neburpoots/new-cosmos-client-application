@@ -1,11 +1,11 @@
 <div class="mb-5 flex justify-between items-center">
   <div class="relative flex w-full flex-wrap md:w-[200px]">
     <span
-      class="z-10 h-full leading-snug font-normal absolute text-center text-slate-300 absolute bg-transparent rounded-2xl text-base items-center justify-center w-8 pl-3 py-3"><i
+      class="z-10 h-full leading-snug font-normal absolute text-center text-slate-400 absolute bg-transparent rounded-2xl text-base items-center justify-center w-8 pl-3 py-3"><i
         class="fa fa-search"></i></span>
     <input (ngModelChange)="loadData($event)" [(ngModel)]="searchCriteria.searchValue" type="text"
       placeholder="Search here..."
-      class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-300 text-slate-600 relative bg-white bg-white rounded-2xl text-sm  w-full pl-10" />
+      class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-400 text-slate-600 relative bg-white bg-white rounded-2xl text-sm  w-full pl-10" />
   </div>
 
   <div>
@@ -124,6 +124,7 @@
       <div *ngIf="data.length === 0" class="text-center text-slate-400 text-lg p-4">
         No results matched the search criteria
       </div>
+
     </div>
   </div>
 </div>

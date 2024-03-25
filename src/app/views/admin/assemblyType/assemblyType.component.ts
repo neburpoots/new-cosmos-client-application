@@ -17,21 +17,12 @@ import { ActivatedRoute } from "@angular/router";
 
 export class AssemblyTypeComponent extends AbstractComponent<AssemblyType> implements OnInit, IAbstractComponent<AssemblyType> {
 
-
-  // @ViewChild('calibrationGasEdit') childComponent!: CalibrationGasesFormComponent;
-
   objectSingle = 'Assembly type';
   objectPlural = 'Assembly types';
-
-  // override setEditData() {
-  //   console.log(this.editData)
-  //   this.childComponent.setEditData(this.editData);
-  // }
 
   get editData(): any {
     return {
       id: this.selectedItem?.id,
-
     };
   }
   
@@ -72,7 +63,7 @@ export class AssemblyTypeComponent extends AbstractComponent<AssemblyType> imple
   }
 
   override createUrlParams(): string {
-    return `${this.url}?orderBy=${this.searchCriteria.orderBy.orderByColumn}&sort=${this.searchCriteria.orderBy.orderByDirection}&page=${this.data.page}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
+    return `${this.url}?orderBy=${this.searchCriteria.orderBy.orderByColumn}&sort=${this.searchCriteria.orderBy.orderByDirection}&page=${this.data.page}&limit=${this.data.limit}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
   }
 
 }
