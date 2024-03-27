@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
-import { HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { PaginatedResult } from "../../../../models/utils/pagination";
 import { SearchCriteria } from "../../../../models/utils/searchCriteria";
 import { ModalWidth } from "../../../../models/enums/modalWidth.enum";
@@ -43,8 +43,8 @@ export class CalibrationGasesComponent extends AbstractComponent<CalGas> impleme
     };
   }  
 
-  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<CalGas>, protected override route: ActivatedRoute) {
-      super(toastr, calgasService, route);
+  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<CalGas>, protected override route: ActivatedRoute, protected override http: HttpClient) {
+      super(toastr, calgasService, route, http);
       this.abstractService = calgasService;
       this.url = 'api/calgas';
   }

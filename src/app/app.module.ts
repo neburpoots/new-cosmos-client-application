@@ -78,6 +78,8 @@ import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultiver
 import { SensorBaseTypeComponent } from "./views/admin/sensorBaseType/sensorBaseType.component";
 import { SensorBaseTypeFormComponent } from "./views/admin/sensorBaseType/form/sensorBaseTypeForm.component";
 import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.component";
+import { SensorTypeComponent } from "./views/admin/sensor-type/sensor-type.component";
+import { SensorTypeFormComponent } from "./views/admin/sensor-type/form/sensor-type-form.component";
 
 @NgModule({
   declarations: [
@@ -135,6 +137,8 @@ import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.c
     SensorBaseTypeFormComponent,
     AssemblyTypeComponent,
     AssemblyCreateComponent,
+    SensorTypeComponent,
+    SensorTypeFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

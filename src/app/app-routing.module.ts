@@ -27,6 +27,7 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/asse
 import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
 import { SensorBaseTypeComponent } from "./views/admin/sensorBaseType/sensorBaseType.component";
 import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.component";
+import { SensorTypeComponent } from "./views/admin/sensor-type/sensor-type.component";
 
 const routes: Routes = [
   // user views
@@ -46,6 +47,7 @@ const routes: Routes = [
       { path: "tables", component: TablesComponent },
       { path: "maps", component: MapsComponent },
       { path: "sensor-base-types", component: SensorBaseTypeComponent},
+      { path: "sensor-types", component: SensorTypeComponent},
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

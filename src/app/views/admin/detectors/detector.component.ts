@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
-import { HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { PaginatedResult } from "../../../models/utils/pagination";
 import { CalGas } from "../../../models/entities/calgas";
 import { SearchCriteria } from "../../../models/utils/searchCriteria";
@@ -36,8 +36,8 @@ export class DetectorComponent extends AbstractComponent<Detector> implements On
     objectSingle = 'Detector';
     objectPlural = 'Detectors';
 
-    constructor(protected override toastr: ToastrService, private detectorService: AbstractService<Detector>, protected override route: ActivatedRoute) {
-        super(toastr, detectorService, route);
+    constructor(protected override toastr: ToastrService, private detectorService: AbstractService<Detector>, protected override route: ActivatedRoute, protected override http: HttpClient) {
+        super(toastr, detectorService, route, http);
         this.abstractService = detectorService;
         this.url = 'api/detectors';
     }

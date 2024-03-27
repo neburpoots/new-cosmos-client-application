@@ -9,6 +9,7 @@ import { SearchCriteria } from "../../../models/utils/searchCriteria";
 import { TableHeader } from "../../../models/utils/tableHeader";
 import { ActivatedRoute } from "@angular/router";
 import { AssemblyMultivers } from "../../../models/entities/assemblyMultivers";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-assembly-multivers",
@@ -46,8 +47,8 @@ export class AssemblyMultiversComponent extends AbstractComponent<AssemblyMultiv
 
   assemblyMultiversLine : AssemblyMultiversLine[] = [];
   
-  constructor(protected override toastr: ToastrService, private assemblyService: AbstractService<AssemblyMultivers>, protected override route: ActivatedRoute) {
-    super(toastr, assemblyService, route);
+  constructor(protected override toastr: ToastrService, private assemblyService: AbstractService<AssemblyMultivers>, protected override route: ActivatedRoute, protected override http: HttpClient) {
+    super(toastr, assemblyService, route, http);
     this.toastr = toastr;
     this.abstractService = assemblyService;
 

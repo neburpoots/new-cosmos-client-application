@@ -1,0 +1,55 @@
+import { CalGas } from "./calgas";
+import Electrolyte from "./electrolyte";
+import { Filter } from "./filter";
+import Membrane from "./membrane";
+import ORing from "./oring";
+import Pyrolyser from "./pyrolyser";
+import SensorBaseType from "./sensorBaseType";
+import { Range } from "./range";
+
+interface SensorType {
+    id: number;
+    label: string;
+    calcMaintenanceIntervalMonths: number;
+    calcReplacementIntervalMonths: number;
+    calRange: string;
+    calcVolume: number;
+    sensor_type_id?: number;
+    electrolyte?: Electrolyte;
+    membrane?: Membrane;
+    oring?: ORing;
+    pyrolyser?: Pyrolyser;
+    filter?: Filter;
+    battery?: boolean;
+    restrictor?: boolean;
+    membrane_seal?: boolean;
+    range?: Range;
+    flow_rate?: number;
+    cal_flow_rate?: number;
+    code: string;
+    obsolete?: boolean;
+    pyrolyser_voltage?: number;
+    principle_id?: number;
+    sensorBaseType?: SensorBaseType;
+    created: Date;
+    modified: Date;
+    owner_id: number;
+    model: string;
+    calgas?: CalGas;
+    silicone_sheet?: boolean;
+    element_count?: number;
+    maintenance_interval_months?: number;
+    replacement_interval_months?: number;
+    cdartikel: string;
+    volume?: number;
+    cal_response: number;
+    electrode_count?: number;
+    bias_mv?: number;
+    direction?: boolean;
+    low_electrolyte?: boolean;
+    span_resistor?: number;
+    plug_id?: number;
+    transport_switch?: boolean;
+}
+
+export default SensorType;

@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
-import { HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 
 import AssemblyType from "../../../models/entities/assemblyType";
 import { AbstractComponent } from "../abstract/abstract.component";
@@ -27,8 +27,8 @@ export class AssemblyTypeComponent extends AbstractComponent<AssemblyType> imple
   }
   
 
-  constructor(protected override toastr: ToastrService, private assemblyTypeService: AbstractService<AssemblyType>, protected override route: ActivatedRoute) {
-      super(toastr, assemblyTypeService, route);
+  constructor(protected override toastr: ToastrService, private assemblyTypeService: AbstractService<AssemblyType>, protected override route: ActivatedRoute, protected override http: HttpClient) {
+      super(toastr, assemblyTypeService, route, http);
       this.abstractService = assemblyTypeService;
       this.url = 'api/assembly-types';
   }

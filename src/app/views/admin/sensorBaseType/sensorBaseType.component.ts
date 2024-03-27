@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
-import { HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { AbstractComponent } from "../abstract/abstract.component";
 import SensorBaseType from "../../../models/entities/sensorBaseType";
 import { IAbstractComponent } from "../../../models/interface/IAbstractComponent";
@@ -45,8 +45,8 @@ export class SensorBaseTypeComponent extends AbstractComponent<SensorBaseType> i
   }
   
 
-  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<SensorBaseType>, protected override route: ActivatedRoute) {
-      super(toastr, calgasService, route);
+  constructor(protected override toastr: ToastrService, private calgasService: AbstractService<SensorBaseType>, protected override route: ActivatedRoute, protected override http: HttpClient) {
+      super(toastr, calgasService, route, http);
       this.abstractService = calgasService;
       this.url = 'api/sensor-base-types';
   }

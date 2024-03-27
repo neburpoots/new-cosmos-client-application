@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges } from "@angular/core";
-import { HttpResponse } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { PaginatedResult } from "../../../models/utils/pagination";
 import { CalGas } from "../../../models/entities/calgas";
 import { SearchCriteria } from "../../../models/utils/searchCriteria";
@@ -73,22 +73,22 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
 
   abstract tableHeaders: TableHeader[];
 
-  constructor(protected toastr: ToastrService, protected abstractService: AbstractService<T>, protected route: ActivatedRoute) {
+  constructor(protected toastr: ToastrService, protected abstractService: AbstractService<T>, protected route: ActivatedRoute, protected http: HttpClient) {
   }
 
   abstract mapTableData(data: any[]): any[];
 
   //cannot be abstract because it is not used in all components
-  setEditData(): any {};
+  setEditData(): any { };
 
-  loadDetailData(id : any): void {};
+  loadDetailData(id: any): void { };
 
   abstract createUrlParams(): string;
 
   async checkQueryParams(): Promise<void> {
     this.route.queryParams.subscribe(params => {
       const editId = params['edit'];
-  
+
       if (editId) {
         // Open your modal with the specified ID
         this.openEditModal(editId);
@@ -107,7 +107,7 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
     await this.loadItems();
   }
 
-  async loadFilteredItems(searchCriteria : SearchCriteria): Promise<void> {
+  async loadFilteredItems(searchCriteria: SearchCriteria): Promise<void> {
     this.data.page = 1;
     this.searchCriteria.searchValue = searchCriteria.searchValue;
     this.searchCriteria.orderBy = searchCriteria.orderBy;
@@ -119,7 +119,7 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
     try {
 
       //allow for optional search criteria
-      if(searchCriteria){
+      if (searchCriteria) {
         this.searchCriteria = searchCriteria;
       }
 
@@ -145,8 +145,8 @@ export abstract class AbstractComponent<T> implements OnInit, IAbstractComponent
   async onPaginationChange(result: PaginatedResult<T>): Promise<void> {
     this.data = result;
     await this.loadItems();
-    
   }
+
 
   async openEditModal(id: number): Promise<void> {
     await this.setSelectedItem(id);

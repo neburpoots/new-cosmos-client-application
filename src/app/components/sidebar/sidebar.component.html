@@ -137,6 +137,13 @@
                   class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
                     class="mr-2 fa fa-area-chart" aria-hidden="true"></i>
                   Detectors</a></li>
+                  <li><a [routerLink]="['/user/sensor-types']" routerLinkActive #sensorType="routerLinkActive" [ngClass]="
+                    sensorType.isActive
+                      ? 'text-white hover:text-white'
+                      : 'text-white hover:text-white'
+                  " [ngClass]="sensorType.isActive ? 'bg-cosmosDark text-white' : ''"
+                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
+                  <fa-icon class="mr-4" [icon]="faTowerBroadcast"></fa-icon>Sensor Types</a></li>
                   <li><a [routerLink]="['/user/sensor-base-types']" routerLinkActive #sensorBaseType="routerLinkActive" [ngClass]="
                     sensorBaseType.isActive
                       ? 'text-white hover:text-white'

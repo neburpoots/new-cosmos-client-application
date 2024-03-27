@@ -1,0 +1,74 @@
+<h2 class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
+<form [formGroup]="myForm" class="flex flex-col gap-4" (ngSubmit)="onSubmit()">
+
+    <select-component [form]="myForm" [name]="'sensor_base_type'" [displayName]="'Sensor Base Type'"
+        [options]="sensorBaseTypes" [placeholder]="'Select a Sensor Base Type'"
+        [touched]="myForm.controls['sensor_base_type'].touched"
+        [errors]="[{ name: 'required', message: 'Sensor Base Type is required' }]">
+    </select-component>
+
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'code'" [displayName]="'Code'"
+        [touched]="myForm.controls['code'].touched" [errors]="[{ name: 'required', message: 'Code is required' }, { name: 'minlength' ,
+        message: 'Name must be at least 2 characters' }]"></input-component>
+
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'model'" [displayName]="'Model'"
+        [touched]="myForm.controls['model'].touched" [errors]="[{ name: 'required', message: 'Model is required' }, { name: 'minlength' ,
+message: 'Name must be at least 2 characters' }]"></input-component>
+
+    <select-component [form]="myForm" [name]="'range'" [displayName]="'Range'"
+        [options]="ranges" [placeholder]="'Select a Range'"
+        [touched]="myForm.controls['range'].touched"
+        [errors]="[{ name: 'required', message: 'Range is required' }]">
+    </select-component>
+
+    <!-- <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'prefix'" [displayName]="'Prefix'"
+        [touched]="myForm.controls['prefix'].touched" [errors]="[{ name: 'required', message: 'Prefix is required' }, { name: 'minlength' ,
+    message: 'Factuuropdracht must be at least 2 characters' }]"></input-component> -->
+
+    <!-- <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'suffix'" [displayName]="'Suffix'"
+        [touched]="myForm.controls['suffix'].touched" [errors]="[{ name: 'required', message: 'Prefix is required' }, { name: 'minlength' ,
+    message: 'Factuuropdracht must be at least 2 characters' }]"></input-component>
+
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'series'" [displayName]="'Series'"
+        [touched]="myForm.controls['series'].touched"
+        [errors]="[{ name: 'required', message: 'Series is required' }]"></input-component>
+
+
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'maintenance_interval_months'"
+        [displayName]="'Maintenance Interval Months'" [touched]="myForm.controls['maintenance_interval_months'].touched"
+        [errors]="[{ name: 'required', message: 'Maintenance interval months is required' }, { name: 'pattern' ,
+        message: 'Maintenance interval number must be a number' }]">
+    </input-component>
+
+
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'replacement_interval_months'"
+        [displayName]="'Replacement Interval Months'" [touched]="myForm.controls['replacement_interval_months'].touched"
+        [errors]="[{ name: 'required', message: 'Maintenance interval months is required' }, { name: 'pattern' ,
+        message: 'Replacement interval number must be a number' }]">
+    </input-component>
+
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'quotation_interval_months'" [displayName]="'Quotation Interval Months'"
+        [touched]="myForm.controls['quotation_interval_months'].touched"
+        [errors]="[{ name: 'required', message: 'Maintenance interval months is required' }, { name: 'pattern' ,
+        message: 'Quotation interval number must be a number' }]">
+    </input-component>
+
+    <select-component [form]="myForm" [name]="'principle_id'" [displayName]="'Principles'" [options]="principles"
+        [placeholder]="'Select a principle'" [touched]="myForm.controls['principle_id'].touched"
+        [errors]="[{ name: 'required', message: 'Principle is required' }]">
+    </select-component>
+
+    <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'volume'" [displayName]="'Volume (mL)'"
+        [touched]="myForm.controls['volume'].touched"
+        [errors]="[]">
+    </input-component> -->
+
+    <div class="flex flex-row mt-auto justify-end items-center gap-2">
+        <button type="button" (click)="close()"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Close</button>
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">{{id
+            ? "Edit" : "Add"}} {{objectSingle}}</button>
+    </div>
+
+</form>
