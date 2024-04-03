@@ -9,61 +9,83 @@ import { TableField } from "../../../models/utils/tableField";
 import { IAbstractComponent } from "../../../models/interface/IAbstractComponent";
 import { TableHeader } from "../../../models/utils/tableHeader";
 import { ActivatedRoute } from "@angular/router";
+import { Observable, Subject, map, of, startWith, switchMap } from "rxjs";
+import { AssemblyTypeEntitiesGQL, AssemblyTypeEntitiesQuery, AssemblyTypesEntitiesOrderBy, AssemblyTypesEntity, AssemblyTypesOrderBy } from "../../../../generated/graphql";
+import { BaseEntity } from "../base/base-entity.component";
+import { SearchFilters } from "../../../models/utils/searchFilters";
+import { AssemblyService } from "../../../services/assembly/assembly.service";
+import { AssemblyTypeService } from "../../../services/assemblyType/assemblyType.service";
+import { TableHead } from "../../../models/utils/tableHead";
 
 @Component({
   selector: "app-calibrationgasses",
   templateUrl: "./assemblyType.component.html",
 })
 
-export class AssemblyTypeComponent extends AbstractComponent<AssemblyType> implements OnInit, IAbstractComponent<AssemblyType> {
+export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> implements OnInit{
 
   objectSingle = 'Assembly type';
   objectPlural = 'Assembly types';
 
-  get editData(): any {
-    return {
-      id: this.selectedItem?.id,
-    };
-  }
-  
-
-  constructor(protected override toastr: ToastrService, private assemblyTypeService: AbstractService<AssemblyType>, protected override route: ActivatedRoute, protected override http: HttpClient) {
-      super(toastr, assemblyTypeService, route, http);
-      this.abstractService = assemblyTypeService;
-      this.url = 'api/assembly-types';
+  searchCriteria: SearchFilters = {
+    orderBy: [AssemblyTypesEntitiesOrderBy.IdDesc],
+    search: "",
+    limit: 10,
+    offset: 0,
+    totalPages: 0,
+    total: 0,
+    page: 1,
   }
 
-  tableHeaders : TableHeader[] = [
-    { displayName: 'Name', sortValue: 'name', key: 'name'  },
-    { displayName: 'CDArticle', sortValue: 'cdartikel.cdartikel', key: 'cdartikel'},
-    { displayName: 'Free', sortValue: 'cdartikel.stock.voorraad', key: 'free'},
-    { displayName: 'Res', sortValue: 'cdartikel.stock.gereserveerd', key: 'res'},
-    { displayName: 'Min', sortValue: 'cdartikel.stock.minvoorraad', key: 'min'},
-    { displayName: 'Max', sortValue: 'cdartikel.stock.maxvoorraad', key: 'max'},
-    { displayName: 'Advice', sortValue: 'cdartikel.advice', key: 'advice'},
-    { displayName: 'Created', sortValue: 'created', key: 'created'},
-  ];
+  ngOnInit(): void {
+    console.log(this.nodes$);
+    this.nodes$.subscribe(result => console.log(result));
+  }
 
+  //json return object for getter
+  Key = 'assemblyTypes';
 
-  mapTableData(assemblyTypes: AssemblyType[]): any[] {
-    console.log(assemblyTypes)
-    return assemblyTypes.map((assemblyType: AssemblyType) => {
+  baseOrderBy = AssemblyTypesOrderBy.IdDesc;
+
+  override nodes$: Observable<Array<AssemblyTypesEntity>>;
+
+  constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
+    private assemblyTypeService: AssemblyTypeEntitiesGQL) {
+    super(toastr, route, http, assemblyTypeService, null);
+
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
+
+  //maps for the url to be set at the front
+  mapTableData(assemblyTypes: AssemblyTypesEntity[]): any[] {
+
+    console.log(this.searchCriteria)
+    return assemblyTypes.map((assemblyType) => {
       return {
         id: { url: null, value: assemblyType.id } as TableField,
         name: { url: null, value: assemblyType.name } as TableField,
-        cdartikel: { url: null, value: assemblyType?.cdartikel?.cdartikel } as TableField,
-        free: { url: null, value: assemblyType?.cdartikel?.stock?.voorraad } as TableField,
-        res: { url: null, value: assemblyType?.cdartikel?.stock?.gereserveerd } as TableField,
-        min: { url: null, value: assemblyType?.cdartikel?.stock?.minvoorraad } as TableField,
-        max: { url: null, value: assemblyType?.cdartikel?.stock?.maxvoorraad } as TableField,
-        advice: { url: null, value: assemblyType?.cdartikel?.advice } as TableField,
-        created: { url: null, value: assemblyType.created } as TableField,
+        cdartikel: { url: null, value: assemblyType?.cdartikel } as TableField,
+        free: { url: null, value: assemblyType?.voorraad } as TableField,
+        res: { url: null, value: assemblyType?.gereserveerd } as TableField,
+        min: { url: null, value: assemblyType?.minvoorraad } as TableField,
+        max: { url: null, value: assemblyType?.maxvoorraad } as TableField,
+        advice: { url: null, value: assemblyType?.advice } as TableField,
+        created: { url: null, value: assemblyType?.created } as TableField,
+        initials: { url: null, value: assemblyType?.initials } as TableField,
       };
     });
   }
 
-  override createUrlParams(): string {
-    return `${this.url}?orderBy=${this.searchCriteria.orderBy.orderByColumn}&sort=${this.searchCriteria.orderBy.orderByDirection}&page=${this.data.page}&limit=${this.data.limit}&searchQuery=${encodeURIComponent(this.searchCriteria.searchValue!)}`;
-  }
+  tableHeaders : TableHead<AssemblyTypesEntitiesOrderBy>[] = [
+		{ key: 'name', label: "Name", asc: AssemblyTypesEntitiesOrderBy.NameAsc, desc: AssemblyTypesEntitiesOrderBy.NameDesc },
+		{ key: 'cdartikel', label: "CD Artikel", asc: AssemblyTypesEntitiesOrderBy.CdartikelAsc, desc: AssemblyTypesEntitiesOrderBy.CdartikelDesc },
+		{ key: 'free', label: "Free", asc: AssemblyTypesEntitiesOrderBy.VoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.VoorraadDesc },
+		{ key: 'res', label: "Res.", asc: AssemblyTypesEntitiesOrderBy.GereserveerdAsc, desc: AssemblyTypesEntitiesOrderBy.GereserveerdDesc },
+		{ key: 'min', label: "Min", asc: AssemblyTypesEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MinvoorraadDesc },
+		{ key: 'max', label: "Max", asc: AssemblyTypesEntitiesOrderBy.MaxvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MaxvoorraadDesc },
+		{ key: 'advice', label: "Advice", asc: AssemblyTypesEntitiesOrderBy.AdviceAsc, desc: AssemblyTypesEntitiesOrderBy.AdviceDesc },
+		{ key: 'created', label: "Created", asc: AssemblyTypesEntitiesOrderBy.CreatedAsc, desc: AssemblyTypesEntitiesOrderBy.CreatedDesc },
+		{ key: 'initials', label: "By", asc: AssemblyTypesEntitiesOrderBy.OwnerIdAsc, desc: AssemblyTypesEntitiesOrderBy.OwnerIdDesc },
+	]
 
 }

@@ -1,0 +1,156 @@
+#-------------------------------------------------------------------------------
+fragment groupFields on Group
+{	 
+	id
+	name	
+}
+
+#-------------------------------------------------------------------------------
+query CacheGroups
+{
+	groups: allGroups
+	{	
+		nodes 
+		{
+			...groupFields			
+		}
+	}	
+}
+
+#-------------------------------------------------------------------------------
+query Groups
+{
+	groups: allGroups(orderBy: NAME_ASC)
+	{	
+		nodes 
+		{
+			...groupFields			
+			groupPermission: groupPermissionByGroupId
+			{			
+				id
+				readIds
+				writeIds			
+			}
+		}
+	}       
+}
+
+#-------------------------------------------------------------------------------
+query Group($id: Int!)
+{
+	group: groupById(id: $id)
+	{
+		...groupFields	
+		groupPermission: groupPermissionByGroupId 
+		{			
+			id
+			readIds
+			writeIds			
+		}
+	}
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteGroup($id: Int!)
+{
+	deleteGroupById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}
+
+#-------------------------------------------------------------------------------
+query Permissions
+{
+	permissions: allPermissions
+	{	
+		nodes 
+		{
+			id
+			name
+		}
+	}       
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateGroup($name: String) 
+{
+	createGroup
+	(
+		input: 
+		{			
+			name: $name		
+		}
+	) 
+	{
+		group 
+		{
+			...groupFields		
+			groupPermission: groupPermissionByGroupId
+			{			
+				id
+				readIds
+				writeIds			
+			}
+		}
+	}		
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateGroup
+(
+	$id: Int!
+	$name: String	
+	$groupPermissionId: Int!
+	$readIds: [Int]
+	$writeIds: [Int]
+) 
+{
+	updateGroupById 
+	(
+		input: 
+		{
+			id: $id, 
+			groupPatch: 
+			{
+				name: $name 				
+			}
+		}
+	) 
+	{
+		group 
+		{
+			...groupFields			
+		}
+	}
+	
+	updateGroupPermissionById
+	(
+		input: 
+		{
+			id: $groupPermissionId, 
+			groupPermissionPatch: 
+			{
+				readIds: $readIds 				
+				writeIds: $writeIds 				
+			}
+		}
+	)
+	{
+		groupPermission 
+		{
+			id
+			readIds
+			writeIds
+		}
+	}
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteGroup($id: Int!)
+{
+	deleteGroupById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

@@ -1,4 +1,9 @@
-<div [formGroup]="form" class="flex flex-col gap-1">
+<div [formGroup]="form" class="flex flex-col gap-1"
+    [ngClass]="{
+        'p-1': inline,
+    }"
+
+>
     <select [ngClass]="{
         'border-green-600 border' : form.get('selectedOption')?.value,
         'text-sm': inline,

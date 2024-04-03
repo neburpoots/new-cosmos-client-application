@@ -1,0 +1,131 @@
+#-------------------------------------------------------------------------------
+fragment localUserFields on User
+{	 
+	id	
+	username
+	fullname
+	initials		
+	holidayStartBalance
+	overtimeStartBalance	
+}
+
+#-------------------------------------------------------------------------------
+query Users
+{
+	users: allUsers
+	{	
+		nodes 
+		{
+			...localUserFields			
+		}
+	}       
+}
+
+#-------------------------------------------------------------------------------
+query User($id: Int!)
+{
+	user: userById(id: $id)
+	{
+		...localUserFields		
+		usersGroups: usersGroupsByUserId
+		{
+			nodes
+			{
+				id
+				group: groupByGroupId
+				{
+					...groupFields
+				}
+			}
+		}
+	}
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateUser($id: Int!, $userPatch: UserPatch!, $groupIds: [Int])
+{
+	updateUserById(input: {id: $id, userPatch: $userPatch}) 
+	{
+		user 
+		{
+			...localUserFields			
+			usersGroups: usersGroupsByUserId
+			{
+				nodes
+				{
+					id
+					group: groupByGroupId
+					{
+						...groupFields
+					}
+				}
+			}
+		}
+	}
+
+	updateUserGroups(input:{userId: $id, groupIds: $groupIds})
+	{
+		user 
+		{
+			...localUserFields				
+			usersGroups: usersGroupsByUserId
+			{
+				nodes
+				{
+					id
+					group: groupByGroupId
+					{
+						...groupFields
+					}
+				}
+			}
+		}
+	}				
+}
+
+#-------------------------------------------------------------------------------
+query CurrentUserId
+{
+	currentUserId
+}
+
+#-------------------------------------------------------------------------------
+query CurrentUsername
+{
+	currentUsername
+}
+
+#-------------------------------------------------------------------------------
+query CurrentReadPermissions
+{
+	currentReadPermissions
+	{
+		nodes
+		{
+			id
+			name
+		}
+	}
+}
+
+#-------------------------------------------------------------------------------
+query CurrentWritePermissions
+{
+	currentWritePermissions
+	{
+		nodes
+		{
+			id
+			name
+		}
+	}
+}
+
+#-------------------------------------------------------------------------------
+mutation Authenticate($username: String!, $password: String!) 
+{
+	authenticate(input: {username: $username, password: $password}) 
+	{
+		jwtToken	 
+	}
+}

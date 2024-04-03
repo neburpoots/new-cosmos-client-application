@@ -1,0 +1,96 @@
+#-------------------------------------------------------------------------------
+query AssemblyTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyTypesEntitiesOrderBy!])
+{
+  assemblyTypes: allAssemblyTypesEntities(
+    filter: {
+      or: [
+        { name: { includesInsensitive: $search } },
+        { cdartikel: { includesInsensitive: $search } }
+      ]
+    },
+    orderBy: $orderBy,
+    first: $limit,  # Use first to limit the number of results
+    offset: $offset # Use offset to specify the number of results to skip
+  ) {
+    totalCount
+    nodes {
+      id
+      name
+      cdartikel
+      created
+      modified
+      minvoorraad
+      maxvoorraad
+      voorraad
+      gereserveerd
+      assemblaf
+      advice
+      initials
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateAssemblyType($id: Int!, $patch: AssemblyTypePatch!) 
+{
+	updateAssemblyTypeById
+	(
+		input: 
+		{
+			id: $id
+			assemblyTypePatch: $patch			
+		}
+	) 
+	{
+		assemblyType 
+		{
+			name
+      cdartikel
+      modified
+		}
+	}		
+}
+
+#-------------------------------------------------------------------------------
+query AssemblyTypeById($id: Int!)
+{
+	assemblyType: assemblyTypeById(id: $id)
+	{		
+		  id
+      name
+      cdartikel
+      created
+      modified
+    
+	}
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateAssemblyType($name: String!, $cdartikel: String!, $ownerId: Int!, $created: Datetime!) {
+  createAssemblyType(
+    input: {assemblyType: {
+      name: $name, 
+      cdartikel: $cdartikel, 
+      created: $created,
+      ownerId: $ownerId
+    }}
+  ) {
+    assemblyType {
+      id
+      name
+      cdartikel
+      created
+      modified
+      ownerId
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteAssemblyType($id: Int!)
+{
+	deleteAssemblyTypeById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

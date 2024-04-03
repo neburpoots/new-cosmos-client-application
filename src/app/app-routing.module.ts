@@ -20,7 +20,6 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
-import { AuthGuard } from "./services/authentication/auth.guard";
 import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
 import { DetectorComponent } from "./views/admin/detectors/detector.component";
 import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/assembly-multivers.component";
@@ -34,7 +33,6 @@ const routes: Routes = [
   {
     path: "user",
     component: AdminComponent,
-    canActivate: [AuthGuard],
     children: [
       { path: "dashboard", component: DashboardComponent },
       { path: "assembly", component: AssemblyComponent },
@@ -42,6 +40,10 @@ const routes: Routes = [
       { path: "assemblymultivers/:id", component: AssemblyMultiversDetailComponent }, // Add the dynamic parameter ":userId"
       { path: "calibrationgases", component: CalibrationGasesComponent },
       { path: "assembly-types", component: AssemblyTypeComponent },
+      { 
+        path: 'assembly-types/:id', 
+        component: AssemblyTypeComponent,		
+      },
       { path: "detectors", component: DetectorComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },

@@ -1,0 +1,9 @@
+query allGasesNoPagination
+    {
+    allGases {
+        nodes {
+            id,
+            name
+        }       
+    }
+}

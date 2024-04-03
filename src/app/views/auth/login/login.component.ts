@@ -9,25 +9,20 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  constructor(private toastr: ToastrService, private authService: AuthService, private router: Router) {}
+  constructor(private toastr: ToastrService, private authService: AuthService, private router: Router) { }
 
-  login(username: string, password: string): void {
+  async login(username: string, password: string): Promise<void> {
     console.log(username, password)
-    this.authService.login(username, password).subscribe(
-      (response) => {
-        // Handle successful login
-        console.log(response);
+    await this.authService.login(username, password).subscribe
+      (
+        result => {
+          //console.log(result);	
+          if (result) {
+            this.router.navigate(['/user/dashboard'])
+            this.toastr.success('Logged in successfully!', 'Success');
 
-        
-        this.router.navigate(['/user/dashboard']); // Add this line
-        this.toastr.success('Welcome back!', 'Success');
-        // Store tokens in a secure place (e.g., in local storage or a service)
-      },
-      (error) => {
-        this.toastr.error('Invalid username or password', 'Error');
-        // Handle login error
-        console.error(error);
-      }
-    );
+          }
+        }
+      );;
   }
 }

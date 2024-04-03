@@ -2,33 +2,34 @@
 
     <div class="h-full w-full flex items-center">
         <div class="mt-[100px] w-full mb-12 px-4">
-            <app-card-table [isEditable]="false" (edit)="openEditModal($event)" [isDeletable]="true"
-                [isCreatable]="false" (create)="openCreateModal()" (edit)="openEditModal($event)"
-                (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)"
-                [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData" [title]="objectPlural"
-                [object]="objectSingle"></app-card-table>
-
-            <!-- Your table content here -->
-            <app-pagination [paginatedResult]="data" (paginationChange)="onPaginationChange($event)" ></app-pagination>
+            <table-component
+            [baseOrderBy]="baseOrderBy"
+            [isEditable]="false"  [isDeletable]="false"
+            [isCreatable]="false"
+            [title]="objectPlural" [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"></table-component>
+            <app-pagination-component [searchCriteria]="searchCriteria"
+            (paginationChange)="fetch($event)"
+            ></app-pagination-component>
 
             <!-- <modal-component [width]="ModalWidth.Large
-        " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <calgas-form [objectPlural]="objectPlural" [objectSingle]="objectSingle"
-                    (refresh)="loadItems()" (closeModal)="closeCreateModal()"></calgas-form>
-            </modal-component>
+            " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
+                    <calgas-form [objectPlural]="objectPlural" [objectSingle]="objectSingle"
+                        (refresh)="loadItems()" (closeModal)="closeCreateModal()"></calgas-form>
+                </modal-component> -->
+            <!-- 
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
                 <calgas-form #calibrationGasEdit [objectPlural]="objectPlural" [objectSingle]="objectSingle"
                     (refresh)="loadItems()" (object)="editData" (closeModal)="closeEditModal()"></calgas-form>
             </modal-component> -->
-
+<!-- 
             <modal-component [width]="ModalWidth.Medium
         " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
                 <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
                     [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
                     (closeModal)="closeDeleteModal()"></delete-modal>
-            </modal-component>
+            </modal-component> -->
         </div>
     </div>
 </div>

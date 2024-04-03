@@ -1,60 +1,165 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { Router } from '@angular/router'; // Import the Router
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthService {
-  private apiUrl = 'http://localhost:8080'; // Replace with your API URL
-  private readonly TOKEN_KEY = 'access_token';
-  private readonly REFRESH_KEY = 'refresh_token';
+import { ReplaySubject, Observable, of, from, combineLatest } from 'rxjs';
+import { switchMap, map, tap } from 'rxjs/operators';
+import { Apollo } from 'apollo-angular';
+//import { ApolloCache } from '@apollo/client/core';
+import { AuthenticateGQL, CurrentReadPermissionsGQL, CurrentReadPermissionsQuery, CurrentUsernameGQL, CurrentWritePermissionsGQL, CurrentWritePermissionsQuery, JwtTokenDocument } from '../../../generated/graphql';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
-  constructor(private http: HttpClient, private router: Router) {}
+//------------------------------------------------------------------------------
+type CurrentReadPermissions = Exclude<CurrentReadPermissionsQuery['currentReadPermissions'], null | undefined>;
+type CurrentWritePermissions = Exclude<CurrentWritePermissionsQuery['currentWritePermissions'], null | undefined>;
 
-  login(username: string, password: string): Observable<any> {
-    // Make API request to your login endpoint
-    const body = { username, password };
-    let result = this.http.post(`${this.apiUrl}/api/auth/login`, body, { withCredentials: true }).pipe(
-      tap((response: any) => {
-        const token = response.access_token;
-        this.setToken(token);
-      })
-    );
-    return result;
+//------------------------------------------------------------------------------
+@Injectable
+(
+	{
+  		providedIn: 'root'
+	}
+)
+export class AuthService 
+{
+	//cache: ApolloCache<any>;	
+	currentUsername$ = new ReplaySubject<string|null|undefined>(1);
+	currentReadPermissions$ = new ReplaySubject<CurrentReadPermissions['nodes']>(1);	  
+	currentWritePermissions$ = new ReplaySubject<CurrentWritePermissions['nodes']>(1);	
 
-  }
+	constructor(private authenticateService: AuthenticateGQL, 
+		private currentUsernameService: CurrentUsernameGQL, 
+		private currentReadPermissionsService: CurrentReadPermissionsGQL, 
+		private currentWritePermissionsService: CurrentWritePermissionsGQL, 
+		private apollo: Apollo, private toastrService: ToastrService,
+		private router: Router
+		) 
+	{ 
+		//this.cache = this.apollo.client.cache;		
 
-  refresh(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/auth/refresh`, {}, { withCredentials: true }).pipe(
-      tap((response: any) => {
-        const token = response.access_token;
-        this.setToken(token);
-      }, (error) => this.logout())
+		this.currentUsernameService.fetch({}, {fetchPolicy: 'cache-only'}).pipe
+		(
+			tap(({data: {currentUsername}}) => this.currentUsername$.next(currentUsername)),			
+			switchMap
+			(
+				() => this.currentReadPermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe
+				(
+					tap(({data: {currentReadPermissions}}) => this.currentReadPermissions$.next(currentReadPermissions?.nodes || []))
+				)
+			),
+			switchMap
+			(
+				() => this.currentWritePermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe
+				(
+					tap(({data: {currentWritePermissions}}) => this.currentWritePermissions$.next(currentWritePermissions?.nodes || []))
+				)
+			),			
+		).subscribe();	
+	}
 
-    );
-  }
+	async clearCache()
+	{			
+		return caches.keys().then
+		(
+			keys => Promise.all
+			(
+				keys.filter(key => key.includes(':data')).map
+				(
+					(key) => 
+					{
+						//console.log(key);
+						caches.open(key).then
+						(
+							(eachCache) => 
+							{
+								eachCache.keys().then
+								(
+									(requests) => 
+									{														
+										requests.forEach
+										(
+											(eachRequest) => 
+											{ 
+												//console.log(eachRequest); 
+												return eachCache.delete(eachRequest); 
+											}
+										);
+									}														
+								)
+							}
+						)										
+					}
+				)
+			)
+		);
+	}
 
-  logout(): void {
-    this.removeToken();
-    this.router.navigate(['/auth/login']);
-  }
+	login(username: string, password: string): Observable<boolean>
+	{			
+		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});		
+		console.log('test')						
+		return this.authenticateService.mutate({username: username, password: password}).pipe
+		(
+			switchMap
+			(				
+				({data}) =>
+				{ 			
+	
+					if (!data?.authenticate?.jwtToken)				
+					{
+						// this.toastService.add({type: ToastType.Danger, message: 'Invalid username or password!', delay: 15});
+						this.toastrService.error('Invalid username or password!', 'Error');
 
-  getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
-  }
+						return of(false);
+					}
 
-  setToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
-  }
+					// this.toastService.add({type: ToastType.Success, message: 'Logged in successfully!', delay: 2});
+					
+					// write jwtToken
+					this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: data?.authenticate?.jwtToken}});											
+					
+					// this.router.navigate(['/admin/dashboard']);
 
-  removeToken(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    sessionStorage.removeItem(this.REFRESH_KEY);
-  }
+					// currentUsername
+					return combineLatest
+					(
+						[
+							this.currentUsernameService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data}) => data.currentUsername)),
+							this.currentReadPermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data: {currentReadPermissions}}) => currentReadPermissions?.nodes || [])),
+							this.currentWritePermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data: {currentWritePermissions}}) => currentWritePermissions?.nodes || [])),
+						]
+					).pipe
+					(
+						tap
+						(
+							([currentUsername, currentReadPermissions, currentWritePermissions]) => 
+							{
+								this.currentUsername$.next(currentUsername);
+								this.currentReadPermissions$.next(currentReadPermissions);
+								this.currentWritePermissions$.next(currentWritePermissions);
+							}
+						),
+						map(() => true)
+					)
+				}				
+			)		
+		);		
+	}
+	
+	logout(): Observable<boolean>
+	{	
+		this.currentUsername$.next(null);
+		//this.currentReadPermissions$.next(null);
+		
+		// clear jwtToken
+		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});			
+		
+		this.router.navigate(['/auth/login']);
 
-  // Add methods for refreshing token, checking authentication state, etc.
+		// clear cache
+		return from(this.apollo.client.clearStore()).pipe
+		(
+			switchMap(() => from(this.clearCache())),
+			map(_ => true)			
+		);						
+	}
 }

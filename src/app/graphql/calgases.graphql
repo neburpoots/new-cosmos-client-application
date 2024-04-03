@@ -1,0 +1,86 @@
+query CalGasEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [CalgasEntitiesOrderBy!]) {
+  calGases: allCalgasEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      cdartikel
+      concentration
+      created
+      engineeringUnits
+      gasCreated
+      gasId
+      initials
+      modified
+      name
+      ownerId
+      username
+    }
+  }
+}
+
+mutation CreateCalGas(
+    $gasId: Int!, 
+    $cdartikel: String!, 
+    $concentration: Float!, 
+    $ownerId: Int!,
+    $engineeringUnits: String!,
+    $created: Datetime!,
+    $modified: Datetime!,
+) {
+  createCalGas(
+    input: {calGas: {
+      gasId: $gasId, 
+      cdartikel: $cdartikel, 
+      concentration: $concentration,
+      engineeringUnits: $engineeringUnits,
+      ownerId: $ownerId,
+      created: $created,
+      modified: $modified
+    }}
+  ) {
+    calGas {
+      id
+      cdartikel
+      concentration
+      engineeringUnits
+      created
+      ownerId
+      modified
+    }
+  }
+}
+
+mutation UpdateCalGas(
+    $id: Int!, $patch: CalGasPatch!
+) {
+  updateCalGasById(
+    input: {
+		id: $id
+		calGasPatch: $patch	
+    }
+  ) {
+    calGas {
+      id
+      cdartikel
+      concentration
+      engineeringUnits
+      created
+      ownerId
+      modified
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteCalGas($id: Int!)
+{
+	deleteCalGasById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

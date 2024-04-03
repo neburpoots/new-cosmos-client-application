@@ -67,7 +67,7 @@
 
         <tbody *ngIf="data.length > 0">
 
-          <tr [style.max-width.px]="totalWidth"><td [attr.colspan]="columns.length + 1"><ng-content select="assembly-create"></ng-content></td></tr>
+          <tr [style.max-width.px]="totalWidth"><td [attr.colspan]="columns.length + 1"><ng-content *select="inline_selector"></ng-content></td></tr>
 
 
           <tr *ngFor="let item of data">

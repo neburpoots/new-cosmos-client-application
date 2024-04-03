@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { APP_INITIALIZER, NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -49,8 +49,6 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthService } from "./services/authentication/auth.service";
-import { AuthGuard } from "./services/authentication/auth.guard";
-import { AuthInterceptor } from "./services/authentication/auth.interceptor";
 import { AssemblyComponent } from "./views/admin/assembly/index/assembly.component";
 import { UserComponent } from "./layouts/user/user.component";
 import { PaginationComponent } from "./components/cards/card-pagination/pagination.component";
@@ -80,6 +78,12 @@ import { SensorBaseTypeFormComponent } from "./views/admin/sensorBaseType/form/s
 import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.component";
 import { SensorTypeComponent } from "./views/admin/sensor-type/sensor-type.component";
 import { SensorTypeFormComponent } from "./views/admin/sensor-type/form/sensor-type-form.component";
+import { GraphQLModule } from './graphql.module';
+import { ApolloClientService } from "./apollo-client.service";
+import { APOLLO_OPTIONS, ApolloModule } from "apollo-angular";
+import { TableComponent } from "./components/table/table.component";
+import { PaginationTableComponent } from "./components/pagination/pagination.component";
+import { CalGasInlineCreate } from "./views/admin/calibrationgases/inlinecreate/calgas-inline-create.component";
 
 @NgModule({
   declarations: [
@@ -138,7 +142,10 @@ import { SensorTypeFormComponent } from "./views/admin/sensor-type/form/sensor-t
     AssemblyTypeComponent,
     AssemblyCreateComponent,
     SensorTypeComponent,
-    SensorTypeFormComponent
+    SensorTypeFormComponent,
+    TableComponent,
+    PaginationTableComponent,
+    CalGasInlineCreate
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)
@@ -147,14 +154,29 @@ import { SensorTypeFormComponent } from "./views/admin/sensor-type/form/sensor-t
     progressBar: true, // Show or hide the progress bar
     progressAnimation: 'increasing', // Set the animation type for the progress bar ('increasing' or 'decreasing')
     preventDuplicates: true, // Prevent duplicate toastrs from being shown
-  }), ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule, FontAwesomeModule, SatPopoverModule],
+  }), ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule, FontAwesomeModule, SatPopoverModule, ApolloModule],
   providers: [AuthService,
-    AuthGuard,
     {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
+      provide: APP_INITIALIZER,
+      useFactory: (apolloClientService: ApolloClientService) =>
+      {
+        return () => apolloClientService.getOptionsPromise();
+      },
+      deps: [ApolloClientService],
       multi: true,
-    },],
+    },			
+    // { 
+    //   provide: HTTP_INTERCEPTORS, 
+    //   useClass: JwtInterceptor, 
+    //   multi: true 
+    // },			
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (apolloClientService: ApolloClientService) => apolloClientService.getOptions(),
+      deps: [ApolloClientService, APP_INITIALIZER],
+    },
+  
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

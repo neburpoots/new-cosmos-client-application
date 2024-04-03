@@ -2,7 +2,9 @@
 
     <div class="h-full w-full flex items-center">
         <div class="mt-[100px] w-full mb-12 px-4">
-            <app-card-table (setTableWidths)="setTableWidths($event)" (toggleInlineCreating)="toggleInlineCreating()" [isInlineCreating]="isInlineCreating" [isEditable]="true" [isDeletable]="true" (create)="openCreateModal()" (edit)="openEditModal($event)" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"
+            <app-card-table (setTableWidths)="setTableWidths($event)" (toggleInlineCreating)="toggleInlineCreating()" [isInlineCreating]="isInlineCreating" [isEditable]="true" [isDeletable]="true" (create)="openCreateModal()" (edit)="openEditModal($event)" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" 
+            [columns]="tableHeaders" [data]="tableData"
+            
                 [title]="objectPlural" [object]="objectSingle">
                 <assembly-create (refresh)="loadItems($event)" [objectSingle]="objectSingle"  [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating" (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></assembly-create>
             </app-card-table>

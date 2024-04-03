@@ -10,17 +10,21 @@ import { AbstractService } from '../../../../services/abstract/abstract.service'
 import { CalgasDto } from '../../../../models/dto/calgasDto';
 import { Gas } from '../../../../models/entities/gas';
 import { SearchCriteria } from '../../../../models/utils/searchCriteria';
+import { BaseFormComponent } from '../../base/form/base-form.component';
+import { AllGasesNoPaginationGQL, CreateCalGasGQL, UpdateCalGasGQL } from '../../../../../generated/graphql';
+import { Query } from 'apollo-angular';
+import { FormSelect } from '../../../../models/utils/formSelect';
 
 @Component({
     selector: 'calgas-form',
     templateUrl: './calibrationgases-form.component.html',
     styles: []
 })
-export class CalibrationGasesFormComponent extends AbstractFormComponent<CalgasDto> implements IAbstractForm<CalgasDto> {
+export class CalibrationGasesFormComponent extends BaseFormComponent<CalgasDto> {
 
-    override url = 'api/calgas';
+    @Input() cellWidths: number[] = [];
 
-    @Input() object: CalgasDto = {
+    @Input() object: any = {
         concentration: null,
         engineering_units: '',
         gas: null,
@@ -28,11 +32,19 @@ export class CalibrationGasesFormComponent extends AbstractFormComponent<CalgasD
     };
 
     myForm: FormGroup;
+    gases: FormSelect[];
 
-    gases: Gas[] = [];
 
-    constructor(protected override toastr: ToastrService, protected override fb: FormBuilder, private detectorTypeService: DetectorTypeService, protected override abstractService: AbstractService<CalgasDto>) {
-        super(toastr, fb, abstractService)
+    constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
+        , gasesService: AllGasesNoPaginationGQL,
+        createCalGasService: CreateCalGasGQL,
+        editCalGasService: UpdateCalGasGQL
+        ) {
+        super(toastr, fb, createCalGasService, editCalGasService)
+        
+        this.gases = [];
+
+        this.setUpDependentData(gasesService);
         this.myForm = this.fb.group({
             gas: [this.object.gas, [Validators.required]],
             concentration: [this.object.concentration, [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
@@ -41,34 +53,24 @@ export class CalibrationGasesFormComponent extends AbstractFormComponent<CalgasD
         });
     }
 
-    createDto(): CalgasDto {
-
-        this.myForm.value;
-
-        //get the detectorType from the array
-        let selectedGas = this.gases.find((gases) => gases.id === +this.myForm.value.gas);
-
-        if (!selectedGas) {
-            this.toastr.error('Please select an gas', 'Error');
-            throw new Error('Please select an gas');
-        }
-
+    createDto(): any {
+        //todo setup owner_id, ownerId
         return {
+            ownerId: 10,
             concentration: +this.myForm.value.concentration,
-            engineering_units: this.myForm.value.engineering_units,
-            gas: selectedGas,
+            engineeringUnits: this.myForm.value.engineering_units,
+            gasId: +this.myForm.value.gas,
             cdartikel: this.myForm.value.cdartikel,
+            created: new Date(),
+            modified: new Date(),
         }
 
     }
 
-
-    ngOnInit(): void {
-        this.setUpDependentData();
-    }
-
-    async setUpDependentData(): Promise<void> {
-        this.gases = await this.getDependentData('api/gases/all');
+    async setUpDependentData(gasesService: Query<any, any>) {
+        gasesService.fetch().subscribe(result => {
+            this.gases = result?.data?.allGases?.nodes || [];
+        });
     }
 
     //on edit set to selected assembly
