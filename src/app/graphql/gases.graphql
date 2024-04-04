@@ -7,3 +7,79 @@ query allGasesNoPagination
         }       
     }
 }
+
+#-------------------------------------------------------------------------------
+query allGases(
+    $limit: Int, $offset: Int, $search: String!, $orderBy: [GasesOrderBy!]
+)
+    {
+    allGases(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+    ) {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateGas(
+    $body: GasInput!
+) {
+  createGas(
+    input: {gas: $body}
+  ) {
+    gas {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateGas(
+    $id: Int!, $patch: GasPatch!
+) {
+  updateGasById(
+    input: {
+		id: $id
+		gasPatch: $patch	
+    }
+  ) {
+    gas {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteGas($id: Int!)
+{
+	deleteGasById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}
+
+

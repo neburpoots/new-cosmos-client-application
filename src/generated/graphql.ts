@@ -233,6 +233,10 @@ export type ActionFilter = {
   endUserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `followUp` field. */
   followUp?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `groupByGroupId` relation. */
+  groupByGroupId?: InputMaybe<GroupFilter>;
+  /** A related `groupByGroupId` exists. */
+  groupByGroupIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `groupId` field. */
   groupId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -245,8 +249,18 @@ export type ActionFilter = {
   or?: InputMaybe<Array<ActionFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `reportByReportId` relation. */
+  reportByReportId?: InputMaybe<ReportFilter>;
+  /** A related `reportByReportId` exists. */
+  reportByReportIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `reportId` field. */
   reportId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
+  /** A related `userByUserId` exists. */
+  userByUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -833,6 +847,10 @@ export type ApplicationFilter = {
   and?: InputMaybe<Array<ApplicationFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorSensorLocationsByApplicationId` relation. */
+  detectorSensorLocationsByApplicationId?: InputMaybe<ApplicationToManyDetectorSensorLocationFilter>;
+  /** Some related `detectorSensorLocationsByApplicationId` exist. */
+  detectorSensorLocationsByApplicationIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `modified` field. */
@@ -845,6 +863,8 @@ export type ApplicationFilter = {
   or?: InputMaybe<Array<ApplicationFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `Application` */
@@ -865,6 +885,16 @@ export type ApplicationPatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `DetectorSensorLocation` object types. All fields are combined with a logical ‘and.’ */
+export type ApplicationToManyDetectorSensorLocationFilter = {
+  /** Every related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorLocationFilter>;
+  /** No related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorLocationFilter>;
+  /** Some related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorLocationFilter>;
 };
 
 /** A connection to a list of `Application` values. */
@@ -977,6 +1007,12 @@ export type AreaFilter = {
   and?: InputMaybe<Array<AreaFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorLocationsByAreaId` relation. */
+  detectorLocationsByAreaId?: InputMaybe<AreaToManyDetectorLocationFilter>;
+  /** Some related `detectorLocationsByAreaId` exist. */
+  detectorLocationsByAreaIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `floorByFloorId` relation. */
+  floorByFloorId?: InputMaybe<FloorFilter>;
   /** Filter by the object’s `floorId` field. */
   floorId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -993,6 +1029,12 @@ export type AreaFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `remarks` field. */
   remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `samplePointsByAreaId` relation. */
+  samplePointsByAreaId?: InputMaybe<AreaToManySamplePointFilter>;
+  /** Some related `samplePointsByAreaId` exist. */
+  samplePointsByAreaIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `Area` */
@@ -1015,6 +1057,26 @@ export type AreaPatch = {
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   remarks?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `DetectorLocation` object types. All fields are combined with a logical ‘and.’ */
+export type AreaToManyDetectorLocationFilter = {
+  /** Every related `DetectorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorLocationFilter>;
+  /** No related `DetectorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorLocationFilter>;
+  /** Some related `DetectorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorLocationFilter>;
+};
+
+/** A filter to be used against many `SamplePoint` object types. All fields are combined with a logical ‘and.’ */
+export type AreaToManySamplePointFilter = {
+  /** Every related `SamplePoint` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SamplePointFilter>;
+  /** No related `SamplePoint` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SamplePointFilter>;
+  /** Some related `SamplePoint` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SamplePointFilter>;
 };
 
 /** A connection to a list of `Area` values. */
@@ -2149,6 +2211,10 @@ export type ArtikelFilter = {
   and?: InputMaybe<Array<ArtikelFilter>>;
   /** Filter by the object’s `assemblageArtikel` field. */
   assemblageArtikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `assemblyTypesByCdartikel` relation. */
+  assemblyTypesByCdartikel?: InputMaybe<ArtikelToManyAssemblyTypeFilter>;
+  /** Some related `assemblyTypesByCdartikel` exist. */
+  assemblyTypesByCdartikelExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `btwcode` field. */
   btwcode?: InputMaybe<IntFilter>;
   /** Filter by the object’s `cdartgroep` field. */
@@ -3448,6 +3514,16 @@ export enum ArtikelSamenstellingensOrderBy {
   VrijDesc = 'VRIJ_DESC'
 }
 
+/** A filter to be used against many `AssemblyType` object types. All fields are combined with a logical ‘and.’ */
+export type ArtikelToManyAssemblyTypeFilter = {
+  /** Every related `AssemblyType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AssemblyTypeFilter>;
+  /** No related `AssemblyType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AssemblyTypeFilter>;
+  /** Some related `AssemblyType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AssemblyTypeFilter>;
+};
+
 export type Artikelomschr = Node & {
   __typename?: 'Artikelomschr';
   cdartikel: Scalars['String']['output'];
@@ -4168,6 +4244,8 @@ export type AspNetRoleClaimCondition = {
 export type AspNetRoleClaimFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AspNetRoleClaimFilter>>;
+  /** Filter by the object’s `aspNetRoleByRoleId` relation. */
+  aspNetRoleByRoleId?: InputMaybe<AspNetRoleFilter>;
   /** Filter by the object’s `claimType` field. */
   claimType?: InputMaybe<StringFilter>;
   /** Filter by the object’s `claimValue` field. */
@@ -4254,6 +4332,14 @@ export type AspNetRoleCondition = {
 export type AspNetRoleFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AspNetRoleFilter>>;
+  /** Filter by the object’s `aspNetRoleClaimsByRoleId` relation. */
+  aspNetRoleClaimsByRoleId?: InputMaybe<AspNetRoleToManyAspNetRoleClaimFilter>;
+  /** Some related `aspNetRoleClaimsByRoleId` exist. */
+  aspNetRoleClaimsByRoleIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `aspNetUserRolesByRoleId` relation. */
+  aspNetUserRolesByRoleId?: InputMaybe<AspNetRoleToManyAspNetUserRoleFilter>;
+  /** Some related `aspNetUserRolesByRoleId` exist. */
+  aspNetUserRolesByRoleIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `concurrencyStamp` field. */
   concurrencyStamp?: InputMaybe<StringFilter>;
   /** Filter by the object’s `id` field. */
@@ -4282,6 +4368,26 @@ export type AspNetRolePatch = {
   id?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   normalizedName?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `AspNetRoleClaim` object types. All fields are combined with a logical ‘and.’ */
+export type AspNetRoleToManyAspNetRoleClaimFilter = {
+  /** Every related `AspNetRoleClaim` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AspNetRoleClaimFilter>;
+  /** No related `AspNetRoleClaim` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AspNetRoleClaimFilter>;
+  /** Some related `AspNetRoleClaim` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AspNetRoleClaimFilter>;
+};
+
+/** A filter to be used against many `AspNetUserRole` object types. All fields are combined with a logical ‘and.’ */
+export type AspNetRoleToManyAspNetUserRoleFilter = {
+  /** Every related `AspNetUserRole` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AspNetUserRoleFilter>;
+  /** No related `AspNetUserRole` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AspNetUserRoleFilter>;
+  /** Some related `AspNetUserRole` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AspNetUserRoleFilter>;
 };
 
 /** A connection to a list of `AspNetRole` values. */
@@ -4458,6 +4564,8 @@ export type AspNetUserClaimCondition = {
 export type AspNetUserClaimFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AspNetUserClaimFilter>>;
+  /** Filter by the object’s `aspNetUserByUserId` relation. */
+  aspNetUserByUserId?: InputMaybe<AspNetUserFilter>;
   /** Filter by the object’s `claimType` field. */
   claimType?: InputMaybe<StringFilter>;
   /** Filter by the object’s `claimValue` field. */
@@ -4570,6 +4678,26 @@ export type AspNetUserFilter = {
   accessFailedCount?: InputMaybe<IntFilter>;
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AspNetUserFilter>>;
+  /** Filter by the object’s `aspNetUserClaimsByUserId` relation. */
+  aspNetUserClaimsByUserId?: InputMaybe<AspNetUserToManyAspNetUserClaimFilter>;
+  /** Some related `aspNetUserClaimsByUserId` exist. */
+  aspNetUserClaimsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `aspNetUserLoginsByUserId` relation. */
+  aspNetUserLoginsByUserId?: InputMaybe<AspNetUserToManyAspNetUserLoginFilter>;
+  /** Some related `aspNetUserLoginsByUserId` exist. */
+  aspNetUserLoginsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `aspNetUserRolesByAppUserId` relation. */
+  aspNetUserRolesByAppUserId?: InputMaybe<AspNetUserToManyAspNetUserRoleFilter>;
+  /** Some related `aspNetUserRolesByAppUserId` exist. */
+  aspNetUserRolesByAppUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `aspNetUserRolesByUserId` relation. */
+  aspNetUserRolesByUserId?: InputMaybe<AspNetUserToManyAspNetUserRoleFilter>;
+  /** Some related `aspNetUserRolesByUserId` exist. */
+  aspNetUserRolesByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `aspNetUserTokensByUserId` relation. */
+  aspNetUserTokensByUserId?: InputMaybe<AspNetUserToManyAspNetUserTokenFilter>;
+  /** Some related `aspNetUserTokensByUserId` exist. */
+  aspNetUserTokensByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `concurrencyStamp` field. */
   concurrencyStamp?: InputMaybe<StringFilter>;
   /** Filter by the object’s `displayName` field. */
@@ -4598,6 +4726,10 @@ export type AspNetUserFilter = {
   phoneNumber?: InputMaybe<StringFilter>;
   /** Filter by the object’s `phoneNumberConfirmed` field. */
   phoneNumberConfirmed?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `refreshTokensByAppUserId` relation. */
+  refreshTokensByAppUserId?: InputMaybe<AspNetUserToManyRefreshTokenFilter>;
+  /** Some related `refreshTokensByAppUserId` exist. */
+  refreshTokensByAppUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `securityStamp` field. */
   securityStamp?: InputMaybe<StringFilter>;
   /** Filter by the object’s `twoFactorEnabled` field. */
@@ -4657,6 +4789,8 @@ export type AspNetUserLoginCondition = {
 export type AspNetUserLoginFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AspNetUserLoginFilter>>;
+  /** Filter by the object’s `aspNetUserByUserId` relation. */
+  aspNetUserByUserId?: InputMaybe<AspNetUserFilter>;
   /** Filter by the object’s `loginProvider` field. */
   loginProvider?: InputMaybe<StringFilter>;
   /** Negates the expression. */
@@ -4778,6 +4912,14 @@ export type AspNetUserRoleFilter = {
   and?: InputMaybe<Array<AspNetUserRoleFilter>>;
   /** Filter by the object’s `appUserId` field. */
   appUserId?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `aspNetRoleByRoleId` relation. */
+  aspNetRoleByRoleId?: InputMaybe<AspNetRoleFilter>;
+  /** Filter by the object’s `aspNetUserByAppUserId` relation. */
+  aspNetUserByAppUserId?: InputMaybe<AspNetUserFilter>;
+  /** A related `aspNetUserByAppUserId` exists. */
+  aspNetUserByAppUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `aspNetUserByUserId` relation. */
+  aspNetUserByUserId?: InputMaybe<AspNetUserFilter>;
   /** Negates the expression. */
   not?: InputMaybe<AspNetUserRoleFilter>;
   /** Checks for any expressions in this list. */
@@ -4837,6 +4979,56 @@ export enum AspNetUserRolesOrderBy {
   UserIdDesc = 'USER_ID_DESC'
 }
 
+/** A filter to be used against many `AspNetUserClaim` object types. All fields are combined with a logical ‘and.’ */
+export type AspNetUserToManyAspNetUserClaimFilter = {
+  /** Every related `AspNetUserClaim` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AspNetUserClaimFilter>;
+  /** No related `AspNetUserClaim` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AspNetUserClaimFilter>;
+  /** Some related `AspNetUserClaim` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AspNetUserClaimFilter>;
+};
+
+/** A filter to be used against many `AspNetUserLogin` object types. All fields are combined with a logical ‘and.’ */
+export type AspNetUserToManyAspNetUserLoginFilter = {
+  /** Every related `AspNetUserLogin` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AspNetUserLoginFilter>;
+  /** No related `AspNetUserLogin` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AspNetUserLoginFilter>;
+  /** Some related `AspNetUserLogin` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AspNetUserLoginFilter>;
+};
+
+/** A filter to be used against many `AspNetUserRole` object types. All fields are combined with a logical ‘and.’ */
+export type AspNetUserToManyAspNetUserRoleFilter = {
+  /** Every related `AspNetUserRole` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AspNetUserRoleFilter>;
+  /** No related `AspNetUserRole` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AspNetUserRoleFilter>;
+  /** Some related `AspNetUserRole` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AspNetUserRoleFilter>;
+};
+
+/** A filter to be used against many `AspNetUserToken` object types. All fields are combined with a logical ‘and.’ */
+export type AspNetUserToManyAspNetUserTokenFilter = {
+  /** Every related `AspNetUserToken` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AspNetUserTokenFilter>;
+  /** No related `AspNetUserToken` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AspNetUserTokenFilter>;
+  /** Some related `AspNetUserToken` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AspNetUserTokenFilter>;
+};
+
+/** A filter to be used against many `RefreshToken` object types. All fields are combined with a logical ‘and.’ */
+export type AspNetUserToManyRefreshTokenFilter = {
+  /** Every related `RefreshToken` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<RefreshTokenFilter>;
+  /** No related `RefreshToken` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<RefreshTokenFilter>;
+  /** Some related `RefreshToken` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<RefreshTokenFilter>;
+};
+
 export type AspNetUserToken = Node & {
   __typename?: 'AspNetUserToken';
   /** Reads a single `AspNetUser` that is related to this `AspNetUserToken`. */
@@ -4868,6 +5060,8 @@ export type AspNetUserTokenCondition = {
 export type AspNetUserTokenFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AspNetUserTokenFilter>>;
+  /** Filter by the object’s `aspNetUserByUserId` relation. */
+  aspNetUserByUserId?: InputMaybe<AspNetUserFilter>;
   /** Filter by the object’s `loginProvider` field. */
   loginProvider?: InputMaybe<StringFilter>;
   /** Filter by the object’s `name` field. */
@@ -5794,6 +5988,10 @@ export type AssemblyEntityFilter = {
 export type AssemblyFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AssemblyFilter>>;
+  /** Filter by the object’s `assemblyTypeByAssemblyTypeId` relation. */
+  assemblyTypeByAssemblyTypeId?: InputMaybe<AssemblyTypeFilter>;
+  /** A related `assemblyTypeByAssemblyTypeId` exists. */
+  assemblyTypeByAssemblyTypeIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `assemblyTypeId` field. */
   assemblyTypeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `checked` field. */
@@ -5822,6 +6020,8 @@ export type AssemblyFilter = {
   quantity?: InputMaybe<IntFilter>;
   /** Filter by the object’s `startSerialNumber` field. */
   startSerialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `Assembly` */
@@ -5962,6 +6162,8 @@ export type AssemblyPartFilter = {
   used2?: InputMaybe<StringFilter>;
   /** Filter by the object’s `usedQuantity` field. */
   usedQuantity?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
   /** Filter by the object’s `verrekenprijs` field. */
   verrekenprijs?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `xxx` field. */
@@ -6174,6 +6376,18 @@ export type AssemblyTypeCondition = {
 export type AssemblyTypeFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AssemblyTypeFilter>>;
+  /** Filter by the object’s `artikelByCdartikel` relation. */
+  artikelByCdartikel?: InputMaybe<ArtikelFilter>;
+  /** A related `artikelByCdartikel` exists. */
+  artikelByCdartikelExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `assembliesByAssemblyTypeId` relation. */
+  assembliesByAssemblyTypeId?: InputMaybe<AssemblyTypeToManyAssemblyFilter>;
+  /** Some related `assembliesByAssemblyTypeId` exist. */
+  assembliesByAssemblyTypeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `assemblyTypePartsByAssemblyTypeId` relation. */
+  assemblyTypePartsByAssemblyTypeId?: InputMaybe<AssemblyTypeToManyAssemblyTypePartFilter>;
+  /** Some related `assemblyTypePartsByAssemblyTypeId` exist. */
+  assemblyTypePartsByAssemblyTypeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `cdartikel` field. */
   cdartikel?: InputMaybe<StringFilter>;
   /** Filter by the object’s `created` field. */
@@ -6190,6 +6404,8 @@ export type AssemblyTypeFilter = {
   or?: InputMaybe<Array<AssemblyTypeFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `AssemblyType` */
@@ -6262,6 +6478,8 @@ export type AssemblyTypePartCondition = {
 export type AssemblyTypePartFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<AssemblyTypePartFilter>>;
+  /** Filter by the object’s `assemblyTypeByAssemblyTypeId` relation. */
+  assemblyTypeByAssemblyTypeId?: InputMaybe<AssemblyTypeFilter>;
   /** Filter by the object’s `assemblyTypeId` field. */
   assemblyTypeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `bestcode` field. */
@@ -6288,6 +6506,8 @@ export type AssemblyTypePartFilter = {
   prijsper?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `quantity` field. */
   quantity?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
   /** Filter by the object’s `verrekenprijs` field. */
   verrekenprijs?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `zoeknaam` field. */
@@ -6391,6 +6611,26 @@ export type AssemblyTypePatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `Assembly` object types. All fields are combined with a logical ‘and.’ */
+export type AssemblyTypeToManyAssemblyFilter = {
+  /** Every related `Assembly` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AssemblyFilter>;
+  /** No related `Assembly` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AssemblyFilter>;
+  /** Some related `Assembly` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AssemblyFilter>;
+};
+
+/** A filter to be used against many `AssemblyTypePart` object types. All fields are combined with a logical ‘and.’ */
+export type AssemblyTypeToManyAssemblyTypePartFilter = {
+  /** Every related `AssemblyTypePart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AssemblyTypePartFilter>;
+  /** No related `AssemblyTypePart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AssemblyTypePartFilter>;
+  /** Some related `AssemblyTypePart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AssemblyTypePartFilter>;
 };
 
 /** A connection to a list of `AssemblyType` values. */
@@ -7020,8 +7260,14 @@ export type BuildingFilter = {
   and?: InputMaybe<Array<BuildingFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `endUserByEndUserId` relation. */
+  endUserByEndUserId?: InputMaybe<EndUserFilter>;
   /** Filter by the object’s `endUserId` field. */
   endUserId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `floorsByBuildingId` relation. */
+  floorsByBuildingId?: InputMaybe<BuildingToManyFloorFilter>;
+  /** Some related `floorsByBuildingId` exist. */
+  floorsByBuildingIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `modified` field. */
@@ -7034,6 +7280,8 @@ export type BuildingFilter = {
   or?: InputMaybe<Array<BuildingFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `Building` */
@@ -7054,6 +7302,16 @@ export type BuildingPatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `Floor` object types. All fields are combined with a logical ‘and.’ */
+export type BuildingToManyFloorFilter = {
+  /** Every related `Floor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<FloorFilter>;
+  /** No related `Floor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<FloorFilter>;
+  /** Some related `Floor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<FloorFilter>;
 };
 
 /** A connection to a list of `Building` values. */
@@ -7190,10 +7448,16 @@ export type CalGasFilter = {
   created?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `engineeringUnits` field. */
   engineeringUnits?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `gasByGasId` relation. */
+  gasByGasId?: InputMaybe<GasFilter>;
   /** Filter by the object’s `gasId` field. */
   gasId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `maintenanceVisitLinesByCalGasId` relation. */
+  maintenanceVisitLinesByCalGasId?: InputMaybe<CalGasToManyMaintenanceVisitLineFilter>;
+  /** Some related `maintenanceVisitLinesByCalGasId` exist. */
+  maintenanceVisitLinesByCalGasIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Negates the expression. */
@@ -7202,8 +7466,20 @@ export type CalGasFilter = {
   or?: InputMaybe<Array<CalGasFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTestResultsByFsCalGasId` relation. */
+  sensorTestResultsByFsCalGasId?: InputMaybe<CalGasToManySensorTestResultFilter>;
+  /** Some related `sensorTestResultsByFsCalGasId` exist. */
+  sensorTestResultsByFsCalGasIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorTypesByCalGasId` relation. */
+  sensorTypesByCalGasId?: InputMaybe<CalGasToManySensorTypeFilter>;
+  /** Some related `sensorTypesByCalGasId` exist. */
+  sensorTypesByCalGasIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `type` field. */
   type?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `CalGas` */
@@ -7228,6 +7504,36 @@ export type CalGasPatch = {
   id?: InputMaybe<Scalars['Int']['input']>;
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `MaintenanceVisitLine` object types. All fields are combined with a logical ‘and.’ */
+export type CalGasToManyMaintenanceVisitLineFilter = {
+  /** Every related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** No related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** Some related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitLineFilter>;
+};
+
+/** A filter to be used against many `SensorTestResult` object types. All fields are combined with a logical ‘and.’ */
+export type CalGasToManySensorTestResultFilter = {
+  /** Every related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTestResultFilter>;
+  /** No related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTestResultFilter>;
+  /** Some related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTestResultFilter>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type CalGasToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `CalGas` values. */
@@ -7458,6 +7764,10 @@ export type CatalogGroupCondition = {
 export type CatalogGroupFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<CatalogGroupFilter>>;
+  /** Filter by the object’s `catalogSubGroupsByCatalogGroupId` relation. */
+  catalogSubGroupsByCatalogGroupId?: InputMaybe<CatalogGroupToManyCatalogSubGroupFilter>;
+  /** Some related `catalogSubGroupsByCatalogGroupId` exist. */
+  catalogSubGroupsByCatalogGroupIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `id` field. */
@@ -7474,6 +7784,8 @@ export type CatalogGroupFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sortCode` field. */
   sortCode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `CatalogGroup` */
@@ -7494,6 +7806,16 @@ export type CatalogGroupPatch = {
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   sortCode?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `CatalogSubGroup` object types. All fields are combined with a logical ‘and.’ */
+export type CatalogGroupToManyCatalogSubGroupFilter = {
+  /** Every related `CatalogSubGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CatalogSubGroupFilter>;
+  /** No related `CatalogSubGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CatalogSubGroupFilter>;
+  /** Some related `CatalogSubGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CatalogSubGroupFilter>;
 };
 
 /** A connection to a list of `CatalogGroup` values. */
@@ -7665,6 +7987,8 @@ export type CatalogItemFileCondition = {
 export type CatalogItemFileFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<CatalogItemFileFilter>>;
+  /** Filter by the object’s `catalogItemByCatalogItemId` relation. */
+  catalogItemByCatalogItemId?: InputMaybe<CatalogItemFilter>;
   /** Filter by the object’s `catalogItemId` field. */
   catalogItemId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `created` field. */
@@ -7683,6 +8007,10 @@ export type CatalogItemFileFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `type` field. */
   type?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `CatalogItemFile` */
@@ -7754,6 +8082,20 @@ export enum CatalogItemFilesOrderBy {
 export type CatalogItemFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<CatalogItemFilter>>;
+  /** Filter by the object’s `catalogItemFilesByCatalogItemId` relation. */
+  catalogItemFilesByCatalogItemId?: InputMaybe<CatalogItemToManyCatalogItemFileFilter>;
+  /** Some related `catalogItemFilesByCatalogItemId` exist. */
+  catalogItemFilesByCatalogItemIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `catalogItemRelationsByChildCatalogItemId` relation. */
+  catalogItemRelationsByChildCatalogItemId?: InputMaybe<CatalogItemToManyCatalogItemRelationFilter>;
+  /** Some related `catalogItemRelationsByChildCatalogItemId` exist. */
+  catalogItemRelationsByChildCatalogItemIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `catalogItemRelationsByParentCatalogItemId` relation. */
+  catalogItemRelationsByParentCatalogItemId?: InputMaybe<CatalogItemToManyCatalogItemRelationFilter>;
+  /** Some related `catalogItemRelationsByParentCatalogItemId` exist. */
+  catalogItemRelationsByParentCatalogItemIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `catalogSubGroupByCatalogSubGroupId` relation. */
+  catalogSubGroupByCatalogSubGroupId?: InputMaybe<CatalogSubGroupFilter>;
   /** Filter by the object’s `catalogSubGroupId` field. */
   catalogSubGroupId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `cdartikel` field. */
@@ -7776,6 +8118,8 @@ export type CatalogItemFilter = {
   remarks?: InputMaybe<StringFilter>;
   /** Filter by the object’s `sortCode` field. */
   sortCode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `CatalogItem` */
@@ -7834,6 +8178,10 @@ export type CatalogItemRelationCondition = {
 export type CatalogItemRelationFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<CatalogItemRelationFilter>>;
+  /** Filter by the object’s `catalogItemByChildCatalogItemId` relation. */
+  catalogItemByChildCatalogItemId?: InputMaybe<CatalogItemFilter>;
+  /** Filter by the object’s `catalogItemByParentCatalogItemId` relation. */
+  catalogItemByParentCatalogItemId?: InputMaybe<CatalogItemFilter>;
   /** Filter by the object’s `childCatalogItemId` field. */
   childCatalogItemId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -7894,6 +8242,26 @@ export enum CatalogItemRelationsOrderBy {
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
+
+/** A filter to be used against many `CatalogItemFile` object types. All fields are combined with a logical ‘and.’ */
+export type CatalogItemToManyCatalogItemFileFilter = {
+  /** Every related `CatalogItemFile` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CatalogItemFileFilter>;
+  /** No related `CatalogItemFile` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CatalogItemFileFilter>;
+  /** Some related `CatalogItemFile` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CatalogItemFileFilter>;
+};
+
+/** A filter to be used against many `CatalogItemRelation` object types. All fields are combined with a logical ‘and.’ */
+export type CatalogItemToManyCatalogItemRelationFilter = {
+  /** Every related `CatalogItemRelation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CatalogItemRelationFilter>;
+  /** No related `CatalogItemRelation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CatalogItemRelationFilter>;
+  /** Some related `CatalogItemRelation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CatalogItemRelationFilter>;
+};
 
 /** A connection to a list of `CatalogItem` values. */
 export type CatalogItemsConnection = {
@@ -7998,8 +8366,14 @@ export type CatalogSubGroupCondition = {
 export type CatalogSubGroupFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<CatalogSubGroupFilter>>;
+  /** Filter by the object’s `catalogGroupByCatalogGroupId` relation. */
+  catalogGroupByCatalogGroupId?: InputMaybe<CatalogGroupFilter>;
   /** Filter by the object’s `catalogGroupId` field. */
   catalogGroupId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `catalogItemsByCatalogSubGroupId` relation. */
+  catalogItemsByCatalogSubGroupId?: InputMaybe<CatalogSubGroupToManyCatalogItemFilter>;
+  /** Some related `catalogItemsByCatalogSubGroupId` exist. */
+  catalogItemsByCatalogSubGroupIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `id` field. */
@@ -8016,6 +8390,8 @@ export type CatalogSubGroupFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sortCode` field. */
   sortCode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `CatalogSubGroup` */
@@ -8038,6 +8414,16 @@ export type CatalogSubGroupPatch = {
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   sortCode?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `CatalogItem` object types. All fields are combined with a logical ‘and.’ */
+export type CatalogSubGroupToManyCatalogItemFilter = {
+  /** Every related `CatalogItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CatalogItemFilter>;
+  /** No related `CatalogItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CatalogItemFilter>;
+  /** Some related `CatalogItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CatalogItemFilter>;
 };
 
 /** A connection to a list of `CatalogSubGroup` values. */
@@ -8243,6 +8629,10 @@ export type ChemicalCompoundFilter = {
   density?: InputMaybe<FloatFilter>;
   /** Filter by the object’s `formula` field. */
   formula?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `gasesByChemicalCompoundId` relation. */
+  gasesByChemicalCompoundId?: InputMaybe<ChemicalCompoundToManyGasFilter>;
+  /** Some related `gasesByChemicalCompoundId` exist. */
+  gasesByChemicalCompoundIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `icsc` field. */
   icsc?: InputMaybe<StringFilter>;
   /** Filter by the object’s `id` field. */
@@ -8263,6 +8653,10 @@ export type ChemicalCompoundFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `url` field. */
   url?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `ChemicalCompound` */
@@ -8295,6 +8689,16 @@ export type ChemicalCompoundPatch = {
   otherName?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `Gas` object types. All fields are combined with a logical ‘and.’ */
+export type ChemicalCompoundToManyGasFilter = {
+  /** Every related `Gas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<GasFilter>;
+  /** No related `Gas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<GasFilter>;
+  /** Some related `Gas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<GasFilter>;
 };
 
 /** A connection to a list of `ChemicalCompound` values. */
@@ -14056,6 +14460,10 @@ export type DebiteurFilter = {
   datumverif?: InputMaybe<DateFilter>;
   /** Filter by the object’s `email` field. */
   email?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `factureeropdrachtsByCddebiteur` relation. */
+  factureeropdrachtsByCddebiteur?: InputMaybe<DebiteurToManyFactureeropdrachtFilter>;
+  /** Some related `factureeropdrachtsByCddebiteur` exist. */
+  factureeropdrachtsByCddebiteurExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `guidItem` field. */
   guidItem?: InputMaybe<StringFilter>;
   /** Filter by the object’s `homepage` field. */
@@ -14585,6 +14993,16 @@ export enum DebiteurMvsOrderBy {
   ZoeknaamAsc = 'ZOEKNAAM_ASC',
   ZoeknaamDesc = 'ZOEKNAAM_DESC'
 }
+
+/** A filter to be used against many `Factureeropdracht` object types. All fields are combined with a logical ‘and.’ */
+export type DebiteurToManyFactureeropdrachtFilter = {
+  /** Every related `Factureeropdracht` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<FactureeropdrachtFilter>;
+  /** No related `Factureeropdracht` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<FactureeropdrachtFilter>;
+  /** Some related `Factureeropdracht` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<FactureeropdrachtFilter>;
+};
 
 /** A connection to a list of `Debiteur` values. */
 export type DebiteursConnection = {
@@ -21041,12 +21459,151 @@ export type DetectorCondition = {
   serialNumber?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** A connection to a list of `DetectorEntity` values. */
+export type DetectorEntitiesConnection = {
+  __typename?: 'DetectorEntitiesConnection';
+  /** A list of edges which contains the `DetectorEntity` and cursor to aid in pagination. */
+  edges: Array<DetectorEntitiesEdge>;
+  /** A list of `DetectorEntity` objects. */
+  nodes: Array<DetectorEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `DetectorEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `DetectorEntity` edge in the connection. */
+export type DetectorEntitiesEdge = {
+  __typename?: 'DetectorEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `DetectorEntity` at the end of the edge. */
+  node: DetectorEntity;
+};
+
+/** Methods to use when ordering `DetectorEntity`. */
+export enum DetectorEntitiesOrderBy {
+  CodeAsc = 'CODE_ASC',
+  CodeDesc = 'CODE_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  DetectorTypeIdAsc = 'DETECTOR_TYPE_ID_ASC',
+  DetectorTypeIdDesc = 'DETECTOR_TYPE_ID_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  LabelDateAsc = 'LABEL_DATE_ASC',
+  LabelDateDesc = 'LABEL_DATE_DESC',
+  Natural = 'NATURAL',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  PrefixAsc = 'PREFIX_ASC',
+  PrefixDesc = 'PREFIX_DESC',
+  RemarksAsc = 'REMARKS_ASC',
+  RemarksDesc = 'REMARKS_DESC',
+  SerialNumberAsc = 'SERIAL_NUMBER_ASC',
+  SerialNumberDesc = 'SERIAL_NUMBER_DESC',
+  SuffixAsc = 'SUFFIX_ASC',
+  SuffixDesc = 'SUFFIX_DESC'
+}
+
+export type DetectorEntity = {
+  __typename?: 'DetectorEntity';
+  code?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  detectorTypeId?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  labelDate?: Maybe<Scalars['Date']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  prefix?: Maybe<Scalars['String']['output']>;
+  remarks?: Maybe<Scalars['String']['output']>;
+  serialNumber?: Maybe<Scalars['String']['output']>;
+  suffix?: Maybe<Scalars['String']['output']>;
+};
+
+/**
+ * A condition to be used against `DetectorEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type DetectorEntityCondition = {
+  /** Checks for equality with the object’s `code` field. */
+  code?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `detectorTypeId` field. */
+  detectorTypeId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `labelDate` field. */
+  labelDate?: InputMaybe<Scalars['Date']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `prefix` field. */
+  prefix?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `remarks` field. */
+  remarks?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `serialNumber` field. */
+  serialNumber?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `suffix` field. */
+  suffix?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against `DetectorEntity` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<DetectorEntityFilter>>;
+  /** Filter by the object’s `code` field. */
+  code?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorTypeId` field. */
+  detectorTypeId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `labelDate` field. */
+  labelDate?: InputMaybe<DateFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<DetectorEntityFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<DetectorEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `prefix` field. */
+  prefix?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `remarks` field. */
+  remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `serialNumber` field. */
+  serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `suffix` field. */
+  suffix?: InputMaybe<StringFilter>;
+};
+
 /** A filter to be used against `Detector` object types. All fields are combined with a logical ‘and.’ */
 export type DetectorFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<DetectorFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorLocationByDetectorId` relation. */
+  detectorLocationByDetectorId?: InputMaybe<DetectorLocationFilter>;
+  /** A related `detectorLocationByDetectorId` exists. */
+  detectorLocationByDetectorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorOrdersByDetectorId` relation. */
+  detectorOrdersByDetectorId?: InputMaybe<DetectorToManyDetectorOrderFilter>;
+  /** Some related `detectorOrdersByDetectorId` exist. */
+  detectorOrdersByDetectorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorSensorsByDetectorId` relation. */
+  detectorSensorsByDetectorId?: InputMaybe<DetectorToManyDetectorSensorFilter>;
+  /** Some related `detectorSensorsByDetectorId` exist. */
+  detectorSensorsByDetectorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorTypeByDetectorTypeId` relation. */
+  detectorTypeByDetectorTypeId?: InputMaybe<DetectorTypeFilter>;
   /** Filter by the object’s `detectorTypeId` field. */
   detectorTypeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -21063,8 +21620,14 @@ export type DetectorFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `remarks` field. */
   remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `reportDetectorsByDetectorId` relation. */
+  reportDetectorsByDetectorId?: InputMaybe<DetectorToManyReportDetectorFilter>;
+  /** Some related `reportDetectorsByDetectorId` exist. */
+  reportDetectorsByDetectorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 export type DetectorIndex = {
@@ -21281,14 +21844,24 @@ export type DetectorLocationFilter = {
   address?: InputMaybe<IntFilter>;
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<DetectorLocationFilter>>;
+  /** Filter by the object’s `areaByAreaId` relation. */
+  areaByAreaId?: InputMaybe<AreaFilter>;
   /** Filter by the object’s `areaId` field. */
   areaId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `bus` field. */
   bus?: InputMaybe<IntFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorByDetectorId` relation. */
+  detectorByDetectorId?: InputMaybe<DetectorFilter>;
+  /** A related `detectorByDetectorId` exists. */
+  detectorByDetectorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `detectorId` field. */
   detectorId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `detectorSensorLocationsByDetectorLocationId` relation. */
+  detectorSensorLocationsByDetectorLocationId?: InputMaybe<DetectorLocationToManyDetectorSensorLocationFilter>;
+  /** Some related `detectorSensorLocationsByDetectorLocationId` exist. */
+  detectorSensorLocationsByDetectorLocationIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `modified` field. */
@@ -21299,6 +21872,8 @@ export type DetectorLocationFilter = {
   or?: InputMaybe<Array<DetectorLocationFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `DetectorLocation` */
@@ -21323,6 +21898,16 @@ export type DetectorLocationPatch = {
   id?: InputMaybe<Scalars['Int']['input']>;
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `DetectorSensorLocation` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorLocationToManyDetectorSensorLocationFilter = {
+  /** Every related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorLocationFilter>;
+  /** No related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorLocationFilter>;
+  /** Some related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorLocationFilter>;
 };
 
 /** A connection to a list of `DetectorLocation` values. */
@@ -21416,6 +22001,8 @@ export type DetectorOrderFilter = {
   completed?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorByDetectorId` relation. */
+  detectorByDetectorId?: InputMaybe<DetectorFilter>;
   /** Filter by the object’s `detectorId` field. */
   detectorId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `factuuropdracht` field. */
@@ -21430,6 +22017,8 @@ export type DetectorOrderFilter = {
   or?: InputMaybe<Array<DetectorOrderFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `DetectorOrder` */
@@ -21608,14 +22197,28 @@ export type DetectorSensorFilter = {
   and?: InputMaybe<Array<DetectorSensorFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorByDetectorId` relation. */
+  detectorByDetectorId?: InputMaybe<DetectorFilter>;
   /** Filter by the object’s `detectorId` field. */
   detectorId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `detectorPosition` field. */
   detectorPosition?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `detectorSensorLocationByDetectorSensorId` relation. */
+  detectorSensorLocationByDetectorSensorId?: InputMaybe<DetectorSensorLocationFilter>;
+  /** A related `detectorSensorLocationByDetectorSensorId` exists. */
+  detectorSensorLocationByDetectorSensorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `filterByFilterId` relation. */
+  filterByFilterId?: InputMaybe<FilterFilter>;
+  /** A related `filterByFilterId` exists. */
+  filterByFilterIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `filterId` field. */
   filterId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `maintenanceVisitLinesByDetectorSensorId` relation. */
+  maintenanceVisitLinesByDetectorSensorId?: InputMaybe<DetectorSensorToManyMaintenanceVisitLineFilter>;
+  /** Some related `maintenanceVisitLinesByDetectorSensorId` exist. */
+  maintenanceVisitLinesByDetectorSensorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Negates the expression. */
@@ -21624,10 +22227,20 @@ export type DetectorSensorFilter = {
   or?: InputMaybe<Array<DetectorSensorFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `pyrolyserByPyrolyserId` relation. */
+  pyrolyserByPyrolyserId?: InputMaybe<PyrolyserFilter>;
+  /** A related `pyrolyserByPyrolyserId` exists. */
+  pyrolyserByPyrolyserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `pyrolyserId` field. */
   pyrolyserId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorBySensorId` relation. */
+  sensorBySensorId?: InputMaybe<SensorFilter>;
+  /** A related `sensorBySensorId` exists. */
+  sensorBySensorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `sensorId` field. */
   sensorId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 export type DetectorSensorIndex = {
@@ -21923,6 +22536,10 @@ export type DetectorSensorLocationCondition = {
 export type DetectorSensorLocationFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<DetectorSensorLocationFilter>>;
+  /** Filter by the object’s `applicationByApplicationId` relation. */
+  applicationByApplicationId?: InputMaybe<ApplicationFilter>;
+  /** A related `applicationByApplicationId` exists. */
+  applicationByApplicationIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `applicationId` field. */
   applicationId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `calcFilterReplacementInterval` field. */
@@ -21935,8 +22552,14 @@ export type DetectorSensorLocationFilter = {
   calcSensorReplacementInterval?: InputMaybe<IntervalFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorLocationByDetectorLocationId` relation. */
+  detectorLocationByDetectorLocationId?: InputMaybe<DetectorLocationFilter>;
+  /** A related `detectorLocationByDetectorLocationId` exists. */
+  detectorLocationByDetectorLocationIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `detectorLocationId` field. */
   detectorLocationId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `detectorSensorByDetectorSensorId` relation. */
+  detectorSensorByDetectorSensorId?: InputMaybe<DetectorSensorFilter>;
   /** Filter by the object’s `detectorSensorId` field. */
   detectorSensorId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `filterReplacementDueDate` field. */
@@ -21945,8 +22568,16 @@ export type DetectorSensorLocationFilter = {
   filterReplacementIntervalMonths?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `licenseByLicenseId` relation. */
+  licenseByLicenseId?: InputMaybe<LicenseFilter>;
+  /** A related `licenseByLicenseId` exists. */
+  licenseByLicenseIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `licenseId` field. */
   licenseId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `maintenanceVisitLinesByDetectorSensorLocationId` relation. */
+  maintenanceVisitLinesByDetectorSensorLocationId?: InputMaybe<DetectorSensorLocationToManyMaintenanceVisitLineFilter>;
+  /** Some related `maintenanceVisitLinesByDetectorSensorLocationId` exist. */
+  maintenanceVisitLinesByDetectorSensorLocationIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Negates the expression. */
@@ -21961,8 +22592,14 @@ export type DetectorSensorLocationFilter = {
   pyrolyserReplacementIntervalMonths?: InputMaybe<IntFilter>;
   /** Filter by the object’s `remarks` field. */
   remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `samplePointBySamplePointId` relation. */
+  samplePointBySamplePointId?: InputMaybe<SamplePointFilter>;
   /** Filter by the object’s `samplePointId` field. */
   samplePointId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorElementLocationsByDetectorSensorLocationId` relation. */
+  sensorElementLocationsByDetectorSensorLocationId?: InputMaybe<DetectorSensorLocationToManySensorElementLocationFilter>;
+  /** Some related `sensorElementLocationsByDetectorSensorLocationId` exist. */
+  sensorElementLocationsByDetectorSensorLocationIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `sensorMaintenanceDueDate` field. */
   sensorMaintenanceDueDate?: InputMaybe<DateFilter>;
   /** Filter by the object’s `sensorMaintenanceIntervalMonths` field. */
@@ -21975,6 +22612,8 @@ export type DetectorSensorLocationFilter = {
   simsChannel?: InputMaybe<IntFilter>;
   /** Filter by the object’s `simsTag` field. */
   simsTag?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `DetectorSensorLocation` */
@@ -22015,6 +22654,26 @@ export type DetectorSensorLocationPatch = {
   sensorReplacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
   simsChannel?: InputMaybe<Scalars['Int']['input']>;
   simsTag?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `MaintenanceVisitLine` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorSensorLocationToManyMaintenanceVisitLineFilter = {
+  /** Every related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** No related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** Some related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitLineFilter>;
+};
+
+/** A filter to be used against many `SensorElementLocation` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorSensorLocationToManySensorElementLocationFilter = {
+  /** Every related `SensorElementLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementLocationFilter>;
+  /** No related `SensorElementLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementLocationFilter>;
+  /** Some related `SensorElementLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementLocationFilter>;
 };
 
 /** A connection to a list of `DetectorSensorLocation` values. */
@@ -22630,6 +23289,16 @@ export type DetectorSensorPatch = {
   sensorId?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** A filter to be used against many `MaintenanceVisitLine` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorSensorToManyMaintenanceVisitLineFilter = {
+  /** Every related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** No related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** Some related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitLineFilter>;
+};
+
 export type DetectorSensorType = Node & {
   __typename?: 'DetectorSensorType';
   created?: Maybe<Scalars['Datetime']['output']>;
@@ -22688,8 +23357,12 @@ export type DetectorSensorTypeFilter = {
   or?: InputMaybe<Array<DetectorSensorTypeFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTypeBySensorTypeId` relation. */
+  sensorTypeBySensorTypeId?: InputMaybe<SensorTypeFilter>;
   /** Filter by the object’s `sensorTypeId` field. */
   sensorTypeId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `DetectorSensorType` */
@@ -22808,6 +23481,36 @@ export enum DetectorSensorsOrderBy {
   PyrolyserLabelDateDesc = '_PYROLYSER_LABEL_DATE_DESC'
 }
 
+/** A filter to be used against many `DetectorOrder` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorToManyDetectorOrderFilter = {
+  /** Every related `DetectorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorOrderFilter>;
+  /** No related `DetectorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorOrderFilter>;
+  /** Some related `DetectorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorOrderFilter>;
+};
+
+/** A filter to be used against many `DetectorSensor` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorToManyDetectorSensorFilter = {
+  /** Every related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorFilter>;
+  /** No related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorFilter>;
+  /** Some related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorFilter>;
+};
+
+/** A filter to be used against many `ReportDetector` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorToManyReportDetectorFilter = {
+  /** Every related `ReportDetector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ReportDetectorFilter>;
+  /** No related `ReportDetector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ReportDetectorFilter>;
+  /** Some related `ReportDetector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ReportDetectorFilter>;
+};
+
 export type DetectorType = Node & {
   __typename?: 'DetectorType';
   code?: Maybe<Scalars['String']['output']>;
@@ -22873,6 +23576,10 @@ export type DetectorTypeFilter = {
   code?: InputMaybe<StringFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorsByDetectorTypeId` relation. */
+  detectorsByDetectorTypeId?: InputMaybe<DetectorTypeToManyDetectorFilter>;
+  /** Some related `detectorsByDetectorTypeId` exist. */
+  detectorsByDetectorTypeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `modified` field. */
@@ -22893,6 +23600,10 @@ export type DetectorTypeFilter = {
   suffix?: InputMaybe<StringFilter>;
   /** Filter by the object’s `type` field. */
   type?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `DetectorType` */
@@ -22921,6 +23632,16 @@ export type DetectorTypePatch = {
   suffix?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** A filter to be used against many `Detector` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorTypeToManyDetectorFilter = {
+  /** Every related `Detector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorFilter>;
+  /** No related `Detector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorFilter>;
+  /** Some related `Detector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorFilter>;
+};
+
 /** A connection to a list of `DetectorType` values. */
 export type DetectorTypesConnection = {
   __typename?: 'DetectorTypesConnection';
@@ -22941,6 +23662,131 @@ export type DetectorTypesEdge = {
   cursor?: Maybe<Scalars['Cursor']['output']>;
   /** The `DetectorType` at the end of the edge. */
   node: DetectorType;
+};
+
+/** A connection to a list of `DetectorTypesEntity` values. */
+export type DetectorTypesEntitiesConnection = {
+  __typename?: 'DetectorTypesEntitiesConnection';
+  /** A list of edges which contains the `DetectorTypesEntity` and cursor to aid in pagination. */
+  edges: Array<DetectorTypesEntitiesEdge>;
+  /** A list of `DetectorTypesEntity` objects. */
+  nodes: Array<DetectorTypesEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `DetectorTypesEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `DetectorTypesEntity` edge in the connection. */
+export type DetectorTypesEntitiesEdge = {
+  __typename?: 'DetectorTypesEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `DetectorTypesEntity` at the end of the edge. */
+  node: DetectorTypesEntity;
+};
+
+/** Methods to use when ordering `DetectorTypesEntity`. */
+export enum DetectorTypesEntitiesOrderBy {
+  CodeAsc = 'CODE_ASC',
+  CodeDesc = 'CODE_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  ModifiedAsc = 'MODIFIED_ASC',
+  ModifiedDesc = 'MODIFIED_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  ObsoleteAsc = 'OBSOLETE_ASC',
+  ObsoleteDesc = 'OBSOLETE_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  PrefixAsc = 'PREFIX_ASC',
+  PrefixDesc = 'PREFIX_DESC',
+  SensorCountAsc = 'SENSOR_COUNT_ASC',
+  SensorCountDesc = 'SENSOR_COUNT_DESC',
+  SuffixAsc = 'SUFFIX_ASC',
+  SuffixDesc = 'SUFFIX_DESC'
+}
+
+export type DetectorTypesEntity = {
+  __typename?: 'DetectorTypesEntity';
+  code?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  modified?: Maybe<Scalars['Datetime']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  obsolete?: Maybe<Scalars['Boolean']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  prefix?: Maybe<Scalars['String']['output']>;
+  sensorCount?: Maybe<Scalars['Int']['output']>;
+  suffix?: Maybe<Scalars['String']['output']>;
+};
+
+/**
+ * A condition to be used against `DetectorTypesEntity` object types. All fields
+ * are tested for equality and combined with a logical ‘and.’
+ */
+export type DetectorTypesEntityCondition = {
+  /** Checks for equality with the object’s `code` field. */
+  code?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `modified` field. */
+  modified?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `obsolete` field. */
+  obsolete?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `prefix` field. */
+  prefix?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorCount` field. */
+  sensorCount?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `suffix` field. */
+  suffix?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against `DetectorTypesEntity` object types. All fields are combined with a logical ‘and.’ */
+export type DetectorTypesEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<DetectorTypesEntityFilter>>;
+  /** Filter by the object’s `code` field. */
+  code?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `modified` field. */
+  modified?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<DetectorTypesEntityFilter>;
+  /** Filter by the object’s `obsolete` field. */
+  obsolete?: InputMaybe<BooleanFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<DetectorTypesEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `prefix` field. */
+  prefix?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorCount` field. */
+  sensorCount?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `suffix` field. */
+  suffix?: InputMaybe<StringFilter>;
 };
 
 /** Methods to use when ordering `DetectorType`. */
@@ -23288,6 +24134,10 @@ export type DpCardFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `DpCard` */
@@ -23446,6 +24296,14 @@ export type ElectrolyteFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTypesByElectrolyteId` relation. */
+  sensorTypesByElectrolyteId?: InputMaybe<ElectrolyteToManySensorTypeFilter>;
+  /** Some related `sensorTypesByElectrolyteId` exist. */
+  sensorTypesByElectrolyteIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `volume` field. */
   volume?: InputMaybe<IntFilter>;
 };
@@ -23472,6 +24330,16 @@ export type ElectrolytePatch = {
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
   volume?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type ElectrolyteToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `Electrolyte` values. */
@@ -23677,6 +24545,10 @@ export type EndUserFilter = {
   address2?: InputMaybe<StringFilter>;
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<EndUserFilter>>;
+  /** Filter by the object’s `buildingsByEndUserId` relation. */
+  buildingsByEndUserId?: InputMaybe<EndUserToManyBuildingFilter>;
+  /** Some related `buildingsByEndUserId` exist. */
+  buildingsByEndUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `city` field. */
   city?: InputMaybe<StringFilter>;
   /** Filter by the object’s `contactEmail` field. */
@@ -23695,8 +24567,24 @@ export type EndUserFilter = {
   formerName2?: InputMaybe<StringFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `itemsByEndUserId` relation. */
+  itemsByEndUserId?: InputMaybe<EndUserToManyItemFilter>;
+  /** Some related `itemsByEndUserId` exist. */
+  itemsByEndUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `jobsByEndUserId` relation. */
+  jobsByEndUserId?: InputMaybe<EndUserToManyJobFilter>;
+  /** Some related `jobsByEndUserId` exist. */
+  jobsByEndUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `licensesByEndUserId` relation. */
+  licensesByEndUserId?: InputMaybe<EndUserToManyLicenseFilter>;
+  /** Some related `licensesByEndUserId` exist. */
+  licensesByEndUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `location` field. */
   location?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `maintenanceVisitsByEndUserId` relation. */
+  maintenanceVisitsByEndUserId?: InputMaybe<EndUserToManyMaintenanceVisitFilter>;
+  /** Some related `maintenanceVisitsByEndUserId` exist. */
+  maintenanceVisitsByEndUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `name` field. */
@@ -23709,8 +24597,16 @@ export type EndUserFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `region` field. */
   region?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `reportsByEndUserId` relation. */
+  reportsByEndUserId?: InputMaybe<EndUserToManyReportFilter>;
+  /** Some related `reportsByEndUserId` exist. */
+  reportsByEndUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `subLocation` field. */
   subLocation?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `zipCode` field. */
   zipCode?: InputMaybe<StringFilter>;
 };
@@ -23757,6 +24653,66 @@ export type EndUserPatch = {
   region?: InputMaybe<Scalars['String']['input']>;
   subLocation?: InputMaybe<Scalars['String']['input']>;
   zipCode?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `Building` object types. All fields are combined with a logical ‘and.’ */
+export type EndUserToManyBuildingFilter = {
+  /** Every related `Building` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<BuildingFilter>;
+  /** No related `Building` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<BuildingFilter>;
+  /** Some related `Building` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<BuildingFilter>;
+};
+
+/** A filter to be used against many `Item` object types. All fields are combined with a logical ‘and.’ */
+export type EndUserToManyItemFilter = {
+  /** Every related `Item` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ItemFilter>;
+  /** No related `Item` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ItemFilter>;
+  /** Some related `Item` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ItemFilter>;
+};
+
+/** A filter to be used against many `Job` object types. All fields are combined with a logical ‘and.’ */
+export type EndUserToManyJobFilter = {
+  /** Every related `Job` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<JobFilter>;
+  /** No related `Job` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<JobFilter>;
+  /** Some related `Job` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<JobFilter>;
+};
+
+/** A filter to be used against many `License` object types. All fields are combined with a logical ‘and.’ */
+export type EndUserToManyLicenseFilter = {
+  /** Every related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseFilter>;
+  /** No related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseFilter>;
+  /** Some related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseFilter>;
+};
+
+/** A filter to be used against many `MaintenanceVisit` object types. All fields are combined with a logical ‘and.’ */
+export type EndUserToManyMaintenanceVisitFilter = {
+  /** Every related `MaintenanceVisit` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitFilter>;
+  /** No related `MaintenanceVisit` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitFilter>;
+  /** Some related `MaintenanceVisit` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitFilter>;
+};
+
+/** A filter to be used against many `Report` object types. All fields are combined with a logical ‘and.’ */
+export type EndUserToManyReportFilter = {
+  /** Every related `Report` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ReportFilter>;
+  /** No related `Report` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ReportFilter>;
+  /** Some related `Report` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ReportFilter>;
 };
 
 /** A connection to a list of `EndUser` values. */
@@ -24641,6 +25597,10 @@ export type FactopdrachtregelFilter = {
   factbedragincl?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `factopdrRglGuid` field. */
   factopdrRglGuid?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `factureeropdrachtByFactuuropdracht` relation. */
+  factureeropdrachtByFactuuropdracht?: InputMaybe<FactureeropdrachtFilter>;
+  /** A related `factureeropdrachtByFactuuropdracht` exists. */
+  factureeropdrachtByFactuuropdrachtExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `factuuropdracht` field. */
   factuuropdracht?: InputMaybe<StringFilter>;
   /** Filter by the object’s `factuurregel` field. */
@@ -25734,6 +26694,10 @@ export type FactopdrachtregelLineRemarkFilter = {
   or?: InputMaybe<Array<FactopdrachtregelLineRemarkFilter>>;
   /** Filter by the object’s `remark` field. */
   remark?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
+  /** A related `userByUserId` exists. */
+  userByUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -27172,6 +28136,14 @@ export type FactureeropdrachtFilter = {
   cdvervoer?: InputMaybe<IntFilter>;
   /** Filter by the object’s `cdverzamel` field. */
   cdverzamel?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `debiteurByCddebiteur` relation. */
+  debiteurByCddebiteur?: InputMaybe<DebiteurFilter>;
+  /** A related `debiteurByCddebiteur` exists. */
+  debiteurByCddebiteurExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `factopdrachtregelsByFactuuropdracht` relation. */
+  factopdrachtregelsByFactuuropdracht?: InputMaybe<FactureeropdrachtToManyFactopdrachtregelFilter>;
+  /** Some related `factopdrachtregelsByFactuuropdracht` exist. */
+  factopdrachtregelsByFactuuropdrachtExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `factureren` field. */
   factureren?: InputMaybe<StringFilter>;
   /** Filter by the object’s `factuurdatum` field. */
@@ -27222,6 +28194,10 @@ export type FactureeropdrachtFilter = {
   projFactureren?: InputMaybe<StringFilter>;
   /** Filter by the object’s `referentie` field. */
   referentie?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorOrdersByFactuuropdracht` relation. */
+  sensorOrdersByFactuuropdracht?: InputMaybe<FactureeropdrachtToManySensorOrderFilter>;
+  /** Some related `sensorOrdersByFactuuropdracht` exist. */
+  sensorOrdersByFactuuropdrachtExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `status` field. */
   status?: InputMaybe<StringFilter>;
   /** Filter by the object’s `subadres` field. */
@@ -27914,6 +28890,26 @@ export enum FactureeropdrachtMvsOrderBy {
   VrachtgewichtDesc = 'VRACHTGEWICHT_DESC'
 }
 
+/** A filter to be used against many `Factopdrachtregel` object types. All fields are combined with a logical ‘and.’ */
+export type FactureeropdrachtToManyFactopdrachtregelFilter = {
+  /** Every related `Factopdrachtregel` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<FactopdrachtregelFilter>;
+  /** No related `Factopdrachtregel` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<FactopdrachtregelFilter>;
+  /** Some related `Factopdrachtregel` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<FactopdrachtregelFilter>;
+};
+
+/** A filter to be used against many `SensorOrder` object types. All fields are combined with a logical ‘and.’ */
+export type FactureeropdrachtToManySensorOrderFilter = {
+  /** Every related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorOrderFilter>;
+  /** No related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorOrderFilter>;
+  /** Some related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorOrderFilter>;
+};
+
 /** A connection to a list of `Factureeropdracht` values. */
 export type FactureeropdrachtsConnection = {
   __typename?: 'FactureeropdrachtsConnection';
@@ -28169,6 +29165,16 @@ export type FactuurFilter = {
   sent?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `sentId` field. */
   sentId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByCheckedId` relation. */
+  userByCheckedId?: InputMaybe<UserFilter>;
+  /** A related `userByCheckedId` exists. */
+  userByCheckedIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** Filter by the object’s `userBySentId` relation. */
+  userBySentId?: InputMaybe<UserFilter>;
+  /** A related `userBySentId` exists. */
+  userBySentIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Factuur` */
@@ -28336,8 +29342,16 @@ export type FilterFilter = {
   consumable?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorSensorsByFilterId` relation. */
+  detectorSensorsByFilterId?: InputMaybe<FilterToManyDetectorSensorFilter>;
+  /** Some related `detectorSensorsByFilterId` exist. */
+  detectorSensorsByFilterIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `maintenanceVisitLinesByFilterId` relation. */
+  maintenanceVisitLinesByFilterId?: InputMaybe<FilterToManyMaintenanceVisitLineFilter>;
+  /** Some related `maintenanceVisitLinesByFilterId` exist. */
+  maintenanceVisitLinesByFilterIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `name` field. */
@@ -28350,6 +29364,14 @@ export type FilterFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTypesByFilterId` relation. */
+  sensorTypesByFilterId?: InputMaybe<FilterToManySensorTypeFilter>;
+  /** Some related `sensorTypesByFilterId` exist. */
+  sensorTypesByFilterIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Filter` */
@@ -28374,6 +29396,36 @@ export type FilterPatch = {
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `DetectorSensor` object types. All fields are combined with a logical ‘and.’ */
+export type FilterToManyDetectorSensorFilter = {
+  /** Every related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorFilter>;
+  /** No related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorFilter>;
+  /** Some related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorFilter>;
+};
+
+/** A filter to be used against many `MaintenanceVisitLine` object types. All fields are combined with a logical ‘and.’ */
+export type FilterToManyMaintenanceVisitLineFilter = {
+  /** Every related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** No related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** Some related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitLineFilter>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type FilterToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `Filter` values. */
@@ -28497,6 +29549,12 @@ export type FloorCondition = {
 export type FloorFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<FloorFilter>>;
+  /** Filter by the object’s `areasByFloorId` relation. */
+  areasByFloorId?: InputMaybe<FloorToManyAreaFilter>;
+  /** Some related `areasByFloorId` exist. */
+  areasByFloorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `buildingByBuildingId` relation. */
+  buildingByBuildingId?: InputMaybe<BuildingFilter>;
   /** Filter by the object’s `buildingId` field. */
   buildingId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `created` field. */
@@ -28513,6 +29571,8 @@ export type FloorFilter = {
   or?: InputMaybe<Array<FloorFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `Floor` */
@@ -28533,6 +29593,16 @@ export type FloorPatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `Area` object types. All fields are combined with a logical ‘and.’ */
+export type FloorToManyAreaFilter = {
+  /** Every related `Area` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AreaFilter>;
+  /** No related `Area` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AreaFilter>;
+  /** Some related `Area` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AreaFilter>;
 };
 
 /** A connection to a list of `Floor` values. */
@@ -28643,6 +29713,14 @@ export type GasCondition = {
 export type GasFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<GasFilter>>;
+  /** Filter by the object’s `calGasesByGasId` relation. */
+  calGasesByGasId?: InputMaybe<GasToManyCalGasFilter>;
+  /** Some related `calGasesByGasId` exist. */
+  calGasesByGasIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `chemicalCompoundByChemicalCompoundId` relation. */
+  chemicalCompoundByChemicalCompoundId?: InputMaybe<ChemicalCompoundFilter>;
+  /** A related `chemicalCompoundByChemicalCompoundId` exists. */
+  chemicalCompoundByChemicalCompoundIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `chemicalCompoundId` field. */
   chemicalCompoundId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `created` field. */
@@ -28661,6 +29739,14 @@ export type GasFilter = {
   or?: InputMaybe<Array<GasFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `rangesByGasId` relation. */
+  rangesByGasId?: InputMaybe<GasToManyRangeFilter>;
+  /** Some related `rangesByGasId` exist. */
+  rangesByGasIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Gas` */
@@ -28683,6 +29769,26 @@ export type GasPatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `CalGas` object types. All fields are combined with a logical ‘and.’ */
+export type GasToManyCalGasFilter = {
+  /** Every related `CalGas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CalGasFilter>;
+  /** No related `CalGas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CalGasFilter>;
+  /** Some related `CalGas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CalGasFilter>;
+};
+
+/** A filter to be used against many `Range` object types. All fields are combined with a logical ‘and.’ */
+export type GasToManyRangeFilter = {
+  /** Every related `Range` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<RangeFilter>;
+  /** No related `Range` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<RangeFilter>;
+  /** Some related `Range` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<RangeFilter>;
 };
 
 /** A connection to a list of `Gas` values. */
@@ -28832,10 +29938,22 @@ export type GroupCondition = {
 
 /** A filter to be used against `Group` object types. All fields are combined with a logical ‘and.’ */
 export type GroupFilter = {
+  /** Filter by the object’s `actionsByGroupId` relation. */
+  actionsByGroupId?: InputMaybe<GroupToManyActionFilter>;
+  /** Some related `actionsByGroupId` exist. */
+  actionsByGroupIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<GroupFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `groupPermissionByGroupId` relation. */
+  groupPermissionByGroupId?: InputMaybe<GroupPermissionFilter>;
+  /** A related `groupPermissionByGroupId` exists. */
+  groupPermissionByGroupIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `groupRightsByGroupId` relation. */
+  groupRightsByGroupId?: InputMaybe<GroupToManyGroupRightFilter>;
+  /** Some related `groupRightsByGroupId` exist. */
+  groupRightsByGroupIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `modified` field. */
@@ -28848,6 +29966,18 @@ export type GroupFilter = {
   or?: InputMaybe<Array<GroupFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `usersByGroupId` relation. */
+  usersByGroupId?: InputMaybe<GroupToManyUserFilter>;
+  /** Some related `usersByGroupId` exist. */
+  usersByGroupIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `usersGroupsByGroupId` relation. */
+  usersGroupsByGroupId?: InputMaybe<GroupToManyUsersGroupFilter>;
+  /** Some related `usersGroupsByGroupId` exist. */
+  usersGroupsByGroupIdExist?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Represents an update to a `Group`. Fields that are set will be updated. */
@@ -28890,6 +30020,8 @@ export type GroupPermissionCondition = {
 export type GroupPermissionFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<GroupPermissionFilter>>;
+  /** Filter by the object’s `groupByGroupId` relation. */
+  groupByGroupId?: InputMaybe<GroupFilter>;
   /** Filter by the object’s `groupId` field. */
   groupId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -29001,6 +30133,10 @@ export type GroupRightFilter = {
   authorized?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `groupByGroupId` relation. */
+  groupByGroupId?: InputMaybe<GroupFilter>;
+  /** A related `groupByGroupId` exists. */
+  groupByGroupIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `groupId` field. */
   groupId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -29081,6 +30217,46 @@ export enum GroupRightsOrderBy {
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
+
+/** A filter to be used against many `Action` object types. All fields are combined with a logical ‘and.’ */
+export type GroupToManyActionFilter = {
+  /** Every related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ActionFilter>;
+  /** No related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ActionFilter>;
+  /** Some related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ActionFilter>;
+};
+
+/** A filter to be used against many `GroupRight` object types. All fields are combined with a logical ‘and.’ */
+export type GroupToManyGroupRightFilter = {
+  /** Every related `GroupRight` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<GroupRightFilter>;
+  /** No related `GroupRight` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<GroupRightFilter>;
+  /** Some related `GroupRight` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<GroupRightFilter>;
+};
+
+/** A filter to be used against many `User` object types. All fields are combined with a logical ‘and.’ */
+export type GroupToManyUserFilter = {
+  /** Every related `User` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<UserFilter>;
+  /** No related `User` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<UserFilter>;
+  /** Some related `User` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<UserFilter>;
+};
+
+/** A filter to be used against many `UsersGroup` object types. All fields are combined with a logical ‘and.’ */
+export type GroupToManyUsersGroupFilter = {
+  /** Every related `UsersGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<UsersGroupFilter>;
+  /** No related `UsersGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<UsersGroupFilter>;
+  /** Some related `UsersGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<UsersGroupFilter>;
+};
 
 /** A connection to a list of `Group` values. */
 export type GroupsConnection = {
@@ -29234,10 +30410,22 @@ export type HardwareFilter = {
   remarks?: InputMaybe<StringFilter>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `softwaresByHardwareId` relation. */
+  softwaresByHardwareId?: InputMaybe<HardwareToManySoftwareFilter>;
+  /** Some related `softwaresByHardwareId` exist. */
+  softwaresByHardwareIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `specs` field. */
   specs?: InputMaybe<StringFilter>;
   /** Filter by the object’s `type` field. */
   type?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
+  /** A related `userByUserId` exists. */
+  userByUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -29280,6 +30468,16 @@ export type HardwarePatch = {
   specs?: InputMaybe<Scalars['String']['input']>;
   type?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `Software` object types. All fields are combined with a logical ‘and.’ */
+export type HardwareToManySoftwareFilter = {
+  /** Every related `Software` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SoftwareFilter>;
+  /** No related `Software` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SoftwareFilter>;
+  /** Some related `Software` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SoftwareFilter>;
 };
 
 /** A connection to a list of `Hardware` values. */
@@ -29416,6 +30614,10 @@ export type IncomingDocumentFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `type` field. */
   type?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -32081,6 +33283,10 @@ export type ItemFilter = {
   cdartikel?: InputMaybe<StringFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `endUserByEndUserId` relation. */
+  endUserByEndUserId?: InputMaybe<EndUserFilter>;
+  /** A related `endUserByEndUserId` exists. */
+  endUserByEndUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `endUserId` field. */
   endUserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -32097,8 +33303,14 @@ export type ItemFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `remarks` field. */
   remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `reportItemsByItemId` relation. */
+  reportItemsByItemId?: InputMaybe<ItemToManyReportItemFilter>;
+  /** Some related `reportItemsByItemId` exist. */
+  reportItemsByItemIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `Item` */
@@ -32125,6 +33337,16 @@ export type ItemPatch = {
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   remarks?: InputMaybe<Scalars['String']['input']>;
   serialNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `ReportItem` object types. All fields are combined with a logical ‘and.’ */
+export type ItemToManyReportItemFilter = {
+  /** Every related `ReportItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ReportItemFilter>;
+  /** No related `ReportItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ReportItemFilter>;
+  /** Some related `ReportItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ReportItemFilter>;
 };
 
 /** A connection to a list of `Item` values. */
@@ -32261,6 +33483,10 @@ export type JobFilter = {
   created?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `endDate` field. */
   endDate?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `endUserByEndUserId` relation. */
+  endUserByEndUserId?: InputMaybe<EndUserFilter>;
+  /** A related `endUserByEndUserId` exists. */
+  endUserByEndUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `endUserId` field. */
   endUserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `factuuropdracht` field. */
@@ -32277,6 +33503,10 @@ export type JobFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `startDate` field. */
   startDate?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Job` */
@@ -32400,6 +33630,10 @@ export type JunctionBoxFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `JunctionBox` */
@@ -32771,6 +34005,10 @@ export type LeadFilter = {
   telephone?: InputMaybe<StringFilter>;
   /** Filter by the object’s `typeOfCompany` field. */
   typeOfCompany?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `viewedElements` field. */
   viewedElements?: InputMaybe<StringFilter>;
   /** Filter by the object’s `webSite` field. */
@@ -33480,6 +34718,10 @@ export type LicenseCustomerFilter = {
   created?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `licensesByLicenseCustomerId` relation. */
+  licensesByLicenseCustomerId?: InputMaybe<LicenseCustomerToManyLicenseFilter>;
+  /** Some related `licensesByLicenseCustomerId` exist. */
+  licensesByLicenseCustomerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `name` field. */
@@ -33490,6 +34732,10 @@ export type LicenseCustomerFilter = {
   or?: InputMaybe<Array<LicenseCustomerFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `LicenseCustomer` */
@@ -33508,6 +34754,16 @@ export type LicenseCustomerPatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `License` object types. All fields are combined with a logical ‘and.’ */
+export type LicenseCustomerToManyLicenseFilter = {
+  /** Every related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseFilter>;
+  /** No related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseFilter>;
+  /** Some related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseFilter>;
 };
 
 /** A connection to a list of `LicenseCustomer` values. */
@@ -33557,22 +34813,46 @@ export type LicenseFilter = {
   and?: InputMaybe<Array<LicenseFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorSensorLocationsByLicenseId` relation. */
+  detectorSensorLocationsByLicenseId?: InputMaybe<LicenseToManyDetectorSensorLocationFilter>;
+  /** Some related `detectorSensorLocationsByLicenseId` exist. */
+  detectorSensorLocationsByLicenseIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `durationDays` field. */
   durationDays?: InputMaybe<IntFilter>;
   /** Filter by the object’s `durationMonths` field. */
   durationMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `endUserByEndUserId` relation. */
+  endUserByEndUserId?: InputMaybe<EndUserFilter>;
+  /** A related `endUserByEndUserId` exists. */
+  endUserByEndUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `endUserId` field. */
   endUserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `licenseCode` field. */
   licenseCode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `licenseCustomerByLicenseCustomerId` relation. */
+  licenseCustomerByLicenseCustomerId?: InputMaybe<LicenseCustomerFilter>;
+  /** A related `licenseCustomerByLicenseCustomerId` exists. */
+  licenseCustomerByLicenseCustomerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `licenseCustomerId` field. */
   licenseCustomerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `licenseId` field. */
   licenseId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `licenseModuleByLicenseModuleId` relation. */
+  licenseModuleByLicenseModuleId?: InputMaybe<LicenseModuleFilter>;
+  /** A related `licenseModuleByLicenseModuleId` exists. */
+  licenseModuleByLicenseModuleIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `licenseModuleId` field. */
   licenseModuleId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `licenseOrdersByLicenseId` relation. */
+  licenseOrdersByLicenseId?: InputMaybe<LicenseToManyLicenseOrderFilter>;
+  /** Some related `licenseOrdersByLicenseId` exist. */
+  licenseOrdersByLicenseIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `licenseRegistrationsByLicenseId` relation. */
+  licenseRegistrationsByLicenseId?: InputMaybe<LicenseToManyLicenseRegistrationFilter>;
+  /** Some related `licenseRegistrationsByLicenseId` exist. */
+  licenseRegistrationsByLicenseIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `moduleData` field. */
   moduleData?: InputMaybe<StringFilter>;
   /** Negates the expression. */
@@ -33583,6 +34863,10 @@ export type LicenseFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `remarks` field. */
   remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `License` */
@@ -33659,6 +34943,10 @@ export type LicenseModuleFilter = {
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `latestVersion` field. */
   latestVersion?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `licensesByLicenseModuleId` relation. */
+  licensesByLicenseModuleId?: InputMaybe<LicenseModuleToManyLicenseFilter>;
+  /** Some related `licensesByLicenseModuleId` exist. */
+  licensesByLicenseModuleIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `name` field. */
@@ -33669,6 +34957,10 @@ export type LicenseModuleFilter = {
   or?: InputMaybe<Array<LicenseModuleFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `LicenseModule` */
@@ -33689,6 +34981,16 @@ export type LicenseModulePatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `License` object types. All fields are combined with a logical ‘and.’ */
+export type LicenseModuleToManyLicenseFilter = {
+  /** Every related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseFilter>;
+  /** No related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseFilter>;
+  /** Some related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseFilter>;
 };
 
 /** A connection to a list of `LicenseModule` values. */
@@ -33798,8 +35100,16 @@ export type LicenseOrderFilter = {
   factuuropdracht?: InputMaybe<StringFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `licenseByLicenseId` relation. */
+  licenseByLicenseId?: InputMaybe<LicenseFilter>;
+  /** A related `licenseByLicenseId` exists. */
+  licenseByLicenseIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `licenseId` field. */
   licenseId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `licenseRegistrationByLicenseRegistrationId` relation. */
+  licenseRegistrationByLicenseRegistrationId?: InputMaybe<LicenseRegistrationFilter>;
+  /** A related `licenseRegistrationByLicenseRegistrationId` exists. */
+  licenseRegistrationByLicenseRegistrationIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `licenseRegistrationId` field. */
   licenseRegistrationId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `modified` field. */
@@ -33814,6 +35124,10 @@ export type LicenseOrderFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `remarks` field. */
   remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `LicenseOrder` */
@@ -34001,8 +35315,16 @@ export type LicenseRegistrationFilter = {
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `ipAddress` field. */
   ipAddress?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `licenseByLicenseId` relation. */
+  licenseByLicenseId?: InputMaybe<LicenseFilter>;
+  /** A related `licenseByLicenseId` exists. */
+  licenseByLicenseIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `licenseId` field. */
   licenseId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `licenseOrdersByLicenseRegistrationId` relation. */
+  licenseOrdersByLicenseRegistrationId?: InputMaybe<LicenseRegistrationToManyLicenseOrderFilter>;
+  /** Some related `licenseOrdersByLicenseRegistrationId` exist. */
+  licenseOrdersByLicenseRegistrationIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Negates the expression. */
   not?: InputMaybe<LicenseRegistrationFilter>;
   /** Checks for any expressions in this list. */
@@ -34013,6 +35335,10 @@ export type LicenseRegistrationFilter = {
   registrationCode?: InputMaybe<StringFilter>;
   /** Filter by the object’s `remarks` field. */
   remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `LicenseRegistration` */
@@ -34045,6 +35371,16 @@ export type LicenseRegistrationPatch = {
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   registrationCode?: InputMaybe<Scalars['String']['input']>;
   remarks?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `LicenseOrder` object types. All fields are combined with a logical ‘and.’ */
+export type LicenseRegistrationToManyLicenseOrderFilter = {
+  /** Every related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseOrderFilter>;
+  /** No related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseOrderFilter>;
+  /** Some related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseOrderFilter>;
 };
 
 /** A connection to a list of `LicenseRegistration` values. */
@@ -34099,6 +35435,36 @@ export enum LicenseRegistrationsOrderBy {
   RemarksAsc = 'REMARKS_ASC',
   RemarksDesc = 'REMARKS_DESC'
 }
+
+/** A filter to be used against many `DetectorSensorLocation` object types. All fields are combined with a logical ‘and.’ */
+export type LicenseToManyDetectorSensorLocationFilter = {
+  /** Every related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorLocationFilter>;
+  /** No related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorLocationFilter>;
+  /** Some related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorLocationFilter>;
+};
+
+/** A filter to be used against many `LicenseOrder` object types. All fields are combined with a logical ‘and.’ */
+export type LicenseToManyLicenseOrderFilter = {
+  /** Every related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseOrderFilter>;
+  /** No related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseOrderFilter>;
+  /** Some related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseOrderFilter>;
+};
+
+/** A filter to be used against many `LicenseRegistration` object types. All fields are combined with a logical ‘and.’ */
+export type LicenseToManyLicenseRegistrationFilter = {
+  /** Every related `LicenseRegistration` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseRegistrationFilter>;
+  /** No related `LicenseRegistration` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseRegistrationFilter>;
+  /** Some related `LicenseRegistration` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseRegistrationFilter>;
+};
 
 /** A connection to a list of `License` values. */
 export type LicensesConnection = {
@@ -34512,6 +35878,8 @@ export type MaintenanceVisitFilter = {
   date?: InputMaybe<DateFilter>;
   /** Filter by the object’s `duration` field. */
   duration?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `endUserByEndUserId` relation. */
+  endUserByEndUserId?: InputMaybe<EndUserFilter>;
   /** Filter by the object’s `endUserId` field. */
   endUserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `factuuropdracht` field. */
@@ -34522,6 +35890,14 @@ export type MaintenanceVisitFilter = {
   labourHours?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `locked` field. */
   locked?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `maintenanceVisitLinesByMaintenanceVisitId` relation. */
+  maintenanceVisitLinesByMaintenanceVisitId?: InputMaybe<MaintenanceVisitToManyMaintenanceVisitLineFilter>;
+  /** Some related `maintenanceVisitLinesByMaintenanceVisitId` exist. */
+  maintenanceVisitLinesByMaintenanceVisitIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `maintenanceVisitRemarksByMaintenanceVisitId` relation. */
+  maintenanceVisitRemarksByMaintenanceVisitId?: InputMaybe<MaintenanceVisitToManyMaintenanceVisitRemarkFilter>;
+  /** Some related `maintenanceVisitRemarksByMaintenanceVisitId` exist. */
+  maintenanceVisitRemarksByMaintenanceVisitIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Negates the expression. */
@@ -34530,6 +35906,12 @@ export type MaintenanceVisitFilter = {
   or?: InputMaybe<Array<MaintenanceVisitFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
+  /** A related `userByUserId` exists. */
+  userByUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -34653,6 +36035,10 @@ export type MaintenanceVisitLineCondition = {
 export type MaintenanceVisitLineFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<MaintenanceVisitLineFilter>>;
+  /** Filter by the object’s `calGasByCalGasId` relation. */
+  calGasByCalGasId?: InputMaybe<CalGasFilter>;
+  /** A related `calGasByCalGasId` exists. */
+  calGasByCalGasIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `calGasId` field. */
   calGasId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `concentration` field. */
@@ -34661,16 +36047,28 @@ export type MaintenanceVisitLineFilter = {
   dateOld?: InputMaybe<DateFilter>;
   /** Filter by the object’s `day` field. */
   day?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `detectorSensorByDetectorSensorId` relation. */
+  detectorSensorByDetectorSensorId?: InputMaybe<DetectorSensorFilter>;
+  /** A related `detectorSensorByDetectorSensorId` exists. */
+  detectorSensorByDetectorSensorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `detectorSensorId` field. */
   detectorSensorId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `detectorSensorLocationByDetectorSensorLocationId` relation. */
+  detectorSensorLocationByDetectorSensorLocationId?: InputMaybe<DetectorSensorLocationFilter>;
   /** Filter by the object’s `detectorSensorLocationId` field. */
   detectorSensorLocationId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `filterByFilterId` relation. */
+  filterByFilterId?: InputMaybe<FilterFilter>;
+  /** A related `filterByFilterId` exists. */
+  filterByFilterIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `filterId` field. */
   filterId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `filterInstallDueDate` field. */
   filterInstallDueDate?: InputMaybe<DateFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `maintenanceVisitByMaintenanceVisitId` relation. */
+  maintenanceVisitByMaintenanceVisitId?: InputMaybe<MaintenanceVisitFilter>;
   /** Filter by the object’s `maintenanceVisitId` field. */
   maintenanceVisitId?: InputMaybe<IntFilter>;
   /** Negates the expression. */
@@ -34681,6 +36079,10 @@ export type MaintenanceVisitLineFilter = {
   originalSensorId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `preResponse` field. */
   preResponse?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `pyrolyserByPyrolyserId` relation. */
+  pyrolyserByPyrolyserId?: InputMaybe<PyrolyserFilter>;
+  /** A related `pyrolyserByPyrolyserId` exists. */
+  pyrolyserByPyrolyserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `pyrolyserId` field. */
   pyrolyserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `pyrolyserInstallDueDate` field. */
@@ -34689,6 +36091,14 @@ export type MaintenanceVisitLineFilter = {
   remarkLine?: InputMaybe<IntFilter>;
   /** Filter by the object’s `response` field. */
   response?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `sensorByOriginalSensorId` relation. */
+  sensorByOriginalSensorId?: InputMaybe<SensorFilter>;
+  /** A related `sensorByOriginalSensorId` exists. */
+  sensorByOriginalSensorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorBySensorId` relation. */
+  sensorBySensorId?: InputMaybe<SensorFilter>;
+  /** A related `sensorBySensorId` exists. */
+  sensorBySensorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `sensorId` field. */
   sensorId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sensorInstallDueDate` field. */
@@ -35392,6 +36802,8 @@ export type MaintenanceVisitRemarkFilter = {
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `line` field. */
   line?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `maintenanceVisitByMaintenanceVisitId` relation. */
+  maintenanceVisitByMaintenanceVisitId?: InputMaybe<MaintenanceVisitFilter>;
   /** Filter by the object’s `maintenanceVisitId` field. */
   maintenanceVisitId?: InputMaybe<IntFilter>;
   /** Negates the expression. */
@@ -35581,6 +36993,26 @@ export enum MaintenanceVisitRemarksOrderBy {
   RemarksAsc = 'REMARKS_ASC',
   RemarksDesc = 'REMARKS_DESC'
 }
+
+/** A filter to be used against many `MaintenanceVisitLine` object types. All fields are combined with a logical ‘and.’ */
+export type MaintenanceVisitToManyMaintenanceVisitLineFilter = {
+  /** Every related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** No related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** Some related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitLineFilter>;
+};
+
+/** A filter to be used against many `MaintenanceVisitRemark` object types. All fields are combined with a logical ‘and.’ */
+export type MaintenanceVisitToManyMaintenanceVisitRemarkFilter = {
+  /** Every related `MaintenanceVisitRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitRemarkFilter>;
+  /** No related `MaintenanceVisitRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitRemarkFilter>;
+  /** Some related `MaintenanceVisitRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitRemarkFilter>;
+};
 
 export type MaintenanceVisitsCalGasMaterial = {
   __typename?: 'MaintenanceVisitsCalGasMaterial';
@@ -37053,6 +38485,14 @@ export type MembraneFilter = {
   quantity?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTypesByMembraneId` relation. */
+  sensorTypesByMembraneId?: InputMaybe<MembraneToManySensorTypeFilter>;
+  /** Some related `sensorTypesByMembraneId` exist. */
+  sensorTypesByMembraneIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Membrane` */
@@ -37077,6 +38517,16 @@ export type MembranePatch = {
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   quantity?: InputMaybe<Scalars['Int']['input']>;
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type MembraneToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `Membrane` values. */
@@ -43326,6 +44776,14 @@ export type ORingFilter = {
   quantity?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTypesByORingId` relation. */
+  sensorTypesByORingId?: InputMaybe<ORingToManySensorTypeFilter>;
+  /** Some related `sensorTypesByORingId` exist. */
+  sensorTypesByORingIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `ORing` */
@@ -43350,6 +44808,16 @@ export type ORingPatch = {
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   quantity?: InputMaybe<Scalars['Int']['input']>;
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type ORingToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `ORing` values. */
@@ -44263,6 +45731,8 @@ export type OfferteRemarkFilter = {
   status?: InputMaybe<StringFilter>;
   /** Filter by the object’s `statusApproved` field. */
   statusApproved?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `OfferteRemark` */
@@ -45102,6 +46572,10 @@ export type OpportunityCondition = {
 
 /** A filter to be used against `Opportunity` object types. All fields are combined with a logical ‘and.’ */
 export type OpportunityFilter = {
+  /** Filter by the object’s `_landByCdland` relation. */
+  _landByCdland?: InputMaybe<_LandFilter>;
+  /** A related `_landByCdland` exists. */
+  _landByCdlandExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `actionDate` field. */
   actionDate?: InputMaybe<DateFilter>;
   /** Filter by the object’s `actions` field. */
@@ -45138,6 +46612,8 @@ export type OpportunityFilter = {
   source?: InputMaybe<StringFilter>;
   /** Filter by the object’s `status` field. */
   status?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `Opportunity` */
@@ -46611,6 +48087,14 @@ export type PlugFilter = {
   or?: InputMaybe<Array<PlugFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTypesByPlugId` relation. */
+  sensorTypesByPlugId?: InputMaybe<PlugToManySensorTypeFilter>;
+  /** Some related `sensorTypesByPlugId` exist. */
+  sensorTypesByPlugIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Plug` */
@@ -46629,6 +48113,16 @@ export type PlugPatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type PlugToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `Plug` values. */
@@ -46732,6 +48226,14 @@ export type PrincipleFilter = {
   or?: InputMaybe<Array<PrincipleFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorBaseTypesByPrincipleId` relation. */
+  sensorBaseTypesByPrincipleId?: InputMaybe<PrincipleToManySensorBaseTypeFilter>;
+  /** Some related `sensorBaseTypesByPrincipleId` exist. */
+  sensorBaseTypesByPrincipleIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Principle` */
@@ -46750,6 +48252,16 @@ export type PrinciplePatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `SensorBaseType` object types. All fields are combined with a logical ‘and.’ */
+export type PrincipleToManySensorBaseTypeFilter = {
+  /** Every related `SensorBaseType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorBaseTypeFilter>;
+  /** No related `SensorBaseType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorBaseTypeFilter>;
+  /** Some related `SensorBaseType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorBaseTypeFilter>;
 };
 
 /** A connection to a list of `Principle` values. */
@@ -46946,8 +48458,16 @@ export type PyrolyserFilter = {
   cdartikel?: InputMaybe<StringFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorSensorsByPyrolyserId` relation. */
+  detectorSensorsByPyrolyserId?: InputMaybe<PyrolyserToManyDetectorSensorFilter>;
+  /** Some related `detectorSensorsByPyrolyserId` exist. */
+  detectorSensorsByPyrolyserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `maintenanceVisitLinesByPyrolyserId` relation. */
+  maintenanceVisitLinesByPyrolyserId?: InputMaybe<PyrolyserToManyMaintenanceVisitLineFilter>;
+  /** Some related `maintenanceVisitLinesByPyrolyserId` exist. */
+  maintenanceVisitLinesByPyrolyserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `name` field. */
@@ -46960,6 +48480,14 @@ export type PyrolyserFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTypesByPyrolyserId` relation. */
+  sensorTypesByPyrolyserId?: InputMaybe<PyrolyserToManySensorTypeFilter>;
+  /** Some related `sensorTypesByPyrolyserId` exist. */
+  sensorTypesByPyrolyserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Pyrolyser` */
@@ -46982,6 +48510,36 @@ export type PyrolyserPatch = {
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `DetectorSensor` object types. All fields are combined with a logical ‘and.’ */
+export type PyrolyserToManyDetectorSensorFilter = {
+  /** Every related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorFilter>;
+  /** No related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorFilter>;
+  /** Some related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorFilter>;
+};
+
+/** A filter to be used against many `MaintenanceVisitLine` object types. All fields are combined with a logical ‘and.’ */
+export type PyrolyserToManyMaintenanceVisitLineFilter = {
+  /** Every related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** No related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** Some related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitLineFilter>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type PyrolyserToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `Pyrolyser` values. */
@@ -47160,6 +48718,8 @@ export type Query = Node & {
   allDebiteurMvs?: Maybe<DebiteurMvsConnection>;
   /** Reads and enables pagination through a set of `Debiteur`. */
   allDebiteurs?: Maybe<DebiteursConnection>;
+  /** Reads and enables pagination through a set of `DetectorEntity`. */
+  allDetectorEntities?: Maybe<DetectorEntitiesConnection>;
   /** Reads and enables pagination through a set of `DetectorIndex`. */
   allDetectorIndices?: Maybe<DetectorIndicesConnection>;
   /** Reads and enables pagination through a set of `DetectorLocation`. */
@@ -47180,6 +48740,8 @@ export type Query = Node & {
   allDetectorSensors?: Maybe<DetectorSensorsConnection>;
   /** Reads and enables pagination through a set of `DetectorType`. */
   allDetectorTypes?: Maybe<DetectorTypesConnection>;
+  /** Reads and enables pagination through a set of `DetectorTypesEntity`. */
+  allDetectorTypesEntities?: Maybe<DetectorTypesEntitiesConnection>;
   /** Reads and enables pagination through a set of `Detector`. */
   allDetectors?: Maybe<DetectorsConnection>;
   /** Reads and enables pagination through a set of `DetectorsChecklist`. */
@@ -48776,6 +50338,19 @@ export type QueryAllDebiteursArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllDetectorEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<DetectorEntityCondition>;
+  filter?: InputMaybe<DetectorEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<DetectorEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllDetectorIndicesArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -48902,6 +50477,19 @@ export type QueryAllDetectorTypesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<DetectorTypesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllDetectorTypesEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<DetectorTypesEntityCondition>;
+  filter?: InputMaybe<DetectorTypesEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<DetectorTypesEntitiesOrderBy>>;
 };
 
 
@@ -53193,6 +54781,8 @@ export type RangeFilter = {
   created?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `engineeringUnits` field. */
   engineeringUnits?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `gasByGasId` relation. */
+  gasByGasId?: InputMaybe<GasFilter>;
   /** Filter by the object’s `gasId` field. */
   gasId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `highEu` field. */
@@ -53217,6 +54807,22 @@ export type RangeFilter = {
   precision?: InputMaybe<IntFilter>;
   /** Filter by the object’s `range` field. */
   range?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorElementTypesByCalRangeId` relation. */
+  sensorElementTypesByCalRangeId?: InputMaybe<RangeToManySensorElementTypeFilter>;
+  /** Some related `sensorElementTypesByCalRangeId` exist. */
+  sensorElementTypesByCalRangeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorElementTypesByRangeId` relation. */
+  sensorElementTypesByRangeId?: InputMaybe<RangeToManySensorElementTypeFilter>;
+  /** Some related `sensorElementTypesByRangeId` exist. */
+  sensorElementTypesByRangeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorTypesByRangeId` relation. */
+  sensorTypesByRangeId?: InputMaybe<RangeToManySensorTypeFilter>;
+  /** Some related `sensorTypesByRangeId` exist. */
+  sensorTypesByRangeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `warning1Level` field. */
   warning1Level?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `warning2Level` field. */
@@ -53265,6 +54871,26 @@ export type RangePatch = {
   precision?: InputMaybe<Scalars['Int']['input']>;
   warning1Level?: InputMaybe<Scalars['BigFloat']['input']>;
   warning2Level?: InputMaybe<Scalars['BigFloat']['input']>;
+};
+
+/** A filter to be used against many `SensorElementType` object types. All fields are combined with a logical ‘and.’ */
+export type RangeToManySensorElementTypeFilter = {
+  /** Every related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementTypeFilter>;
+  /** No related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementTypeFilter>;
+  /** Some related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementTypeFilter>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type RangeToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `Range` values. */
@@ -53377,6 +55003,10 @@ export type RcCardFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `RcCard` */
@@ -53472,6 +55102,8 @@ export type RefreshTokenFilter = {
   and?: InputMaybe<Array<RefreshTokenFilter>>;
   /** Filter by the object’s `appUserId` field. */
   appUserId?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `aspNetUserByAppUserId` relation. */
+  aspNetUserByAppUserId?: InputMaybe<AspNetUserFilter>;
   /** Filter by the object’s `expires` field. */
   expires?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `id` field. */
@@ -54210,6 +55842,10 @@ export type ReportDetectorCondition = {
 export type ReportDetectorFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<ReportDetectorFilter>>;
+  /** Filter by the object’s `detectorByDetectorId` relation. */
+  detectorByDetectorId?: InputMaybe<DetectorFilter>;
+  /** A related `detectorByDetectorId` exists. */
+  detectorByDetectorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `detectorId` field. */
   detectorId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -54218,6 +55854,10 @@ export type ReportDetectorFilter = {
   not?: InputMaybe<ReportDetectorFilter>;
   /** Checks for any expressions in this list. */
   or?: InputMaybe<Array<ReportDetectorFilter>>;
+  /** Filter by the object’s `reportByReportId` relation. */
+  reportByReportId?: InputMaybe<ReportFilter>;
+  /** A related `reportByReportId` exists. */
+  reportByReportIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `reportId` field. */
   reportId?: InputMaybe<IntFilter>;
 };
@@ -54273,6 +55913,10 @@ export enum ReportDetectorsOrderBy {
 
 /** A filter to be used against `Report` object types. All fields are combined with a logical ‘and.’ */
 export type ReportFilter = {
+  /** Filter by the object’s `actionsByReportId` relation. */
+  actionsByReportId?: InputMaybe<ReportToManyActionFilter>;
+  /** Some related `actionsByReportId` exist. */
+  actionsByReportIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<ReportFilter>>;
   /** Filter by the object’s `checkedTechcentre` field. */
@@ -54287,6 +55931,10 @@ export type ReportFilter = {
   date?: InputMaybe<DateFilter>;
   /** Filter by the object’s `destroyed` field. */
   destroyed?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `endUserByEndUserId` relation. */
+  endUserByEndUserId?: InputMaybe<EndUserFilter>;
+  /** A related `endUserByEndUserId` exists. */
+  endUserByEndUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `endUserId` field. */
   endUserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `extraWork` field. */
@@ -54313,12 +55961,28 @@ export type ReportFilter = {
   remarks?: InputMaybe<StringFilter>;
   /** Filter by the object’s `repair` field. */
   repair?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `reportDetectorsByReportId` relation. */
+  reportDetectorsByReportId?: InputMaybe<ReportToManyReportDetectorFilter>;
+  /** Some related `reportDetectorsByReportId` exist. */
+  reportDetectorsByReportIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `reportItemsByReportId` relation. */
+  reportItemsByReportId?: InputMaybe<ReportToManyReportItemFilter>;
+  /** Some related `reportItemsByReportId` exist. */
+  reportItemsByReportIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `reportSensorsByReportId` relation. */
+  reportSensorsByReportId?: InputMaybe<ReportToManyReportSensorFilter>;
+  /** Some related `reportSensorsByReportId` exist. */
+  reportSensorsByReportIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `startup` field. */
   startup?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `tsrNumber` field. */
   tsrNumber?: InputMaybe<StringFilter>;
   /** Filter by the object’s `type` field. */
   type?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `version` field. */
@@ -54383,12 +56047,16 @@ export type ReportItemFilter = {
   and?: InputMaybe<Array<ReportItemFilter>>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `itemByItemId` relation. */
+  itemByItemId?: InputMaybe<ItemFilter>;
   /** Filter by the object’s `itemId` field. */
   itemId?: InputMaybe<IntFilter>;
   /** Negates the expression. */
   not?: InputMaybe<ReportItemFilter>;
   /** Checks for any expressions in this list. */
   or?: InputMaybe<Array<ReportItemFilter>>;
+  /** Filter by the object’s `reportByReportId` relation. */
+  reportByReportId?: InputMaybe<ReportFilter>;
   /** Filter by the object’s `reportId` field. */
   reportId?: InputMaybe<IntFilter>;
 };
@@ -54573,8 +56241,16 @@ export type ReportSensorFilter = {
   not?: InputMaybe<ReportSensorFilter>;
   /** Checks for any expressions in this list. */
   or?: InputMaybe<Array<ReportSensorFilter>>;
+  /** Filter by the object’s `reportByReportId` relation. */
+  reportByReportId?: InputMaybe<ReportFilter>;
+  /** A related `reportByReportId` exists. */
+  reportByReportIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `reportId` field. */
   reportId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorBySensorId` relation. */
+  sensorBySensorId?: InputMaybe<SensorFilter>;
+  /** A related `sensorBySensorId` exists. */
+  sensorBySensorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `sensorId` field. */
   sensorId?: InputMaybe<IntFilter>;
 };
@@ -54627,6 +56303,46 @@ export enum ReportSensorsOrderBy {
   SensorIdAsc = 'SENSOR_ID_ASC',
   SensorIdDesc = 'SENSOR_ID_DESC'
 }
+
+/** A filter to be used against many `Action` object types. All fields are combined with a logical ‘and.’ */
+export type ReportToManyActionFilter = {
+  /** Every related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ActionFilter>;
+  /** No related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ActionFilter>;
+  /** Some related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ActionFilter>;
+};
+
+/** A filter to be used against many `ReportDetector` object types. All fields are combined with a logical ‘and.’ */
+export type ReportToManyReportDetectorFilter = {
+  /** Every related `ReportDetector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ReportDetectorFilter>;
+  /** No related `ReportDetector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ReportDetectorFilter>;
+  /** Some related `ReportDetector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ReportDetectorFilter>;
+};
+
+/** A filter to be used against many `ReportItem` object types. All fields are combined with a logical ‘and.’ */
+export type ReportToManyReportItemFilter = {
+  /** Every related `ReportItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ReportItemFilter>;
+  /** No related `ReportItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ReportItemFilter>;
+  /** Some related `ReportItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ReportItemFilter>;
+};
+
+/** A filter to be used against many `ReportSensor` object types. All fields are combined with a logical ‘and.’ */
+export type ReportToManyReportSensorFilter = {
+  /** Every related `ReportSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ReportSensorFilter>;
+  /** No related `ReportSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ReportSensorFilter>;
+  /** Some related `ReportSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ReportSensorFilter>;
+};
 
 /** A connection to a list of `Report` values. */
 export type ReportsConnection = {
@@ -54756,6 +56472,8 @@ export type RequestFilter = {
   request?: InputMaybe<StringFilter>;
   /** Filter by the object’s `tableName` field. */
   tableName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `Request` */
@@ -54868,6 +56586,10 @@ export type RxCardFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `RxCard` */
@@ -54980,10 +56702,16 @@ export type SamplePointCondition = {
 export type SamplePointFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<SamplePointFilter>>;
+  /** Filter by the object’s `areaByAreaId` relation. */
+  areaByAreaId?: InputMaybe<AreaFilter>;
   /** Filter by the object’s `areaId` field. */
   areaId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorSensorLocationsBySamplePointId` relation. */
+  detectorSensorLocationsBySamplePointId?: InputMaybe<SamplePointToManyDetectorSensorLocationFilter>;
+  /** Some related `detectorSensorLocationsBySamplePointId` exist. */
+  detectorSensorLocationsBySamplePointIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `modified` field. */
@@ -54996,6 +56724,10 @@ export type SamplePointFilter = {
   or?: InputMaybe<Array<SamplePointFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `SamplePoint` */
@@ -55016,6 +56748,16 @@ export type SamplePointPatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `DetectorSensorLocation` object types. All fields are combined with a logical ‘and.’ */
+export type SamplePointToManyDetectorSensorLocationFilter = {
+  /** Every related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorLocationFilter>;
+  /** No related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorLocationFilter>;
+  /** Some related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorLocationFilter>;
 };
 
 /** A connection to a list of `SamplePoint` values. */
@@ -55293,12 +57035,24 @@ export type SensorBaseTypeFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `prefix` field. */
   prefix?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `principleByPrincipleId` relation. */
+  principleByPrincipleId?: InputMaybe<PrincipleFilter>;
+  /** A related `principleByPrincipleId` exists. */
+  principleByPrincipleIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `principleId` field. */
   principleId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `quotationIntervalMonths` field. */
   quotationIntervalMonths?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorElementTypesBySensorBaseTypeId` relation. */
+  sensorElementTypesBySensorBaseTypeId?: InputMaybe<SensorBaseTypeToManySensorElementTypeFilter>;
+  /** Some related `sensorElementTypesBySensorBaseTypeId` exist. */
+  sensorElementTypesBySensorBaseTypeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorTypesBySensorBaseTypeId` relation. */
+  sensorTypesBySensorBaseTypeId?: InputMaybe<SensorBaseTypeToManySensorTypeFilter>;
+  /** Some related `sensorTypesBySensorBaseTypeId` exist. */
+  sensorTypesBySensorBaseTypeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `series` field. */
   series?: InputMaybe<StringFilter>;
   /** Filter by the object’s `suffix` field. */
@@ -55337,6 +57091,26 @@ export type SensorBaseTypePatch = {
   series?: InputMaybe<Scalars['String']['input']>;
   suffix?: InputMaybe<Scalars['String']['input']>;
   volume?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `SensorElementType` object types. All fields are combined with a logical ‘and.’ */
+export type SensorBaseTypeToManySensorElementTypeFilter = {
+  /** Every related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementTypeFilter>;
+  /** No related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementTypeFilter>;
+  /** Some related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementTypeFilter>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type SensorBaseTypeToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
 };
 
 /** A connection to a list of `SensorBaseType` values. */
@@ -55520,10 +57294,26 @@ export type SensorElementFilter = {
   or?: InputMaybe<Array<SensorElementFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorElementLocationBySensorElementId` relation. */
+  sensorElementLocationBySensorElementId?: InputMaybe<SensorElementLocationFilter>;
+  /** A related `sensorElementLocationBySensorElementId` exists. */
+  sensorElementLocationBySensorElementIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorElementLogsBySensorElementId` relation. */
+  sensorElementLogsBySensorElementId?: InputMaybe<SensorElementToManySensorElementLogFilter>;
+  /** Some related `sensorElementLogsBySensorElementId` exist. */
+  sensorElementLogsBySensorElementIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorElementTypeBySensorElementTypeId` relation. */
+  sensorElementTypeBySensorElementTypeId?: InputMaybe<SensorElementTypeFilter>;
   /** Filter by the object’s `sensorElementTypeId` field. */
   sensorElementTypeId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorSensorElementBySensorElementId` relation. */
+  sensorSensorElementBySensorElementId?: InputMaybe<SensorSensorElementFilter>;
+  /** A related `sensorSensorElementBySensorElementId` exists. */
+  sensorSensorElementBySensorElementIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `SensorElement` */
@@ -55580,6 +57370,8 @@ export type SensorElementLocationFilter = {
   and?: InputMaybe<Array<SensorElementLocationFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorSensorLocationByDetectorSensorLocationId` relation. */
+  detectorSensorLocationByDetectorSensorLocationId?: InputMaybe<DetectorSensorLocationFilter>;
   /** Filter by the object’s `detectorSensorLocationId` field. */
   detectorSensorLocationId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -55592,8 +57384,14 @@ export type SensorElementLocationFilter = {
   or?: InputMaybe<Array<SensorElementLocationFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorElementBySensorElementId` relation. */
+  sensorElementBySensorElementId?: InputMaybe<SensorElementFilter>;
+  /** A related `sensorElementBySensorElementId` exists. */
+  sensorElementBySensorElementIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `sensorElementId` field. */
   sensorElementId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `SensorElementLocation` */
@@ -55704,6 +57502,12 @@ export type SensorElementLogFilter = {
   or?: InputMaybe<Array<SensorElementLogFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorBySensorId` relation. */
+  sensorBySensorId?: InputMaybe<SensorFilter>;
+  /** A related `sensorBySensorId` exists. */
+  sensorBySensorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorElementBySensorElementId` relation. */
+  sensorElementBySensorElementId?: InputMaybe<SensorElementFilter>;
   /** Filter by the object’s `sensorElementId` field. */
   sensorElementId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sensorId` field. */
@@ -55784,6 +57588,16 @@ export type SensorElementPatch = {
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   sensorElementTypeId?: InputMaybe<Scalars['Int']['input']>;
   serialNumber?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `SensorElementLog` object types. All fields are combined with a logical ‘and.’ */
+export type SensorElementToManySensorElementLogFilter = {
+  /** Every related `SensorElementLog` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementLogFilter>;
+  /** No related `SensorElementLog` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementLogFilter>;
+  /** Some related `SensorElementLog` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementLogFilter>;
 };
 
 export type SensorElementType = Node & {
@@ -55868,12 +57682,24 @@ export type SensorElementTypeFilter = {
   or?: InputMaybe<Array<SensorElementTypeFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `rangeByCalRangeId` relation. */
+  rangeByCalRangeId?: InputMaybe<RangeFilter>;
+  /** Filter by the object’s `rangeByRangeId` relation. */
+  rangeByRangeId?: InputMaybe<RangeFilter>;
   /** Filter by the object’s `rangeId` field. */
   rangeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementInterval` field. */
   replacementInterval?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorBaseTypeBySensorBaseTypeId` relation. */
+  sensorBaseTypeBySensorBaseTypeId?: InputMaybe<SensorBaseTypeFilter>;
   /** Filter by the object’s `sensorBaseTypeId` field. */
   sensorBaseTypeId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorElementsBySensorElementTypeId` relation. */
+  sensorElementsBySensorElementTypeId?: InputMaybe<SensorElementTypeToManySensorElementFilter>;
+  /** Some related `sensorElementsBySensorElementTypeId` exist. */
+  sensorElementsBySensorElementTypeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `SensorElementType` */
@@ -55900,6 +57726,16 @@ export type SensorElementTypePatch = {
   rangeId?: InputMaybe<Scalars['Int']['input']>;
   replacementInterval?: InputMaybe<Scalars['Int']['input']>;
   sensorBaseTypeId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `SensorElement` object types. All fields are combined with a logical ‘and.’ */
+export type SensorElementTypeToManySensorElementFilter = {
+  /** Every related `SensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementFilter>;
+  /** No related `SensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementFilter>;
+  /** Some related `SensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementFilter>;
 };
 
 /** A connection to a list of `SensorElementType` values. */
@@ -55998,10 +57834,22 @@ export type SensorFilter = {
   and?: InputMaybe<Array<SensorFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorSensorBySensorId` relation. */
+  detectorSensorBySensorId?: InputMaybe<DetectorSensorFilter>;
+  /** A related `detectorSensorBySensorId` exists. */
+  detectorSensorBySensorIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
   /** Filter by the object’s `labelDate` field. */
   labelDate?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `maintenanceVisitLinesByOriginalSensorId` relation. */
+  maintenanceVisitLinesByOriginalSensorId?: InputMaybe<SensorToManyMaintenanceVisitLineFilter>;
+  /** Some related `maintenanceVisitLinesByOriginalSensorId` exist. */
+  maintenanceVisitLinesByOriginalSensorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `maintenanceVisitLinesBySensorId` relation. */
+  maintenanceVisitLinesBySensorId?: InputMaybe<SensorToManyMaintenanceVisitLineFilter>;
+  /** Some related `maintenanceVisitLinesBySensorId` exist. */
+  maintenanceVisitLinesBySensorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Negates the expression. */
@@ -56012,10 +57860,34 @@ export type SensorFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `remarks` field. */
   remarks?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `reportSensorsBySensorId` relation. */
+  reportSensorsBySensorId?: InputMaybe<SensorToManyReportSensorFilter>;
+  /** Some related `reportSensorsBySensorId` exist. */
+  reportSensorsBySensorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorElementLogsBySensorId` relation. */
+  sensorElementLogsBySensorId?: InputMaybe<SensorToManySensorElementLogFilter>;
+  /** Some related `sensorElementLogsBySensorId` exist. */
+  sensorElementLogsBySensorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorOrdersBySensorId` relation. */
+  sensorOrdersBySensorId?: InputMaybe<SensorToManySensorOrderFilter>;
+  /** Some related `sensorOrdersBySensorId` exist. */
+  sensorOrdersBySensorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorSensorElementsBySensorId` relation. */
+  sensorSensorElementsBySensorId?: InputMaybe<SensorToManySensorSensorElementFilter>;
+  /** Some related `sensorSensorElementsBySensorId` exist. */
+  sensorSensorElementsBySensorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorTestResultsBySensorId` relation. */
+  sensorTestResultsBySensorId?: InputMaybe<SensorToManySensorTestResultFilter>;
+  /** Some related `sensorTestResultsBySensorId` exist. */
+  sensorTestResultsBySensorIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorTypeBySensorTypeId` relation. */
+  sensorTypeBySensorTypeId?: InputMaybe<SensorTypeFilter>;
   /** Filter by the object’s `sensorTypeId` field. */
   sensorTypeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `serialNumber` field. */
   serialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 export type SensorIndex = {
@@ -56226,6 +58098,8 @@ export type SensorOrderFilter = {
   checkedUserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `factureeropdrachtByFactuuropdracht` relation. */
+  factureeropdrachtByFactuuropdracht?: InputMaybe<FactureeropdrachtFilter>;
   /** Filter by the object’s `factuuropdracht` field. */
   factuuropdracht?: InputMaybe<StringFilter>;
   /** Filter by the object’s `id` field. */
@@ -56238,8 +58112,24 @@ export type SensorOrderFilter = {
   or?: InputMaybe<Array<SensorOrderFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorBySensorId` relation. */
+  sensorBySensorId?: InputMaybe<SensorFilter>;
   /** Filter by the object’s `sensorId` field. */
   sensorId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorTestResultsBySensorOrderId` relation. */
+  sensorTestResultsBySensorOrderId?: InputMaybe<SensorOrderToManySensorTestResultFilter>;
+  /** Some related `sensorTestResultsBySensorOrderId` exist. */
+  sensorTestResultsBySensorOrderIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByCheckedUserId` relation. */
+  userByCheckedUserId?: InputMaybe<UserFilter>;
+  /** A related `userByCheckedUserId` exists. */
+  userByCheckedUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** Filter by the object’s `userByVerifiedUserId` relation. */
+  userByVerifiedUserId?: InputMaybe<UserFilter>;
+  /** A related `userByVerifiedUserId` exists. */
+  userByVerifiedUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `verifiedUserId` field. */
   verifiedUserId?: InputMaybe<IntFilter>;
 };
@@ -56266,6 +58156,16 @@ export type SensorOrderPatch = {
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   sensorId?: InputMaybe<Scalars['Int']['input']>;
   verifiedUserId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `SensorTestResult` object types. All fields are combined with a logical ‘and.’ */
+export type SensorOrderToManySensorTestResultFilter = {
+  /** Every related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTestResultFilter>;
+  /** No related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTestResultFilter>;
+  /** Some related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTestResultFilter>;
 };
 
 /** A connection to a list of `SensorOrder` values. */
@@ -56386,12 +58286,18 @@ export type SensorSensorElementFilter = {
   or?: InputMaybe<Array<SensorSensorElementFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorBySensorId` relation. */
+  sensorBySensorId?: InputMaybe<SensorFilter>;
+  /** Filter by the object’s `sensorElementBySensorElementId` relation. */
+  sensorElementBySensorElementId?: InputMaybe<SensorElementFilter>;
   /** Filter by the object’s `sensorElementId` field. */
   sensorElementId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sensorId` field. */
   sensorId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sensorPosition` field. */
   sensorPosition?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `SensorSensorElement` */
@@ -56949,6 +58855,10 @@ export type SensorTestResultCondition = {
 export type SensorTestResultFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<SensorTestResultFilter>>;
+  /** Filter by the object’s `calGasByFsCalGasId` relation. */
+  calGasByFsCalGasId?: InputMaybe<CalGasFilter>;
+  /** A related `calGasByFsCalGasId` exists. */
+  calGasByFsCalGasIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
   /** Filter by the object’s `date` field. */
@@ -56967,14 +58877,24 @@ export type SensorTestResultFilter = {
   or?: InputMaybe<Array<SensorTestResultFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorBySensorId` relation. */
+  sensorBySensorId?: InputMaybe<SensorFilter>;
   /** Filter by the object’s `sensorId` field. */
   sensorId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorOrderBySensorOrderId` relation. */
+  sensorOrderBySensorOrderId?: InputMaybe<SensorOrderFilter>;
+  /** A related `sensorOrderBySensorOrderId` exists. */
+  sensorOrderBySensorOrderIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `sensorOrderId` field. */
   sensorOrderId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `spanResponse` field. */
   spanResponse?: InputMaybe<FloatFilter>;
   /** Filter by the object’s `usedSpanConcentration` field. */
   usedSpanConcentration?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `zeroResponse` field. */
@@ -57069,6 +58989,66 @@ export enum SensorTestResultsOrderBy {
   ZeroResponseAsc = 'ZERO_RESPONSE_ASC',
   ZeroResponseDesc = 'ZERO_RESPONSE_DESC'
 }
+
+/** A filter to be used against many `MaintenanceVisitLine` object types. All fields are combined with a logical ‘and.’ */
+export type SensorToManyMaintenanceVisitLineFilter = {
+  /** Every related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** No related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitLineFilter>;
+  /** Some related `MaintenanceVisitLine` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitLineFilter>;
+};
+
+/** A filter to be used against many `ReportSensor` object types. All fields are combined with a logical ‘and.’ */
+export type SensorToManyReportSensorFilter = {
+  /** Every related `ReportSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ReportSensorFilter>;
+  /** No related `ReportSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ReportSensorFilter>;
+  /** Some related `ReportSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ReportSensorFilter>;
+};
+
+/** A filter to be used against many `SensorElementLog` object types. All fields are combined with a logical ‘and.’ */
+export type SensorToManySensorElementLogFilter = {
+  /** Every related `SensorElementLog` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementLogFilter>;
+  /** No related `SensorElementLog` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementLogFilter>;
+  /** Some related `SensorElementLog` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementLogFilter>;
+};
+
+/** A filter to be used against many `SensorOrder` object types. All fields are combined with a logical ‘and.’ */
+export type SensorToManySensorOrderFilter = {
+  /** Every related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorOrderFilter>;
+  /** No related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorOrderFilter>;
+  /** Some related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorOrderFilter>;
+};
+
+/** A filter to be used against many `SensorSensorElement` object types. All fields are combined with a logical ‘and.’ */
+export type SensorToManySensorSensorElementFilter = {
+  /** Every related `SensorSensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorSensorElementFilter>;
+  /** No related `SensorSensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorSensorElementFilter>;
+  /** Some related `SensorSensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorSensorElementFilter>;
+};
+
+/** A filter to be used against many `SensorTestResult` object types. All fields are combined with a logical ‘and.’ */
+export type SensorToManySensorTestResultFilter = {
+  /** Every related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTestResultFilter>;
+  /** No related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTestResultFilter>;
+  /** Some related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTestResultFilter>;
+};
 
 export type SensorType = Node & {
   __typename?: 'SensorType';
@@ -57256,6 +59236,8 @@ export type SensorTypeFilter = {
   biasMv?: InputMaybe<IntFilter>;
   /** Filter by the object’s `calFlowRate` field. */
   calFlowRate?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `calGasByCalGasId` relation. */
+  calGasByCalGasId?: InputMaybe<CalGasFilter>;
   /** Filter by the object’s `calGasId` field. */
   calGasId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `calResponse` field. */
@@ -57266,14 +59248,26 @@ export type SensorTypeFilter = {
   code?: InputMaybe<StringFilter>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorSensorTypesBySensorTypeId` relation. */
+  detectorSensorTypesBySensorTypeId?: InputMaybe<SensorTypeToManyDetectorSensorTypeFilter>;
+  /** Some related `detectorSensorTypesBySensorTypeId` exist. */
+  detectorSensorTypesBySensorTypeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `direction` field. */
   direction?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `electrodeCount` field. */
   electrodeCount?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `electrolyteByElectrolyteId` relation. */
+  electrolyteByElectrolyteId?: InputMaybe<ElectrolyteFilter>;
+  /** A related `electrolyteByElectrolyteId` exists. */
+  electrolyteByElectrolyteIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `electrolyteId` field. */
   electrolyteId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `elementCount` field. */
   elementCount?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `filterByFilterId` relation. */
+  filterByFilterId?: InputMaybe<FilterFilter>;
+  /** A related `filterByFilterId` exists. */
+  filterByFilterIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `filterId` field. */
   filterId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `flowRate` field. */
@@ -57286,6 +59280,10 @@ export type SensorTypeFilter = {
   lowElectrolyte?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `maintenanceIntervalMonths` field. */
   maintenanceIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `membraneByMembraneId` relation. */
+  membraneByMembraneId?: InputMaybe<MembraneFilter>;
+  /** A related `membraneByMembraneId` exists. */
+  membraneByMembraneIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `membraneId` field. */
   membraneId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `membraneSeal` field. */
@@ -57296,6 +59294,10 @@ export type SensorTypeFilter = {
   modified?: InputMaybe<DatetimeFilter>;
   /** Negates the expression. */
   not?: InputMaybe<SensorTypeFilter>;
+  /** Filter by the object’s `oRingByORingId` relation. */
+  oRingByORingId?: InputMaybe<ORingFilter>;
+  /** A related `oRingByORingId` exists. */
+  oRingByORingIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `oRingId` field. */
   oRingId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `obsolete` field. */
@@ -57304,24 +59306,40 @@ export type SensorTypeFilter = {
   or?: InputMaybe<Array<SensorTypeFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `plugByPlugId` relation. */
+  plugByPlugId?: InputMaybe<PlugFilter>;
+  /** A related `plugByPlugId` exists. */
+  plugByPlugIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `plugId` field. */
   plugId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `principleId` field. */
   principleId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `pyrolyserByPyrolyserId` relation. */
+  pyrolyserByPyrolyserId?: InputMaybe<PyrolyserFilter>;
+  /** A related `pyrolyserByPyrolyserId` exists. */
+  pyrolyserByPyrolyserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `pyrolyserId` field. */
   pyrolyserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `pyrolyserVoltage` field. */
   pyrolyserVoltage?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `rangeByRangeId` relation. */
+  rangeByRangeId?: InputMaybe<RangeFilter>;
   /** Filter by the object’s `rangeId` field. */
   rangeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<IntFilter>;
   /** Filter by the object’s `restrictor` field. */
   restrictor?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `sensorBaseTypeBySensorBaseTypeId` relation. */
+  sensorBaseTypeBySensorBaseTypeId?: InputMaybe<SensorBaseTypeFilter>;
   /** Filter by the object’s `sensorBaseTypeId` field. */
   sensorBaseTypeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sensorTypeId` field. */
   sensorTypeId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorsBySensorTypeId` relation. */
+  sensorsBySensorTypeId?: InputMaybe<SensorTypeToManySensorFilter>;
+  /** Some related `sensorsBySensorTypeId` exist. */
+  sensorsBySensorTypeIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `siliconeSheet` field. */
   siliconeSheet?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `spanResistor` field. */
@@ -57330,6 +59348,8 @@ export type SensorTypeFilter = {
   transportSwitch?: InputMaybe<BooleanFilter>;
   /** Filter by the object’s `type` field. */
   type?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
   /** Filter by the object’s `volume` field. */
   volume?: InputMaybe<IntFilter>;
 };
@@ -57414,6 +59434,26 @@ export type SensorTypePatch = {
   spanResistor?: InputMaybe<Scalars['BigFloat']['input']>;
   transportSwitch?: InputMaybe<Scalars['Boolean']['input']>;
   volume?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `DetectorSensorType` object types. All fields are combined with a logical ‘and.’ */
+export type SensorTypeToManyDetectorSensorTypeFilter = {
+  /** Every related `DetectorSensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorTypeFilter>;
+  /** No related `DetectorSensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorTypeFilter>;
+  /** Some related `DetectorSensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorTypeFilter>;
+};
+
+/** A filter to be used against many `Sensor` object types. All fields are combined with a logical ‘and.’ */
+export type SensorTypeToManySensorFilter = {
+  /** Every related `Sensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorFilter>;
+  /** No related `Sensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorFilter>;
+  /** Some related `Sensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorFilter>;
 };
 
 export type SensorTypesChecklist = {
@@ -58815,6 +60855,10 @@ export type SoftwareFilter = {
   and?: InputMaybe<Array<SoftwareFilter>>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `hardwareByHardwareId` relation. */
+  hardwareByHardwareId?: InputMaybe<HardwareFilter>;
+  /** A related `hardwareByHardwareId` exists. */
+  hardwareByHardwareIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `hardwareId` field. */
   hardwareId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -58841,6 +60885,10 @@ export type SoftwareFilter = {
   serialNumber?: InputMaybe<StringFilter>;
   /** Filter by the object’s `type` field. */
   type?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Software` */
@@ -58994,6 +61042,12 @@ export type StockGroupFilter = {
   or?: InputMaybe<Array<StockGroupFilter>>;
   /** Filter by the object’s `ownerId` field. */
   ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `stockItemsByStockGroupId` relation. */
+  stockItemsByStockGroupId?: InputMaybe<StockGroupToManyStockItemFilter>;
+  /** Some related `stockItemsByStockGroupId` exist. */
+  stockItemsByStockGroupIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `StockGroup` */
@@ -59012,6 +61066,16 @@ export type StockGroupPatch = {
   modified?: InputMaybe<Scalars['Datetime']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against many `StockItem` object types. All fields are combined with a logical ‘and.’ */
+export type StockGroupToManyStockItemFilter = {
+  /** Every related `StockItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<StockItemFilter>;
+  /** No related `StockItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<StockItemFilter>;
+  /** Some related `StockItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<StockItemFilter>;
 };
 
 /** A connection to a list of `StockGroup` values. */
@@ -59116,8 +61180,12 @@ export type StockItemFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `prijsper` field. */
   prijsper?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `stockGroupByStockGroupId` relation. */
+  stockGroupByStockGroupId?: InputMaybe<StockGroupFilter>;
   /** Filter by the object’s `stockGroupId` field. */
   stockGroupId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `StockItem` */
@@ -59252,6 +61320,8 @@ export type StockSupplierFilter = {
   shipmentDay?: InputMaybe<IntFilter>;
   /** Filter by the object’s `shipmentDays` field. */
   shipmentDays?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
 };
 
 /** An input for mutations affecting `StockSupplier` */
@@ -59834,10 +61904,26 @@ export type TaskFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sortCode` field. */
   sortCode?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userTasksByTaskId` relation. */
+  userTasksByTaskId?: InputMaybe<TaskToManyUserTaskFilter>;
+  /** Some related `userTasksByTaskId` exist. */
+  userTasksByTaskIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `wbsoEndDate` field. */
   wbsoEndDate?: InputMaybe<DateFilter>;
   /** Filter by the object’s `wbsoStartDate` field. */
   wbsoStartDate?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `weeklyHourRemarksByTaskId` relation. */
+  weeklyHourRemarksByTaskId?: InputMaybe<TaskToManyWeeklyHourRemarkFilter>;
+  /** Some related `weeklyHourRemarksByTaskId` exist. */
+  weeklyHourRemarksByTaskIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `weeklyHoursByTaskId` relation. */
+  weeklyHoursByTaskId?: InputMaybe<TaskToManyWeeklyHourFilter>;
+  /** Some related `weeklyHoursByTaskId` exist. */
+  weeklyHoursByTaskIdExist?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** An input for mutations affecting `Task` */
@@ -59868,6 +61954,36 @@ export type TaskPatch = {
   sortCode?: InputMaybe<Scalars['Int']['input']>;
   wbsoEndDate?: InputMaybe<Scalars['Date']['input']>;
   wbsoStartDate?: InputMaybe<Scalars['Date']['input']>;
+};
+
+/** A filter to be used against many `UserTask` object types. All fields are combined with a logical ‘and.’ */
+export type TaskToManyUserTaskFilter = {
+  /** Every related `UserTask` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<UserTaskFilter>;
+  /** No related `UserTask` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<UserTaskFilter>;
+  /** Some related `UserTask` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<UserTaskFilter>;
+};
+
+/** A filter to be used against many `WeeklyHour` object types. All fields are combined with a logical ‘and.’ */
+export type TaskToManyWeeklyHourFilter = {
+  /** Every related `WeeklyHour` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<WeeklyHourFilter>;
+  /** No related `WeeklyHour` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<WeeklyHourFilter>;
+  /** Some related `WeeklyHour` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<WeeklyHourFilter>;
+};
+
+/** A filter to be used against many `WeeklyHourRemark` object types. All fields are combined with a logical ‘and.’ */
+export type TaskToManyWeeklyHourRemarkFilter = {
+  /** Every related `WeeklyHourRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<WeeklyHourRemarkFilter>;
+  /** No related `WeeklyHourRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<WeeklyHourRemarkFilter>;
+  /** Some related `WeeklyHourRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<WeeklyHourRemarkFilter>;
 };
 
 /** A connection to a list of `Task` values. */
@@ -69273,34 +71389,382 @@ export type UserCondition = {
 
 /** A filter to be used against `User` object types. All fields are combined with a logical ‘and.’ */
 export type UserFilter = {
+  /** Filter by the object’s `actionsByOwnerId` relation. */
+  actionsByOwnerId?: InputMaybe<UserToManyActionFilter>;
+  /** Some related `actionsByOwnerId` exist. */
+  actionsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `actionsByUserId` relation. */
+  actionsByUserId?: InputMaybe<UserToManyActionFilter>;
+  /** Some related `actionsByUserId` exist. */
+  actionsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<UserFilter>>;
+  /** Filter by the object’s `applicationsByOwnerId` relation. */
+  applicationsByOwnerId?: InputMaybe<UserToManyApplicationFilter>;
+  /** Some related `applicationsByOwnerId` exist. */
+  applicationsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `areasByOwnerId` relation. */
+  areasByOwnerId?: InputMaybe<UserToManyAreaFilter>;
+  /** Some related `areasByOwnerId` exist. */
+  areasByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `assembliesByOwnerId` relation. */
+  assembliesByOwnerId?: InputMaybe<UserToManyAssemblyFilter>;
+  /** Some related `assembliesByOwnerId` exist. */
+  assembliesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `assemblyPartsByOwnerId` relation. */
+  assemblyPartsByOwnerId?: InputMaybe<UserToManyAssemblyPartFilter>;
+  /** Some related `assemblyPartsByOwnerId` exist. */
+  assemblyPartsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `assemblyTypePartsByOwnerId` relation. */
+  assemblyTypePartsByOwnerId?: InputMaybe<UserToManyAssemblyTypePartFilter>;
+  /** Some related `assemblyTypePartsByOwnerId` exist. */
+  assemblyTypePartsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `assemblyTypesByOwnerId` relation. */
+  assemblyTypesByOwnerId?: InputMaybe<UserToManyAssemblyTypeFilter>;
+  /** Some related `assemblyTypesByOwnerId` exist. */
+  assemblyTypesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `buildingsByOwnerId` relation. */
+  buildingsByOwnerId?: InputMaybe<UserToManyBuildingFilter>;
+  /** Some related `buildingsByOwnerId` exist. */
+  buildingsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `calGasesByOwnerId` relation. */
+  calGasesByOwnerId?: InputMaybe<UserToManyCalGasFilter>;
+  /** Some related `calGasesByOwnerId` exist. */
+  calGasesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `catalogGroupsByOwnerId` relation. */
+  catalogGroupsByOwnerId?: InputMaybe<UserToManyCatalogGroupFilter>;
+  /** Some related `catalogGroupsByOwnerId` exist. */
+  catalogGroupsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `catalogItemFilesByOwnerId` relation. */
+  catalogItemFilesByOwnerId?: InputMaybe<UserToManyCatalogItemFileFilter>;
+  /** Some related `catalogItemFilesByOwnerId` exist. */
+  catalogItemFilesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `catalogItemsByOwnerId` relation. */
+  catalogItemsByOwnerId?: InputMaybe<UserToManyCatalogItemFilter>;
+  /** Some related `catalogItemsByOwnerId` exist. */
+  catalogItemsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `catalogSubGroupsByOwnerId` relation. */
+  catalogSubGroupsByOwnerId?: InputMaybe<UserToManyCatalogSubGroupFilter>;
+  /** Some related `catalogSubGroupsByOwnerId` exist. */
+  catalogSubGroupsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `chemicalCompoundsByOwnerId` relation. */
+  chemicalCompoundsByOwnerId?: InputMaybe<UserToManyChemicalCompoundFilter>;
+  /** Some related `chemicalCompoundsByOwnerId` exist. */
+  chemicalCompoundsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `created` field. */
   created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `detectorLocationsByOwnerId` relation. */
+  detectorLocationsByOwnerId?: InputMaybe<UserToManyDetectorLocationFilter>;
+  /** Some related `detectorLocationsByOwnerId` exist. */
+  detectorLocationsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorOrdersByOwnerId` relation. */
+  detectorOrdersByOwnerId?: InputMaybe<UserToManyDetectorOrderFilter>;
+  /** Some related `detectorOrdersByOwnerId` exist. */
+  detectorOrdersByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorSensorLocationsByOwnerId` relation. */
+  detectorSensorLocationsByOwnerId?: InputMaybe<UserToManyDetectorSensorLocationFilter>;
+  /** Some related `detectorSensorLocationsByOwnerId` exist. */
+  detectorSensorLocationsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorSensorTypesByOwnerId` relation. */
+  detectorSensorTypesByOwnerId?: InputMaybe<UserToManyDetectorSensorTypeFilter>;
+  /** Some related `detectorSensorTypesByOwnerId` exist. */
+  detectorSensorTypesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorSensorsByOwnerId` relation. */
+  detectorSensorsByOwnerId?: InputMaybe<UserToManyDetectorSensorFilter>;
+  /** Some related `detectorSensorsByOwnerId` exist. */
+  detectorSensorsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorTypesByOwnerId` relation. */
+  detectorTypesByOwnerId?: InputMaybe<UserToManyDetectorTypeFilter>;
+  /** Some related `detectorTypesByOwnerId` exist. */
+  detectorTypesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `detectorsByOwnerId` relation. */
+  detectorsByOwnerId?: InputMaybe<UserToManyDetectorFilter>;
+  /** Some related `detectorsByOwnerId` exist. */
+  detectorsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `dpCardsByOwnerId` relation. */
+  dpCardsByOwnerId?: InputMaybe<UserToManyDpCardFilter>;
+  /** Some related `dpCardsByOwnerId` exist. */
+  dpCardsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `electrolytesByOwnerId` relation. */
+  electrolytesByOwnerId?: InputMaybe<UserToManyElectrolyteFilter>;
+  /** Some related `electrolytesByOwnerId` exist. */
+  electrolytesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `endUsersByOwnerId` relation. */
+  endUsersByOwnerId?: InputMaybe<UserToManyEndUserFilter>;
+  /** Some related `endUsersByOwnerId` exist. */
+  endUsersByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `factopdrachtregelLineRemarksByUserId` relation. */
+  factopdrachtregelLineRemarksByUserId?: InputMaybe<UserToManyFactopdrachtregelLineRemarkFilter>;
+  /** Some related `factopdrachtregelLineRemarksByUserId` exist. */
+  factopdrachtregelLineRemarksByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `factuursByCheckedId` relation. */
+  factuursByCheckedId?: InputMaybe<UserToManyFactuurFilter>;
+  /** Some related `factuursByCheckedId` exist. */
+  factuursByCheckedIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `factuursByOwnerId` relation. */
+  factuursByOwnerId?: InputMaybe<UserToManyFactuurFilter>;
+  /** Some related `factuursByOwnerId` exist. */
+  factuursByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `factuursBySentId` relation. */
+  factuursBySentId?: InputMaybe<UserToManyFactuurFilter>;
+  /** Some related `factuursBySentId` exist. */
+  factuursBySentIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `filtersByOwnerId` relation. */
+  filtersByOwnerId?: InputMaybe<UserToManyFilterFilter>;
+  /** Some related `filtersByOwnerId` exist. */
+  filtersByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `floorsByOwnerId` relation. */
+  floorsByOwnerId?: InputMaybe<UserToManyFloorFilter>;
+  /** Some related `floorsByOwnerId` exist. */
+  floorsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `fullname` field. */
   fullname?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `gasesByOwnerId` relation. */
+  gasesByOwnerId?: InputMaybe<UserToManyGasFilter>;
+  /** Some related `gasesByOwnerId` exist. */
+  gasesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `groupByGroupId` relation. */
+  groupByGroupId?: InputMaybe<GroupFilter>;
+  /** A related `groupByGroupId` exists. */
+  groupByGroupIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `groupId` field. */
   groupId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `groupsByOwnerId` relation. */
+  groupsByOwnerId?: InputMaybe<UserToManyGroupFilter>;
+  /** Some related `groupsByOwnerId` exist. */
+  groupsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `hardwaresByOwnerId` relation. */
+  hardwaresByOwnerId?: InputMaybe<UserToManyHardwareFilter>;
+  /** Some related `hardwaresByOwnerId` exist. */
+  hardwaresByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `hardwaresByUserId` relation. */
+  hardwaresByUserId?: InputMaybe<UserToManyHardwareFilter>;
+  /** Some related `hardwaresByUserId` exist. */
+  hardwaresByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `holidayStartBalance` field. */
   holidayStartBalance?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
   id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `incomingDocumentsByOwnerId` relation. */
+  incomingDocumentsByOwnerId?: InputMaybe<UserToManyIncomingDocumentFilter>;
+  /** Some related `incomingDocumentsByOwnerId` exist. */
+  incomingDocumentsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `incomingDocumentsByUserId` relation. */
+  incomingDocumentsByUserId?: InputMaybe<UserToManyIncomingDocumentFilter>;
+  /** Some related `incomingDocumentsByUserId` exist. */
+  incomingDocumentsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `initials` field. */
   initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `itemsByOwnerId` relation. */
+  itemsByOwnerId?: InputMaybe<UserToManyItemFilter>;
+  /** Some related `itemsByOwnerId` exist. */
+  itemsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `jobsByOwnerId` relation. */
+  jobsByOwnerId?: InputMaybe<UserToManyJobFilter>;
+  /** Some related `jobsByOwnerId` exist. */
+  jobsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `junctionBoxesByOwnerId` relation. */
+  junctionBoxesByOwnerId?: InputMaybe<UserToManyJunctionBoxFilter>;
+  /** Some related `junctionBoxesByOwnerId` exist. */
+  junctionBoxesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `leadsByOwnerId` relation. */
+  leadsByOwnerId?: InputMaybe<UserToManyLeadFilter>;
+  /** Some related `leadsByOwnerId` exist. */
+  leadsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `licenseCustomersByOwnerId` relation. */
+  licenseCustomersByOwnerId?: InputMaybe<UserToManyLicenseCustomerFilter>;
+  /** Some related `licenseCustomersByOwnerId` exist. */
+  licenseCustomersByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `licenseModulesByOwnerId` relation. */
+  licenseModulesByOwnerId?: InputMaybe<UserToManyLicenseModuleFilter>;
+  /** Some related `licenseModulesByOwnerId` exist. */
+  licenseModulesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `licenseOrdersByOwnerId` relation. */
+  licenseOrdersByOwnerId?: InputMaybe<UserToManyLicenseOrderFilter>;
+  /** Some related `licenseOrdersByOwnerId` exist. */
+  licenseOrdersByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `licenseRegistrationsByOwnerId` relation. */
+  licenseRegistrationsByOwnerId?: InputMaybe<UserToManyLicenseRegistrationFilter>;
+  /** Some related `licenseRegistrationsByOwnerId` exist. */
+  licenseRegistrationsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `licensesByOwnerId` relation. */
+  licensesByOwnerId?: InputMaybe<UserToManyLicenseFilter>;
+  /** Some related `licensesByOwnerId` exist. */
+  licensesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `maintenanceVisitsByOwnerId` relation. */
+  maintenanceVisitsByOwnerId?: InputMaybe<UserToManyMaintenanceVisitFilter>;
+  /** Some related `maintenanceVisitsByOwnerId` exist. */
+  maintenanceVisitsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `maintenanceVisitsByUserId` relation. */
+  maintenanceVisitsByUserId?: InputMaybe<UserToManyMaintenanceVisitFilter>;
+  /** Some related `maintenanceVisitsByUserId` exist. */
+  maintenanceVisitsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `membranesByOwnerId` relation. */
+  membranesByOwnerId?: InputMaybe<UserToManyMembraneFilter>;
+  /** Some related `membranesByOwnerId` exist. */
+  membranesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `modified` field. */
   modified?: InputMaybe<DatetimeFilter>;
   /** Negates the expression. */
   not?: InputMaybe<UserFilter>;
+  /** Filter by the object’s `oRingsByOwnerId` relation. */
+  oRingsByOwnerId?: InputMaybe<UserToManyORingFilter>;
+  /** Some related `oRingsByOwnerId` exist. */
+  oRingsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `offerteRemarksByOwnerId` relation. */
+  offerteRemarksByOwnerId?: InputMaybe<UserToManyOfferteRemarkFilter>;
+  /** Some related `offerteRemarksByOwnerId` exist. */
+  offerteRemarksByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `opportunitiesByOwnerId` relation. */
+  opportunitiesByOwnerId?: InputMaybe<UserToManyOpportunityFilter>;
+  /** Some related `opportunitiesByOwnerId` exist. */
+  opportunitiesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Checks for any expressions in this list. */
   or?: InputMaybe<Array<UserFilter>>;
   /** Filter by the object’s `overtimeStartBalance` field. */
   overtimeStartBalance?: InputMaybe<IntFilter>;
   /** Filter by the object’s `password` field. */
   password?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `plugsByOwnerId` relation. */
+  plugsByOwnerId?: InputMaybe<UserToManyPlugFilter>;
+  /** Some related `plugsByOwnerId` exist. */
+  plugsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `principlesByOwnerId` relation. */
+  principlesByOwnerId?: InputMaybe<UserToManyPrincipleFilter>;
+  /** Some related `principlesByOwnerId` exist. */
+  principlesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `pyrolysersByOwnerId` relation. */
+  pyrolysersByOwnerId?: InputMaybe<UserToManyPyrolyserFilter>;
+  /** Some related `pyrolysersByOwnerId` exist. */
+  pyrolysersByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `rangesByOwnerId` relation. */
+  rangesByOwnerId?: InputMaybe<UserToManyRangeFilter>;
+  /** Some related `rangesByOwnerId` exist. */
+  rangesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `rcCardsByOwnerId` relation. */
+  rcCardsByOwnerId?: InputMaybe<UserToManyRcCardFilter>;
+  /** Some related `rcCardsByOwnerId` exist. */
+  rcCardsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `reportsByOwnerId` relation. */
+  reportsByOwnerId?: InputMaybe<UserToManyReportFilter>;
+  /** Some related `reportsByOwnerId` exist. */
+  reportsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `reportsByUserId` relation. */
+  reportsByUserId?: InputMaybe<UserToManyReportFilter>;
+  /** Some related `reportsByUserId` exist. */
+  reportsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `requestsByOwnerId` relation. */
+  requestsByOwnerId?: InputMaybe<UserToManyRequestFilter>;
+  /** Some related `requestsByOwnerId` exist. */
+  requestsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `rxCardsByOwnerId` relation. */
+  rxCardsByOwnerId?: InputMaybe<UserToManyRxCardFilter>;
+  /** Some related `rxCardsByOwnerId` exist. */
+  rxCardsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `samplePointsByOwnerId` relation. */
+  samplePointsByOwnerId?: InputMaybe<UserToManySamplePointFilter>;
+  /** Some related `samplePointsByOwnerId` exist. */
+  samplePointsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorElementLocationsByOwnerId` relation. */
+  sensorElementLocationsByOwnerId?: InputMaybe<UserToManySensorElementLocationFilter>;
+  /** Some related `sensorElementLocationsByOwnerId` exist. */
+  sensorElementLocationsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorElementTypesByOwnerId` relation. */
+  sensorElementTypesByOwnerId?: InputMaybe<UserToManySensorElementTypeFilter>;
+  /** Some related `sensorElementTypesByOwnerId` exist. */
+  sensorElementTypesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorElementsByOwnerId` relation. */
+  sensorElementsByOwnerId?: InputMaybe<UserToManySensorElementFilter>;
+  /** Some related `sensorElementsByOwnerId` exist. */
+  sensorElementsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorOrdersByCheckedUserId` relation. */
+  sensorOrdersByCheckedUserId?: InputMaybe<UserToManySensorOrderFilter>;
+  /** Some related `sensorOrdersByCheckedUserId` exist. */
+  sensorOrdersByCheckedUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorOrdersByOwnerId` relation. */
+  sensorOrdersByOwnerId?: InputMaybe<UserToManySensorOrderFilter>;
+  /** Some related `sensorOrdersByOwnerId` exist. */
+  sensorOrdersByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorOrdersByVerifiedUserId` relation. */
+  sensorOrdersByVerifiedUserId?: InputMaybe<UserToManySensorOrderFilter>;
+  /** Some related `sensorOrdersByVerifiedUserId` exist. */
+  sensorOrdersByVerifiedUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorSensorElementsByOwnerId` relation. */
+  sensorSensorElementsByOwnerId?: InputMaybe<UserToManySensorSensorElementFilter>;
+  /** Some related `sensorSensorElementsByOwnerId` exist. */
+  sensorSensorElementsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorTestResultsByOwnerId` relation. */
+  sensorTestResultsByOwnerId?: InputMaybe<UserToManySensorTestResultFilter>;
+  /** Some related `sensorTestResultsByOwnerId` exist. */
+  sensorTestResultsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorTestResultsByUserId` relation. */
+  sensorTestResultsByUserId?: InputMaybe<UserToManySensorTestResultFilter>;
+  /** Some related `sensorTestResultsByUserId` exist. */
+  sensorTestResultsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorTypesByOwnerId` relation. */
+  sensorTypesByOwnerId?: InputMaybe<UserToManySensorTypeFilter>;
+  /** Some related `sensorTypesByOwnerId` exist. */
+  sensorTypesByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `sensorsByOwnerId` relation. */
+  sensorsByOwnerId?: InputMaybe<UserToManySensorFilter>;
+  /** Some related `sensorsByOwnerId` exist. */
+  sensorsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `softwaresByOwnerId` relation. */
+  softwaresByOwnerId?: InputMaybe<UserToManySoftwareFilter>;
+  /** Some related `softwaresByOwnerId` exist. */
+  softwaresByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `stockGroupsByOwnerId` relation. */
+  stockGroupsByOwnerId?: InputMaybe<UserToManyStockGroupFilter>;
+  /** Some related `stockGroupsByOwnerId` exist. */
+  stockGroupsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `stockItemsByOwnerId` relation. */
+  stockItemsByOwnerId?: InputMaybe<UserToManyStockItemFilter>;
+  /** Some related `stockItemsByOwnerId` exist. */
+  stockItemsByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `stockSuppliersByOwnerId` relation. */
+  stockSuppliersByOwnerId?: InputMaybe<UserToManyStockSupplierFilter>;
+  /** Some related `stockSuppliersByOwnerId` exist. */
+  stockSuppliersByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `tasksByOwnerId` relation. */
+  tasksByOwnerId?: InputMaybe<UserToManyTaskFilter>;
+  /** Some related `tasksByOwnerId` exist. */
+  tasksByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `url` field. */
   url?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userRightsByUserId` relation. */
+  userRightsByUserId?: InputMaybe<UserToManyUserRightFilter>;
+  /** Some related `userRightsByUserId` exist. */
+  userRightsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userTasksByOwnerId` relation. */
+  userTasksByOwnerId?: InputMaybe<UserToManyUserTaskFilter>;
+  /** Some related `userTasksByOwnerId` exist. */
+  userTasksByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userTasksByUserId` relation. */
+  userTasksByUserId?: InputMaybe<UserToManyUserTaskFilter>;
+  /** Some related `userTasksByUserId` exist. */
+  userTasksByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `username` field. */
   username?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `usersGroupsByUserId` relation. */
+  usersGroupsByUserId?: InputMaybe<UserToManyUsersGroupFilter>;
+  /** Some related `usersGroupsByUserId` exist. */
+  usersGroupsByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `weeklyHourRemarksByOwnerId` relation. */
+  weeklyHourRemarksByOwnerId?: InputMaybe<UserToManyWeeklyHourRemarkFilter>;
+  /** Some related `weeklyHourRemarksByOwnerId` exist. */
+  weeklyHourRemarksByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `weeklyHourRemarksByUserId` relation. */
+  weeklyHourRemarksByUserId?: InputMaybe<UserToManyWeeklyHourRemarkFilter>;
+  /** Some related `weeklyHourRemarksByUserId` exist. */
+  weeklyHourRemarksByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `weeklyHoursByOwnerId` relation. */
+  weeklyHoursByOwnerId?: InputMaybe<UserToManyWeeklyHourFilter>;
+  /** Some related `weeklyHoursByOwnerId` exist. */
+  weeklyHoursByOwnerIdExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `weeklyHoursByUserId` relation. */
+  weeklyHoursByUserId?: InputMaybe<UserToManyWeeklyHourFilter>;
+  /** Some related `weeklyHoursByUserId` exist. */
+  weeklyHoursByUserIdExist?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `weeklyHoursFullAccess` field. */
   weeklyHoursFullAccess?: InputMaybe<BooleanFilter>;
 };
@@ -69393,6 +71857,10 @@ export type UserRightFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `path` field. */
   path?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
+  /** A related `userByUserId` exists. */
+  userByUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -69520,8 +71988,20 @@ export type UserTaskFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `qualifiesForOvertime` field. */
   qualifiesForOvertime?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `taskByTaskId` relation. */
+  taskByTaskId?: InputMaybe<TaskFilter>;
+  /** A related `taskByTaskId` exists. */
+  taskByTaskIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `taskId` field. */
   taskId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
+  /** A related `userByUserId` exists. */
+  userByUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -69591,6 +72071,736 @@ export enum UserTasksOrderBy {
   UserIdDesc = 'USER_ID_DESC'
 }
 
+/** A filter to be used against many `Action` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyActionFilter = {
+  /** Every related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ActionFilter>;
+  /** No related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ActionFilter>;
+  /** Some related `Action` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ActionFilter>;
+};
+
+/** A filter to be used against many `Application` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyApplicationFilter = {
+  /** Every related `Application` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ApplicationFilter>;
+  /** No related `Application` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ApplicationFilter>;
+  /** Some related `Application` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ApplicationFilter>;
+};
+
+/** A filter to be used against many `Area` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyAreaFilter = {
+  /** Every related `Area` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AreaFilter>;
+  /** No related `Area` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AreaFilter>;
+  /** Some related `Area` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AreaFilter>;
+};
+
+/** A filter to be used against many `Assembly` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyAssemblyFilter = {
+  /** Every related `Assembly` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AssemblyFilter>;
+  /** No related `Assembly` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AssemblyFilter>;
+  /** Some related `Assembly` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AssemblyFilter>;
+};
+
+/** A filter to be used against many `AssemblyPart` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyAssemblyPartFilter = {
+  /** Every related `AssemblyPart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AssemblyPartFilter>;
+  /** No related `AssemblyPart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AssemblyPartFilter>;
+  /** Some related `AssemblyPart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AssemblyPartFilter>;
+};
+
+/** A filter to be used against many `AssemblyType` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyAssemblyTypeFilter = {
+  /** Every related `AssemblyType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AssemblyTypeFilter>;
+  /** No related `AssemblyType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AssemblyTypeFilter>;
+  /** Some related `AssemblyType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AssemblyTypeFilter>;
+};
+
+/** A filter to be used against many `AssemblyTypePart` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyAssemblyTypePartFilter = {
+  /** Every related `AssemblyTypePart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<AssemblyTypePartFilter>;
+  /** No related `AssemblyTypePart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<AssemblyTypePartFilter>;
+  /** Some related `AssemblyTypePart` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<AssemblyTypePartFilter>;
+};
+
+/** A filter to be used against many `Building` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyBuildingFilter = {
+  /** Every related `Building` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<BuildingFilter>;
+  /** No related `Building` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<BuildingFilter>;
+  /** Some related `Building` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<BuildingFilter>;
+};
+
+/** A filter to be used against many `CalGas` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyCalGasFilter = {
+  /** Every related `CalGas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CalGasFilter>;
+  /** No related `CalGas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CalGasFilter>;
+  /** Some related `CalGas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CalGasFilter>;
+};
+
+/** A filter to be used against many `CatalogGroup` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyCatalogGroupFilter = {
+  /** Every related `CatalogGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CatalogGroupFilter>;
+  /** No related `CatalogGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CatalogGroupFilter>;
+  /** Some related `CatalogGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CatalogGroupFilter>;
+};
+
+/** A filter to be used against many `CatalogItemFile` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyCatalogItemFileFilter = {
+  /** Every related `CatalogItemFile` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CatalogItemFileFilter>;
+  /** No related `CatalogItemFile` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CatalogItemFileFilter>;
+  /** Some related `CatalogItemFile` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CatalogItemFileFilter>;
+};
+
+/** A filter to be used against many `CatalogItem` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyCatalogItemFilter = {
+  /** Every related `CatalogItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CatalogItemFilter>;
+  /** No related `CatalogItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CatalogItemFilter>;
+  /** Some related `CatalogItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CatalogItemFilter>;
+};
+
+/** A filter to be used against many `CatalogSubGroup` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyCatalogSubGroupFilter = {
+  /** Every related `CatalogSubGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<CatalogSubGroupFilter>;
+  /** No related `CatalogSubGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<CatalogSubGroupFilter>;
+  /** Some related `CatalogSubGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<CatalogSubGroupFilter>;
+};
+
+/** A filter to be used against many `ChemicalCompound` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyChemicalCompoundFilter = {
+  /** Every related `ChemicalCompound` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ChemicalCompoundFilter>;
+  /** No related `ChemicalCompound` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ChemicalCompoundFilter>;
+  /** Some related `ChemicalCompound` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ChemicalCompoundFilter>;
+};
+
+/** A filter to be used against many `Detector` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyDetectorFilter = {
+  /** Every related `Detector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorFilter>;
+  /** No related `Detector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorFilter>;
+  /** Some related `Detector` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorFilter>;
+};
+
+/** A filter to be used against many `DetectorLocation` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyDetectorLocationFilter = {
+  /** Every related `DetectorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorLocationFilter>;
+  /** No related `DetectorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorLocationFilter>;
+  /** Some related `DetectorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorLocationFilter>;
+};
+
+/** A filter to be used against many `DetectorOrder` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyDetectorOrderFilter = {
+  /** Every related `DetectorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorOrderFilter>;
+  /** No related `DetectorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorOrderFilter>;
+  /** Some related `DetectorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorOrderFilter>;
+};
+
+/** A filter to be used against many `DetectorSensor` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyDetectorSensorFilter = {
+  /** Every related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorFilter>;
+  /** No related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorFilter>;
+  /** Some related `DetectorSensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorFilter>;
+};
+
+/** A filter to be used against many `DetectorSensorLocation` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyDetectorSensorLocationFilter = {
+  /** Every related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorLocationFilter>;
+  /** No related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorLocationFilter>;
+  /** Some related `DetectorSensorLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorLocationFilter>;
+};
+
+/** A filter to be used against many `DetectorSensorType` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyDetectorSensorTypeFilter = {
+  /** Every related `DetectorSensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorSensorTypeFilter>;
+  /** No related `DetectorSensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorSensorTypeFilter>;
+  /** Some related `DetectorSensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorSensorTypeFilter>;
+};
+
+/** A filter to be used against many `DetectorType` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyDetectorTypeFilter = {
+  /** Every related `DetectorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DetectorTypeFilter>;
+  /** No related `DetectorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DetectorTypeFilter>;
+  /** Some related `DetectorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DetectorTypeFilter>;
+};
+
+/** A filter to be used against many `DpCard` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyDpCardFilter = {
+  /** Every related `DpCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<DpCardFilter>;
+  /** No related `DpCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<DpCardFilter>;
+  /** Some related `DpCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<DpCardFilter>;
+};
+
+/** A filter to be used against many `Electrolyte` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyElectrolyteFilter = {
+  /** Every related `Electrolyte` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ElectrolyteFilter>;
+  /** No related `Electrolyte` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ElectrolyteFilter>;
+  /** Some related `Electrolyte` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ElectrolyteFilter>;
+};
+
+/** A filter to be used against many `EndUser` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyEndUserFilter = {
+  /** Every related `EndUser` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<EndUserFilter>;
+  /** No related `EndUser` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<EndUserFilter>;
+  /** Some related `EndUser` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<EndUserFilter>;
+};
+
+/** A filter to be used against many `FactopdrachtregelLineRemark` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyFactopdrachtregelLineRemarkFilter = {
+  /** Every related `FactopdrachtregelLineRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<FactopdrachtregelLineRemarkFilter>;
+  /** No related `FactopdrachtregelLineRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<FactopdrachtregelLineRemarkFilter>;
+  /** Some related `FactopdrachtregelLineRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<FactopdrachtregelLineRemarkFilter>;
+};
+
+/** A filter to be used against many `Factuur` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyFactuurFilter = {
+  /** Every related `Factuur` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<FactuurFilter>;
+  /** No related `Factuur` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<FactuurFilter>;
+  /** Some related `Factuur` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<FactuurFilter>;
+};
+
+/** A filter to be used against many `Filter` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyFilterFilter = {
+  /** Every related `Filter` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<FilterFilter>;
+  /** No related `Filter` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<FilterFilter>;
+  /** Some related `Filter` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<FilterFilter>;
+};
+
+/** A filter to be used against many `Floor` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyFloorFilter = {
+  /** Every related `Floor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<FloorFilter>;
+  /** No related `Floor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<FloorFilter>;
+  /** Some related `Floor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<FloorFilter>;
+};
+
+/** A filter to be used against many `Gas` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyGasFilter = {
+  /** Every related `Gas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<GasFilter>;
+  /** No related `Gas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<GasFilter>;
+  /** Some related `Gas` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<GasFilter>;
+};
+
+/** A filter to be used against many `Group` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyGroupFilter = {
+  /** Every related `Group` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<GroupFilter>;
+  /** No related `Group` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<GroupFilter>;
+  /** Some related `Group` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<GroupFilter>;
+};
+
+/** A filter to be used against many `Hardware` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyHardwareFilter = {
+  /** Every related `Hardware` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<HardwareFilter>;
+  /** No related `Hardware` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<HardwareFilter>;
+  /** Some related `Hardware` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<HardwareFilter>;
+};
+
+/** A filter to be used against many `IncomingDocument` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyIncomingDocumentFilter = {
+  /** Every related `IncomingDocument` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<IncomingDocumentFilter>;
+  /** No related `IncomingDocument` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<IncomingDocumentFilter>;
+  /** Some related `IncomingDocument` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<IncomingDocumentFilter>;
+};
+
+/** A filter to be used against many `Item` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyItemFilter = {
+  /** Every related `Item` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ItemFilter>;
+  /** No related `Item` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ItemFilter>;
+  /** Some related `Item` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ItemFilter>;
+};
+
+/** A filter to be used against many `Job` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyJobFilter = {
+  /** Every related `Job` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<JobFilter>;
+  /** No related `Job` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<JobFilter>;
+  /** Some related `Job` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<JobFilter>;
+};
+
+/** A filter to be used against many `JunctionBox` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyJunctionBoxFilter = {
+  /** Every related `JunctionBox` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<JunctionBoxFilter>;
+  /** No related `JunctionBox` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<JunctionBoxFilter>;
+  /** Some related `JunctionBox` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<JunctionBoxFilter>;
+};
+
+/** A filter to be used against many `Lead` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyLeadFilter = {
+  /** Every related `Lead` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LeadFilter>;
+  /** No related `Lead` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LeadFilter>;
+  /** Some related `Lead` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LeadFilter>;
+};
+
+/** A filter to be used against many `LicenseCustomer` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyLicenseCustomerFilter = {
+  /** Every related `LicenseCustomer` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseCustomerFilter>;
+  /** No related `LicenseCustomer` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseCustomerFilter>;
+  /** Some related `LicenseCustomer` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseCustomerFilter>;
+};
+
+/** A filter to be used against many `License` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyLicenseFilter = {
+  /** Every related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseFilter>;
+  /** No related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseFilter>;
+  /** Some related `License` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseFilter>;
+};
+
+/** A filter to be used against many `LicenseModule` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyLicenseModuleFilter = {
+  /** Every related `LicenseModule` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseModuleFilter>;
+  /** No related `LicenseModule` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseModuleFilter>;
+  /** Some related `LicenseModule` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseModuleFilter>;
+};
+
+/** A filter to be used against many `LicenseOrder` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyLicenseOrderFilter = {
+  /** Every related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseOrderFilter>;
+  /** No related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseOrderFilter>;
+  /** Some related `LicenseOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseOrderFilter>;
+};
+
+/** A filter to be used against many `LicenseRegistration` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyLicenseRegistrationFilter = {
+  /** Every related `LicenseRegistration` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<LicenseRegistrationFilter>;
+  /** No related `LicenseRegistration` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<LicenseRegistrationFilter>;
+  /** Some related `LicenseRegistration` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<LicenseRegistrationFilter>;
+};
+
+/** A filter to be used against many `MaintenanceVisit` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyMaintenanceVisitFilter = {
+  /** Every related `MaintenanceVisit` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MaintenanceVisitFilter>;
+  /** No related `MaintenanceVisit` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MaintenanceVisitFilter>;
+  /** Some related `MaintenanceVisit` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MaintenanceVisitFilter>;
+};
+
+/** A filter to be used against many `Membrane` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyMembraneFilter = {
+  /** Every related `Membrane` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<MembraneFilter>;
+  /** No related `Membrane` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<MembraneFilter>;
+  /** Some related `Membrane` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<MembraneFilter>;
+};
+
+/** A filter to be used against many `ORing` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyORingFilter = {
+  /** Every related `ORing` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ORingFilter>;
+  /** No related `ORing` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ORingFilter>;
+  /** Some related `ORing` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ORingFilter>;
+};
+
+/** A filter to be used against many `OfferteRemark` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyOfferteRemarkFilter = {
+  /** Every related `OfferteRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<OfferteRemarkFilter>;
+  /** No related `OfferteRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<OfferteRemarkFilter>;
+  /** Some related `OfferteRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<OfferteRemarkFilter>;
+};
+
+/** A filter to be used against many `Opportunity` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyOpportunityFilter = {
+  /** Every related `Opportunity` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<OpportunityFilter>;
+  /** No related `Opportunity` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<OpportunityFilter>;
+  /** Some related `Opportunity` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<OpportunityFilter>;
+};
+
+/** A filter to be used against many `Plug` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyPlugFilter = {
+  /** Every related `Plug` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<PlugFilter>;
+  /** No related `Plug` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<PlugFilter>;
+  /** Some related `Plug` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<PlugFilter>;
+};
+
+/** A filter to be used against many `Principle` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyPrincipleFilter = {
+  /** Every related `Principle` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<PrincipleFilter>;
+  /** No related `Principle` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<PrincipleFilter>;
+  /** Some related `Principle` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<PrincipleFilter>;
+};
+
+/** A filter to be used against many `Pyrolyser` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyPyrolyserFilter = {
+  /** Every related `Pyrolyser` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<PyrolyserFilter>;
+  /** No related `Pyrolyser` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<PyrolyserFilter>;
+  /** Some related `Pyrolyser` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<PyrolyserFilter>;
+};
+
+/** A filter to be used against many `Range` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyRangeFilter = {
+  /** Every related `Range` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<RangeFilter>;
+  /** No related `Range` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<RangeFilter>;
+  /** Some related `Range` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<RangeFilter>;
+};
+
+/** A filter to be used against many `RcCard` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyRcCardFilter = {
+  /** Every related `RcCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<RcCardFilter>;
+  /** No related `RcCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<RcCardFilter>;
+  /** Some related `RcCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<RcCardFilter>;
+};
+
+/** A filter to be used against many `Report` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyReportFilter = {
+  /** Every related `Report` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<ReportFilter>;
+  /** No related `Report` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<ReportFilter>;
+  /** Some related `Report` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<ReportFilter>;
+};
+
+/** A filter to be used against many `Request` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyRequestFilter = {
+  /** Every related `Request` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<RequestFilter>;
+  /** No related `Request` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<RequestFilter>;
+  /** Some related `Request` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<RequestFilter>;
+};
+
+/** A filter to be used against many `RxCard` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyRxCardFilter = {
+  /** Every related `RxCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<RxCardFilter>;
+  /** No related `RxCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<RxCardFilter>;
+  /** Some related `RxCard` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<RxCardFilter>;
+};
+
+/** A filter to be used against many `SamplePoint` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySamplePointFilter = {
+  /** Every related `SamplePoint` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SamplePointFilter>;
+  /** No related `SamplePoint` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SamplePointFilter>;
+  /** Some related `SamplePoint` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SamplePointFilter>;
+};
+
+/** A filter to be used against many `SensorElement` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySensorElementFilter = {
+  /** Every related `SensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementFilter>;
+  /** No related `SensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementFilter>;
+  /** Some related `SensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementFilter>;
+};
+
+/** A filter to be used against many `SensorElementLocation` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySensorElementLocationFilter = {
+  /** Every related `SensorElementLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementLocationFilter>;
+  /** No related `SensorElementLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementLocationFilter>;
+  /** Some related `SensorElementLocation` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementLocationFilter>;
+};
+
+/** A filter to be used against many `SensorElementType` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySensorElementTypeFilter = {
+  /** Every related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorElementTypeFilter>;
+  /** No related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorElementTypeFilter>;
+  /** Some related `SensorElementType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorElementTypeFilter>;
+};
+
+/** A filter to be used against many `Sensor` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySensorFilter = {
+  /** Every related `Sensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorFilter>;
+  /** No related `Sensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorFilter>;
+  /** Some related `Sensor` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorFilter>;
+};
+
+/** A filter to be used against many `SensorOrder` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySensorOrderFilter = {
+  /** Every related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorOrderFilter>;
+  /** No related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorOrderFilter>;
+  /** Some related `SensorOrder` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorOrderFilter>;
+};
+
+/** A filter to be used against many `SensorSensorElement` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySensorSensorElementFilter = {
+  /** Every related `SensorSensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorSensorElementFilter>;
+  /** No related `SensorSensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorSensorElementFilter>;
+  /** Some related `SensorSensorElement` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorSensorElementFilter>;
+};
+
+/** A filter to be used against many `SensorTestResult` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySensorTestResultFilter = {
+  /** Every related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTestResultFilter>;
+  /** No related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTestResultFilter>;
+  /** Some related `SensorTestResult` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTestResultFilter>;
+};
+
+/** A filter to be used against many `SensorType` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySensorTypeFilter = {
+  /** Every related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SensorTypeFilter>;
+  /** No related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SensorTypeFilter>;
+  /** Some related `SensorType` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SensorTypeFilter>;
+};
+
+/** A filter to be used against many `Software` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManySoftwareFilter = {
+  /** Every related `Software` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<SoftwareFilter>;
+  /** No related `Software` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<SoftwareFilter>;
+  /** Some related `Software` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<SoftwareFilter>;
+};
+
+/** A filter to be used against many `StockGroup` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyStockGroupFilter = {
+  /** Every related `StockGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<StockGroupFilter>;
+  /** No related `StockGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<StockGroupFilter>;
+  /** Some related `StockGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<StockGroupFilter>;
+};
+
+/** A filter to be used against many `StockItem` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyStockItemFilter = {
+  /** Every related `StockItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<StockItemFilter>;
+  /** No related `StockItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<StockItemFilter>;
+  /** Some related `StockItem` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<StockItemFilter>;
+};
+
+/** A filter to be used against many `StockSupplier` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyStockSupplierFilter = {
+  /** Every related `StockSupplier` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<StockSupplierFilter>;
+  /** No related `StockSupplier` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<StockSupplierFilter>;
+  /** Some related `StockSupplier` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<StockSupplierFilter>;
+};
+
+/** A filter to be used against many `Task` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyTaskFilter = {
+  /** Every related `Task` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<TaskFilter>;
+  /** No related `Task` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<TaskFilter>;
+  /** Some related `Task` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<TaskFilter>;
+};
+
+/** A filter to be used against many `UserRight` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyUserRightFilter = {
+  /** Every related `UserRight` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<UserRightFilter>;
+  /** No related `UserRight` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<UserRightFilter>;
+  /** Some related `UserRight` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<UserRightFilter>;
+};
+
+/** A filter to be used against many `UserTask` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyUserTaskFilter = {
+  /** Every related `UserTask` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<UserTaskFilter>;
+  /** No related `UserTask` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<UserTaskFilter>;
+  /** Some related `UserTask` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<UserTaskFilter>;
+};
+
+/** A filter to be used against many `UsersGroup` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyUsersGroupFilter = {
+  /** Every related `UsersGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<UsersGroupFilter>;
+  /** No related `UsersGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<UsersGroupFilter>;
+  /** Some related `UsersGroup` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<UsersGroupFilter>;
+};
+
+/** A filter to be used against many `WeeklyHour` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyWeeklyHourFilter = {
+  /** Every related `WeeklyHour` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<WeeklyHourFilter>;
+  /** No related `WeeklyHour` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<WeeklyHourFilter>;
+  /** Some related `WeeklyHour` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<WeeklyHourFilter>;
+};
+
+/** A filter to be used against many `WeeklyHourRemark` object types. All fields are combined with a logical ‘and.’ */
+export type UserToManyWeeklyHourRemarkFilter = {
+  /** Every related `WeeklyHourRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<WeeklyHourRemarkFilter>;
+  /** No related `WeeklyHourRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<WeeklyHourRemarkFilter>;
+  /** Some related `WeeklyHourRemark` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<WeeklyHourRemarkFilter>;
+};
+
 /** A connection to a list of `User` values. */
 export type UsersConnection = {
   __typename?: 'UsersConnection';
@@ -69643,6 +72853,8 @@ export type UsersGroupCondition = {
 export type UsersGroupFilter = {
   /** Checks for all expressions in this list. */
   and?: InputMaybe<Array<UsersGroupFilter>>;
+  /** Filter by the object’s `groupByGroupId` relation. */
+  groupByGroupId?: InputMaybe<GroupFilter>;
   /** Filter by the object’s `groupId` field. */
   groupId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `id` field. */
@@ -69651,6 +72863,8 @@ export type UsersGroupFilter = {
   not?: InputMaybe<UsersGroupFilter>;
   /** Checks for any expressions in this list. */
   or?: InputMaybe<Array<UsersGroupFilter>>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -70950,8 +74164,16 @@ export type WeeklyHourFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `startTime` field. */
   startTime?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `taskByTaskId` relation. */
+  taskByTaskId?: InputMaybe<TaskFilter>;
   /** Filter by the object’s `taskId` field. */
   taskId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -71045,8 +74267,20 @@ export type WeeklyHourRemarkFilter = {
   ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `remark` field. */
   remark?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `taskByTaskId` relation. */
+  taskByTaskId?: InputMaybe<TaskFilter>;
+  /** A related `taskByTaskId` exists. */
+  taskByTaskIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `taskId` field. */
   taskId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userByOwnerId` relation. */
+  userByOwnerId?: InputMaybe<UserFilter>;
+  /** A related `userByOwnerId` exists. */
+  userByOwnerIdExists?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Filter by the object’s `userByUserId` relation. */
+  userByUserId?: InputMaybe<UserFilter>;
+  /** A related `userByUserId` exists. */
+  userByUserIdExists?: InputMaybe<Scalars['Boolean']['input']>;
   /** Filter by the object’s `userId` field. */
   userId?: InputMaybe<IntFilter>;
 };
@@ -71453,6 +74687,34 @@ export type _LandOpportunitiesByCdlandArgs = {
   orderBy?: InputMaybe<Array<OpportunitiesOrderBy>>;
 };
 
+/** A filter to be used against `_Land` object types. All fields are combined with a logical ‘and.’ */
+export type _LandFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<_LandFilter>>;
+  /** Filter by the object’s `cbsland` field. */
+  cbsland?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdeglid` field. */
+  cdeglid?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdland` field. */
+  cdland?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `isoland` field. */
+  isoland?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<_LandFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `opportunitiesByCdland` relation. */
+  opportunitiesByCdland?: InputMaybe<_LandToManyOpportunityFilter>;
+  /** Some related `opportunitiesByCdland` exist. */
+  opportunitiesByCdlandExist?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<_LandFilter>>;
+  /** Filter by the object’s `rszland` field. */
+  rszland?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sepa` field. */
+  sepa?: InputMaybe<StringFilter>;
+};
+
 /** An input for mutations affecting `_Land` */
 export type _LandInput = {
   cbsland?: InputMaybe<Scalars['String']['input']>;
@@ -71473,6 +74735,16 @@ export type _LandPatch = {
   omschr?: InputMaybe<Scalars['String']['input']>;
   rszland?: InputMaybe<Scalars['Int']['input']>;
   sepa?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against many `Opportunity` object types. All fields are combined with a logical ‘and.’ */
+export type _LandToManyOpportunityFilter = {
+  /** Every related `Opportunity` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  every?: InputMaybe<OpportunityFilter>;
+  /** No related `Opportunity` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  none?: InputMaybe<OpportunityFilter>;
+  /** Some related `Opportunity` matches the filter criteria. All fields are combined with a logical ‘and.’ */
+  some?: InputMaybe<OpportunityFilter>;
 };
 
 /** A `_Land` edge in the connection. */
@@ -71558,13 +74830,7 @@ export type CalGasEntitiesQueryVariables = Exact<{
 export type CalGasEntitiesQuery = { __typename?: 'Query', calGases?: { __typename?: 'CalgasEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'CalgasEntity', id?: number | null, cdartikel?: string | null, concentration?: number | null, created?: any | null, engineeringUnits?: string | null, gasCreated?: any | null, gasId?: number | null, initials?: string | null, modified?: any | null, name?: string | null, ownerId?: number | null, username?: string | null }> } | null };
 
 export type CreateCalGasMutationVariables = Exact<{
-  gasId: Scalars['Int']['input'];
-  cdartikel: Scalars['String']['input'];
-  concentration: Scalars['Float']['input'];
-  ownerId: Scalars['Int']['input'];
-  engineeringUnits: Scalars['String']['input'];
-  created: Scalars['Datetime']['input'];
-  modified: Scalars['Datetime']['input'];
+  body: CalGasInput;
 }>;
 
 
@@ -71585,10 +74851,159 @@ export type DeleteCalGasMutationVariables = Exact<{
 
 export type DeleteCalGasMutation = { __typename?: 'Mutation', deleteCalGasById?: { __typename?: 'DeleteCalGasPayload', clientMutationId?: string | null } | null };
 
+export type AllChemicalCompoundsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllChemicalCompoundsNoPaginationQuery = { __typename?: 'Query', allChemicalCompounds?: { __typename?: 'ChemicalCompoundsConnection', nodes: Array<{ __typename?: 'ChemicalCompound', id: number, name?: string | null, otherName?: string | null, formula?: string | null, cas?: string | null, molarMass?: number | null, density?: number | null, url?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllChemicalCompoundsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<ChemicalCompoundsOrderBy> | ChemicalCompoundsOrderBy>;
+}>;
+
+
+export type AllChemicalCompoundsQuery = { __typename?: 'Query', allChemicalCompounds?: { __typename?: 'ChemicalCompoundsConnection', nodes: Array<{ __typename?: 'ChemicalCompound', id: number, name?: string | null, otherName?: string | null, formula?: string | null, cas?: string | null, molarMass?: number | null, density?: number | null, url?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type CreateChemicalCompoundMutationVariables = Exact<{
+  body: ChemicalCompoundInput;
+}>;
+
+
+export type CreateChemicalCompoundMutation = { __typename?: 'Mutation', createChemicalCompound?: { __typename?: 'CreateChemicalCompoundPayload', chemicalCompound?: { __typename?: 'ChemicalCompound', id: number, name?: string | null, otherName?: string | null, formula?: string | null, cas?: string | null, molarMass?: number | null, density?: number | null, url?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdateChemicalCompoundMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: ChemicalCompoundPatch;
+}>;
+
+
+export type UpdateChemicalCompoundMutation = { __typename?: 'Mutation', updateChemicalCompoundById?: { __typename?: 'UpdateChemicalCompoundPayload', chemicalCompound?: { __typename?: 'ChemicalCompound', id: number, name?: string | null, otherName?: string | null, formula?: string | null, cas?: string | null, molarMass?: number | null, density?: number | null, url?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeleteChemicalCompoundMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteChemicalCompoundMutation = { __typename?: 'Mutation', deleteChemicalCompoundById?: { __typename?: 'DeleteChemicalCompoundPayload', clientMutationId?: string | null } | null };
+
+export type DeleteDetectorTypeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteDetectorTypeMutation = { __typename?: 'Mutation', deleteDetectorTypeById?: { __typename?: 'DeleteDetectorTypePayload', clientMutationId?: string | null } | null };
+
+export type AllDetectorTypesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllDetectorTypesNoPaginationQuery = { __typename?: 'Query', allDetectorTypesEntities?: { __typename?: 'DetectorTypesEntitiesConnection', nodes: Array<{ __typename?: 'DetectorTypesEntity', id?: number | null, name?: string | null }> } | null };
+
+export type AllDetectorTypeEntitiesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<DetectorTypesEntitiesOrderBy> | DetectorTypesEntitiesOrderBy>;
+}>;
+
+
+export type AllDetectorTypeEntitiesQuery = { __typename?: 'Query', detectorTypes?: { __typename?: 'DetectorTypesEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'DetectorTypesEntity', code?: string | null, created?: any | null, id?: number | null, initials?: string | null, modified?: any | null, name?: string | null, obsolete?: boolean | null, ownerId?: number | null, prefix?: string | null, sensorCount?: number | null, suffix?: string | null }> } | null };
+
+export type UpdateDetectorTypeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: DetectorTypePatch;
+}>;
+
+
+export type UpdateDetectorTypeMutation = { __typename?: 'Mutation', updateDetectorTypeById?: { __typename?: 'UpdateDetectorTypePayload', detectorType?: { __typename?: 'DetectorType', id: number, obsolete?: boolean | null, prefix?: string | null, suffix?: string | null, code?: string | null, sensorCount?: number | null, created?: any | null, modified?: any | null, ownerId?: number | null } | null } | null };
+
+export type CreateDetectorTypeMutationVariables = Exact<{
+  body: DetectorTypeInput;
+}>;
+
+
+export type CreateDetectorTypeMutation = { __typename?: 'Mutation', createDetectorType?: { __typename?: 'CreateDetectorTypePayload', detectorType?: { __typename?: 'DetectorType', id: number, obsolete?: boolean | null, prefix?: string | null, suffix?: string | null, code?: string | null, sensorCount?: number | null, created?: any | null, modified?: any | null, ownerId?: number | null } | null } | null };
+
+export type LocalDetectorFieldsFragment = { __typename?: 'Detector', id: number, serialNumber: string, labelDate?: any | null, created: any, detectorTypeId: number };
+
+export type DetectorFieldsFragment = { __typename?: 'Detector', id: number, serialNumber: string, labelDate?: any | null, created: any, detectorTypeId: number, detectorType?: { __typename?: 'DetectorType', id: number, type?: string | null, sensorCount?: number | null } | null, detectorLocation?: { __typename?: 'DetectorLocation', id: number, detectorId?: number | null, areaId: number, address?: number | null, bus?: number | null, area?: { __typename?: 'Area', id: number, name: string, floor?: { __typename?: 'Floor', id: number, name: string, building?: { __typename?: 'Building', id: number, name: string, endUser?: { __typename?: 'EndUser', id: number, name?: string | null, location: string, subLocation: string } | null } | null } | null } | null } | null, detectorSensors: { __typename?: 'DetectorSensorsConnection', nodes: Array<{ __typename?: 'DetectorSensor', id: number, detectorPosition: number, sensor?: { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number, sensorType?: { __typename?: 'SensorType', id: number, type?: string | null, rangeId: number, range?: { __typename?: 'Range', id: number, lowEu?: number | null, highEu?: number | null, engineeringUnits?: string | null, gasId: number, gas?: { __typename?: 'Gas', id: number, name?: string | null } | null } | null } | null } | null, detectorSensorLocation?: { __typename?: 'DetectorSensorLocation', id: number, simsChannel?: number | null, simsTag?: string | null, samplePointId: number, samplePoint?: { __typename?: 'SamplePoint', id: number, areaId: number, name: string, area?: { __typename?: 'Area', id: number, name: string, floor?: { __typename?: 'Floor', id: number, name: string, building?: { __typename?: 'Building', id: number, name: string, endUser?: { __typename?: 'EndUser', id: number, name?: string | null, location: string, subLocation: string } | null } | null } | null } | null } | null } | null, pyrolyser?: { __typename?: 'Pyrolyser', id: number, name: string } | null, filter?: { __typename?: 'Filter', id: number, name: string } | null }> } };
+
+export type AllDetectorsEntitiesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<DetectorEntitiesOrderBy> | DetectorEntitiesOrderBy>;
+}>;
+
+
+export type AllDetectorsEntitiesQuery = { __typename?: 'Query', detectors?: { __typename?: 'DetectorEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'DetectorEntity', id?: number | null, suffix?: string | null, serialNumber?: string | null, remarks?: string | null, prefix?: string | null, ownerId?: number | null, labelDate?: any | null, initials?: string | null, detectorTypeId?: number | null, created?: any | null, code?: string | null }> } | null };
+
+export type UpdateDetectorMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: DetectorPatch;
+}>;
+
+
+export type UpdateDetectorMutation = { __typename?: 'Mutation', updateDetectorById?: { __typename?: 'UpdateDetectorPayload', detector?: { __typename?: 'Detector', id: number, serialNumber: string, labelDate?: any | null, created: any, detectorTypeId: number } | null } | null };
+
+export type UpdateDetectorAndSensorsMutationVariables = Exact<{
+  input: UpdateDetectorAndSensorsInput;
+}>;
+
+
+export type UpdateDetectorAndSensorsMutation = { __typename?: 'Mutation', updateDetectorAndSensors?: { __typename?: 'UpdateDetectorAndSensorsPayload', detector?: { __typename?: 'Detector', id: number, serialNumber: string, labelDate?: any | null, created: any, detectorTypeId: number, detectorType?: { __typename?: 'DetectorType', id: number, type?: string | null, sensorCount?: number | null } | null, detectorLocation?: { __typename?: 'DetectorLocation', id: number, detectorId?: number | null, areaId: number, address?: number | null, bus?: number | null, area?: { __typename?: 'Area', id: number, name: string, floor?: { __typename?: 'Floor', id: number, name: string, building?: { __typename?: 'Building', id: number, name: string, endUser?: { __typename?: 'EndUser', id: number, name?: string | null, location: string, subLocation: string } | null } | null } | null } | null } | null, detectorSensors: { __typename?: 'DetectorSensorsConnection', nodes: Array<{ __typename?: 'DetectorSensor', id: number, detectorPosition: number, sensor?: { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number, sensorType?: { __typename?: 'SensorType', id: number, type?: string | null, rangeId: number, range?: { __typename?: 'Range', id: number, lowEu?: number | null, highEu?: number | null, engineeringUnits?: string | null, gasId: number, gas?: { __typename?: 'Gas', id: number, name?: string | null } | null } | null } | null } | null, detectorSensorLocation?: { __typename?: 'DetectorSensorLocation', id: number, simsChannel?: number | null, simsTag?: string | null, samplePointId: number, samplePoint?: { __typename?: 'SamplePoint', id: number, areaId: number, name: string, area?: { __typename?: 'Area', id: number, name: string, floor?: { __typename?: 'Floor', id: number, name: string, building?: { __typename?: 'Building', id: number, name: string, endUser?: { __typename?: 'EndUser', id: number, name?: string | null, location: string, subLocation: string } | null } | null } | null } | null } | null } | null, pyrolyser?: { __typename?: 'Pyrolyser', id: number, name: string } | null, filter?: { __typename?: 'Filter', id: number, name: string } | null }> } } | null } | null };
+
+export type CreateDetectorMutationVariables = Exact<{
+  detector: DetectorInput;
+}>;
+
+
+export type CreateDetectorMutation = { __typename?: 'Mutation', createDetector?: { __typename?: 'CreateDetectorPayload', detector?: { __typename?: 'Detector', id: number, serialNumber: string, labelDate?: any | null, created: any, detectorTypeId: number, detectorType?: { __typename?: 'DetectorType', id: number, type?: string | null, sensorCount?: number | null } | null, detectorLocation?: { __typename?: 'DetectorLocation', id: number, detectorId?: number | null, areaId: number, address?: number | null, bus?: number | null, area?: { __typename?: 'Area', id: number, name: string, floor?: { __typename?: 'Floor', id: number, name: string, building?: { __typename?: 'Building', id: number, name: string, endUser?: { __typename?: 'EndUser', id: number, name?: string | null, location: string, subLocation: string } | null } | null } | null } | null } | null, detectorSensors: { __typename?: 'DetectorSensorsConnection', nodes: Array<{ __typename?: 'DetectorSensor', id: number, detectorPosition: number, sensor?: { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number, sensorType?: { __typename?: 'SensorType', id: number, type?: string | null, rangeId: number, range?: { __typename?: 'Range', id: number, lowEu?: number | null, highEu?: number | null, engineeringUnits?: string | null, gasId: number, gas?: { __typename?: 'Gas', id: number, name?: string | null } | null } | null } | null } | null, detectorSensorLocation?: { __typename?: 'DetectorSensorLocation', id: number, simsChannel?: number | null, simsTag?: string | null, samplePointId: number, samplePoint?: { __typename?: 'SamplePoint', id: number, areaId: number, name: string, area?: { __typename?: 'Area', id: number, name: string, floor?: { __typename?: 'Floor', id: number, name: string, building?: { __typename?: 'Building', id: number, name: string, endUser?: { __typename?: 'EndUser', id: number, name?: string | null, location: string, subLocation: string } | null } | null } | null } | null } | null } | null, pyrolyser?: { __typename?: 'Pyrolyser', id: number, name: string } | null, filter?: { __typename?: 'Filter', id: number, name: string } | null }> } } | null } | null };
+
+export type DeleteDetectorMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteDetectorMutation = { __typename?: 'Mutation', deleteDetectorById?: { __typename?: 'DeleteDetectorPayload', clientMutationId?: string | null } | null };
+
 export type AllGasesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllGasesNoPaginationQuery = { __typename?: 'Query', allGases?: { __typename?: 'GasesConnection', nodes: Array<{ __typename?: 'Gas', id: number, name?: string | null }> } | null };
+
+export type AllGasesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<GasesOrderBy> | GasesOrderBy>;
+}>;
+
+
+export type AllGasesQuery = { __typename?: 'Query', allGases?: { __typename?: 'GasesConnection', nodes: Array<{ __typename?: 'Gas', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type CreateGasMutationVariables = Exact<{
+  body: GasInput;
+}>;
+
+
+export type CreateGasMutation = { __typename?: 'Mutation', createGas?: { __typename?: 'CreateGasPayload', gas?: { __typename?: 'Gas', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdateGasMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: GasPatch;
+}>;
+
+
+export type UpdateGasMutation = { __typename?: 'Mutation', updateGasById?: { __typename?: 'UpdateGasPayload', gas?: { __typename?: 'Gas', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeleteGasMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteGasMutation = { __typename?: 'Mutation', deleteGasById?: { __typename?: 'DeleteGasPayload', clientMutationId?: string | null } | null };
 
 export type GroupFieldsFragment = { __typename?: 'Group', id: number, name?: string | null };
 
@@ -71644,6 +75059,82 @@ export type JwtTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type JwtTokenQuery = { __typename?: 'Query', jwtToken: string };
 
+export type AllPrinciplesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllPrinciplesNoPaginationQuery = { __typename?: 'Query', allPrinciples?: { __typename?: 'PrinciplesConnection', nodes: Array<{ __typename?: 'Principle', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllPrinciplesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<PrinciplesOrderBy> | PrinciplesOrderBy>;
+}>;
+
+
+export type AllPrinciplesQuery = { __typename?: 'Query', allPrinciples?: { __typename?: 'PrinciplesConnection', nodes: Array<{ __typename?: 'Principle', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type CreatePrincipleMutationVariables = Exact<{
+  body: PrincipleInput;
+}>;
+
+
+export type CreatePrincipleMutation = { __typename?: 'Mutation', createPrinciple?: { __typename?: 'CreatePrinciplePayload', principle?: { __typename?: 'Principle', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdatePrincipleMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: PrinciplePatch;
+}>;
+
+
+export type UpdatePrincipleMutation = { __typename?: 'Mutation', updatePrincipleById?: { __typename?: 'UpdatePrinciplePayload', principle?: { __typename?: 'Principle', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeletePrincipleMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeletePrincipleMutation = { __typename?: 'Mutation', deletePrincipleById?: { __typename?: 'DeletePrinciplePayload', clientMutationId?: string | null } | null };
+
+export type AllRangesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllRangesNoPaginationQuery = { __typename?: 'Query', allRanges?: { __typename?: 'RangesConnection', nodes: Array<{ __typename?: 'Range', id: number, created?: any | null, alarm1DirectionUp?: boolean | null, alarm1Level?: any | null, alarm2DirectionUp?: boolean | null, alarm2Level?: any | null, alarmUnits?: boolean | null, engineeringUnits?: string | null, highEu?: number | null, highEuBackup?: number | null, highEuNumeric?: any | null, lowEu?: number | null, modified?: any | null, nodeId: string, ownerId?: number | null, precision?: number | null, range?: string | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, gasByGasId?: { __typename?: 'Gas', name?: string | null, id: number, formula?: string | null, created?: any | null } | null }> } | null };
+
+export type AllRangesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<RangesOrderBy> | RangesOrderBy>;
+}>;
+
+
+export type AllRangesQuery = { __typename?: 'Query', allRanges?: { __typename?: 'RangesConnection', nodes: Array<{ __typename?: 'Range', id: number, created?: any | null, alarm1DirectionUp?: boolean | null, alarm1Level?: any | null, alarm2DirectionUp?: boolean | null, alarm2Level?: any | null, alarmUnits?: boolean | null, engineeringUnits?: string | null, highEu?: number | null, highEuBackup?: number | null, highEuNumeric?: any | null, lowEu?: number | null, modified?: any | null, nodeId: string, ownerId?: number | null, precision?: number | null, range?: string | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, gasByGasId?: { __typename?: 'Gas', name?: string | null, id: number, formula?: string | null, created?: any | null } | null }> } | null };
+
+export type CreateRangeMutationVariables = Exact<{
+  body: RangeInput;
+}>;
+
+
+export type CreateRangeMutation = { __typename?: 'Mutation', createRange?: { __typename?: 'CreateRangePayload', range?: { __typename?: 'Range', id: number, created?: any | null, alarm1DirectionUp?: boolean | null, alarm1Level?: any | null, alarm2DirectionUp?: boolean | null, alarm2Level?: any | null, alarmUnits?: boolean | null, engineeringUnits?: string | null, highEu?: number | null, highEuBackup?: number | null, highEuNumeric?: any | null, lowEu?: number | null, modified?: any | null, nodeId: string, ownerId?: number | null, precision?: number | null, range?: string | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, gasByGasId?: { __typename?: 'Gas', name?: string | null, id: number, formula?: string | null, created?: any | null } | null } | null } | null };
+
+export type UpdateRangeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: RangePatch;
+}>;
+
+
+export type UpdateRangeMutation = { __typename?: 'Mutation', updateRangeById?: { __typename?: 'UpdateRangePayload', range?: { __typename?: 'Range', id: number, created?: any | null, alarm1DirectionUp?: boolean | null, alarm1Level?: any | null, alarm2DirectionUp?: boolean | null, alarm2Level?: any | null, alarmUnits?: boolean | null, engineeringUnits?: string | null, highEu?: number | null, highEuBackup?: number | null, highEuNumeric?: any | null, lowEu?: number | null, modified?: any | null, nodeId: string, ownerId?: number | null, precision?: number | null, range?: string | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, gasByGasId?: { __typename?: 'Gas', name?: string | null, id: number, formula?: string | null, created?: any | null } | null } | null } | null };
+
+export type DeleteRangeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteRangeMutation = { __typename?: 'Mutation', deleteRangeById?: { __typename?: 'DeleteRangePayload', clientMutationId?: string | null } | null };
+
+export type LocalSensorFieldsFragment = { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number };
+
 export type LocalUserFieldsFragment = { __typename?: 'User', id: number, username?: string | null, fullname?: string | null, initials?: string | null, holidayStartBalance?: number | null, overtimeStartBalance?: number | null };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -71695,6 +75186,122 @@ export type AuthenticateMutationVariables = Exact<{
 
 export type AuthenticateMutation = { __typename?: 'Mutation', authenticate?: { __typename?: 'AuthenticatePayload', jwtToken?: any | null } | null };
 
+export const LocalDetectorFieldsFragmentDoc = gql`
+    fragment localDetectorFields on Detector {
+  id
+  serialNumber
+  labelDate
+  created
+  detectorTypeId
+}
+    `;
+export const LocalSensorFieldsFragmentDoc = gql`
+    fragment localSensorFields on Sensor {
+  id
+  serialNumber
+  labelDate
+  created
+  sensorTypeId
+}
+    `;
+export const DetectorFieldsFragmentDoc = gql`
+    fragment detectorFields on Detector {
+  ...localDetectorFields
+  detectorType: detectorTypeByDetectorTypeId {
+    id
+    type
+    sensorCount
+  }
+  detectorLocation: detectorLocationByDetectorId {
+    id
+    detectorId
+    areaId
+    address
+    bus
+    area: areaByAreaId {
+      id
+      name
+      floor: floorByFloorId {
+        id
+        name
+        building: buildingByBuildingId {
+          id
+          name
+          endUser: endUserByEndUserId {
+            id
+            name
+            location
+            subLocation
+          }
+        }
+      }
+    }
+  }
+  detectorSensors: detectorSensorsByDetectorId(orderBy: DETECTOR_POSITION_ASC) {
+    nodes {
+      id
+      detectorPosition
+      sensor: sensorBySensorId {
+        ...localSensorFields
+        sensorType: sensorTypeBySensorTypeId {
+          id
+          type
+          rangeId
+          range: rangeByRangeId {
+            id
+            lowEu
+            highEu
+            engineeringUnits
+            gasId
+            gas: gasByGasId {
+              id
+              name
+            }
+          }
+        }
+      }
+      detectorSensorLocation: detectorSensorLocationByDetectorSensorId {
+        id
+        simsChannel
+        simsTag
+        samplePointId
+        samplePoint: samplePointBySamplePointId {
+          id
+          areaId
+          name
+          area: areaByAreaId {
+            id
+            name
+            floor: floorByFloorId {
+              id
+              name
+              building: buildingByBuildingId {
+                id
+                name
+                endUser: endUserByEndUserId {
+                  id
+                  name
+                  location
+                  subLocation
+                }
+              }
+            }
+          }
+        }
+      }
+      pyrolyser: pyrolyserByPyrolyserId {
+        id
+        name
+      }
+      filter: filterByFilterId {
+        id
+        name
+      }
+    }
+  }
+}
+    ${LocalDetectorFieldsFragmentDoc}
+${LocalSensorFieldsFragmentDoc}`;
 export const GroupFieldsFragmentDoc = gql`
     fragment groupFields on Group {
   id
@@ -71875,10 +75482,8 @@ export const CalGasEntitiesDocument = gql`
     }
   }
 export const CreateCalGasDocument = gql`
-    mutation CreateCalGas($gasId: Int!, $cdartikel: String!, $concentration: Float!, $ownerId: Int!, $engineeringUnits: String!, $created: Datetime!, $modified: Datetime!) {
-  createCalGas(
-    input: {calGas: {gasId: $gasId, cdartikel: $cdartikel, concentration: $concentration, engineeringUnits: $engineeringUnits, ownerId: $ownerId, created: $created, modified: $modified}}
-  ) {
+    mutation CreateCalGas($body: CalGasInput!) {
+  createCalGas(input: {calGas: $body}) {
     calGas {
       id
       cdartikel
@@ -71946,6 +75551,402 @@ export const DeleteCalGasDocument = gql`
       super(apollo);
     }
   }
+export const AllChemicalCompoundsNoPaginationDocument = gql`
+    query allChemicalCompoundsNoPagination {
+  allChemicalCompounds {
+    nodes {
+      id
+      name
+      otherName
+      formula
+      cas
+      molarMass
+      density
+      url
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllChemicalCompoundsNoPaginationGQL extends Apollo.Query<AllChemicalCompoundsNoPaginationQuery, AllChemicalCompoundsNoPaginationQueryVariables> {
+    override document = AllChemicalCompoundsNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllChemicalCompoundsDocument = gql`
+    query allChemicalCompounds($limit: Int, $offset: Int, $search: String!, $orderBy: [ChemicalCompoundsOrderBy!]) {
+  allChemicalCompounds(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    nodes {
+      id
+      name
+      otherName
+      formula
+      cas
+      molarMass
+      density
+      url
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllChemicalCompoundsGQL extends Apollo.Query<AllChemicalCompoundsQuery, AllChemicalCompoundsQueryVariables> {
+    override document = AllChemicalCompoundsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateChemicalCompoundDocument = gql`
+    mutation CreateChemicalCompound($body: ChemicalCompoundInput!) {
+  createChemicalCompound(input: {chemicalCompound: $body}) {
+    chemicalCompound {
+      id
+      name
+      otherName
+      formula
+      cas
+      molarMass
+      density
+      url
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateChemicalCompoundGQL extends Apollo.Mutation<CreateChemicalCompoundMutation, CreateChemicalCompoundMutationVariables> {
+    override document = CreateChemicalCompoundDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateChemicalCompoundDocument = gql`
+    mutation UpdateChemicalCompound($id: Int!, $patch: ChemicalCompoundPatch!) {
+  updateChemicalCompoundById(input: {id: $id, chemicalCompoundPatch: $patch}) {
+    chemicalCompound {
+      id
+      name
+      otherName
+      formula
+      cas
+      molarMass
+      density
+      url
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateChemicalCompoundGQL extends Apollo.Mutation<UpdateChemicalCompoundMutation, UpdateChemicalCompoundMutationVariables> {
+    override document = UpdateChemicalCompoundDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteChemicalCompoundDocument = gql`
+    mutation DeleteChemicalCompound($id: Int!) {
+  deleteChemicalCompoundById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteChemicalCompoundGQL extends Apollo.Mutation<DeleteChemicalCompoundMutation, DeleteChemicalCompoundMutationVariables> {
+    override document = DeleteChemicalCompoundDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteDetectorTypeDocument = gql`
+    mutation DeleteDetectorType($id: Int!) {
+  deleteDetectorTypeById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteDetectorTypeGQL extends Apollo.Mutation<DeleteDetectorTypeMutation, DeleteDetectorTypeMutationVariables> {
+    override document = DeleteDetectorTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllDetectorTypesNoPaginationDocument = gql`
+    query allDetectorTypesNoPagination {
+  allDetectorTypesEntities {
+    nodes {
+      id
+      name
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllDetectorTypesNoPaginationGQL extends Apollo.Query<AllDetectorTypesNoPaginationQuery, AllDetectorTypesNoPaginationQueryVariables> {
+    override document = AllDetectorTypesNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllDetectorTypeEntitiesDocument = gql`
+    query allDetectorTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [DetectorTypesEntitiesOrderBy!]) {
+  detectorTypes: allDetectorTypesEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      code
+      created
+      id
+      initials
+      modified
+      name
+      obsolete
+      ownerId
+      prefix
+      sensorCount
+      suffix
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllDetectorTypeEntitiesGQL extends Apollo.Query<AllDetectorTypeEntitiesQuery, AllDetectorTypeEntitiesQueryVariables> {
+    override document = AllDetectorTypeEntitiesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateDetectorTypeDocument = gql`
+    mutation UpdateDetectorType($id: Int!, $patch: DetectorTypePatch!) {
+  updateDetectorTypeById(input: {id: $id, detectorTypePatch: $patch}) {
+    detectorType {
+      id
+      obsolete
+      prefix
+      suffix
+      code
+      sensorCount
+      created
+      modified
+      ownerId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateDetectorTypeGQL extends Apollo.Mutation<UpdateDetectorTypeMutation, UpdateDetectorTypeMutationVariables> {
+    override document = UpdateDetectorTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateDetectorTypeDocument = gql`
+    mutation CreateDetectorType($body: DetectorTypeInput!) {
+  createDetectorType(input: {detectorType: $body}) {
+    detectorType {
+      id
+      obsolete
+      prefix
+      suffix
+      code
+      sensorCount
+      created
+      modified
+      ownerId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateDetectorTypeGQL extends Apollo.Mutation<CreateDetectorTypeMutation, CreateDetectorTypeMutationVariables> {
+    override document = CreateDetectorTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllDetectorsEntitiesDocument = gql`
+    query allDetectorsEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [DetectorEntitiesOrderBy!]) {
+  detectors: allDetectorEntities(
+    filter: {or: [{serialNumber: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      suffix
+      serialNumber
+      remarks
+      prefix
+      ownerId
+      labelDate
+      initials
+      detectorTypeId
+      created
+      code
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllDetectorsEntitiesGQL extends Apollo.Query<AllDetectorsEntitiesQuery, AllDetectorsEntitiesQueryVariables> {
+    override document = AllDetectorsEntitiesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateDetectorDocument = gql`
+    mutation UpdateDetector($id: Int!, $patch: DetectorPatch!) {
+  updateDetectorById(input: {id: $id, detectorPatch: $patch}) {
+    detector {
+      ...localDetectorFields
+    }
+  }
+}
+    ${LocalDetectorFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateDetectorGQL extends Apollo.Mutation<UpdateDetectorMutation, UpdateDetectorMutationVariables> {
+    override document = UpdateDetectorDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateDetectorAndSensorsDocument = gql`
+    mutation UpdateDetectorAndSensors($input: UpdateDetectorAndSensorsInput!) {
+  updateDetectorAndSensors(input: $input) {
+    detector {
+      ...detectorFields
+    }
+  }
+}
+    ${DetectorFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateDetectorAndSensorsGQL extends Apollo.Mutation<UpdateDetectorAndSensorsMutation, UpdateDetectorAndSensorsMutationVariables> {
+    override document = UpdateDetectorAndSensorsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateDetectorDocument = gql`
+    mutation CreateDetector($detector: DetectorInput!) {
+  createDetector(input: {detector: $detector}) {
+    detector {
+      ...detectorFields
+    }
+  }
+}
+    ${DetectorFieldsFragmentDoc}`;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateDetectorGQL extends Apollo.Mutation<CreateDetectorMutation, CreateDetectorMutationVariables> {
+    override document = CreateDetectorDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteDetectorDocument = gql`
+    mutation DeleteDetector($id: Int!) {
+  deleteDetectorById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteDetectorGQL extends Apollo.Mutation<DeleteDetectorMutation, DeleteDetectorMutationVariables> {
+    override document = DeleteDetectorDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AllGasesNoPaginationDocument = gql`
     query allGasesNoPagination {
   allGases {
@@ -71962,6 +75963,107 @@ export const AllGasesNoPaginationDocument = gql`
   })
   export class AllGasesNoPaginationGQL extends Apollo.Query<AllGasesNoPaginationQuery, AllGasesNoPaginationQueryVariables> {
     override document = AllGasesNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllGasesDocument = gql`
+    query allGases($limit: Int, $offset: Int, $search: String!, $orderBy: [GasesOrderBy!]) {
+  allGases(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllGasesGQL extends Apollo.Query<AllGasesQuery, AllGasesQueryVariables> {
+    override document = AllGasesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateGasDocument = gql`
+    mutation CreateGas($body: GasInput!) {
+  createGas(input: {gas: $body}) {
+    gas {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateGasGQL extends Apollo.Mutation<CreateGasMutation, CreateGasMutationVariables> {
+    override document = CreateGasDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateGasDocument = gql`
+    mutation UpdateGas($id: Int!, $patch: GasPatch!) {
+  updateGasById(input: {id: $id, gasPatch: $patch}) {
+    gas {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateGasGQL extends Apollo.Mutation<UpdateGasMutation, UpdateGasMutationVariables> {
+    override document = UpdateGasDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteGasDocument = gql`
+    mutation DeleteGas($id: Int!) {
+  deleteGasById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteGasGQL extends Apollo.Mutation<DeleteGasMutation, DeleteGasMutationVariables> {
+    override document = DeleteGasDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -72139,6 +76241,340 @@ export const JwtTokenDocument = gql`
   })
   export class JwtTokenGQL extends Apollo.Query<JwtTokenQuery, JwtTokenQueryVariables> {
     override document = JwtTokenDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllPrinciplesNoPaginationDocument = gql`
+    query allPrinciplesNoPagination {
+  allPrinciples {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllPrinciplesNoPaginationGQL extends Apollo.Query<AllPrinciplesNoPaginationQuery, AllPrinciplesNoPaginationQueryVariables> {
+    override document = AllPrinciplesNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllPrinciplesDocument = gql`
+    query allPrinciples($limit: Int, $offset: Int, $search: String!, $orderBy: [PrinciplesOrderBy!]) {
+  allPrinciples(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllPrinciplesGQL extends Apollo.Query<AllPrinciplesQuery, AllPrinciplesQueryVariables> {
+    override document = AllPrinciplesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreatePrincipleDocument = gql`
+    mutation CreatePrinciple($body: PrincipleInput!) {
+  createPrinciple(input: {principle: $body}) {
+    principle {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreatePrincipleGQL extends Apollo.Mutation<CreatePrincipleMutation, CreatePrincipleMutationVariables> {
+    override document = CreatePrincipleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdatePrincipleDocument = gql`
+    mutation UpdatePrinciple($id: Int!, $patch: PrinciplePatch!) {
+  updatePrincipleById(input: {id: $id, principlePatch: $patch}) {
+    principle {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdatePrincipleGQL extends Apollo.Mutation<UpdatePrincipleMutation, UpdatePrincipleMutationVariables> {
+    override document = UpdatePrincipleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeletePrincipleDocument = gql`
+    mutation DeletePrinciple($id: Int!) {
+  deletePrincipleById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeletePrincipleGQL extends Apollo.Mutation<DeletePrincipleMutation, DeletePrincipleMutationVariables> {
+    override document = DeletePrincipleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllRangesNoPaginationDocument = gql`
+    query allRangesNoPagination {
+  allRanges {
+    nodes {
+      id
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      alarm1DirectionUp
+      alarm1Level
+      alarm2DirectionUp
+      alarm2Level
+      alarmUnits
+      engineeringUnits
+      highEu
+      highEuBackup
+      highEuNumeric
+      lowEu
+      modified
+      nodeId
+      ownerId
+      precision
+      range
+      gasByGasId {
+        name
+        id
+        formula
+        created
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllRangesNoPaginationGQL extends Apollo.Query<AllRangesNoPaginationQuery, AllRangesNoPaginationQueryVariables> {
+    override document = AllRangesNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllRangesDocument = gql`
+    query allRanges($limit: Int, $offset: Int, $search: String!, $orderBy: [RangesOrderBy!]) {
+  allRanges(
+    filter: {or: [{engineeringUnits: {includesInsensitive: $search}}, {gasByGasId: {name: {includesInsensitive: $search}}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    nodes {
+      id
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      alarm1DirectionUp
+      alarm1Level
+      alarm2DirectionUp
+      alarm2Level
+      alarmUnits
+      engineeringUnits
+      highEu
+      highEuBackup
+      highEuNumeric
+      lowEu
+      modified
+      nodeId
+      ownerId
+      precision
+      range
+      gasByGasId {
+        name
+        id
+        formula
+        created
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllRangesGQL extends Apollo.Query<AllRangesQuery, AllRangesQueryVariables> {
+    override document = AllRangesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateRangeDocument = gql`
+    mutation CreateRange($body: RangeInput!) {
+  createRange(input: {range: $body}) {
+    range {
+      id
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      alarm1DirectionUp
+      alarm1Level
+      alarm2DirectionUp
+      alarm2Level
+      alarmUnits
+      engineeringUnits
+      highEu
+      highEuBackup
+      highEuNumeric
+      lowEu
+      modified
+      nodeId
+      ownerId
+      precision
+      range
+      gasByGasId {
+        name
+        id
+        formula
+        created
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateRangeGQL extends Apollo.Mutation<CreateRangeMutation, CreateRangeMutationVariables> {
+    override document = CreateRangeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateRangeDocument = gql`
+    mutation UpdateRange($id: Int!, $patch: RangePatch!) {
+  updateRangeById(input: {id: $id, rangePatch: $patch}) {
+    range {
+      id
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      alarm1DirectionUp
+      alarm1Level
+      alarm2DirectionUp
+      alarm2Level
+      alarmUnits
+      engineeringUnits
+      highEu
+      highEuBackup
+      highEuNumeric
+      lowEu
+      modified
+      nodeId
+      ownerId
+      precision
+      range
+      gasByGasId {
+        name
+        id
+        formula
+        created
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateRangeGQL extends Apollo.Mutation<UpdateRangeMutation, UpdateRangeMutationVariables> {
+    override document = UpdateRangeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteRangeDocument = gql`
+    mutation DeleteRange($id: Int!) {
+  deleteRangeById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteRangeGQL extends Apollo.Mutation<DeleteRangeMutation, DeleteRangeMutationVariables> {
+    override document = DeleteRangeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

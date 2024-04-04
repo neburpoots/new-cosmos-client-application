@@ -27,6 +27,8 @@ import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultiver
 import { SensorBaseTypeComponent } from "./views/admin/sensorBaseType/sensorBaseType.component";
 import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.component";
 import { SensorTypeComponent } from "./views/admin/sensor-type/sensor-type.component";
+import { DetectorTypeComponent } from "./views/admin/detector-types/detector-type.component";
+import { PrinciplesComponent } from "./views/admin/principles/index/principles.component";
 
 const routes: Routes = [
   // user views
@@ -43,6 +45,14 @@ const routes: Routes = [
       { 
         path: 'assembly-types/:id', 
         component: AssemblyTypeComponent,		
+      },
+      {
+        path: 'detector-types',
+        component: DetectorTypeComponent
+      },
+      {
+        path: 'principles',
+        component: PrinciplesComponent
       },
       { path: "detectors", component: DetectorComponent },
       { path: "settings", component: SettingsComponent },

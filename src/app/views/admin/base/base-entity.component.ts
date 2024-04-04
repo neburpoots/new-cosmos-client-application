@@ -121,6 +121,8 @@ export abstract class BaseEntity<T> {
   setSelectedItem(id: number): void {
     this.nodes$.subscribe(value => {
       this.selectedItem = value.find((item: any) => item.id === id);
+      console.log(value.find((item: any) => item.id === id))
+
       this.setEditData();
     });
   }

@@ -2,11 +2,46 @@
 
     <div class="h-full w-full flex items-center">
         <div class="mt-[100px] w-full mb-12 px-4">
-                <app-card-table [isDeletable]="true" (create)="openCreateModal()" (edit)="openEditModal($event)" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"
+
+            <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
+                (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
+                (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
+                [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
+                [data]="tableData" [inline_selector]="'calgas-form'" [isInlineCreating]="isInlineCreating"
+                (toggleInlineCreating)="toggleInlineCreating()">
+                <calgas-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
+                    [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
+                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></calgas-form>
+            </table-component>
+            <app-pagination-component [searchCriteria]="searchCriteria"
+                (paginationChange)="fetch($event)"></app-pagination-component>
+
+            <modal-component [width]="ModalWidth.Large
+    " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
+
+
+                <detector-form [baseOrderBy]="baseOrderBy" [objectPlural]="objectPlural" [objectSingle]="objectSingle"
+                    (refresh)="fetch()" (closeModal)="closeCreateModal()"></detector-form>
+            </modal-component>
+            <!-- 
+        <modal-component [width]="ModalWidth.Large
+        " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
+            <calgas-form #calibrationGasEdit [objectPlural]="objectPlural"
+            [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
+                (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></calgas-form>
+        </modal-component>
+
+        <modal-component [width]="ModalWidth.Medium
+    " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
+            <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
+                [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
+                (closeModal)="closeDeleteModal()"></delete-modal>
+        </modal-component> -->
+            <!-- <app-card-table [isDeletable]="true" (create)="openCreateModal()" (edit)="openEditModal($event)" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"
                 [title]="objectPlural" [object]="objectSingle"></app-card-table>
 
             <!-- Your table content here -->
-            <app-pagination [paginatedResult]="data" (paginationChange)="onPaginationChange($event)"></app-pagination>
+            <!-- <app-pagination [paginatedResult]="data" (paginationChange)="onPaginationChange($event)"></app-pagination>
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
@@ -17,7 +52,7 @@
             [width]="ModalWidth.Small
             " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
                 <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase" [selectedItem]="selectedItem" (deleteHandler)="delete($event)" (closeModal)="closeDeleteModal()"></delete-modal>
-            </modal-component>
+            </modal-component> -->
         </div>
     </div>
 </div>

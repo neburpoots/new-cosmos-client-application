@@ -26,6 +26,7 @@ export abstract class BaseFormComponent<T> {
     @Output() refresh = new EventEmitter<SearchFilters | undefined>();
     @Output() toggleInlineCreating = new EventEmitter<void>();
 
+    @Input() cellWidths: number[] = [];
 
     @Input() objectSingle: string = '';
     @Input() objectPlural: string = '';
@@ -93,7 +94,7 @@ export abstract class BaseFormComponent<T> {
 
 
     async create(data: T): Promise<void> {
-        this.createService.mutate(data).subscribe(
+        this.createService.mutate({body: data}).subscribe(
             (response) => {
                 console.log('Response:', response);
                 this.toastr.success(`${this.objectSingle} created successfully`, 'Success');

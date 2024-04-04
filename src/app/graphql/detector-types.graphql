@@ -1,0 +1,90 @@
+
+#-------------------------------------------------------------------------------
+mutation DeleteDetectorType($id: Int!)
+{
+	deleteDetectorTypeById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}
+
+#-------------------------------------------------------------------------------
+query allDetectorTypesNoPagination
+    {
+    allDetectorTypesEntities {
+        nodes {
+            id,
+            name
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allDetectorTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [DetectorTypesEntitiesOrderBy!]) {
+  detectorTypes: allDetectorTypesEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      code
+      created
+      id
+      initials
+      modified
+      name
+      obsolete
+      ownerId
+      prefix
+      sensorCount
+      suffix
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateDetectorType(
+    $id: Int!, $patch: DetectorTypePatch!
+) {
+  updateDetectorTypeById(
+    input: {
+		id: $id
+		detectorTypePatch: $patch	
+    }
+  ) {
+    detectorType {
+        id,
+        obsolete,
+        prefix,
+        suffix,
+        code,
+        sensorCount,
+        created,
+        modified,
+        ownerId 
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateDetectorType(
+    $body: DetectorTypeInput!
+) {
+  createDetectorType(
+    input: {detectorType: $body}
+  ) {
+    detectorType {
+        id,
+        obsolete,
+        prefix,
+        suffix,
+        code,
+        sensorCount,
+        created,
+        modified,
+        ownerId 
+    }
+  }
+}

@@ -23,25 +23,12 @@ query CalGasEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [Cal
   }
 }
 
+#-------------------------------------------------------------------------------
 mutation CreateCalGas(
-    $gasId: Int!, 
-    $cdartikel: String!, 
-    $concentration: Float!, 
-    $ownerId: Int!,
-    $engineeringUnits: String!,
-    $created: Datetime!,
-    $modified: Datetime!,
+    $body: CalGasInput!
 ) {
   createCalGas(
-    input: {calGas: {
-      gasId: $gasId, 
-      cdartikel: $cdartikel, 
-      concentration: $concentration,
-      engineeringUnits: $engineeringUnits,
-      ownerId: $ownerId,
-      created: $created,
-      modified: $modified
-    }}
+    input: {calGas: $body}
   ) {
     calGas {
       id
@@ -55,6 +42,7 @@ mutation CreateCalGas(
   }
 }
 
+#-------------------------------------------------------------------------------
 mutation UpdateCalGas(
     $id: Int!, $patch: CalGasPatch!
 ) {

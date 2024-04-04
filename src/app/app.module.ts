@@ -83,7 +83,10 @@ import { ApolloClientService } from "./apollo-client.service";
 import { APOLLO_OPTIONS, ApolloModule } from "apollo-angular";
 import { TableComponent } from "./components/table/table.component";
 import { PaginationTableComponent } from "./components/pagination/pagination.component";
-import { CalGasInlineCreate } from "./views/admin/calibrationgases/inlinecreate/calgas-inline-create.component";
+import { DetectorTypeComponent } from "./views/admin/detector-types/detector-type.component";
+import { DetectorTypeFormComponent } from "./views/admin/detector-types/form/detector-type-form.component";
+import { PrinciplesFormComponent } from "./views/admin/principles/form/principles-form.component";
+import { PrinciplesComponent } from "./views/admin/principles/index/principles.component";
 
 @NgModule({
   declarations: [
@@ -145,7 +148,10 @@ import { CalGasInlineCreate } from "./views/admin/calibrationgases/inlinecreate/
     SensorTypeFormComponent,
     TableComponent,
     PaginationTableComponent,
-    CalGasInlineCreate
+    DetectorTypeComponent,
+    DetectorTypeFormComponent,
+    PrinciplesComponent,
+    PrinciplesFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

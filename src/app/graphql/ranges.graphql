@@ -1,0 +1,172 @@
+query allRangesNoPagination {
+  allRanges {
+    nodes {
+      id
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      alarm1DirectionUp
+      alarm1Level
+      alarm2DirectionUp
+      alarm2Level
+      alarmUnits
+      engineeringUnits
+      highEu
+      highEuBackup
+      highEuNumeric
+      lowEu
+      modified
+      nodeId
+      ownerId
+      precision
+      range
+      gasByGasId {
+        name
+        id
+        formula
+        created
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+query allRanges(
+  $limit: Int
+  $offset: Int
+  $search: String!
+  $orderBy: [RangesOrderBy!]
+) {
+  allRanges(
+    filter: {
+      or: [
+        { engineeringUnits: { includesInsensitive: $search } }
+        { gasByGasId: { name: { includesInsensitive: $search } } }
+      ]
+    }
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    nodes {
+      id
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      alarm1DirectionUp
+      alarm1Level
+      alarm2DirectionUp
+      alarm2Level
+      alarmUnits
+      engineeringUnits
+      highEu
+      highEuBackup
+      highEuNumeric
+      lowEu
+      modified
+      nodeId
+      ownerId
+      precision
+      range
+      gasByGasId {
+        name
+        id
+        formula
+        created
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateRange(
+    $body: RangeInput!
+) {
+  createRange(
+    input: {range: $body}
+  ) {
+    range {
+      id
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      alarm1DirectionUp
+      alarm1Level
+      alarm2DirectionUp
+      alarm2Level
+      alarmUnits
+      engineeringUnits
+      highEu
+      highEuBackup
+      highEuNumeric
+      lowEu
+      modified
+      nodeId
+      ownerId
+      precision
+      range
+      gasByGasId {
+        name
+        id
+        formula
+        created
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateRange(
+    $id: Int!, $patch: RangePatch!
+) {
+  updateRangeById(
+    input: {
+		id: $id
+		rangePatch: $patch	
+    }
+  ) {
+   range {
+      id
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      alarm1DirectionUp
+      alarm1Level
+      alarm2DirectionUp
+      alarm2Level
+      alarmUnits
+      engineeringUnits
+      highEu
+      highEuBackup
+      highEuNumeric
+      lowEu
+      modified
+      nodeId
+      ownerId
+      precision
+      range
+      gasByGasId {
+        name
+        id
+        formula
+        created
+      }
+    }
+  }
+}
+#-------------------------------------------------------------------------------
+mutation DeleteRange($id: Int!)
+{
+	deleteRangeById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

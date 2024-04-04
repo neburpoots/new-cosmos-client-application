@@ -1,0 +1,116 @@
+#-------------------------------------------------------------------------------
+query allChemicalCompoundsNoPagination
+    {
+    allChemicalCompounds {
+        nodes {
+            id
+            name
+            otherName
+            formula
+            cas
+            molarMass
+            density
+            url
+            created
+            userByOwnerId {
+                initials
+                id
+                
+            }
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allChemicalCompounds(
+        $limit: Int, $offset: Int, $search: String!, $orderBy: [ChemicalCompoundsOrderBy!]
+)
+    {
+    allChemicalCompounds(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+    ) {
+        nodes {
+            id
+            name
+            otherName
+            formula
+            cas
+            molarMass
+            density
+            url
+            created
+            userByOwnerId {
+                initials
+                id
+                
+            }
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateChemicalCompound(
+    $body: ChemicalCompoundInput!
+) {
+  createChemicalCompound(
+    input: {chemicalCompound: $body}
+  ) {
+    chemicalCompound {
+            id
+            name
+            otherName
+            formula
+            cas
+            molarMass
+            density
+            url
+            created
+            userByOwnerId {
+                initials
+                id
+                
+            }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateChemicalCompound(
+    $id: Int!, $patch: ChemicalCompoundPatch!
+) {
+  updateChemicalCompoundById(
+    input: {
+		id: $id
+		chemicalCompoundPatch: $patch	
+    }
+  ) {
+    chemicalCompound {
+            id
+            name
+            otherName
+            formula
+            cas
+            molarMass
+            density
+            url
+            created
+            userByOwnerId {
+                initials
+                id
+                
+            }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteChemicalCompound($id: Int!)
+{
+	deleteChemicalCompoundById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

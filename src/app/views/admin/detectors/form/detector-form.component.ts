@@ -14,15 +14,16 @@ import { AbstractFormComponent } from '../../abstract/form/abstract-form.compone
 import { IAbstractForm } from '../../../../models/interface/IAbstractForm';
 import { AbstractService } from '../../../../services/abstract/abstract.service';
 import { SearchCriteria } from '../../../../models/utils/searchCriteria';
+import { BaseFormComponent } from '../../base/form/base-form.component';
+import { FormSelect } from '../../../../models/utils/formSelect';
+import { CreateDetectorGQL } from '../../../../../generated/graphql';
 
 @Component({
     selector: 'detector-form',
     templateUrl: './detector-form.component.html',
     styles: []
 })
-export class DetectorFormComponent extends AbstractFormComponent<DetectorDto> implements IAbstractForm<DetectorDto> {
-
-    override url = 'api/detectors';
+export class DetectorFormComponent extends BaseFormComponent<DetectorDto> {
 
     @Input() object: DetectorDto = {
         invoiceAssignment: '',
@@ -34,12 +35,19 @@ export class DetectorFormComponent extends AbstractFormComponent<DetectorDto> im
 
     myForm: FormGroup;
 
-    detectorTypes: DetectorType[] = [];
+    detectorTypes: FormSelect[] = [];
 
 
 
-    constructor(protected override toastr: ToastrService, protected override fb: FormBuilder, private detectorTypeService: DetectorTypeService, protected override abstractService: AbstractService<DetectorDto>) {
-        super(toastr, fb, abstractService)
+    constructor(protected override toastr: ToastrService, 
+        protected override fb: FormBuilder, 
+        private detectorTypeService: DetectorTypeService, 
+        
+        private tempService: CreateDetectorGQL
+        ) {
+        super(toastr, fb, tempService, tempService)
+        this.detectorTypes = [];
+
         this.myForm = this.fb.group({
             invoiceAssignment: [this.object.invoiceAssignment, [Validators.required, Validators.minLength(6)]],
             detectorType: [this.object.detectorType, [Validators.required]],
@@ -49,7 +57,7 @@ export class DetectorFormComponent extends AbstractFormComponent<DetectorDto> im
         });
     }
 
-    createDto(): DetectorDto {
+    createDto(): any {
 
         //get the detectorType from the array
         let selectedDetectorType = this.detectorTypes.find((detectorType) => detectorType.id === +this.myForm.value.detectorType);
@@ -73,7 +81,7 @@ export class DetectorFormComponent extends AbstractFormComponent<DetectorDto> im
     }
 
     async setUpDependentData(): Promise<void> {
-        this.detectorTypes = await this.getDependentData('api/detector-types');
+        // this.detectorTypes = await this.getDependentData('api/detector-types');
     }
 
 

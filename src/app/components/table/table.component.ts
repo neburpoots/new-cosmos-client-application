@@ -14,7 +14,7 @@ dayjs.extend(customParseFormat);
   selector: "table-component",
   templateUrl: "./table.component.html",
   animations: [
-  trigger("fadeInOut", [
+    trigger("fadeInOut", [
       state("void", style({
         opacity: 0,
         transform: "translateX(-20px)",
@@ -90,7 +90,7 @@ export class TableComponent {
 
   removeOrderBy(event: any): void {
 
-    if(this.isInlineCreating) {
+    if (this.isInlineCreating) {
       this.toastr.error('Please finish creating the new item before sorting', 'Error');
       return;
     }
@@ -113,6 +113,10 @@ export class TableComponent {
   }
 
   openEditModal(id: number): void {
+    if (this.isInlineCreating) {
+      this.toastr.error('Please finish creating the new item before sorting', 'Error');
+      return;
+    }
     this.edit.emit(id);
   }
 
@@ -138,28 +142,28 @@ export class TableComponent {
     return typeof value === 'object' && value !== null;
   }
 
-  
-	orderBy(header: any) {
 
-    if(this.isInlineCreating) {
+  orderBy(header: any) {
+
+    if (this.isInlineCreating) {
       this.toastr.error('Please finish creating the new item before sorting', 'Error');
       return;
     }
 
-		this.searchCriteria.offset = 0;
-		console.log(header.asc)
-		console.log(this.searchCriteria.orderBy)
-		if (this.searchCriteria.orderBy.includes(header.asc)) {
-			this.searchCriteria.orderBy = [header.desc];
-		}
-		else {
-			this.searchCriteria.orderBy = [header.asc];
-		}
-		this.searchCriteriaChange.emit(this.searchCriteria);
+    this.searchCriteria.offset = 0;
+    console.log(header.asc)
+    console.log(this.searchCriteria.orderBy)
+    if (this.searchCriteria.orderBy.includes(header.asc)) {
+      this.searchCriteria.orderBy = [header.desc];
+    }
+    else {
+      this.searchCriteria.orderBy = [header.asc];
+    }
+    this.searchCriteriaChange.emit(this.searchCriteria);
 
-		console.log(this.searchCriteria)
+    console.log(this.searchCriteria)
 
-	}
+  }
 
   // orderByColumn(column: string): void {
 
@@ -187,7 +191,7 @@ export class TableComponent {
 
 
   // //function to calculate table width is needed for inline editing.
-  async setInlineCreating() : Promise<void> {
+  async setInlineCreating(): Promise<void> {
 
     this.toggleInlineCreating.emit();
 
@@ -199,7 +203,7 @@ export class TableComponent {
       // Assuming the first row contains the headers and the actual data starts from the second row
       const rows = table.getElementsByTagName('tr');
 
-      if(rows.length < 2) return;
+      if (rows.length < 2) return;
 
       //first row header second row edit third row data... I think
       const firstRow = rows[2];
@@ -213,8 +217,8 @@ export class TableComponent {
         const width = cells[i].offsetWidth;
         cellWidths.push(width);
       }
-      if(this.totalWidth == 0)  this.totalWidth = cellWidths.reduce((a, b) => a + b, 0);
-     
+      if (this.totalWidth == 0) this.totalWidth = cellWidths.reduce((a, b) => a + b, 0);
+
       this.setTableWidths.emit(cellWidths);
     }
   }

@@ -1,0 +1,91 @@
+#-------------------------------------------------------------------------------
+query allPrinciplesNoPagination
+    {
+    allPrinciples {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+        }       
+    }
+}
+
+
+#-------------------------------------------------------------------------------
+query allPrinciples(
+    $limit: Int, $offset: Int, $search: String!, $orderBy: [PrinciplesOrderBy!]
+)
+    {
+    allPrinciples(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+    ) {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreatePrinciple(
+    $body: PrincipleInput!
+) {
+  createPrinciple(
+    input: {principle: $body}
+  ) {
+    principle {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdatePrinciple(
+    $id: Int!, $patch: PrinciplePatch!
+) {
+  updatePrincipleById(
+    input: {
+		id: $id
+		principlePatch: $patch	
+    }
+  ) {
+    principle {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeletePrinciple($id: Int!)
+{
+	deletePrincipleById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

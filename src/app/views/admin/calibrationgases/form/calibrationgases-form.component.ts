@@ -22,7 +22,6 @@ import { FormSelect } from '../../../../models/utils/formSelect';
 })
 export class CalibrationGasesFormComponent extends BaseFormComponent<CalgasDto> {
 
-    @Input() cellWidths: number[] = [];
 
     @Input() object: any = {
         concentration: null,

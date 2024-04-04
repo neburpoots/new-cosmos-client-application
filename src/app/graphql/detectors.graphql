@@ -1,0 +1,215 @@
+#-------------------------------------------------------------------------------
+fragment localDetectorFields on Detector
+{	 
+	id	
+    serialNumber
+	labelDate
+	created
+    detectorTypeId
+}
+
+#-------------------------------------------------------------------------------
+fragment detectorFields on Detector
+{	 
+	...localDetectorFields
+	detectorType: detectorTypeByDetectorTypeId
+	{
+		id				
+		type
+		sensorCount
+	}
+	detectorLocation: detectorLocationByDetectorId
+	{
+		id
+		detectorId
+		areaId
+		address
+		bus
+		area: areaByAreaId
+		{
+			id
+			name
+			floor: floorByFloorId
+			{
+				id
+				name
+				building: buildingByBuildingId
+				{
+					id
+					name
+					endUser: endUserByEndUserId
+					{
+						id
+						name
+						location
+						subLocation						
+					}
+				}
+			}
+		}
+	}				
+	detectorSensors: detectorSensorsByDetectorId(orderBy: DETECTOR_POSITION_ASC)
+	{
+		nodes
+		{
+			id
+			detectorPosition
+			sensor: sensorBySensorId
+			{
+				...localSensorFields
+				sensorType: sensorTypeBySensorTypeId
+				{
+					id
+					type
+					rangeId
+					range: rangeByRangeId
+					{
+						id
+						lowEu
+						highEu
+						engineeringUnits	
+						gasId						
+						gas: gasByGasId
+						{
+							id
+							name
+						}
+					}
+				}				
+			}
+			detectorSensorLocation: detectorSensorLocationByDetectorSensorId
+			{
+				id
+				simsChannel
+				simsTag
+				samplePointId				
+				samplePoint: samplePointBySamplePointId
+				{
+					id
+					areaId				
+					name		
+					area: areaByAreaId
+					{
+						id
+						name
+						floor: floorByFloorId
+						{
+							id
+							name
+							building: buildingByBuildingId
+							{
+								id
+								name
+								endUser: endUserByEndUserId
+								{
+									id
+									name
+									location
+									subLocation									
+								}								
+							}
+						}
+					}
+				}				
+			}
+			pyrolyser: pyrolyserByPyrolyserId
+			{
+				id
+				name
+			}
+			filter: filterByFilterId
+			{
+				id
+				name
+			}
+		}
+	}	
+}
+
+
+query allDetectorsEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [DetectorEntitiesOrderBy!]) {
+  detectors: allDetectorEntities(
+    filter: {or: [{serialNumber: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      suffix
+      serialNumber
+      remarks
+      prefix
+      ownerId
+      labelDate
+      initials
+      detectorTypeId
+      created
+      code
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateDetector($id: Int!, $patch: DetectorPatch!) 
+{
+	updateDetectorById 
+	(
+		input: 
+		{
+			id: $id
+			detectorPatch: $patch			
+		}
+	) 
+	{
+		detector 
+		{
+			...localDetectorFields
+		}
+	}		
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateDetectorAndSensors($input: UpdateDetectorAndSensorsInput!) 
+{
+	updateDetectorAndSensors 
+	(
+		input: $input
+	) 
+	{
+		detector 
+		{
+			...detectorFields			
+		}
+	}		
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateDetector($detector: DetectorInput!)
+{
+	createDetector
+	(
+		input:
+		{
+			detector: $detector
+		}
+	)
+	{
+		detector 
+		{
+			...detectorFields
+		}
+	}
+}
+
+
+
+#-------------------------------------------------------------------------------
+mutation DeleteDetector($id: Int!)
+{
+	deleteDetectorById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

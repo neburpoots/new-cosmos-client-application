@@ -1,0 +1,9 @@
+#-------------------------------------------------------------------------------
+fragment localSensorFields on Sensor
+{	 
+	id	
+    serialNumber
+	labelDate
+	created
+    sensorTypeId
+}
