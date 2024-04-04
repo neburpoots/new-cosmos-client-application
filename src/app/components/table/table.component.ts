@@ -151,8 +151,8 @@ export class TableComponent {
     }
 
     this.searchCriteria.offset = 0;
-    console.log(header.asc)
-    console.log(this.searchCriteria.orderBy)
+    this.searchCriteria.page = 1;
+
     if (this.searchCriteria.orderBy.includes(header.asc)) {
       this.searchCriteria.orderBy = [header.desc];
     }

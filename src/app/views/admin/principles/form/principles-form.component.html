@@ -4,31 +4,12 @@
 
     <div [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
         [style.max-width.px]="isInlineCreating ? cellWidths[0] : null">
-        <select-component [form]="myForm" [name]="'gas'" [displayName]="'Gas'" [options]="gases"
-            [inline]="isInlineCreating" [placeholder]="'Select a gas'" [touched]="myForm.controls['gas'].touched"
-            [errors]="[{ name: 'required', message: 'Gas is required' }]">
-        </select-component>
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'name'"
+            [inline]="isInlineCreating" [displayName]="'Name'"
+            [touched]="myForm.controls['name'].touched" [errors]="[{ name: 'required', message: 'Name is required' }]"></input-component>
     </div>
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
-        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'concentration'"
-            [inline]="isInlineCreating" [displayName]="'Concentration'"
-            [touched]="myForm.controls['concentration'].touched" [errors]="[{ name: 'required', message: 'Concentration is required' }, { name: 'pattern' ,
-    message: 'Concentration must be a number' }]"></input-component>
-    </div>
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[2] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[2] : null">
-        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'engineering_units'"
-            [displayName]="'Engineering Units'" [inline]="isInlineCreating"
-            [touched]="myForm.controls['engineering_units'].touched" [errors]="[{ name: 'required', message: 'Engineering units is required' }, { name: 'pattern' ,
-    message: 'Serial number must be a number' }]"></input-component>
-    </div>
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[3] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[3] : null">
-        <input-component [inline]="isInlineCreating" [isSubmitted]="isSubmitted" [form]="myForm" [name]="'cdartikel'"
-            [displayName]="'CD artikel'" [touched]="myForm.controls['cdartikel'].touched"
-            [errors]="[]"></input-component>
-    </div>
+
+
 
     <!-- This is is for modal form -->
     <div *ngIf="!isInlineCreating" class="flex flex-row mt-auto justify-end items-center gap-2">

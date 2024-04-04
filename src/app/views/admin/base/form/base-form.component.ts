@@ -145,7 +145,7 @@ export abstract class BaseFormComponent<T> {
                 }
             }
         } catch (error) {
-            // this.toastr.error(error.message, 'Error');
+            this.toastr.error('Something went wrong with submitting the form', 'Error');
             console.error(error);
         }
     }

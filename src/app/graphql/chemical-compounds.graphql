@@ -9,6 +9,7 @@ query allChemicalCompoundsNoPagination
             formula
             cas
             molarMass
+            icsc
             density
             url
             created
@@ -32,6 +33,7 @@ query allChemicalCompounds(
     first: $limit
     offset: $offset
     ) {
+        totalCount
         nodes {
             id
             name
@@ -39,6 +41,7 @@ query allChemicalCompounds(
             formula
             cas
             molarMass
+            icsc
             density
             url
             created
@@ -67,6 +70,7 @@ mutation CreateChemicalCompound(
             molarMass
             density
             url
+            icsc
             created
             userByOwnerId {
                 initials
@@ -93,6 +97,7 @@ mutation UpdateChemicalCompound(
             otherName
             formula
             cas
+            icsc
             molarMass
             density
             url

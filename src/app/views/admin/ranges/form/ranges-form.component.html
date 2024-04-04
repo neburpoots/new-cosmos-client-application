@@ -1,0 +1,116 @@
+<h2 *ngIf="!isInlineCreating" class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
+<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'flex items-start pt-1' : 'flex flex-col gap-5'"
+    (ngSubmit)="onSubmit()">
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[0] : null">
+        <select-component [form]="myForm" [name]="'gas'" [displayName]="'Gas'" [options]="gases"
+            [inline]="isInlineCreating" [placeholder]="'Select a gas'" [touched]="myForm.controls['gas'].touched"
+            [errors]="[{ name: 'required', message: 'Gas is required' }]">
+        </select-component>
+    </div>
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'lowEu'" [displayName]="'Low Eu'"
+            [inline]="isInlineCreating" [touched]="myForm.controls['lowEu'].touched"
+            [errors]="[{ name: 'required', message: 'Low Eu is required' }, { name: 'pattern' , message: 'Low Eu must be a number' }]"></input-component>
+    </div>
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[2] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[2] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'highEu'" [displayName]="'High Eu'"
+            [inline]="isInlineCreating" [touched]="myForm.controls['highEu'].touched"
+            [errors]="[{ name: 'required', message: 'High Eu is required' }, { name: 'pattern' , message: 'High Eu must be a number' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[3] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[3] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'engineeringUnits'"
+            [displayName]="'Engineering Units'" [inline]="isInlineCreating"
+            [touched]="myForm.controls['engineeringUnits'].touched"
+            [errors]="[{ name: 'required', message: 'Engineering Units is required' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[4] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null" class="mt-auto mb-auto">
+        <input-component [inputType]="'checkbox'" [isSubmitted]="isSubmitted" [form]="myForm" [name]="'alarmUnits'"
+            [displayName]="'Alarm Units'" [inline]="isInlineCreating" [touched]="myForm.controls['alarmUnits'].touched"
+            [errors]="[]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[5] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[5] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'alarm1Level'"
+            [displayName]="'Alarm 1 Level (%)'" [inline]="isInlineCreating"
+            [touched]="myForm.controls['alarm1Level'].touched"
+            [errors]="[{ name: 'pattern' , message: 'Alarm 1 Level must be a number' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[6] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[6] : null" class="mt-auto mb-auto">
+        <input-component [inputType]="'checkbox'" [isSubmitted]="isSubmitted" [form]="myForm"
+            [name]="'alarm1DirectionUp'" [displayName]="'Alarm 1 Direction Up'" [inline]="isInlineCreating"
+            [touched]="myForm.controls['alarm1DirectionUp'].touched" [errors]="[]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[7] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[7] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'alarm2Level'"
+            [displayName]="'Alarm 2 Level (%)'" [inline]="isInlineCreating"
+            [touched]="myForm.controls['alarm2Level'].touched"
+            [errors]="[{ name: 'pattern' , message: 'Alarm 2 Level must be a number' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[8] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[8] : null" class="mt-auto mb-auto">
+        <input-component [inputType]="'checkbox'" [isSubmitted]="isSubmitted" [form]="myForm"
+            [name]="'alarm2DirectionUp'" [displayName]="'Alarm 2 Direction Up'" [inline]="isInlineCreating"
+            [touched]="myForm.controls['alarm2DirectionUp'].touched" [errors]="[]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[9] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[9] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'warning1Level'"
+            [displayName]="'Warning 1 Level'" [inline]="isInlineCreating"
+            [touched]="myForm.controls['warning1Level'].touched"
+            [errors]="[{ name: 'pattern' , message: 'Warning 1 Level must be a number' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[10] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[10] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'warning2Level'"
+            [displayName]="'Warning 2 Level'" [inline]="isInlineCreating"
+            [touched]="myForm.controls['warning2Level'].touched"
+            [errors]="[{ name: 'pattern' , message: 'Warning 2 Level must be a number' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[11] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[11] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'precision'" [displayName]="'Precision'"
+            [inline]="isInlineCreating" [touched]="myForm.controls['precision'].touched"
+            [errors]="[{ name: 'pattern' , message: 'Warning 2 Level must be a number' }]"></input-component>
+    </div>
+    
+    <!-- This is is for modal form -->
+    <div *ngIf="!isInlineCreating" class="flex flex-row mt-auto justify-end items-center gap-2">
+        <button type="button" (click)="close()"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Close</button>
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">{{id
+            ? "Edit" : "Add"}} {{objectSingle}}</button>
+    </div>
+
+    <!-- This is the inline form -->
+    <div *ngIf="isInlineCreating" [style.min-width.px]="cellWidths[cellWidths.length - 2]"
+        [style.max-width.px]="cellWidths[cellWidths.length - 2]"
+        class="h-full sticky right-0 flex bg-white gap-1 items-start p-1 pt-1 justify-center ml-auto">
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
+            <i class="fa fa-lg fa-check" aria-hidden="true"></i>
+        </button>
+        <div (click)="toggleInlineCreating.emit()"
+            class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
+            <i class="fa fa-lg fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+
+</form>

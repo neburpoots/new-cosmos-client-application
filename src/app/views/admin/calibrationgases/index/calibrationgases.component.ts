@@ -28,7 +28,7 @@ import { TableHead } from "../../../../models/utils/tableHead";
 export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implements OnInit {
 
 
-  @ViewChild('calibrationGasEdit') childComponent!: CalibrationGasesFormComponent;
+  @ViewChild('editModal') childComponent!: CalibrationGasesFormComponent;
 
   objectSingle = 'Calibration gas';
   objectPlural = 'Calibration gases';

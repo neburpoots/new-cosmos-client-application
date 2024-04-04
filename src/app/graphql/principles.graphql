@@ -27,6 +27,7 @@ query allPrinciples(
     first: $limit
     offset: $offset
     ) {
+        totalCount
         nodes {
             id,
             name

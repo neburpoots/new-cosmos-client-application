@@ -87,6 +87,12 @@ import { DetectorTypeComponent } from "./views/admin/detector-types/detector-typ
 import { DetectorTypeFormComponent } from "./views/admin/detector-types/form/detector-type-form.component";
 import { PrinciplesFormComponent } from "./views/admin/principles/form/principles-form.component";
 import { PrinciplesComponent } from "./views/admin/principles/index/principles.component";
+import { GasesComponent } from "./views/admin/gases/index/gases.component";
+import { GasesFormComponent } from "./views/admin/gases/form/gases-form.component";
+import { ChemicalCompoundsComponent } from "./views/admin/chemical-compounds/index/chemical-compounds.component";
+import { ChemicalCompoundsFormComponent } from "./views/admin/chemical-compounds/form/chemical-compounds-form.component";
+import { RangesComponent } from "./views/admin/ranges/index/ranges.component";
+import { RangesFormComponent } from "./views/admin/ranges/form/ranges-form.component";
 
 @NgModule({
   declarations: [
@@ -151,7 +157,13 @@ import { PrinciplesComponent } from "./views/admin/principles/index/principles.c
     DetectorTypeComponent,
     DetectorTypeFormComponent,
     PrinciplesComponent,
-    PrinciplesFormComponent
+    PrinciplesFormComponent,
+    GasesComponent,
+    GasesFormComponent,
+    ChemicalCompoundsComponent,
+    ChemicalCompoundsFormComponent,
+    RangesComponent,
+    RangesFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

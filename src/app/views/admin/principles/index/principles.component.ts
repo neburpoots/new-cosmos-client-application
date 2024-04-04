@@ -1,19 +1,11 @@
-import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
-import { HttpClient, HttpResponse } from "@angular/common/http";
-import { PaginatedResult } from "../../../../models/utils/pagination";
-import { SearchCriteria } from "../../../../models/utils/searchCriteria";
-import { ModalWidth } from "../../../../models/enums/modalWidth.enum";
-import { Assembly } from "../../../../models/entities/assembly";
-import { CalGasService } from "../../../../services/calgas/calgas.service";
-import { CalGas } from "../../../../models/entities/calgas";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+
 import { TableField } from "../../../../models/utils/tableField";
-import { AbstractComponent } from "../../abstract/abstract.component";
-import { IAbstractComponent } from "../../../../models/interface/IAbstractComponent";
-import { AbstractService } from "../../../../services/abstract/abstract.service";
+
 import { ToastrService } from "ngx-toastr";
-import { TableHeader } from "../../../../models/utils/tableHeader";
 import { ActivatedRoute } from "@angular/router";
-import { CalGasEntitiesGQL, CalGasesOrderBy, CalgasEntitiesOrderBy, CalgasEntity, DeleteCalGasGQL } from "../../../../../generated/graphql";
+import { AllPrinciplesGQL, DeletePrincipleGQL, Principle, PrinciplesOrderBy } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,16 +17,16 @@ import { PrinciplesFormComponent } from "../form/principles-form.component";
   templateUrl: "./principles.component.html",
 })
 
-export class PrinciplesComponent extends BaseEntity<CalgasEntity> implements OnInit {
+export class PrinciplesComponent extends BaseEntity<Principle> implements OnInit {
 
 
-  @ViewChild('calibrationGasEdit') childComponent!: PrinciplesFormComponent;
+  @ViewChild('editModal') childComponent!: PrinciplesFormComponent;
 
   objectSingle = 'Principle';
   objectPlural = 'Principles';
 
   searchCriteria: SearchFilters = {
-    orderBy: [CalgasEntitiesOrderBy.IdDesc],
+    orderBy: [PrinciplesOrderBy.IdDesc],
     search: "",
     limit: 10,
     offset: 0,
@@ -48,7 +40,6 @@ export class PrinciplesComponent extends BaseEntity<CalgasEntity> implements OnI
     this.nodes$.subscribe(result => console.log(result));
   }
 
-
   override setEditData() {
     console.log(this.editData)
     this.childComponent.setEditData(this.editData);
@@ -57,63 +48,43 @@ export class PrinciplesComponent extends BaseEntity<CalgasEntity> implements OnI
   get editData(): any {
     return {
       id: this.selectedItem?.id,
-      gas: this.selectedItem?.gasId,
-      concentration: this.selectedItem?.concentration,
-      cdartikel: this.selectedItem?.cdartikel,
-      engineering_units: this.selectedItem?.engineeringUnits,
+      name: this.selectedItem?.name,
     };
   }
-
 
   //json return object for getter
   //This is the object name of the nodes: return
   //check the get all method and see what it returns and set to this object
-  Key = 'calGases';
+  Key = 'allPrinciples';
 
-  baseOrderBy = CalgasEntitiesOrderBy.IdDesc;
+  baseOrderBy = PrinciplesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<CalgasEntity>>;
+  override nodes$: Observable<Array<Principle>>;
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
-    private calGasService: CalGasEntitiesGQL,
-    private deleteCalGasService: DeleteCalGasGQL
+    private principleService: AllPrinciplesGQL,
+    private deletePrincipleService: DeletePrincipleGQL
   ) {
-    super(toastr, route, http, calGasService, deleteCalGasService);
+    super(toastr, route, http, principleService, deletePrincipleService);
 
     this.nodes$ = this.loadData(this.searchCriteria);
   }
 
-
-  // tableHeaders : TableHeader[] = [
-  //   { displayName: 'Gas', sortValue: 'gas.name', key: 'gas'  },
-  //   { displayName: 'Concentration', sortValue: 'concentration', key: 'concentration'},
-  //   { displayName: 'Engineering Units', sortValue: 'engineering_units', key: 'engineering_units'},
-  //   { displayName: 'CD Artikel', sortValue: 'cdartikel', key: 'cdartikel'},
-  //   { displayName: 'Created', sortValue: 'created', key: 'created'},
-  //   { displayName: 'By', sortValue: 'owner.initials', key: 'by'},
-  // ];
-
-  tableHeaders: TableHead<CalgasEntitiesOrderBy>[] = [
-    { key: 'gas', label: "Gas", asc: CalgasEntitiesOrderBy.NameAsc, desc: CalgasEntitiesOrderBy.NameDesc },
-    { key: 'concentration', label: "Concentration", asc: CalgasEntitiesOrderBy.ConcentrationAsc, desc: CalgasEntitiesOrderBy.ConcentrationDesc },
-    { key: 'engineering_units', label: "Engineering Units", asc: CalgasEntitiesOrderBy.EngineeringUnitsAsc, desc: CalgasEntitiesOrderBy.EngineeringUnitsDesc },
-    { key: 'cdartikel', label: "CD Artikel", asc: CalgasEntitiesOrderBy.CdartikelAsc, desc: CalgasEntitiesOrderBy.CdartikelDesc },
-    { key: 'created', label: "Created", asc: CalgasEntitiesOrderBy.CreatedAsc, desc: CalgasEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: CalgasEntitiesOrderBy.InitialsAsc, desc: CalgasEntitiesOrderBy.InitialsDesc },
+  tableHeaders: TableHead<PrinciplesOrderBy>[] = [
+    { key: 'name', label: "Name", asc: PrinciplesOrderBy.NameAsc, desc: PrinciplesOrderBy.NameDesc },
+    { key: 'created', label: "Created", asc: PrinciplesOrderBy.CreatedAsc, desc: PrinciplesOrderBy.CreatedDesc },
+    { key: 'by', label: "By", asc: PrinciplesOrderBy.UserByOwnerIdInitialsAsc, desc: PrinciplesOrderBy.UserByOwnerIdInitialsDesc },
   ]
 
 
-  mapTableData(calGasses: CalgasEntity[]): any[] {
-    console.log(calGasses)
-    return calGasses.map((calgas: CalgasEntity) => {
+  mapTableData(principles: Principle[]): any[] {
+    console.log(principles)
+    return principles.map((principle: Principle) => {
       return {
-        id: { url: 'api/calGasses', value: calgas.id } as TableField,
-        gas: { url: null, value: calgas?.name } as TableField,
-        concentration: { url: null, value: calgas?.concentration } as TableField,
-        engineering_units: { url: null, value: calgas?.engineeringUnits } as TableField,
-        cdartikel: { url: null, value: calgas?.cdartikel } as TableField,
-        created: { url: null, value: calgas.created } as TableField,
-        by: { url: null, value: calgas?.initials } as TableField,
+        id: { url: null, value: principle.id } as TableField,
+        name: { url: null, value: principle?.name } as TableField,
+        created: { url: null, value: principle?.created } as TableField,
+        by: { url: null, value: principle?.userByOwnerId?.initials } as TableField,
       };
     });
   }

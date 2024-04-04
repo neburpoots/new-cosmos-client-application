@@ -10,28 +10,28 @@
                 [isInlineCreating]="isInlineCreating"
                 (toggleInlineCreating)="toggleInlineCreating()"	
                 >
-                <calgas-form
+                <principles-form
                     [baseOrderBy]="baseOrderBy"
                 (refresh)="fetch($event)" [objectSingle]="objectSingle"
                     [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
-                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></calgas-form>
+                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></principles-form>
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large
         " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <calgas-form
+                <principles-form
                 [baseOrderBy]="baseOrderBy"
                 [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refresh)="fetch()"
-                    (closeModal)="closeCreateModal()"></calgas-form>
+                    (closeModal)="closeCreateModal()"></principles-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-                <calgas-form #calibrationGasEdit [objectPlural]="objectPlural"
+                <principles-form #editModal [objectPlural]="objectPlural"
                 [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
-                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></calgas-form>
+                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></principles-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Medium

@@ -19,6 +19,7 @@ query allGases(
     first: $limit
     offset: $offset
     ) {
+        totalCount
         nodes {
             id,
             name

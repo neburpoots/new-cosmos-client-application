@@ -11,7 +11,7 @@ import { CalgasDto } from '../../../../models/dto/calgasDto';
 import { Gas } from '../../../../models/entities/gas';
 import { SearchCriteria } from '../../../../models/utils/searchCriteria';
 import { BaseFormComponent } from '../../base/form/base-form.component';
-import { AllGasesNoPaginationGQL, CreateCalGasGQL, UpdateCalGasGQL } from '../../../../../generated/graphql';
+import { AllGasesNoPaginationGQL, CreateCalGasGQL, CreatePrincipleGQL, PrincipleInput, UpdateCalGasGQL, UpdatePrincipleGQL } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
 import { FormSelect } from '../../../../models/utils/formSelect';
 
@@ -20,66 +20,48 @@ import { FormSelect } from '../../../../models/utils/formSelect';
     templateUrl: './principles-form.component.html',
     styles: []
 })
-export class PrinciplesFormComponent extends BaseFormComponent<CalgasDto> {
+export class PrinciplesFormComponent extends BaseFormComponent<PrincipleInput> {
 
 
     @Input() object: any = {
-        concentration: null,
-        engineering_units: '',
-        gas: null,
-        cdartikel: '',
+        name: null,
     };
 
     myForm: FormGroup;
-    gases: FormSelect[];
-
 
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
-        , gasesService: AllGasesNoPaginationGQL,
-        createCalGasService: CreateCalGasGQL,
-        editCalGasService: UpdateCalGasGQL
+        ,
+        createService: CreatePrincipleGQL,
+        editService: UpdatePrincipleGQL
         ) {
-        super(toastr, fb, createCalGasService, editCalGasService)
-        
-        this.gases = [];
+        super(toastr, fb, createService, editService)
 
-        this.setUpDependentData(gasesService);
         this.myForm = this.fb.group({
-            gas: [this.object.gas, [Validators.required]],
-            concentration: [this.object.concentration, [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
-            cdartikel: [this.object.cdartikel, []],
-            engineering_units: [this.object.engineering_units, [Validators.required]],
+            name: [this.object.name, [Validators.required]],
         });
     }
 
-    createDto(): any {
+    createDto(): PrincipleInput {
         //todo setup owner_id, ownerId
         return {
-            ownerId: 10,
-            concentration: +this.myForm.value.concentration,
-            engineeringUnits: this.myForm.value.engineering_units,
-            gasId: +this.myForm.value.gas,
-            cdartikel: this.myForm.value.cdartikel,
+            name: this.myForm.value.name,
             created: new Date(),
             modified: new Date(),
+            ownerId: 10
         }
-
     }
 
-    async setUpDependentData(gasesService: Query<any, any>) {
-        gasesService.fetch().subscribe(result => {
-            this.gases = result?.data?.allGases?.nodes || [];
-        });
-    }
+    // async setUpDependentData(gasesService: Query<any, any>) {
+    //     gasesService.fetch().subscribe(result => {
+    //         this.gases = result?.data?.allGases?.nodes || [];
+    //     });
+    // }
 
     //on edit set to selected assembly
     setEditData(changes: any): void {
         this.object = {
-            id: changes.id,
-            concentration: changes.concentration,
-            engineering_units: changes.engineering_units,
-            cdartikel: changes.cdartikel,            
-            gas: changes.gas,
+            id: changes.id,           
+            name: changes.name,
         };
 
         this.myForm.patchValue(this.object);

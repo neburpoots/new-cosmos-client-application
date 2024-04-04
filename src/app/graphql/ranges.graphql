@@ -50,6 +50,7 @@ query allRanges(
     first: $limit
     offset: $offset
   ) {
+    totalCount
     nodes {
       id
       created

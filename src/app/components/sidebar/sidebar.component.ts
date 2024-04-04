@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/authentication/auth.service";
-import { faCloud, faCodeCompare, faEllipsis, faListUl, faRuler, faSatelliteDish, faShoppingBasket, faTowerBroadcast, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faBuilding, faCloud, faCodeCompare, faEllipsis, faHouseSignal, faListUl, faMountain, faMountainSun, faPanorama, faPlus, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { NavBarIcon } from "../../models/utils/navbarItem";
 
@@ -14,6 +14,8 @@ export class SidebarComponent implements OnInit {
   assembleDropdownActive: boolean = false;
   productDropdownActive: boolean = false;
   miscDropdownActive: boolean = false;
+  servicesDropdownActive: boolean = false;
+
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -27,6 +29,72 @@ export class SidebarComponent implements OnInit {
   faRuler = faRuler
   faEllipsis = faEllipsis
   faListUl = faListUl
+  faMountainSun = faMountainSun
+  faBuilding = faBuilding
+  faShop = faShop
+  faToiletPortable = faToiletPortable
+  faHouseSignal = faHouseSignal
+  faTowerCell = faTowerCell
+  faPlus = faPlus
+  faServer = faServer
+  services: NavBarIcon[] = [
+    {
+      title: "Add Detector",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faPlus,
+      url: "/user/add-detector",
+    },
+    {
+      title: "Add Sensor",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faPlus,
+      url: "/user/add-sensor",
+    },
+    {
+      title: "Sensor Lists",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faTowerCell,
+      url: "/user/sensor-lists",
+    },
+    {
+      title: "Sample Points",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faHouseSignal,
+      url: "/user/sample-points",
+    },
+    {
+      title: "Applications",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faToiletPortable,
+      url: "/user/applications",
+    },
+    {
+      title: "Buildings",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faBuilding,
+      url: "/user/buildings",
+    },
+    {
+      title: "Floors",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faShop,
+      url: "/user/floors",
+    },
+    {
+      title: "Areas",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faMountainSun,
+      url: "/user/areas",
+    },
+  ];
 
   misc : NavBarIcon[] = [
     {
@@ -92,5 +160,10 @@ export class SidebarComponent implements OnInit {
   // Method to toggle the dropdown state
   togglemiscDropdown() {
     this.miscDropdownActive = !this.miscDropdownActive;
+  }
+
+  // Method to toggle the dropdown state
+  toggleServicesDropdown() {
+    this.servicesDropdownActive = !this.servicesDropdownActive;
   }
 }

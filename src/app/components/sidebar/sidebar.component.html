@@ -178,6 +178,32 @@
 
             </ul>
           </div>
+
+          <button class="text-md text-slate-200 py-3  font-semibold  block hover:text-white" type="button"
+          (click)="toggleServicesDropdown()">
+          <fa-icon [icon]="faServer"></fa-icon>
+          Services
+        </button>
+        <div *ngIf="servicesDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
+          <ul class="list-none">
+            @for (item of services; track $index) {
+            <li><a [routerLink]="[item.url]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
+        isActive(item.url)
+          ? 'text-white hover:text-white'
+          : 'text-white hover:text-white'
+      " [ngClass]="isActive(item.url) ? 'bg-cosmosDark text-white' : ''"
+                class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
+                @if(item.icon6) {
+                <fa-icon class="mr-4" [icon]="item.icon6"></fa-icon>
+                } @else if (item.icon4) {
+                <i [ngClass]="item.icon4" aria-hidden="true"></i>
+                }
+                {{item.title}}</a></li>
+            }
+
+          </ul>
+        </div>
+
           <button class="text-md text-slate-200 py-3  font-semibold  block hover:text-white" type="button"
             (click)="togglemiscDropdown()">
             <fa-icon [icon]="faListUl"></fa-icon>
@@ -202,76 +228,10 @@
 
             </ul>
           </div>
+
         </div>
 
 
-        <li class="items-center">
-          <a [routerLink]="['/user/settings']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
-            #adminSettings="routerLinkActive" [ngClass]="
-              adminSettings.isActive
-                ? 'text-cosmosDark hover:text-cosmosDarker'
-                : 'text-slate-200 hover:text-white'
-            ">
-            <i class="fa fa-tools mr-2 text-sm" [ngClass]="
-                adminSettings.isActive ? 'opacity-75' : 'text-slate-300'
-              "></i>
-            Settings
-          </a>
-        </li>
-
-        <li class="items-center">
-          <a [routerLink]="['/user/tables']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
-            #adminTables="routerLinkActive" [ngClass]="
-              adminTables.isActive
-                ? 'text-cosmosDark hover:text-cosmosDarker'
-                : 'text-slate-200 hover:text-white'
-            ">
-            <i class="fa fa-table mr-2 text-sm" [ngClass]="
-                adminTables.isActive ? 'opacity-75' : 'text-slate-300'
-              "></i>
-            Tables
-          </a>
-        </li>
-
-        <li class="items-center">
-          <a [routerLink]="['/user/maps']" class="text-xs uppercase py-3 font-bold block" routerLinkActive
-            #adminMaps="routerLinkActive" [ngClass]="
-              adminMaps.isActive
-                ? 'text-cosmosDark hover:text-cosmosDarker'
-                : 'text-slate-200 hover:text-white'
-            ">
-            <i class="fa fa-map-marked mr-2 text-sm" [ngClass]="
-                adminMaps.isActive ? 'opacity-75' : 'text-slate-300'
-              "></i>
-            Maps
-          </a>
-        </li>
-      </ul>
-
-      <!-- Divider -->
-      <hr class="my-4 md:min-w-full" />
-      <!-- Heading -->
-      <h6 class="md:min-w-full text-white text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-        Auth Layout Pages
-      </h6>
-      <!-- Navigation -->
-
-      <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-        <li class="items-center">
-          <a [routerLink]="['/auth/login']"
-            class="text-slate-200 hover:text-white text-xs uppercase py-3 font-bold block">
-            <i class="fa fa-fingerprint text-slate-300 mr-2 text-sm"></i>
-            Login
-          </a>
-        </li>
-
-        <li class="items-center">
-          <a [routerLink]="['/auth/register']"
-            class="text-slate-200 hover:text-white text-xs uppercase py-3 font-bold block">
-            <i class="fa fa-clipboard-list text-slate-300 mr-2 text-sm"></i>
-            Register
-          </a>
-        </li>
       </ul>
 
       <!-- Divider -->

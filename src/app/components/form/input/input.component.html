@@ -1,18 +1,16 @@
-<div [formGroup]="form" class="flex flex-col" [class]="inline ? 'text-xs p-1' : ''">
-    <label *ngIf="!inline" [for]="name" [ngClass]="{
+<div [formGroup]="form" class="flex flex-col justify-center" [class]="inline ? 'text-xs p-1' : ''">
+    <label *ngIf="!inline && inputType !== 'checkbox' " [for]="name" [ngClass]="{
+        
         'text-red-500': form.get(name)?.errors && form && form.controls[name].touched,
         'text-green-600': form.get(name)?.valid && form && form.controls[name].touched,
         'text-slate-800': !form.get(name)?.touched
     }">{{displayName}}</label>
-    
+
     <ng-container [ngSwitch]="inputType">
-        <textarea *ngSwitchCase="'textarea'" 
-            [ngClass]="{
+        <textarea *ngSwitchCase="'textarea'" [ngClass]="{
                 'text-sm': inline,
                 '': !inline
-            }"
-        
-        [ngClass]="{
+            }" [ngClass]="{
           'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
           'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
           'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
@@ -25,12 +23,21 @@
           'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched
         }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
             [id]="name" [formControlName]="name">
-            
-        <input *ngSwitchDefault type="text" 
-    
-        
+
+        <label *ngSwitchCase="'checkbox'" class="h-full inline-flex items-center cursor-pointer"
         
         [ngClass]="{
+            'ml-3': inline,
+        }"
+        >
+            <input [id]="name" [formControlName]="name" type="checkbox" value="" class="sr-only peer">
+            <div
+                class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-cosmosDarker rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-cosmosDark">
+            </div>
+            <span *ngIf="!inline" class="ml-3 text-slate-800">{{displayName}}</span>
+        </label>
+
+        <input *ngSwitchDefault type="text" [ngClass]="{
           'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
           'border-red-500 test focus:outline-red-500': isSubmitted && form.get(name)?.errors,
           'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
@@ -38,11 +45,14 @@
           'text-sm': inline 
         }" [placeholder]="displayName" class="bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
             [id]="name" [formControlName]="name">
+
+
     </ng-container>
 
     <ng-container *ngFor="let error of errors">
         <div class="text-red-500">
-            <div *ngIf="(form.get(name)?.hasError(error.name) && form && form.controls[name].touched) || (form.get(name)?.hasError(error.name) && isSubmitted)">
+            <div
+                *ngIf="(form.get(name)?.hasError(error.name) && form && form.controls[name].touched) || (form.get(name)?.hasError(error.name) && isSubmitted)">
                 {{error.message}}
             </div>
         </div>

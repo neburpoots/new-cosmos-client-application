@@ -29,6 +29,9 @@ import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.c
 import { SensorTypeComponent } from "./views/admin/sensor-type/sensor-type.component";
 import { DetectorTypeComponent } from "./views/admin/detector-types/detector-type.component";
 import { PrinciplesComponent } from "./views/admin/principles/index/principles.component";
+import { GasesComponent } from "./views/admin/gases/index/gases.component";
+import { ChemicalCompoundsComponent } from "./views/admin/chemical-compounds/index/chemical-compounds.component";
+import { RangesComponent } from "./views/admin/ranges/index/ranges.component";
 
 const routes: Routes = [
   // user views
@@ -60,6 +63,9 @@ const routes: Routes = [
       { path: "maps", component: MapsComponent },
       { path: "sensor-base-types", component: SensorBaseTypeComponent},
       { path: "sensor-types", component: SensorTypeComponent},
+      { path: "gases", component: GasesComponent},
+      { path: "chemical-compounds", component: ChemicalCompoundsComponent},
+      { path: "ranges", component: RangesComponent},
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },
