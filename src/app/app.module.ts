@@ -93,6 +93,10 @@ import { ChemicalCompoundsComponent } from "./views/admin/chemical-compounds/ind
 import { ChemicalCompoundsFormComponent } from "./views/admin/chemical-compounds/form/chemical-compounds-form.component";
 import { RangesComponent } from "./views/admin/ranges/index/ranges.component";
 import { RangesFormComponent } from "./views/admin/ranges/form/ranges-form.component";
+import { AreasComponent } from "./views/admin/areas/index/areas.component";
+import { AreasFormComponent } from "./views/admin/areas/form/areas-form.component";
+import { FloorsComponent } from "./views/admin/floors/index/floors.component";
+import { FloorFormComponent } from "./views/admin/floors/form/floors-form.component";
 
 @NgModule({
   declarations: [
@@ -163,7 +167,11 @@ import { RangesFormComponent } from "./views/admin/ranges/form/ranges-form.compo
     ChemicalCompoundsComponent,
     ChemicalCompoundsFormComponent,
     RangesComponent,
-    RangesFormComponent
+    RangesFormComponent,
+    AreasComponent,
+    AreasFormComponent,
+    FloorsComponent,
+    FloorFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

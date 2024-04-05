@@ -1,11 +1,21 @@
 #-------------------------------------------------------------------------------
-query allFloorsNoPagination
+query allFloorsNoPagination($buildingId: [Int!])
     {
-    allFloors {
+    allFloors(
+        filter: { 
+      or: [
+        { buildingByBuildingId: { id: { inExpansive: $buildingId } } }
+      ]
+  }
+    ) {
         nodes {
             id,
             name
             created,
+            buildingByBuildingId {
+                name
+                id
+            }
             userByOwnerId {
                 initials
                 id
@@ -16,9 +26,10 @@ query allFloorsNoPagination
     }
 }
 
+
 #-------------------------------------------------------------------------------
-query allFloors($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorsOrderBy!]) {
-  allFloors(
+query allFloorEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorEntitiesOrderBy!]) {
+  allFloorEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -26,20 +37,15 @@ query allFloors($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorsOr
   ) {
     totalCount
     nodes {
-      buildingByBuildingId {
-        id
-        name
-        endUserByEndUserId {
-          id
-          name
-        }
-      }
       name
       created
-      userByOwnerId {
-        id
-        initials
-      }
+      initials
+      ownerId
+      id
+      endUserName
+      endUserId
+      buildingName
+      buildingId
     }
   }
 }

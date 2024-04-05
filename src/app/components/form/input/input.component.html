@@ -7,10 +7,7 @@
     }">{{displayName}}</label>
 
     <ng-container [ngSwitch]="inputType">
-        <textarea *ngSwitchCase="'textarea'" [ngClass]="{
-                'text-sm': inline,
-                '': !inline
-            }" [ngClass]="{
+        <textarea *ngSwitchCase="'textarea'" [class]="inline ? 'text-xs' : ''" [ngClass]="{
           'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
           'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
           'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched

@@ -1129,6 +1129,138 @@ export type AreaCondition = {
   remarks?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** A connection to a list of `AreaEntity` values. */
+export type AreaEntitiesConnection = {
+  __typename?: 'AreaEntitiesConnection';
+  /** A list of edges which contains the `AreaEntity` and cursor to aid in pagination. */
+  edges: Array<AreaEntitiesEdge>;
+  /** A list of `AreaEntity` objects. */
+  nodes: Array<AreaEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `AreaEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `AreaEntity` edge in the connection. */
+export type AreaEntitiesEdge = {
+  __typename?: 'AreaEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `AreaEntity` at the end of the edge. */
+  node: AreaEntity;
+};
+
+/** Methods to use when ordering `AreaEntity`. */
+export enum AreaEntitiesOrderBy {
+  BuildingIdAsc = 'BUILDING_ID_ASC',
+  BuildingIdDesc = 'BUILDING_ID_DESC',
+  BuildingNameAsc = 'BUILDING_NAME_ASC',
+  BuildingNameDesc = 'BUILDING_NAME_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  EndUserIdAsc = 'END_USER_ID_ASC',
+  EndUserIdDesc = 'END_USER_ID_DESC',
+  EndUserNameAsc = 'END_USER_NAME_ASC',
+  EndUserNameDesc = 'END_USER_NAME_DESC',
+  FloorIdAsc = 'FLOOR_ID_ASC',
+  FloorIdDesc = 'FLOOR_ID_DESC',
+  FloorNameAsc = 'FLOOR_NAME_ASC',
+  FloorNameDesc = 'FLOOR_NAME_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  RemarksAsc = 'REMARKS_ASC',
+  RemarksDesc = 'REMARKS_DESC'
+}
+
+export type AreaEntity = {
+  __typename?: 'AreaEntity';
+  buildingId?: Maybe<Scalars['Int']['output']>;
+  buildingName?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  endUserId?: Maybe<Scalars['Int']['output']>;
+  endUserName?: Maybe<Scalars['String']['output']>;
+  floorId?: Maybe<Scalars['Int']['output']>;
+  floorName?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  remarks?: Maybe<Scalars['String']['output']>;
+};
+
+/**
+ * A condition to be used against `AreaEntity` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type AreaEntityCondition = {
+  /** Checks for equality with the object’s `buildingId` field. */
+  buildingId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `buildingName` field. */
+  buildingName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `endUserId` field. */
+  endUserId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `endUserName` field. */
+  endUserName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `floorId` field. */
+  floorId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `floorName` field. */
+  floorName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `remarks` field. */
+  remarks?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against `AreaEntity` object types. All fields are combined with a logical ‘and.’ */
+export type AreaEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<AreaEntityFilter>>;
+  /** Filter by the object’s `buildingId` field. */
+  buildingId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `buildingName` field. */
+  buildingName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `endUserId` field. */
+  endUserId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `endUserName` field. */
+  endUserName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `floorId` field. */
+  floorId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `floorName` field. */
+  floorName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<AreaEntityFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<AreaEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `remarks` field. */
+  remarks?: InputMaybe<StringFilter>;
+};
+
 /** A filter to be used against `Area` object types. All fields are combined with a logical ‘and.’ */
 export type AreaFilter = {
   /** Checks for all expressions in this list. */
@@ -7715,6 +7847,8 @@ export type BigFloatFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['BigFloat']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['BigFloat']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['BigFloat']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -7741,6 +7875,8 @@ export type BigIntFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['BigInt']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['BigInt']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -7767,6 +7903,8 @@ export type BooleanFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['Boolean']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['Boolean']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['Boolean']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -15041,6 +15179,8 @@ export type DateFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['Date']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['Date']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['Date']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -15067,6 +15207,8 @@ export type DatetimeFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['Datetime']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['Datetime']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['Datetime']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -31389,6 +31531,8 @@ export type FloatFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['Float']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['Float']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['Float']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -31447,6 +31591,117 @@ export type FloorCondition = {
   name?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `ownerId` field. */
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A connection to a list of `FloorEntity` values. */
+export type FloorEntitiesConnection = {
+  __typename?: 'FloorEntitiesConnection';
+  /** A list of edges which contains the `FloorEntity` and cursor to aid in pagination. */
+  edges: Array<FloorEntitiesEdge>;
+  /** A list of `FloorEntity` objects. */
+  nodes: Array<FloorEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `FloorEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `FloorEntity` edge in the connection. */
+export type FloorEntitiesEdge = {
+  __typename?: 'FloorEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `FloorEntity` at the end of the edge. */
+  node: FloorEntity;
+};
+
+/** Methods to use when ordering `FloorEntity`. */
+export enum FloorEntitiesOrderBy {
+  BuildingIdAsc = 'BUILDING_ID_ASC',
+  BuildingIdDesc = 'BUILDING_ID_DESC',
+  BuildingNameAsc = 'BUILDING_NAME_ASC',
+  BuildingNameDesc = 'BUILDING_NAME_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  EndUserIdAsc = 'END_USER_ID_ASC',
+  EndUserIdDesc = 'END_USER_ID_DESC',
+  EndUserNameAsc = 'END_USER_NAME_ASC',
+  EndUserNameDesc = 'END_USER_NAME_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC'
+}
+
+export type FloorEntity = {
+  __typename?: 'FloorEntity';
+  buildingId?: Maybe<Scalars['Int']['output']>;
+  buildingName?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  endUserId?: Maybe<Scalars['Int']['output']>;
+  endUserName?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `FloorEntity` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type FloorEntityCondition = {
+  /** Checks for equality with the object’s `buildingId` field. */
+  buildingId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `buildingName` field. */
+  buildingName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `endUserId` field. */
+  endUserId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `endUserName` field. */
+  endUserName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `FloorEntity` object types. All fields are combined with a logical ‘and.’ */
+export type FloorEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<FloorEntityFilter>>;
+  /** Filter by the object’s `buildingId` field. */
+  buildingId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `buildingName` field. */
+  buildingName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `endUserId` field. */
+  endUserId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `endUserName` field. */
+  endUserName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<FloorEntityFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<FloorEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
 };
 
 /** A filter to be used against `Floor` object types. All fields are combined with a logical ‘and.’ */
@@ -35251,6 +35506,8 @@ export type IntFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['Int']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['Int']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -35338,6 +35595,8 @@ export type IntervalFilter = {
   greaterThanOrEqualTo?: InputMaybe<IntervalInput>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<IntervalInput>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<IntervalInput>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -35632,6 +35891,8 @@ export type JsonFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['JSON']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['JSON']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['JSON']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -51680,6 +51941,8 @@ export type Query = Node & {
   allAnotherRefreshTokens?: Maybe<AnotherRefreshTokensConnection>;
   /** Reads and enables pagination through a set of `Application`. */
   allApplications?: Maybe<ApplicationsConnection>;
+  /** Reads and enables pagination through a set of `AreaEntity`. */
+  allAreaEntities?: Maybe<AreaEntitiesConnection>;
   /** Reads and enables pagination through a set of `Area`. */
   allAreas?: Maybe<AreasConnection>;
   /** Reads and enables pagination through a set of `Aro`. */
@@ -51864,6 +52127,8 @@ export type Query = Node & {
   allFactuurs?: Maybe<FactuursConnection>;
   /** Reads and enables pagination through a set of `Filter`. */
   allFilters?: Maybe<FiltersConnection>;
+  /** Reads and enables pagination through a set of `FloorEntity`. */
+  allFloorEntities?: Maybe<FloorEntitiesConnection>;
   /** Reads and enables pagination through a set of `Floor`. */
   allFloors?: Maybe<FloorsConnection>;
   /** Reads and enables pagination through a set of `Gas`. */
@@ -52713,6 +52978,19 @@ export type QueryAllApplicationsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<ApplicationsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllAreaEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<AreaEntityCondition>;
+  filter?: InputMaybe<AreaEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<AreaEntitiesOrderBy>>;
 };
 
 
@@ -53909,6 +54187,19 @@ export type QueryAllFiltersArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<FiltersOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllFloorEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<FloorEntityCondition>;
+  filter?: InputMaybe<FloorEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<FloorEntitiesOrderBy>>;
 };
 
 
@@ -66433,6 +66724,8 @@ export type StringFilter = {
   greaterThanOrEqualToInsensitive?: InputMaybe<Scalars['String']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['String']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['String']['input']>>;
   /** Included in the specified list (case-insensitive). */
   inInsensitive?: InputMaybe<Array<Scalars['String']['input']>>;
   /** Contains the specified string (case-sensitive). */
@@ -68088,6 +68381,8 @@ export type UuidFilter = {
   greaterThanOrEqualTo?: InputMaybe<Scalars['UUID']['input']>;
   /** Included in the specified list. */
   in?: InputMaybe<Array<Scalars['UUID']['input']>>;
+  /** Included in the specified list -unless list is empty in which case this operator is not applied. */
+  inExpansive?: InputMaybe<Array<Scalars['UUID']['input']>>;
   /** Is null (if `true` is specified) or is not null (if `false` is specified). */
   isNull?: InputMaybe<Scalars['Boolean']['input']>;
   /** Less than the specified value. */
@@ -79997,15 +80292,15 @@ export type AllAreasNoPaginationQueryVariables = Exact<{ [key: string]: never; }
 
 export type AllAreasNoPaginationQuery = { __typename?: 'Query', allAreas?: { __typename?: 'AreasConnection', nodes: Array<{ __typename?: 'Area', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
-export type AllAreasQueryVariables = Exact<{
+export type AllAreaEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   search: Scalars['String']['input'];
-  orderBy?: InputMaybe<Array<AreasOrderBy> | AreasOrderBy>;
+  orderBy?: InputMaybe<Array<AreaEntitiesOrderBy> | AreaEntitiesOrderBy>;
 }>;
 
 
-export type AllAreasQuery = { __typename?: 'Query', allAreas?: { __typename?: 'AreasConnection', totalCount: number, nodes: Array<{ __typename?: 'Area', id: number, name: string, created?: any | null, floorByFloorId?: { __typename?: 'Floor', name: string, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null }> } | null };
+export type AllAreaEntitiesQuery = { __typename?: 'Query', allAreaEntities?: { __typename?: 'AreaEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AreaEntity', id?: number | null, name?: string | null, created?: any | null, floorName?: string | null, floorId?: number | null, endUserName?: string | null, endUserId?: number | null, buildingName?: string | null, buildingId?: number | null, initials?: string | null, ownerId?: number | null }> } | null };
 
 export type CreateAreaMutationVariables = Exact<{
   body: AreaInput;
@@ -80071,10 +80366,12 @@ export type DeleteAssemblyTypeMutationVariables = Exact<{
 
 export type DeleteAssemblyTypeMutation = { __typename?: 'Mutation', deleteAssemblyTypeById?: { __typename?: 'DeleteAssemblyTypePayload', clientMutationId?: string | null } | null };
 
-export type AllBuildingsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllBuildingsNoPaginationQueryVariables = Exact<{
+  userId?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
+}>;
 
 
-export type AllBuildingsNoPaginationQuery = { __typename?: 'Query', allBuildings?: { __typename?: 'BuildingsConnection', nodes: Array<{ __typename?: 'Building', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+export type AllBuildingsNoPaginationQuery = { __typename?: 'Query', allBuildings?: { __typename?: 'BuildingsConnection', nodes: Array<{ __typename?: 'Building', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null }> } | null };
 
 export type AllBuildingsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -80257,20 +80554,27 @@ export type DeleteDetectorMutationVariables = Exact<{
 
 export type DeleteDetectorMutation = { __typename?: 'Mutation', deleteDetectorById?: { __typename?: 'DeleteDetectorPayload', clientMutationId?: string | null } | null };
 
-export type AllFloorsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllEndUsersNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllFloorsNoPaginationQuery = { __typename?: 'Query', allFloors?: { __typename?: 'FloorsConnection', nodes: Array<{ __typename?: 'Floor', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+export type AllEndUsersNoPaginationQuery = { __typename?: 'Query', allEndUsers?: { __typename?: 'EndUsersConnection', nodes: Array<{ __typename?: 'EndUser', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
-export type AllFloorsQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
-  orderBy?: InputMaybe<Array<FloorsOrderBy> | FloorsOrderBy>;
+export type AllFloorsNoPaginationQueryVariables = Exact<{
+  buildingId?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
 }>;
 
 
-export type AllFloorsQuery = { __typename?: 'Query', allFloors?: { __typename?: 'FloorsConnection', totalCount: number, nodes: Array<{ __typename?: 'Floor', name: string, created?: any | null, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null, userByOwnerId?: { __typename?: 'User', id: number, initials?: string | null } | null }> } | null };
+export type AllFloorsNoPaginationQuery = { __typename?: 'Query', allFloors?: { __typename?: 'FloorsConnection', nodes: Array<{ __typename?: 'Floor', id: number, name: string, created?: any | null, buildingByBuildingId?: { __typename?: 'Building', name: string, id: number } | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllFloorEntitiesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<FloorEntitiesOrderBy> | FloorEntitiesOrderBy>;
+}>;
+
+
+export type AllFloorEntitiesQuery = { __typename?: 'Query', allFloorEntities?: { __typename?: 'FloorEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'FloorEntity', name?: string | null, created?: any | null, initials?: string | null, ownerId?: number | null, id?: number | null, endUserName?: string | null, endUserId?: number | null, buildingName?: string | null, buildingId?: number | null }> } | null };
 
 export type CreateFloorMutationVariables = Exact<{
   body: FloorInput;
@@ -80835,9 +81139,9 @@ export const AllAreasNoPaginationDocument = gql`
       super(apollo);
     }
   }
-export const AllAreasDocument = gql`
-    query allAreas($limit: Int, $offset: Int, $search: String!, $orderBy: [AreasOrderBy!]) {
-  allAreas(
+export const AllAreaEntitiesDocument = gql`
+    query allAreaEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AreaEntitiesOrderBy!]) {
+  allAreaEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -80848,17 +81152,14 @@ export const AllAreasDocument = gql`
       id
       name
       created
-      floorByFloorId {
-        buildingByBuildingId {
-          id
-          name
-          endUserByEndUserId {
-            id
-            name
-          }
-        }
-        name
-      }
+      floorName
+      floorId
+      endUserName
+      endUserId
+      buildingName
+      buildingId
+      initials
+      ownerId
     }
   }
 }
@@ -80867,8 +81168,8 @@ export const AllAreasDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class AllAreasGQL extends Apollo.Query<AllAreasQuery, AllAreasQueryVariables> {
-    override document = AllAreasDocument;
+  export class AllAreaEntitiesGQL extends Apollo.Query<AllAreaEntitiesQuery, AllAreaEntitiesQueryVariables> {
+    override document = AllAreaEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -81085,8 +81386,8 @@ export const DeleteAssemblyTypeDocument = gql`
     }
   }
 export const AllBuildingsNoPaginationDocument = gql`
-    query allBuildingsNoPagination {
-  allBuildings {
+    query allBuildingsNoPagination($userId: [Int!]) {
+  allBuildings(filter: {or: [{endUserByEndUserId: {id: {inExpansive: $userId}}}]}) {
     nodes {
       id
       name
@@ -81094,6 +81395,10 @@ export const AllBuildingsNoPaginationDocument = gql`
       userByOwnerId {
         initials
         id
+      }
+      endUserByEndUserId {
+        id
+        name
       }
     }
   }
@@ -81732,13 +82037,45 @@ export const DeleteDetectorDocument = gql`
       super(apollo);
     }
   }
-export const AllFloorsNoPaginationDocument = gql`
-    query allFloorsNoPagination {
-  allFloors {
+export const AllEndUsersNoPaginationDocument = gql`
+    query allEndUsersNoPagination {
+  allEndUsers {
     nodes {
       id
       name
       created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllEndUsersNoPaginationGQL extends Apollo.Query<AllEndUsersNoPaginationQuery, AllEndUsersNoPaginationQueryVariables> {
+    override document = AllEndUsersNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllFloorsNoPaginationDocument = gql`
+    query allFloorsNoPagination($buildingId: [Int!]) {
+  allFloors(
+    filter: {or: [{buildingByBuildingId: {id: {inExpansive: $buildingId}}}]}
+  ) {
+    nodes {
+      id
+      name
+      created
+      buildingByBuildingId {
+        name
+        id
+      }
       userByOwnerId {
         initials
         id
@@ -81758,9 +82095,9 @@ export const AllFloorsNoPaginationDocument = gql`
       super(apollo);
     }
   }
-export const AllFloorsDocument = gql`
-    query allFloors($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorsOrderBy!]) {
-  allFloors(
+export const AllFloorEntitiesDocument = gql`
+    query allFloorEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorEntitiesOrderBy!]) {
+  allFloorEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -81768,20 +82105,15 @@ export const AllFloorsDocument = gql`
   ) {
     totalCount
     nodes {
-      buildingByBuildingId {
-        id
-        name
-        endUserByEndUserId {
-          id
-          name
-        }
-      }
       name
       created
-      userByOwnerId {
-        id
-        initials
-      }
+      initials
+      ownerId
+      id
+      endUserName
+      endUserId
+      buildingName
+      buildingId
     }
   }
 }
@@ -81790,8 +82122,8 @@ export const AllFloorsDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class AllFloorsGQL extends Apollo.Query<AllFloorsQuery, AllFloorsQueryVariables> {
-    override document = AllFloorsDocument;
+  export class AllFloorEntitiesGQL extends Apollo.Query<AllFloorEntitiesQuery, AllFloorEntitiesQueryVariables> {
+    override document = AllFloorEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

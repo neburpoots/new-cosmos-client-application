@@ -1,20 +1,26 @@
 #-------------------------------------------------------------------------------
-query allBuildingsNoPagination
-    {
-    allBuildings {
-        nodes {
-            id,
-            name
-            created,
-            userByOwnerId {
-                initials
-                id
-                
-            }
-
-        }       
+query allBuildingsNoPagination($userId: [Int!]) {
+  allBuildings(filter: { 
+          or: [
+   { endUserByEndUserId: { id: { inExpansive: $userId } }
+  }]
+  }) {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      endUserByEndUserId {
+        id
+        name
+      }   
     }
+  }
 }
+
 
 #-------------------------------------------------------------------------------
 query allBuildings($limit: Int, $offset: Int, $search: String!, $orderBy: [BuildingsOrderBy!]) {

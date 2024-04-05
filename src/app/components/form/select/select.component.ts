@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -16,4 +16,10 @@ export class SelectComponent {
   @Input() options: any[] = [];
   @Input() placeholder: any = '';
   @Input() selectedOption: any = '';
+
+  @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
+
+  changeEmit(event : any) {
+    this.onChange.emit(event);
+  }
 }

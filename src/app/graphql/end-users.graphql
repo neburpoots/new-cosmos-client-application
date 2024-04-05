@@ -1,0 +1,17 @@
+#-------------------------------------------------------------------------------
+query allEndUsersNoPagination
+    {
+    allEndUsers {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+
+        }       
+    }
+}

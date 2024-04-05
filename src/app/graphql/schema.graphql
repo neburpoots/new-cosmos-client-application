@@ -493,6 +493,40 @@ type Query implements Node {
     filter: ApplicationFilter
   ): ApplicationsConnection
 
+  """Reads and enables pagination through a set of `AreaEntity`."""
+  allAreaEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `AreaEntity`."""
+    orderBy: [AreaEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AreaEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: AreaEntityFilter
+  ): AreaEntitiesConnection
+
   """Reads and enables pagination through a set of `Area`."""
   allAreas(
     """Only read the first `n` values of the set."""
@@ -3420,6 +3454,40 @@ type Query implements Node {
     """
     filter: FilterFilter
   ): FiltersConnection
+
+  """Reads and enables pagination through a set of `FloorEntity`."""
+  allFloorEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `FloorEntity`."""
+    orderBy: [FloorEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: FloorEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: FloorEntityFilter
+  ): FloorEntitiesConnection
 
   """Reads and enables pagination through a set of `Floor`."""
   allFloors(
@@ -9856,6 +9924,11 @@ input IntFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: Int
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [Int!]
 }
 
 """
@@ -9988,6 +10061,11 @@ input StringFilter {
 
   """Greater than or equal to the specified value (case-insensitive)."""
   greaterThanOrEqualToInsensitive: String
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [String!]
 }
 
 """
@@ -10241,6 +10319,11 @@ input BooleanFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: Boolean
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [Boolean!]
 }
 
 """
@@ -10283,6 +10366,11 @@ input DatetimeFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: Datetime
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [Datetime!]
 }
 
 """
@@ -16156,6 +16244,11 @@ input FloatFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: Float
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [Float!]
 }
 
 """
@@ -16409,6 +16502,11 @@ input BigFloatFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: BigFloat
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [BigFloat!]
 }
 
 """
@@ -16570,6 +16668,11 @@ input DateFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: Date
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [Date!]
 }
 
 """
@@ -16830,6 +16933,11 @@ input IntervalFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: IntervalInput
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [IntervalInput!]
 }
 
 """
@@ -43337,6 +43445,168 @@ input AdresMvFilter {
   not: AdresMvFilter
 }
 
+"""A connection to a list of `AreaEntity` values."""
+type AreaEntitiesConnection {
+  """A list of `AreaEntity` objects."""
+  nodes: [AreaEntity!]!
+
+  """
+  A list of edges which contains the `AreaEntity` and cursor to aid in pagination.
+  """
+  edges: [AreaEntitiesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `AreaEntity` you could get from the connection."""
+  totalCount: Int!
+}
+
+type AreaEntity {
+  id: Int
+  name: String
+  created: Datetime
+  remarks: String
+  floorId: Int
+  floorName: String
+  buildingId: Int
+  buildingName: String
+  endUserId: Int
+  endUserName: String
+  ownerId: Int
+  initials: String
+}
+
+"""A `AreaEntity` edge in the connection."""
+type AreaEntitiesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `AreaEntity` at the end of the edge."""
+  node: AreaEntity!
+}
+
+"""Methods to use when ordering `AreaEntity`."""
+enum AreaEntitiesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  CREATED_ASC
+  CREATED_DESC
+  REMARKS_ASC
+  REMARKS_DESC
+  FLOOR_ID_ASC
+  FLOOR_ID_DESC
+  FLOOR_NAME_ASC
+  FLOOR_NAME_DESC
+  BUILDING_ID_ASC
+  BUILDING_ID_DESC
+  BUILDING_NAME_ASC
+  BUILDING_NAME_DESC
+  END_USER_ID_ASC
+  END_USER_ID_DESC
+  END_USER_NAME_ASC
+  END_USER_NAME_DESC
+  OWNER_ID_ASC
+  OWNER_ID_DESC
+  INITIALS_ASC
+  INITIALS_DESC
+}
+
+"""
+A condition to be used against `AreaEntity` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input AreaEntityCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `created` field."""
+  created: Datetime
+
+  """Checks for equality with the object’s `remarks` field."""
+  remarks: String
+
+  """Checks for equality with the object’s `floorId` field."""
+  floorId: Int
+
+  """Checks for equality with the object’s `floorName` field."""
+  floorName: String
+
+  """Checks for equality with the object’s `buildingId` field."""
+  buildingId: Int
+
+  """Checks for equality with the object’s `buildingName` field."""
+  buildingName: String
+
+  """Checks for equality with the object’s `endUserId` field."""
+  endUserId: Int
+
+  """Checks for equality with the object’s `endUserName` field."""
+  endUserName: String
+
+  """Checks for equality with the object’s `ownerId` field."""
+  ownerId: Int
+
+  """Checks for equality with the object’s `initials` field."""
+  initials: String
+}
+
+"""
+A filter to be used against `AreaEntity` object types. All fields are combined with a logical ‘and.’
+"""
+input AreaEntityFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `name` field."""
+  name: StringFilter
+
+  """Filter by the object’s `created` field."""
+  created: DatetimeFilter
+
+  """Filter by the object’s `remarks` field."""
+  remarks: StringFilter
+
+  """Filter by the object’s `floorId` field."""
+  floorId: IntFilter
+
+  """Filter by the object’s `floorName` field."""
+  floorName: StringFilter
+
+  """Filter by the object’s `buildingId` field."""
+  buildingId: IntFilter
+
+  """Filter by the object’s `buildingName` field."""
+  buildingName: StringFilter
+
+  """Filter by the object’s `endUserId` field."""
+  endUserId: IntFilter
+
+  """Filter by the object’s `endUserName` field."""
+  endUserName: StringFilter
+
+  """Filter by the object’s `ownerId` field."""
+  ownerId: IntFilter
+
+  """Filter by the object’s `initials` field."""
+  initials: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [AreaEntityFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [AreaEntityFilter!]
+
+  """Negates the expression."""
+  not: AreaEntityFilter
+}
+
 """A connection to a list of `Aro` values."""
 type ArosConnection {
   """A list of `Aro` objects."""
@@ -45356,6 +45626,11 @@ input JSONFilter {
 
   """Contained by the specified JSON."""
   containedBy: JSON
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [JSON!]
 }
 
 """A connection to a list of `ArtikelLogsIndex` values."""
@@ -56131,6 +56406,141 @@ input FactureeropdrachtMvFilter {
   not: FactureeropdrachtMvFilter
 }
 
+"""A connection to a list of `FloorEntity` values."""
+type FloorEntitiesConnection {
+  """A list of `FloorEntity` objects."""
+  nodes: [FloorEntity!]!
+
+  """
+  A list of edges which contains the `FloorEntity` and cursor to aid in pagination.
+  """
+  edges: [FloorEntitiesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `FloorEntity` you could get from the connection."""
+  totalCount: Int!
+}
+
+type FloorEntity {
+  id: Int
+  name: String
+  created: Datetime
+  buildingId: Int
+  buildingName: String
+  endUserId: Int
+  endUserName: String
+  ownerId: Int
+  initials: String
+}
+
+"""A `FloorEntity` edge in the connection."""
+type FloorEntitiesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `FloorEntity` at the end of the edge."""
+  node: FloorEntity!
+}
+
+"""Methods to use when ordering `FloorEntity`."""
+enum FloorEntitiesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  NAME_ASC
+  NAME_DESC
+  CREATED_ASC
+  CREATED_DESC
+  BUILDING_ID_ASC
+  BUILDING_ID_DESC
+  BUILDING_NAME_ASC
+  BUILDING_NAME_DESC
+  END_USER_ID_ASC
+  END_USER_ID_DESC
+  END_USER_NAME_ASC
+  END_USER_NAME_DESC
+  OWNER_ID_ASC
+  OWNER_ID_DESC
+  INITIALS_ASC
+  INITIALS_DESC
+}
+
+"""
+A condition to be used against `FloorEntity` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input FloorEntityCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `created` field."""
+  created: Datetime
+
+  """Checks for equality with the object’s `buildingId` field."""
+  buildingId: Int
+
+  """Checks for equality with the object’s `buildingName` field."""
+  buildingName: String
+
+  """Checks for equality with the object’s `endUserId` field."""
+  endUserId: Int
+
+  """Checks for equality with the object’s `endUserName` field."""
+  endUserName: String
+
+  """Checks for equality with the object’s `ownerId` field."""
+  ownerId: Int
+
+  """Checks for equality with the object’s `initials` field."""
+  initials: String
+}
+
+"""
+A filter to be used against `FloorEntity` object types. All fields are combined with a logical ‘and.’
+"""
+input FloorEntityFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `name` field."""
+  name: StringFilter
+
+  """Filter by the object’s `created` field."""
+  created: DatetimeFilter
+
+  """Filter by the object’s `buildingId` field."""
+  buildingId: IntFilter
+
+  """Filter by the object’s `buildingName` field."""
+  buildingName: StringFilter
+
+  """Filter by the object’s `endUserId` field."""
+  endUserId: IntFilter
+
+  """Filter by the object’s `endUserName` field."""
+  endUserName: StringFilter
+
+  """Filter by the object’s `ownerId` field."""
+  ownerId: IntFilter
+
+  """Filter by the object’s `initials` field."""
+  initials: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [FloorEntityFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [FloorEntityFilter!]
+
+  """Negates the expression."""
+  not: FloorEntityFilter
+}
+
 """A connection to a list of `Inkoopgegeven` values."""
 type InkoopgegevensConnection {
   """A list of `Inkoopgegeven` objects."""
@@ -60624,6 +61034,11 @@ input BigIntFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: BigInt
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [BigInt!]
 }
 
 """A connection to a list of `MaintenanceVisitRemarksIndex` values."""
@@ -66433,6 +66848,11 @@ input UUIDFilter {
 
   """Greater than or equal to the specified value."""
   greaterThanOrEqualTo: UUID
+
+  """
+  Included in the specified list -unless list is empty in which case this operator is not applied.
+  """
+  inExpansive: [UUID!]
 }
 
 """A connection to a list of `Relatie` values."""

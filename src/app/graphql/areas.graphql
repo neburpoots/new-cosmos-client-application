@@ -17,8 +17,8 @@ query allAreasNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allAreas($limit: Int, $offset: Int, $search: String!, $orderBy: [AreasOrderBy!]) {
-  allAreas(
+query allAreaEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AreaEntitiesOrderBy!]) {
+  allAreaEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -29,20 +29,19 @@ query allAreas($limit: Int, $offset: Int, $search: String!, $orderBy: [AreasOrde
       id
       name
       created
-      floorByFloorId {
-        buildingByBuildingId {
-          id
-          name
-          endUserByEndUserId {
-            id
-            name
-          }
-        }
-        name
-      }
+      floorName
+      floorId
+      endUserName
+      endUserId
+      buildingName
+      buildingId
+      initials
+      ownerId
     }
   }
 }
+
+
 
 #-------------------------------------------------------------------------------
 mutation CreateArea(

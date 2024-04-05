@@ -32,6 +32,8 @@ import { PrinciplesComponent } from "./views/admin/principles/index/principles.c
 import { GasesComponent } from "./views/admin/gases/index/gases.component";
 import { ChemicalCompoundsComponent } from "./views/admin/chemical-compounds/index/chemical-compounds.component";
 import { RangesComponent } from "./views/admin/ranges/index/ranges.component";
+import { AreasComponent } from "./views/admin/areas/index/areas.component";
+import { FloorsComponent } from "./views/admin/floors/index/floors.component";
 
 const routes: Routes = [
   // user views
@@ -63,6 +65,8 @@ const routes: Routes = [
       { path: "maps", component: MapsComponent },
       { path: "sensor-base-types", component: SensorBaseTypeComponent},
       { path: "sensor-types", component: SensorTypeComponent},
+      { path: "areas", component: AreasComponent },
+      { path: "floors", component: FloorsComponent },
       { path: "gases", component: GasesComponent},
       { path: "chemical-compounds", component: ChemicalCompoundsComponent},
       { path: "ranges", component: RangesComponent},
