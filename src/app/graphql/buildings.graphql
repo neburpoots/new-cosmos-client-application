@@ -1,0 +1,100 @@
+#-------------------------------------------------------------------------------
+query allBuildingsNoPagination
+    {
+    allBuildings {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allBuildings($limit: Int, $offset: Int, $search: String!, $orderBy: [BuildingsOrderBy!]) {
+  allBuildings(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+        endUserByEndUserId {
+          id
+          name
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateBuilding(
+    $body: BuildingInput!
+) {
+  createBuilding(
+    input: {building: $body}
+  ) {
+    building {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+        endUserByEndUserId {
+          id
+          name
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateBuilding(
+    $id: Int!, $patch: BuildingPatch!
+) {
+  updateBuildingById(
+    input: {
+		id: $id
+		buildingPatch: $patch	
+    }
+  ) {
+    building {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+        endUserByEndUserId {
+          id
+          name
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteBuilding($id: Int!)
+{
+	deleteBuildingById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

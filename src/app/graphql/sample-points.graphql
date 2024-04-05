@@ -1,0 +1,135 @@
+#-------------------------------------------------------------------------------
+query allSamplePointsNoPagination
+    {
+    allSamplePoints {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allSamplePoints($limit: Int, $offset: Int, $search: String!, $orderBy: [SamplePointsOrderBy!]) {
+  allSamplePoints(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+        name
+        created
+        areaByAreaId {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+    userByOwnerId {
+        id
+        initials
+    }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateSamplePoint(
+    $body: SamplePointInput!
+) {
+  createSamplePoint(
+    input: {samplePoint: $body}
+  ) {
+    samplePoint {
+        id
+        name
+        created
+        areaByAreaId {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+    userByOwnerId {
+        id
+        initials
+    }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateSamplePoint(
+    $id: Int!, $patch: SamplePointPatch!
+) {
+  updateSamplePointById(
+    input: {
+		id: $id
+		samplePointPatch: $patch	
+    }
+  ) {
+    samplePoint {
+        id
+        name
+        created
+        areaByAreaId {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+    userByOwnerId {
+        id
+        initials
+    }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteSamplePoint($id: Int!)
+{
+	deleteSamplePointById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

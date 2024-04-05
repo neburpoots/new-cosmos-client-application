@@ -1,0 +1,110 @@
+#-------------------------------------------------------------------------------
+query allFloorsNoPagination
+    {
+    allFloors {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allFloors($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorsOrderBy!]) {
+  allFloors(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      buildingByBuildingId {
+        id
+        name
+        endUserByEndUserId {
+          id
+          name
+        }
+      }
+      name
+      created
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateFloor(
+    $body: FloorInput!
+) {
+  createFloor(
+    input: {floor: $body}
+  ) {
+    floor {
+      buildingByBuildingId {
+        id
+        name
+        endUserByEndUserId {
+          id
+          name
+        }
+      }
+      name
+      created
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateFloor(
+    $id: Int!, $patch: FloorPatch!
+) {
+  updateFloorById(
+    input: {
+		id: $id
+		floorPatch: $patch	
+    }
+  ) {
+floor {
+      buildingByBuildingId {
+        id
+        name
+        endUserByEndUserId {
+          id
+          name
+        }
+      }
+      name
+      created
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteFloor($id: Int!)
+{
+	deleteFloorById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}
+

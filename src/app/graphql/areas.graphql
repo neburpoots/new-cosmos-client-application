@@ -1,0 +1,109 @@
+
+query allAreasNoPagination
+    {
+    allAreas {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allAreas($limit: Int, $offset: Int, $search: String!, $orderBy: [AreasOrderBy!]) {
+  allAreas(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateArea(
+    $body: AreaInput!
+) {
+  createArea(
+    input: {area: $body}
+  ) {
+    area {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateArea(
+    $id: Int!, $patch: AreaPatch!
+) {
+  updateAreaById(
+    input: {
+		id: $id
+		areaPatch: $patch	
+    }
+  ) {
+    area {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteArea($id: Int!)
+{
+	deleteAreaById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

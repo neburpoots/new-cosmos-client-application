@@ -79955,6 +79955,80 @@ export enum _LandsOrderBy {
   SepaDesc = 'SEPA_DESC'
 }
 
+export type AllApplicationsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllApplicationsNoPaginationQuery = { __typename?: 'Query', allApplications?: { __typename?: 'ApplicationsConnection', nodes: Array<{ __typename?: 'Application', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllApplicationsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<ApplicationsOrderBy> | ApplicationsOrderBy>;
+}>;
+
+
+export type AllApplicationsQuery = { __typename?: 'Query', allApplications?: { __typename?: 'ApplicationsConnection', totalCount: number, nodes: Array<{ __typename?: 'Application', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type CreateApplicationMutationVariables = Exact<{
+  body: ApplicationInput;
+}>;
+
+
+export type CreateApplicationMutation = { __typename?: 'Mutation', createApplication?: { __typename?: 'CreateApplicationPayload', application?: { __typename?: 'Application', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdateApplicationMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: ApplicationPatch;
+}>;
+
+
+export type UpdateApplicationMutation = { __typename?: 'Mutation', updateApplicationById?: { __typename?: 'UpdateApplicationPayload', application?: { __typename?: 'Application', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeleteApplicationMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteApplicationMutation = { __typename?: 'Mutation', deleteApplicationById?: { __typename?: 'DeleteApplicationPayload', clientMutationId?: string | null } | null };
+
+export type AllAreasNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllAreasNoPaginationQuery = { __typename?: 'Query', allAreas?: { __typename?: 'AreasConnection', nodes: Array<{ __typename?: 'Area', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllAreasQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<AreasOrderBy> | AreasOrderBy>;
+}>;
+
+
+export type AllAreasQuery = { __typename?: 'Query', allAreas?: { __typename?: 'AreasConnection', totalCount: number, nodes: Array<{ __typename?: 'Area', id: number, name: string, created?: any | null, floorByFloorId?: { __typename?: 'Floor', name: string, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null }> } | null };
+
+export type CreateAreaMutationVariables = Exact<{
+  body: AreaInput;
+}>;
+
+
+export type CreateAreaMutation = { __typename?: 'Mutation', createArea?: { __typename?: 'CreateAreaPayload', area?: { __typename?: 'Area', id: number, name: string, created?: any | null, floorByFloorId?: { __typename?: 'Floor', name: string, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null } | null } | null };
+
+export type UpdateAreaMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: AreaPatch;
+}>;
+
+
+export type UpdateAreaMutation = { __typename?: 'Mutation', updateAreaById?: { __typename?: 'UpdateAreaPayload', area?: { __typename?: 'Area', id: number, name: string, created?: any | null, floorByFloorId?: { __typename?: 'Floor', name: string, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null } | null } | null };
+
+export type DeleteAreaMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteAreaMutation = { __typename?: 'Mutation', deleteAreaById?: { __typename?: 'DeleteAreaPayload', clientMutationId?: string | null } | null };
+
 export type AssemblyTypeEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -79996,6 +80070,43 @@ export type DeleteAssemblyTypeMutationVariables = Exact<{
 
 
 export type DeleteAssemblyTypeMutation = { __typename?: 'Mutation', deleteAssemblyTypeById?: { __typename?: 'DeleteAssemblyTypePayload', clientMutationId?: string | null } | null };
+
+export type AllBuildingsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllBuildingsNoPaginationQuery = { __typename?: 'Query', allBuildings?: { __typename?: 'BuildingsConnection', nodes: Array<{ __typename?: 'Building', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllBuildingsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<BuildingsOrderBy> | BuildingsOrderBy>;
+}>;
+
+
+export type AllBuildingsQuery = { __typename?: 'Query', allBuildings?: { __typename?: 'BuildingsConnection', totalCount: number, nodes: Array<{ __typename?: 'Building', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null }> } | null };
+
+export type CreateBuildingMutationVariables = Exact<{
+  body: BuildingInput;
+}>;
+
+
+export type CreateBuildingMutation = { __typename?: 'Mutation', createBuilding?: { __typename?: 'CreateBuildingPayload', building?: { __typename?: 'Building', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null };
+
+export type UpdateBuildingMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: BuildingPatch;
+}>;
+
+
+export type UpdateBuildingMutation = { __typename?: 'Mutation', updateBuildingById?: { __typename?: 'UpdateBuildingPayload', building?: { __typename?: 'Building', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null };
+
+export type DeleteBuildingMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteBuildingMutation = { __typename?: 'Mutation', deleteBuildingById?: { __typename?: 'DeleteBuildingPayload', clientMutationId?: string | null } | null };
 
 export type CalGasEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -80145,6 +80256,43 @@ export type DeleteDetectorMutationVariables = Exact<{
 
 
 export type DeleteDetectorMutation = { __typename?: 'Mutation', deleteDetectorById?: { __typename?: 'DeleteDetectorPayload', clientMutationId?: string | null } | null };
+
+export type AllFloorsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllFloorsNoPaginationQuery = { __typename?: 'Query', allFloors?: { __typename?: 'FloorsConnection', nodes: Array<{ __typename?: 'Floor', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllFloorsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<FloorsOrderBy> | FloorsOrderBy>;
+}>;
+
+
+export type AllFloorsQuery = { __typename?: 'Query', allFloors?: { __typename?: 'FloorsConnection', totalCount: number, nodes: Array<{ __typename?: 'Floor', name: string, created?: any | null, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null, userByOwnerId?: { __typename?: 'User', id: number, initials?: string | null } | null }> } | null };
+
+export type CreateFloorMutationVariables = Exact<{
+  body: FloorInput;
+}>;
+
+
+export type CreateFloorMutation = { __typename?: 'Mutation', createFloor?: { __typename?: 'CreateFloorPayload', floor?: { __typename?: 'Floor', name: string, created?: any | null, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null, userByOwnerId?: { __typename?: 'User', id: number, initials?: string | null } | null } | null } | null };
+
+export type UpdateFloorMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: FloorPatch;
+}>;
+
+
+export type UpdateFloorMutation = { __typename?: 'Mutation', updateFloorById?: { __typename?: 'UpdateFloorPayload', floor?: { __typename?: 'Floor', name: string, created?: any | null, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null, userByOwnerId?: { __typename?: 'User', id: number, initials?: string | null } | null } | null } | null };
+
+export type DeleteFloorMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteFloorMutation = { __typename?: 'Mutation', deleteFloorById?: { __typename?: 'DeleteFloorPayload', clientMutationId?: string | null } | null };
 
 export type AllGasesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -80310,6 +80458,43 @@ export type DeleteRangeMutationVariables = Exact<{
 
 
 export type DeleteRangeMutation = { __typename?: 'Mutation', deleteRangeById?: { __typename?: 'DeleteRangePayload', clientMutationId?: string | null } | null };
+
+export type AllSamplePointsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllSamplePointsNoPaginationQuery = { __typename?: 'Query', allSamplePoints?: { __typename?: 'SamplePointsConnection', nodes: Array<{ __typename?: 'SamplePoint', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllSamplePointsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<SamplePointsOrderBy> | SamplePointsOrderBy>;
+}>;
+
+
+export type AllSamplePointsQuery = { __typename?: 'Query', allSamplePoints?: { __typename?: 'SamplePointsConnection', totalCount: number, nodes: Array<{ __typename?: 'SamplePoint', name: string, created?: any | null, areaByAreaId?: { __typename?: 'Area', id: number, name: string, created?: any | null, floorByFloorId?: { __typename?: 'Floor', name: string, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null } | null, userByOwnerId?: { __typename?: 'User', id: number, initials?: string | null } | null }> } | null };
+
+export type CreateSamplePointMutationVariables = Exact<{
+  body: SamplePointInput;
+}>;
+
+
+export type CreateSamplePointMutation = { __typename?: 'Mutation', createSamplePoint?: { __typename?: 'CreateSamplePointPayload', samplePoint?: { __typename?: 'SamplePoint', id: number, name: string, created?: any | null, areaByAreaId?: { __typename?: 'Area', id: number, name: string, created?: any | null, floorByFloorId?: { __typename?: 'Floor', name: string, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null } | null, userByOwnerId?: { __typename?: 'User', id: number, initials?: string | null } | null } | null } | null };
+
+export type UpdateSamplePointMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: SamplePointPatch;
+}>;
+
+
+export type UpdateSamplePointMutation = { __typename?: 'Mutation', updateSamplePointById?: { __typename?: 'UpdateSamplePointPayload', samplePoint?: { __typename?: 'SamplePoint', id: number, name: string, created?: any | null, areaByAreaId?: { __typename?: 'Area', id: number, name: string, created?: any | null, floorByFloorId?: { __typename?: 'Floor', name: string, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null } | null, userByOwnerId?: { __typename?: 'User', id: number, initials?: string | null } | null } | null } | null };
+
+export type DeleteSamplePointMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteSamplePointMutation = { __typename?: 'Mutation', deleteSamplePointById?: { __typename?: 'DeleteSamplePointPayload', clientMutationId?: string | null } | null };
 
 export type LocalSensorFieldsFragment = { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number };
 
@@ -80496,6 +80681,283 @@ export const LocalUserFieldsFragmentDoc = gql`
   overtimeStartBalance
 }
     `;
+export const AllApplicationsNoPaginationDocument = gql`
+    query allApplicationsNoPagination {
+  allApplications {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllApplicationsNoPaginationGQL extends Apollo.Query<AllApplicationsNoPaginationQuery, AllApplicationsNoPaginationQueryVariables> {
+    override document = AllApplicationsNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllApplicationsDocument = gql`
+    query allApplications($limit: Int, $offset: Int, $search: String!, $orderBy: [ApplicationsOrderBy!]) {
+  allApplications(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllApplicationsGQL extends Apollo.Query<AllApplicationsQuery, AllApplicationsQueryVariables> {
+    override document = AllApplicationsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateApplicationDocument = gql`
+    mutation CreateApplication($body: ApplicationInput!) {
+  createApplication(input: {application: $body}) {
+    application {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateApplicationGQL extends Apollo.Mutation<CreateApplicationMutation, CreateApplicationMutationVariables> {
+    override document = CreateApplicationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateApplicationDocument = gql`
+    mutation UpdateApplication($id: Int!, $patch: ApplicationPatch!) {
+  updateApplicationById(input: {id: $id, applicationPatch: $patch}) {
+    application {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateApplicationGQL extends Apollo.Mutation<UpdateApplicationMutation, UpdateApplicationMutationVariables> {
+    override document = UpdateApplicationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteApplicationDocument = gql`
+    mutation DeleteApplication($id: Int!) {
+  deleteApplicationById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteApplicationGQL extends Apollo.Mutation<DeleteApplicationMutation, DeleteApplicationMutationVariables> {
+    override document = DeleteApplicationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllAreasNoPaginationDocument = gql`
+    query allAreasNoPagination {
+  allAreas {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllAreasNoPaginationGQL extends Apollo.Query<AllAreasNoPaginationQuery, AllAreasNoPaginationQueryVariables> {
+    override document = AllAreasNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllAreasDocument = gql`
+    query allAreas($limit: Int, $offset: Int, $search: String!, $orderBy: [AreasOrderBy!]) {
+  allAreas(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllAreasGQL extends Apollo.Query<AllAreasQuery, AllAreasQueryVariables> {
+    override document = AllAreasDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateAreaDocument = gql`
+    mutation CreateArea($body: AreaInput!) {
+  createArea(input: {area: $body}) {
+    area {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateAreaGQL extends Apollo.Mutation<CreateAreaMutation, CreateAreaMutationVariables> {
+    override document = CreateAreaDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateAreaDocument = gql`
+    mutation UpdateArea($id: Int!, $patch: AreaPatch!) {
+  updateAreaById(input: {id: $id, areaPatch: $patch}) {
+    area {
+      id
+      name
+      created
+      floorByFloorId {
+        buildingByBuildingId {
+          id
+          name
+          endUserByEndUserId {
+            id
+            name
+          }
+        }
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateAreaGQL extends Apollo.Mutation<UpdateAreaMutation, UpdateAreaMutationVariables> {
+    override document = UpdateAreaDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteAreaDocument = gql`
+    mutation DeleteArea($id: Int!) {
+  deleteAreaById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteAreaGQL extends Apollo.Mutation<DeleteAreaMutation, DeleteAreaMutationVariables> {
+    override document = DeleteAreaDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AssemblyTypeEntitiesDocument = gql`
     query AssemblyTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyTypesEntitiesOrderBy!]) {
   assemblyTypes: allAssemblyTypesEntities(
@@ -80617,6 +81079,146 @@ export const DeleteAssemblyTypeDocument = gql`
   })
   export class DeleteAssemblyTypeGQL extends Apollo.Mutation<DeleteAssemblyTypeMutation, DeleteAssemblyTypeMutationVariables> {
     override document = DeleteAssemblyTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllBuildingsNoPaginationDocument = gql`
+    query allBuildingsNoPagination {
+  allBuildings {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllBuildingsNoPaginationGQL extends Apollo.Query<AllBuildingsNoPaginationQuery, AllBuildingsNoPaginationQueryVariables> {
+    override document = AllBuildingsNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllBuildingsDocument = gql`
+    query allBuildings($limit: Int, $offset: Int, $search: String!, $orderBy: [BuildingsOrderBy!]) {
+  allBuildings(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      endUserByEndUserId {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllBuildingsGQL extends Apollo.Query<AllBuildingsQuery, AllBuildingsQueryVariables> {
+    override document = AllBuildingsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateBuildingDocument = gql`
+    mutation CreateBuilding($body: BuildingInput!) {
+  createBuilding(input: {building: $body}) {
+    building {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      endUserByEndUserId {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateBuildingGQL extends Apollo.Mutation<CreateBuildingMutation, CreateBuildingMutationVariables> {
+    override document = CreateBuildingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateBuildingDocument = gql`
+    mutation UpdateBuilding($id: Int!, $patch: BuildingPatch!) {
+  updateBuildingById(input: {id: $id, buildingPatch: $patch}) {
+    building {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+      endUserByEndUserId {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateBuildingGQL extends Apollo.Mutation<UpdateBuildingMutation, UpdateBuildingMutationVariables> {
+    override document = UpdateBuildingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteBuildingDocument = gql`
+    mutation DeleteBuilding($id: Int!) {
+  deleteBuildingById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteBuildingGQL extends Apollo.Mutation<DeleteBuildingMutation, DeleteBuildingMutationVariables> {
+    override document = DeleteBuildingDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -81125,6 +81727,155 @@ export const DeleteDetectorDocument = gql`
   })
   export class DeleteDetectorGQL extends Apollo.Mutation<DeleteDetectorMutation, DeleteDetectorMutationVariables> {
     override document = DeleteDetectorDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllFloorsNoPaginationDocument = gql`
+    query allFloorsNoPagination {
+  allFloors {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllFloorsNoPaginationGQL extends Apollo.Query<AllFloorsNoPaginationQuery, AllFloorsNoPaginationQueryVariables> {
+    override document = AllFloorsNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllFloorsDocument = gql`
+    query allFloors($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorsOrderBy!]) {
+  allFloors(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      buildingByBuildingId {
+        id
+        name
+        endUserByEndUserId {
+          id
+          name
+        }
+      }
+      name
+      created
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllFloorsGQL extends Apollo.Query<AllFloorsQuery, AllFloorsQueryVariables> {
+    override document = AllFloorsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateFloorDocument = gql`
+    mutation CreateFloor($body: FloorInput!) {
+  createFloor(input: {floor: $body}) {
+    floor {
+      buildingByBuildingId {
+        id
+        name
+        endUserByEndUserId {
+          id
+          name
+        }
+      }
+      name
+      created
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateFloorGQL extends Apollo.Mutation<CreateFloorMutation, CreateFloorMutationVariables> {
+    override document = CreateFloorDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateFloorDocument = gql`
+    mutation UpdateFloor($id: Int!, $patch: FloorPatch!) {
+  updateFloorById(input: {id: $id, floorPatch: $patch}) {
+    floor {
+      buildingByBuildingId {
+        id
+        name
+        endUserByEndUserId {
+          id
+          name
+        }
+      }
+      name
+      created
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateFloorGQL extends Apollo.Mutation<UpdateFloorMutation, UpdateFloorMutationVariables> {
+    override document = UpdateFloorDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteFloorDocument = gql`
+    mutation DeleteFloor($id: Int!) {
+  deleteFloorById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteFloorGQL extends Apollo.Mutation<DeleteFloorMutation, DeleteFloorMutationVariables> {
+    override document = DeleteFloorDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -81761,6 +82512,181 @@ export const DeleteRangeDocument = gql`
   })
   export class DeleteRangeGQL extends Apollo.Mutation<DeleteRangeMutation, DeleteRangeMutationVariables> {
     override document = DeleteRangeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllSamplePointsNoPaginationDocument = gql`
+    query allSamplePointsNoPagination {
+  allSamplePoints {
+    nodes {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllSamplePointsNoPaginationGQL extends Apollo.Query<AllSamplePointsNoPaginationQuery, AllSamplePointsNoPaginationQueryVariables> {
+    override document = AllSamplePointsNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllSamplePointsDocument = gql`
+    query allSamplePoints($limit: Int, $offset: Int, $search: String!, $orderBy: [SamplePointsOrderBy!]) {
+  allSamplePoints(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      name
+      created
+      areaByAreaId {
+        id
+        name
+        created
+        floorByFloorId {
+          buildingByBuildingId {
+            id
+            name
+            endUserByEndUserId {
+              id
+              name
+            }
+          }
+          name
+        }
+      }
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllSamplePointsGQL extends Apollo.Query<AllSamplePointsQuery, AllSamplePointsQueryVariables> {
+    override document = AllSamplePointsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateSamplePointDocument = gql`
+    mutation CreateSamplePoint($body: SamplePointInput!) {
+  createSamplePoint(input: {samplePoint: $body}) {
+    samplePoint {
+      id
+      name
+      created
+      areaByAreaId {
+        id
+        name
+        created
+        floorByFloorId {
+          buildingByBuildingId {
+            id
+            name
+            endUserByEndUserId {
+              id
+              name
+            }
+          }
+          name
+        }
+      }
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateSamplePointGQL extends Apollo.Mutation<CreateSamplePointMutation, CreateSamplePointMutationVariables> {
+    override document = CreateSamplePointDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateSamplePointDocument = gql`
+    mutation UpdateSamplePoint($id: Int!, $patch: SamplePointPatch!) {
+  updateSamplePointById(input: {id: $id, samplePointPatch: $patch}) {
+    samplePoint {
+      id
+      name
+      created
+      areaByAreaId {
+        id
+        name
+        created
+        floorByFloorId {
+          buildingByBuildingId {
+            id
+            name
+            endUserByEndUserId {
+              id
+              name
+            }
+          }
+          name
+        }
+      }
+      userByOwnerId {
+        id
+        initials
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateSamplePointGQL extends Apollo.Mutation<UpdateSamplePointMutation, UpdateSamplePointMutationVariables> {
+    override document = UpdateSamplePointDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteSamplePointDocument = gql`
+    mutation DeleteSamplePoint($id: Int!) {
+  deleteSamplePointById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteSamplePointGQL extends Apollo.Mutation<DeleteSamplePointMutation, DeleteSamplePointMutationVariables> {
+    override document = DeleteSamplePointDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

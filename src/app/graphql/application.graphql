@@ -1,0 +1,88 @@
+#-------------------------------------------------------------------------------
+query allApplicationsNoPagination
+    {
+    allApplications {
+        nodes {
+            id,
+            name
+            created,
+            userByOwnerId {
+                initials
+                id
+                
+            }
+
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allApplications($limit: Int, $offset: Int, $search: String!, $orderBy: [ApplicationsOrderBy!]) {
+  allApplications(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateApplication(
+    $body: ApplicationInput!
+) {
+  createApplication(
+    input: {application: $body}
+  ) {
+    application {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateApplication(
+    $id: Int!, $patch: ApplicationPatch!
+) {
+  updateApplicationById(
+    input: {
+		id: $id
+		applicationPatch: $patch	
+    }
+  ) {
+    application {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteApplication($id: Int!)
+{
+	deleteApplicationById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}
