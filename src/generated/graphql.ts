@@ -25856,6 +25856,117 @@ export type ElectrolyteCondition = {
   volume?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** A connection to a list of `ElectrolyteEntity` values. */
+export type ElectrolyteEntitiesConnection = {
+  __typename?: 'ElectrolyteEntitiesConnection';
+  /** A list of edges which contains the `ElectrolyteEntity` and cursor to aid in pagination. */
+  edges: Array<ElectrolyteEntitiesEdge>;
+  /** A list of `ElectrolyteEntity` objects. */
+  nodes: Array<ElectrolyteEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `ElectrolyteEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `ElectrolyteEntity` edge in the connection. */
+export type ElectrolyteEntitiesEdge = {
+  __typename?: 'ElectrolyteEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `ElectrolyteEntity` at the end of the edge. */
+  node: ElectrolyteEntity;
+};
+
+/** Methods to use when ordering `ElectrolyteEntity`. */
+export enum ElectrolyteEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC',
+  VolumeAsc = 'VOLUME_ASC',
+  VolumeDesc = 'VOLUME_DESC'
+}
+
+export type ElectrolyteEntity = {
+  __typename?: 'ElectrolyteEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+  volume?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `ElectrolyteEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type ElectrolyteEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `volume` field. */
+  volume?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `ElectrolyteEntity` object types. All fields are combined with a logical ‘and.’ */
+export type ElectrolyteEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<ElectrolyteEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<ElectrolyteEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<ElectrolyteEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `volume` field. */
+  volume?: InputMaybe<IntFilter>;
+};
+
 /** A filter to be used against `Electrolyte` object types. All fields are combined with a logical ‘and.’ */
 export type ElectrolyteFilter = {
   /** Checks for all expressions in this list. */
@@ -25944,117 +26055,6 @@ export type ElectrolytesEdge = {
   cursor?: Maybe<Scalars['Cursor']['output']>;
   /** The `Electrolyte` at the end of the edge. */
   node: Electrolyte;
-};
-
-/** A connection to a list of `ElectrolytesEntity` values. */
-export type ElectrolytesEntitiesConnection = {
-  __typename?: 'ElectrolytesEntitiesConnection';
-  /** A list of edges which contains the `ElectrolytesEntity` and cursor to aid in pagination. */
-  edges: Array<ElectrolytesEntitiesEdge>;
-  /** A list of `ElectrolytesEntity` objects. */
-  nodes: Array<ElectrolytesEntity>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `ElectrolytesEntity` you could get from the connection. */
-  totalCount: Scalars['Int']['output'];
-};
-
-/** A `ElectrolytesEntity` edge in the connection. */
-export type ElectrolytesEntitiesEdge = {
-  __typename?: 'ElectrolytesEntitiesEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']['output']>;
-  /** The `ElectrolytesEntity` at the end of the edge. */
-  node: ElectrolytesEntity;
-};
-
-/** Methods to use when ordering `ElectrolytesEntity`. */
-export enum ElectrolytesEntitiesOrderBy {
-  CdartikelAsc = 'CDARTIKEL_ASC',
-  CdartikelDesc = 'CDARTIKEL_DESC',
-  CreatedAsc = 'CREATED_ASC',
-  CreatedDesc = 'CREATED_DESC',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  InitialsAsc = 'INITIALS_ASC',
-  InitialsDesc = 'INITIALS_DESC',
-  NameAsc = 'NAME_ASC',
-  NameDesc = 'NAME_DESC',
-  Natural = 'NATURAL',
-  OmschrAsc = 'OMSCHR_ASC',
-  OmschrDesc = 'OMSCHR_DESC',
-  OwnerIdAsc = 'OWNER_ID_ASC',
-  OwnerIdDesc = 'OWNER_ID_DESC',
-  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
-  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC',
-  VolumeAsc = 'VOLUME_ASC',
-  VolumeDesc = 'VOLUME_DESC'
-}
-
-export type ElectrolytesEntity = {
-  __typename?: 'ElectrolytesEntity';
-  cdartikel?: Maybe<Scalars['String']['output']>;
-  created?: Maybe<Scalars['Datetime']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  initials?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  omschr?: Maybe<Scalars['String']['output']>;
-  ownerId?: Maybe<Scalars['Int']['output']>;
-  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
-  volume?: Maybe<Scalars['Int']['output']>;
-};
-
-/**
- * A condition to be used against `ElectrolytesEntity` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type ElectrolytesEntityCondition = {
-  /** Checks for equality with the object’s `cdartikel` field. */
-  cdartikel?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `created` field. */
-  created?: InputMaybe<Scalars['Datetime']['input']>;
-  /** Checks for equality with the object’s `id` field. */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `initials` field. */
-  initials?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `name` field. */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `omschr` field. */
-  omschr?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `ownerId` field. */
-  ownerId?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
-  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `volume` field. */
-  volume?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** A filter to be used against `ElectrolytesEntity` object types. All fields are combined with a logical ‘and.’ */
-export type ElectrolytesEntityFilter = {
-  /** Checks for all expressions in this list. */
-  and?: InputMaybe<Array<ElectrolytesEntityFilter>>;
-  /** Filter by the object’s `cdartikel` field. */
-  cdartikel?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `created` field. */
-  created?: InputMaybe<DatetimeFilter>;
-  /** Filter by the object’s `id` field. */
-  id?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `initials` field. */
-  initials?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `name` field. */
-  name?: InputMaybe<StringFilter>;
-  /** Negates the expression. */
-  not?: InputMaybe<ElectrolytesEntityFilter>;
-  /** Filter by the object’s `omschr` field. */
-  omschr?: InputMaybe<StringFilter>;
-  /** Checks for any expressions in this list. */
-  or?: InputMaybe<Array<ElectrolytesEntityFilter>>;
-  /** Filter by the object’s `ownerId` field. */
-  ownerId?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `replacementIntervalMonths` field. */
-  replacementIntervalMonths?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `volume` field. */
-  volume?: InputMaybe<IntFilter>;
 };
 
 /** Methods to use when ordering `Electrolyte`. */
@@ -31459,6 +31459,117 @@ export type FilterCondition = {
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** A connection to a list of `FilterEntity` values. */
+export type FilterEntitiesConnection = {
+  __typename?: 'FilterEntitiesConnection';
+  /** A list of edges which contains the `FilterEntity` and cursor to aid in pagination. */
+  edges: Array<FilterEntitiesEdge>;
+  /** A list of `FilterEntity` objects. */
+  nodes: Array<FilterEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `FilterEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `FilterEntity` edge in the connection. */
+export type FilterEntitiesEdge = {
+  __typename?: 'FilterEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `FilterEntity` at the end of the edge. */
+  node: FilterEntity;
+};
+
+/** Methods to use when ordering `FilterEntity`. */
+export enum FilterEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  ConsumableAsc = 'CONSUMABLE_ASC',
+  ConsumableDesc = 'CONSUMABLE_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
+}
+
+export type FilterEntity = {
+  __typename?: 'FilterEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  consumable?: Maybe<Scalars['Boolean']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `FilterEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type FilterEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `consumable` field. */
+  consumable?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `FilterEntity` object types. All fields are combined with a logical ‘and.’ */
+export type FilterEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<FilterEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `consumable` field. */
+  consumable?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<FilterEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<FilterEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
+};
+
 /** A filter to be used against `Filter` object types. All fields are combined with a logical ‘and.’ */
 export type FilterFilter = {
   /** Checks for all expressions in this list. */
@@ -31575,117 +31686,6 @@ export type FiltersEdge = {
   cursor?: Maybe<Scalars['Cursor']['output']>;
   /** The `Filter` at the end of the edge. */
   node: Filter;
-};
-
-/** A connection to a list of `FiltersEntity` values. */
-export type FiltersEntitiesConnection = {
-  __typename?: 'FiltersEntitiesConnection';
-  /** A list of edges which contains the `FiltersEntity` and cursor to aid in pagination. */
-  edges: Array<FiltersEntitiesEdge>;
-  /** A list of `FiltersEntity` objects. */
-  nodes: Array<FiltersEntity>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `FiltersEntity` you could get from the connection. */
-  totalCount: Scalars['Int']['output'];
-};
-
-/** A `FiltersEntity` edge in the connection. */
-export type FiltersEntitiesEdge = {
-  __typename?: 'FiltersEntitiesEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']['output']>;
-  /** The `FiltersEntity` at the end of the edge. */
-  node: FiltersEntity;
-};
-
-/** Methods to use when ordering `FiltersEntity`. */
-export enum FiltersEntitiesOrderBy {
-  CdartikelAsc = 'CDARTIKEL_ASC',
-  CdartikelDesc = 'CDARTIKEL_DESC',
-  ConsumableAsc = 'CONSUMABLE_ASC',
-  ConsumableDesc = 'CONSUMABLE_DESC',
-  CreatedAsc = 'CREATED_ASC',
-  CreatedDesc = 'CREATED_DESC',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  InitialsAsc = 'INITIALS_ASC',
-  InitialsDesc = 'INITIALS_DESC',
-  NameAsc = 'NAME_ASC',
-  NameDesc = 'NAME_DESC',
-  Natural = 'NATURAL',
-  OmschrAsc = 'OMSCHR_ASC',
-  OmschrDesc = 'OMSCHR_DESC',
-  OwnerIdAsc = 'OWNER_ID_ASC',
-  OwnerIdDesc = 'OWNER_ID_DESC',
-  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
-  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
-}
-
-export type FiltersEntity = {
-  __typename?: 'FiltersEntity';
-  cdartikel?: Maybe<Scalars['String']['output']>;
-  consumable?: Maybe<Scalars['Boolean']['output']>;
-  created?: Maybe<Scalars['Datetime']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  initials?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  omschr?: Maybe<Scalars['String']['output']>;
-  ownerId?: Maybe<Scalars['Int']['output']>;
-  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
-};
-
-/**
- * A condition to be used against `FiltersEntity` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type FiltersEntityCondition = {
-  /** Checks for equality with the object’s `cdartikel` field. */
-  cdartikel?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `consumable` field. */
-  consumable?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Checks for equality with the object’s `created` field. */
-  created?: InputMaybe<Scalars['Datetime']['input']>;
-  /** Checks for equality with the object’s `id` field. */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `initials` field. */
-  initials?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `name` field. */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `omschr` field. */
-  omschr?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `ownerId` field. */
-  ownerId?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
-  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** A filter to be used against `FiltersEntity` object types. All fields are combined with a logical ‘and.’ */
-export type FiltersEntityFilter = {
-  /** Checks for all expressions in this list. */
-  and?: InputMaybe<Array<FiltersEntityFilter>>;
-  /** Filter by the object’s `cdartikel` field. */
-  cdartikel?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `consumable` field. */
-  consumable?: InputMaybe<BooleanFilter>;
-  /** Filter by the object’s `created` field. */
-  created?: InputMaybe<DatetimeFilter>;
-  /** Filter by the object’s `id` field. */
-  id?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `initials` field. */
-  initials?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `name` field. */
-  name?: InputMaybe<StringFilter>;
-  /** Negates the expression. */
-  not?: InputMaybe<FiltersEntityFilter>;
-  /** Filter by the object’s `omschr` field. */
-  omschr?: InputMaybe<StringFilter>;
-  /** Checks for any expressions in this list. */
-  or?: InputMaybe<Array<FiltersEntityFilter>>;
-  /** Filter by the object’s `ownerId` field. */
-  ownerId?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `replacementIntervalMonths` field. */
-  replacementIntervalMonths?: InputMaybe<IntFilter>;
 };
 
 /** Methods to use when ordering `Filter`. */
@@ -41816,6 +41816,117 @@ export type MembraneCondition = {
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** A connection to a list of `MembraneEntity` values. */
+export type MembraneEntitiesConnection = {
+  __typename?: 'MembraneEntitiesConnection';
+  /** A list of edges which contains the `MembraneEntity` and cursor to aid in pagination. */
+  edges: Array<MembraneEntitiesEdge>;
+  /** A list of `MembraneEntity` objects. */
+  nodes: Array<MembraneEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `MembraneEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `MembraneEntity` edge in the connection. */
+export type MembraneEntitiesEdge = {
+  __typename?: 'MembraneEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `MembraneEntity` at the end of the edge. */
+  node: MembraneEntity;
+};
+
+/** Methods to use when ordering `MembraneEntity`. */
+export enum MembraneEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  QuantityAsc = 'QUANTITY_ASC',
+  QuantityDesc = 'QUANTITY_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
+}
+
+export type MembraneEntity = {
+  __typename?: 'MembraneEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  quantity?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `MembraneEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type MembraneEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `quantity` field. */
+  quantity?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `MembraneEntity` object types. All fields are combined with a logical ‘and.’ */
+export type MembraneEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<MembraneEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<MembraneEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<MembraneEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `quantity` field. */
+  quantity?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
+};
+
 /** A filter to be used against `Membrane` object types. All fields are combined with a logical ‘and.’ */
 export type MembraneFilter = {
   /** Checks for all expressions in this list. */
@@ -41904,117 +42015,6 @@ export type MembranesEdge = {
   cursor?: Maybe<Scalars['Cursor']['output']>;
   /** The `Membrane` at the end of the edge. */
   node: Membrane;
-};
-
-/** A connection to a list of `MembranesEntity` values. */
-export type MembranesEntitiesConnection = {
-  __typename?: 'MembranesEntitiesConnection';
-  /** A list of edges which contains the `MembranesEntity` and cursor to aid in pagination. */
-  edges: Array<MembranesEntitiesEdge>;
-  /** A list of `MembranesEntity` objects. */
-  nodes: Array<MembranesEntity>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `MembranesEntity` you could get from the connection. */
-  totalCount: Scalars['Int']['output'];
-};
-
-/** A `MembranesEntity` edge in the connection. */
-export type MembranesEntitiesEdge = {
-  __typename?: 'MembranesEntitiesEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']['output']>;
-  /** The `MembranesEntity` at the end of the edge. */
-  node: MembranesEntity;
-};
-
-/** Methods to use when ordering `MembranesEntity`. */
-export enum MembranesEntitiesOrderBy {
-  CdartikelAsc = 'CDARTIKEL_ASC',
-  CdartikelDesc = 'CDARTIKEL_DESC',
-  CreatedAsc = 'CREATED_ASC',
-  CreatedDesc = 'CREATED_DESC',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  InitialsAsc = 'INITIALS_ASC',
-  InitialsDesc = 'INITIALS_DESC',
-  NameAsc = 'NAME_ASC',
-  NameDesc = 'NAME_DESC',
-  Natural = 'NATURAL',
-  OmschrAsc = 'OMSCHR_ASC',
-  OmschrDesc = 'OMSCHR_DESC',
-  OwnerIdAsc = 'OWNER_ID_ASC',
-  OwnerIdDesc = 'OWNER_ID_DESC',
-  QuantityAsc = 'QUANTITY_ASC',
-  QuantityDesc = 'QUANTITY_DESC',
-  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
-  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
-}
-
-export type MembranesEntity = {
-  __typename?: 'MembranesEntity';
-  cdartikel?: Maybe<Scalars['String']['output']>;
-  created?: Maybe<Scalars['Datetime']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  initials?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  omschr?: Maybe<Scalars['String']['output']>;
-  ownerId?: Maybe<Scalars['Int']['output']>;
-  quantity?: Maybe<Scalars['Int']['output']>;
-  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
-};
-
-/**
- * A condition to be used against `MembranesEntity` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type MembranesEntityCondition = {
-  /** Checks for equality with the object’s `cdartikel` field. */
-  cdartikel?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `created` field. */
-  created?: InputMaybe<Scalars['Datetime']['input']>;
-  /** Checks for equality with the object’s `id` field. */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `initials` field. */
-  initials?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `name` field. */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `omschr` field. */
-  omschr?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `ownerId` field. */
-  ownerId?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `quantity` field. */
-  quantity?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
-  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** A filter to be used against `MembranesEntity` object types. All fields are combined with a logical ‘and.’ */
-export type MembranesEntityFilter = {
-  /** Checks for all expressions in this list. */
-  and?: InputMaybe<Array<MembranesEntityFilter>>;
-  /** Filter by the object’s `cdartikel` field. */
-  cdartikel?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `created` field. */
-  created?: InputMaybe<DatetimeFilter>;
-  /** Filter by the object’s `id` field. */
-  id?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `initials` field. */
-  initials?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `name` field. */
-  name?: InputMaybe<StringFilter>;
-  /** Negates the expression. */
-  not?: InputMaybe<MembranesEntityFilter>;
-  /** Filter by the object’s `omschr` field. */
-  omschr?: InputMaybe<StringFilter>;
-  /** Checks for any expressions in this list. */
-  or?: InputMaybe<Array<MembranesEntityFilter>>;
-  /** Filter by the object’s `ownerId` field. */
-  ownerId?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `quantity` field. */
-  quantity?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `replacementIntervalMonths` field. */
-  replacementIntervalMonths?: InputMaybe<IntFilter>;
 };
 
 /** Methods to use when ordering `Membrane`. */
@@ -48244,6 +48244,117 @@ export type ORingCondition = {
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** A connection to a list of `ORingEntity` values. */
+export type ORingEntitiesConnection = {
+  __typename?: 'ORingEntitiesConnection';
+  /** A list of edges which contains the `ORingEntity` and cursor to aid in pagination. */
+  edges: Array<ORingEntitiesEdge>;
+  /** A list of `ORingEntity` objects. */
+  nodes: Array<ORingEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `ORingEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `ORingEntity` edge in the connection. */
+export type ORingEntitiesEdge = {
+  __typename?: 'ORingEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `ORingEntity` at the end of the edge. */
+  node: ORingEntity;
+};
+
+/** Methods to use when ordering `ORingEntity`. */
+export enum ORingEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  QuantityAsc = 'QUANTITY_ASC',
+  QuantityDesc = 'QUANTITY_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
+}
+
+export type ORingEntity = {
+  __typename?: 'ORingEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  quantity?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `ORingEntity` object types. All fields are tested
+ * for equality and combined with a logical ‘and.’
+ */
+export type ORingEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `quantity` field. */
+  quantity?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `ORingEntity` object types. All fields are combined with a logical ‘and.’ */
+export type ORingEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<ORingEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<ORingEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<ORingEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `quantity` field. */
+  quantity?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
+};
+
 /** A filter to be used against `ORing` object types. All fields are combined with a logical ‘and.’ */
 export type ORingFilter = {
   /** Checks for all expressions in this list. */
@@ -48332,117 +48443,6 @@ export type ORingsEdge = {
   cursor?: Maybe<Scalars['Cursor']['output']>;
   /** The `ORing` at the end of the edge. */
   node: ORing;
-};
-
-/** A connection to a list of `ORingsEntity` values. */
-export type ORingsEntitiesConnection = {
-  __typename?: 'ORingsEntitiesConnection';
-  /** A list of edges which contains the `ORingsEntity` and cursor to aid in pagination. */
-  edges: Array<ORingsEntitiesEdge>;
-  /** A list of `ORingsEntity` objects. */
-  nodes: Array<ORingsEntity>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `ORingsEntity` you could get from the connection. */
-  totalCount: Scalars['Int']['output'];
-};
-
-/** A `ORingsEntity` edge in the connection. */
-export type ORingsEntitiesEdge = {
-  __typename?: 'ORingsEntitiesEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']['output']>;
-  /** The `ORingsEntity` at the end of the edge. */
-  node: ORingsEntity;
-};
-
-/** Methods to use when ordering `ORingsEntity`. */
-export enum ORingsEntitiesOrderBy {
-  CdartikelAsc = 'CDARTIKEL_ASC',
-  CdartikelDesc = 'CDARTIKEL_DESC',
-  CreatedAsc = 'CREATED_ASC',
-  CreatedDesc = 'CREATED_DESC',
-  IdAsc = 'ID_ASC',
-  IdDesc = 'ID_DESC',
-  InitialsAsc = 'INITIALS_ASC',
-  InitialsDesc = 'INITIALS_DESC',
-  NameAsc = 'NAME_ASC',
-  NameDesc = 'NAME_DESC',
-  Natural = 'NATURAL',
-  OmschrAsc = 'OMSCHR_ASC',
-  OmschrDesc = 'OMSCHR_DESC',
-  OwnerIdAsc = 'OWNER_ID_ASC',
-  OwnerIdDesc = 'OWNER_ID_DESC',
-  QuantityAsc = 'QUANTITY_ASC',
-  QuantityDesc = 'QUANTITY_DESC',
-  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
-  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
-}
-
-export type ORingsEntity = {
-  __typename?: 'ORingsEntity';
-  cdartikel?: Maybe<Scalars['String']['output']>;
-  created?: Maybe<Scalars['Datetime']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  initials?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  omschr?: Maybe<Scalars['String']['output']>;
-  ownerId?: Maybe<Scalars['Int']['output']>;
-  quantity?: Maybe<Scalars['Int']['output']>;
-  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
-};
-
-/**
- * A condition to be used against `ORingsEntity` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
-export type ORingsEntityCondition = {
-  /** Checks for equality with the object’s `cdartikel` field. */
-  cdartikel?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `created` field. */
-  created?: InputMaybe<Scalars['Datetime']['input']>;
-  /** Checks for equality with the object’s `id` field. */
-  id?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `initials` field. */
-  initials?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `name` field. */
-  name?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `omschr` field. */
-  omschr?: InputMaybe<Scalars['String']['input']>;
-  /** Checks for equality with the object’s `ownerId` field. */
-  ownerId?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `quantity` field. */
-  quantity?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
-  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** A filter to be used against `ORingsEntity` object types. All fields are combined with a logical ‘and.’ */
-export type ORingsEntityFilter = {
-  /** Checks for all expressions in this list. */
-  and?: InputMaybe<Array<ORingsEntityFilter>>;
-  /** Filter by the object’s `cdartikel` field. */
-  cdartikel?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `created` field. */
-  created?: InputMaybe<DatetimeFilter>;
-  /** Filter by the object’s `id` field. */
-  id?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `initials` field. */
-  initials?: InputMaybe<StringFilter>;
-  /** Filter by the object’s `name` field. */
-  name?: InputMaybe<StringFilter>;
-  /** Negates the expression. */
-  not?: InputMaybe<ORingsEntityFilter>;
-  /** Filter by the object’s `omschr` field. */
-  omschr?: InputMaybe<StringFilter>;
-  /** Checks for any expressions in this list. */
-  or?: InputMaybe<Array<ORingsEntityFilter>>;
-  /** Filter by the object’s `ownerId` field. */
-  ownerId?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `quantity` field. */
-  quantity?: InputMaybe<IntFilter>;
-  /** Filter by the object’s `replacementIntervalMonths` field. */
-  replacementIntervalMonths?: InputMaybe<IntFilter>;
 };
 
 /** Methods to use when ordering `ORing`. */
@@ -52627,10 +52627,10 @@ export type Query = Node & {
   allDetectorsChecklists?: Maybe<DetectorsChecklistsConnection>;
   /** Reads and enables pagination through a set of `DpCard`. */
   allDpCards?: Maybe<DpCardsConnection>;
+  /** Reads and enables pagination through a set of `ElectrolyteEntity`. */
+  allElectrolyteEntities?: Maybe<ElectrolyteEntitiesConnection>;
   /** Reads and enables pagination through a set of `Electrolyte`. */
   allElectrolytes?: Maybe<ElectrolytesConnection>;
-  /** Reads and enables pagination through a set of `ElectrolytesEntity`. */
-  allElectrolytesEntities?: Maybe<ElectrolytesEntitiesConnection>;
   /** Reads and enables pagination through a set of `EndUser`. */
   allEndUsers?: Maybe<EndUsersConnection>;
   /** Reads and enables pagination through a set of `FactopdrachtArtikelExclusion`. */
@@ -52675,10 +52675,10 @@ export type Query = Node & {
   allFactureeropdrachts?: Maybe<FactureeropdrachtsConnection>;
   /** Reads and enables pagination through a set of `Factuur`. */
   allFactuurs?: Maybe<FactuursConnection>;
+  /** Reads and enables pagination through a set of `FilterEntity`. */
+  allFilterEntities?: Maybe<FilterEntitiesConnection>;
   /** Reads and enables pagination through a set of `Filter`. */
   allFilters?: Maybe<FiltersConnection>;
-  /** Reads and enables pagination through a set of `FiltersEntity`. */
-  allFiltersEntities?: Maybe<FiltersEntitiesConnection>;
   /** Reads and enables pagination through a set of `FloorEntity`. */
   allFloorEntities?: Maybe<FloorEntitiesConnection>;
   /** Reads and enables pagination through a set of `Floor`. */
@@ -52793,18 +52793,18 @@ export type Query = Node & {
   allMaintenanceVisitsPyrolyserMaterials?: Maybe<MaintenanceVisitsPyrolyserMaterialsConnection>;
   /** Reads and enables pagination through a set of `MaintenanceVisitsSensorMaterial`. */
   allMaintenanceVisitsSensorMaterials?: Maybe<MaintenanceVisitsSensorMaterialsConnection>;
+  /** Reads and enables pagination through a set of `MembraneEntity`. */
+  allMembraneEntities?: Maybe<MembraneEntitiesConnection>;
   /** Reads and enables pagination through a set of `Membrane`. */
   allMembranes?: Maybe<MembranesConnection>;
-  /** Reads and enables pagination through a set of `MembranesEntity`. */
-  allMembranesEntities?: Maybe<MembranesEntitiesConnection>;
   /** Reads and enables pagination through a set of `Notity`. */
   allNotities?: Maybe<NotitiesConnection>;
   /** Reads and enables pagination through a set of `NotitiesMv`. */
   allNotitiesMvs?: Maybe<NotitiesMvsConnection>;
+  /** Reads and enables pagination through a set of `ORingEntity`. */
+  allORingEntities?: Maybe<ORingEntitiesConnection>;
   /** Reads and enables pagination through a set of `ORing`. */
   allORings?: Maybe<ORingsConnection>;
-  /** Reads and enables pagination through a set of `ORingsEntity`. */
-  allORingsEntities?: Maybe<ORingsEntitiesConnection>;
   /** Reads and enables pagination through a set of `OfferteCsv`. */
   allOfferteCsvs?: Maybe<OfferteCsvsConnection>;
   /** Reads and enables pagination through a set of `OfferteMv`. */
@@ -54445,6 +54445,19 @@ export type QueryAllDpCardsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllElectrolyteEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<ElectrolyteEntityCondition>;
+  filter?: InputMaybe<ElectrolyteEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ElectrolyteEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllElectrolytesArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -54454,19 +54467,6 @@ export type QueryAllElectrolytesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<ElectrolytesOrderBy>>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllElectrolytesEntitiesArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  condition?: InputMaybe<ElectrolytesEntityCondition>;
-  filter?: InputMaybe<ElectrolytesEntityFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<ElectrolytesEntitiesOrderBy>>;
 };
 
 
@@ -54757,6 +54757,19 @@ export type QueryAllFactuursArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllFilterEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<FilterEntityCondition>;
+  filter?: InputMaybe<FilterEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<FilterEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllFiltersArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -54766,19 +54779,6 @@ export type QueryAllFiltersArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<FiltersOrderBy>>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllFiltersEntitiesArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  condition?: InputMaybe<FiltersEntityCondition>;
-  filter?: InputMaybe<FiltersEntityFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<FiltersEntitiesOrderBy>>;
 };
 
 
@@ -55524,6 +55524,19 @@ export type QueryAllMaintenanceVisitsSensorMaterialsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllMembraneEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<MembraneEntityCondition>;
+  filter?: InputMaybe<MembraneEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<MembraneEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllMembranesArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -55533,19 +55546,6 @@ export type QueryAllMembranesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<MembranesOrderBy>>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllMembranesEntitiesArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  condition?: InputMaybe<MembranesEntityCondition>;
-  filter?: InputMaybe<MembranesEntityFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<MembranesEntitiesOrderBy>>;
 };
 
 
@@ -55576,6 +55576,19 @@ export type QueryAllNotitiesMvsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllORingEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<ORingEntityCondition>;
+  filter?: InputMaybe<ORingEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ORingEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllORingsArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -55585,19 +55598,6 @@ export type QueryAllORingsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<ORingsOrderBy>>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryAllORingsEntitiesArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  condition?: InputMaybe<ORingsEntityCondition>;
-  filter?: InputMaybe<ORingsEntityFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<ORingsEntitiesOrderBy>>;
 };
 
 
@@ -81380,15 +81380,15 @@ export type AllElectrolytesNoPaginationQueryVariables = Exact<{ [key: string]: n
 
 export type AllElectrolytesNoPaginationQuery = { __typename?: 'Query', allElectrolytes?: { __typename?: 'ElectrolytesConnection', nodes: Array<{ __typename?: 'Electrolyte', id: number, name: string }> } | null };
 
-export type AllElectrolytesQueryVariables = Exact<{
+export type AllElectrolyteEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   search: Scalars['String']['input'];
-  orderBy?: InputMaybe<Array<ElectrolytesEntitiesOrderBy> | ElectrolytesEntitiesOrderBy>;
+  orderBy?: InputMaybe<Array<ElectrolyteEntitiesOrderBy> | ElectrolyteEntitiesOrderBy>;
 }>;
 
 
-export type AllElectrolytesQuery = { __typename?: 'Query', allElectrolytesEntities?: { __typename?: 'ElectrolytesEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'ElectrolytesEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, volume?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
+export type AllElectrolyteEntitiesQuery = { __typename?: 'Query', allElectrolyteEntities?: { __typename?: 'ElectrolyteEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'ElectrolyteEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, volume?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
 
 export type CreateElectrolyteMutationVariables = Exact<{
   body: ElectrolyteInput;
@@ -81397,13 +81397,13 @@ export type CreateElectrolyteMutationVariables = Exact<{
 
 export type CreateElectrolyteMutation = { __typename?: 'Mutation', createElectrolyte?: { __typename?: 'CreateElectrolytePayload', electrolyte?: { __typename?: 'Electrolyte', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
 
-export type UpdateELectrolyteMutationVariables = Exact<{
+export type UpdateElectrolyteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
   patch: ElectrolytePatch;
 }>;
 
 
-export type UpdateELectrolyteMutation = { __typename?: 'Mutation', updateElectrolyteById?: { __typename?: 'UpdateElectrolytePayload', electrolyte?: { __typename?: 'Electrolyte', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+export type UpdateElectrolyteMutation = { __typename?: 'Mutation', updateElectrolyteById?: { __typename?: 'UpdateElectrolytePayload', electrolyte?: { __typename?: 'Electrolyte', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
 
 export type DeleteElectrolyteMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -81422,15 +81422,15 @@ export type AllFiltersNoPaginationQueryVariables = Exact<{ [key: string]: never;
 
 export type AllFiltersNoPaginationQuery = { __typename?: 'Query', allFilters?: { __typename?: 'FiltersConnection', nodes: Array<{ __typename?: 'Filter', id: number, name: string }> } | null };
 
-export type AllFiltersQueryVariables = Exact<{
+export type AllFilterEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   search: Scalars['String']['input'];
-  orderBy?: InputMaybe<Array<FiltersEntitiesOrderBy> | FiltersEntitiesOrderBy>;
+  orderBy?: InputMaybe<Array<FilterEntitiesOrderBy> | FilterEntitiesOrderBy>;
 }>;
 
 
-export type AllFiltersQuery = { __typename?: 'Query', allFiltersEntities?: { __typename?: 'FiltersEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'FiltersEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, consumable?: boolean | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
+export type AllFilterEntitiesQuery = { __typename?: 'Query', allFilterEntities?: { __typename?: 'FilterEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'FilterEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, consumable?: boolean | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
 
 export type CreateFilterMutationVariables = Exact<{
   body: FilterInput;
@@ -81589,15 +81589,15 @@ export type AllMembranesNoPaginationQueryVariables = Exact<{ [key: string]: neve
 
 export type AllMembranesNoPaginationQuery = { __typename?: 'Query', allMembranes?: { __typename?: 'MembranesConnection', nodes: Array<{ __typename?: 'Membrane', id: number, name: string }> } | null };
 
-export type AllMembranesQueryVariables = Exact<{
+export type AllMembraneEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   search: Scalars['String']['input'];
-  orderBy?: InputMaybe<Array<MembranesEntitiesOrderBy> | MembranesEntitiesOrderBy>;
+  orderBy?: InputMaybe<Array<MembraneEntitiesOrderBy> | MembraneEntitiesOrderBy>;
 }>;
 
 
-export type AllMembranesQuery = { __typename?: 'Query', allMembranesEntities?: { __typename?: 'MembranesEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'MembranesEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, quantity?: number | null, created?: any | null, cdartikel?: string | null }> } | null };
+export type AllMembraneEntitiesQuery = { __typename?: 'Query', allMembraneEntities?: { __typename?: 'MembraneEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'MembraneEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, quantity?: number | null, created?: any | null, cdartikel?: string | null }> } | null };
 
 export type CreateMembraneMutationVariables = Exact<{
   body: MembraneInput;
@@ -81626,15 +81626,15 @@ export type AllORingsNoPaginationQueryVariables = Exact<{ [key: string]: never; 
 
 export type AllORingsNoPaginationQuery = { __typename?: 'Query', allORings?: { __typename?: 'ORingsConnection', nodes: Array<{ __typename?: 'ORing', id: number, name: string }> } | null };
 
-export type AllORingsQueryVariables = Exact<{
+export type AllORingEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   search: Scalars['String']['input'];
-  orderBy?: InputMaybe<Array<ORingsEntitiesOrderBy> | ORingsEntitiesOrderBy>;
+  orderBy?: InputMaybe<Array<ORingEntitiesOrderBy> | ORingEntitiesOrderBy>;
 }>;
 
 
-export type AllORingsQuery = { __typename?: 'Query', allORingsEntities?: { __typename?: 'ORingsEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'ORingsEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, quantity?: number | null, created?: any | null, cdartikel?: string | null }> } | null };
+export type AllORingEntitiesQuery = { __typename?: 'Query', allORingEntities?: { __typename?: 'ORingEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'ORingEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, quantity?: number | null, created?: any | null, cdartikel?: string | null }> } | null };
 
 export type CreateORingMutationVariables = Exact<{
   body: ORingInput;
@@ -81700,7 +81700,7 @@ export type AllPyrolysersNoPaginationQueryVariables = Exact<{ [key: string]: nev
 
 export type AllPyrolysersNoPaginationQuery = { __typename?: 'Query', allPyrolysers?: { __typename?: 'PyrolysersConnection', nodes: Array<{ __typename?: 'Pyrolyser', id: number, name: string }> } | null };
 
-export type AllPyrolysersQueryVariables = Exact<{
+export type AllPyrolyserEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   search: Scalars['String']['input'];
@@ -81708,7 +81708,7 @@ export type AllPyrolysersQueryVariables = Exact<{
 }>;
 
 
-export type AllPyrolysersQuery = { __typename?: 'Query', allPyrolyserEntities?: { __typename?: 'PyrolyserEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'PyrolyserEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
+export type AllPyrolyserEntitiesQuery = { __typename?: 'Query', allPyrolyserEntities?: { __typename?: 'PyrolyserEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'PyrolyserEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
 
 export type CreatePyrolyserMutationVariables = Exact<{
   body: PyrolyserInput;
@@ -83102,9 +83102,9 @@ export const AllElectrolytesNoPaginationDocument = gql`
       super(apollo);
     }
   }
-export const AllElectrolytesDocument = gql`
-    query allElectrolytes($limit: Int, $offset: Int, $search: String!, $orderBy: [ElectrolytesEntitiesOrderBy!]) {
-  allElectrolytesEntities(
+export const AllElectrolyteEntitiesDocument = gql`
+    query allElectrolyteEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [ElectrolyteEntitiesOrderBy!]) {
+  allElectrolyteEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -83129,8 +83129,8 @@ export const AllElectrolytesDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class AllElectrolytesGQL extends Apollo.Query<AllElectrolytesQuery, AllElectrolytesQueryVariables> {
-    override document = AllElectrolytesDocument;
+  export class AllElectrolyteEntitiesGQL extends Apollo.Query<AllElectrolyteEntitiesQuery, AllElectrolyteEntitiesQueryVariables> {
+    override document = AllElectrolyteEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -83162,8 +83162,8 @@ export const CreateElectrolyteDocument = gql`
       super(apollo);
     }
   }
-export const UpdateELectrolyteDocument = gql`
-    mutation UpdateELectrolyte($id: Int!, $patch: ElectrolytePatch!) {
+export const UpdateElectrolyteDocument = gql`
+    mutation UpdateElectrolyte($id: Int!, $patch: ElectrolytePatch!) {
   updateElectrolyteById(input: {id: $id, electrolytePatch: $patch}) {
     electrolyte {
       id
@@ -83181,8 +83181,8 @@ export const UpdateELectrolyteDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class UpdateELectrolyteGQL extends Apollo.Mutation<UpdateELectrolyteMutation, UpdateELectrolyteMutationVariables> {
-    override document = UpdateELectrolyteDocument;
+  export class UpdateElectrolyteGQL extends Apollo.Mutation<UpdateElectrolyteMutation, UpdateElectrolyteMutationVariables> {
+    override document = UpdateElectrolyteDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -83253,9 +83253,9 @@ export const AllFiltersNoPaginationDocument = gql`
       super(apollo);
     }
   }
-export const AllFiltersDocument = gql`
-    query allFilters($limit: Int, $offset: Int, $search: String!, $orderBy: [FiltersEntitiesOrderBy!]) {
-  allFiltersEntities(
+export const AllFilterEntitiesDocument = gql`
+    query allFilterEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [FilterEntitiesOrderBy!]) {
+  allFilterEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -83280,8 +83280,8 @@ export const AllFiltersDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class AllFiltersGQL extends Apollo.Query<AllFiltersQuery, AllFiltersQueryVariables> {
-    override document = AllFiltersDocument;
+  export class AllFilterEntitiesGQL extends Apollo.Query<AllFilterEntitiesQuery, AllFilterEntitiesQueryVariables> {
+    override document = AllFilterEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -83828,9 +83828,9 @@ export const AllMembranesNoPaginationDocument = gql`
       super(apollo);
     }
   }
-export const AllMembranesDocument = gql`
-    query allMembranes($limit: Int, $offset: Int, $search: String!, $orderBy: [MembranesEntitiesOrderBy!]) {
-  allMembranesEntities(
+export const AllMembraneEntitiesDocument = gql`
+    query allMembraneEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [MembraneEntitiesOrderBy!]) {
+  allMembraneEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -83855,8 +83855,8 @@ export const AllMembranesDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class AllMembranesGQL extends Apollo.Query<AllMembranesQuery, AllMembranesQueryVariables> {
-    override document = AllMembranesDocument;
+  export class AllMembraneEntitiesGQL extends Apollo.Query<AllMembraneEntitiesQuery, AllMembraneEntitiesQueryVariables> {
+    override document = AllMembraneEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -83953,9 +83953,9 @@ export const AllORingsNoPaginationDocument = gql`
       super(apollo);
     }
   }
-export const AllORingsDocument = gql`
-    query allORings($limit: Int, $offset: Int, $search: String!, $orderBy: [ORingsEntitiesOrderBy!]) {
-  allORingsEntities(
+export const AllORingEntitiesDocument = gql`
+    query allORingEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [ORingEntitiesOrderBy!]) {
+  allORingEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -83980,8 +83980,8 @@ export const AllORingsDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class AllORingsGQL extends Apollo.Query<AllORingsQuery, AllORingsQueryVariables> {
-    override document = AllORingsDocument;
+  export class AllORingEntitiesGQL extends Apollo.Query<AllORingEntitiesQuery, AllORingEntitiesQueryVariables> {
+    override document = AllORingEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -84206,8 +84206,8 @@ export const AllPyrolysersNoPaginationDocument = gql`
       super(apollo);
     }
   }
-export const AllPyrolysersDocument = gql`
-    query allPyrolysers($limit: Int, $offset: Int, $search: String!, $orderBy: [PyrolyserEntitiesOrderBy!]) {
+export const AllPyrolyserEntitiesDocument = gql`
+    query allPyrolyserEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [PyrolyserEntitiesOrderBy!]) {
   allPyrolyserEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
@@ -84232,8 +84232,8 @@ export const AllPyrolysersDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class AllPyrolysersGQL extends Apollo.Query<AllPyrolysersQuery, AllPyrolysersQueryVariables> {
-    override document = AllPyrolysersDocument;
+  export class AllPyrolyserEntitiesGQL extends Apollo.Query<AllPyrolyserEntitiesQuery, AllPyrolyserEntitiesQueryVariables> {
+    override document = AllPyrolyserEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -10,8 +10,8 @@ query allFiltersNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allFilters($limit: Int, $offset: Int, $search: String!, $orderBy: [FiltersEntitiesOrderBy!]) {
-  allFiltersEntities(
+query allFilterEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [FilterEntitiesOrderBy!]) {
+  allFilterEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -31,6 +31,7 @@ query allFilters($limit: Int, $offset: Int, $search: String!, $orderBy: [Filters
     }
   }
 }
+
 
 #-------------------------------------------------------------------------------
 mutation CreateFilter(

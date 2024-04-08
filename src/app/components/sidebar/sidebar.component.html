@@ -159,25 +159,30 @@
 
             </ul>
           </div>
-          <button class="text-md text-slate-200 py-3  font-semibold block hover:text-white" type="button"
-            (click)="toggleProductsDropdown()">
-            <fa-icon [icon]="faShoppingBasket"></fa-icon>
-            Products
-          </button>
-          <div *ngIf="productDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
-            <ul class="list-none">
-              <li><a [routerLink]="['/user/detector-types']" routerLinkActive #adminDetectorTypes="routerLinkActive"
-                  [ngClass]="
-            adminDetectorTypes.isActive
-              ? 'text-white hover:text-white'
-              : 'text-white hover:text-white'
-          " [ngClass]="adminDetectorTypes.isActive ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
-                    class="mr-2 fa fa-cog" aria-hidden="true"></i>
-                  Detector Types</a></li>
+          <button class="text-md text-slate-200 py-3  font-semibold  block hover:text-white" type="button"
+          (click)="toggleProductsDropdown()">
+          <fa-icon [icon]="faBoxOpen"></fa-icon>
+          Products
+        </button>
+        <div *ngIf="productsDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
+          <ul class="list-none">
+            @for (item of products; track $index) {
+            <li><a [routerLink]="[item.url]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
+        isActive(item.url)
+          ? 'text-white hover:text-white'
+          : 'text-white hover:text-white'
+      " [ngClass]="isActive(item.url) ? 'bg-cosmosDark text-white' : ''"
+                class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
+                @if(item.icon6) {
+                <fa-icon class="mr-4" [icon]="item.icon6"></fa-icon>
+                } @else if (item.icon4) {
+                <i [ngClass]="item.icon4" aria-hidden="true"></i>
+                }
+                {{item.title}}</a></li>
+            }
 
-            </ul>
-          </div>
+          </ul>
+        </div>
 
           <button class="text-md text-slate-200 py-3  font-semibold  block hover:text-white" type="button"
           (click)="toggleServicesDropdown()">

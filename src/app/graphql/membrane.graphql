@@ -10,8 +10,8 @@ query allMembranesNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allMembranes($limit: Int, $offset: Int, $search: String!, $orderBy: [MembranesEntitiesOrderBy!]) {
-  allMembranesEntities(
+query allMembraneEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [MembraneEntitiesOrderBy!]) {
+  allMembraneEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit

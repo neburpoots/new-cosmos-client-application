@@ -10,8 +10,8 @@ query allElectrolytesNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allElectrolytes($limit: Int, $offset: Int, $search: String!, $orderBy: [ElectrolytesEntitiesOrderBy!]) {
-  allElectrolytesEntities(
+query allElectrolyteEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [ElectrolyteEntitiesOrderBy!]) {
+  allElectrolyteEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -52,7 +52,7 @@ mutation CreateElectrolyte(
 }
 
 #-------------------------------------------------------------------------------
-mutation UpdateELectrolyte(
+mutation UpdateElectrolyte(
     $id: Int!, $patch: ElectrolytePatch!
 ) {
   updateElectrolyteById(

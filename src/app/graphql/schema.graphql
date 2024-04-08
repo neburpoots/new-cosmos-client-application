@@ -2609,6 +2609,40 @@ type Query implements Node {
     filter: DpCardFilter
   ): DpCardsConnection
 
+  """Reads and enables pagination through a set of `ElectrolyteEntity`."""
+  allElectrolyteEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ElectrolyteEntity`."""
+    orderBy: [ElectrolyteEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ElectrolyteEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ElectrolyteEntityFilter
+  ): ElectrolyteEntitiesConnection
+
   """Reads and enables pagination through a set of `Electrolyte`."""
   allElectrolytes(
     """Only read the first `n` values of the set."""
@@ -2642,40 +2676,6 @@ type Query implements Node {
     """
     filter: ElectrolyteFilter
   ): ElectrolytesConnection
-
-  """Reads and enables pagination through a set of `ElectrolytesEntity`."""
-  allElectrolytesEntities(
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """The method to use when ordering `ElectrolytesEntity`."""
-    orderBy: [ElectrolytesEntitiesOrderBy!] = [NATURAL]
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: ElectrolytesEntityCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: ElectrolytesEntityFilter
-  ): ElectrolytesEntitiesConnection
 
   """Reads and enables pagination through a set of `EndUser`."""
   allEndUsers(
@@ -3455,6 +3455,40 @@ type Query implements Node {
     filter: FactuurFilter
   ): FactuursConnection
 
+  """Reads and enables pagination through a set of `FilterEntity`."""
+  allFilterEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `FilterEntity`."""
+    orderBy: [FilterEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: FilterEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: FilterEntityFilter
+  ): FilterEntitiesConnection
+
   """Reads and enables pagination through a set of `Filter`."""
   allFilters(
     """Only read the first `n` values of the set."""
@@ -3488,40 +3522,6 @@ type Query implements Node {
     """
     filter: FilterFilter
   ): FiltersConnection
-
-  """Reads and enables pagination through a set of `FiltersEntity`."""
-  allFiltersEntities(
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """The method to use when ordering `FiltersEntity`."""
-    orderBy: [FiltersEntitiesOrderBy!] = [NATURAL]
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: FiltersEntityCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: FiltersEntityFilter
-  ): FiltersEntitiesConnection
 
   """Reads and enables pagination through a set of `FloorEntity`."""
   allFloorEntities(
@@ -5469,6 +5469,40 @@ type Query implements Node {
     filter: MaintenanceVisitsSensorMaterialFilter
   ): MaintenanceVisitsSensorMaterialsConnection
 
+  """Reads and enables pagination through a set of `MembraneEntity`."""
+  allMembraneEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `MembraneEntity`."""
+    orderBy: [MembraneEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MembraneEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: MembraneEntityFilter
+  ): MembraneEntitiesConnection
+
   """Reads and enables pagination through a set of `Membrane`."""
   allMembranes(
     """Only read the first `n` values of the set."""
@@ -5502,40 +5536,6 @@ type Query implements Node {
     """
     filter: MembraneFilter
   ): MembranesConnection
-
-  """Reads and enables pagination through a set of `MembranesEntity`."""
-  allMembranesEntities(
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """The method to use when ordering `MembranesEntity`."""
-    orderBy: [MembranesEntitiesOrderBy!] = [NATURAL]
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: MembranesEntityCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: MembranesEntityFilter
-  ): MembranesEntitiesConnection
 
   """Reads and enables pagination through a set of `Notity`."""
   allNotities(
@@ -5605,6 +5605,40 @@ type Query implements Node {
     filter: NotitiesMvFilter
   ): NotitiesMvsConnection
 
+  """Reads and enables pagination through a set of `ORingEntity`."""
+  allORingEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ORingEntity`."""
+    orderBy: [ORingEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ORingEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ORingEntityFilter
+  ): ORingEntitiesConnection
+
   """Reads and enables pagination through a set of `ORing`."""
   allORings(
     """Only read the first `n` values of the set."""
@@ -5638,40 +5672,6 @@ type Query implements Node {
     """
     filter: ORingFilter
   ): ORingsConnection
-
-  """Reads and enables pagination through a set of `ORingsEntity`."""
-  allORingsEntities(
-    """Only read the first `n` values of the set."""
-    first: Int
-
-    """Only read the last `n` values of the set."""
-    last: Int
-
-    """
-    Skip the first `n` values from our `after` cursor, an alternative to cursor
-    based pagination. May not be used with `last`.
-    """
-    offset: Int
-
-    """Read all values in the set before (above) this cursor."""
-    before: Cursor
-
-    """Read all values in the set after (below) this cursor."""
-    after: Cursor
-
-    """The method to use when ordering `ORingsEntity`."""
-    orderBy: [ORingsEntitiesOrderBy!] = [NATURAL]
-
-    """
-    A condition to be used in determining which values should be returned by the collection.
-    """
-    condition: ORingsEntityCondition
-
-    """
-    A filter to be used in determining which values should be returned by the collection.
-    """
-    filter: ORingsEntityFilter
-  ): ORingsEntitiesConnection
 
   """Reads and enables pagination through a set of `Offerte`."""
   allOffertes(
@@ -52951,26 +52951,26 @@ input DetectorsChecklistFilter {
   not: DetectorsChecklistFilter
 }
 
-"""A connection to a list of `ElectrolytesEntity` values."""
-type ElectrolytesEntitiesConnection {
-  """A list of `ElectrolytesEntity` objects."""
-  nodes: [ElectrolytesEntity!]!
+"""A connection to a list of `ElectrolyteEntity` values."""
+type ElectrolyteEntitiesConnection {
+  """A list of `ElectrolyteEntity` objects."""
+  nodes: [ElectrolyteEntity!]!
 
   """
-  A list of edges which contains the `ElectrolytesEntity` and cursor to aid in pagination.
+  A list of edges which contains the `ElectrolyteEntity` and cursor to aid in pagination.
   """
-  edges: [ElectrolytesEntitiesEdge!]!
+  edges: [ElectrolyteEntitiesEdge!]!
 
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """
-  The count of *all* `ElectrolytesEntity` you could get from the connection.
+  The count of *all* `ElectrolyteEntity` you could get from the connection.
   """
   totalCount: Int!
 }
 
-type ElectrolytesEntity {
+type ElectrolyteEntity {
   id: Int
   name: String
   created: Datetime
@@ -52982,17 +52982,17 @@ type ElectrolytesEntity {
   initials: String
 }
 
-"""A `ElectrolytesEntity` edge in the connection."""
-type ElectrolytesEntitiesEdge {
+"""A `ElectrolyteEntity` edge in the connection."""
+type ElectrolyteEntitiesEdge {
   """A cursor for use in pagination."""
   cursor: Cursor
 
-  """The `ElectrolytesEntity` at the end of the edge."""
-  node: ElectrolytesEntity!
+  """The `ElectrolyteEntity` at the end of the edge."""
+  node: ElectrolyteEntity!
 }
 
-"""Methods to use when ordering `ElectrolytesEntity`."""
-enum ElectrolytesEntitiesOrderBy {
+"""Methods to use when ordering `ElectrolyteEntity`."""
+enum ElectrolyteEntitiesOrderBy {
   NATURAL
   ID_ASC
   ID_DESC
@@ -53015,10 +53015,10 @@ enum ElectrolytesEntitiesOrderBy {
 }
 
 """
-A condition to be used against `ElectrolytesEntity` object types. All fields are
+A condition to be used against `ElectrolyteEntity` object types. All fields are
 tested for equality and combined with a logical ‘and.’
 """
-input ElectrolytesEntityCondition {
+input ElectrolyteEntityCondition {
   """Checks for equality with the object’s `id` field."""
   id: Int
 
@@ -53050,9 +53050,9 @@ input ElectrolytesEntityCondition {
 }
 
 """
-A filter to be used against `ElectrolytesEntity` object types. All fields are combined with a logical ‘and.’
+A filter to be used against `ElectrolyteEntity` object types. All fields are combined with a logical ‘and.’
 """
-input ElectrolytesEntityFilter {
+input ElectrolyteEntityFilter {
   """Filter by the object’s `id` field."""
   id: IntFilter
 
@@ -53081,13 +53081,13 @@ input ElectrolytesEntityFilter {
   initials: StringFilter
 
   """Checks for all expressions in this list."""
-  and: [ElectrolytesEntityFilter!]
+  and: [ElectrolyteEntityFilter!]
 
   """Checks for any expressions in this list."""
-  or: [ElectrolytesEntityFilter!]
+  or: [ElectrolyteEntityFilter!]
 
   """Negates the expression."""
-  not: ElectrolytesEntityFilter
+  not: ElectrolyteEntityFilter
 }
 
 """A connection to a list of `FactopdrachtArtikelExclusion` values."""
@@ -56833,24 +56833,24 @@ input FactureeropdrachtMvFilter {
   not: FactureeropdrachtMvFilter
 }
 
-"""A connection to a list of `FiltersEntity` values."""
-type FiltersEntitiesConnection {
-  """A list of `FiltersEntity` objects."""
-  nodes: [FiltersEntity!]!
+"""A connection to a list of `FilterEntity` values."""
+type FilterEntitiesConnection {
+  """A list of `FilterEntity` objects."""
+  nodes: [FilterEntity!]!
 
   """
-  A list of edges which contains the `FiltersEntity` and cursor to aid in pagination.
+  A list of edges which contains the `FilterEntity` and cursor to aid in pagination.
   """
-  edges: [FiltersEntitiesEdge!]!
+  edges: [FilterEntitiesEdge!]!
 
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  """The count of *all* `FiltersEntity` you could get from the connection."""
+  """The count of *all* `FilterEntity` you could get from the connection."""
   totalCount: Int!
 }
 
-type FiltersEntity {
+type FilterEntity {
   id: Int
   name: String
   created: Datetime
@@ -56862,17 +56862,17 @@ type FiltersEntity {
   initials: String
 }
 
-"""A `FiltersEntity` edge in the connection."""
-type FiltersEntitiesEdge {
+"""A `FilterEntity` edge in the connection."""
+type FilterEntitiesEdge {
   """A cursor for use in pagination."""
   cursor: Cursor
 
-  """The `FiltersEntity` at the end of the edge."""
-  node: FiltersEntity!
+  """The `FilterEntity` at the end of the edge."""
+  node: FilterEntity!
 }
 
-"""Methods to use when ordering `FiltersEntity`."""
-enum FiltersEntitiesOrderBy {
+"""Methods to use when ordering `FilterEntity`."""
+enum FilterEntitiesOrderBy {
   NATURAL
   ID_ASC
   ID_DESC
@@ -56895,10 +56895,10 @@ enum FiltersEntitiesOrderBy {
 }
 
 """
-A condition to be used against `FiltersEntity` object types. All fields are
+A condition to be used against `FilterEntity` object types. All fields are
 tested for equality and combined with a logical ‘and.’
 """
-input FiltersEntityCondition {
+input FilterEntityCondition {
   """Checks for equality with the object’s `id` field."""
   id: Int
 
@@ -56930,9 +56930,9 @@ input FiltersEntityCondition {
 }
 
 """
-A filter to be used against `FiltersEntity` object types. All fields are combined with a logical ‘and.’
+A filter to be used against `FilterEntity` object types. All fields are combined with a logical ‘and.’
 """
-input FiltersEntityFilter {
+input FilterEntityFilter {
   """Filter by the object’s `id` field."""
   id: IntFilter
 
@@ -56961,13 +56961,13 @@ input FiltersEntityFilter {
   initials: StringFilter
 
   """Checks for all expressions in this list."""
-  and: [FiltersEntityFilter!]
+  and: [FilterEntityFilter!]
 
   """Checks for any expressions in this list."""
-  or: [FiltersEntityFilter!]
+  or: [FilterEntityFilter!]
 
   """Negates the expression."""
-  not: FiltersEntityFilter
+  not: FilterEntityFilter
 }
 
 """A connection to a list of `FloorEntity` values."""
@@ -63417,26 +63417,24 @@ input MaintenanceVisitsSensorMaterialFilter {
   not: MaintenanceVisitsSensorMaterialFilter
 }
 
-"""A connection to a list of `MembranesEntity` values."""
-type MembranesEntitiesConnection {
-  """A list of `MembranesEntity` objects."""
-  nodes: [MembranesEntity!]!
+"""A connection to a list of `MembraneEntity` values."""
+type MembraneEntitiesConnection {
+  """A list of `MembraneEntity` objects."""
+  nodes: [MembraneEntity!]!
 
   """
-  A list of edges which contains the `MembranesEntity` and cursor to aid in pagination.
+  A list of edges which contains the `MembraneEntity` and cursor to aid in pagination.
   """
-  edges: [MembranesEntitiesEdge!]!
+  edges: [MembraneEntitiesEdge!]!
 
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  """
-  The count of *all* `MembranesEntity` you could get from the connection.
-  """
+  """The count of *all* `MembraneEntity` you could get from the connection."""
   totalCount: Int!
 }
 
-type MembranesEntity {
+type MembraneEntity {
   id: Int
   name: String
   created: Datetime
@@ -63448,17 +63446,17 @@ type MembranesEntity {
   initials: String
 }
 
-"""A `MembranesEntity` edge in the connection."""
-type MembranesEntitiesEdge {
+"""A `MembraneEntity` edge in the connection."""
+type MembraneEntitiesEdge {
   """A cursor for use in pagination."""
   cursor: Cursor
 
-  """The `MembranesEntity` at the end of the edge."""
-  node: MembranesEntity!
+  """The `MembraneEntity` at the end of the edge."""
+  node: MembraneEntity!
 }
 
-"""Methods to use when ordering `MembranesEntity`."""
-enum MembranesEntitiesOrderBy {
+"""Methods to use when ordering `MembraneEntity`."""
+enum MembraneEntitiesOrderBy {
   NATURAL
   ID_ASC
   ID_DESC
@@ -63481,10 +63479,10 @@ enum MembranesEntitiesOrderBy {
 }
 
 """
-A condition to be used against `MembranesEntity` object types. All fields are
+A condition to be used against `MembraneEntity` object types. All fields are
 tested for equality and combined with a logical ‘and.’
 """
-input MembranesEntityCondition {
+input MembraneEntityCondition {
   """Checks for equality with the object’s `id` field."""
   id: Int
 
@@ -63516,9 +63514,9 @@ input MembranesEntityCondition {
 }
 
 """
-A filter to be used against `MembranesEntity` object types. All fields are combined with a logical ‘and.’
+A filter to be used against `MembraneEntity` object types. All fields are combined with a logical ‘and.’
 """
-input MembranesEntityFilter {
+input MembraneEntityFilter {
   """Filter by the object’s `id` field."""
   id: IntFilter
 
@@ -63547,13 +63545,13 @@ input MembranesEntityFilter {
   initials: StringFilter
 
   """Checks for all expressions in this list."""
-  and: [MembranesEntityFilter!]
+  and: [MembraneEntityFilter!]
 
   """Checks for any expressions in this list."""
-  or: [MembranesEntityFilter!]
+  or: [MembraneEntityFilter!]
 
   """Negates the expression."""
-  not: MembranesEntityFilter
+  not: MembraneEntityFilter
 }
 
 """A connection to a list of `Notity` values."""
@@ -64041,24 +64039,24 @@ input NotitiesMvFilter {
   not: NotitiesMvFilter
 }
 
-"""A connection to a list of `ORingsEntity` values."""
-type ORingsEntitiesConnection {
-  """A list of `ORingsEntity` objects."""
-  nodes: [ORingsEntity!]!
+"""A connection to a list of `ORingEntity` values."""
+type ORingEntitiesConnection {
+  """A list of `ORingEntity` objects."""
+  nodes: [ORingEntity!]!
 
   """
-  A list of edges which contains the `ORingsEntity` and cursor to aid in pagination.
+  A list of edges which contains the `ORingEntity` and cursor to aid in pagination.
   """
-  edges: [ORingsEntitiesEdge!]!
+  edges: [ORingEntitiesEdge!]!
 
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
-  """The count of *all* `ORingsEntity` you could get from the connection."""
+  """The count of *all* `ORingEntity` you could get from the connection."""
   totalCount: Int!
 }
 
-type ORingsEntity {
+type ORingEntity {
   id: Int
   name: String
   created: Datetime
@@ -64070,17 +64068,17 @@ type ORingsEntity {
   initials: String
 }
 
-"""A `ORingsEntity` edge in the connection."""
-type ORingsEntitiesEdge {
+"""A `ORingEntity` edge in the connection."""
+type ORingEntitiesEdge {
   """A cursor for use in pagination."""
   cursor: Cursor
 
-  """The `ORingsEntity` at the end of the edge."""
-  node: ORingsEntity!
+  """The `ORingEntity` at the end of the edge."""
+  node: ORingEntity!
 }
 
-"""Methods to use when ordering `ORingsEntity`."""
-enum ORingsEntitiesOrderBy {
+"""Methods to use when ordering `ORingEntity`."""
+enum ORingEntitiesOrderBy {
   NATURAL
   ID_ASC
   ID_DESC
@@ -64103,10 +64101,10 @@ enum ORingsEntitiesOrderBy {
 }
 
 """
-A condition to be used against `ORingsEntity` object types. All fields are
-tested for equality and combined with a logical ‘and.’
+A condition to be used against `ORingEntity` object types. All fields are tested
+for equality and combined with a logical ‘and.’
 """
-input ORingsEntityCondition {
+input ORingEntityCondition {
   """Checks for equality with the object’s `id` field."""
   id: Int
 
@@ -64138,9 +64136,9 @@ input ORingsEntityCondition {
 }
 
 """
-A filter to be used against `ORingsEntity` object types. All fields are combined with a logical ‘and.’
+A filter to be used against `ORingEntity` object types. All fields are combined with a logical ‘and.’
 """
-input ORingsEntityFilter {
+input ORingEntityFilter {
   """Filter by the object’s `id` field."""
   id: IntFilter
 
@@ -64169,13 +64167,13 @@ input ORingsEntityFilter {
   initials: StringFilter
 
   """Checks for all expressions in this list."""
-  and: [ORingsEntityFilter!]
+  and: [ORingEntityFilter!]
 
   """Checks for any expressions in this list."""
-  or: [ORingsEntityFilter!]
+  or: [ORingEntityFilter!]
 
   """Negates the expression."""
-  not: ORingsEntityFilter
+  not: ORingEntityFilter
 }
 
 """A connection to a list of `Offerte` values."""

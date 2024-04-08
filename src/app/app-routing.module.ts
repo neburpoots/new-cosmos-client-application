@@ -37,6 +37,11 @@ import { FloorsComponent } from "./views/admin/floors/index/floors.component";
 import { BuildingsComponent } from "./views/admin/buildings/index/buildings.component";
 import { ApplicationsComponent } from "./views/admin/applications/index/applications.component";
 import { SamplePointsComponent } from "./views/admin/sample-points/index/sample-points.component";
+import { PyrolysersComponent } from "./views/admin/pyrolysers/index/pyrolysers.component";
+import { ORingsComponent } from "./views/admin/o-rings/index/o-rings.component";
+import { FiltersComponent } from "./views/admin/filters/index/filters.component";
+import { MembranesComponent } from "./views/admin/membranes/index/membranes.component";
+import { ElectrolytesComponent } from "./views/admin/electrolytes/index/electrolytes.component";
 
 const routes: Routes = [
   // user views
@@ -59,9 +64,30 @@ const routes: Routes = [
         component: DetectorTypeComponent
       },
       {
+        path: 'pyrolysers',
+        component: PyrolysersComponent
+      },
+      {
+        path: 'o-rings',
+        component: ORingsComponent
+      },
+      {
+        path: 'filters',
+        component: FiltersComponent
+      },
+      {
+        path: 'membranes',
+        component: MembranesComponent
+      },
+      {
+        path: 'electrolytes',
+        component: ElectrolytesComponent
+      },
+      {
         path: 'principles',
         component: PrinciplesComponent
       },
+      
       { path: "detectors", component: DetectorComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },

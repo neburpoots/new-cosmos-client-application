@@ -10,7 +10,7 @@ query allPyrolysersNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allPyrolysers($limit: Int, $offset: Int, $search: String!, $orderBy: [PyrolyserEntitiesOrderBy!]) {
+query allPyrolyserEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [PyrolyserEntitiesOrderBy!]) {
   allPyrolyserEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy

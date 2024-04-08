@@ -10,8 +10,8 @@ query allORingsNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allORings($limit: Int, $offset: Int, $search: String!, $orderBy: [ORingsEntitiesOrderBy!]) {
-  allORingsEntities(
+query allORingEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [ORingEntitiesOrderBy!]) {
+  allORingEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -31,6 +31,7 @@ query allORings($limit: Int, $offset: Int, $search: String!, $orderBy: [ORingsEn
     }
   }
 }
+
 
 #-------------------------------------------------------------------------------
 mutation CreateORing(

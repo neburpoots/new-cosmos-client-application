@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/authentication/auth.service";
-import { faBuilding, faCloud, faCodeCompare, faEllipsis, faHouseSignal, faListUl, faMountain, faMountainSun, faPanorama, faPlus, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faBolt, faBoxOpen, faBuilding, faCashRegister, faCloud, faCodeCompare, faEllipsis, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountain, faMountainSun, faPanorama, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { NavBarIcon } from "../../models/utils/navbarItem";
 
@@ -12,10 +12,9 @@ export class SidebarComponent implements OnInit {
   collapseShow = "hidden";
   favoritesDropdownActive: boolean = false;
   assembleDropdownActive: boolean = false;
-  productDropdownActive: boolean = false;
   miscDropdownActive: boolean = false;
   servicesDropdownActive: boolean = false;
-
+  productsDropdownActive: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -37,6 +36,67 @@ export class SidebarComponent implements OnInit {
   faTowerCell = faTowerCell
   faPlus = faPlus
   faServer = faServer
+  faCashRegister = faCashRegister
+  faRing = faRing
+  faFilter = faFilter
+  faBolt = faBolt
+  faFlaskVial = faFlaskVial
+  faGauge = faGauge
+  faBoxOpen = faBoxOpen
+
+  products: NavBarIcon[] = [
+    {
+      title: "Detector Types",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faGauge,
+      url: "/user/detector-types",
+    },
+    {
+      title: "Sensor Types",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faVial,
+      url: "/user/sensor-types",
+    },
+    {
+      title: "Electrolytes",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faFlaskVial,
+      url: "/user/electrolytes",
+    },
+    {
+      title: "Membranes",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faBolt,
+      url: "/user/membranes",
+    },
+    {
+      title: "Filters",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faFilter,
+      url: "/user/filters",
+    },
+    {
+      title: "O-Rings",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faRing,
+      url: "/user/o-rings",
+    },
+    {
+      title: "Pyrolysers",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faCashRegister,
+      url: "/user/pyrolysers",
+    },
+  ];
+
+
   services: NavBarIcon[] = [
     {
       title: "Add Detector",
@@ -96,7 +156,7 @@ export class SidebarComponent implements OnInit {
     },
   ];
 
-  misc : NavBarIcon[] = [
+  misc: NavBarIcon[] = [
     {
       title: "Principles",
       active: false,
@@ -153,11 +213,6 @@ export class SidebarComponent implements OnInit {
   }
 
   // Method to toggle the dropdown state
-  toggleProductsDropdown() {
-    this.productDropdownActive = !this.productDropdownActive;
-  }
-
-  // Method to toggle the dropdown state
   togglemiscDropdown() {
     this.miscDropdownActive = !this.miscDropdownActive;
   }
@@ -165,5 +220,10 @@ export class SidebarComponent implements OnInit {
   // Method to toggle the dropdown state
   toggleServicesDropdown() {
     this.servicesDropdownActive = !this.servicesDropdownActive;
+  }
+
+  // Method to toggle the dropdown state
+  toggleProductsDropdown() {
+    this.productsDropdownActive = !this.productsDropdownActive;
   }
 }

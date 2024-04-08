@@ -103,6 +103,16 @@ import { ApplicationsComponent } from "./views/admin/applications/index/applicat
 import { ApplicationsFormComponent } from "./views/admin/applications/form/applications-form.component";
 import { SamplePointsComponent } from "./views/admin/sample-points/index/sample-points.component";
 import { SamplePointsFormComponent } from "./views/admin/sample-points/form/sample-point-form.component";
+import { PyrolysersFormComponent } from "./views/admin/pyrolysers/form/pyrolysers-form.component";
+import { PyrolysersComponent } from "./views/admin/pyrolysers/index/pyrolysers.component";
+import { ORingsFormComponent } from "./views/admin/o-rings/form/o-rings-form.component";
+import { ORingsComponent } from "./views/admin/o-rings/index/o-rings.component";
+import { FiltersComponent } from "./views/admin/filters/index/filters.component";
+import { FiltersFormComponent } from "./views/admin/filters/form/filters-form.component";
+import { MembranesComponent } from "./views/admin/membranes/index/membranes.component";
+import { MembranesFormComponent } from "./views/admin/membranes/form/membranes-form.component";
+import { ElectrolytesFormComponent } from "./views/admin/electrolytes/form/electrolytes-form.component";
+import { ElectrolytesComponent } from "./views/admin/electrolytes/index/electrolytes.component";
 
 @NgModule({
   declarations: [
@@ -183,7 +193,17 @@ import { SamplePointsFormComponent } from "./views/admin/sample-points/form/samp
     ApplicationsComponent,
     ApplicationsFormComponent,
     SamplePointsComponent,
-    SamplePointsFormComponent
+    SamplePointsFormComponent,
+    PyrolysersFormComponent,
+    PyrolysersComponent,
+    ORingsFormComponent,
+    ORingsComponent,
+    FiltersComponent,
+    FiltersFormComponent,
+    MembranesComponent,
+    MembranesFormComponent,
+    ElectrolytesFormComponent,
+    ElectrolytesComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)
