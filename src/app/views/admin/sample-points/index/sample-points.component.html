@@ -1,0 +1,45 @@
+<div class="min-h-[100vh] flex px-4 md:px-10 justify-center">
+
+    <div class="h-full w-full flex items-center">
+        <div class="mt-[100px] w-full mb-12 px-4">
+            <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
+                (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
+                (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
+                [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
+                [data]="tableData" [inline_selector]="'areas-form'"
+                [isInlineCreating]="isInlineCreating"
+                (toggleInlineCreating)="toggleInlineCreating()"	
+                >
+                <sample-point-form
+                    [baseOrderBy]="baseOrderBy"
+                (refresh)="fetch($event)" [objectSingle]="objectSingle"
+                    [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
+                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></sample-point-form>
+            </table-component>
+            <app-pagination-component [searchCriteria]="searchCriteria"
+                (paginationChange)="fetch($event)"></app-pagination-component>
+
+            <modal-component [width]="ModalWidth.Large
+        " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
+                <sample-point-form
+                [baseOrderBy]="baseOrderBy"
+                [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refresh)="fetch()"
+                    (closeModal)="closeCreateModal()"></sample-point-form>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
+                <sample-point-form #editModal [objectPlural]="objectPlural"
+                [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
+                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></sample-point-form>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Medium
+        " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
+                <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
+                    [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
+                    (closeModal)="closeDeleteModal()"></delete-modal>
+            </modal-component>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+#-------------------------------------------------------------------------------
+query allFiltersNoPagination
+    {
+    allFilters {
+        nodes {
+            id,
+            name
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allFilters($limit: Int, $offset: Int, $search: String!, $orderBy: [FiltersEntitiesOrderBy!]) {
+  allFiltersEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      consumable
+      omschr
+      name
+      initials
+      created
+      cdartikel
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateFilter(
+    $body: FilterInput!
+) {
+  createFilter(
+    input: {filter: $body}
+  ) {
+    filter {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateFilter(
+    $id: Int!, $patch: FilterPatch!
+) {
+  updateFilterById(
+    input: {
+		id: $id
+		filterPatch: $patch	
+    }
+  ) {
+    filter {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteFilter($id: Int!)
+{
+	deleteFilterById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

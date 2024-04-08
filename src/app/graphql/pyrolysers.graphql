@@ -1,0 +1,82 @@
+#-------------------------------------------------------------------------------
+query allPyrolysersNoPagination
+    {
+    allPyrolysers {
+        nodes {
+            id,
+            name
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allPyrolysers($limit: Int, $offset: Int, $search: String!, $orderBy: [PyrolyserEntitiesOrderBy!]) {
+  allPyrolyserEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      omschr
+      name
+      initials
+      created
+      cdartikel
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreatePyrolyser(
+    $body: PyrolyserInput!
+) {
+  createPyrolyser(
+    input: {pyrolyser: $body}
+  ) {
+    pyrolyser {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdatePyrolyser(
+    $id: Int!, $patch: PyrolyserPatch!
+) {
+  updatePyrolyserById(
+    input: {
+		id: $id
+		pyrolyserPatch: $patch	
+    }
+  ) {
+    pyrolyser {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeletePyrolyser($id: Int!)
+{
+	deletePyrolyserById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

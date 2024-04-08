@@ -13,7 +13,7 @@ import { TableHead } from "../../../../models/utils/tableHead";
 import { FloorFormComponent } from "../form/floors-form.component";
 
 @Component({
-  selector: "app-areas",
+  selector: "app-floors",
   templateUrl: "./floors.component.html",
 })
 

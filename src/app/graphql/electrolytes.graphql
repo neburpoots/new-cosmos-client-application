@@ -1,0 +1,83 @@
+#-------------------------------------------------------------------------------
+query allElectrolytesNoPagination
+    {
+    allElectrolytes {
+        nodes {
+            id,
+            name
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allElectrolytes($limit: Int, $offset: Int, $search: String!, $orderBy: [ElectrolytesEntitiesOrderBy!]) {
+  allElectrolytesEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      volume
+      omschr
+      name
+      initials
+      created
+      cdartikel
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateElectrolyte(
+    $body: ElectrolyteInput!
+) {
+  createElectrolyte(
+    input: {electrolyte: $body}
+  ) {
+    electrolyte {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateELectrolyte(
+    $id: Int!, $patch: ElectrolytePatch!
+) {
+  updateElectrolyteById(
+    input: {
+		id: $id
+		electrolytePatch: $patch	
+    }
+  ) {
+    electrolyte {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteElectrolyte($id: Int!)
+{
+	deleteElectrolyteById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

@@ -1,0 +1,170 @@
+#-------------------------------------------------------------------------------
+query allSensorTypesNoPagination
+    {
+    allSensorTypesIndices {
+        nodes {
+            id,
+            sensorTypeArtikelOmschr
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allSensorTypesIndices($limit: Int, $offset: Int, $search: String!, $orderBy: [SensorTypesIndicesOrderBy!]) {
+  sensorTypes: allSensorTypesIndices(
+    filter: {or: [{sensorTypeArtikelOmschr: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      battery
+      calEngineeringUnits
+      calFlowRate
+      calGasConcentration
+      calGasName
+      calResponse
+      code
+      createdDate
+      electrolyteCdartikel
+      electrolyteName
+      engineeringUnits
+      filterCdartikel
+      filterName
+      flowRate
+      highEu
+      id
+      maintenanceIntervalMonths
+      membraneCdartikel
+      membraneName
+      membraneSeal
+      model
+      oRingCdartikel
+      oRingName
+      prefix
+      target
+      suffix
+      siliconeSheet
+      sensorTypeCdartikel
+      sensorTypeArtikelOmschr
+      restrictor
+      replacementIntervalMonths
+      pyrolyserName
+      pyrolyserCdartikel
+      principleName
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateSensorType(
+    $body: SensorTypeInput!
+) {
+  createSensorType(
+    input: {sensorType: $body}
+  ) {
+    sensorType {
+      id
+      obsolete
+      battery
+      biasMv
+      calFlowRate
+      calGasId
+      calResponse
+      cdartikel
+      code
+      created
+      direction
+      electrodeCount
+      electrolyteId
+      elementCount
+      filterId
+      flowRate
+      fullType
+      lowElectrolyte
+      maintenanceIntervalMonths
+      membraneId
+      membraneSeal
+      model
+      modified
+      volume
+      transportSwitch
+      siliconeSheet
+      spanResistor
+      sensorTypeId
+      sensorBaseTypeId
+      restrictor
+      rangeId
+      replacementIntervalMonths
+      pyrolyserVoltage
+      pyrolyserId
+      principleId
+      plugId
+      ownerId
+      oRingId
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateSensorType(
+    $id: Int!, $patch: SensorTypePatch!
+) {
+  updateSensorTypeById(
+    input: {
+		id: $id
+		sensorTypePatch: $patch	
+    }
+  ) {
+    sensorType {
+      id
+      obsolete
+      battery
+      biasMv
+      calFlowRate
+      calGasId
+      calResponse
+      cdartikel
+      code
+      created
+      direction
+      electrodeCount
+      electrolyteId
+      elementCount
+      filterId
+      flowRate
+      fullType
+      lowElectrolyte
+      maintenanceIntervalMonths
+      membraneId
+      membraneSeal
+      model
+      modified
+      volume
+      transportSwitch
+      siliconeSheet
+      spanResistor
+      sensorTypeId
+      sensorBaseTypeId
+      restrictor
+      rangeId
+      replacementIntervalMonths
+      pyrolyserVoltage
+      pyrolyserId
+      principleId
+      plugId
+      ownerId
+      oRingId
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteSensorType($id: Int!)
+{
+	deleteSensorTypeById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

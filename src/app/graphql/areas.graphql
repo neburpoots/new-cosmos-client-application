@@ -1,10 +1,17 @@
-
-query allAreasNoPagination
+#-------------------------------------------------------------------------------
+query allAreasNoPagination($floorId: [Int!])
     {
-    allAreas {
+    allAreas(
+        filter: { 
+          or: [
+   { floorByFloorId: { id: { inExpansive: $floorId } }
+  }]
+  }
+    ) {
         nodes {
             id,
             name
+            remarks
             created,
             userByOwnerId {
                 initials

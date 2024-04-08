@@ -34,6 +34,9 @@ import { ChemicalCompoundsComponent } from "./views/admin/chemical-compounds/ind
 import { RangesComponent } from "./views/admin/ranges/index/ranges.component";
 import { AreasComponent } from "./views/admin/areas/index/areas.component";
 import { FloorsComponent } from "./views/admin/floors/index/floors.component";
+import { BuildingsComponent } from "./views/admin/buildings/index/buildings.component";
+import { ApplicationsComponent } from "./views/admin/applications/index/applications.component";
+import { SamplePointsComponent } from "./views/admin/sample-points/index/sample-points.component";
 
 const routes: Routes = [
   // user views
@@ -67,6 +70,9 @@ const routes: Routes = [
       { path: "sensor-types", component: SensorTypeComponent},
       { path: "areas", component: AreasComponent },
       { path: "floors", component: FloorsComponent },
+      { path: "buildings", component: BuildingsComponent},
+      { path: "applications", component: ApplicationsComponent},
+      { path: "sample-points", component: SamplePointsComponent},
       { path: "gases", component: GasesComponent},
       { path: "chemical-compounds", component: ChemicalCompoundsComponent},
       { path: "ranges", component: RangesComponent},

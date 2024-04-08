@@ -1,0 +1,77 @@
+<h2 *ngIf="!isInlineCreating" class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
+<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'flex items-start pt-1' : 'flex flex-col gap-5'"
+    (ngSubmit)="onSubmit()">
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[0] : null">
+        <select-component (onChange)="selectedEndUser($event)" [form]="myForm" [name]="'endUser'"
+            [displayName]="'End User'" [options]="end_users" [inline]="isInlineCreating"
+            [placeholder]="'Select a End User'" [touched]="myForm.controls['endUser'].touched"
+            [errors]="[{ name: 'required', message: 'End User is required' }]">
+        </select-component>
+    </div>
+    <div  [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
+        <select-component *ngIf="buildings.length > 0" (onChange)="selectedBuilding($event)" [form]="myForm" [name]="'building'"
+            [displayName]="'Building'" [options]="buildings" [inline]="isInlineCreating"
+            [placeholder]="'Select a Building'" [touched]="myForm.controls['building'].touched"
+            [errors]="[{ name: 'required', message: 'Building is required' }]">
+        </select-component>
+    </div>
+
+    <div  [style.min-width.px]="isInlineCreating ? cellWidths[2] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[2] : null">
+        <select-component *ngIf="floors.length > 0" (onChange)="selectedFloor($event)" [form]="myForm" [name]="'floor'" [displayName]="'Floor'" [options]="floors"
+            [inline]="isInlineCreating" [placeholder]="'Select a Floor'" [touched]="myForm.controls['floor'].touched"
+            [errors]="[{ name: 'required', message: 'Floor is required' }]">
+        </select-component>
+    </div>
+
+    <div  [style.min-width.px]="isInlineCreating ? cellWidths[3] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[3] : null">
+        <select-component *ngIf="areas.length > 0" [form]="myForm" [name]="'area'" [displayName]="'Area'" [options]="areas"
+            [inline]="isInlineCreating" [placeholder]="'Select a Area'" [touched]="myForm.controls['area'].touched"
+            [errors]="[{ name: 'required', message: 'Area is required' }]">
+        </select-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[4] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'name'" [displayName]="'Name'"
+            [inline]="isInlineCreating" [touched]="myForm.controls['name'].touched"
+            [errors]="[{ name: 'required', message: 'Name is required' }]"></input-component>
+    </div>
+
+    <div *ngIf="!isInlineCreating"  [style.min-width.px]="isInlineCreating ? cellWidths[5] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[5] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'remarks'" [displayName]="'Remarks'"
+            [inputType]="'textarea'"
+            [inline]="isInlineCreating" [touched]="myForm.controls['remarks'].touched"
+            [errors]="[]"></input-component>
+    </div>
+
+
+    <!-- This is is for modal form -->
+    <div *ngIf="!isInlineCreating" class="flex flex-row mt-auto justify-end items-center gap-2">
+        <button type="button" (click)="close()"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Close</button>
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">{{id
+            ? "Edit" : "Add"}} {{objectSingle}}</button>
+    </div>
+
+    <!-- This is the inline form -->
+    <div *ngIf="isInlineCreating" [style.min-width.px]="cellWidths[cellWidths.length - 2]"
+        [style.max-width.px]="cellWidths[cellWidths.length - 2]"
+        class="h-full sticky right-0 flex bg-white gap-1 items-start p-1 pt-1 justify-center ml-auto">
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
+            <i class="fa fa-lg fa-check" aria-hidden="true"></i>
+        </button>
+        <div (click)="toggleInlineCreating.emit()"
+            class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
+            <i class="fa fa-lg fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+
+</form>

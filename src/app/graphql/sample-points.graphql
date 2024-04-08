@@ -17,8 +17,8 @@ query allSamplePointsNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allSamplePoints($limit: Int, $offset: Int, $search: String!, $orderBy: [SamplePointsOrderBy!]) {
-  allSamplePoints(
+query allSamplePointEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [SamplePointEntitiesOrderBy!]) {
+  allSamplePointEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -26,31 +26,23 @@ query allSamplePoints($limit: Int, $offset: Int, $search: String!, $orderBy: [Sa
   ) {
     totalCount
     nodes {
-        name
-        created
-        areaByAreaId {
-      id
       name
+      areaId
+      areaName
+      buildingId
+      buildingName
       created
-      floorByFloorId {
-        buildingByBuildingId {
-          id
-          name
-          endUserByEndUserId {
-            id
-            name
-          }
-        }
-        name
-      }
-    }
-    userByOwnerId {
-        id
-        initials
-    }
+      endUserId
+      endUserName
+      floorId
+      floorName
+      id
+      initials
+      ownerId
     }
   }
 }
+
 
 #-------------------------------------------------------------------------------
 mutation CreateSamplePoint(

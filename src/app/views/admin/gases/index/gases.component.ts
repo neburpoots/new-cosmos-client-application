@@ -78,14 +78,13 @@ export class GasesComponent extends BaseEntity<Gas> implements OnInit {
   ]
 
 
-  mapTableData(principles: Principle[]): any[] {
-    console.log(principles)
-    return principles.map((principle: Principle) => {
+  mapTableData(gases: Gas[]): any[] {
+    return gases.map((gas: Gas) => {
       return {
-        id: { url: null, value: principle.id } as TableField,
-        name: { url: null, value: principle?.name } as TableField,
-        created: { url: null, value: principle?.created } as TableField,
-        by: { url: null, value: principle?.userByOwnerId?.initials } as TableField,
+        id: { url: null, value: gas.id } as TableField,
+        name: { url: null, value: gas?.name } as TableField,
+        created: { url: null, value: gas?.created } as TableField,
+        by: { url: null, value: gas?.userByOwnerId?.initials } as TableField,
       };
     });
   }

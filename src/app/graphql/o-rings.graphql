@@ -1,0 +1,84 @@
+#-------------------------------------------------------------------------------
+query allORingsNoPagination
+    {
+    allORings {
+        nodes {
+            id,
+            name
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allORings($limit: Int, $offset: Int, $search: String!, $orderBy: [ORingsEntitiesOrderBy!]) {
+  allORingsEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      omschr
+      name
+      initials
+      quantity
+      created
+      cdartikel
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateORing(
+    $body: ORingInput!
+) {
+  createORing(
+    input: {oRing: $body}
+  ) {
+    oRing {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateORing(
+    $id: Int!, $patch: ORingPatch!
+) {
+  updateORingById(
+    input: {
+		id: $id
+		oRingPatch: $patch	
+    }
+  ) {
+    oRing {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+
+#-------------------------------------------------------------------------------
+mutation DeleteORing($id: Int!)
+{
+	deleteORingById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

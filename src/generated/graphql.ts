@@ -25946,6 +25946,117 @@ export type ElectrolytesEdge = {
   node: Electrolyte;
 };
 
+/** A connection to a list of `ElectrolytesEntity` values. */
+export type ElectrolytesEntitiesConnection = {
+  __typename?: 'ElectrolytesEntitiesConnection';
+  /** A list of edges which contains the `ElectrolytesEntity` and cursor to aid in pagination. */
+  edges: Array<ElectrolytesEntitiesEdge>;
+  /** A list of `ElectrolytesEntity` objects. */
+  nodes: Array<ElectrolytesEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `ElectrolytesEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `ElectrolytesEntity` edge in the connection. */
+export type ElectrolytesEntitiesEdge = {
+  __typename?: 'ElectrolytesEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `ElectrolytesEntity` at the end of the edge. */
+  node: ElectrolytesEntity;
+};
+
+/** Methods to use when ordering `ElectrolytesEntity`. */
+export enum ElectrolytesEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC',
+  VolumeAsc = 'VOLUME_ASC',
+  VolumeDesc = 'VOLUME_DESC'
+}
+
+export type ElectrolytesEntity = {
+  __typename?: 'ElectrolytesEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+  volume?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `ElectrolytesEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type ElectrolytesEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `volume` field. */
+  volume?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `ElectrolytesEntity` object types. All fields are combined with a logical ‘and.’ */
+export type ElectrolytesEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<ElectrolytesEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<ElectrolytesEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<ElectrolytesEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `volume` field. */
+  volume?: InputMaybe<IntFilter>;
+};
+
 /** Methods to use when ordering `Electrolyte`. */
 export enum ElectrolytesOrderBy {
   CdartikelAsc = 'CDARTIKEL_ASC',
@@ -31464,6 +31575,117 @@ export type FiltersEdge = {
   cursor?: Maybe<Scalars['Cursor']['output']>;
   /** The `Filter` at the end of the edge. */
   node: Filter;
+};
+
+/** A connection to a list of `FiltersEntity` values. */
+export type FiltersEntitiesConnection = {
+  __typename?: 'FiltersEntitiesConnection';
+  /** A list of edges which contains the `FiltersEntity` and cursor to aid in pagination. */
+  edges: Array<FiltersEntitiesEdge>;
+  /** A list of `FiltersEntity` objects. */
+  nodes: Array<FiltersEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `FiltersEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `FiltersEntity` edge in the connection. */
+export type FiltersEntitiesEdge = {
+  __typename?: 'FiltersEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `FiltersEntity` at the end of the edge. */
+  node: FiltersEntity;
+};
+
+/** Methods to use when ordering `FiltersEntity`. */
+export enum FiltersEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  ConsumableAsc = 'CONSUMABLE_ASC',
+  ConsumableDesc = 'CONSUMABLE_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
+}
+
+export type FiltersEntity = {
+  __typename?: 'FiltersEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  consumable?: Maybe<Scalars['Boolean']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `FiltersEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type FiltersEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `consumable` field. */
+  consumable?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `FiltersEntity` object types. All fields are combined with a logical ‘and.’ */
+export type FiltersEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<FiltersEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `consumable` field. */
+  consumable?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<FiltersEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<FiltersEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
 };
 
 /** Methods to use when ordering `Filter`. */
@@ -41684,6 +41906,117 @@ export type MembranesEdge = {
   node: Membrane;
 };
 
+/** A connection to a list of `MembranesEntity` values. */
+export type MembranesEntitiesConnection = {
+  __typename?: 'MembranesEntitiesConnection';
+  /** A list of edges which contains the `MembranesEntity` and cursor to aid in pagination. */
+  edges: Array<MembranesEntitiesEdge>;
+  /** A list of `MembranesEntity` objects. */
+  nodes: Array<MembranesEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `MembranesEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `MembranesEntity` edge in the connection. */
+export type MembranesEntitiesEdge = {
+  __typename?: 'MembranesEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `MembranesEntity` at the end of the edge. */
+  node: MembranesEntity;
+};
+
+/** Methods to use when ordering `MembranesEntity`. */
+export enum MembranesEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  QuantityAsc = 'QUANTITY_ASC',
+  QuantityDesc = 'QUANTITY_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
+}
+
+export type MembranesEntity = {
+  __typename?: 'MembranesEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  quantity?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `MembranesEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type MembranesEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `quantity` field. */
+  quantity?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `MembranesEntity` object types. All fields are combined with a logical ‘and.’ */
+export type MembranesEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<MembranesEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<MembranesEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<MembranesEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `quantity` field. */
+  quantity?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
+};
+
 /** Methods to use when ordering `Membrane`. */
 export enum MembranesOrderBy {
   CdartikelAsc = 'CDARTIKEL_ASC',
@@ -48001,6 +48334,117 @@ export type ORingsEdge = {
   node: ORing;
 };
 
+/** A connection to a list of `ORingsEntity` values. */
+export type ORingsEntitiesConnection = {
+  __typename?: 'ORingsEntitiesConnection';
+  /** A list of edges which contains the `ORingsEntity` and cursor to aid in pagination. */
+  edges: Array<ORingsEntitiesEdge>;
+  /** A list of `ORingsEntity` objects. */
+  nodes: Array<ORingsEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `ORingsEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `ORingsEntity` edge in the connection. */
+export type ORingsEntitiesEdge = {
+  __typename?: 'ORingsEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `ORingsEntity` at the end of the edge. */
+  node: ORingsEntity;
+};
+
+/** Methods to use when ordering `ORingsEntity`. */
+export enum ORingsEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  QuantityAsc = 'QUANTITY_ASC',
+  QuantityDesc = 'QUANTITY_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
+}
+
+export type ORingsEntity = {
+  __typename?: 'ORingsEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  quantity?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `ORingsEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type ORingsEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `quantity` field. */
+  quantity?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `ORingsEntity` object types. All fields are combined with a logical ‘and.’ */
+export type ORingsEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<ORingsEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<ORingsEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<ORingsEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `quantity` field. */
+  quantity?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
+};
+
 /** Methods to use when ordering `ORing`. */
 export enum ORingsOrderBy {
   CdartikelAsc = 'CDARTIKEL_ASC',
@@ -51749,6 +52193,110 @@ export type PyrolyserCondition = {
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** A connection to a list of `PyrolyserEntity` values. */
+export type PyrolyserEntitiesConnection = {
+  __typename?: 'PyrolyserEntitiesConnection';
+  /** A list of edges which contains the `PyrolyserEntity` and cursor to aid in pagination. */
+  edges: Array<PyrolyserEntitiesEdge>;
+  /** A list of `PyrolyserEntity` objects. */
+  nodes: Array<PyrolyserEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `PyrolyserEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `PyrolyserEntity` edge in the connection. */
+export type PyrolyserEntitiesEdge = {
+  __typename?: 'PyrolyserEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `PyrolyserEntity` at the end of the edge. */
+  node: PyrolyserEntity;
+};
+
+/** Methods to use when ordering `PyrolyserEntity`. */
+export enum PyrolyserEntitiesOrderBy {
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
+  ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC'
+}
+
+export type PyrolyserEntity = {
+  __typename?: 'PyrolyserEntity';
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `PyrolyserEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type PyrolyserEntityCondition = {
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `PyrolyserEntity` object types. All fields are combined with a logical ‘and.’ */
+export type PyrolyserEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<PyrolyserEntityFilter>>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<PyrolyserEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<PyrolyserEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `replacementIntervalMonths` field. */
+  replacementIntervalMonths?: InputMaybe<IntFilter>;
+};
+
 /** A filter to be used against `Pyrolyser` object types. All fields are combined with a logical ‘and.’ */
 export type PyrolyserFilter = {
   /** Checks for all expressions in this list. */
@@ -52081,6 +52629,8 @@ export type Query = Node & {
   allDpCards?: Maybe<DpCardsConnection>;
   /** Reads and enables pagination through a set of `Electrolyte`. */
   allElectrolytes?: Maybe<ElectrolytesConnection>;
+  /** Reads and enables pagination through a set of `ElectrolytesEntity`. */
+  allElectrolytesEntities?: Maybe<ElectrolytesEntitiesConnection>;
   /** Reads and enables pagination through a set of `EndUser`. */
   allEndUsers?: Maybe<EndUsersConnection>;
   /** Reads and enables pagination through a set of `FactopdrachtArtikelExclusion`. */
@@ -52127,6 +52677,8 @@ export type Query = Node & {
   allFactuurs?: Maybe<FactuursConnection>;
   /** Reads and enables pagination through a set of `Filter`. */
   allFilters?: Maybe<FiltersConnection>;
+  /** Reads and enables pagination through a set of `FiltersEntity`. */
+  allFiltersEntities?: Maybe<FiltersEntitiesConnection>;
   /** Reads and enables pagination through a set of `FloorEntity`. */
   allFloorEntities?: Maybe<FloorEntitiesConnection>;
   /** Reads and enables pagination through a set of `Floor`. */
@@ -52243,12 +52795,16 @@ export type Query = Node & {
   allMaintenanceVisitsSensorMaterials?: Maybe<MaintenanceVisitsSensorMaterialsConnection>;
   /** Reads and enables pagination through a set of `Membrane`. */
   allMembranes?: Maybe<MembranesConnection>;
+  /** Reads and enables pagination through a set of `MembranesEntity`. */
+  allMembranesEntities?: Maybe<MembranesEntitiesConnection>;
   /** Reads and enables pagination through a set of `Notity`. */
   allNotities?: Maybe<NotitiesConnection>;
   /** Reads and enables pagination through a set of `NotitiesMv`. */
   allNotitiesMvs?: Maybe<NotitiesMvsConnection>;
   /** Reads and enables pagination through a set of `ORing`. */
   allORings?: Maybe<ORingsConnection>;
+  /** Reads and enables pagination through a set of `ORingsEntity`. */
+  allORingsEntities?: Maybe<ORingsEntitiesConnection>;
   /** Reads and enables pagination through a set of `OfferteCsv`. */
   allOfferteCsvs?: Maybe<OfferteCsvsConnection>;
   /** Reads and enables pagination through a set of `OfferteMv`. */
@@ -52285,6 +52841,8 @@ export type Query = Node & {
   allPrinciples?: Maybe<PrinciplesConnection>;
   /** Reads and enables pagination through a set of `Production`. */
   allProductions?: Maybe<ProductionsConnection>;
+  /** Reads and enables pagination through a set of `PyrolyserEntity`. */
+  allPyrolyserEntities?: Maybe<PyrolyserEntitiesConnection>;
   /** Reads and enables pagination through a set of `Pyrolyser`. */
   allPyrolysers?: Maybe<PyrolysersConnection>;
   /** Reads and enables pagination through a set of `Range`. */
@@ -52311,6 +52869,8 @@ export type Query = Node & {
   allRequests?: Maybe<RequestsConnection>;
   /** Reads and enables pagination through a set of `RxCard`. */
   allRxCards?: Maybe<RxCardsConnection>;
+  /** Reads and enables pagination through a set of `SamplePointEntity`. */
+  allSamplePointEntities?: Maybe<SamplePointEntitiesConnection>;
   /** Reads and enables pagination through a set of `SamplePoint`. */
   allSamplePoints?: Maybe<SamplePointsConnection>;
   /** Reads and enables pagination through a set of `SensorBaseType`. */
@@ -52597,6 +53157,8 @@ export type Query = Node & {
   gas?: Maybe<Gas>;
   gasById?: Maybe<Gas>;
   gasByName?: Maybe<Gas>;
+  /** Reads and enables pagination through a set of `Artikel`. */
+  getArtikelByCdartikel?: Maybe<ArtikelsConnection>;
   /** Reads a single `Group` using its globally unique `ID`. */
   group?: Maybe<Group>;
   groupById?: Maybe<Group>;
@@ -52704,8 +53266,12 @@ export type Query = Node & {
   productionById?: Maybe<Production>;
   /** Reads a single `Pyrolyser` using its globally unique `ID`. */
   pyrolyser?: Maybe<Pyrolyser>;
+  /** Reads and enables pagination through a set of `Artikel`. */
+  pyrolyserArtikelByCdartikel?: Maybe<ArtikelsConnection>;
   pyrolyserById?: Maybe<Pyrolyser>;
   pyrolyserByName?: Maybe<Pyrolyser>;
+  /** Reads and enables pagination through a set of `Artikel`. */
+  pyrolysersArtikelByCdartikel?: Maybe<ArtikelsConnection>;
   /**
    * Exposes the root query type nested one level down. This is helpful for Relay 1
    * which can only query top level fields if they are in a particular form.
@@ -53892,6 +54458,19 @@ export type QueryAllElectrolytesArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllElectrolytesEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<ElectrolytesEntityCondition>;
+  filter?: InputMaybe<ElectrolytesEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ElectrolytesEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllEndUsersArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -54187,6 +54766,19 @@ export type QueryAllFiltersArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<FiltersOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllFiltersEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<FiltersEntityCondition>;
+  filter?: InputMaybe<FiltersEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<FiltersEntitiesOrderBy>>;
 };
 
 
@@ -54945,6 +55537,19 @@ export type QueryAllMembranesArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllMembranesEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<MembranesEntityCondition>;
+  filter?: InputMaybe<MembranesEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<MembranesEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllNotitiesArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -54980,6 +55585,19 @@ export type QueryAllORingsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<ORingsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllORingsEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<ORingsEntityCondition>;
+  filter?: InputMaybe<ORingsEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<ORingsEntitiesOrderBy>>;
 };
 
 
@@ -55218,6 +55836,19 @@ export type QueryAllProductionsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAllPyrolyserEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<PyrolyserEntityCondition>;
+  filter?: InputMaybe<PyrolyserEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<PyrolyserEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAllPyrolysersArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -55383,6 +56014,19 @@ export type QueryAllRxCardsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<RxCardsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllSamplePointEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<SamplePointEntityCondition>;
+  filter?: InputMaybe<SamplePointEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<SamplePointEntitiesOrderBy>>;
 };
 
 
@@ -56927,6 +57571,18 @@ export type QueryGasByNameArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryGetArtikelByCdartikelArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  cdartikelParam?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ArtikelFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryGroupArgs = {
   nodeId: Scalars['ID']['input'];
 };
@@ -57372,6 +58028,18 @@ export type QueryPyrolyserArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryPyrolyserArtikelByCdartikelArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  cdartikelParam?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ArtikelFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryPyrolyserByIdArgs = {
   id: Scalars['Int']['input'];
 };
@@ -57380,6 +58048,18 @@ export type QueryPyrolyserByIdArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryPyrolyserByNameArgs = {
   name: Scalars['String']['input'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryPyrolysersArtikelByCdartikelArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  cdartikelParam?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ArtikelFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
@@ -60477,6 +61157,145 @@ export type SamplePointCondition = {
   name?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `ownerId` field. */
   ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A connection to a list of `SamplePointEntity` values. */
+export type SamplePointEntitiesConnection = {
+  __typename?: 'SamplePointEntitiesConnection';
+  /** A list of edges which contains the `SamplePointEntity` and cursor to aid in pagination. */
+  edges: Array<SamplePointEntitiesEdge>;
+  /** A list of `SamplePointEntity` objects. */
+  nodes: Array<SamplePointEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `SamplePointEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `SamplePointEntity` edge in the connection. */
+export type SamplePointEntitiesEdge = {
+  __typename?: 'SamplePointEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `SamplePointEntity` at the end of the edge. */
+  node: SamplePointEntity;
+};
+
+/** Methods to use when ordering `SamplePointEntity`. */
+export enum SamplePointEntitiesOrderBy {
+  AreaIdAsc = 'AREA_ID_ASC',
+  AreaIdDesc = 'AREA_ID_DESC',
+  AreaNameAsc = 'AREA_NAME_ASC',
+  AreaNameDesc = 'AREA_NAME_DESC',
+  BuildingIdAsc = 'BUILDING_ID_ASC',
+  BuildingIdDesc = 'BUILDING_ID_DESC',
+  BuildingNameAsc = 'BUILDING_NAME_ASC',
+  BuildingNameDesc = 'BUILDING_NAME_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDesc = 'CREATED_DESC',
+  EndUserIdAsc = 'END_USER_ID_ASC',
+  EndUserIdDesc = 'END_USER_ID_DESC',
+  EndUserNameAsc = 'END_USER_NAME_ASC',
+  EndUserNameDesc = 'END_USER_NAME_DESC',
+  FloorIdAsc = 'FLOOR_ID_ASC',
+  FloorIdDesc = 'FLOOR_ID_DESC',
+  FloorNameAsc = 'FLOOR_NAME_ASC',
+  FloorNameDesc = 'FLOOR_NAME_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  InitialsAsc = 'INITIALS_ASC',
+  InitialsDesc = 'INITIALS_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
+  Natural = 'NATURAL',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC'
+}
+
+export type SamplePointEntity = {
+  __typename?: 'SamplePointEntity';
+  areaId?: Maybe<Scalars['Int']['output']>;
+  areaName?: Maybe<Scalars['String']['output']>;
+  buildingId?: Maybe<Scalars['Int']['output']>;
+  buildingName?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  endUserId?: Maybe<Scalars['Int']['output']>;
+  endUserName?: Maybe<Scalars['String']['output']>;
+  floorId?: Maybe<Scalars['Int']['output']>;
+  floorName?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  initials?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+};
+
+/**
+ * A condition to be used against `SamplePointEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type SamplePointEntityCondition = {
+  /** Checks for equality with the object’s `areaId` field. */
+  areaId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `areaName` field. */
+  areaName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `buildingId` field. */
+  buildingId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `buildingName` field. */
+  buildingName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `endUserId` field. */
+  endUserId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `endUserName` field. */
+  endUserName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `floorId` field. */
+  floorId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `floorName` field. */
+  floorName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `initials` field. */
+  initials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** A filter to be used against `SamplePointEntity` object types. All fields are combined with a logical ‘and.’ */
+export type SamplePointEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<SamplePointEntityFilter>>;
+  /** Filter by the object’s `areaId` field. */
+  areaId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `areaName` field. */
+  areaName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `buildingId` field. */
+  buildingId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `buildingName` field. */
+  buildingName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `endUserId` field. */
+  endUserId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `endUserName` field. */
+  endUserName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `floorId` field. */
+  floorId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `floorName` field. */
+  floorName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `initials` field. */
+  initials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<SamplePointEntityFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<SamplePointEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
 };
 
 /** A filter to be used against `SamplePoint` object types. All fields are combined with a logical ‘and.’ */
@@ -80287,10 +81106,12 @@ export type DeleteApplicationMutationVariables = Exact<{
 
 export type DeleteApplicationMutation = { __typename?: 'Mutation', deleteApplicationById?: { __typename?: 'DeleteApplicationPayload', clientMutationId?: string | null } | null };
 
-export type AllAreasNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllAreasNoPaginationQueryVariables = Exact<{
+  floorId?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
+}>;
 
 
-export type AllAreasNoPaginationQuery = { __typename?: 'Query', allAreas?: { __typename?: 'AreasConnection', nodes: Array<{ __typename?: 'Area', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+export type AllAreasNoPaginationQuery = { __typename?: 'Query', allAreas?: { __typename?: 'AreasConnection', nodes: Array<{ __typename?: 'Area', id: number, name: string, remarks?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
 export type AllAreaEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -80554,10 +81375,84 @@ export type DeleteDetectorMutationVariables = Exact<{
 
 export type DeleteDetectorMutation = { __typename?: 'Mutation', deleteDetectorById?: { __typename?: 'DeleteDetectorPayload', clientMutationId?: string | null } | null };
 
+export type AllElectrolytesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllElectrolytesNoPaginationQuery = { __typename?: 'Query', allElectrolytes?: { __typename?: 'ElectrolytesConnection', nodes: Array<{ __typename?: 'Electrolyte', id: number, name: string }> } | null };
+
+export type AllElectrolytesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<ElectrolytesEntitiesOrderBy> | ElectrolytesEntitiesOrderBy>;
+}>;
+
+
+export type AllElectrolytesQuery = { __typename?: 'Query', allElectrolytesEntities?: { __typename?: 'ElectrolytesEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'ElectrolytesEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, volume?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
+
+export type CreateElectrolyteMutationVariables = Exact<{
+  body: ElectrolyteInput;
+}>;
+
+
+export type CreateElectrolyteMutation = { __typename?: 'Mutation', createElectrolyte?: { __typename?: 'CreateElectrolytePayload', electrolyte?: { __typename?: 'Electrolyte', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdateELectrolyteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: ElectrolytePatch;
+}>;
+
+
+export type UpdateELectrolyteMutation = { __typename?: 'Mutation', updateElectrolyteById?: { __typename?: 'UpdateElectrolytePayload', electrolyte?: { __typename?: 'Electrolyte', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeleteElectrolyteMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteElectrolyteMutation = { __typename?: 'Mutation', deleteElectrolyteById?: { __typename?: 'DeleteElectrolytePayload', clientMutationId?: string | null } | null };
+
 export type AllEndUsersNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type AllEndUsersNoPaginationQuery = { __typename?: 'Query', allEndUsers?: { __typename?: 'EndUsersConnection', nodes: Array<{ __typename?: 'EndUser', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+
+export type AllFiltersNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllFiltersNoPaginationQuery = { __typename?: 'Query', allFilters?: { __typename?: 'FiltersConnection', nodes: Array<{ __typename?: 'Filter', id: number, name: string }> } | null };
+
+export type AllFiltersQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<FiltersEntitiesOrderBy> | FiltersEntitiesOrderBy>;
+}>;
+
+
+export type AllFiltersQuery = { __typename?: 'Query', allFiltersEntities?: { __typename?: 'FiltersEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'FiltersEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, consumable?: boolean | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
+
+export type CreateFilterMutationVariables = Exact<{
+  body: FilterInput;
+}>;
+
+
+export type CreateFilterMutation = { __typename?: 'Mutation', createFilter?: { __typename?: 'CreateFilterPayload', filter?: { __typename?: 'Filter', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdateFilterMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: FilterPatch;
+}>;
+
+
+export type UpdateFilterMutation = { __typename?: 'Mutation', updateFilterById?: { __typename?: 'UpdateFilterPayload', filter?: { __typename?: 'Filter', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeleteFilterMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteFilterMutation = { __typename?: 'Mutation', deleteFilterById?: { __typename?: 'DeleteFilterPayload', clientMutationId?: string | null } | null };
 
 export type AllFloorsNoPaginationQueryVariables = Exact<{
   buildingId?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
@@ -80689,6 +81584,80 @@ export type JwtTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type JwtTokenQuery = { __typename?: 'Query', jwtToken: string };
 
+export type AllMembranesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllMembranesNoPaginationQuery = { __typename?: 'Query', allMembranes?: { __typename?: 'MembranesConnection', nodes: Array<{ __typename?: 'Membrane', id: number, name: string }> } | null };
+
+export type AllMembranesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<MembranesEntitiesOrderBy> | MembranesEntitiesOrderBy>;
+}>;
+
+
+export type AllMembranesQuery = { __typename?: 'Query', allMembranesEntities?: { __typename?: 'MembranesEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'MembranesEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, quantity?: number | null, created?: any | null, cdartikel?: string | null }> } | null };
+
+export type CreateMembraneMutationVariables = Exact<{
+  body: MembraneInput;
+}>;
+
+
+export type CreateMembraneMutation = { __typename?: 'Mutation', createMembrane?: { __typename?: 'CreateMembranePayload', membrane?: { __typename?: 'Membrane', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdateMembraneMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: MembranePatch;
+}>;
+
+
+export type UpdateMembraneMutation = { __typename?: 'Mutation', updateMembraneById?: { __typename?: 'UpdateMembranePayload', membrane?: { __typename?: 'Membrane', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeleteMembraneMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteMembraneMutation = { __typename?: 'Mutation', deleteMembraneById?: { __typename?: 'DeleteMembranePayload', clientMutationId?: string | null } | null };
+
+export type AllORingsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllORingsNoPaginationQuery = { __typename?: 'Query', allORings?: { __typename?: 'ORingsConnection', nodes: Array<{ __typename?: 'ORing', id: number, name: string }> } | null };
+
+export type AllORingsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<ORingsEntitiesOrderBy> | ORingsEntitiesOrderBy>;
+}>;
+
+
+export type AllORingsQuery = { __typename?: 'Query', allORingsEntities?: { __typename?: 'ORingsEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'ORingsEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, quantity?: number | null, created?: any | null, cdartikel?: string | null }> } | null };
+
+export type CreateORingMutationVariables = Exact<{
+  body: ORingInput;
+}>;
+
+
+export type CreateORingMutation = { __typename?: 'Mutation', createORing?: { __typename?: 'CreateORingPayload', oRing?: { __typename?: 'ORing', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdateORingMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: ORingPatch;
+}>;
+
+
+export type UpdateORingMutation = { __typename?: 'Mutation', updateORingById?: { __typename?: 'UpdateORingPayload', oRing?: { __typename?: 'ORing', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeleteORingMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteORingMutation = { __typename?: 'Mutation', deleteORingById?: { __typename?: 'DeleteORingPayload', clientMutationId?: string | null } | null };
+
 export type AllPrinciplesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -80725,6 +81694,43 @@ export type DeletePrincipleMutationVariables = Exact<{
 
 
 export type DeletePrincipleMutation = { __typename?: 'Mutation', deletePrincipleById?: { __typename?: 'DeletePrinciplePayload', clientMutationId?: string | null } | null };
+
+export type AllPyrolysersNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllPyrolysersNoPaginationQuery = { __typename?: 'Query', allPyrolysers?: { __typename?: 'PyrolysersConnection', nodes: Array<{ __typename?: 'Pyrolyser', id: number, name: string }> } | null };
+
+export type AllPyrolysersQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<PyrolyserEntitiesOrderBy> | PyrolyserEntitiesOrderBy>;
+}>;
+
+
+export type AllPyrolysersQuery = { __typename?: 'Query', allPyrolyserEntities?: { __typename?: 'PyrolyserEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'PyrolyserEntity', id?: number | null, replacementIntervalMonths?: number | null, ownerId?: number | null, omschr?: string | null, name?: string | null, initials?: string | null, created?: any | null, cdartikel?: string | null }> } | null };
+
+export type CreatePyrolyserMutationVariables = Exact<{
+  body: PyrolyserInput;
+}>;
+
+
+export type CreatePyrolyserMutation = { __typename?: 'Mutation', createPyrolyser?: { __typename?: 'CreatePyrolyserPayload', pyrolyser?: { __typename?: 'Pyrolyser', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type UpdatePyrolyserMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: PyrolyserPatch;
+}>;
+
+
+export type UpdatePyrolyserMutation = { __typename?: 'Mutation', updatePyrolyserById?: { __typename?: 'UpdatePyrolyserPayload', pyrolyser?: { __typename?: 'Pyrolyser', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null } | null } | null };
+
+export type DeletePyrolyserMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeletePyrolyserMutation = { __typename?: 'Mutation', deletePyrolyserById?: { __typename?: 'DeletePyrolyserPayload', clientMutationId?: string | null } | null };
 
 export type AllRangesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -80768,15 +81774,15 @@ export type AllSamplePointsNoPaginationQueryVariables = Exact<{ [key: string]: n
 
 export type AllSamplePointsNoPaginationQuery = { __typename?: 'Query', allSamplePoints?: { __typename?: 'SamplePointsConnection', nodes: Array<{ __typename?: 'SamplePoint', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
-export type AllSamplePointsQueryVariables = Exact<{
+export type AllSamplePointEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   search: Scalars['String']['input'];
-  orderBy?: InputMaybe<Array<SamplePointsOrderBy> | SamplePointsOrderBy>;
+  orderBy?: InputMaybe<Array<SamplePointEntitiesOrderBy> | SamplePointEntitiesOrderBy>;
 }>;
 
 
-export type AllSamplePointsQuery = { __typename?: 'Query', allSamplePoints?: { __typename?: 'SamplePointsConnection', totalCount: number, nodes: Array<{ __typename?: 'SamplePoint', name: string, created?: any | null, areaByAreaId?: { __typename?: 'Area', id: number, name: string, created?: any | null, floorByFloorId?: { __typename?: 'Floor', name: string, buildingByBuildingId?: { __typename?: 'Building', id: number, name: string, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null } | null } | null } | null, userByOwnerId?: { __typename?: 'User', id: number, initials?: string | null } | null }> } | null };
+export type AllSamplePointEntitiesQuery = { __typename?: 'Query', allSamplePointEntities?: { __typename?: 'SamplePointEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'SamplePointEntity', name?: string | null, areaId?: number | null, areaName?: string | null, buildingId?: number | null, buildingName?: string | null, created?: any | null, endUserId?: number | null, endUserName?: string | null, floorId?: number | null, floorName?: string | null, id?: number | null, initials?: string | null, ownerId?: number | null }> } | null };
 
 export type CreateSamplePointMutationVariables = Exact<{
   body: SamplePointInput;
@@ -80799,6 +81805,43 @@ export type DeleteSamplePointMutationVariables = Exact<{
 
 
 export type DeleteSamplePointMutation = { __typename?: 'Mutation', deleteSamplePointById?: { __typename?: 'DeleteSamplePointPayload', clientMutationId?: string | null } | null };
+
+export type AllSensorTypesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllSensorTypesNoPaginationQuery = { __typename?: 'Query', allSensorTypesIndices?: { __typename?: 'SensorTypesIndicesConnection', nodes: Array<{ __typename?: 'SensorTypesIndex', id?: number | null, sensorTypeArtikelOmschr?: string | null }> } | null };
+
+export type AllSensorTypesIndicesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<SensorTypesIndicesOrderBy> | SensorTypesIndicesOrderBy>;
+}>;
+
+
+export type AllSensorTypesIndicesQuery = { __typename?: 'Query', sensorTypes?: { __typename?: 'SensorTypesIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'SensorTypesIndex', battery?: boolean | null, calEngineeringUnits?: string | null, calFlowRate?: number | null, calGasConcentration?: number | null, calGasName?: string | null, calResponse?: number | null, code?: string | null, createdDate?: string | null, electrolyteCdartikel?: string | null, electrolyteName?: string | null, engineeringUnits?: string | null, filterCdartikel?: string | null, filterName?: string | null, flowRate?: number | null, highEu?: number | null, id?: number | null, maintenanceIntervalMonths?: number | null, membraneCdartikel?: string | null, membraneName?: string | null, membraneSeal?: boolean | null, model?: string | null, oRingCdartikel?: string | null, oRingName?: string | null, prefix?: string | null, target?: string | null, suffix?: string | null, siliconeSheet?: boolean | null, sensorTypeCdartikel?: string | null, sensorTypeArtikelOmschr?: string | null, restrictor?: boolean | null, replacementIntervalMonths?: number | null, pyrolyserName?: string | null, pyrolyserCdartikel?: string | null, principleName?: string | null }> } | null };
+
+export type CreateSensorTypeMutationVariables = Exact<{
+  body: SensorTypeInput;
+}>;
+
+
+export type CreateSensorTypeMutation = { __typename?: 'Mutation', createSensorType?: { __typename?: 'CreateSensorTypePayload', sensorType?: { __typename?: 'SensorType', id: number, obsolete?: boolean | null, battery?: boolean | null, biasMv?: number | null, calFlowRate?: number | null, calGasId: number, calResponse: number, cdartikel?: string | null, code: string, created?: any | null, direction?: boolean | null, electrodeCount?: number | null, electrolyteId?: number | null, elementCount?: number | null, filterId?: number | null, flowRate?: number | null, fullType?: string | null, lowElectrolyte?: boolean | null, maintenanceIntervalMonths?: number | null, membraneId?: number | null, membraneSeal?: boolean | null, model: string, modified?: any | null, volume?: number | null, transportSwitch?: boolean | null, siliconeSheet?: boolean | null, spanResistor?: any | null, sensorTypeId?: number | null, sensorBaseTypeId: number, restrictor?: boolean | null, rangeId: number, replacementIntervalMonths?: number | null, pyrolyserVoltage?: number | null, pyrolyserId?: number | null, principleId?: number | null, plugId?: number | null, ownerId: number, oRingId?: number | null } | null } | null };
+
+export type UpdateSensorTypeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: SensorTypePatch;
+}>;
+
+
+export type UpdateSensorTypeMutation = { __typename?: 'Mutation', updateSensorTypeById?: { __typename?: 'UpdateSensorTypePayload', sensorType?: { __typename?: 'SensorType', id: number, obsolete?: boolean | null, battery?: boolean | null, biasMv?: number | null, calFlowRate?: number | null, calGasId: number, calResponse: number, cdartikel?: string | null, code: string, created?: any | null, direction?: boolean | null, electrodeCount?: number | null, electrolyteId?: number | null, elementCount?: number | null, filterId?: number | null, flowRate?: number | null, fullType?: string | null, lowElectrolyte?: boolean | null, maintenanceIntervalMonths?: number | null, membraneId?: number | null, membraneSeal?: boolean | null, model: string, modified?: any | null, volume?: number | null, transportSwitch?: boolean | null, siliconeSheet?: boolean | null, spanResistor?: any | null, sensorTypeId?: number | null, sensorBaseTypeId: number, restrictor?: boolean | null, rangeId: number, replacementIntervalMonths?: number | null, pyrolyserVoltage?: number | null, pyrolyserId?: number | null, principleId?: number | null, plugId?: number | null, ownerId: number, oRingId?: number | null } | null } | null };
+
+export type DeleteSensorTypeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteSensorTypeMutation = { __typename?: 'Mutation', deleteSensorTypeById?: { __typename?: 'DeleteSensorTypePayload', clientMutationId?: string | null } | null };
 
 export type LocalSensorFieldsFragment = { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number };
 
@@ -81114,11 +82157,12 @@ export const DeleteApplicationDocument = gql`
     }
   }
 export const AllAreasNoPaginationDocument = gql`
-    query allAreasNoPagination {
-  allAreas {
+    query allAreasNoPagination($floorId: [Int!]) {
+  allAreas(filter: {or: [{floorByFloorId: {id: {inExpansive: $floorId}}}]}) {
     nodes {
       id
       name
+      remarks
       created
       userByOwnerId {
         initials
@@ -82037,6 +83081,131 @@ export const DeleteDetectorDocument = gql`
       super(apollo);
     }
   }
+export const AllElectrolytesNoPaginationDocument = gql`
+    query allElectrolytesNoPagination {
+  allElectrolytes {
+    nodes {
+      id
+      name
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllElectrolytesNoPaginationGQL extends Apollo.Query<AllElectrolytesNoPaginationQuery, AllElectrolytesNoPaginationQueryVariables> {
+    override document = AllElectrolytesNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllElectrolytesDocument = gql`
+    query allElectrolytes($limit: Int, $offset: Int, $search: String!, $orderBy: [ElectrolytesEntitiesOrderBy!]) {
+  allElectrolytesEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      volume
+      omschr
+      name
+      initials
+      created
+      cdartikel
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllElectrolytesGQL extends Apollo.Query<AllElectrolytesQuery, AllElectrolytesQueryVariables> {
+    override document = AllElectrolytesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateElectrolyteDocument = gql`
+    mutation CreateElectrolyte($body: ElectrolyteInput!) {
+  createElectrolyte(input: {electrolyte: $body}) {
+    electrolyte {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateElectrolyteGQL extends Apollo.Mutation<CreateElectrolyteMutation, CreateElectrolyteMutationVariables> {
+    override document = CreateElectrolyteDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateELectrolyteDocument = gql`
+    mutation UpdateELectrolyte($id: Int!, $patch: ElectrolytePatch!) {
+  updateElectrolyteById(input: {id: $id, electrolytePatch: $patch}) {
+    electrolyte {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateELectrolyteGQL extends Apollo.Mutation<UpdateELectrolyteMutation, UpdateELectrolyteMutationVariables> {
+    override document = UpdateELectrolyteDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteElectrolyteDocument = gql`
+    mutation DeleteElectrolyte($id: Int!) {
+  deleteElectrolyteById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteElectrolyteGQL extends Apollo.Mutation<DeleteElectrolyteMutation, DeleteElectrolyteMutationVariables> {
+    override document = DeleteElectrolyteDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AllEndUsersNoPaginationDocument = gql`
     query allEndUsersNoPagination {
   allEndUsers {
@@ -82058,6 +83227,131 @@ export const AllEndUsersNoPaginationDocument = gql`
   })
   export class AllEndUsersNoPaginationGQL extends Apollo.Query<AllEndUsersNoPaginationQuery, AllEndUsersNoPaginationQueryVariables> {
     override document = AllEndUsersNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllFiltersNoPaginationDocument = gql`
+    query allFiltersNoPagination {
+  allFilters {
+    nodes {
+      id
+      name
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllFiltersNoPaginationGQL extends Apollo.Query<AllFiltersNoPaginationQuery, AllFiltersNoPaginationQueryVariables> {
+    override document = AllFiltersNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllFiltersDocument = gql`
+    query allFilters($limit: Int, $offset: Int, $search: String!, $orderBy: [FiltersEntitiesOrderBy!]) {
+  allFiltersEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      consumable
+      omschr
+      name
+      initials
+      created
+      cdartikel
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllFiltersGQL extends Apollo.Query<AllFiltersQuery, AllFiltersQueryVariables> {
+    override document = AllFiltersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateFilterDocument = gql`
+    mutation CreateFilter($body: FilterInput!) {
+  createFilter(input: {filter: $body}) {
+    filter {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateFilterGQL extends Apollo.Mutation<CreateFilterMutation, CreateFilterMutationVariables> {
+    override document = CreateFilterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateFilterDocument = gql`
+    mutation UpdateFilter($id: Int!, $patch: FilterPatch!) {
+  updateFilterById(input: {id: $id, filterPatch: $patch}) {
+    filter {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateFilterGQL extends Apollo.Mutation<UpdateFilterMutation, UpdateFilterMutationVariables> {
+    override document = UpdateFilterDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteFilterDocument = gql`
+    mutation DeleteFilter($id: Int!) {
+  deleteFilterById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteFilterGQL extends Apollo.Mutation<DeleteFilterMutation, DeleteFilterMutationVariables> {
+    override document = DeleteFilterDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -82513,6 +83807,256 @@ export const JwtTokenDocument = gql`
       super(apollo);
     }
   }
+export const AllMembranesNoPaginationDocument = gql`
+    query allMembranesNoPagination {
+  allMembranes {
+    nodes {
+      id
+      name
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllMembranesNoPaginationGQL extends Apollo.Query<AllMembranesNoPaginationQuery, AllMembranesNoPaginationQueryVariables> {
+    override document = AllMembranesNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllMembranesDocument = gql`
+    query allMembranes($limit: Int, $offset: Int, $search: String!, $orderBy: [MembranesEntitiesOrderBy!]) {
+  allMembranesEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      omschr
+      name
+      initials
+      quantity
+      created
+      cdartikel
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllMembranesGQL extends Apollo.Query<AllMembranesQuery, AllMembranesQueryVariables> {
+    override document = AllMembranesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateMembraneDocument = gql`
+    mutation CreateMembrane($body: MembraneInput!) {
+  createMembrane(input: {membrane: $body}) {
+    membrane {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateMembraneGQL extends Apollo.Mutation<CreateMembraneMutation, CreateMembraneMutationVariables> {
+    override document = CreateMembraneDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateMembraneDocument = gql`
+    mutation UpdateMembrane($id: Int!, $patch: MembranePatch!) {
+  updateMembraneById(input: {id: $id, membranePatch: $patch}) {
+    membrane {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateMembraneGQL extends Apollo.Mutation<UpdateMembraneMutation, UpdateMembraneMutationVariables> {
+    override document = UpdateMembraneDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteMembraneDocument = gql`
+    mutation DeleteMembrane($id: Int!) {
+  deleteMembraneById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteMembraneGQL extends Apollo.Mutation<DeleteMembraneMutation, DeleteMembraneMutationVariables> {
+    override document = DeleteMembraneDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllORingsNoPaginationDocument = gql`
+    query allORingsNoPagination {
+  allORings {
+    nodes {
+      id
+      name
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllORingsNoPaginationGQL extends Apollo.Query<AllORingsNoPaginationQuery, AllORingsNoPaginationQueryVariables> {
+    override document = AllORingsNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllORingsDocument = gql`
+    query allORings($limit: Int, $offset: Int, $search: String!, $orderBy: [ORingsEntitiesOrderBy!]) {
+  allORingsEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      omschr
+      name
+      initials
+      quantity
+      created
+      cdartikel
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllORingsGQL extends Apollo.Query<AllORingsQuery, AllORingsQueryVariables> {
+    override document = AllORingsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateORingDocument = gql`
+    mutation CreateORing($body: ORingInput!) {
+  createORing(input: {oRing: $body}) {
+    oRing {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateORingGQL extends Apollo.Mutation<CreateORingMutation, CreateORingMutationVariables> {
+    override document = CreateORingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateORingDocument = gql`
+    mutation UpdateORing($id: Int!, $patch: ORingPatch!) {
+  updateORingById(input: {id: $id, oRingPatch: $patch}) {
+    oRing {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateORingGQL extends Apollo.Mutation<UpdateORingMutation, UpdateORingMutationVariables> {
+    override document = UpdateORingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteORingDocument = gql`
+    mutation DeleteORing($id: Int!) {
+  deleteORingById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteORingGQL extends Apollo.Mutation<DeleteORingMutation, DeleteORingMutationVariables> {
+    override document = DeleteORingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AllPrinciplesNoPaginationDocument = gql`
     query allPrinciplesNoPagination {
   allPrinciples {
@@ -82636,6 +84180,130 @@ export const DeletePrincipleDocument = gql`
   })
   export class DeletePrincipleGQL extends Apollo.Mutation<DeletePrincipleMutation, DeletePrincipleMutationVariables> {
     override document = DeletePrincipleDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllPyrolysersNoPaginationDocument = gql`
+    query allPyrolysersNoPagination {
+  allPyrolysers {
+    nodes {
+      id
+      name
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllPyrolysersNoPaginationGQL extends Apollo.Query<AllPyrolysersNoPaginationQuery, AllPyrolysersNoPaginationQueryVariables> {
+    override document = AllPyrolysersNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllPyrolysersDocument = gql`
+    query allPyrolysers($limit: Int, $offset: Int, $search: String!, $orderBy: [PyrolyserEntitiesOrderBy!]) {
+  allPyrolyserEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      omschr
+      name
+      initials
+      created
+      cdartikel
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllPyrolysersGQL extends Apollo.Query<AllPyrolysersQuery, AllPyrolysersQueryVariables> {
+    override document = AllPyrolysersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreatePyrolyserDocument = gql`
+    mutation CreatePyrolyser($body: PyrolyserInput!) {
+  createPyrolyser(input: {pyrolyser: $body}) {
+    pyrolyser {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreatePyrolyserGQL extends Apollo.Mutation<CreatePyrolyserMutation, CreatePyrolyserMutationVariables> {
+    override document = CreatePyrolyserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdatePyrolyserDocument = gql`
+    mutation UpdatePyrolyser($id: Int!, $patch: PyrolyserPatch!) {
+  updatePyrolyserById(input: {id: $id, pyrolyserPatch: $patch}) {
+    pyrolyser {
+      id
+      name
+      created
+      userByOwnerId {
+        initials
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdatePyrolyserGQL extends Apollo.Mutation<UpdatePyrolyserMutation, UpdatePyrolyserMutationVariables> {
+    override document = UpdatePyrolyserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeletePyrolyserDocument = gql`
+    mutation DeletePyrolyser($id: Int!) {
+  deletePyrolyserById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeletePyrolyserGQL extends Apollo.Mutation<DeletePyrolyserMutation, DeletePyrolyserMutationVariables> {
+    override document = DeletePyrolyserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -82875,9 +84543,9 @@ export const AllSamplePointsNoPaginationDocument = gql`
       super(apollo);
     }
   }
-export const AllSamplePointsDocument = gql`
-    query allSamplePoints($limit: Int, $offset: Int, $search: String!, $orderBy: [SamplePointsOrderBy!]) {
-  allSamplePoints(
+export const AllSamplePointEntitiesDocument = gql`
+    query allSamplePointEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [SamplePointEntitiesOrderBy!]) {
+  allSamplePointEntities(
     filter: {or: [{name: {includesInsensitive: $search}}]}
     orderBy: $orderBy
     first: $limit
@@ -82886,27 +84554,18 @@ export const AllSamplePointsDocument = gql`
     totalCount
     nodes {
       name
+      areaId
+      areaName
+      buildingId
+      buildingName
       created
-      areaByAreaId {
-        id
-        name
-        created
-        floorByFloorId {
-          buildingByBuildingId {
-            id
-            name
-            endUserByEndUserId {
-              id
-              name
-            }
-          }
-          name
-        }
-      }
-      userByOwnerId {
-        id
-        initials
-      }
+      endUserId
+      endUserName
+      floorId
+      floorName
+      id
+      initials
+      ownerId
     }
   }
 }
@@ -82915,8 +84574,8 @@ export const AllSamplePointsDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class AllSamplePointsGQL extends Apollo.Query<AllSamplePointsQuery, AllSamplePointsQueryVariables> {
-    override document = AllSamplePointsDocument;
+  export class AllSamplePointEntitiesGQL extends Apollo.Query<AllSamplePointEntitiesQuery, AllSamplePointEntitiesQueryVariables> {
+    override document = AllSamplePointEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -83019,6 +84678,218 @@ export const DeleteSamplePointDocument = gql`
   })
   export class DeleteSamplePointGQL extends Apollo.Mutation<DeleteSamplePointMutation, DeleteSamplePointMutationVariables> {
     override document = DeleteSamplePointDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllSensorTypesNoPaginationDocument = gql`
+    query allSensorTypesNoPagination {
+  allSensorTypesIndices {
+    nodes {
+      id
+      sensorTypeArtikelOmschr
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllSensorTypesNoPaginationGQL extends Apollo.Query<AllSensorTypesNoPaginationQuery, AllSensorTypesNoPaginationQueryVariables> {
+    override document = AllSensorTypesNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllSensorTypesIndicesDocument = gql`
+    query allSensorTypesIndices($limit: Int, $offset: Int, $search: String!, $orderBy: [SensorTypesIndicesOrderBy!]) {
+  sensorTypes: allSensorTypesIndices(
+    filter: {or: [{sensorTypeArtikelOmschr: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      battery
+      calEngineeringUnits
+      calFlowRate
+      calGasConcentration
+      calGasName
+      calResponse
+      code
+      createdDate
+      electrolyteCdartikel
+      electrolyteName
+      engineeringUnits
+      filterCdartikel
+      filterName
+      flowRate
+      highEu
+      id
+      maintenanceIntervalMonths
+      membraneCdartikel
+      membraneName
+      membraneSeal
+      model
+      oRingCdartikel
+      oRingName
+      prefix
+      target
+      suffix
+      siliconeSheet
+      sensorTypeCdartikel
+      sensorTypeArtikelOmschr
+      restrictor
+      replacementIntervalMonths
+      pyrolyserName
+      pyrolyserCdartikel
+      principleName
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllSensorTypesIndicesGQL extends Apollo.Query<AllSensorTypesIndicesQuery, AllSensorTypesIndicesQueryVariables> {
+    override document = AllSensorTypesIndicesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateSensorTypeDocument = gql`
+    mutation CreateSensorType($body: SensorTypeInput!) {
+  createSensorType(input: {sensorType: $body}) {
+    sensorType {
+      id
+      obsolete
+      battery
+      biasMv
+      calFlowRate
+      calGasId
+      calResponse
+      cdartikel
+      code
+      created
+      direction
+      electrodeCount
+      electrolyteId
+      elementCount
+      filterId
+      flowRate
+      fullType
+      lowElectrolyte
+      maintenanceIntervalMonths
+      membraneId
+      membraneSeal
+      model
+      modified
+      volume
+      transportSwitch
+      siliconeSheet
+      spanResistor
+      sensorTypeId
+      sensorBaseTypeId
+      restrictor
+      rangeId
+      replacementIntervalMonths
+      pyrolyserVoltage
+      pyrolyserId
+      principleId
+      plugId
+      ownerId
+      oRingId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateSensorTypeGQL extends Apollo.Mutation<CreateSensorTypeMutation, CreateSensorTypeMutationVariables> {
+    override document = CreateSensorTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateSensorTypeDocument = gql`
+    mutation UpdateSensorType($id: Int!, $patch: SensorTypePatch!) {
+  updateSensorTypeById(input: {id: $id, sensorTypePatch: $patch}) {
+    sensorType {
+      id
+      obsolete
+      battery
+      biasMv
+      calFlowRate
+      calGasId
+      calResponse
+      cdartikel
+      code
+      created
+      direction
+      electrodeCount
+      electrolyteId
+      elementCount
+      filterId
+      flowRate
+      fullType
+      lowElectrolyte
+      maintenanceIntervalMonths
+      membraneId
+      membraneSeal
+      model
+      modified
+      volume
+      transportSwitch
+      siliconeSheet
+      spanResistor
+      sensorTypeId
+      sensorBaseTypeId
+      restrictor
+      rangeId
+      replacementIntervalMonths
+      pyrolyserVoltage
+      pyrolyserId
+      principleId
+      plugId
+      ownerId
+      oRingId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateSensorTypeGQL extends Apollo.Mutation<UpdateSensorTypeMutation, UpdateSensorTypeMutationVariables> {
+    override document = UpdateSensorTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteSensorTypeDocument = gql`
+    mutation DeleteSensorType($id: Int!) {
+  deleteSensorTypeById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteSensorTypeGQL extends Apollo.Mutation<DeleteSensorTypeMutation, DeleteSensorTypeMutationVariables> {
+    override document = DeleteSensorTypeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

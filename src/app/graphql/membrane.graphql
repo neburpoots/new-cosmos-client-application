@@ -1,0 +1,83 @@
+#-------------------------------------------------------------------------------
+query allMembranesNoPagination
+    {
+    allMembranes {
+        nodes {
+            id,
+            name
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allMembranes($limit: Int, $offset: Int, $search: String!, $orderBy: [MembranesEntitiesOrderBy!]) {
+  allMembranesEntities(
+    filter: {or: [{name: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      replacementIntervalMonths
+      ownerId
+      omschr
+      name
+      initials
+      quantity
+      created
+      cdartikel
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateMembrane(
+    $body: MembraneInput!
+) {
+  createMembrane(
+    input: {membrane: $body}
+  ) {
+    membrane {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateMembrane(
+    $id: Int!, $patch: MembranePatch!
+) {
+  updateMembraneById(
+    input: {
+		id: $id
+		membranePatch: $patch	
+    }
+  ) {
+    membrane {
+        id
+        name
+        created
+        userByOwnerId {
+            initials
+            id
+        }
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteMembrane($id: Int!)
+{
+	deleteMembraneById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

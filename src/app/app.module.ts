@@ -97,6 +97,12 @@ import { AreasComponent } from "./views/admin/areas/index/areas.component";
 import { AreasFormComponent } from "./views/admin/areas/form/areas-form.component";
 import { FloorsComponent } from "./views/admin/floors/index/floors.component";
 import { FloorFormComponent } from "./views/admin/floors/form/floors-form.component";
+import { BuildingFormComponent } from "./views/admin/buildings/form/building-form.component";
+import { BuildingsComponent } from "./views/admin/buildings/index/buildings.component";
+import { ApplicationsComponent } from "./views/admin/applications/index/applications.component";
+import { ApplicationsFormComponent } from "./views/admin/applications/form/applications-form.component";
+import { SamplePointsComponent } from "./views/admin/sample-points/index/sample-points.component";
+import { SamplePointsFormComponent } from "./views/admin/sample-points/form/sample-point-form.component";
 
 @NgModule({
   declarations: [
@@ -171,7 +177,13 @@ import { FloorFormComponent } from "./views/admin/floors/form/floors-form.compon
     AreasComponent,
     AreasFormComponent,
     FloorsComponent,
-    FloorFormComponent
+    FloorFormComponent,
+    BuildingFormComponent,
+    BuildingsComponent,
+    ApplicationsComponent,
+    ApplicationsFormComponent,
+    SamplePointsComponent,
+    SamplePointsFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)
