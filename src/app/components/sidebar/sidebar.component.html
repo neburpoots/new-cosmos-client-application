@@ -95,68 +95,23 @@
             (click)="toggleAssembliesDropdown()">
             <i class="fa fa-cog  mr-2 "></i>Assembly
           </button>
-          <div *ngIf="assembleDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
+          <div *ngIf="assemblyDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
             <ul class="list-none">
-              <li><a [routerLink]="['/user/assembly']" routerLinkActive #adminAssembly="routerLinkActive" [ngClass]="
-              adminAssembly.isActive
-                ? 'text-white hover:text-white'
-                : 'text-white hover:text-white'
-            " [ngClass]="adminAssembly.isActive ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
-                    class="mr-2 fa fa-cog" aria-hidden="true"></i>
-                  Assembly</a></li>
-              <li><a [routerLink]="['/user/assemblymultivers']" routerLinkActive
-                  #adminAssemblyMultivers="routerLinkActive" [ngClass]="
-                      adminAssemblyMultivers.isActive
-                        ? 'text-white hover:text-white'
-                        : 'text-white hover:text-white'
-                    " [ngClass]="adminAssemblyMultivers.isActive ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
-                    class="mr-2 fa fa-gears" aria-hidden="true"></i>
-                  Assembly MV</a></li>
-              <li><a [routerLink]="['/user/assembly-types']" routerLinkActive #assemblyTypes="routerLinkActive"
-                  [ngClass]="
-                    assemblyTypes.isActive
-                      ? 'text-white hover:text-white'
-                      : 'text-white hover:text-white'
-                  " [ngClass]="assemblyTypes.isActive ? 'bg-cosmosDark text-white' : ''"
+              @for (item of assembly; track $index) {
+              <li><a [routerLink]="[item.url]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
+          isActive(item.url)
+            ? 'text-white hover:text-white'
+            : 'text-white hover:text-white'
+        " [ngClass]="isActive(item.url) ? 'bg-cosmosDark text-white' : ''"
                   class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
-                  <fa-icon class="mr-4" [icon]="faCodeCompare"></fa-icon>Assembly Types</a></li>
-              <li><a [routerLink]="['/user/calibrationgases']" routerLinkActive #adminCalGas="routerLinkActive"
-                  [ngClass]="
-                    adminCalGas.isActive
-                      ? 'text-white hover:text-white'
-                      : 'text-white hover:text-white'
-                  " [ngClass]="adminCalGas.isActive ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
-                    class="mr-2 fa fa-cloud" aria-hidden="true"></i>
-                  Calibration gases</a></li>
-              <li><a [routerLink]="['/user/detectors']" routerLinkActive #adminDetectors="routerLinkActive" [ngClass]="
-                    adminDetectors.isActive
-                      ? 'text-white hover:text-white'
-                      : 'text-white hover:text-white'
-                  " [ngClass]="adminDetectors.isActive ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
-                    class="mr-2 fa fa-area-chart" aria-hidden="true"></i>
-                  Detectors</a></li>
-              <li><a [routerLink]="['/user/sensor-types']" routerLinkActive #sensorType="routerLinkActive" [ngClass]="
-                    sensorType.isActive
-                      ? 'text-white hover:text-white'
-                      : 'text-white hover:text-white'
-                  " [ngClass]="sensorType.isActive ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
-                  <fa-icon class="mr-4" [icon]="faTowerBroadcast"></fa-icon>Sensor Types</a></li>
-              <li><a [routerLink]="['/user/sensor-base-types']" routerLinkActive #sensorBaseType="routerLinkActive"
-                  [ngClass]="
-                    sensorBaseType.isActive
-                      ? 'text-white hover:text-white'
-                      : 'text-white hover:text-white'
-                  " [ngClass]="sensorBaseType.isActive ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
-                  <fa-icon class="mr-4" [icon]="faSatelliteDish"></fa-icon>Sensor Base Types</a></li>
-
-
-
+                  @if(item.icon6) {
+                  <fa-icon class="mr-4" [icon]="item.icon6"></fa-icon>
+                  } @else if (item.icon4) {
+                  <i [ngClass]="item.icon4" aria-hidden="true"></i>
+                  }
+                  {{item.title}}</a></li>
+              }
+  
             </ul>
           </div>
           <button class="text-md text-slate-200 py-3  font-semibold  block hover:text-white" type="button"

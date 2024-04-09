@@ -31,56 +31,57 @@
     </div>
 
     <div [style.min-width.px]="isInlineCreating ? cellWidths[4] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null" class="mt-auto mb-auto">
-        <input-component [inputType]="'checkbox'" [isSubmitted]="isSubmitted" [form]="myForm" [name]="'alarmUnits'"
-            [displayName]="'Alarm Units'" [inline]="isInlineCreating" [touched]="myForm.controls['alarmUnits'].touched"
-            [errors]="[]"></input-component>
-    </div>
-
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[5] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[5] : null">
+        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null">
         <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'alarm1Level'"
             [displayName]="'Alarm 1 Level (%)'" [inline]="isInlineCreating"
             [touched]="myForm.controls['alarm1Level'].touched"
             [errors]="[{ name: 'pattern' , message: 'Alarm 1 Level must be a number' }]"></input-component>
     </div>
 
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[6] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[6] : null" class="mt-auto mb-auto">
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[5] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[5] : null" class="mt-auto mb-auto">
         <input-component [inputType]="'checkbox'" [isSubmitted]="isSubmitted" [form]="myForm"
             [name]="'alarm1DirectionUp'" [displayName]="'Alarm 1 Direction Up'" [inline]="isInlineCreating"
             [touched]="myForm.controls['alarm1DirectionUp'].touched" [errors]="[]"></input-component>
     </div>
 
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[7] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[7] : null">
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[6] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[6] : null">
         <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'alarm2Level'"
             [displayName]="'Alarm 2 Level (%)'" [inline]="isInlineCreating"
             [touched]="myForm.controls['alarm2Level'].touched"
             [errors]="[{ name: 'pattern' , message: 'Alarm 2 Level must be a number' }]"></input-component>
     </div>
 
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[8] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[8] : null" class="mt-auto mb-auto">
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[7] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[7] : null" class="mt-auto mb-auto">
         <input-component [inputType]="'checkbox'" [isSubmitted]="isSubmitted" [form]="myForm"
             [name]="'alarm2DirectionUp'" [displayName]="'Alarm 2 Direction Up'" [inline]="isInlineCreating"
             [touched]="myForm.controls['alarm2DirectionUp'].touched" [errors]="[]"></input-component>
     </div>
 
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[9] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[9] : null">
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[8] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[8] : null">
         <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'warning1Level'"
             [displayName]="'Warning 1 Level'" [inline]="isInlineCreating"
             [touched]="myForm.controls['warning1Level'].touched"
             [errors]="[{ name: 'pattern' , message: 'Warning 1 Level must be a number' }]"></input-component>
     </div>
 
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[10] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[10] : null">
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[9] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[9] : null">
         <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'warning2Level'"
             [displayName]="'Warning 2 Level'" [inline]="isInlineCreating"
             [touched]="myForm.controls['warning2Level'].touched"
             [errors]="[{ name: 'pattern' , message: 'Warning 2 Level must be a number' }]"></input-component>
+    </div>
+
+        
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[10] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[10] : null" class="mt-auto mb-auto">
+        <input-component [inputType]="'checkbox'" [isSubmitted]="isSubmitted" [form]="myForm" [name]="'alarmUnits'"
+            [displayName]="'Alarm Units'" [inline]="isInlineCreating" [touched]="myForm.controls['alarmUnits'].touched"
+            [errors]="[]"></input-component>
     </div>
 
     <div [style.min-width.px]="isInlineCreating ? cellWidths[11] : null"

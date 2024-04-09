@@ -22,11 +22,8 @@ import { LandingComponent } from "./views/landing/landing.component";
 import { ProfileComponent } from "./views/profile/profile.component";
 import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
 import { DetectorComponent } from "./views/admin/detectors/detector.component";
-import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/assembly-multivers.component";
 import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
-import { SensorBaseTypeComponent } from "./views/admin/sensorBaseType/sensorBaseType.component";
 import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.component";
-import { SensorTypeComponent } from "./views/admin/sensor-type/sensor-type.component";
 import { DetectorTypeComponent } from "./views/admin/detector-types/detector-type.component";
 import { PrinciplesComponent } from "./views/admin/principles/index/principles.component";
 import { GasesComponent } from "./views/admin/gases/index/gases.component";
@@ -42,6 +39,10 @@ import { ORingsComponent } from "./views/admin/o-rings/index/o-rings.component";
 import { FiltersComponent } from "./views/admin/filters/index/filters.component";
 import { MembranesComponent } from "./views/admin/membranes/index/membranes.component";
 import { ElectrolytesComponent } from "./views/admin/electrolytes/index/electrolytes.component";
+import { SensorTypeComponent } from "./views/admin/sensor-types/index/sensor-types.component";
+import { SensorBaseTypeComponent } from "./views/admin/sensor-base-types/index/sensor-base-types.component";
+import { SensorTypeAssembliesComponent } from "./views/admin/sensor-types-assembly/index/sensor-types-assembly.component";
+import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/index/assembly-multivers.component";
 
 const routes: Routes = [
   // user views
@@ -87,7 +88,9 @@ const routes: Routes = [
         path: 'principles',
         component: PrinciplesComponent
       },
-      
+      {
+        path: 'sensor-types-assembly', component: SensorTypeAssembliesComponent
+      },
       { path: "detectors", component: DetectorComponent },
       { path: "settings", component: SettingsComponent },
       { path: "tables", component: TablesComponent },

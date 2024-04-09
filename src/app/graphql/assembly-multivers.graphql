@@ -1,0 +1,65 @@
+#-------------------------------------------------------------------------------
+query allAssemblyMultiversEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyMultiversEntitiesOrderBy!]) {
+  allAssemblyMultiversEntities: allAssemblyMultiversEntities(
+    filter: {or: [{cdartikel: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      aantal
+      aantalGeassembleerd
+      aantalgereservbij
+      advice
+      afdrukAssemblageBon
+      assemblageDatum
+      assemblageOrder
+      cdartikel
+      cdmagazijn
+      commentaar
+      guidItem
+      orderDatum
+      status
+      sysCreate
+      sysUpdate
+      waardeGeassembleerd
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+query allAssemblyLinesMultiversEntities($assemblage_order: String, $limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyLineEntitiesOrderBy!]) {
+  allAssemblyLineEntities: allAssemblyLineEntities(
+    filter: {or: [{cdartikel: {includesInsensitive: $search}}]
+    and: [{assemblageOrder: {equalTo: $assemblage_order}}]
+    }
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      omschr
+      zoeknaam
+      waardeGebruikt
+      voorraad
+      minvoorraad
+      maxvoorraad
+      locatie
+      inkvolgnr
+      inkopen
+      gereserveerd
+      cdmagazijn
+      cdcrediteur
+      cdartikel
+      bestcode
+      assemblageOrder
+      assemblageDatum
+      advice
+      aantalSamenstelling
+      aantalNorm
+      aantalGebruikt
+    }
+  }
+}

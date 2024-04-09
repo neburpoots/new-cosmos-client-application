@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/authentication/auth.service";
-import { faBolt, faBoxOpen, faBuilding, faCashRegister, faCloud, faCodeCompare, faEllipsis, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountain, faMountainSun, faPanorama, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faBolt, faBoxOpen, faBuilding, faCashRegister, faChartSimple, faCloud, faCodeCompare, faEllipsis, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountain, faMountainSun, faPanorama, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { NavBarIcon } from "../../models/utils/navbarItem";
 
@@ -11,7 +11,7 @@ import { NavBarIcon } from "../../models/utils/navbarItem";
 export class SidebarComponent implements OnInit {
   collapseShow = "hidden";
   favoritesDropdownActive: boolean = false;
-  assembleDropdownActive: boolean = false;
+  assemblyDropdownActive: boolean = false;
   miscDropdownActive: boolean = false;
   servicesDropdownActive: boolean = false;
   productsDropdownActive: boolean = false;
@@ -43,6 +43,53 @@ export class SidebarComponent implements OnInit {
   faFlaskVial = faFlaskVial
   faGauge = faGauge
   faBoxOpen = faBoxOpen
+  faUserCog = faUserCog
+  faChartSimple = faChartSimple
+
+  assembly: NavBarIcon[] = [
+    {
+      title: "Assemblies MV",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faUserCog,
+      url: "/user/assemblymultivers",
+    },
+    {
+      title: "Assembly Types",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faCodeCompare,
+      url: "/user/assembly-types",
+    },
+    {
+      title: "Calibration gases",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faCloud,
+      url: "/user/calibrationgases",
+    },
+    {
+      title: "Detectors",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faChartSimple,
+      url: "/user/detectors",
+    },
+    {
+      title: "Sensor Types",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faTowerBroadcast,
+      url: "/user/sensor-types-assembly",
+    },
+    {
+      title: "Sensor Base Types",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faSatelliteDish,
+      url: "/user/sensor-base-types",
+    }
+  ]
 
   products: NavBarIcon[] = [
     {
@@ -56,7 +103,7 @@ export class SidebarComponent implements OnInit {
       title: "Sensor Types",
       active: false,
       // icon4: "ni-tv-2 text-primary",
-      icon6: faVial,
+      icon6: faTowerBroadcast,
       url: "/user/sensor-types",
     },
     {
@@ -201,29 +248,42 @@ export class SidebarComponent implements OnInit {
     this.authService.logout();
   }
 
+  closeAllMenus() {
+    this.assemblyDropdownActive = false;
+    this.favoritesDropdownActive = false;
+    this.miscDropdownActive = false;
+    this.servicesDropdownActive = false;
+    this.productsDropdownActive = false;
+  }
+
 
   // Method to toggle the dropdown state
   toggleFavoritesDropdown() {
+    this.closeAllMenus();
     this.favoritesDropdownActive = !this.favoritesDropdownActive;
   }
 
   // Method to toggle the dropdown state
   toggleAssembliesDropdown() {
-    this.assembleDropdownActive = !this.assembleDropdownActive;
+    this.closeAllMenus();
+    this.assemblyDropdownActive = !this.assemblyDropdownActive;
   }
 
   // Method to toggle the dropdown state
   togglemiscDropdown() {
+    this.closeAllMenus();
     this.miscDropdownActive = !this.miscDropdownActive;
   }
 
   // Method to toggle the dropdown state
   toggleServicesDropdown() {
+    this.closeAllMenus();
     this.servicesDropdownActive = !this.servicesDropdownActive;
   }
 
   // Method to toggle the dropdown state
   toggleProductsDropdown() {
+    this.closeAllMenus();
     this.productsDropdownActive = !this.productsDropdownActive;
   }
 }

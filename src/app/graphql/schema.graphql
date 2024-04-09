@@ -1379,6 +1379,76 @@ type Query implements Node {
     filter: AssemblyEntityFilter
   ): AssemblyEntitiesConnection
 
+  """Reads and enables pagination through a set of `AssemblyLineEntity`."""
+  allAssemblyLineEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `AssemblyLineEntity`."""
+    orderBy: [AssemblyLineEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AssemblyLineEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: AssemblyLineEntityFilter
+  ): AssemblyLineEntitiesConnection
+
+  """
+  Reads and enables pagination through a set of `AssemblyMultiversEntity`.
+  """
+  allAssemblyMultiversEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `AssemblyMultiversEntity`."""
+    orderBy: [AssemblyMultiversEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AssemblyMultiversEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: AssemblyMultiversEntityFilter
+  ): AssemblyMultiversEntitiesConnection
+
   """Reads and enables pagination through a set of `AssemblyPart`."""
   allAssemblyParts(
     """Only read the first `n` values of the set."""
@@ -48166,6 +48236,496 @@ input AssemblyEntityFilter {
 
   """Negates the expression."""
   not: AssemblyEntityFilter
+}
+
+"""A connection to a list of `AssemblyLineEntity` values."""
+type AssemblyLineEntitiesConnection {
+  """A list of `AssemblyLineEntity` objects."""
+  nodes: [AssemblyLineEntity!]!
+
+  """
+  A list of edges which contains the `AssemblyLineEntity` and cursor to aid in pagination.
+  """
+  edges: [AssemblyLineEntitiesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `AssemblyLineEntity` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type AssemblyLineEntity {
+  assemblageOrder: String
+  omschr: String
+  cdartikel: String
+  cdmagazijn: String
+  aantalNorm: BigFloat
+  aantalGebruikt: BigFloat
+  waardeGebruikt: BigFloat
+  aantalSamenstelling: BigFloat
+  inkopen: BigFloat
+  voorraad: BigFloat
+  gereserveerd: BigFloat
+  minvoorraad: BigFloat
+  maxvoorraad: BigFloat
+  locatie: String
+  bestcode: String
+  inkvolgnr: Int
+  cdcrediteur: String
+  zoeknaam: String
+  assemblageDatum: Date
+  advice: Int
+}
+
+"""A `AssemblyLineEntity` edge in the connection."""
+type AssemblyLineEntitiesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `AssemblyLineEntity` at the end of the edge."""
+  node: AssemblyLineEntity!
+}
+
+"""Methods to use when ordering `AssemblyLineEntity`."""
+enum AssemblyLineEntitiesOrderBy {
+  NATURAL
+  ASSEMBLAGE_ORDER_ASC
+  ASSEMBLAGE_ORDER_DESC
+  OMSCHR_ASC
+  OMSCHR_DESC
+  CDARTIKEL_ASC
+  CDARTIKEL_DESC
+  CDMAGAZIJN_ASC
+  CDMAGAZIJN_DESC
+  AANTAL_NORM_ASC
+  AANTAL_NORM_DESC
+  AANTAL_GEBRUIKT_ASC
+  AANTAL_GEBRUIKT_DESC
+  WAARDE_GEBRUIKT_ASC
+  WAARDE_GEBRUIKT_DESC
+  AANTAL_SAMENSTELLING_ASC
+  AANTAL_SAMENSTELLING_DESC
+  INKOPEN_ASC
+  INKOPEN_DESC
+  VOORRAAD_ASC
+  VOORRAAD_DESC
+  GERESERVEERD_ASC
+  GERESERVEERD_DESC
+  MINVOORRAAD_ASC
+  MINVOORRAAD_DESC
+  MAXVOORRAAD_ASC
+  MAXVOORRAAD_DESC
+  LOCATIE_ASC
+  LOCATIE_DESC
+  BESTCODE_ASC
+  BESTCODE_DESC
+  INKVOLGNR_ASC
+  INKVOLGNR_DESC
+  CDCREDITEUR_ASC
+  CDCREDITEUR_DESC
+  ZOEKNAAM_ASC
+  ZOEKNAAM_DESC
+  ASSEMBLAGE_DATUM_ASC
+  ASSEMBLAGE_DATUM_DESC
+  ADVICE_ASC
+  ADVICE_DESC
+}
+
+"""
+A condition to be used against `AssemblyLineEntity` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input AssemblyLineEntityCondition {
+  """Checks for equality with the object’s `assemblageOrder` field."""
+  assemblageOrder: String
+
+  """Checks for equality with the object’s `omschr` field."""
+  omschr: String
+
+  """Checks for equality with the object’s `cdartikel` field."""
+  cdartikel: String
+
+  """Checks for equality with the object’s `cdmagazijn` field."""
+  cdmagazijn: String
+
+  """Checks for equality with the object’s `aantalNorm` field."""
+  aantalNorm: BigFloat
+
+  """Checks for equality with the object’s `aantalGebruikt` field."""
+  aantalGebruikt: BigFloat
+
+  """Checks for equality with the object’s `waardeGebruikt` field."""
+  waardeGebruikt: BigFloat
+
+  """Checks for equality with the object’s `aantalSamenstelling` field."""
+  aantalSamenstelling: BigFloat
+
+  """Checks for equality with the object’s `inkopen` field."""
+  inkopen: BigFloat
+
+  """Checks for equality with the object’s `voorraad` field."""
+  voorraad: BigFloat
+
+  """Checks for equality with the object’s `gereserveerd` field."""
+  gereserveerd: BigFloat
+
+  """Checks for equality with the object’s `minvoorraad` field."""
+  minvoorraad: BigFloat
+
+  """Checks for equality with the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloat
+
+  """Checks for equality with the object’s `locatie` field."""
+  locatie: String
+
+  """Checks for equality with the object’s `bestcode` field."""
+  bestcode: String
+
+  """Checks for equality with the object’s `inkvolgnr` field."""
+  inkvolgnr: Int
+
+  """Checks for equality with the object’s `cdcrediteur` field."""
+  cdcrediteur: String
+
+  """Checks for equality with the object’s `zoeknaam` field."""
+  zoeknaam: String
+
+  """Checks for equality with the object’s `assemblageDatum` field."""
+  assemblageDatum: Date
+
+  """Checks for equality with the object’s `advice` field."""
+  advice: Int
+}
+
+"""
+A filter to be used against `AssemblyLineEntity` object types. All fields are combined with a logical ‘and.’
+"""
+input AssemblyLineEntityFilter {
+  """Filter by the object’s `assemblageOrder` field."""
+  assemblageOrder: StringFilter
+
+  """Filter by the object’s `omschr` field."""
+  omschr: StringFilter
+
+  """Filter by the object’s `cdartikel` field."""
+  cdartikel: StringFilter
+
+  """Filter by the object’s `cdmagazijn` field."""
+  cdmagazijn: StringFilter
+
+  """Filter by the object’s `aantalNorm` field."""
+  aantalNorm: BigFloatFilter
+
+  """Filter by the object’s `aantalGebruikt` field."""
+  aantalGebruikt: BigFloatFilter
+
+  """Filter by the object’s `waardeGebruikt` field."""
+  waardeGebruikt: BigFloatFilter
+
+  """Filter by the object’s `aantalSamenstelling` field."""
+  aantalSamenstelling: BigFloatFilter
+
+  """Filter by the object’s `inkopen` field."""
+  inkopen: BigFloatFilter
+
+  """Filter by the object’s `voorraad` field."""
+  voorraad: BigFloatFilter
+
+  """Filter by the object’s `gereserveerd` field."""
+  gereserveerd: BigFloatFilter
+
+  """Filter by the object’s `minvoorraad` field."""
+  minvoorraad: BigFloatFilter
+
+  """Filter by the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloatFilter
+
+  """Filter by the object’s `locatie` field."""
+  locatie: StringFilter
+
+  """Filter by the object’s `bestcode` field."""
+  bestcode: StringFilter
+
+  """Filter by the object’s `inkvolgnr` field."""
+  inkvolgnr: IntFilter
+
+  """Filter by the object’s `cdcrediteur` field."""
+  cdcrediteur: StringFilter
+
+  """Filter by the object’s `zoeknaam` field."""
+  zoeknaam: StringFilter
+
+  """Filter by the object’s `assemblageDatum` field."""
+  assemblageDatum: DateFilter
+
+  """Filter by the object’s `advice` field."""
+  advice: IntFilter
+
+  """Checks for all expressions in this list."""
+  and: [AssemblyLineEntityFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [AssemblyLineEntityFilter!]
+
+  """Negates the expression."""
+  not: AssemblyLineEntityFilter
+}
+
+"""A connection to a list of `AssemblyMultiversEntity` values."""
+type AssemblyMultiversEntitiesConnection {
+  """A list of `AssemblyMultiversEntity` objects."""
+  nodes: [AssemblyMultiversEntity!]!
+
+  """
+  A list of edges which contains the `AssemblyMultiversEntity` and cursor to aid in pagination.
+  """
+  edges: [AssemblyMultiversEntitiesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `AssemblyMultiversEntity` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type AssemblyMultiversEntity {
+  assemblageOrder: String
+  orderDatum: Date
+  cdmagazijn: String
+  aantal: BigFloat
+  omschr: String
+  commentaar: String
+  cdartikel: String
+  assemblageDatum: Date
+  aantalGeassembleerd: BigFloat
+  waardeGeassembleerd: BigFloat
+  afdrukAssemblageBon: String
+  status: String
+  guidItem: String
+  sysCreate: String
+  sysUpdate: String
+  aantalgereservbij: BigFloat
+  voorraad: BigFloat
+  inkopen: BigFloat
+  minvoorraad: BigFloat
+  maxvoorraad: BigFloat
+  bestcode: String
+  advice: Int
+}
+
+"""A `AssemblyMultiversEntity` edge in the connection."""
+type AssemblyMultiversEntitiesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `AssemblyMultiversEntity` at the end of the edge."""
+  node: AssemblyMultiversEntity!
+}
+
+"""Methods to use when ordering `AssemblyMultiversEntity`."""
+enum AssemblyMultiversEntitiesOrderBy {
+  NATURAL
+  ASSEMBLAGE_ORDER_ASC
+  ASSEMBLAGE_ORDER_DESC
+  ORDER_DATUM_ASC
+  ORDER_DATUM_DESC
+  CDMAGAZIJN_ASC
+  CDMAGAZIJN_DESC
+  AANTAL_ASC
+  AANTAL_DESC
+  OMSCHR_ASC
+  OMSCHR_DESC
+  COMMENTAAR_ASC
+  COMMENTAAR_DESC
+  CDARTIKEL_ASC
+  CDARTIKEL_DESC
+  ASSEMBLAGE_DATUM_ASC
+  ASSEMBLAGE_DATUM_DESC
+  AANTAL_GEASSEMBLEERD_ASC
+  AANTAL_GEASSEMBLEERD_DESC
+  WAARDE_GEASSEMBLEERD_ASC
+  WAARDE_GEASSEMBLEERD_DESC
+  AFDRUK_ASSEMBLAGE_BON_ASC
+  AFDRUK_ASSEMBLAGE_BON_DESC
+  STATUS_ASC
+  STATUS_DESC
+  GUID_ITEM_ASC
+  GUID_ITEM_DESC
+  SYS_CREATE_ASC
+  SYS_CREATE_DESC
+  SYS_UPDATE_ASC
+  SYS_UPDATE_DESC
+  AANTALGERESERVBIJ_ASC
+  AANTALGERESERVBIJ_DESC
+  VOORRAAD_ASC
+  VOORRAAD_DESC
+  INKOPEN_ASC
+  INKOPEN_DESC
+  MINVOORRAAD_ASC
+  MINVOORRAAD_DESC
+  MAXVOORRAAD_ASC
+  MAXVOORRAAD_DESC
+  BESTCODE_ASC
+  BESTCODE_DESC
+  ADVICE_ASC
+  ADVICE_DESC
+}
+
+"""
+A condition to be used against `AssemblyMultiversEntity` object types. All
+fields are tested for equality and combined with a logical ‘and.’
+"""
+input AssemblyMultiversEntityCondition {
+  """Checks for equality with the object’s `assemblageOrder` field."""
+  assemblageOrder: String
+
+  """Checks for equality with the object’s `orderDatum` field."""
+  orderDatum: Date
+
+  """Checks for equality with the object’s `cdmagazijn` field."""
+  cdmagazijn: String
+
+  """Checks for equality with the object’s `aantal` field."""
+  aantal: BigFloat
+
+  """Checks for equality with the object’s `omschr` field."""
+  omschr: String
+
+  """Checks for equality with the object’s `commentaar` field."""
+  commentaar: String
+
+  """Checks for equality with the object’s `cdartikel` field."""
+  cdartikel: String
+
+  """Checks for equality with the object’s `assemblageDatum` field."""
+  assemblageDatum: Date
+
+  """Checks for equality with the object’s `aantalGeassembleerd` field."""
+  aantalGeassembleerd: BigFloat
+
+  """Checks for equality with the object’s `waardeGeassembleerd` field."""
+  waardeGeassembleerd: BigFloat
+
+  """Checks for equality with the object’s `afdrukAssemblageBon` field."""
+  afdrukAssemblageBon: String
+
+  """Checks for equality with the object’s `status` field."""
+  status: String
+
+  """Checks for equality with the object’s `guidItem` field."""
+  guidItem: String
+
+  """Checks for equality with the object’s `sysCreate` field."""
+  sysCreate: String
+
+  """Checks for equality with the object’s `sysUpdate` field."""
+  sysUpdate: String
+
+  """Checks for equality with the object’s `aantalgereservbij` field."""
+  aantalgereservbij: BigFloat
+
+  """Checks for equality with the object’s `voorraad` field."""
+  voorraad: BigFloat
+
+  """Checks for equality with the object’s `inkopen` field."""
+  inkopen: BigFloat
+
+  """Checks for equality with the object’s `minvoorraad` field."""
+  minvoorraad: BigFloat
+
+  """Checks for equality with the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloat
+
+  """Checks for equality with the object’s `bestcode` field."""
+  bestcode: String
+
+  """Checks for equality with the object’s `advice` field."""
+  advice: Int
+}
+
+"""
+A filter to be used against `AssemblyMultiversEntity` object types. All fields are combined with a logical ‘and.’
+"""
+input AssemblyMultiversEntityFilter {
+  """Filter by the object’s `assemblageOrder` field."""
+  assemblageOrder: StringFilter
+
+  """Filter by the object’s `orderDatum` field."""
+  orderDatum: DateFilter
+
+  """Filter by the object’s `cdmagazijn` field."""
+  cdmagazijn: StringFilter
+
+  """Filter by the object’s `aantal` field."""
+  aantal: BigFloatFilter
+
+  """Filter by the object’s `omschr` field."""
+  omschr: StringFilter
+
+  """Filter by the object’s `commentaar` field."""
+  commentaar: StringFilter
+
+  """Filter by the object’s `cdartikel` field."""
+  cdartikel: StringFilter
+
+  """Filter by the object’s `assemblageDatum` field."""
+  assemblageDatum: DateFilter
+
+  """Filter by the object’s `aantalGeassembleerd` field."""
+  aantalGeassembleerd: BigFloatFilter
+
+  """Filter by the object’s `waardeGeassembleerd` field."""
+  waardeGeassembleerd: BigFloatFilter
+
+  """Filter by the object’s `afdrukAssemblageBon` field."""
+  afdrukAssemblageBon: StringFilter
+
+  """Filter by the object’s `status` field."""
+  status: StringFilter
+
+  """Filter by the object’s `guidItem` field."""
+  guidItem: StringFilter
+
+  """Filter by the object’s `sysCreate` field."""
+  sysCreate: StringFilter
+
+  """Filter by the object’s `sysUpdate` field."""
+  sysUpdate: StringFilter
+
+  """Filter by the object’s `aantalgereservbij` field."""
+  aantalgereservbij: BigFloatFilter
+
+  """Filter by the object’s `voorraad` field."""
+  voorraad: BigFloatFilter
+
+  """Filter by the object’s `inkopen` field."""
+  inkopen: BigFloatFilter
+
+  """Filter by the object’s `minvoorraad` field."""
+  minvoorraad: BigFloatFilter
+
+  """Filter by the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloatFilter
+
+  """Filter by the object’s `bestcode` field."""
+  bestcode: StringFilter
+
+  """Filter by the object’s `advice` field."""
+  advice: IntFilter
+
+  """Checks for all expressions in this list."""
+  and: [AssemblyMultiversEntityFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [AssemblyMultiversEntityFilter!]
+
+  """Negates the expression."""
+  not: AssemblyMultiversEntityFilter
 }
 
 """A connection to a list of `AssemblyTypesEntity` values."""

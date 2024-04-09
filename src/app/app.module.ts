@@ -66,20 +66,14 @@ import { DeleteModalComponent } from "./views/admin/delete/delete-modal.componen
 import { AssemblyFormComponent } from "./views/admin/assembly/form/assembly-form.component";
 import { DetectorFormComponent } from "./views/admin/detectors/form/detector-form.component";
 import { CalibrationGasesFormComponent } from "./views/admin/calibrationgases/form/calibrationgases-form.component";
-import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/assembly-multivers.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { PopOverComponent } from "./components/popover/popover.component";
 import { SatPopoverModule } from '@ncstate/sat-popover';
 import { AssemblyMultiversPopoverComponent } from "./views/admin/assemblyMultivers/popover/assembly-multivers-popover.component";
 import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
-import { SensorBaseTypeComponent } from "./views/admin/sensorBaseType/sensorBaseType.component";
-import { SensorBaseTypeFormComponent } from "./views/admin/sensorBaseType/form/sensorBaseTypeForm.component";
 import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.component";
-import { SensorTypeComponent } from "./views/admin/sensor-type/sensor-type.component";
-import { SensorTypeFormComponent } from "./views/admin/sensor-type/form/sensor-type-form.component";
 import { GraphQLModule } from './graphql.module';
-import { ApolloClientService } from "./apollo-client.service";
 import { APOLLO_OPTIONS, ApolloModule } from "apollo-angular";
 import { TableComponent } from "./components/table/table.component";
 import { PaginationTableComponent } from "./components/pagination/pagination.component";
@@ -113,6 +107,12 @@ import { MembranesComponent } from "./views/admin/membranes/index/membranes.comp
 import { MembranesFormComponent } from "./views/admin/membranes/form/membranes-form.component";
 import { ElectrolytesFormComponent } from "./views/admin/electrolytes/form/electrolytes-form.component";
 import { ElectrolytesComponent } from "./views/admin/electrolytes/index/electrolytes.component";
+import { SensorTypeComponent } from "./views/admin/sensor-types/index/sensor-types.component";
+import { SensorTypesFormComponent } from "./views/admin/sensor-types/form/sensor-types-form.component";
+import { SensorBaseTypeComponent } from "./views/admin/sensor-base-types/index/sensor-base-types.component";
+import { SensorBaseTypesFormComponent } from "./views/admin/sensor-base-types/form/sensor-base-types-form.component";
+import { SensorTypeAssembliesComponent } from "./views/admin/sensor-types-assembly/index/sensor-types-assembly.component";
+import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/index/assembly-multivers.component";
 
 @NgModule({
   declarations: [
@@ -162,16 +162,14 @@ import { ElectrolytesComponent } from "./views/admin/electrolytes/index/electrol
     AssemblyFormComponent,
     DetectorFormComponent,
     CalibrationGasesFormComponent,
-    AssemblyMultiversComponent,
     PopOverComponent,
+    AssemblyMultiversComponent,
     AssemblyMultiversPopoverComponent,
     AssemblyMultiversDetailComponent,
     SensorBaseTypeComponent,
-    SensorBaseTypeFormComponent,
+    SensorBaseTypesFormComponent,
     AssemblyTypeComponent,
     AssemblyCreateComponent,
-    SensorTypeComponent,
-    SensorTypeFormComponent,
     TableComponent,
     PaginationTableComponent,
     DetectorTypeComponent,
@@ -203,7 +201,10 @@ import { ElectrolytesComponent } from "./views/admin/electrolytes/index/electrol
     MembranesComponent,
     MembranesFormComponent,
     ElectrolytesFormComponent,
-    ElectrolytesComponent
+    ElectrolytesComponent,
+    SensorTypeComponent,
+    SensorTypesFormComponent,
+    SensorTypeAssembliesComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

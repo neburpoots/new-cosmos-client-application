@@ -2,14 +2,14 @@
 <form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'flex items-start pt-1' : 'flex flex-col gap-5'"
     (ngSubmit)="onSubmit()">
 
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[0] : null">
         <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'cdartikel'" [inline]="isInlineCreating"
             [displayName]="'Part'" [touched]="myForm.controls['cdartikel'].touched"
             [errors]="[{ name: 'required', message: 'Part is required' }]"></input-component>
     </div>
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[0] : null">
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
         <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'name'" [inline]="isInlineCreating"
             [displayName]="'Name'" [touched]="myForm.controls['name'].touched"
             [errors]="[{ name: 'required', message: 'Name is required' }]"></input-component>

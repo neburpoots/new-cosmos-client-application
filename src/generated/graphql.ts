@@ -6570,6 +6570,396 @@ export type AssemblyInput = {
   startSerialNumber?: InputMaybe<Scalars['String']['input']>;
 };
 
+/** A connection to a list of `AssemblyLineEntity` values. */
+export type AssemblyLineEntitiesConnection = {
+  __typename?: 'AssemblyLineEntitiesConnection';
+  /** A list of edges which contains the `AssemblyLineEntity` and cursor to aid in pagination. */
+  edges: Array<AssemblyLineEntitiesEdge>;
+  /** A list of `AssemblyLineEntity` objects. */
+  nodes: Array<AssemblyLineEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `AssemblyLineEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `AssemblyLineEntity` edge in the connection. */
+export type AssemblyLineEntitiesEdge = {
+  __typename?: 'AssemblyLineEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `AssemblyLineEntity` at the end of the edge. */
+  node: AssemblyLineEntity;
+};
+
+/** Methods to use when ordering `AssemblyLineEntity`. */
+export enum AssemblyLineEntitiesOrderBy {
+  AantalGebruiktAsc = 'AANTAL_GEBRUIKT_ASC',
+  AantalGebruiktDesc = 'AANTAL_GEBRUIKT_DESC',
+  AantalNormAsc = 'AANTAL_NORM_ASC',
+  AantalNormDesc = 'AANTAL_NORM_DESC',
+  AantalSamenstellingAsc = 'AANTAL_SAMENSTELLING_ASC',
+  AantalSamenstellingDesc = 'AANTAL_SAMENSTELLING_DESC',
+  AdviceAsc = 'ADVICE_ASC',
+  AdviceDesc = 'ADVICE_DESC',
+  AssemblageDatumAsc = 'ASSEMBLAGE_DATUM_ASC',
+  AssemblageDatumDesc = 'ASSEMBLAGE_DATUM_DESC',
+  AssemblageOrderAsc = 'ASSEMBLAGE_ORDER_ASC',
+  AssemblageOrderDesc = 'ASSEMBLAGE_ORDER_DESC',
+  BestcodeAsc = 'BESTCODE_ASC',
+  BestcodeDesc = 'BESTCODE_DESC',
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CdcrediteurAsc = 'CDCREDITEUR_ASC',
+  CdcrediteurDesc = 'CDCREDITEUR_DESC',
+  CdmagazijnAsc = 'CDMAGAZIJN_ASC',
+  CdmagazijnDesc = 'CDMAGAZIJN_DESC',
+  GereserveerdAsc = 'GERESERVEERD_ASC',
+  GereserveerdDesc = 'GERESERVEERD_DESC',
+  InkopenAsc = 'INKOPEN_ASC',
+  InkopenDesc = 'INKOPEN_DESC',
+  InkvolgnrAsc = 'INKVOLGNR_ASC',
+  InkvolgnrDesc = 'INKVOLGNR_DESC',
+  LocatieAsc = 'LOCATIE_ASC',
+  LocatieDesc = 'LOCATIE_DESC',
+  MaxvoorraadAsc = 'MAXVOORRAAD_ASC',
+  MaxvoorraadDesc = 'MAXVOORRAAD_DESC',
+  MinvoorraadAsc = 'MINVOORRAAD_ASC',
+  MinvoorraadDesc = 'MINVOORRAAD_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  VoorraadAsc = 'VOORRAAD_ASC',
+  VoorraadDesc = 'VOORRAAD_DESC',
+  WaardeGebruiktAsc = 'WAARDE_GEBRUIKT_ASC',
+  WaardeGebruiktDesc = 'WAARDE_GEBRUIKT_DESC',
+  ZoeknaamAsc = 'ZOEKNAAM_ASC',
+  ZoeknaamDesc = 'ZOEKNAAM_DESC'
+}
+
+export type AssemblyLineEntity = {
+  __typename?: 'AssemblyLineEntity';
+  aantalGebruikt?: Maybe<Scalars['BigFloat']['output']>;
+  aantalNorm?: Maybe<Scalars['BigFloat']['output']>;
+  aantalSamenstelling?: Maybe<Scalars['BigFloat']['output']>;
+  advice?: Maybe<Scalars['Int']['output']>;
+  assemblageDatum?: Maybe<Scalars['Date']['output']>;
+  assemblageOrder?: Maybe<Scalars['String']['output']>;
+  bestcode?: Maybe<Scalars['String']['output']>;
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  cdcrediteur?: Maybe<Scalars['String']['output']>;
+  cdmagazijn?: Maybe<Scalars['String']['output']>;
+  gereserveerd?: Maybe<Scalars['BigFloat']['output']>;
+  inkopen?: Maybe<Scalars['BigFloat']['output']>;
+  inkvolgnr?: Maybe<Scalars['Int']['output']>;
+  locatie?: Maybe<Scalars['String']['output']>;
+  maxvoorraad?: Maybe<Scalars['BigFloat']['output']>;
+  minvoorraad?: Maybe<Scalars['BigFloat']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  voorraad?: Maybe<Scalars['BigFloat']['output']>;
+  waardeGebruikt?: Maybe<Scalars['BigFloat']['output']>;
+  zoeknaam?: Maybe<Scalars['String']['output']>;
+};
+
+/**
+ * A condition to be used against `AssemblyLineEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type AssemblyLineEntityCondition = {
+  /** Checks for equality with the object’s `aantalGebruikt` field. */
+  aantalGebruikt?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `aantalNorm` field. */
+  aantalNorm?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `aantalSamenstelling` field. */
+  aantalSamenstelling?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `advice` field. */
+  advice?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `assemblageDatum` field. */
+  assemblageDatum?: InputMaybe<Scalars['Date']['input']>;
+  /** Checks for equality with the object’s `assemblageOrder` field. */
+  assemblageOrder?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `bestcode` field. */
+  bestcode?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `cdcrediteur` field. */
+  cdcrediteur?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `cdmagazijn` field. */
+  cdmagazijn?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `gereserveerd` field. */
+  gereserveerd?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `inkopen` field. */
+  inkopen?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `inkvolgnr` field. */
+  inkvolgnr?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `locatie` field. */
+  locatie?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `maxvoorraad` field. */
+  maxvoorraad?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `minvoorraad` field. */
+  minvoorraad?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `voorraad` field. */
+  voorraad?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `waardeGebruikt` field. */
+  waardeGebruikt?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `zoeknaam` field. */
+  zoeknaam?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against `AssemblyLineEntity` object types. All fields are combined with a logical ‘and.’ */
+export type AssemblyLineEntityFilter = {
+  /** Filter by the object’s `aantalGebruikt` field. */
+  aantalGebruikt?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `aantalNorm` field. */
+  aantalNorm?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `aantalSamenstelling` field. */
+  aantalSamenstelling?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `advice` field. */
+  advice?: InputMaybe<IntFilter>;
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<AssemblyLineEntityFilter>>;
+  /** Filter by the object’s `assemblageDatum` field. */
+  assemblageDatum?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `assemblageOrder` field. */
+  assemblageOrder?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `bestcode` field. */
+  bestcode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdcrediteur` field. */
+  cdcrediteur?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdmagazijn` field. */
+  cdmagazijn?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `gereserveerd` field. */
+  gereserveerd?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `inkopen` field. */
+  inkopen?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `inkvolgnr` field. */
+  inkvolgnr?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `locatie` field. */
+  locatie?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `maxvoorraad` field. */
+  maxvoorraad?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `minvoorraad` field. */
+  minvoorraad?: InputMaybe<BigFloatFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<AssemblyLineEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<AssemblyLineEntityFilter>>;
+  /** Filter by the object’s `voorraad` field. */
+  voorraad?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `waardeGebruikt` field. */
+  waardeGebruikt?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `zoeknaam` field. */
+  zoeknaam?: InputMaybe<StringFilter>;
+};
+
+/** A connection to a list of `AssemblyMultiversEntity` values. */
+export type AssemblyMultiversEntitiesConnection = {
+  __typename?: 'AssemblyMultiversEntitiesConnection';
+  /** A list of edges which contains the `AssemblyMultiversEntity` and cursor to aid in pagination. */
+  edges: Array<AssemblyMultiversEntitiesEdge>;
+  /** A list of `AssemblyMultiversEntity` objects. */
+  nodes: Array<AssemblyMultiversEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `AssemblyMultiversEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `AssemblyMultiversEntity` edge in the connection. */
+export type AssemblyMultiversEntitiesEdge = {
+  __typename?: 'AssemblyMultiversEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `AssemblyMultiversEntity` at the end of the edge. */
+  node: AssemblyMultiversEntity;
+};
+
+/** Methods to use when ordering `AssemblyMultiversEntity`. */
+export enum AssemblyMultiversEntitiesOrderBy {
+  AantalgereservbijAsc = 'AANTALGERESERVBIJ_ASC',
+  AantalgereservbijDesc = 'AANTALGERESERVBIJ_DESC',
+  AantalAsc = 'AANTAL_ASC',
+  AantalDesc = 'AANTAL_DESC',
+  AantalGeassembleerdAsc = 'AANTAL_GEASSEMBLEERD_ASC',
+  AantalGeassembleerdDesc = 'AANTAL_GEASSEMBLEERD_DESC',
+  AdviceAsc = 'ADVICE_ASC',
+  AdviceDesc = 'ADVICE_DESC',
+  AfdrukAssemblageBonAsc = 'AFDRUK_ASSEMBLAGE_BON_ASC',
+  AfdrukAssemblageBonDesc = 'AFDRUK_ASSEMBLAGE_BON_DESC',
+  AssemblageDatumAsc = 'ASSEMBLAGE_DATUM_ASC',
+  AssemblageDatumDesc = 'ASSEMBLAGE_DATUM_DESC',
+  AssemblageOrderAsc = 'ASSEMBLAGE_ORDER_ASC',
+  AssemblageOrderDesc = 'ASSEMBLAGE_ORDER_DESC',
+  BestcodeAsc = 'BESTCODE_ASC',
+  BestcodeDesc = 'BESTCODE_DESC',
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CdmagazijnAsc = 'CDMAGAZIJN_ASC',
+  CdmagazijnDesc = 'CDMAGAZIJN_DESC',
+  CommentaarAsc = 'COMMENTAAR_ASC',
+  CommentaarDesc = 'COMMENTAAR_DESC',
+  GuidItemAsc = 'GUID_ITEM_ASC',
+  GuidItemDesc = 'GUID_ITEM_DESC',
+  InkopenAsc = 'INKOPEN_ASC',
+  InkopenDesc = 'INKOPEN_DESC',
+  MaxvoorraadAsc = 'MAXVOORRAAD_ASC',
+  MaxvoorraadDesc = 'MAXVOORRAAD_DESC',
+  MinvoorraadAsc = 'MINVOORRAAD_ASC',
+  MinvoorraadDesc = 'MINVOORRAAD_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  OrderDatumAsc = 'ORDER_DATUM_ASC',
+  OrderDatumDesc = 'ORDER_DATUM_DESC',
+  StatusAsc = 'STATUS_ASC',
+  StatusDesc = 'STATUS_DESC',
+  SysCreateAsc = 'SYS_CREATE_ASC',
+  SysCreateDesc = 'SYS_CREATE_DESC',
+  SysUpdateAsc = 'SYS_UPDATE_ASC',
+  SysUpdateDesc = 'SYS_UPDATE_DESC',
+  VoorraadAsc = 'VOORRAAD_ASC',
+  VoorraadDesc = 'VOORRAAD_DESC',
+  WaardeGeassembleerdAsc = 'WAARDE_GEASSEMBLEERD_ASC',
+  WaardeGeassembleerdDesc = 'WAARDE_GEASSEMBLEERD_DESC'
+}
+
+export type AssemblyMultiversEntity = {
+  __typename?: 'AssemblyMultiversEntity';
+  aantal?: Maybe<Scalars['BigFloat']['output']>;
+  aantalGeassembleerd?: Maybe<Scalars['BigFloat']['output']>;
+  aantalgereservbij?: Maybe<Scalars['BigFloat']['output']>;
+  advice?: Maybe<Scalars['Int']['output']>;
+  afdrukAssemblageBon?: Maybe<Scalars['String']['output']>;
+  assemblageDatum?: Maybe<Scalars['Date']['output']>;
+  assemblageOrder?: Maybe<Scalars['String']['output']>;
+  bestcode?: Maybe<Scalars['String']['output']>;
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  cdmagazijn?: Maybe<Scalars['String']['output']>;
+  commentaar?: Maybe<Scalars['String']['output']>;
+  guidItem?: Maybe<Scalars['String']['output']>;
+  inkopen?: Maybe<Scalars['BigFloat']['output']>;
+  maxvoorraad?: Maybe<Scalars['BigFloat']['output']>;
+  minvoorraad?: Maybe<Scalars['BigFloat']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  orderDatum?: Maybe<Scalars['Date']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  sysCreate?: Maybe<Scalars['String']['output']>;
+  sysUpdate?: Maybe<Scalars['String']['output']>;
+  voorraad?: Maybe<Scalars['BigFloat']['output']>;
+  waardeGeassembleerd?: Maybe<Scalars['BigFloat']['output']>;
+};
+
+/**
+ * A condition to be used against `AssemblyMultiversEntity` object types. All
+ * fields are tested for equality and combined with a logical ‘and.’
+ */
+export type AssemblyMultiversEntityCondition = {
+  /** Checks for equality with the object’s `aantal` field. */
+  aantal?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `aantalGeassembleerd` field. */
+  aantalGeassembleerd?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `aantalgereservbij` field. */
+  aantalgereservbij?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `advice` field. */
+  advice?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `afdrukAssemblageBon` field. */
+  afdrukAssemblageBon?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `assemblageDatum` field. */
+  assemblageDatum?: InputMaybe<Scalars['Date']['input']>;
+  /** Checks for equality with the object’s `assemblageOrder` field. */
+  assemblageOrder?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `bestcode` field. */
+  bestcode?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `cdmagazijn` field. */
+  cdmagazijn?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `commentaar` field. */
+  commentaar?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `guidItem` field. */
+  guidItem?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `inkopen` field. */
+  inkopen?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `maxvoorraad` field. */
+  maxvoorraad?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `minvoorraad` field. */
+  minvoorraad?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `orderDatum` field. */
+  orderDatum?: InputMaybe<Scalars['Date']['input']>;
+  /** Checks for equality with the object’s `status` field. */
+  status?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sysCreate` field. */
+  sysCreate?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sysUpdate` field. */
+  sysUpdate?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `voorraad` field. */
+  voorraad?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `waardeGeassembleerd` field. */
+  waardeGeassembleerd?: InputMaybe<Scalars['BigFloat']['input']>;
+};
+
+/** A filter to be used against `AssemblyMultiversEntity` object types. All fields are combined with a logical ‘and.’ */
+export type AssemblyMultiversEntityFilter = {
+  /** Filter by the object’s `aantal` field. */
+  aantal?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `aantalGeassembleerd` field. */
+  aantalGeassembleerd?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `aantalgereservbij` field. */
+  aantalgereservbij?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `advice` field. */
+  advice?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `afdrukAssemblageBon` field. */
+  afdrukAssemblageBon?: InputMaybe<StringFilter>;
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<AssemblyMultiversEntityFilter>>;
+  /** Filter by the object’s `assemblageDatum` field. */
+  assemblageDatum?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `assemblageOrder` field. */
+  assemblageOrder?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `bestcode` field. */
+  bestcode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdmagazijn` field. */
+  cdmagazijn?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `commentaar` field. */
+  commentaar?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `guidItem` field. */
+  guidItem?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `inkopen` field. */
+  inkopen?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `maxvoorraad` field. */
+  maxvoorraad?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `minvoorraad` field. */
+  minvoorraad?: InputMaybe<BigFloatFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<AssemblyMultiversEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<AssemblyMultiversEntityFilter>>;
+  /** Filter by the object’s `orderDatum` field. */
+  orderDatum?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `status` field. */
+  status?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sysCreate` field. */
+  sysCreate?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sysUpdate` field. */
+  sysUpdate?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `voorraad` field. */
+  voorraad?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `waardeGeassembleerd` field. */
+  waardeGeassembleerd?: InputMaybe<BigFloatFilter>;
+};
+
 export type AssemblyPart = Node & {
   __typename?: 'AssemblyPart';
   assemblyId: Scalars['Int']['output'];
@@ -52555,6 +52945,10 @@ export type Query = Node & {
   allAssemblies?: Maybe<AssembliesConnection>;
   /** Reads and enables pagination through a set of `AssemblyEntity`. */
   allAssemblyEntities?: Maybe<AssemblyEntitiesConnection>;
+  /** Reads and enables pagination through a set of `AssemblyLineEntity`. */
+  allAssemblyLineEntities?: Maybe<AssemblyLineEntitiesConnection>;
+  /** Reads and enables pagination through a set of `AssemblyMultiversEntity`. */
+  allAssemblyMultiversEntities?: Maybe<AssemblyMultiversEntitiesConnection>;
   /** Reads and enables pagination through a set of `AssemblyPart`. */
   allAssemblyParts?: Maybe<AssemblyPartsConnection>;
   /** Reads and enables pagination through a set of `AssemblyTypePart`. */
@@ -53973,6 +54367,32 @@ export type QueryAllAssemblyEntitiesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<AssemblyEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllAssemblyLineEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<AssemblyLineEntityCondition>;
+  filter?: InputMaybe<AssemblyLineEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<AssemblyLineEntitiesOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllAssemblyMultiversEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<AssemblyMultiversEntityCondition>;
+  filter?: InputMaybe<AssemblyMultiversEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<AssemblyMultiversEntitiesOrderBy>>;
 };
 
 
@@ -81145,6 +81565,27 @@ export type DeleteAreaMutationVariables = Exact<{
 
 export type DeleteAreaMutation = { __typename?: 'Mutation', deleteAreaById?: { __typename?: 'DeleteAreaPayload', clientMutationId?: string | null } | null };
 
+export type AllAssemblyMultiversEntitiesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<AssemblyMultiversEntitiesOrderBy> | AssemblyMultiversEntitiesOrderBy>;
+}>;
+
+
+export type AllAssemblyMultiversEntitiesQuery = { __typename?: 'Query', allAssemblyMultiversEntities?: { __typename?: 'AssemblyMultiversEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyMultiversEntity', aantal?: any | null, aantalGeassembleerd?: any | null, aantalgereservbij?: any | null, advice?: number | null, afdrukAssemblageBon?: string | null, assemblageDatum?: any | null, assemblageOrder?: string | null, cdartikel?: string | null, cdmagazijn?: string | null, commentaar?: string | null, guidItem?: string | null, orderDatum?: any | null, status?: string | null, sysCreate?: string | null, sysUpdate?: string | null, waardeGeassembleerd?: any | null }> } | null };
+
+export type AllAssemblyLinesMultiversEntitiesQueryVariables = Exact<{
+  assemblage_order?: InputMaybe<Scalars['String']['input']>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<AssemblyLineEntitiesOrderBy> | AssemblyLineEntitiesOrderBy>;
+}>;
+
+
+export type AllAssemblyLinesMultiversEntitiesQuery = { __typename?: 'Query', allAssemblyLineEntities?: { __typename?: 'AssemblyLineEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyLineEntity', omschr?: string | null, zoeknaam?: string | null, waardeGebruikt?: any | null, voorraad?: any | null, minvoorraad?: any | null, maxvoorraad?: any | null, locatie?: string | null, inkvolgnr?: number | null, inkopen?: any | null, gereserveerd?: any | null, cdmagazijn?: string | null, cdcrediteur?: string | null, cdartikel?: string | null, bestcode?: string | null, assemblageOrder?: string | null, assemblageDatum?: any | null, advice?: number | null, aantalSamenstelling?: any | null, aantalNorm?: any | null, aantalGebruikt?: any | null }> } | null };
+
 export type AssemblyTypeEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -81806,6 +82247,43 @@ export type DeleteSamplePointMutationVariables = Exact<{
 
 export type DeleteSamplePointMutation = { __typename?: 'Mutation', deleteSamplePointById?: { __typename?: 'DeleteSamplePointPayload', clientMutationId?: string | null } | null };
 
+export type AllSensorBaseTypesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllSensorBaseTypesNoPaginationQuery = { __typename?: 'Query', allSensorBaseTypes?: { __typename?: 'SensorBaseTypesConnection', nodes: Array<{ __typename?: 'SensorBaseType', id: number, prefix?: string | null, suffix?: string | null, series?: string | null, volume?: number | null, maintenanceIntervalMonths?: number | null, replacementIntervalMonths?: number | null, quotationIntervalMonths?: number | null, principleByPrincipleId?: { __typename?: 'Principle', id: number, name?: string | null } | null }> } | null };
+
+export type AllSensorBaseTypesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  search: Scalars['String']['input'];
+  orderBy?: InputMaybe<Array<SensorBaseTypesOrderBy> | SensorBaseTypesOrderBy>;
+}>;
+
+
+export type AllSensorBaseTypesQuery = { __typename?: 'Query', allSensorBaseTypes?: { __typename?: 'SensorBaseTypesConnection', totalCount: number, nodes: Array<{ __typename?: 'SensorBaseType', id: number, prefix?: string | null, suffix?: string | null, series?: string | null, volume?: number | null, maintenanceIntervalMonths?: number | null, replacementIntervalMonths?: number | null, quotationIntervalMonths?: number | null, principleByPrincipleId?: { __typename?: 'Principle', id: number, name?: string | null } | null }> } | null };
+
+export type CreateSensorBaseTypeMutationVariables = Exact<{
+  body: SensorBaseTypeInput;
+}>;
+
+
+export type CreateSensorBaseTypeMutation = { __typename?: 'Mutation', createSensorBaseType?: { __typename?: 'CreateSensorBaseTypePayload', sensorBaseType?: { __typename?: 'SensorBaseType', id: number, prefix?: string | null, suffix?: string | null, series?: string | null, volume?: number | null, maintenanceIntervalMonths?: number | null, replacementIntervalMonths?: number | null, quotationIntervalMonths?: number | null, principleByPrincipleId?: { __typename?: 'Principle', id: number, name?: string | null } | null } | null } | null };
+
+export type UpdateSensorBaseTypeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: SensorBaseTypePatch;
+}>;
+
+
+export type UpdateSensorBaseTypeMutation = { __typename?: 'Mutation', updateSensorBaseTypeById?: { __typename?: 'UpdateSensorBaseTypePayload', sensorBaseType?: { __typename?: 'SensorBaseType', id: number, prefix?: string | null, suffix?: string | null, series?: string | null, volume?: number | null, maintenanceIntervalMonths?: number | null, replacementIntervalMonths?: number | null, quotationIntervalMonths?: number | null, principleByPrincipleId?: { __typename?: 'Principle', id: number, name?: string | null } | null } | null } | null };
+
+export type DeleteSensorBaseTypeMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteSensorBaseTypeMutation = { __typename?: 'Mutation', deleteSensorBaseTypeById?: { __typename?: 'DeleteSensorBaseTypePayload', clientMutationId?: string | null } | null };
+
 export type AllSensorTypesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -82298,6 +82776,92 @@ export const DeleteAreaDocument = gql`
   })
   export class DeleteAreaGQL extends Apollo.Mutation<DeleteAreaMutation, DeleteAreaMutationVariables> {
     override document = DeleteAreaDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllAssemblyMultiversEntitiesDocument = gql`
+    query allAssemblyMultiversEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyMultiversEntitiesOrderBy!]) {
+  allAssemblyMultiversEntities: allAssemblyMultiversEntities(
+    filter: {or: [{cdartikel: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      aantal
+      aantalGeassembleerd
+      aantalgereservbij
+      advice
+      afdrukAssemblageBon
+      assemblageDatum
+      assemblageOrder
+      cdartikel
+      cdmagazijn
+      commentaar
+      guidItem
+      orderDatum
+      status
+      sysCreate
+      sysUpdate
+      waardeGeassembleerd
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllAssemblyMultiversEntitiesGQL extends Apollo.Query<AllAssemblyMultiversEntitiesQuery, AllAssemblyMultiversEntitiesQueryVariables> {
+    override document = AllAssemblyMultiversEntitiesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllAssemblyLinesMultiversEntitiesDocument = gql`
+    query allAssemblyLinesMultiversEntities($assemblage_order: String, $limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyLineEntitiesOrderBy!]) {
+  allAssemblyLineEntities: allAssemblyLineEntities(
+    filter: {or: [{cdartikel: {includesInsensitive: $search}}], and: [{assemblageOrder: {equalTo: $assemblage_order}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      omschr
+      zoeknaam
+      waardeGebruikt
+      voorraad
+      minvoorraad
+      maxvoorraad
+      locatie
+      inkvolgnr
+      inkopen
+      gereserveerd
+      cdmagazijn
+      cdcrediteur
+      cdartikel
+      bestcode
+      assemblageOrder
+      assemblageDatum
+      advice
+      aantalSamenstelling
+      aantalNorm
+      aantalGebruikt
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllAssemblyLinesMultiversEntitiesGQL extends Apollo.Query<AllAssemblyLinesMultiversEntitiesQuery, AllAssemblyLinesMultiversEntitiesQueryVariables> {
+    override document = AllAssemblyLinesMultiversEntitiesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -84678,6 +85242,154 @@ export const DeleteSamplePointDocument = gql`
   })
   export class DeleteSamplePointGQL extends Apollo.Mutation<DeleteSamplePointMutation, DeleteSamplePointMutationVariables> {
     override document = DeleteSamplePointDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllSensorBaseTypesNoPaginationDocument = gql`
+    query allSensorBaseTypesNoPagination {
+  allSensorBaseTypes {
+    nodes {
+      id
+      prefix
+      suffix
+      series
+      volume
+      maintenanceIntervalMonths
+      replacementIntervalMonths
+      quotationIntervalMonths
+      principleByPrincipleId {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllSensorBaseTypesNoPaginationGQL extends Apollo.Query<AllSensorBaseTypesNoPaginationQuery, AllSensorBaseTypesNoPaginationQueryVariables> {
+    override document = AllSensorBaseTypesNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllSensorBaseTypesDocument = gql`
+    query allSensorBaseTypes($limit: Int, $offset: Int, $search: String!, $orderBy: [SensorBaseTypesOrderBy!]) {
+  allSensorBaseTypes(
+    filter: {or: [{prefix: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      prefix
+      suffix
+      series
+      volume
+      maintenanceIntervalMonths
+      replacementIntervalMonths
+      quotationIntervalMonths
+      principleByPrincipleId {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllSensorBaseTypesGQL extends Apollo.Query<AllSensorBaseTypesQuery, AllSensorBaseTypesQueryVariables> {
+    override document = AllSensorBaseTypesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateSensorBaseTypeDocument = gql`
+    mutation CreateSensorBaseType($body: SensorBaseTypeInput!) {
+  createSensorBaseType(input: {sensorBaseType: $body}) {
+    sensorBaseType {
+      id
+      prefix
+      suffix
+      series
+      volume
+      maintenanceIntervalMonths
+      replacementIntervalMonths
+      quotationIntervalMonths
+      principleByPrincipleId {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateSensorBaseTypeGQL extends Apollo.Mutation<CreateSensorBaseTypeMutation, CreateSensorBaseTypeMutationVariables> {
+    override document = CreateSensorBaseTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateSensorBaseTypeDocument = gql`
+    mutation UpdateSensorBaseType($id: Int!, $patch: SensorBaseTypePatch!) {
+  updateSensorBaseTypeById(input: {id: $id, sensorBaseTypePatch: $patch}) {
+    sensorBaseType {
+      id
+      prefix
+      suffix
+      series
+      volume
+      maintenanceIntervalMonths
+      replacementIntervalMonths
+      quotationIntervalMonths
+      principleByPrincipleId {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateSensorBaseTypeGQL extends Apollo.Mutation<UpdateSensorBaseTypeMutation, UpdateSensorBaseTypeMutationVariables> {
+    override document = UpdateSensorBaseTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteSensorBaseTypeDocument = gql`
+    mutation DeleteSensorBaseType($id: Int!) {
+  deleteSensorBaseTypeById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteSensorBaseTypeGQL extends Apollo.Mutation<DeleteSensorBaseTypeMutation, DeleteSensorBaseTypeMutationVariables> {
+    override document = DeleteSensorBaseTypeDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

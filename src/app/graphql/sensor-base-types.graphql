@@ -1,0 +1,106 @@
+#-------------------------------------------------------------------------------
+query allSensorBaseTypesNoPagination
+    {
+    allSensorBaseTypes {
+        nodes {
+            id
+            prefix
+            suffix
+            series
+            volume
+            maintenanceIntervalMonths
+            replacementIntervalMonths
+            quotationIntervalMonths
+            principleByPrincipleId {
+                id
+                name
+            }
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allSensorBaseTypes($limit: Int, $offset: Int, $search: String!, $orderBy: [SensorBaseTypesOrderBy!]) {
+  allSensorBaseTypes(
+    filter: {or: [{prefix: {includesInsensitive: $search}}]}
+    orderBy: $orderBy
+    first: $limit
+    offset: $offset
+  ) {
+    totalCount
+        nodes {
+            id
+            prefix
+            suffix
+            series
+            volume
+            maintenanceIntervalMonths
+            replacementIntervalMonths
+            quotationIntervalMonths
+            principleByPrincipleId {
+                id
+                name
+            }
+        } 
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateSensorBaseType(
+    $body: SensorBaseTypeInput!
+) {
+  createSensorBaseType(
+    input: {sensorBaseType: $body}
+  ) {
+    sensorBaseType {
+            id
+            prefix
+            suffix
+            series
+            volume
+            maintenanceIntervalMonths
+            replacementIntervalMonths
+            quotationIntervalMonths
+            principleByPrincipleId {
+                id
+                name
+            }
+        } 
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateSensorBaseType(
+    $id: Int!, $patch: SensorBaseTypePatch!
+) {
+  updateSensorBaseTypeById(
+    input: {
+		id: $id
+		sensorBaseTypePatch: $patch	
+    }
+  ) {
+    sensorBaseType {
+            id
+            prefix
+            suffix
+            series
+            volume
+            maintenanceIntervalMonths
+            replacementIntervalMonths
+            quotationIntervalMonths
+            principleByPrincipleId {
+                id
+                name
+            }
+        } 
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteSensorBaseType($id: Int!)
+{
+	deleteSensorBaseTypeById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}
