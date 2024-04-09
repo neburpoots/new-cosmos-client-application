@@ -74,6 +74,7 @@ import { AssemblyMultiversPopoverComponent } from "./views/admin/assemblyMultive
 import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
 import { AssemblyTypeComponent } from "./views/admin/assemblyType/assemblyType.component";
 import { GraphQLModule } from './graphql.module';
+import { ApolloClientService } from "./apollo-client.service";
 import { APOLLO_OPTIONS, ApolloModule } from "apollo-angular";
 import { TableComponent } from "./components/table/table.component";
 import { PaginationTableComponent } from "./components/pagination/pagination.component";
