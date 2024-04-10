@@ -7,6 +7,7 @@ import { Apollo } from 'apollo-angular';
 import { AuthenticateGQL, CurrentReadPermissionsGQL, CurrentReadPermissionsQuery, CurrentUsernameGQL, CurrentWritePermissionsGQL, CurrentWritePermissionsQuery, JwtTokenDocument } from '../../../generated/graphql';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
 
 //------------------------------------------------------------------------------
 type CurrentReadPermissions = Exclude<CurrentReadPermissionsQuery['currentReadPermissions'], null | undefined>;
@@ -95,8 +96,8 @@ export class AuthService
 
 	login(username: string, password: string): Observable<boolean>
 	{			
-		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});		
-		console.log('test')						
+		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});	
+	
 		return this.authenticateService.mutate({username: username, password: password}).pipe
 		(
 			switchMap
@@ -115,8 +116,9 @@ export class AuthService
 					// this.toastService.add({type: ToastType.Success, message: 'Logged in successfully!', delay: 2});
 					
 					// write jwtToken
-					this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: data?.authenticate?.jwtToken}});											
-					
+					this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: data?.authenticate?.jwtToken}});	
+															
+					localStorage.setItem('jwtToken', data?.authenticate?.jwtToken);
 					// this.router.navigate(['/admin/dashboard']);
 
 					// currentUsername
@@ -151,7 +153,9 @@ export class AuthService
 		//this.currentReadPermissions$.next(null);
 		
 		// clear jwtToken
-		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});			
+		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});
+		
+		localStorage.removeItem('jwtToken');
 		
 		this.router.navigate(['/auth/login']);
 

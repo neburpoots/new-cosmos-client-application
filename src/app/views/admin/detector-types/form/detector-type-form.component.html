@@ -1,5 +1,5 @@
 <h2 *ngIf="!isInlineCreating" class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
-<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'flex items-start pt-1' : 'flex flex-col gap-5'"
+<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'sticky flex items-start pt-1' : 'flex flex-col gap-5'"
     (ngSubmit)="onSubmit()">
     <div *ngIf="isInlineCreating" [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
         [style.max-width.px]="isInlineCreating ? cellWidths[0] : null">

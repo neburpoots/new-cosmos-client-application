@@ -42,10 +42,10 @@ export class BuildingFormComponent extends BaseFormComponent<BuildingInput> {
         });
     }
 
-    createDto(): any {
+    createDto(): BuildingInput {
         //todo setup owner_id, ownerId
         return {
-            buildingId: +this.myForm.value.building,
+            endUserId: +this.myForm.value.endUser,
             name: this.myForm.value.name,
             created: new Date(),
             modified: new Date(),

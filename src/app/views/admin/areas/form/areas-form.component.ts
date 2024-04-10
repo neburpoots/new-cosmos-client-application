@@ -115,6 +115,8 @@ export class AreasFormComponent extends BaseFormComponent<AreaInput> {
             remarks: changes.remarks,
         };
 
+        if(!this.object.id) return;
+
         this.selectedEndUser(this.object.endUser);
 
         this.selectedBuilding(this.object.building);

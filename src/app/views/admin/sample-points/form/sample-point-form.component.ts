@@ -18,7 +18,6 @@ export class SamplePointsFormComponent extends BaseFormComponent<SamplePointInpu
         floor: null,
         name: null,
         area: null,
-        remarks: '',
     };
 
     myForm: FormGroup;
@@ -62,11 +61,10 @@ export class SamplePointsFormComponent extends BaseFormComponent<SamplePointInpu
             floor: [this.object.floor, [Validators.required]],
             name: [this.object.name, [Validators.required]],
             area: [this.object.area, [Validators.required]],
-            remarks: [this.object.remarks],
         });
     }
 
-    createDto(): any {
+    createDto(): SamplePointInput {
         //todo setup owner_id, ownerId
         return {
             areaId: +this.myForm.value.area,
@@ -123,14 +121,17 @@ export class SamplePointsFormComponent extends BaseFormComponent<SamplePointInpu
     setEditData(changes: any): void {
         
         this.object = {
-            id: changes.id,
-            name: changes.name,
-            endUser: changes.endUser,
-            building: changes.building,
-            floor: changes.floor,
-            area: changes.area,
-            remarks: changes.remarks,
+            id: changes?.id,
+            name: changes?.name,
+            endUser: changes?.endUser,
+            building: changes?.building,
+            floor: changes?.floor,
+            area: changes?.area,
         };
+
+        if(this.object.id == null) {
+            return;
+        }
 
         this.selectedEndUser(this.object.endUser);
 

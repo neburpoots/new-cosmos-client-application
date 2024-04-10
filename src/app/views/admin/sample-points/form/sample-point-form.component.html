@@ -1,5 +1,5 @@
 <h2 *ngIf="!isInlineCreating" class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
-<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'flex items-start pt-1' : 'flex flex-col gap-5'"
+<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'sticky flex items-start pt-1' : 'flex flex-col gap-5'"
     (ngSubmit)="onSubmit()">
 
     <div [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
@@ -41,15 +41,6 @@
             [inline]="isInlineCreating" [touched]="myForm.controls['name'].touched"
             [errors]="[{ name: 'required', message: 'Name is required' }]"></input-component>
     </div>
-
-    <div *ngIf="!isInlineCreating"  [style.min-width.px]="isInlineCreating ? cellWidths[5] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[5] : null">
-        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'remarks'" [displayName]="'Remarks'"
-            [inputType]="'textarea'"
-            [inline]="isInlineCreating" [touched]="myForm.controls['remarks'].touched"
-            [errors]="[]"></input-component>
-    </div>
-
 
     <!-- This is is for modal form -->
     <div *ngIf="!isInlineCreating" class="flex flex-row mt-auto justify-end items-center gap-2">
