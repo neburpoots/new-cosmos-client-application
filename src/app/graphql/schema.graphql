@@ -48495,6 +48495,7 @@ type AssemblyMultiversEntitiesConnection {
 
 type AssemblyMultiversEntity {
   assemblageOrder: String
+  id: String
   orderDatum: Date
   cdmagazijn: String
   aantal: BigFloat
@@ -48532,6 +48533,8 @@ enum AssemblyMultiversEntitiesOrderBy {
   NATURAL
   ASSEMBLAGE_ORDER_ASC
   ASSEMBLAGE_ORDER_DESC
+  ID_ASC
+  ID_DESC
   ORDER_DATUM_ASC
   ORDER_DATUM_DESC
   CDMAGAZIJN_ASC
@@ -48583,6 +48586,9 @@ fields are tested for equality and combined with a logical ‘and.’
 input AssemblyMultiversEntityCondition {
   """Checks for equality with the object’s `assemblageOrder` field."""
   assemblageOrder: String
+
+  """Checks for equality with the object’s `id` field."""
+  id: String
 
   """Checks for equality with the object’s `orderDatum` field."""
   orderDatum: Date
@@ -48654,6 +48660,9 @@ A filter to be used against `AssemblyMultiversEntity` object types. All fields a
 input AssemblyMultiversEntityFilter {
   """Filter by the object’s `assemblageOrder` field."""
   assemblageOrder: StringFilter
+
+  """Filter by the object’s `id` field."""
+  id: StringFilter
 
   """Filter by the object’s `orderDatum` field."""
   orderDatum: DateFilter

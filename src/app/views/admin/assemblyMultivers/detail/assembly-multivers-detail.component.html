@@ -4,7 +4,7 @@
         <div class="w-full mb-12 pt-12 px-4">
             <div class="pt-12 flex flex-col gap-6">
                 <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
-                    <h1 class="text-2xl text-roboto font-bold text-gray-800">Assembly Multivers ({{item?.assemblage_order}} / {{item?.commentaar}})</h1>
+                    <h1 class="text-2xl text-roboto font-bold text-gray-800">Assembly Multivers ({{item?.orderDatum}} / {{item?.commentaar}})</h1>
                     <p>View the details of the assembly here.</p>
                 </div>
                 <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
@@ -15,7 +15,7 @@
                         </div>
                         <div class="flex flex-col items-center justify-center">
                             <p class="font-bold">MV Code</p>
-                            <p>{{item?.cdartikel?.cdartikel}}</p>
+                            <p>{{item?.cdartikel}}</p>
                         </div>
                         <div class="flex flex-col items-center justify-center">
                             <p class="font-bold">Status</p>
@@ -23,22 +23,22 @@
                         </div>
                     </div>
                     <hr class="mt-4">
-                    @for (line of item?.assemblyMultiversLines; track line.assemblageOrder) {
+                    @for (line of assemblyLines; track line.assemblageOrder) {
                         <div class="card mb-4">
                             <div class="card-header text-lg my-2 font-semibold">
-                              Assembly Line ({{ line?.cdartikel?.product?.omschr }})
+                              Assembly Line ({{ line?.omschr }})
                             </div>
                             <div class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 card-body gap-x-4">
-                              <p>Part: {{ line.cdartikel?.cdartikel }}</p>
-                              <p>Supplier: {{ line.cdartikel?.purchasingData?.creditor?.zoeknaam }}</p>
-                              <p>Order Code: {{line.cdartikel?.purchasingData?.bestcode}}</p>
-                              <p>Free: {{line.cdartikel?.stock?.voorraad}}</p>
-                              <p>PO(N): {{line.cdartikel?.stock?.inkopen}}</p>
+                              <p>Part: {{ line.cdartikel }}</p>
+                              <p>Supplier: {{ line?.cdcrediteur }}</p>
+                              <p>Order Code: {{line.bestcode}}</p>
+                              <p>Free: {{line.voorraad}}</p>
+                              <p>PO(N): {{line.inkopen}}</p>
                               <p>Q(n): {{ line.aantalNorm }}</p>
                               <p>Number Used: {{ line.aantalGebruikt }}</p>
                               <p>Used Value: {{ line.waardeGebruikt | currency }}</p>
                               <p>Number of Assembly: {{ line.aantalSamenstelling }}</p>
-                              <p>Number Reserved: {{ line.aantalgereservaf }}</p>
+                              <p>Number Reserved: {{ line.aantalNorm }}</p>
                             </div>
                           </div>
                           <hr>

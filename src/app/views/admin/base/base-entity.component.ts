@@ -82,7 +82,7 @@ export abstract class BaseEntity<T> {
       }
 
       const page = params['page'];
-
+      
       if (page) {
         this.searchCriteria.page = page;
       }
@@ -138,7 +138,6 @@ export abstract class BaseEntity<T> {
   setSelectedItem(id: number): void {
     this.nodes$.subscribe(value => {
       this.selectedItem = value.find((item: any) => item.id === id);
-      console.log(value.find((item: any) => item.id === id))
 
       this.setEditData();
     });
@@ -163,7 +162,9 @@ export abstract class BaseEntity<T> {
   }
 
   openViewModal(id: number): void {
-    this.setSelectedItem(id);
+    console.log(id)
+    // this.setSelectedItem(id);
+
     this.loadDetailData(id);
     this.isViewModalVisible = true;
   }

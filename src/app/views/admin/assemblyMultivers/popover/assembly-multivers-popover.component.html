@@ -14,23 +14,23 @@
                 <!-- Add other labels for each column -->
             </div>
 
-            @for (line of assemblyMultiversLine.slice(0, 10); track line.assemblageOrder) {
+            @for (line of assemblyMultiversLines.slice(0, 10); track line.assemblageOrder) {
                 <div class="grid grid-cols-2 gap-2 mb-2" >
                     <div class="col">
-                        <p class="p-1">{{ line?.cdartikel?.cdartikel }}</p>
+                        <p class="p-1">{{ line?.cdartikel }}</p>
                     </div>
                     <div class="col">
-                        <p class="p-1">{{ line?.cdartikel?.product?.omschr }}</p>
+                        <p class="p-1">{{ line?.omschr }}</p>
                     </div>
                     <!-- Add other <div class="col"> elements for each column -->
                 </div>
             } @empty {
-                <p class="text-gray-500">Empty list of assembly details</p>
+                <p class="text-gray-200">Empty list of assembly details</p>
             }
 
-            @if(assemblyMultiversLine.length > 10) {
+            @if(assemblyMultiversLines.length > 10) {
                 <div class="flex justify-end text-lg text-white">
-                    {{assemblyMultiversLine.length - 10}} more
+                    {{assemblyMultiversLines.length - 10}} more
                 </div>
             }
         </div>

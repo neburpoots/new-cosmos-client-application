@@ -259,8 +259,9 @@ export class SidebarComponent implements OnInit {
 
   // Method to toggle the dropdown state
   toggleFavoritesDropdown() {
+    let open = this.favoritesDropdownActive;
     this.closeAllMenus();
-    this.favoritesDropdownActive = !this.favoritesDropdownActive;
+    this.favoritesDropdownActive = !open;
   }
 
   // Method to toggle the dropdown state

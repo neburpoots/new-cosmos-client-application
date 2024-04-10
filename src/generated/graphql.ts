@@ -6806,6 +6806,8 @@ export enum AssemblyMultiversEntitiesOrderBy {
   CommentaarDesc = 'COMMENTAAR_DESC',
   GuidItemAsc = 'GUID_ITEM_ASC',
   GuidItemDesc = 'GUID_ITEM_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
   InkopenAsc = 'INKOPEN_ASC',
   InkopenDesc = 'INKOPEN_DESC',
   MaxvoorraadAsc = 'MAXVOORRAAD_ASC',
@@ -6843,6 +6845,7 @@ export type AssemblyMultiversEntity = {
   cdmagazijn?: Maybe<Scalars['String']['output']>;
   commentaar?: Maybe<Scalars['String']['output']>;
   guidItem?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['String']['output']>;
   inkopen?: Maybe<Scalars['BigFloat']['output']>;
   maxvoorraad?: Maybe<Scalars['BigFloat']['output']>;
   minvoorraad?: Maybe<Scalars['BigFloat']['output']>;
@@ -6884,6 +6887,8 @@ export type AssemblyMultiversEntityCondition = {
   commentaar?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `guidItem` field. */
   guidItem?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `inkopen` field. */
   inkopen?: InputMaybe<Scalars['BigFloat']['input']>;
   /** Checks for equality with the object’s `maxvoorraad` field. */
@@ -6934,6 +6939,8 @@ export type AssemblyMultiversEntityFilter = {
   commentaar?: InputMaybe<StringFilter>;
   /** Filter by the object’s `guidItem` field. */
   guidItem?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<StringFilter>;
   /** Filter by the object’s `inkopen` field. */
   inkopen?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `maxvoorraad` field. */
@@ -81573,7 +81580,7 @@ export type AllAssemblyMultiversEntitiesQueryVariables = Exact<{
 }>;
 
 
-export type AllAssemblyMultiversEntitiesQuery = { __typename?: 'Query', allAssemblyMultiversEntities?: { __typename?: 'AssemblyMultiversEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyMultiversEntity', aantal?: any | null, aantalGeassembleerd?: any | null, aantalgereservbij?: any | null, advice?: number | null, afdrukAssemblageBon?: string | null, assemblageDatum?: any | null, assemblageOrder?: string | null, cdartikel?: string | null, cdmagazijn?: string | null, commentaar?: string | null, guidItem?: string | null, orderDatum?: any | null, status?: string | null, sysCreate?: string | null, sysUpdate?: string | null, waardeGeassembleerd?: any | null }> } | null };
+export type AllAssemblyMultiversEntitiesQuery = { __typename?: 'Query', allAssemblyMultiversEntities?: { __typename?: 'AssemblyMultiversEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyMultiversEntity', id?: string | null, aantal?: any | null, aantalGeassembleerd?: any | null, aantalgereservbij?: any | null, advice?: number | null, afdrukAssemblageBon?: string | null, assemblageDatum?: any | null, assemblageOrder?: string | null, cdartikel?: string | null, cdmagazijn?: string | null, commentaar?: string | null, omschr?: string | null, guidItem?: string | null, orderDatum?: any | null, status?: string | null, sysCreate?: string | null, sysUpdate?: string | null, waardeGeassembleerd?: any | null }> } | null };
 
 export type AllAssemblyLinesMultiversEntitiesQueryVariables = Exact<{
   assemblage_order?: InputMaybe<Scalars['String']['input']>;
@@ -81585,6 +81592,13 @@ export type AllAssemblyLinesMultiversEntitiesQueryVariables = Exact<{
 
 
 export type AllAssemblyLinesMultiversEntitiesQuery = { __typename?: 'Query', allAssemblyLineEntities?: { __typename?: 'AssemblyLineEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyLineEntity', omschr?: string | null, zoeknaam?: string | null, waardeGebruikt?: any | null, voorraad?: any | null, minvoorraad?: any | null, maxvoorraad?: any | null, locatie?: string | null, inkvolgnr?: number | null, inkopen?: any | null, gereserveerd?: any | null, cdmagazijn?: string | null, cdcrediteur?: string | null, cdartikel?: string | null, bestcode?: string | null, assemblageOrder?: string | null, assemblageDatum?: any | null, advice?: number | null, aantalSamenstelling?: any | null, aantalNorm?: any | null, aantalGebruikt?: any | null }> } | null };
+
+export type AssemblyMultiversByIdQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type AssemblyMultiversByIdQuery = { __typename?: 'Query', assemblyMultiversById?: { __typename?: 'AssemblyMultiversEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyMultiversEntity', id?: string | null, aantal?: any | null, omschr?: string | null, aantalGeassembleerd?: any | null, aantalgereservbij?: any | null, advice?: number | null, afdrukAssemblageBon?: string | null, assemblageDatum?: any | null, assemblageOrder?: string | null, cdartikel?: string | null, cdmagazijn?: string | null, commentaar?: string | null, guidItem?: string | null, orderDatum?: any | null, status?: string | null, sysCreate?: string | null, sysUpdate?: string | null, waardeGeassembleerd?: any | null }> } | null };
 
 export type AssemblyTypeEntitiesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -82791,6 +82805,7 @@ export const AllAssemblyMultiversEntitiesDocument = gql`
   ) {
     totalCount
     nodes {
+      id
       aantal
       aantalGeassembleerd
       aantalgereservbij
@@ -82801,6 +82816,7 @@ export const AllAssemblyMultiversEntitiesDocument = gql`
       cdartikel
       cdmagazijn
       commentaar
+      omschr
       guidItem
       orderDatum
       status
@@ -82862,6 +82878,46 @@ export const AllAssemblyLinesMultiversEntitiesDocument = gql`
   })
   export class AllAssemblyLinesMultiversEntitiesGQL extends Apollo.Query<AllAssemblyLinesMultiversEntitiesQuery, AllAssemblyLinesMultiversEntitiesQueryVariables> {
     override document = AllAssemblyLinesMultiversEntitiesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AssemblyMultiversByIdDocument = gql`
+    query assemblyMultiversById($id: String) {
+  assemblyMultiversById: allAssemblyMultiversEntities(
+    filter: {assemblageOrder: {equalTo: $id}}
+  ) {
+    totalCount
+    nodes {
+      id
+      aantal
+      omschr
+      aantalGeassembleerd
+      aantalgereservbij
+      advice
+      afdrukAssemblageBon
+      assemblageDatum
+      assemblageOrder
+      cdartikel
+      cdmagazijn
+      commentaar
+      guidItem
+      orderDatum
+      status
+      sysCreate
+      sysUpdate
+      waardeGeassembleerd
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AssemblyMultiversByIdGQL extends Apollo.Query<AssemblyMultiversByIdQuery, AssemblyMultiversByIdQueryVariables> {
+    override document = AssemblyMultiversByIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

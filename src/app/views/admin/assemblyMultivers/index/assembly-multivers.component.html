@@ -3,14 +3,15 @@
     <div class="h-full w-full flex items-center">
         <div class="mt-[100px] w-full mb-12 px-4">
             <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
-                (setTableWidths)="setTableWidths($event)" (edit)="openEditModal($event)"
-                [isCreatable]="false"
+                (setTableWidths)="setTableWidths($event)" (edit)="openEditModal($event)" [isCreatable]="false"
                 [detailPagePrefix]="'/user/assemblymultivers/'" [isViewable]="true" (closeView)="closeViewModal()"
-                 [title]="objectPlural"
-                [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData" [inline_selector]="'filters-form'"
+                [title]="objectPlural" 
+                (view)="openViewModal($event)"
                 
-                >
+                [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)"
+                [columns]="tableHeaders" [data]="tableData" [inline_selector]="'filters-form'">
+                <assembly-multivers-popover [assemblyMultiversLines]="assemblyMultiversLines"
+                    [item]="selectedItem"></assembly-multivers-popover>
 
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"

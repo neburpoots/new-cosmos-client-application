@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AssemblyMultiversLine } from '../../../../models/entities/assemblyMultiversLine';
+import { AssemblyLineEntity, AssemblyMultiversEntity } from '../../../../../generated/graphql';
 
 @Component({
     selector: 'assembly-multivers-popover',
@@ -16,6 +17,6 @@ import { AssemblyMultiversLine } from '../../../../models/entities/assemblyMulti
     //   styleUrls: ['./modal.component.css']
 })
 export class AssemblyMultiversPopoverComponent {
-    @Input() assemblyMultiversLine: AssemblyMultiversLine[] = [];
+    @Input() assemblyMultiversLines: AssemblyLineEntity[] = [];
     @Input() item: any;
 }

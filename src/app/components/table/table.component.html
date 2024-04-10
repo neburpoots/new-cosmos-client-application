@@ -54,7 +54,7 @@
 
               </div>
             </th>
-            <th class="bg-slate-100 sticky right-0 rounded-tr-lg text-slate-800 rounded-br-lg">
+            <th *ngIf="isDeletable || isEditable || isViewable || isPdf" class="bg-slate-100 sticky right-0 rounded-tr-lg text-slate-800 rounded-br-lg">
               <div
                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-4">
                 Actions
@@ -102,7 +102,7 @@
               </div>
               <a [routerLink]="detailPagePrefix + item['id']?.value">
                 <div *ngIf="isViewable" [satPopoverAnchor]="popover" (mouseover)="popover.open()"
-                  (mouseover)="openViewModal(item['id'].value)" (mouseleave)="popover.close()"
+                  (mouseenter)="openViewModal(item['id'].value)" (mouseleave)="popover.close()"
                   class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
                   <fa-icon [icon]="faMagnifyingGlass"></fa-icon>
                   <sat-popover verticalAlign="center" horizontalAlign="before" #popover>

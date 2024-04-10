@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
 
-import { DetectorTypeService } from '../../../../services/detectorType/detectorType.service';
 import { DetectorDto } from '../../../../models/dto/detectorDto';
 
 import { BaseFormComponent } from '../../base/form/base-form.component';
@@ -33,7 +32,7 @@ export class DetectorFormComponent extends BaseFormComponent<DetectorDto> {
 
     constructor(protected override toastr: ToastrService, 
         protected override fb: FormBuilder, 
-        private detectorTypeService: DetectorTypeService, 
+        // private detectorTypeService: DetectorTypeService, 
         
         private tempService: CreateDetectorGQL
         ) {

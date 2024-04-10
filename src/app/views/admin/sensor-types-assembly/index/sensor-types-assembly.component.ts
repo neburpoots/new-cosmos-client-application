@@ -13,7 +13,7 @@ import { TableHead } from "../../../../models/utils/tableHead";
 import { SensorTypesFormComponent } from "../../sensor-types/form/sensor-types-form.component";
 
 @Component({
-  selector: "app-sensor-types",
+  selector: "app-sensor-types-assembly",
   templateUrl: "./sensor-types-assembly.component.html",
 })
 

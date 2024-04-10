@@ -126,6 +126,7 @@ export class TableComponent {
 
 
   openViewModal(id: number): void {
+    console.log('test')
     this.view.emit(id);
   }
 
