@@ -10,7 +10,6 @@ import { DashboardComponent } from "./views/admin/dashboard/dashboard.component"
 import { MapsComponent } from "./views/admin/maps/maps.component";
 import { SettingsComponent } from "./views/admin/settings/settings.component";
 import { TablesComponent } from "./views/admin/tables/tables.component";
-import { AssemblyComponent } from "./views/admin/assembly/index/assembly.component";
 
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
@@ -51,7 +50,6 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: "dashboard", component: DashboardComponent },
-      { path: "assembly", component: AssemblyComponent },
       { path: "assemblymultivers", component: AssemblyMultiversComponent },
       { path: "assemblymultivers/:id", component: AssemblyMultiversDetailComponent }, // Add the dynamic parameter ":userId"
       { path: "calibrationgases", component: CalibrationGasesComponent },

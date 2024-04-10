@@ -68,10 +68,27 @@ export abstract class BaseEntity<T> {
   //this is the orderby that is used in case of removal of order by in table component
   abstract baseOrderBy: any;
 
-
   constructor(protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
     protected getService: Query<any, any>, protected deleteService: Mutation<any, any> | null
   ) { }
+
+  async checkQueryParams(): Promise<void> {
+    this.route.queryParams.subscribe(params => {
+      const editId = params['edit'];
+
+      if (editId) {
+        // Open your modal with the specified ID
+        this.openEditModal(editId);
+      }
+
+      const page = params['page'];
+
+      if (page) {
+        this.searchCriteria.page = page;
+      }
+    });
+  }
+
 
   loadData(searchCriteria: SearchFilters) {
     return this.refetchTrigger.pipe(

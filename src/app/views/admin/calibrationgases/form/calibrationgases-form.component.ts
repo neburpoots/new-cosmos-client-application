@@ -1,12 +1,7 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { DetectorTypeService } from '../../../../services/detectorType/detectorType.service';
-import DetectorType from '../../../../models/entities/detectorType';
-import { DetectorDto } from '../../../../models/dto/detectorDto';
-import { AbstractFormComponent } from '../../abstract/form/abstract-form.component';
-import { IAbstractForm } from '../../../../models/interface/IAbstractForm';
-import { AbstractService } from '../../../../services/abstract/abstract.service';
+
 import { CalgasDto } from '../../../../models/dto/calgasDto';
 import { Gas } from '../../../../models/entities/gas';
 import { SearchCriteria } from '../../../../models/utils/searchCriteria';

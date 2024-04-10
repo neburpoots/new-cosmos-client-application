@@ -1,20 +1,14 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 
-import AssemblyType from "../../../models/entities/assemblyType";
-import { AbstractComponent } from "../abstract/abstract.component";
 import { ToastrService } from "ngx-toastr";
-import { AbstractService } from "../../../services/abstract/abstract.service";
 import { TableField } from "../../../models/utils/tableField";
-import { IAbstractComponent } from "../../../models/interface/IAbstractComponent";
-import { TableHeader } from "../../../models/utils/tableHeader";
 import { ActivatedRoute } from "@angular/router";
 import { Observable, Subject, map, of, startWith, switchMap } from "rxjs";
 import { AssemblyTypeEntitiesGQL, AssemblyTypeEntitiesQuery, AssemblyTypesEntitiesOrderBy, AssemblyTypesEntity, AssemblyTypesOrderBy } from "../../../../generated/graphql";
 import { BaseEntity } from "../base/base-entity.component";
 import { SearchFilters } from "../../../models/utils/searchFilters";
-import { AssemblyService } from "../../../services/assembly/assembly.service";
-import { AssemblyTypeService } from "../../../services/assemblyType/assemblyType.service";
+
 import { TableHead } from "../../../models/utils/tableHead";
 
 @Component({

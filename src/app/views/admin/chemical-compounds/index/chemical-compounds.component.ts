@@ -1,15 +1,6 @@
 import { Component, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { HttpClient, HttpResponse } from "@angular/common/http";
-import { PaginatedResult } from "../../../../models/utils/pagination";
-import { SearchCriteria } from "../../../../models/utils/searchCriteria";
-import { ModalWidth } from "../../../../models/enums/modalWidth.enum";
-import { Assembly } from "../../../../models/entities/assembly";
-import { CalGasService } from "../../../../services/calgas/calgas.service";
-import { CalGas } from "../../../../models/entities/calgas";
 import { TableField } from "../../../../models/utils/tableField";
-import { AbstractComponent } from "../../abstract/abstract.component";
-import { IAbstractComponent } from "../../../../models/interface/IAbstractComponent";
-import { AbstractService } from "../../../../services/abstract/abstract.service";
 import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../../models/utils/tableHeader";
 import { ActivatedRoute } from "@angular/router";

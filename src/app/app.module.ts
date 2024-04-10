@@ -49,21 +49,17 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user-dropdown.component";
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthService } from "./services/authentication/auth.service";
-import { AssemblyComponent } from "./views/admin/assembly/index/assembly.component";
 import { UserComponent } from "./layouts/user/user.component";
 import { PaginationComponent } from "./components/cards/card-pagination/pagination.component";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from "./components/modal/modal.component";
-import { AssemblyCreateComponent } from "./views/admin/assembly/create/assembly-create.component";
 import { InputComponent } from "./components/form/input/input.component";
 import { SelectComponent } from "./components/form/select/select.component";
 import { ToastrModule } from 'ngx-toastr';
 import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
-import { AbstractComponent } from "./views/admin/abstract/abstract.component";
 import { DetectorComponent } from "./views/admin/detectors/detector.component";
 import { DeleteModalComponent } from "./views/admin/delete/delete-modal.component";
-import { AssemblyFormComponent } from "./views/admin/assembly/form/assembly-form.component";
 import { DetectorFormComponent } from "./views/admin/detectors/form/detector-form.component";
 import { CalibrationGasesFormComponent } from "./views/admin/calibrationgases/form/calibrationgases-form.component";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -147,7 +143,6 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/inde
     MapsComponent,
     SettingsComponent,
     TablesComponent,
-    AssemblyComponent,
     LoginComponent,
     RegisterComponent,
     IndexComponent,
@@ -159,7 +154,6 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/inde
     CalibrationGasesComponent,
     DetectorComponent,
     DeleteModalComponent,
-    AssemblyFormComponent,
     DetectorFormComponent,
     CalibrationGasesFormComponent,
     PopOverComponent,
@@ -169,7 +163,6 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/inde
     SensorBaseTypeComponent,
     SensorBaseTypesFormComponent,
     AssemblyTypeComponent,
-    AssemblyCreateComponent,
     TableComponent,
     PaginationTableComponent,
     DetectorTypeComponent,
