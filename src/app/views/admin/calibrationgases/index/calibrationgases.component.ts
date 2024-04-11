@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { CalibrationGasesFormComponent } from "../form/calibrationgases-form.component";
 import { TableHeader } from "../../../../models/utils/tableHeader";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { CalGasEntitiesGQL, CalGasesOrderBy, CalgasEntitiesOrderBy, CalgasEntity, DeleteCalGasGQL } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -69,11 +69,14 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private calGasService: CalGasEntitiesGQL,
     private deleteCalGasService: DeleteCalGasGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, calGasService, deleteCalGasService);
+    super(router, toastr, route, http, calGasService, deleteCalGasService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
 
   // tableHeaders : TableHeader[] = [

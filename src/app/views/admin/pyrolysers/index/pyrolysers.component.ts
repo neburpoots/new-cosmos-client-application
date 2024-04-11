@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllPyrolyserEntitiesGQL,  DeletePyrolyserGQL, PyrolyserEntitiesOrderBy, PyrolyserEntity } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -69,11 +69,14 @@ export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> implements 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private pyrolyserService: AllPyrolyserEntitiesGQL,
     private deletePyrolyserService: DeletePyrolyserGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, pyrolyserService, deletePyrolyserService);
+    super(router, toastr, route, http, pyrolyserService, deletePyrolyserService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<PyrolyserEntitiesOrderBy>[] = [
     { key: 'part', label: "Part", asc: PyrolyserEntitiesOrderBy.CdartikelAsc, desc: PyrolyserEntitiesOrderBy.CdartikelDesc },

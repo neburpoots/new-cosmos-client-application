@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllSensorTypesIndicesGQL,  DeleteSensorTypeGQL,  SensorTypesIndex, SensorTypesIndicesOrderBy } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -65,12 +65,14 @@ export class SensorTypeAssembliesComponent extends BaseEntity<SensorTypesIndex> 
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private sensorTypeService: AllSensorTypesIndicesGQL,
-    private deleteSensorService: DeleteSensorTypeGQL
+    private deleteSensorService: DeleteSensorTypeGQL,
+    protected override router: Router
   ) {
-    super(toastr, route, http, sensorTypeService, deleteSensorService);
+    super(router, toastr, route, http, sensorTypeService, deleteSensorService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<SensorTypesIndicesOrderBy>[] = [
     { key: 'prefix', label: "Prefix", asc: SensorTypesIndicesOrderBy.PrefixAsc, desc: SensorTypesIndicesOrderBy.PrefixDesc },

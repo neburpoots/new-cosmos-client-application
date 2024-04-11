@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllAreaEntitiesGQL, AllFloorEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteFloorGQL, FloorEntitiesOrderBy, FloorEntity} from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -70,11 +70,14 @@ export class FloorsComponent extends BaseEntity<FloorEntity> implements OnInit {
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private floorService: AllFloorEntitiesGQL,
     private deleteFloorService: DeleteFloorGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, floorService, deleteFloorService);
+    super(router, toastr, route, http, floorService, deleteFloorService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<FloorEntitiesOrderBy>[] = [
     { key: 'end_user_name', label: "End User", asc: FloorEntitiesOrderBy.EndUserNameAsc, desc: FloorEntitiesOrderBy.EndUserNameDesc },

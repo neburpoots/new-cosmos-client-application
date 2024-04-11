@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllApplicationsGQL, AllGasesGQL, Application, ApplicationsOrderBy, DeleteApplicationGQL, DeleteGasGQL, Gas, GasesOrderBy, Principle } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -64,12 +64,14 @@ export class ApplicationsComponent extends BaseEntity<Application> implements On
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private applicationsService: AllApplicationsGQL,
-    private deleteApplicationService: DeleteApplicationGQL
+    private deleteApplicationService: DeleteApplicationGQL,
+    protected override router: Router
   ) {
-    super(toastr, route, http, applicationsService, deleteApplicationService);
+    super(router, toastr, route, http, applicationsService, deleteApplicationService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<ApplicationsOrderBy>[] = [
     { key: 'name', label: "Name", asc: ApplicationsOrderBy.NameAsc, desc: ApplicationsOrderBy.NameDesc },

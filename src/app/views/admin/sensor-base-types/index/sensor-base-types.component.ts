@@ -4,8 +4,8 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
-import { AllSensorBaseTypesGQL, AllSensorTypesIndicesGQL,  DeleteSensorBaseTypeGQL,  DeleteSensorTypeGQL,  SensorBaseType,  SensorBaseTypesOrderBy,  SensorTypesIndex, SensorTypesIndicesOrderBy } from "../../../../../generated/graphql";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AllSensorBaseTypesGQL, AllSensorTypesIndicesGQL, DeleteSensorBaseTypeGQL, DeleteSensorTypeGQL, SensorBaseType, SensorBaseTypesOrderBy, SensorTypesIndex, SensorTypesIndicesOrderBy } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -72,9 +72,13 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private sensorBaseTypeService: AllSensorBaseTypesGQL,
-    private deleteSensorBaseTypeService: DeleteSensorBaseTypeGQL
+    private deleteSensorBaseTypeService: DeleteSensorBaseTypeGQL,
+    protected override router: Router
   ) {
-    super(toastr, route, http, sensorBaseTypeService, deleteSensorBaseTypeService);
+    super(router, toastr, route, http, sensorBaseTypeService, deleteSensorBaseTypeService);
+
+    this.checkQueryParams();
+
 
     this.nodes$ = this.loadData(this.searchCriteria);
   }
@@ -83,7 +87,7 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
     { key: 'prefix', label: "Prefix", asc: SensorBaseTypesOrderBy.PrefixAsc, desc: SensorBaseTypesOrderBy.PrefixDesc },
     { key: 'suffix', label: "Suffix", asc: SensorBaseTypesOrderBy.SuffixAsc, desc: SensorBaseTypesOrderBy.SuffixDesc },
     { key: 'series', label: "Series", asc: SensorBaseTypesOrderBy.SeriesAsc, desc: SensorBaseTypesOrderBy.SeriesDesc },
-    { key: 'maintenance_interval_months', label: "Maint. Int.", asc: SensorBaseTypesOrderBy.MaintenanceIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.MaintenanceIntervalMonthsDesc},
+    { key: 'maintenance_interval_months', label: "Maint. Int.", asc: SensorBaseTypesOrderBy.MaintenanceIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.MaintenanceIntervalMonthsDesc },
     { key: 'replacement_interval_months', label: "Rep. Int.", asc: SensorBaseTypesOrderBy.ReplacementIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.ReplacementIntervalMonthsDesc },
     { key: 'quotation_interval_months', label: "Quo. Int.", asc: SensorBaseTypesOrderBy.QuotationIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.QuotationIntervalMonthsDesc },
     { key: 'principle', label: "Principle", asc: SensorBaseTypesOrderBy.PrincipleByPrincipleIdNameAsc, desc: SensorBaseTypesOrderBy.PrincipleByPrincipleIdNameDesc },
@@ -91,7 +95,7 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
   ]
 
   mapTableData(sensorBaseTypes: SensorBaseType[]): any[] {
-    return sensorBaseTypes.map((sensorBaseType: SensorBaseType) => { 
+    return sensorBaseTypes.map((sensorBaseType: SensorBaseType) => {
       return {
         id: { url: null, value: sensorBaseType.id } as TableField,
         prefix: { url: null, value: sensorBaseType?.prefix } as TableField,

@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../models/utils/tableHeader";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseEntity } from "../base/base-entity.component";
 import { AllDetectorTypeEntitiesGQL, AllDetectorsEntitiesGQL, DeleteDetectorTypeGQL, DetectorEntitiesOrderBy, DetectorEntity, DetectorTypesEntitiesOrderBy, DetectorTypesEntity } from "../../../../generated/graphql";
 import { SearchFilters } from "../../../models/utils/searchFilters";
@@ -63,11 +63,14 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private detectorTypeEntitiesService: AllDetectorTypeEntitiesGQL,
     private deleteDetectorTypeService: DeleteDetectorTypeGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, detectorTypeEntitiesService, deleteDetectorTypeService);
+    super(router, toastr, route, http, detectorTypeEntitiesService, deleteDetectorTypeService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
 
   get editData(): any {

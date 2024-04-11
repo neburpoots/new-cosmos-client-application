@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 
 import { ToastrService } from "ngx-toastr";
 import { TableField } from "../../../models/utils/tableField";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, Subject, map, of, startWith, switchMap } from "rxjs";
 import { AssemblyTypeEntitiesGQL, AssemblyTypeEntitiesQuery, AssemblyTypesEntitiesOrderBy, AssemblyTypesEntity, AssemblyTypesOrderBy } from "../../../../generated/graphql";
 import { BaseEntity } from "../base/base-entity.component";
@@ -44,11 +44,14 @@ export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> imple
   override nodes$: Observable<Array<AssemblyTypesEntity>>;
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
-    private assemblyTypeService: AssemblyTypeEntitiesGQL) {
-    super(toastr, route, http, assemblyTypeService, null);
+    private assemblyTypeService: AssemblyTypeEntitiesGQL,
+    protected override router: Router
+  ) {
+    super(router, toastr, route, http, assemblyTypeService, null);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   //maps for the url to be set at the front
   mapTableData(assemblyTypes: AssemblyTypesEntity[]): any[] {

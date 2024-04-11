@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllPrinciplesGQL, DeletePrincipleGQL, Principle, PrinciplesOrderBy } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -64,11 +64,14 @@ export class PrinciplesComponent extends BaseEntity<Principle> implements OnInit
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private principleService: AllPrinciplesGQL,
     private deletePrincipleService: DeletePrincipleGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, principleService, deletePrincipleService);
+    super(router, toastr, route, http, principleService, deletePrincipleService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<PrinciplesOrderBy>[] = [
     { key: 'name', label: "Name", asc: PrinciplesOrderBy.NameAsc, desc: PrinciplesOrderBy.NameDesc },

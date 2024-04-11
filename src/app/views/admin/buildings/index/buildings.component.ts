@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllAreaEntitiesGQL, AllBuildingsGQL, AllFloorEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, Building, BuildingsOrderBy, DeleteAreaGQL, DeleteBuildingGQL, DeleteFloorGQL, FloorEntitiesOrderBy, FloorEntity} from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -67,12 +67,14 @@ export class BuildingsComponent extends BaseEntity<Building> implements OnInit {
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private buildingService: AllBuildingsGQL,
-    private deleteBuildingService: DeleteBuildingGQL
+    private deleteBuildingService: DeleteBuildingGQL,
+    protected override router: Router
   ) {
-    super(toastr, route, http, buildingService, deleteBuildingService);
+    super(router, toastr, route, http, buildingService, deleteBuildingService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<BuildingsOrderBy>[] = [
     { key: 'end_user_name', label: "End User", asc: BuildingsOrderBy.EndUserByEndUserIdNameAsc, desc: BuildingsOrderBy.EndUserByEndUserIdNameDesc },

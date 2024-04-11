@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllAreaEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL} from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -70,11 +70,14 @@ export class AreasComponent extends BaseEntity<AreaEntity> implements OnInit {
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private areasService: AllAreaEntitiesGQL,
     private deleteAreaService: DeleteAreaGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, areasService, deleteAreaService);
+    super(router, toastr, route, http, areasService, deleteAreaService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<AreaEntitiesOrderBy>[] = [
     { key: 'end_user_name', label: "End User", asc: AreaEntitiesOrderBy.EndUserNameAsc, desc: AreaEntitiesOrderBy.EndUserNameDesc },

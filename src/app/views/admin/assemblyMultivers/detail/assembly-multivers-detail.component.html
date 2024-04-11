@@ -4,7 +4,7 @@
         <div class="w-full mb-12 pt-12 px-4">
             <div class="pt-12 flex flex-col gap-6">
                 <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
-                    <h1 class="text-2xl text-roboto font-bold text-gray-800">Assembly Multivers ({{item?.orderDatum}} / {{item?.commentaar}})</h1>
+                    <h1 class="text-2xl text-roboto font-bold text-gray-800">Assembly Multivers ({{item?.assemblageOrder}} / {{item?.commentaar}})</h1>
                     <p>View the details of the assembly here.</p>
                 </div>
                 <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
@@ -30,9 +30,10 @@
                             </div>
                             <div class="grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 card-body gap-x-4">
                               <p>Part: {{ line.cdartikel }}</p>
-                              <p>Supplier: {{ line?.cdcrediteur }}</p>
+                              <p>Supplier: {{ line.zoeknaam }}</p>
                               <p>Order Code: {{line.bestcode}}</p>
                               <p>Free: {{line.voorraad}}</p>
+                              <p>Locatie: {{line.locatie}}</p>
                               <p>PO(N): {{line.inkopen}}</p>
                               <p>Q(n): {{ line.aantalNorm }}</p>
                               <p>Number Used: {{ line.aantalGebruikt }}</p>

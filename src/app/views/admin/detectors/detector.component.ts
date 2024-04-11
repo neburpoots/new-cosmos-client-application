@@ -5,7 +5,7 @@ import { TableField } from "../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { DetectorFormComponent } from "./form/detector-form.component";
 import { TableHeader } from "../../../models/utils/tableHeader";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BaseEntity } from "../base/base-entity.component";
 import { AllDetectorsEntitiesGQL, DeleteDetectorGQL, DetectorEntitiesOrderBy, DetectorEntity, DetectorTypesOrderBy, DetectorsOrderBy } from "../../../../generated/graphql";
 import { SearchFilters } from "../../../models/utils/searchFilters";
@@ -67,11 +67,14 @@ export class DetectorComponent extends BaseEntity<DetectorEntity> implements OnI
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private detectorEntitiesService: AllDetectorsEntitiesGQL,
     private deleteDetectorService: DeleteDetectorGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, detectorEntitiesService, deleteDetectorService);
+    super(router, toastr, route, http, detectorEntitiesService, deleteDetectorService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
 
     get editData(): any {

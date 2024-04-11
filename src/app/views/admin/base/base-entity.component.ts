@@ -11,6 +11,7 @@ import { SearchFilters } from "../../../models/utils/searchFilters";
 import { TableHead } from "../../../models/utils/tableHead";
 import { start } from "@popperjs/core";
 import { ModalWidth } from "../../../models/enums/modalWidth.enum";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-base-entity",
@@ -18,10 +19,12 @@ import { ModalWidth } from "../../../models/enums/modalWidth.enum";
 })
 export abstract class BaseEntity<T> {
 
-  abstract searchCriteria: SearchFilters;
+  abstract searchCriteria: any;
 
   abstract objectSingle: string;
   abstract objectPlural: string;
+
+  totalResults: number = 0;
 
   get objectSingleLowerCase(): string {
     return this.objectSingle!.toLowerCase();
@@ -68,11 +71,11 @@ export abstract class BaseEntity<T> {
   //this is the orderby that is used in case of removal of order by in table component
   abstract baseOrderBy: any;
 
-  constructor(protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
-    protected getService: Query<any, any>, protected deleteService: Mutation<any, any> | null
+  constructor(protected router: Router, protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
+    protected getService: Query<any, any>, protected deleteService: Mutation<any, any> | null,
   ) { }
 
-  async checkQueryParams(): Promise<void> {
+  checkQueryParams(): void {
     this.route.queryParams.subscribe(params => {
       const editId = params['edit'];
 
@@ -81,37 +84,62 @@ export abstract class BaseEntity<T> {
         this.openEditModal(editId);
       }
 
-      const page = params['page'];
-      
-      if (page) {
-        this.searchCriteria.page = page;
+      // const page = params['page'];
+      const search = params['search'];
+
+      // if (page) {
+      //   this.searchCriteria.offset = (page - 1) * this.searchCriteria.limit;
+      //   this.searchCriteria.page = page;
+      // }
+
+      console.log(search)
+      if (search) {
+        this.searchCriteria.search = search;
       }
     });
   }
 
+  // Your setQueryParams method
+  async setQueryParams(): Promise<void> {
+    // Get the current query parameters
+    const queryParams = { ...this.route.snapshot.queryParams };
 
-  loadData(searchCriteria: SearchFilters) {
+    // Update the query parameters with new values
+    queryParams['page'] = this.searchCriteria.page;
+    queryParams['search'] = this.searchCriteria.search;
+
+    // Navigate to the same route with updated query parameters
+    this.router.navigate([], { queryParams: queryParams });
+  }
+
+
+  loadData(searchCriteria: any) {
+    console.log(searchCriteria)
     return this.refetchTrigger.pipe(
       startWith(null),
       switchMap(() =>
         this.getService.watch(searchCriteria ? searchCriteria : this.searchCriteria, { fetchPolicy: 'no-cache' }).valueChanges.pipe
           (
             map(({ data }) => {
+              console.log(data)
               let objects = data[this.Key];
-              this.searchCriteria.total = objects?.totalCount || 0;
-              this.searchCriteria.totalPages = Math.ceil(this.searchCriteria.total / this.searchCriteria.limit);
+              // this.searchCriteria.total = objects?.totalCount || 0;
+              // this.searchCriteria.totalPage  s = Math.ceil(this.searchCriteria.total / this.searchCriteria.limit);
+              this.totalResults = objects?.totalCount || 0;
 
               this.tableData = this.mapTableData(objects?.nodes);
-              return objects?.nodes.filter((object: any) => object) || []
+              return objects?.nodes.filter((object: any) => object) || [];
             }
             )
           )));
   }
 
-  async fetch(searchCriteria?: SearchFilters) {
+  async fetch(searchCriteria?: any) {
+    console.log(searchCriteria)
     if (searchCriteria) {
       this.searchCriteria = searchCriteria;
     }
+    this.setQueryParams();
     this.refetchTrigger.next();
   }
 

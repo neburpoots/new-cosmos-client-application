@@ -81878,10 +81878,10 @@ export type AllFiltersNoPaginationQueryVariables = Exact<{ [key: string]: never;
 export type AllFiltersNoPaginationQuery = { __typename?: 'Query', allFilters?: { __typename?: 'FiltersConnection', nodes: Array<{ __typename?: 'Filter', id: number, name: string }> } | null };
 
 export type AllFilterEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
   orderBy?: InputMaybe<Array<FilterEntitiesOrderBy> | FilterEntitiesOrderBy>;
+  filter: FilterEntityFilter;
 }>;
 
 
@@ -83874,11 +83874,11 @@ export const AllFiltersNoPaginationDocument = gql`
     }
   }
 export const AllFilterEntitiesDocument = gql`
-    query allFilterEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [FilterEntitiesOrderBy!]) {
+    query allFilterEntities($first: Int, $offset: Int, $orderBy: [FilterEntitiesOrderBy!], $filter: FilterEntityFilter!) {
   allFilterEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

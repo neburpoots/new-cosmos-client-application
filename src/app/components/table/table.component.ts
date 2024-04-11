@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from "@angular/core";
 import { trigger, state, style, animate, transition } from "@angular/animations";
-import { faCoffee, faFilePdf, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCoffee, faDeleteLeft, faFilePdf, faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { SatPopover } from "@ncstate/sat-popover";
 import dayjs from "dayjs";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -8,6 +8,7 @@ import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../models/utils/tableHeader";
 import { TableHead } from "../../models/utils/tableHead";
 import { SearchFilters } from "../../models/utils/searchFilters";
+import { FilterBuilder, filterInput, filterTypes } from "../../models/filters/filterBuilder";
 dayjs.extend(customParseFormat);
 
 @Component({
@@ -39,7 +40,7 @@ export class TableComponent {
   @Input() detailPagePrefix: string = "";
   @Input() isInlineCreating: boolean = false;
   @Input() color: string = "light";
-  @Input() searchCriteria: SearchFilters = {
+  @Input() searchCriteria: any = {
     orderBy: [],
     search: "",
     limit: 10,
@@ -67,6 +68,10 @@ export class TableComponent {
 
   faMagnifyingGlass = faMagnifyingGlass;
   faFilePdf = faFilePdf;
+  faFilter = faFilter;
+  faDeleteLeft = faDeleteLeft
+
+  filterBuilder = new FilterBuilder();
 
   //totalwidth of all columns used for inline editing
   totalWidth: number = 0;
@@ -128,6 +133,10 @@ export class TableComponent {
   openViewModal(id: number): void {
     console.log('test')
     this.view.emit(id);
+  }
+
+  openFilterModal(): void {
+    
   }
 
 
@@ -223,4 +232,65 @@ export class TableComponent {
       this.setTableWidths.emit(cellWidths);
     }
   }
+
+  selectedColumn : TableHead<any> | undefined;
+
+
+  async getColumnType(key: string): Promise<string> {
+
+    if(this.data.length === 0) {
+      this.toastr.error('No data to filter on', 'Error');
+    }
+
+    let firstRow = this.data[0];
+
+    if(this.selectedColumn === undefined) {
+      this.toastr.error('No data to filter on', 'Error');
+    }
+    console.log(firstRow[key]);
+    console.log(typeof firstRow[key].value);
+
+    let type : string = typeof firstRow[key].value;
+
+    //check if the column is a date
+    if(type == 'string') {
+      if(this.isValidDate(firstRow[key].value)) {
+        type = 'datetime';
+      }
+    }
+
+    return type;
+  }
+
+  //Runs when column is selected
+  async selectColumnFilter(columnName: any, filterIndex: number): Promise<void> {
+    this.selectedColumn = await this.columns.find((column) => column.key === columnName);
+    let type = await this.getColumnType(columnName);
+
+    let options = await this.filterBuilder.getFilterOptionsForType(type);
+
+    console.log(filterIndex)
+    this.filterBuilder.filterInputs[filterIndex].column = columnName;
+    this.filterBuilder.filterInputs[filterIndex].filterTypes = options;
+    
+    console.log(type);
+  }
+
+  async selectTypeFilter(selectTypeFilter: number, filterInput: filterInput): Promise<void> {
+    let selectedFilterType = filterTypes.find((filterType) => filterType.id === selectTypeFilter);
+    console.log(selectedFilterType);
+
+    filterInput.selectedFilterType = selectedFilterType;
+
+    console.log(this.filterBuilder.filterInputs);
+  }
+
+  async addInputFilter(): Promise<void> {
+    this.filterBuilder.addFilterInput();
+  }
+
+  async deleteFilterInput(id: number): Promise<void> {
+    this.filterBuilder.deleteFilterInput(id);
+  }
+
 }

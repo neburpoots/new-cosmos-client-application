@@ -3,7 +3,7 @@ import { HttpClient, HttpResponse } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../../models/utils/tableHeader";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllChemicalCompoundsGQL, CalGasEntitiesGQL, CalGasesOrderBy, CalgasEntitiesOrderBy, CalgasEntity, ChemicalCompound, ChemicalCompoundsOrderBy, DeleteCalGasGQL, DeleteChemicalCompoundGQL } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -71,11 +71,14 @@ export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> imp
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private chemicalCompoundService: AllChemicalCompoundsGQL,
     private deleteChemicalCompoundService: DeleteChemicalCompoundGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, chemicalCompoundService, deleteChemicalCompoundService);
+    super(router, toastr, route, http, chemicalCompoundService, deleteChemicalCompoundService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
 
   // tableHeaders : TableHeader[] = [

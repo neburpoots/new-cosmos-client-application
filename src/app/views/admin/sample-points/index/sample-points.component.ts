@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AllAreaEntitiesGQL, AllSamplePointEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteSamplePointGQL, SamplePointEntitiesOrderBy, SamplePointEntity} from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
@@ -69,11 +69,14 @@ export class SamplePointsComponent extends BaseEntity<SamplePointEntity> impleme
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private samplePointService: AllSamplePointEntitiesGQL,
     private deleteSamplePointService: DeleteSamplePointGQL
+  ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, samplePointService, deleteSamplePointService);
+    super(router, toastr, route, http, samplePointService, deleteSamplePointService);
 
-    this.nodes$ = this.loadData(this.searchCriteria);
-  }
+this.checkQueryParams();
+
+this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<SamplePointEntitiesOrderBy>[] = [
     { key: 'end_user_name', label: "End User", asc: SamplePointEntitiesOrderBy.EndUserNameAsc, desc: SamplePointEntitiesOrderBy.EndUserNameDesc },

@@ -10,11 +10,13 @@ query allFiltersNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allFilterEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [FilterEntitiesOrderBy!]) {
+query allFilterEntities($first: Int, $offset: Int, $orderBy: [FilterEntitiesOrderBy!], 
+    $filter: FilterEntityFilter!,
+) {
   allFilterEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

@@ -4,8 +4,8 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
-import { ActivatedRoute } from "@angular/router";
-import { AllFilterEntitiesGQL, AllORingEntitiesGQL, AllPyrolyserEntitiesGQL,  DeleteFilterGQL,  DeletePyrolyserGQL, FilterEntitiesOrderBy, FilterEntity, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity } from "../../../../../generated/graphql";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AllFilterEntitiesGQL, AllORingEntitiesGQL, AllPyrolyserEntitiesGQL, DeleteFilterGQL, DeletePyrolyserGQL, FilterEntitiesOrderBy, FilterEntity, FilterEntityFilter, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllFilterEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,19 +25,30 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
   objectSingle = 'Filter';
   objectPlural = 'Filters';
 
-  searchCriteria: SearchFilters = {
+  // searchCriteria: SearchFilters = {
+  //   orderBy: [FilterEntitiesOrderBy.IdDesc],
+  //   search: "",
+  //   limit: 10,
+  //   offset: 0,
+  //   totalPages: 0,
+  //   total: 0,
+  //   page: 1,
+  // }
+
+  searchCriteria: QueryAllFilterEntitiesArgs = {
     orderBy: [FilterEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {and: [
+      
+    ]},
+
   }
 
   ngOnInit(): void {
     console.log(this.nodes$);
     this.nodes$.subscribe(result => console.log(result));
+
   }
 
   override setEditData() {
@@ -70,8 +81,12 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private filterService: AllFilterEntitiesGQL,
     private deleteFilterService: DeleteFilterGQL
+    ,
+    protected override router: Router
   ) {
-    super(toastr, route, http, filterService, deleteFilterService);
+    super(router, toastr, route, http, filterService, deleteFilterService);
+
+    this.checkQueryParams();
 
     this.nodes$ = this.loadData(this.searchCriteria);
   }
