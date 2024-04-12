@@ -1,9 +1,9 @@
 #-------------------------------------------------------------------------------
-query allAssemblyMultiversEntities($limit: Int, $offset: Int, $filter: AssemblyMultiversEntityFilter!, $orderBy: [AssemblyMultiversEntitiesOrderBy!]) {
+query allAssemblyMultiversEntities($first: Int, $offset: Int, $filter: AssemblyMultiversEntityFilter!, $orderBy: [AssemblyMultiversEntitiesOrderBy!]) {
   allAssemblyMultiversEntities: allAssemblyMultiversEntities(
     filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -31,13 +31,13 @@ query allAssemblyMultiversEntities($limit: Int, $offset: Int, $filter: AssemblyM
 }
 
 #-------------------------------------------------------------------------------
-query allAssemblyLinesMultiversEntities($assemblage_order: String, $limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyLineEntitiesOrderBy!]) {
+query allAssemblyLinesMultiversEntities($assemblage_order: String, $first: Int, $offset: Int, $search: String!, $orderBy: [AssemblyLineEntitiesOrderBy!]) {
   allAssemblyLineEntities: allAssemblyLineEntities(
     filter: {or: [{cdartikel: {includesInsensitive: $search}}]
     and: [{assemblageOrder: {equalTo: $assemblage_order}}]
     }
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

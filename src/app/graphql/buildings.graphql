@@ -23,11 +23,11 @@ query allBuildingsNoPagination($userId: [Int!]) {
 
 
 #-------------------------------------------------------------------------------
-query allBuildings($limit: Int, $offset: Int, $search: String!, $orderBy: [BuildingsOrderBy!]) {
+query allBuildings($first: Int, $offset: Int, $filter: BuildingFilter!, $orderBy: [BuildingsOrderBy!]) {
   allBuildings(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -46,6 +46,7 @@ query allBuildings($limit: Int, $offset: Int, $search: String!, $orderBy: [Build
     }
   }
 }
+
 
 #-------------------------------------------------------------------------------
 mutation CreateBuilding(

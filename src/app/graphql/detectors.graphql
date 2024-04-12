@@ -127,11 +127,11 @@ fragment detectorFields on Detector
 }
 
 #-------------------------------------------------------------------------------
-query allDetectorsEntities($limit: Int, $offset: Int, $filter: DetectorEntityFilter!, $orderBy: [DetectorEntitiesOrderBy!]) {
+query allDetectorsEntities($first: Int, $offset: Int, $filter: DetectorEntityFilter!, $orderBy: [DetectorEntitiesOrderBy!]) {
   detectors: allDetectorEntities(
     filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

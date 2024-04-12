@@ -17,11 +17,11 @@ query allApplicationsNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allApplications($limit: Int, $offset: Int, $search: String!, $orderBy: [ApplicationsOrderBy!]) {
+query allApplications($first: Int, $offset: Int, $filter: ApplicationFilter!, $orderBy: [ApplicationsOrderBy!]) {
   allApplications(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

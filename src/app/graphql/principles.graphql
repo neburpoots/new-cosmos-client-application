@@ -18,13 +18,13 @@ query allPrinciplesNoPagination
 
 #-------------------------------------------------------------------------------
 query allPrinciples(
-    $limit: Int, $offset: Int, $filter: PrincipleFilter!, $orderBy: [PrinciplesOrderBy!]
+    $first: Int, $offset: Int, $filter: PrincipleFilter!, $orderBy: [PrinciplesOrderBy!]
 )
     {
     allPrinciples(
     filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
     ) {
         totalCount

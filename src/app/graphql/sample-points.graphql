@@ -17,11 +17,11 @@ query allSamplePointsNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allSamplePointEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [SamplePointEntitiesOrderBy!]) {
+query allSamplePointEntities($first: Int, $offset: Int, $filter: SamplePointEntityFilter!, $orderBy: [SamplePointEntitiesOrderBy!]) {
   allSamplePointEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -42,6 +42,7 @@ query allSamplePointEntities($limit: Int, $offset: Int, $search: String!, $order
     }
   }
 }
+
 
 
 #-------------------------------------------------------------------------------

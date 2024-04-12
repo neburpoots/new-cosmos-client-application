@@ -34,7 +34,7 @@ query allRangesNoPagination {
 
 #-------------------------------------------------------------------------------
 query allRanges(
-  $limit: Int
+  $first: Int
   $offset: Int
   $filter: RangeFilter!
   $orderBy: [RangesOrderBy!]
@@ -42,7 +42,7 @@ query allRanges(
   allRanges(
     filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

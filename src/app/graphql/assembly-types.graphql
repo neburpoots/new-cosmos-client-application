@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-query AssemblyTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyTypesEntitiesOrderBy!])
+query AssemblyTypeEntities($first: Int, $offset: Int, $search: String!, $orderBy: [AssemblyTypesEntitiesOrderBy!])
 {
   assemblyTypes: allAssemblyTypesEntities(
     filter: {
@@ -9,7 +9,7 @@ query AssemblyTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy
       ]
     },
     orderBy: $orderBy,
-    first: $limit,  # Use first to limit the number of results
+    first: $first,  # Use first to limit the number of results
     offset: $offset # Use offset to specify the number of results to skip
   ) {
     totalCount

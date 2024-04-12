@@ -20,11 +20,11 @@ query allDetectorTypesNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allDetectorTypeEntities($limit: Int, $offset: Int, $filter: DetectorTypesEntityFilter!, $orderBy: [DetectorTypesEntitiesOrderBy!]) {
+query allDetectorTypeEntities($first: Int, $offset: Int, $filter: DetectorTypesEntityFilter!, $orderBy: [DetectorTypesEntitiesOrderBy!]) {
   detectorTypes: allDetectorTypesEntities(
     filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

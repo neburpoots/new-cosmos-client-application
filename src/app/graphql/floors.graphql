@@ -28,11 +28,11 @@ query allFloorsNoPagination($buildingId: [Int!])
 
 
 #-------------------------------------------------------------------------------
-query allFloorEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorEntitiesOrderBy!]) {
+query allFloorEntities($first: Int, $offset: Int, $filter: FloorEntityFilter!, $orderBy: [FloorEntitiesOrderBy!]) {
   allFloorEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

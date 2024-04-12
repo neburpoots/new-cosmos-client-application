@@ -10,11 +10,11 @@ query allSensorTypesNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allSensorTypesIndices($limit: Int, $offset: Int, $search: String!, $orderBy: [SensorTypesIndicesOrderBy!]) {
+query allSensorTypesIndices($first: Int, $offset: Int, $filter: SensorTypesIndexFilter!, $orderBy: [SensorTypesIndicesOrderBy!]) {
   sensorTypes: allSensorTypesIndices(
-    filter: {or: [{sensorTypeArtikelOmschr: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

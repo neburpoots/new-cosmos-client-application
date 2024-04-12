@@ -24,13 +24,13 @@ query allChemicalCompoundsNoPagination
 
 #-------------------------------------------------------------------------------
 query allChemicalCompounds(
-        $limit: Int, $offset: Int, $filter: ChemicalCompoundFilter!, $orderBy: [ChemicalCompoundsOrderBy!]
+        $first: Int, $offset: Int, $filter: ChemicalCompoundFilter!, $orderBy: [ChemicalCompoundsOrderBy!]
 )
     {
     allChemicalCompounds(
     filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
     ) {
         totalCount

@@ -10,13 +10,13 @@ query allGasesNoPagination
 
 #-------------------------------------------------------------------------------
 query allGases(
-    $limit: Int, $offset: Int, $filter: GasFilter!, $orderBy: [GasesOrderBy!]
+    $first: Int, $offset: Int, $filter: GasFilter!, $orderBy: [GasesOrderBy!]
 )
     {
     allGases(
     filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
     ) {
         totalCount

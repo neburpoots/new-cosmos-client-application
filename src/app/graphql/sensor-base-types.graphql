@@ -20,11 +20,11 @@ query allSensorBaseTypesNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allSensorBaseTypes($limit: Int, $offset: Int, $search: String!, $orderBy: [SensorBaseTypesOrderBy!]) {
+query allSensorBaseTypes($first: Int, $offset: Int, $filter: SensorBaseTypeFilter!, $orderBy: [SensorBaseTypesOrderBy!]) {
   allSensorBaseTypes(
-    filter: {or: [{prefix: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -44,6 +44,7 @@ query allSensorBaseTypes($limit: Int, $offset: Int, $search: String!, $orderBy: 
         } 
   }
 }
+
 
 #-------------------------------------------------------------------------------
 mutation CreateSensorBaseType(

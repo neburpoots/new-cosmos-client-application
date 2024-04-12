@@ -1,8 +1,8 @@
-query allCalibrationGases($limit: Int, $offset: Int, $filter: CalgasEntityFilter, $orderBy: [CalgasEntitiesOrderBy!]) {
+query allCalibrationGases($first: Int, $offset: Int, $filter: CalgasEntityFilter, $orderBy: [CalgasEntitiesOrderBy!]) {
   calGases: allCalgasEntities(
     filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
