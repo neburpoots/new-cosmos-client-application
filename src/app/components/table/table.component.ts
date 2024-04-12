@@ -24,12 +24,17 @@ dayjs.extend(customParseFormat);
     ]),
   ],
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
   @Input() columns: TableHead<any>[] = [];
   @Input() data: any[] = [];
   @Input() title: string = "";
   @Input() object: string = "";
   @Input() inline_selector: string = "";
+
+  //basetablerow used by filtering
+  //The filtering looks at this row for the types of filters.
+  @Input() baseTableRow: any = {};
+
   // @Input() paginationInfo: any = {};
   @Input() isEditable: boolean = false;
   @Input() isDeletable: boolean = false;
@@ -76,7 +81,15 @@ export class TableComponent {
   //totalwidth of all columns used for inline editing
   totalWidth: number = 0;
 
+  rangeInput: string = '';
+
   constructor(private toastr: ToastrService) { }
+
+  ngOnInit(): void {
+    console.log(this.columns);
+    console.log(this.baseTableRow);
+  }
+
 
   formattedDate(date: string): string {
     const hasTime = date.includes('00:00'); // Check if the date string includes a time component
@@ -108,9 +121,15 @@ export class TableComponent {
 
 
   async loadData(searchString: string): Promise<any> {
-    this.searchCriteria.search = searchString;
 
-    this.searchCriteriaChange.emit(this.searchCriteria);
+    if(this.filterBuilder.columnTypes.length === 0) {
+      await this.filterBuilder.setUpColumnTypes(this.columns, this.baseTableRow, this.isValidDate);	
+    }
+
+    this.filterBuilder.globalSearch = searchString;
+
+    this.applyFilters();
+
   }
 
   openCreateModal(): void {
@@ -133,10 +152,6 @@ export class TableComponent {
   openViewModal(id: number): void {
     console.log('test')
     this.view.emit(id);
-  }
-
-  openFilterModal(): void {
-    
   }
 
 
@@ -175,25 +190,6 @@ export class TableComponent {
 
   }
 
-  // orderByColumn(column: string): void {
-
-  //   //Disable sorting on inline editing since this will change the column sizing
-  //   //Future fix would have to rescale the columns after the data is received 
-  //   if(this.isInlineCreating) {
-  //     this.toastr.error('Please finish creating the new item before sorting', 'Error');
-  //     return;
-  //   }
-
-  //   //toggles the order by direction onclick of the same column
-  //   if (this.searchCriteria.orderBy.orderByColumn === column) {
-  //     this.searchCriteria.orderBy.orderByDirection = this.searchCriteria.orderBy.orderByDirection === "asc" ? "desc" : "asc";
-  //   } else {
-  //     this.searchCriteria.orderBy.orderByColumn = column;
-  //     this.searchCriteria.orderBy.orderByDirection = "asc";
-  //   }
-
-  //   this.searchCriteriaChange.emit(this.searchCriteria);
-  // }
 
   downloadPdf(id: number): void {
     this.pdf.emit(id);
@@ -235,62 +231,107 @@ export class TableComponent {
 
   selectedColumn : TableHead<any> | undefined;
 
-
-  async getColumnType(key: string): Promise<string> {
-
-    if(this.data.length === 0) {
-      this.toastr.error('No data to filter on', 'Error');
-    }
-
-    let firstRow = this.data[0];
-
-    if(this.selectedColumn === undefined) {
-      this.toastr.error('No data to filter on', 'Error');
-    }
-    console.log(firstRow[key]);
-    console.log(typeof firstRow[key].value);
-
-    let type : string = typeof firstRow[key].value;
-
-    //check if the column is a date
-    if(type == 'string') {
-      if(this.isValidDate(firstRow[key].value)) {
-        type = 'datetime';
-      }
-    }
-
-    return type;
-  }
-
-  //Runs when column is selected
+  //Runs when column is selected in filter
   async selectColumnFilter(columnName: any, filterIndex: number): Promise<void> {
-    this.selectedColumn = await this.columns.find((column) => column.key === columnName);
-    let type = await this.getColumnType(columnName);
 
-    let options = await this.filterBuilder.getFilterOptionsForType(type);
+    //checks if the column types are already set
+    if(this.filterBuilder.columnTypes.length === 0) {
+      await this.filterBuilder.setUpColumnTypes(this.columns, this.baseTableRow, this.isValidDate);	
+    }
+
+    //Onchange set to null for the type of filter and the value
+    this.filterBuilder.filterInputs[filterIndex].filterTypes = null;
+    this.filterBuilder.filterInputs[filterIndex].selectedFilterType = null;
+    this.filterBuilder.filterInputs[filterIndex].value = '';
+    this.filterBuilder.filterInputs[filterIndex].column = null;
+    this.filterBuilder.filterInputs[filterIndex].range = [];
+
+    //find the column that is selected from the tableheaders
+    this.selectedColumn = await this.filterBuilder.columns.find((column) => column.key === columnName);
+
+    let options = await this.filterBuilder.getFilterOptionsForType(this.selectedColumn?.type as string);
 
     console.log(filterIndex)
     this.filterBuilder.filterInputs[filterIndex].column = columnName;
     this.filterBuilder.filterInputs[filterIndex].filterTypes = options;
-    
-    console.log(type);
   }
 
   async selectTypeFilter(selectTypeFilter: number, filterInput: filterInput): Promise<void> {
+    
     let selectedFilterType = filterTypes.find((filterType) => filterType.id === selectTypeFilter);
     console.log(selectedFilterType);
 
-    filterInput.selectedFilterType = selectedFilterType;
+    //if filter type is changed then remove the current range
+    filterInput.range = [];
 
-    console.log(this.filterBuilder.filterInputs);
+
+    filterInput.selectedFilterType = selectedFilterType;
   }
 
+  //adds a new filter
   async addInputFilter(): Promise<void> {
     this.filterBuilder.addFilterInput();
   }
 
+  //removes a single filter
   async deleteFilterInput(id: number): Promise<void> {
     this.filterBuilder.deleteFilterInput(id);
+  }
+
+  //removes all filters
+  async removeFilters(): Promise<void> {
+    this.filterBuilder.filterInputs = [];
+    this.filterBuilder.currentFilters = [];
+    this.filterBuilder.currentFilterInputs = [];
+
+    this.searchCriteria.filter = { and: []};
+
+    this.searchCriteriaChange.emit(this.searchCriteria);
+
+  }
+
+  async applyFilters(): Promise<void> {
+    try {
+
+      let filters = await this.filterBuilder.getFilters();
+
+      this.searchCriteria.filter = { and: filters.length > 0 ? filters : []};
+
+      //global search is done outside of standard filtering
+      let globalSearch = await this.filterBuilder.handleGlobalSearch();
+
+      if(globalSearch) {
+        this.searchCriteria.filter.and.push(globalSearch);
+      }
+
+      this.searchCriteriaChange.emit(this.searchCriteria);
+
+    } catch (error : any) {
+      this.toastr.error(error?.message ? error?.message : 'Filters are incorrect', 'Error');
+    }
+
+  }
+
+  //adds and item to the range of items
+  async addtoFilterInputRange(filterInput: filterInput, value: string): Promise<void> {
+
+    if(value === '') {
+      this.toastr.error('Please enter a value', 'Error');
+      return;
+    }
+
+    this.rangeInput = '';
+
+    filterInput.range.push(value);
+  }
+
+  //deletes an item from the range of items
+  async deleteFilterInputRange(filterInput: filterInput, index: number): Promise<void> {
+    filterInput.range.splice(index, 1);
+  }
+
+  async recoverSavedFilters(): Promise<void> {
+    this.filterBuilder.filterInputs = this.filterBuilder.currentFilterInputs;
   }
 
 }

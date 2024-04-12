@@ -8,7 +8,8 @@
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
                 [data]="tableData" [inline_selector]="'filters-form'"
                 [isInlineCreating]="isInlineCreating"
-                (toggleInlineCreating)="toggleInlineCreating()"	
+                (toggleInlineCreating)="toggleInlineCreating()"
+                [baseTableRow]="baseTableRow"	
                 >
                 <filters-form
                     [baseOrderBy]="baseOrderBy"

@@ -4,64 +4,114 @@
       <span
         class="z-10 h-full leading-snug font-normal absolute text-center text-slate-400 absolute bg-transparent rounded-2xl text-base items-center justify-center w-8 pl-3 py-3"><i
           class="fa fa-search"></i></span>
-      <input (ngModelChange)="loadData($event)" [(ngModel)]="searchCriteria.search" type="text"
+      <input (ngModelChange)="loadData($event)" [(ngModel)]="filterBuilder.globalSearch" type="text"
         placeholder="Search here..."
         class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-400 text-slate-600 relative bg-white bg-white rounded-2xl text-sm  w-full pl-10" />
     </div>
-    <div [satPopoverAnchor]="filters" (click)="filters.toggle()"
-      class="cursor-pointer bg-cosmosDark ease-in-out flex items-center hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
-      <fa-icon [icon]="faFilter"></fa-icon>
-      <sat-popover hasBackdrop verticalAlign="center" horizontalAlign="before" #filters>
-        <div class="bg-cosmosDark rounded-lg flex gap-2 flex-col p-4">
-          <h2 class="text-white font-bold">Filters</h2>
-          @for(filterInput of filterBuilder.filterInputs; track filterInput; let activeIndex = $index) {
-          <div class="flex flex-row gap-2">
-            <select
-              class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
-              id="selectedOption" #filter (change)="selectColumnFilter(filter.value, activeIndex)">
-              <option [value]="'placeholder'" disabled [defaultSelected]="'placeholder'">Select a column</option>
-              <!-- (change)="onPageSizeChange($event)"> -->
-              <option *ngFor="let header of columns" [value]="header.key">{{ header.label }}</option>
-            </select>
-            <select *ngIf="filterInput.filterTypes"
-              class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
-              id="selectedOption" #filterTypes (change)="selectTypeFilter(+filterTypes.value, filterInput)">
-              <option [value]="'placeholder'" disabled [defaultSelected]="'placeholder'">Type of filter</option>
-              <!-- (change)="onPageSizeChange($event)"> -->
-              <option *ngFor="let filterOption of filterInput.filterTypes" [value]="filterOption.id">{{
-                filterOption.label }}</option>
-            </select>
-            <div *ngIf="filterInput.selectedFilterType">
-              @switch (filterInput.selectedFilterType.id) {
-                @case (1) {
-              <input type="text" [placeholder]="'Match'"
-                class="w-[100px] placeholder-slate-400 bg-cosmosDarker text-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
-                [(ngModel)]="filterInput.value">
-              }
-                @case (2) {
-                <input type="text" [placeholder]="'Match'"
-                class="w-[100px] placeholder-slate-400 bg-cosmosDarker text-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
-                [(ngModel)]="filterInput.value">
-              }
 
-              }
+    <div class="flex">
+      <div  [satPopoverAnchor]="filters"  (click)="filters.open()"
+        class="mr-[-10px] cursor-pointer bg-cosmosDark ease-in-out flex items-center hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-full py-[5px] px-[14px] ">
+        <fa-icon [icon]="faFilter"></fa-icon>
+
+
+        <sat-popover (afterClose)="recoverSavedFilters()"  hasBackdrop verticalAlign="center" horizontalAlign="before" #filters>
+          <div class="bg-cosmosDark rounded-lg flex gap-2 flex-col p-4">
+            <h2 class="text-white font-bold">Filters</h2>
+            @for(filterInput of filterBuilder.filterInputs; track filterInput; let activeIndex = $index) {
+            <div>
+              <div class="flex flex-row gap-2">
+                <select
+                  class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
+                  id="selectedOption" #filter (change)="selectColumnFilter(filter.value, activeIndex)">
+                  <option [value]="'placeholder'" disabled [defaultSelected]="'placeholder'">Select a column</option>
+                  <!-- (change)="onPageSizeChange($event)"> -->
+                  <option *ngFor="let header of columns" [value]="header.key">{{ header.label }}</option>
+                </select>
+                <select *ngIf="filterInput.filterTypes"
+                  class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
+                  id="selectedOption" #filterTypes (change)="selectTypeFilter(+filterTypes.value, filterInput)">
+                  <option [value]="'placeholder'" disabled [defaultSelected]="'placeholder'">Type of filter</option>
+                  <!-- (change)="onPageSizeChange($event)"> -->
+                  <option *ngFor="let filterOption of filterInput.filterTypes" [value]="filterOption.id">{{
+                    filterOption.label }}</option>
+                </select>
+                <div *ngIf="filterInput.selectedFilterType">
+                  @if([1,2].includes(filterInput.selectedFilterType.id)) {
+                  <input type="'text" [placeholder]="filterInput.selectedFilterType.label"
+                    class="w-[120px] px-4 py-4 text-sm placeholder-slate-200 bg-cosmosDarker text-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+                    [(ngModel)]="filterInput.value">
+                  } @else if([4,5,6].includes(filterInput.selectedFilterType.id)) {
+                  <input type="number" [placeholder]="filterInput.selectedFilterType.label"
+                    class="w-[120px] placeholder-slate-200 bg-cosmosDarker text-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+                    [(ngModel)]="filterInput.value">
+                  } @else if([10,11,12].includes(filterInput.selectedFilterType.id)) {
+                  <input type="date" [placeholder]="filterInput.selectedFilterType.label"
+                    class="w-[120px] placeholder-slate-200 bg-cosmosDarker text-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+                    [(ngModel)]="filterInput.value">
+                  } @else if([7, 3].includes(filterInput.selectedFilterType.id)) {
+                  <div class="relative inline-flex">
+                    <input [(ngModel)]="rangeInput" [type]="filterInput.selectedFilterType.id === 3 ? 'text' : 'number'"
+                      class="rounded-2xl w-[120px] bg-cosmosDarker text-white appearance-none border py-2 px-3 pr-12 focus:outline-none focus:ring-2 focus:ring-cosmosDark focus:border-transparent">
+                    <span class="relative">
+                      <button type="button" (click)="addtoFilterInputRange(filterInput, rangeInput)"
+                        class="text-white absolute inset-y-0 right-0 px-3 py-2 border-l rounded-r-md focus:outline-none">
+                        +
+                      </button>
+                    </span>
+                  </div>
+                  }
+
+                </div>
+                <button type="button" (click)="deleteFilterInput(filterInput.id)"
+                  class="text-white font-semibold px-4 rounded-full bg-cosmosDarker cursor-pointer">
+                  <fa-icon [icon]="faDeleteLeft"></fa-icon>
+                </button>
+
+              </div>
+              <div class="flex gap-2 flex-row items-center mt-1 mb-2">
+                @for(item of filterInput.range; track item; let rangeIndex = $index) {
+                <div class="">
+                  <div
+                    class="flex gap-2 text-white px-4 font-semibold px-4 rounded-full bg-cosmosDarker cursor-pointer">
+                    {{ item }}
+                    <button type="button" (click)="deleteFilterInputRange(filterInput, rangeIndex)" class="">
+                      <i class="fa fa-sm fa-close"></i>
+                    </button>
+                  </div>
+
+                </div>
+                }
+              </div>
             </div>
-            <button type="button" (click)="deleteFilterInput(filterInput.id)"
-              class="text-white font-semibold px-4 shadow-lg rounded-full bg-cosmosDarker cursor-pointer">
-              <fa-icon [icon]="faDeleteLeft"></fa-icon>
-            </button>
+
+            }
+
+            <div class="flex gap-2 mt-4 justify-end">
+              <button type="button" (click)="addInputFilter()"
+                class="text-sm shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer">
+                New Filter +
+              </button>
+              <button type="button" (click)="removeFilters()"
+                class="text-sm shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer">
+                Clear filters
+              </button>
+              <button
+                class="text-sm shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer"
+                type="button" (click)="applyFilters()">
+                Save filters
+              </button>
+            </div>
+
           </div>
+        </sat-popover>
+      </div>
+      <span class="relative flex" *ngIf="filterBuilder.currentFilters.length > 0">
 
-          }
-
-
-          <button type="button" (click)="addInputFilter()"
-            class="text-sm ml-auto shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer">
-            Add Filter +
-          </button>
-        </div>
-      </sat-popover>
+        <span class="text-white leading-[0.4rem] h-6 relative inline-flex rounded-full p-2 text-xs bg-cosmosDarker rounded-full bg-cosmosDarker">{{filterBuilder.currentFilters.length}}</span>
+      </span>
     </div>
+
   </div>
 
 

@@ -68,6 +68,11 @@ export abstract class BaseEntity<T> {
   cellWidths: number[] = [];
   isInlineCreating: boolean = false;
 
+  //This row is used by the filters incase of the filter not having any results 
+  //this causes the filtering on the table to not work
+  //at the first get this baseTableRow is set an can then be referenced even on a null value.
+  baseTableRow: any = {};
+
   //this is the orderby that is used in case of removal of order by in table component
   abstract baseOrderBy: any;
 

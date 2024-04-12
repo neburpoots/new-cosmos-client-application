@@ -3,4 +3,5 @@ export interface TableHead<T> {
     asc: T;
     desc: T;
     key: string;
+    type?: string;
 }
