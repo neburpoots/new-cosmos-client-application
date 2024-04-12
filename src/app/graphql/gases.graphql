@@ -10,11 +10,11 @@ query allGasesNoPagination
 
 #-------------------------------------------------------------------------------
 query allGases(
-    $limit: Int, $offset: Int, $search: String!, $orderBy: [GasesOrderBy!]
+    $limit: Int, $offset: Int, $filter: GasFilter!, $orderBy: [GasesOrderBy!]
 )
     {
     allGases(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset

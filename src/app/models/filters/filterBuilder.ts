@@ -70,9 +70,6 @@ export class FilterBuilder {
     //calculates the type of the filter based upon the first row of the data
     getColumnType(key: string, tableBaseRow: any, isValidDate : (date : string) => boolean): string {
 
-        console.log(tableBaseRow[key]);
-        console.log(typeof tableBaseRow[key].value);
-
         let type: string = typeof tableBaseRow[key].value;
 
         //check if the column is a date
@@ -95,8 +92,6 @@ export class FilterBuilder {
             column.type = this.getColumnType(column.key, tableBaseRow, isValidDate);
             return column
         })
-
-        console.log(this.columns)
     }
 
     //adds a empty filter to the filerinput array
@@ -168,8 +163,6 @@ export class FilterBuilder {
             return { [column]: { includesInsensitive: this.globalSearch } }
         })
 
-        console.log(orFilter)
-
         if (this.globalSearch) {
             return {
                 or: orFilter
@@ -222,7 +215,11 @@ export class FilterBuilder {
 
         });
 
-        return this.currentFilters[0] == undefined ? [] : this.currentFilters;
+        if(this.currentFilters[0] == undefined) {
+            this.currentFilters = []
+        }
+
+        return this.currentFilters;
     }
 
 

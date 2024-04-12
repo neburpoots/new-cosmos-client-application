@@ -1,6 +1,6 @@
-query CalGasEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [CalgasEntitiesOrderBy!]) {
+query allCalibrationGases($limit: Int, $offset: Int, $filter: CalgasEntityFilter, $orderBy: [CalgasEntitiesOrderBy!]) {
   calGases: allCalgasEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset
@@ -22,6 +22,7 @@ query CalGasEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [Cal
     }
   }
 }
+
 
 #-------------------------------------------------------------------------------
 mutation CreateCalGas(

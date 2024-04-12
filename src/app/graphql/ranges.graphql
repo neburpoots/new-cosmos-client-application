@@ -36,16 +36,11 @@ query allRangesNoPagination {
 query allRanges(
   $limit: Int
   $offset: Int
-  $search: String!
+  $filter: RangeFilter!
   $orderBy: [RangesOrderBy!]
 ) {
   allRanges(
-    filter: {
-      or: [
-        { engineeringUnits: { includesInsensitive: $search } }
-        { gasByGasId: { name: { includesInsensitive: $search } } }
-      ]
-    }
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset

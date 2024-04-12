@@ -20,9 +20,9 @@ query allDetectorTypesNoPagination
 }
 
 #-------------------------------------------------------------------------------
-query allDetectorTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [DetectorTypesEntitiesOrderBy!]) {
+query allDetectorTypeEntities($limit: Int, $offset: Int, $filter: DetectorTypesEntityFilter!, $orderBy: [DetectorTypesEntitiesOrderBy!]) {
   detectorTypes: allDetectorTypesEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset

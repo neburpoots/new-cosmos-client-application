@@ -24,11 +24,11 @@ query allChemicalCompoundsNoPagination
 
 #-------------------------------------------------------------------------------
 query allChemicalCompounds(
-        $limit: Int, $offset: Int, $search: String!, $orderBy: [ChemicalCompoundsOrderBy!]
+        $limit: Int, $offset: Int, $filter: ChemicalCompoundFilter!, $orderBy: [ChemicalCompoundsOrderBy!]
 )
     {
     allChemicalCompounds(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset
@@ -40,8 +40,8 @@ query allChemicalCompounds(
             otherName
             formula
             cas
-            molarMass
             icsc
+            molarMass
             density
             url
             created

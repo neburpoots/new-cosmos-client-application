@@ -18,11 +18,11 @@ query allPrinciplesNoPagination
 
 #-------------------------------------------------------------------------------
 query allPrinciples(
-    $limit: Int, $offset: Int, $search: String!, $orderBy: [PrinciplesOrderBy!]
+    $limit: Int, $offset: Int, $filter: PrincipleFilter!, $orderBy: [PrinciplesOrderBy!]
 )
     {
     allPrinciples(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset
@@ -35,11 +35,11 @@ query allPrinciples(
             userByOwnerId {
                 initials
                 id
-                
             }
         }       
     }
 }
+
 
 #-------------------------------------------------------------------------------
 mutation CreatePrinciple(

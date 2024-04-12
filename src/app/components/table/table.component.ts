@@ -119,19 +119,6 @@ export class TableComponent implements OnInit {
     event.stopPropagation();
   }
 
-
-  async loadData(searchString: string): Promise<any> {
-
-    if(this.filterBuilder.columnTypes.length === 0) {
-      await this.filterBuilder.setUpColumnTypes(this.columns, this.baseTableRow, this.isValidDate);	
-    }
-
-    this.filterBuilder.globalSearch = searchString;
-
-    this.applyFilters();
-
-  }
-
   openCreateModal(): void {
     this.create.emit();
   }
@@ -194,7 +181,18 @@ export class TableComponent implements OnInit {
   downloadPdf(id: number): void {
     this.pdf.emit(id);
   }
+  
+  //called on search
+  async loadData(searchString: string): Promise<any> {
 
+    if(this.filterBuilder.columns.length === 0) {
+      await this.filterBuilder.setUpColumnTypes(this.columns, this.baseTableRow, this.isValidDate);	
+    }
+
+    this.filterBuilder.globalSearch = searchString;
+
+    this.applyFilters();
+  }
 
   // //function to calculate table width is needed for inline editing.
   async setInlineCreating(): Promise<void> {
@@ -229,13 +227,11 @@ export class TableComponent implements OnInit {
     }
   }
 
-  selectedColumn : TableHead<any> | undefined;
-
   //Runs when column is selected in filter
   async selectColumnFilter(columnName: any, filterIndex: number): Promise<void> {
 
     //checks if the column types are already set
-    if(this.filterBuilder.columnTypes.length === 0) {
+    if(this.filterBuilder.columns.length === 0) {
       await this.filterBuilder.setUpColumnTypes(this.columns, this.baseTableRow, this.isValidDate);	
     }
 
@@ -247,11 +243,10 @@ export class TableComponent implements OnInit {
     this.filterBuilder.filterInputs[filterIndex].range = [];
 
     //find the column that is selected from the tableheaders
-    this.selectedColumn = await this.filterBuilder.columns.find((column) => column.key === columnName);
+    let selectedColumn = await this.filterBuilder.columns.find((column) => column.key === columnName);
 
-    let options = await this.filterBuilder.getFilterOptionsForType(this.selectedColumn?.type as string);
+    let options = await this.filterBuilder.getFilterOptionsForType(selectedColumn?.type as string);
 
-    console.log(filterIndex)
     this.filterBuilder.filterInputs[filterIndex].column = columnName;
     this.filterBuilder.filterInputs[filterIndex].filterTypes = options;
   }
@@ -259,7 +254,6 @@ export class TableComponent implements OnInit {
   async selectTypeFilter(selectTypeFilter: number, filterInput: filterInput): Promise<void> {
     
     let selectedFilterType = filterTypes.find((filterType) => filterType.id === selectTypeFilter);
-    console.log(selectedFilterType);
 
     //if filter type is changed then remove the current range
     filterInput.range = [];
@@ -295,14 +289,21 @@ export class TableComponent implements OnInit {
 
       let filters = await this.filterBuilder.getFilters();
 
-      this.searchCriteria.filter = { and: filters.length > 0 ? filters : []};
-
       //global search is done outside of standard filtering
       let globalSearch = await this.filterBuilder.handleGlobalSearch();
 
-      if(globalSearch) {
-        this.searchCriteria.filter.and.push(globalSearch);
+      let searchObject = {
+        and: [...filters]
       }
+
+      //global search is not null otherwise it should be ignored
+      if(globalSearch) {
+        searchObject.and.push(globalSearch);
+      }
+
+      this.searchCriteria.filter = searchObject;
+
+      console.log(this.searchCriteria.filter)
 
       this.searchCriteriaChange.emit(this.searchCriteria);
 

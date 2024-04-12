@@ -24,9 +24,9 @@ query allAreasNoPagination($floorId: [Int!])
 }
 
 #-------------------------------------------------------------------------------
-query allAreaEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AreaEntitiesOrderBy!]) {
+query allAreaEntities($limit: Int, $offset: Int, $filter: AreaEntityFilter!, $orderBy: [AreaEntitiesOrderBy!]) {
   allAreaEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset
@@ -36,6 +36,7 @@ query allAreaEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [Ar
       id
       name
       created
+      remarks
       floorName
       floorId
       endUserName
@@ -47,7 +48,6 @@ query allAreaEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [Ar
     }
   }
 }
-
 
 
 #-------------------------------------------------------------------------------

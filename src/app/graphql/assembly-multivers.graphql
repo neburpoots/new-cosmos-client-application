@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------
-query allAssemblyMultiversEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyMultiversEntitiesOrderBy!]) {
+query allAssemblyMultiversEntities($limit: Int, $offset: Int, $filter: AssemblyMultiversEntityFilter!, $orderBy: [AssemblyMultiversEntitiesOrderBy!]) {
   allAssemblyMultiversEntities: allAssemblyMultiversEntities(
-    filter: {or: [{cdartikel: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset
@@ -29,7 +29,6 @@ query allAssemblyMultiversEntities($limit: Int, $offset: Int, $search: String!, 
     }
   }
 }
-
 
 #-------------------------------------------------------------------------------
 query allAssemblyLinesMultiversEntities($assemblage_order: String, $limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyLineEntitiesOrderBy!]) {

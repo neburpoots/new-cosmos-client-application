@@ -126,10 +126,10 @@ fragment detectorFields on Detector
 	}	
 }
 
-
-query allDetectorsEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [DetectorEntitiesOrderBy!]) {
+#-------------------------------------------------------------------------------
+query allDetectorsEntities($limit: Int, $offset: Int, $filter: DetectorEntityFilter!, $orderBy: [DetectorEntitiesOrderBy!]) {
   detectors: allDetectorEntities(
-    filter: {or: [{serialNumber: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
     first: $limit
     offset: $offset
