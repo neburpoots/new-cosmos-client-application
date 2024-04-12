@@ -31,10 +31,6 @@ export class TableComponent implements OnInit {
   @Input() object: string = "";
   @Input() inline_selector: string = "";
 
-  //basetablerow used by filtering
-  //The filtering looks at this row for the types of filters.
-  @Input() baseTableRow: any = {};
-
   // @Input() paginationInfo: any = {};
   @Input() isEditable: boolean = false;
   @Input() isDeletable: boolean = false;
@@ -76,7 +72,7 @@ export class TableComponent implements OnInit {
   faFilter = faFilter;
   faDeleteLeft = faDeleteLeft
 
-  filterBuilder = new FilterBuilder();
+  filterBuilder = new FilterBuilder(this.columns);
 
   //totalwidth of all columns used for inline editing
   totalWidth: number = 0;
@@ -86,8 +82,7 @@ export class TableComponent implements OnInit {
   constructor(private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    console.log(this.columns);
-    console.log(this.baseTableRow);
+    this.filterBuilder.columns = this.columns;
   }
 
 
@@ -185,10 +180,6 @@ export class TableComponent implements OnInit {
   //called on search
   async loadData(searchString: string): Promise<any> {
 
-    if(this.filterBuilder.columns.length === 0) {
-      await this.filterBuilder.setUpColumnTypes(this.columns, this.baseTableRow, this.isValidDate);	
-    }
-
     this.filterBuilder.globalSearch = searchString;
 
     this.applyFilters();
@@ -229,11 +220,6 @@ export class TableComponent implements OnInit {
 
   //Runs when column is selected in filter
   async selectColumnFilter(columnName: any, filterIndex: number): Promise<void> {
-
-    //checks if the column types are already set
-    if(this.filterBuilder.columns.length === 0) {
-      await this.filterBuilder.setUpColumnTypes(this.columns, this.baseTableRow, this.isValidDate);	
-    }
 
     //Onchange set to null for the type of filter and the value
     this.filterBuilder.filterInputs[filterIndex].filterTypes = null;

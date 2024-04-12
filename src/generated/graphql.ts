@@ -22930,6 +22930,8 @@ export enum DetectorEntitiesOrderBy {
   InitialsDesc = 'INITIALS_DESC',
   LabelDateAsc = 'LABEL_DATE_ASC',
   LabelDateDesc = 'LABEL_DATE_DESC',
+  NameAsc = 'NAME_ASC',
+  NameDesc = 'NAME_DESC',
   Natural = 'NATURAL',
   OwnerIdAsc = 'OWNER_ID_ASC',
   OwnerIdDesc = 'OWNER_ID_DESC',
@@ -22951,6 +22953,7 @@ export type DetectorEntity = {
   id?: Maybe<Scalars['Int']['output']>;
   initials?: Maybe<Scalars['String']['output']>;
   labelDate?: Maybe<Scalars['Date']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   ownerId?: Maybe<Scalars['Int']['output']>;
   prefix?: Maybe<Scalars['String']['output']>;
   remarks?: Maybe<Scalars['String']['output']>;
@@ -22975,6 +22978,8 @@ export type DetectorEntityCondition = {
   initials?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `labelDate` field. */
   labelDate?: InputMaybe<Scalars['Date']['input']>;
+  /** Checks for equality with the object’s `name` field. */
+  name?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `ownerId` field. */
   ownerId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `prefix` field. */
@@ -23003,6 +23008,8 @@ export type DetectorEntityFilter = {
   initials?: InputMaybe<StringFilter>;
   /** Filter by the object’s `labelDate` field. */
   labelDate?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `name` field. */
+  name?: InputMaybe<StringFilter>;
   /** Negates the expression. */
   not?: InputMaybe<DetectorEntityFilter>;
   /** Checks for any expressions in this list. */
@@ -81502,9 +81509,9 @@ export type AllApplicationsNoPaginationQueryVariables = Exact<{ [key: string]: n
 export type AllApplicationsNoPaginationQuery = { __typename?: 'Query', allApplications?: { __typename?: 'ApplicationsConnection', nodes: Array<{ __typename?: 'Application', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
 export type AllApplicationsQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: ApplicationFilter;
   orderBy?: InputMaybe<Array<ApplicationsOrderBy> | ApplicationsOrderBy>;
 }>;
 
@@ -81541,14 +81548,14 @@ export type AllAreasNoPaginationQueryVariables = Exact<{
 export type AllAreasNoPaginationQuery = { __typename?: 'Query', allAreas?: { __typename?: 'AreasConnection', nodes: Array<{ __typename?: 'Area', id: number, name: string, remarks?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
 export type AllAreaEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: AreaEntityFilter;
   orderBy?: InputMaybe<Array<AreaEntitiesOrderBy> | AreaEntitiesOrderBy>;
 }>;
 
 
-export type AllAreaEntitiesQuery = { __typename?: 'Query', allAreaEntities?: { __typename?: 'AreaEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AreaEntity', id?: number | null, name?: string | null, created?: any | null, floorName?: string | null, floorId?: number | null, endUserName?: string | null, endUserId?: number | null, buildingName?: string | null, buildingId?: number | null, initials?: string | null, ownerId?: number | null }> } | null };
+export type AllAreaEntitiesQuery = { __typename?: 'Query', allAreaEntities?: { __typename?: 'AreaEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AreaEntity', id?: number | null, name?: string | null, created?: any | null, remarks?: string | null, floorName?: string | null, floorId?: number | null, endUserName?: string | null, endUserId?: number | null, buildingName?: string | null, buildingId?: number | null, initials?: string | null, ownerId?: number | null }> } | null };
 
 export type CreateAreaMutationVariables = Exact<{
   body: AreaInput;
@@ -81573,9 +81580,9 @@ export type DeleteAreaMutationVariables = Exact<{
 export type DeleteAreaMutation = { __typename?: 'Mutation', deleteAreaById?: { __typename?: 'DeleteAreaPayload', clientMutationId?: string | null } | null };
 
 export type AllAssemblyMultiversEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: AssemblyMultiversEntityFilter;
   orderBy?: InputMaybe<Array<AssemblyMultiversEntitiesOrderBy> | AssemblyMultiversEntitiesOrderBy>;
 }>;
 
@@ -81584,7 +81591,7 @@ export type AllAssemblyMultiversEntitiesQuery = { __typename?: 'Query', allAssem
 
 export type AllAssemblyLinesMultiversEntitiesQueryVariables = Exact<{
   assemblage_order?: InputMaybe<Scalars['String']['input']>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   search: Scalars['String']['input'];
   orderBy?: InputMaybe<Array<AssemblyLineEntitiesOrderBy> | AssemblyLineEntitiesOrderBy>;
@@ -81601,9 +81608,9 @@ export type AssemblyMultiversByIdQueryVariables = Exact<{
 export type AssemblyMultiversByIdQuery = { __typename?: 'Query', assemblyMultiversById?: { __typename?: 'AssemblyMultiversEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyMultiversEntity', id?: string | null, aantal?: any | null, omschr?: string | null, aantalGeassembleerd?: any | null, aantalgereservbij?: any | null, advice?: number | null, afdrukAssemblageBon?: string | null, assemblageDatum?: any | null, assemblageOrder?: string | null, cdartikel?: string | null, cdmagazijn?: string | null, commentaar?: string | null, guidItem?: string | null, orderDatum?: any | null, status?: string | null, sysCreate?: string | null, sysUpdate?: string | null, waardeGeassembleerd?: any | null }> } | null };
 
 export type AssemblyTypeEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: AssemblyTypesEntityFilter;
   orderBy?: InputMaybe<Array<AssemblyTypesEntitiesOrderBy> | AssemblyTypesEntitiesOrderBy>;
 }>;
 
@@ -81650,9 +81657,9 @@ export type AllBuildingsNoPaginationQueryVariables = Exact<{
 export type AllBuildingsNoPaginationQuery = { __typename?: 'Query', allBuildings?: { __typename?: 'BuildingsConnection', nodes: Array<{ __typename?: 'Building', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, endUserByEndUserId?: { __typename?: 'EndUser', id: number, name?: string | null } | null }> } | null };
 
 export type AllBuildingsQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: BuildingFilter;
   orderBy?: InputMaybe<Array<BuildingsOrderBy> | BuildingsOrderBy>;
 }>;
 
@@ -81681,15 +81688,15 @@ export type DeleteBuildingMutationVariables = Exact<{
 
 export type DeleteBuildingMutation = { __typename?: 'Mutation', deleteBuildingById?: { __typename?: 'DeleteBuildingPayload', clientMutationId?: string | null } | null };
 
-export type CalGasEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+export type AllCalibrationGasesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter?: InputMaybe<CalgasEntityFilter>;
   orderBy?: InputMaybe<Array<CalgasEntitiesOrderBy> | CalgasEntitiesOrderBy>;
 }>;
 
 
-export type CalGasEntitiesQuery = { __typename?: 'Query', calGases?: { __typename?: 'CalgasEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'CalgasEntity', id?: number | null, cdartikel?: string | null, concentration?: number | null, created?: any | null, engineeringUnits?: string | null, gasCreated?: any | null, gasId?: number | null, initials?: string | null, modified?: any | null, name?: string | null, ownerId?: number | null, username?: string | null }> } | null };
+export type AllCalibrationGasesQuery = { __typename?: 'Query', calGases?: { __typename?: 'CalgasEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'CalgasEntity', id?: number | null, cdartikel?: string | null, concentration?: number | null, created?: any | null, engineeringUnits?: string | null, gasCreated?: any | null, gasId?: number | null, initials?: string | null, modified?: any | null, name?: string | null, ownerId?: number | null, username?: string | null }> } | null };
 
 export type CreateCalGasMutationVariables = Exact<{
   body: CalGasInput;
@@ -81719,14 +81726,14 @@ export type AllChemicalCompoundsNoPaginationQueryVariables = Exact<{ [key: strin
 export type AllChemicalCompoundsNoPaginationQuery = { __typename?: 'Query', allChemicalCompounds?: { __typename?: 'ChemicalCompoundsConnection', nodes: Array<{ __typename?: 'ChemicalCompound', id: number, name?: string | null, otherName?: string | null, formula?: string | null, cas?: string | null, molarMass?: number | null, icsc?: string | null, density?: number | null, url?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
 export type AllChemicalCompoundsQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: ChemicalCompoundFilter;
   orderBy?: InputMaybe<Array<ChemicalCompoundsOrderBy> | ChemicalCompoundsOrderBy>;
 }>;
 
 
-export type AllChemicalCompoundsQuery = { __typename?: 'Query', allChemicalCompounds?: { __typename?: 'ChemicalCompoundsConnection', totalCount: number, nodes: Array<{ __typename?: 'ChemicalCompound', id: number, name?: string | null, otherName?: string | null, formula?: string | null, cas?: string | null, molarMass?: number | null, icsc?: string | null, density?: number | null, url?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
+export type AllChemicalCompoundsQuery = { __typename?: 'Query', allChemicalCompounds?: { __typename?: 'ChemicalCompoundsConnection', totalCount: number, nodes: Array<{ __typename?: 'ChemicalCompound', id: number, name?: string | null, otherName?: string | null, formula?: string | null, cas?: string | null, icsc?: string | null, molarMass?: number | null, density?: number | null, url?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
 export type CreateChemicalCompoundMutationVariables = Exact<{
   body: ChemicalCompoundInput;
@@ -81763,9 +81770,9 @@ export type AllDetectorTypesNoPaginationQueryVariables = Exact<{ [key: string]: 
 export type AllDetectorTypesNoPaginationQuery = { __typename?: 'Query', allDetectorTypesEntities?: { __typename?: 'DetectorTypesEntitiesConnection', nodes: Array<{ __typename?: 'DetectorTypesEntity', id?: number | null, name?: string | null }> } | null };
 
 export type AllDetectorTypeEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: DetectorTypesEntityFilter;
   orderBy?: InputMaybe<Array<DetectorTypesEntitiesOrderBy> | DetectorTypesEntitiesOrderBy>;
 }>;
 
@@ -81792,14 +81799,14 @@ export type LocalDetectorFieldsFragment = { __typename?: 'Detector', id: number,
 export type DetectorFieldsFragment = { __typename?: 'Detector', id: number, serialNumber: string, labelDate?: any | null, created: any, detectorTypeId: number, detectorType?: { __typename?: 'DetectorType', id: number, type?: string | null, sensorCount?: number | null } | null, detectorLocation?: { __typename?: 'DetectorLocation', id: number, detectorId?: number | null, areaId: number, address?: number | null, bus?: number | null, area?: { __typename?: 'Area', id: number, name: string, floor?: { __typename?: 'Floor', id: number, name: string, building?: { __typename?: 'Building', id: number, name: string, endUser?: { __typename?: 'EndUser', id: number, name?: string | null, location: string, subLocation: string } | null } | null } | null } | null } | null, detectorSensors: { __typename?: 'DetectorSensorsConnection', nodes: Array<{ __typename?: 'DetectorSensor', id: number, detectorPosition: number, sensor?: { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number, sensorType?: { __typename?: 'SensorType', id: number, type?: string | null, rangeId: number, range?: { __typename?: 'Range', id: number, lowEu?: number | null, highEu?: number | null, engineeringUnits?: string | null, gasId: number, gas?: { __typename?: 'Gas', id: number, name?: string | null } | null } | null } | null } | null, detectorSensorLocation?: { __typename?: 'DetectorSensorLocation', id: number, simsChannel?: number | null, simsTag?: string | null, samplePointId: number, samplePoint?: { __typename?: 'SamplePoint', id: number, areaId: number, name: string, area?: { __typename?: 'Area', id: number, name: string, floor?: { __typename?: 'Floor', id: number, name: string, building?: { __typename?: 'Building', id: number, name: string, endUser?: { __typename?: 'EndUser', id: number, name?: string | null, location: string, subLocation: string } | null } | null } | null } | null } | null } | null, pyrolyser?: { __typename?: 'Pyrolyser', id: number, name: string } | null, filter?: { __typename?: 'Filter', id: number, name: string } | null }> } };
 
 export type AllDetectorsEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: DetectorEntityFilter;
   orderBy?: InputMaybe<Array<DetectorEntitiesOrderBy> | DetectorEntitiesOrderBy>;
 }>;
 
 
-export type AllDetectorsEntitiesQuery = { __typename?: 'Query', detectors?: { __typename?: 'DetectorEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'DetectorEntity', id?: number | null, suffix?: string | null, serialNumber?: string | null, remarks?: string | null, prefix?: string | null, ownerId?: number | null, labelDate?: any | null, initials?: string | null, detectorTypeId?: number | null, created?: any | null, code?: string | null }> } | null };
+export type AllDetectorsEntitiesQuery = { __typename?: 'Query', detectors?: { __typename?: 'DetectorEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'DetectorEntity', id?: number | null, suffix?: string | null, serialNumber?: string | null, remarks?: string | null, prefix?: string | null, name?: string | null, ownerId?: number | null, labelDate?: any | null, initials?: string | null, detectorTypeId?: number | null, created?: any | null, code?: string | null }> } | null };
 
 export type UpdateDetectorMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -81836,9 +81843,9 @@ export type AllElectrolytesNoPaginationQueryVariables = Exact<{ [key: string]: n
 export type AllElectrolytesNoPaginationQuery = { __typename?: 'Query', allElectrolytes?: { __typename?: 'ElectrolytesConnection', nodes: Array<{ __typename?: 'Electrolyte', id: number, name: string }> } | null };
 
 export type AllElectrolyteEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: ElectrolyteEntityFilter;
   orderBy?: InputMaybe<Array<ElectrolyteEntitiesOrderBy> | ElectrolyteEntitiesOrderBy>;
 }>;
 
@@ -81917,9 +81924,9 @@ export type AllFloorsNoPaginationQueryVariables = Exact<{
 export type AllFloorsNoPaginationQuery = { __typename?: 'Query', allFloors?: { __typename?: 'FloorsConnection', nodes: Array<{ __typename?: 'Floor', id: number, name: string, created?: any | null, buildingByBuildingId?: { __typename?: 'Building', name: string, id: number } | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
 export type AllFloorEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: FloorEntityFilter;
   orderBy?: InputMaybe<Array<FloorEntitiesOrderBy> | FloorEntitiesOrderBy>;
 }>;
 
@@ -81954,9 +81961,9 @@ export type AllGasesNoPaginationQueryVariables = Exact<{ [key: string]: never; }
 export type AllGasesNoPaginationQuery = { __typename?: 'Query', allGases?: { __typename?: 'GasesConnection', nodes: Array<{ __typename?: 'Gas', id: number, name?: string | null }> } | null };
 
 export type AllGasesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: GasFilter;
   orderBy?: InputMaybe<Array<GasesOrderBy> | GasesOrderBy>;
 }>;
 
@@ -82045,9 +82052,9 @@ export type AllMembranesNoPaginationQueryVariables = Exact<{ [key: string]: neve
 export type AllMembranesNoPaginationQuery = { __typename?: 'Query', allMembranes?: { __typename?: 'MembranesConnection', nodes: Array<{ __typename?: 'Membrane', id: number, name: string }> } | null };
 
 export type AllMembraneEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: MembraneEntityFilter;
   orderBy?: InputMaybe<Array<MembraneEntitiesOrderBy> | MembraneEntitiesOrderBy>;
 }>;
 
@@ -82082,9 +82089,9 @@ export type AllORingsNoPaginationQueryVariables = Exact<{ [key: string]: never; 
 export type AllORingsNoPaginationQuery = { __typename?: 'Query', allORings?: { __typename?: 'ORingsConnection', nodes: Array<{ __typename?: 'ORing', id: number, name: string }> } | null };
 
 export type AllORingEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: ORingEntityFilter;
   orderBy?: InputMaybe<Array<ORingEntitiesOrderBy> | ORingEntitiesOrderBy>;
 }>;
 
@@ -82119,9 +82126,9 @@ export type AllPrinciplesNoPaginationQueryVariables = Exact<{ [key: string]: nev
 export type AllPrinciplesNoPaginationQuery = { __typename?: 'Query', allPrinciples?: { __typename?: 'PrinciplesConnection', nodes: Array<{ __typename?: 'Principle', id: number, name?: string | null, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
 export type AllPrinciplesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: PrincipleFilter;
   orderBy?: InputMaybe<Array<PrinciplesOrderBy> | PrinciplesOrderBy>;
 }>;
 
@@ -82156,9 +82163,9 @@ export type AllPyrolysersNoPaginationQueryVariables = Exact<{ [key: string]: nev
 export type AllPyrolysersNoPaginationQuery = { __typename?: 'Query', allPyrolysers?: { __typename?: 'PyrolysersConnection', nodes: Array<{ __typename?: 'Pyrolyser', id: number, name: string }> } | null };
 
 export type AllPyrolyserEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: PyrolyserEntityFilter;
   orderBy?: InputMaybe<Array<PyrolyserEntitiesOrderBy> | PyrolyserEntitiesOrderBy>;
 }>;
 
@@ -82193,9 +82200,9 @@ export type AllRangesNoPaginationQueryVariables = Exact<{ [key: string]: never; 
 export type AllRangesNoPaginationQuery = { __typename?: 'Query', allRanges?: { __typename?: 'RangesConnection', nodes: Array<{ __typename?: 'Range', id: number, created?: any | null, alarm1DirectionUp?: boolean | null, alarm1Level?: any | null, alarm2DirectionUp?: boolean | null, alarm2Level?: any | null, alarmUnits?: boolean | null, engineeringUnits?: string | null, highEu?: number | null, highEuBackup?: number | null, highEuNumeric?: any | null, lowEu?: number | null, modified?: any | null, nodeId: string, ownerId?: number | null, precision?: number | null, range?: string | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, gasByGasId?: { __typename?: 'Gas', name?: string | null, id: number, formula?: string | null, created?: any | null } | null }> } | null };
 
 export type AllRangesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: RangeFilter;
   orderBy?: InputMaybe<Array<RangesOrderBy> | RangesOrderBy>;
 }>;
 
@@ -82230,9 +82237,9 @@ export type AllSamplePointsNoPaginationQueryVariables = Exact<{ [key: string]: n
 export type AllSamplePointsNoPaginationQuery = { __typename?: 'Query', allSamplePoints?: { __typename?: 'SamplePointsConnection', nodes: Array<{ __typename?: 'SamplePoint', id: number, name: string, created?: any | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null }> } | null };
 
 export type AllSamplePointEntitiesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: SamplePointEntityFilter;
   orderBy?: InputMaybe<Array<SamplePointEntitiesOrderBy> | SamplePointEntitiesOrderBy>;
 }>;
 
@@ -82267,9 +82274,9 @@ export type AllSensorBaseTypesNoPaginationQueryVariables = Exact<{ [key: string]
 export type AllSensorBaseTypesNoPaginationQuery = { __typename?: 'Query', allSensorBaseTypes?: { __typename?: 'SensorBaseTypesConnection', nodes: Array<{ __typename?: 'SensorBaseType', id: number, prefix?: string | null, suffix?: string | null, series?: string | null, volume?: number | null, maintenanceIntervalMonths?: number | null, replacementIntervalMonths?: number | null, quotationIntervalMonths?: number | null, principleByPrincipleId?: { __typename?: 'Principle', id: number, name?: string | null } | null }> } | null };
 
 export type AllSensorBaseTypesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: SensorBaseTypeFilter;
   orderBy?: InputMaybe<Array<SensorBaseTypesOrderBy> | SensorBaseTypesOrderBy>;
 }>;
 
@@ -82304,9 +82311,9 @@ export type AllSensorTypesNoPaginationQueryVariables = Exact<{ [key: string]: ne
 export type AllSensorTypesNoPaginationQuery = { __typename?: 'Query', allSensorTypesIndices?: { __typename?: 'SensorTypesIndicesConnection', nodes: Array<{ __typename?: 'SensorTypesIndex', id?: number | null, sensorTypeArtikelOmschr?: string | null }> } | null };
 
 export type AllSensorTypesIndicesQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  search: Scalars['String']['input'];
+  filter: SensorTypesIndexFilter;
   orderBy?: InputMaybe<Array<SensorTypesIndicesOrderBy> | SensorTypesIndicesOrderBy>;
 }>;
 
@@ -82547,11 +82554,11 @@ export const AllApplicationsNoPaginationDocument = gql`
     }
   }
 export const AllApplicationsDocument = gql`
-    query allApplications($limit: Int, $offset: Int, $search: String!, $orderBy: [ApplicationsOrderBy!]) {
+    query allApplications($first: Int, $offset: Int, $filter: ApplicationFilter!, $orderBy: [ApplicationsOrderBy!]) {
   allApplications(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -82676,11 +82683,11 @@ export const AllAreasNoPaginationDocument = gql`
     }
   }
 export const AllAreaEntitiesDocument = gql`
-    query allAreaEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AreaEntitiesOrderBy!]) {
+    query allAreaEntities($first: Int, $offset: Int, $filter: AreaEntityFilter!, $orderBy: [AreaEntitiesOrderBy!]) {
   allAreaEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -82688,6 +82695,7 @@ export const AllAreaEntitiesDocument = gql`
       id
       name
       created
+      remarks
       floorName
       floorId
       endUserName
@@ -82796,11 +82804,11 @@ export const DeleteAreaDocument = gql`
     }
   }
 export const AllAssemblyMultiversEntitiesDocument = gql`
-    query allAssemblyMultiversEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyMultiversEntitiesOrderBy!]) {
+    query allAssemblyMultiversEntities($first: Int, $offset: Int, $filter: AssemblyMultiversEntityFilter!, $orderBy: [AssemblyMultiversEntitiesOrderBy!]) {
   allAssemblyMultiversEntities: allAssemblyMultiversEntities(
-    filter: {or: [{cdartikel: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -82839,11 +82847,11 @@ export const AllAssemblyMultiversEntitiesDocument = gql`
     }
   }
 export const AllAssemblyLinesMultiversEntitiesDocument = gql`
-    query allAssemblyLinesMultiversEntities($assemblage_order: String, $limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyLineEntitiesOrderBy!]) {
+    query allAssemblyLinesMultiversEntities($assemblage_order: String, $first: Int, $offset: Int, $search: String!, $orderBy: [AssemblyLineEntitiesOrderBy!]) {
   allAssemblyLineEntities: allAssemblyLineEntities(
     filter: {or: [{cdartikel: {includesInsensitive: $search}}], and: [{assemblageOrder: {equalTo: $assemblage_order}}]}
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -82924,11 +82932,11 @@ export const AssemblyMultiversByIdDocument = gql`
     }
   }
 export const AssemblyTypeEntitiesDocument = gql`
-    query AssemblyTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [AssemblyTypesEntitiesOrderBy!]) {
+    query AssemblyTypeEntities($first: Int, $offset: Int, $filter: AssemblyTypesEntityFilter!, $orderBy: [AssemblyTypesEntitiesOrderBy!]) {
   assemblyTypes: allAssemblyTypesEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}, {cdartikel: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -83080,13 +83088,8 @@ export const AllBuildingsNoPaginationDocument = gql`
     }
   }
 export const AllBuildingsDocument = gql`
-    query allBuildings($limit: Int, $offset: Int, $search: String!, $orderBy: [BuildingsOrderBy!]) {
-  allBuildings(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
-    orderBy: $orderBy
-    first: $limit
-    offset: $offset
-  ) {
+    query allBuildings($first: Int, $offset: Int, $filter: BuildingFilter!, $orderBy: [BuildingsOrderBy!]) {
+  allBuildings(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
     totalCount
     nodes {
       id
@@ -83193,12 +83196,12 @@ export const DeleteBuildingDocument = gql`
       super(apollo);
     }
   }
-export const CalGasEntitiesDocument = gql`
-    query CalGasEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [CalgasEntitiesOrderBy!]) {
+export const AllCalibrationGasesDocument = gql`
+    query allCalibrationGases($first: Int, $offset: Int, $filter: CalgasEntityFilter, $orderBy: [CalgasEntitiesOrderBy!]) {
   calGases: allCalgasEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -83223,8 +83226,8 @@ export const CalGasEntitiesDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class CalGasEntitiesGQL extends Apollo.Query<CalGasEntitiesQuery, CalGasEntitiesQueryVariables> {
-    override document = CalGasEntitiesDocument;
+  export class AllCalibrationGasesGQL extends Apollo.Query<AllCalibrationGasesQuery, AllCalibrationGasesQueryVariables> {
+    override document = AllCalibrationGasesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -83334,11 +83337,11 @@ export const AllChemicalCompoundsNoPaginationDocument = gql`
     }
   }
 export const AllChemicalCompoundsDocument = gql`
-    query allChemicalCompounds($limit: Int, $offset: Int, $search: String!, $orderBy: [ChemicalCompoundsOrderBy!]) {
+    query allChemicalCompounds($first: Int, $offset: Int, $filter: ChemicalCompoundFilter!, $orderBy: [ChemicalCompoundsOrderBy!]) {
   allChemicalCompounds(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -83348,8 +83351,8 @@ export const AllChemicalCompoundsDocument = gql`
       otherName
       formula
       cas
-      molarMass
       icsc
+      molarMass
       density
       url
       created
@@ -83496,11 +83499,11 @@ export const AllDetectorTypesNoPaginationDocument = gql`
     }
   }
 export const AllDetectorTypeEntitiesDocument = gql`
-    query allDetectorTypeEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [DetectorTypesEntitiesOrderBy!]) {
+    query allDetectorTypeEntities($first: Int, $offset: Int, $filter: DetectorTypesEntityFilter!, $orderBy: [DetectorTypesEntitiesOrderBy!]) {
   detectorTypes: allDetectorTypesEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -83588,11 +83591,11 @@ export const CreateDetectorTypeDocument = gql`
     }
   }
 export const AllDetectorsEntitiesDocument = gql`
-    query allDetectorsEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [DetectorEntitiesOrderBy!]) {
+    query allDetectorsEntities($first: Int, $offset: Int, $filter: DetectorEntityFilter!, $orderBy: [DetectorEntitiesOrderBy!]) {
   detectors: allDetectorEntities(
-    filter: {or: [{serialNumber: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -83602,6 +83605,7 @@ export const AllDetectorsEntitiesDocument = gql`
       serialNumber
       remarks
       prefix
+      name
       ownerId
       labelDate
       initials
@@ -83723,11 +83727,11 @@ export const AllElectrolytesNoPaginationDocument = gql`
     }
   }
 export const AllElectrolyteEntitiesDocument = gql`
-    query allElectrolyteEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [ElectrolyteEntitiesOrderBy!]) {
+    query allElectrolyteEntities($first: Int, $offset: Int, $filter: ElectrolyteEntityFilter!, $orderBy: [ElectrolyteEntitiesOrderBy!]) {
   allElectrolyteEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -84010,11 +84014,11 @@ export const AllFloorsNoPaginationDocument = gql`
     }
   }
 export const AllFloorEntitiesDocument = gql`
-    query allFloorEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [FloorEntitiesOrderBy!]) {
+    query allFloorEntities($first: Int, $offset: Int, $filter: FloorEntityFilter!, $orderBy: [FloorEntitiesOrderBy!]) {
   allFloorEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -84149,13 +84153,8 @@ export const AllGasesNoPaginationDocument = gql`
     }
   }
 export const AllGasesDocument = gql`
-    query allGases($limit: Int, $offset: Int, $search: String!, $orderBy: [GasesOrderBy!]) {
-  allGases(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
-    orderBy: $orderBy
-    first: $limit
-    offset: $offset
-  ) {
+    query allGases($first: Int, $offset: Int, $filter: GasFilter!, $orderBy: [GasesOrderBy!]) {
+  allGases(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
     totalCount
     nodes {
       id
@@ -84449,11 +84448,11 @@ export const AllMembranesNoPaginationDocument = gql`
     }
   }
 export const AllMembraneEntitiesDocument = gql`
-    query allMembraneEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [MembraneEntitiesOrderBy!]) {
+    query allMembraneEntities($first: Int, $offset: Int, $filter: MembraneEntityFilter!, $orderBy: [MembraneEntitiesOrderBy!]) {
   allMembraneEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -84574,11 +84573,11 @@ export const AllORingsNoPaginationDocument = gql`
     }
   }
 export const AllORingEntitiesDocument = gql`
-    query allORingEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [ORingEntitiesOrderBy!]) {
+    query allORingEntities($first: Int, $offset: Int, $filter: ORingEntityFilter!, $orderBy: [ORingEntitiesOrderBy!]) {
   allORingEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -84704,11 +84703,11 @@ export const AllPrinciplesNoPaginationDocument = gql`
     }
   }
 export const AllPrinciplesDocument = gql`
-    query allPrinciples($limit: Int, $offset: Int, $search: String!, $orderBy: [PrinciplesOrderBy!]) {
+    query allPrinciples($first: Int, $offset: Int, $filter: PrincipleFilter!, $orderBy: [PrinciplesOrderBy!]) {
   allPrinciples(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -84827,11 +84826,11 @@ export const AllPyrolysersNoPaginationDocument = gql`
     }
   }
 export const AllPyrolyserEntitiesDocument = gql`
-    query allPyrolyserEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [PyrolyserEntitiesOrderBy!]) {
+    query allPyrolyserEntities($first: Int, $offset: Int, $filter: PyrolyserEntityFilter!, $orderBy: [PyrolyserEntitiesOrderBy!]) {
   allPyrolyserEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -84976,13 +84975,8 @@ export const AllRangesNoPaginationDocument = gql`
     }
   }
 export const AllRangesDocument = gql`
-    query allRanges($limit: Int, $offset: Int, $search: String!, $orderBy: [RangesOrderBy!]) {
-  allRanges(
-    filter: {or: [{engineeringUnits: {includesInsensitive: $search}}, {gasByGasId: {name: {includesInsensitive: $search}}}]}
-    orderBy: $orderBy
-    first: $limit
-    offset: $offset
-  ) {
+    query allRanges($first: Int, $offset: Int, $filter: RangeFilter!, $orderBy: [RangesOrderBy!]) {
+  allRanges(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
     totalCount
     nodes {
       id
@@ -85164,11 +85158,11 @@ export const AllSamplePointsNoPaginationDocument = gql`
     }
   }
 export const AllSamplePointEntitiesDocument = gql`
-    query allSamplePointEntities($limit: Int, $offset: Int, $search: String!, $orderBy: [SamplePointEntitiesOrderBy!]) {
+    query allSamplePointEntities($first: Int, $offset: Int, $filter: SamplePointEntityFilter!, $orderBy: [SamplePointEntitiesOrderBy!]) {
   allSamplePointEntities(
-    filter: {or: [{name: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -85335,11 +85329,11 @@ export const AllSensorBaseTypesNoPaginationDocument = gql`
     }
   }
 export const AllSensorBaseTypesDocument = gql`
-    query allSensorBaseTypes($limit: Int, $offset: Int, $search: String!, $orderBy: [SensorBaseTypesOrderBy!]) {
+    query allSensorBaseTypes($first: Int, $offset: Int, $filter: SensorBaseTypeFilter!, $orderBy: [SensorBaseTypesOrderBy!]) {
   allSensorBaseTypes(
-    filter: {or: [{prefix: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount
@@ -85473,11 +85467,11 @@ export const AllSensorTypesNoPaginationDocument = gql`
     }
   }
 export const AllSensorTypesIndicesDocument = gql`
-    query allSensorTypesIndices($limit: Int, $offset: Int, $search: String!, $orderBy: [SensorTypesIndicesOrderBy!]) {
+    query allSensorTypesIndices($first: Int, $offset: Int, $filter: SensorTypesIndexFilter!, $orderBy: [SensorTypesIndicesOrderBy!]) {
   sensorTypes: allSensorTypesIndices(
-    filter: {or: [{sensorTypeArtikelOmschr: {includesInsensitive: $search}}]}
+    filter: $filter
     orderBy: $orderBy
-    first: $limit
+    first: $first
     offset: $offset
   ) {
     totalCount

@@ -6,7 +6,7 @@ import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../models/utils/tableHeader";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BaseEntity } from "../base/base-entity.component";
-import { AllDetectorTypeEntitiesGQL, AllDetectorsEntitiesGQL, DeleteDetectorTypeGQL, DetectorEntitiesOrderBy, DetectorEntity, DetectorTypesEntitiesOrderBy, DetectorTypesEntity } from "../../../../generated/graphql";
+import { AllDetectorTypeEntitiesGQL, AllDetectorsEntitiesGQL, DeleteDetectorTypeGQL, DetectorEntitiesOrderBy, DetectorEntity, DetectorTypesEntitiesOrderBy, DetectorTypesEntity, QueryAllDetectorTypesEntitiesArgs } from "../../../../generated/graphql";
 import { SearchFilters } from "../../../models/utils/searchFilters";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../models/utils/tableHead";
@@ -28,14 +28,15 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
 
   //These are the search filters that are passed around to the pagination and table.
   //These values are updated in these components and then send as a paremeter to the fetch data component
-  searchCriteria: SearchFilters = {
-    orderBy: [DetectorEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+  searchCriteria: QueryAllDetectorTypesEntitiesArgs = {
+    orderBy: [DetectorTypesEntitiesOrderBy.IdDesc],
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   //json return object for getter
@@ -45,7 +46,7 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
 
 
   //This is the default order by for the table
-  baseOrderBy = DetectorEntitiesOrderBy.IdDesc;
+  baseOrderBy = DetectorTypesEntitiesOrderBy.IdDesc;
 
   //The observable data that is retrieved
   override nodes$: Observable<Array<DetectorTypesEntity>>;
@@ -63,14 +64,15 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private detectorTypeEntitiesService: AllDetectorTypeEntitiesGQL,
     private deleteDetectorTypeService: DeleteDetectorTypeGQL
-  ,
+    ,
     protected override router: Router
   ) {
     super(router, toastr, route, http, detectorTypeEntitiesService, deleteDetectorTypeService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
 
   get editData(): any {
@@ -89,25 +91,25 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return detectorTypes.map((detectorType: DetectorTypesEntity) => {
       return {
         id: { url: 'api/detectors', value: detectorType.id } as TableField,
-        type: { url: 'api/detectorType', value: detectorType.name } as TableField,
+        name: { url: 'api/detectorType', value: detectorType.name } as TableField,
         prefix: { url: null, value: detectorType?.prefix } as TableField,
         code: { url: null, value: detectorType?.code } as TableField,
         suffix: { url: null, value: detectorType?.suffix } as TableField,
-        sensors: { url: null, value: detectorType?.sensorCount } as TableField,
+        sensorCount: { url: null, value: detectorType?.sensorCount } as TableField,
         created: { url: null, value: detectorType?.created } as TableField,
-        by: { url: 'user/' + detectorType?.ownerId, value: detectorType?.initials } as TableField,
+        initials: { url: 'user/' + detectorType?.ownerId, value: detectorType?.initials } as TableField,
       };
     });
   }
 
   tableHeaders: TableHead<DetectorTypesEntitiesOrderBy>[] = [
-    { key: 'type', label: "Type", asc: DetectorTypesEntitiesOrderBy.NameAsc, desc: DetectorTypesEntitiesOrderBy.NameDesc },
-    { key: 'prefix', label: "Prefix", asc: DetectorTypesEntitiesOrderBy.PrefixAsc, desc: DetectorTypesEntitiesOrderBy.PrefixDesc },
-    { key: 'code', label: "Code", asc: DetectorTypesEntitiesOrderBy.CodeAsc, desc: DetectorTypesEntitiesOrderBy.CodeDesc },
-    { key: 'suffix', label: "Suffix", asc: DetectorTypesEntitiesOrderBy.SuffixAsc, desc: DetectorTypesEntitiesOrderBy.SuffixDesc },
-    { key: 'sensors', label: "Sensors", asc: DetectorTypesEntitiesOrderBy.SensorCountAsc, desc: DetectorTypesEntitiesOrderBy.SensorCountDesc },
-    { key: 'created', label: "Created", asc: DetectorTypesEntitiesOrderBy.CreatedAsc, desc: DetectorTypesEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: DetectorTypesEntitiesOrderBy.InitialsAsc, desc: DetectorTypesEntitiesOrderBy.InitialsDesc },
+    { type: '', key: 'name', label: "Type", asc: DetectorTypesEntitiesOrderBy.NameAsc, desc: DetectorTypesEntitiesOrderBy.NameDesc },
+    { type: '', key: 'prefix', label: "Prefix", asc: DetectorTypesEntitiesOrderBy.PrefixAsc, desc: DetectorTypesEntitiesOrderBy.PrefixDesc },
+    { type: '', key: 'code', label: "Code", asc: DetectorTypesEntitiesOrderBy.CodeAsc, desc: DetectorTypesEntitiesOrderBy.CodeDesc },
+    { type: '', key: 'suffix', label: "Suffix", asc: DetectorTypesEntitiesOrderBy.SuffixAsc, desc: DetectorTypesEntitiesOrderBy.SuffixDesc },
+    { type: '', key: 'sensorCount', label: "Sensors", asc: DetectorTypesEntitiesOrderBy.SensorCountAsc, desc: DetectorTypesEntitiesOrderBy.SensorCountDesc },
+    { type: '', key: 'created', label: "Created", asc: DetectorTypesEntitiesOrderBy.CreatedAsc, desc: DetectorTypesEntitiesOrderBy.CreatedDesc },
+    { type: '', key: 'initials', label: "By", asc: DetectorTypesEntitiesOrderBy.InitialsAsc, desc: DetectorTypesEntitiesOrderBy.InitialsDesc },
   ]
 
 }

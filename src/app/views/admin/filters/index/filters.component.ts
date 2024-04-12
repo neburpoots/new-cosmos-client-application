@@ -25,16 +25,6 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
   objectSingle = 'Filter';
   objectPlural = 'Filters';
 
-  // searchCriteria: SearchFilters = {
-  //   orderBy: [FilterEntitiesOrderBy.IdDesc],
-  //   search: "",
-  //   limit: 10,
-  //   offset: 0,
-  //   totalPages: 0,
-  //   total: 0,
-  //   page: 1,
-  // }
-
   searchCriteria: QueryAllFilterEntitiesArgs = {
     orderBy: [FilterEntitiesOrderBy.IdDesc],
     first: 10,
@@ -44,7 +34,6 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
 
       ]
     },
-
   }
 
   ngOnInit(): void {
@@ -94,15 +83,14 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
   }
 
   tableHeaders: TableHead<FilterEntitiesOrderBy>[] = [
-    { key: 'cdartikel', label: "Part", asc: FilterEntitiesOrderBy.CdartikelAsc, desc: FilterEntitiesOrderBy.CdartikelDesc },
-    { key: 'name', label: "Name", asc: FilterEntitiesOrderBy.NameAsc, desc: FilterEntitiesOrderBy.NameDesc },
-    { key: 'omschr', label: "Description", asc: FilterEntitiesOrderBy.OmschrAsc, desc: FilterEntitiesOrderBy.OmschrDesc },
-    { key: 'replacementIntervalMonths', label: "Rep. Int.", asc: FilterEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: FilterEntitiesOrderBy.ReplacementIntervalMonthsDesc },
-    { key: 'consumable', label: "Consumable", asc: FilterEntitiesOrderBy.ConsumableAsc, desc: FilterEntitiesOrderBy.ConsumableDesc },
-    { key: 'created', label: "Created", asc: FilterEntitiesOrderBy.CreatedAsc, desc: FilterEntitiesOrderBy.CreatedDesc },
-    { key: 'initials', label: "By", asc: FilterEntitiesOrderBy.InitialsAsc, desc: FilterEntitiesOrderBy.InitialsDesc },
+    { key: 'cdartikel', label: "Part", asc: FilterEntitiesOrderBy.CdartikelAsc, desc: FilterEntitiesOrderBy.CdartikelDesc, type: 'string' },
+    { key: 'name', label: "Name", asc: FilterEntitiesOrderBy.NameAsc, desc: FilterEntitiesOrderBy.NameDesc, type: 'string'},
+    { key: 'omschr', label: "Description", asc: FilterEntitiesOrderBy.OmschrAsc, desc: FilterEntitiesOrderBy.OmschrDesc, type: 'string' },
+    { key: 'replacementIntervalMonths', label: "Rep. Int.", asc: FilterEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: FilterEntitiesOrderBy.ReplacementIntervalMonthsDesc, type: 'number'},
+    { key: 'consumable', label: "Consumable", asc: FilterEntitiesOrderBy.ConsumableAsc, desc: FilterEntitiesOrderBy.ConsumableDesc, type: 'boolean'},
+    { key: 'created', label: "Created", asc: FilterEntitiesOrderBy.CreatedAsc, desc: FilterEntitiesOrderBy.CreatedDesc, type: 'datetime' },
+    { key: 'initials', label: "By", asc: FilterEntitiesOrderBy.InitialsAsc, desc: FilterEntitiesOrderBy.InitialsDesc, type: 'string' },
   ]
-
 
   mapTableData(filters: FilterEntity[]): any[] {
     let object = filters.map((filter: FilterEntity) => {
@@ -117,15 +105,6 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
         initials: { url: null, value: filter?.initials } as TableField,
       };
     });
-
-    //ASSIGN THE FIRST VALUE
-    //This is for an edge case where the filter returns no results
-    //This means further filtering will not work because the dynamic filtering does not know the types
-    //this fixes it by saving the first result from the first fetch
-    if (object.length > 0) {
-      this.baseTableRow = object[0];
-    }
-
     return object;
   }
 

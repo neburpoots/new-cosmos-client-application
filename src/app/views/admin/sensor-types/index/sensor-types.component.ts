@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllSensorTypesIndicesGQL,  DeleteSensorTypeGQL,  SensorTypesIndex, SensorTypesIndicesOrderBy } from "../../../../../generated/graphql";
+import { AllSensorTypesIndicesGQL, DeleteSensorTypeGQL, QueryAllSensorTypesIndicesArgs, SensorTypesIndex, SensorTypesIndicesOrderBy } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -24,14 +24,15 @@ export class SensorTypeComponent extends BaseEntity<SensorTypesIndex> implements
   objectSingle = 'Sensor Type';
   objectPlural = 'Sensor Types';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllSensorTypesIndicesArgs = {
     orderBy: [SensorTypesIndicesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -70,50 +71,50 @@ export class SensorTypeComponent extends BaseEntity<SensorTypesIndex> implements
   ) {
     super(router, toastr, route, http, sensorTypeService, deleteSensorService);
 
-this.checkQueryParams();
-
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.checkQueryParams();
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<SensorTypesIndicesOrderBy>[] = [
-    { key: 'cdartikel', label: "MV Part", asc: SensorTypesIndicesOrderBy.SensorTypeCdartikelAsc, desc: SensorTypesIndicesOrderBy.SensorTypeCdartikelDesc },
-    { key: 'description', label: "MV Description", asc: SensorTypesIndicesOrderBy.SensorTypeArtikelOmschrAsc, desc: SensorTypesIndicesOrderBy.SensorTypeArtikelOmschrDesc },
-    { key: 'prefix', label: "Prefix", asc: SensorTypesIndicesOrderBy.PrefixAsc, desc: SensorTypesIndicesOrderBy.PrefixDesc },
-    { key: 'code', label: "Code", asc: SensorTypesIndicesOrderBy.CodeAsc, desc: SensorTypesIndicesOrderBy.CodeDesc },
-    { key: 'suffix', label: "Suffix", asc: SensorTypesIndicesOrderBy.SuffixAsc, desc: SensorTypesIndicesOrderBy.SuffixDesc },
-    { key: 'target', label: "Target", asc: SensorTypesIndicesOrderBy.TargetAsc, desc: SensorTypesIndicesOrderBy.TargetDesc },
-    { key: 'range', label: "Range", asc: SensorTypesIndicesOrderBy.HighEuAsc, desc: SensorTypesIndicesOrderBy.HighEuDesc },
-    { key: 'engineering_units', label: "Units", asc: SensorTypesIndicesOrderBy.EngineeringUnitsAsc, desc: SensorTypesIndicesOrderBy.EngineeringUnitsDesc },
-    { key: 'electrolyte', label: "Electrolyte", asc: SensorTypesIndicesOrderBy.ElectrolyteNameAsc, desc: SensorTypesIndicesOrderBy.ElectrolyteNameDesc },
-    { key: 'membrane', label: "Membrane", asc: SensorTypesIndicesOrderBy.MembraneNameAsc, desc: SensorTypesIndicesOrderBy.MembraneNameDesc },
-    { key: 'o_ring', label: "O-Ring", asc: SensorTypesIndicesOrderBy.ORingNameAsc, desc: SensorTypesIndicesOrderBy.ORingNameDesc },
-    { key: 'pyrolyser', label: "Pyro", asc: SensorTypesIndicesOrderBy.PyrolyserNameAsc, desc: SensorTypesIndicesOrderBy.PyrolyserNameDesc },
-    { key: 'filter', label: "Filter", asc: SensorTypesIndicesOrderBy.FilterNameAsc, desc: SensorTypesIndicesOrderBy.FilterNameDesc},
-    { key: 'maintenance_interval_months', label: "Maint. Int.", asc: SensorTypesIndicesOrderBy.MaintenanceIntervalMonthsAsc, desc: SensorTypesIndicesOrderBy.MaintenanceIntervalMonthsDesc},
-    { key: 'replacement_interval_months', label: "Rep. Int.", asc: SensorTypesIndicesOrderBy.ReplacementIntervalMonthsAsc, desc: SensorTypesIndicesOrderBy.ReplacementIntervalMonthsDesc },
-    { key: 'principle', label: "Principle", asc: SensorTypesIndicesOrderBy.PrincipleNameAsc, desc: SensorTypesIndicesOrderBy.PrincipleNameDesc },
+    { type: 'string', key: 'sensorTypeCdartikel', label: "MV Part", asc: SensorTypesIndicesOrderBy.SensorTypeCdartikelAsc, desc: SensorTypesIndicesOrderBy.SensorTypeCdartikelDesc },
+    { type: 'string', key: 'sensorTypeArtikelOmschr', label: "MV Description", asc: SensorTypesIndicesOrderBy.SensorTypeArtikelOmschrAsc, desc: SensorTypesIndicesOrderBy.SensorTypeArtikelOmschrDesc },
+    { type: 'string', key: 'prefix', label: "Prefix", asc: SensorTypesIndicesOrderBy.PrefixAsc, desc: SensorTypesIndicesOrderBy.PrefixDesc },
+    { type: 'string', key: 'code', label: "Code", asc: SensorTypesIndicesOrderBy.CodeAsc, desc: SensorTypesIndicesOrderBy.CodeDesc },
+    { type: 'string', key: 'suffix', label: "Suffix", asc: SensorTypesIndicesOrderBy.SuffixAsc, desc: SensorTypesIndicesOrderBy.SuffixDesc },
+    { type: 'string', key: 'target', label: "Target", asc: SensorTypesIndicesOrderBy.TargetAsc, desc: SensorTypesIndicesOrderBy.TargetDesc },
+    { type: 'number', key: 'highEu', label: "Range", asc: SensorTypesIndicesOrderBy.HighEuAsc, desc: SensorTypesIndicesOrderBy.HighEuDesc },
+    { type: 'string', key: 'engineeringUnits', label: "Units", asc: SensorTypesIndicesOrderBy.EngineeringUnitsAsc, desc: SensorTypesIndicesOrderBy.EngineeringUnitsDesc },
+    { type: 'string', key: 'electrolyteName', label: "Electrolyte", asc: SensorTypesIndicesOrderBy.ElectrolyteNameAsc, desc: SensorTypesIndicesOrderBy.ElectrolyteNameDesc },
+    { type: 'string', key: 'membraneName', label: "Membrane", asc: SensorTypesIndicesOrderBy.MembraneNameAsc, desc: SensorTypesIndicesOrderBy.MembraneNameDesc },
+    { type: 'string', key: 'oRingName', label: "O-Ring", asc: SensorTypesIndicesOrderBy.ORingNameAsc, desc: SensorTypesIndicesOrderBy.ORingNameDesc },
+    { type: 'string', key: 'pyrolyserName', label: "Pyro", asc: SensorTypesIndicesOrderBy.PyrolyserNameAsc, desc: SensorTypesIndicesOrderBy.PyrolyserNameDesc },
+    { type: 'string', key: 'filterName', label: "Filter", asc: SensorTypesIndicesOrderBy.FilterNameAsc, desc: SensorTypesIndicesOrderBy.FilterNameDesc },
+    { type: 'number', key: 'maintenanceIntervalMonths', label: "Maint. Int.", asc: SensorTypesIndicesOrderBy.MaintenanceIntervalMonthsAsc, desc: SensorTypesIndicesOrderBy.MaintenanceIntervalMonthsDesc },
+    { type: 'number', key: 'replacementIntervalMonths', label: "Rep. Int.", asc: SensorTypesIndicesOrderBy.ReplacementIntervalMonthsAsc, desc: SensorTypesIndicesOrderBy.ReplacementIntervalMonthsDesc },
+    { type: 'string', key: 'principleName', label: "Principle", asc: SensorTypesIndicesOrderBy.PrincipleNameAsc, desc: SensorTypesIndicesOrderBy.PrincipleNameDesc },
   ]
 
 
   mapTableData(sensorTypes: SensorTypesIndex[]): any[] {
-    return sensorTypes.map((sensorType: SensorTypesIndex) => { 
+    return sensorTypes.map((sensorType: SensorTypesIndex) => {
       return {
         id: { url: null, value: sensorType.id } as TableField,
-        cdartikel: { url: null, value: sensorType?.sensorTypeCdartikel } as TableField,
-        description: { url: null, value: sensorType?.sensorTypeArtikelOmschr } as TableField,
+        sensorTypeCdartikel: { url: null, value: sensorType?.sensorTypeCdartikel } as TableField,
+        sensorTypeArtikelOmschr: { url: null, value: sensorType?.sensorTypeArtikelOmschr } as TableField,
         prefix: { url: null, value: sensorType?.prefix } as TableField,
         code: { url: null, value: sensorType?.code } as TableField,
         suffix: { url: null, value: sensorType?.suffix } as TableField,
         target: { url: null, value: sensorType?.target } as TableField,
-        range: { url: null, value: sensorType?.highEu } as TableField,
-        engineering_units: { url: null, value: sensorType?.engineeringUnits } as TableField,
-        electrolyte: { url: null, value: sensorType?.electrolyteName } as TableField,
-        membrane: { url: null, value: sensorType?.membraneName } as TableField,
-        o_ring: { url: null, value: sensorType?.oRingName } as TableField,
-        pyrolyser: { url: null, value: sensorType?.pyrolyserName } as TableField,
-        filter: { url: null, value: sensorType?.filterName } as TableField,
-        maintenance_interval_months: { url: null, value: sensorType?.maintenanceIntervalMonths } as TableField,
-        replacement_interval_months: { url: null, value: sensorType?.replacementIntervalMonths } as TableField,
-        principle: { url: null, value: sensorType?.principleName } as TableField,
+        highEu: { url: null, value: sensorType?.highEu } as TableField,
+        engineeringUnits: { url: null, value: sensorType?.engineeringUnits } as TableField,
+        electrolyteName: { url: null, value: sensorType?.electrolyteName } as TableField,
+        membraneName: { url: null, value: sensorType?.membraneName } as TableField,
+        oRingName: { url: null, value: sensorType?.oRingName } as TableField,
+        pyrolyserName: { url: null, value: sensorType?.pyrolyserName } as TableField,
+        filterName: { url: null, value: sensorType?.filterName } as TableField,
+        maintenanceIntervalMonths: { url: null, value: sensorType?.maintenanceIntervalMonths } as TableField,
+        replacementIntervalMonths: { url: null, value: sensorType?.replacementIntervalMonths } as TableField,
+        principleName: { url: null, value: sensorType?.principleName } as TableField,
       };
     });
   }

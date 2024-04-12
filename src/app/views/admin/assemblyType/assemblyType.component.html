@@ -6,8 +6,10 @@
             [baseOrderBy]="baseOrderBy"
             [isEditable]="false"  [isDeletable]="false"
             [isCreatable]="false"
-            [title]="objectPlural" [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"></table-component>
+            [title]="objectPlural" [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"	></table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
+            [totalResults]="totalResults"
+
             (paginationChange)="fetch($event)"
             ></app-pagination-component>
 

@@ -4,7 +4,7 @@ import { TableField } from "../../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../../models/utils/tableHeader";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllChemicalCompoundsGQL, CalGasEntitiesGQL, CalGasesOrderBy, CalgasEntitiesOrderBy, CalgasEntity, ChemicalCompound, ChemicalCompoundsOrderBy, DeleteCalGasGQL, DeleteChemicalCompoundGQL } from "../../../../../generated/graphql";
+import { AllChemicalCompoundsGQL, ChemicalCompound, ChemicalCompoundsOrderBy, DeleteCalGasGQL, DeleteChemicalCompoundGQL } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";

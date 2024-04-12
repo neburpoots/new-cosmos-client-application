@@ -56,42 +56,16 @@ export class FilterBuilder {
     //all columns that are string which can be searched by global search
     searchableColumns: string[] = [];
 
-    columns: TableHead<any>[] = [];
+    columns: TableHead<any>[];
 
     columnTypes: string[] = [];
 
     baseTableRow: any;
 
-    constructor() {
+    constructor(columns: TableHead<any>[]) {
         this.currentFilters = [];
+        this.columns = columns;
         this.addFilterInput();
-    }
-
-    //calculates the type of the filter based upon the first row of the data
-    getColumnType(key: string, tableBaseRow: any, isValidDate : (date : string) => boolean): string {
-
-        let type: string = typeof tableBaseRow[key].value;
-
-        //check if the column is a date
-        if (type == 'string') {
-            if (isValidDate(tableBaseRow[key].value)) {
-                type = 'datetime';
-            }
-        }
-
-        if (type == 'string') {
-            this.searchableColumns.push(key);
-        }
-
-        return type;
-    }
-
-    async setUpColumnTypes(columns : TableHead<any>[], tableBaseRow: any, isValidDate : (date : string) => boolean): Promise<void> {
-        
-        this.columns = await columns.map((column) => {
-            column.type = this.getColumnType(column.key, tableBaseRow, isValidDate);
-            return column
-        })
     }
 
     //adds a empty filter to the filerinput array
@@ -141,26 +115,27 @@ export class FilterBuilder {
         const fomattedDate = date.format('YYYY-MM-DDTHH:mm:ss[Z]');
 
         if ([11, 12].includes(id)) {
-            return {
-                [filterInput.column]: { [filterInput.selectedFilterType.keyWord]: fomattedDate }
-            }
+            return { [filterInput.selectedFilterType.keyWord]: fomattedDate }
+
         } else {
             const endDate = date.add(1, 'day').format('YYYY-MM-DDTHH:mm:ss[Z]');
 
             return {
-                [filterInput.column]: {
-                    greaterThanOrEqualTo: fomattedDate,
-                    smallerThanOrEqualTo: endDate
-                }
+                greaterThanOrEqualTo: fomattedDate,
+                smallerThanOrEqualTo: endDate
             }
+
         }
     }
 
     //handles the global search
     async handleGlobalSearch(): Promise<any> {
+        let orFilter: any[] = [];
 
-        let orFilter = await this.searchableColumns.map((column) => {
-            return { [column]: { includesInsensitive: this.globalSearch } }
+        await this.columns.forEach((column) => {
+            if (column.type === 'string') {
+                orFilter.push({ [column.key]: { includesInsensitive: this.globalSearch } })
+            }
         })
 
         if (this.globalSearch) {
@@ -188,15 +163,28 @@ export class FilterBuilder {
                 return;
             }
 
+            //FOR EMBEDDED OBJECTS SPLIT THE VARIABLE AT $ AND CREATE A NESTED OBJECT
+            const dynamicFilterEmbedding: Record<string, any> = {};
+
+            // Assuming orderByColumn is in the format 'nestedProperty$subproperty'
+            const columns = filterInput.column.split('$');
+            let currentObject = dynamicFilterEmbedding;
+
+            for (let i = 0; i < columns.length - 1; i++) {
+                currentObject[columns[i]] = {};
+                currentObject = currentObject[columns[i]];
+            }
+
             //handles the date filter
             if ([10, 11, 12].includes(id)) {
-                return this.handleDateFilter(filterInput);
+                currentObject[columns[columns.length - 1]] = this.handleDateFilter(filterInput);
+                return dynamicFilterEmbedding
             }
 
             //handles the boolean filter
             if ([8, 9].includes(id)) {
-                console.log()
-                return { [filterInput.column]: { [filterInput.selectedFilterType.keyWord]: id === 8 } }
+                currentObject[columns[columns.length - 1]] = { [filterInput.selectedFilterType.keyWord]: id === 8 };
+                return dynamicFilterEmbedding
             }
 
             //handles the range filter
@@ -206,16 +194,16 @@ export class FilterBuilder {
                         return +value;
                     })
                 }
-                return { [filterInput.column]: { [filterInput.selectedFilterType.keyWord]: filterInput.range } }
+                currentObject[columns[columns.length - 1]] = { [filterInput.selectedFilterType.keyWord]: filterInput.range };
+                return dynamicFilterEmbedding
             }
 
-            return {
-                [filterInput.column]: { [filterInput.selectedFilterType.keyWord]: filterInput.value }
-            }
+            currentObject[columns[columns.length - 1]] = { [filterInput.selectedFilterType.keyWord]: filterInput.value };
 
+            return dynamicFilterEmbedding;
         });
 
-        if(this.currentFilters[0] == undefined) {
+        if (this.currentFilters[0] == undefined) {
             this.currentFilters = []
         }
 

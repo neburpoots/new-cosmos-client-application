@@ -9,12 +9,13 @@
                 (view)="openViewModal($event)"
                 
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)"
-                [columns]="tableHeaders" [data]="tableData" [inline_selector]="'filters-form'">
+                [columns]="tableHeaders" [data]="tableData"	 [inline_selector]="'filters-form'">
                 <assembly-multivers-popover [assemblyMultiversLines]="assemblyMultiversLines"
                     [item]="selectedItem"></assembly-multivers-popover>
 
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
+            [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
         </div>
     </div>

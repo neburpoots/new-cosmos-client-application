@@ -6,7 +6,7 @@
                 (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
                 (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData" [inline_selector]="'areas-form'"
+                [data]="tableData"	 [inline_selector]="'areas-form'"
                 [isInlineCreating]="isInlineCreating"
                 (toggleInlineCreating)="toggleInlineCreating()"	
                 >
@@ -17,6 +17,7 @@
                     (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></areas-form>
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
+            [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large

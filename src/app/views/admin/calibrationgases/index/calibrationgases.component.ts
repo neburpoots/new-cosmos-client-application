@@ -6,7 +6,7 @@ import { ToastrService } from "ngx-toastr";
 import { CalibrationGasesFormComponent } from "../form/calibrationgases-form.component";
 import { TableHeader } from "../../../../models/utils/tableHeader";
 import { ActivatedRoute, Router } from "@angular/router";
-import { CalGasEntitiesGQL, CalGasesOrderBy, CalgasEntitiesOrderBy, CalgasEntity, DeleteCalGasGQL } from "../../../../../generated/graphql";
+import { AllCalibrationGasesGQL, CalGasesOrderBy, CalgasEntitiesOrderBy, CalgasEntity, DeleteCalGasGQL, QueryAllCalgasEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,14 +25,15 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
   objectSingle = 'Calibration gas';
   objectPlural = 'Calibration gases';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllCalgasEntitiesArgs = {
     orderBy: [CalgasEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -67,16 +68,17 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
   override nodes$: Observable<Array<CalgasEntity>>;
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
-    private calGasService: CalGasEntitiesGQL,
+    private calGasService: AllCalibrationGasesGQL,
     private deleteCalGasService: DeleteCalGasGQL
-  ,
+    ,
     protected override router: Router
   ) {
     super(router, toastr, route, http, calGasService, deleteCalGasService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
 
   // tableHeaders : TableHeader[] = [
@@ -89,12 +91,12 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
   // ];
 
   tableHeaders: TableHead<CalgasEntitiesOrderBy>[] = [
-    { key: 'gas', label: "Gas", asc: CalgasEntitiesOrderBy.NameAsc, desc: CalgasEntitiesOrderBy.NameDesc },
-    { key: 'concentration', label: "Concentration", asc: CalgasEntitiesOrderBy.ConcentrationAsc, desc: CalgasEntitiesOrderBy.ConcentrationDesc },
-    { key: 'engineering_units', label: "Engineering Units", asc: CalgasEntitiesOrderBy.EngineeringUnitsAsc, desc: CalgasEntitiesOrderBy.EngineeringUnitsDesc },
-    { key: 'cdartikel', label: "CD Artikel", asc: CalgasEntitiesOrderBy.CdartikelAsc, desc: CalgasEntitiesOrderBy.CdartikelDesc },
-    { key: 'created', label: "Created", asc: CalgasEntitiesOrderBy.CreatedAsc, desc: CalgasEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: CalgasEntitiesOrderBy.InitialsAsc, desc: CalgasEntitiesOrderBy.InitialsDesc },
+    { type: 'string', key: 'name', label: "Gas", asc: CalgasEntitiesOrderBy.NameAsc, desc: CalgasEntitiesOrderBy.NameDesc },
+    { type: 'number', key: 'concentration', label: "Concentration", asc: CalgasEntitiesOrderBy.ConcentrationAsc, desc: CalgasEntitiesOrderBy.ConcentrationDesc },
+    { type: 'string', key: 'engineeringUnits', label: "Engineering Units", asc: CalgasEntitiesOrderBy.EngineeringUnitsAsc, desc: CalgasEntitiesOrderBy.EngineeringUnitsDesc },
+    { type: 'string', key: 'cdartikel', label: "CD Artikel", asc: CalgasEntitiesOrderBy.CdartikelAsc, desc: CalgasEntitiesOrderBy.CdartikelDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: CalgasEntitiesOrderBy.CreatedAsc, desc: CalgasEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: CalgasEntitiesOrderBy.InitialsAsc, desc: CalgasEntitiesOrderBy.InitialsDesc },
   ]
 
 
@@ -103,12 +105,12 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return calGasses.map((calgas: CalgasEntity) => {
       return {
         id: { url: 'api/calGasses', value: calgas.id } as TableField,
-        gas: { url: null, value: calgas?.name } as TableField,
+        name: { url: null, value: calgas?.name } as TableField,
         concentration: { url: null, value: calgas?.concentration } as TableField,
-        engineering_units: { url: null, value: calgas?.engineeringUnits } as TableField,
+        engineeringUnits: { url: null, value: calgas?.engineeringUnits } as TableField,
         cdartikel: { url: null, value: calgas?.cdartikel } as TableField,
         created: { url: null, value: calgas.created } as TableField,
-        by: { url: null, value: calgas?.initials } as TableField,
+        initials: { url: null, value: calgas?.initials } as TableField,
       };
     });
   }

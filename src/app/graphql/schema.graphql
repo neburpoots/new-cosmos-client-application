@@ -51864,6 +51864,7 @@ type DetectorEntity {
   remarks: String
   prefix: String
   detectorTypeId: Int
+  name: String
   code: String
   suffix: String
   created: Datetime
@@ -51895,6 +51896,8 @@ enum DetectorEntitiesOrderBy {
   PREFIX_DESC
   DETECTOR_TYPE_ID_ASC
   DETECTOR_TYPE_ID_DESC
+  NAME_ASC
+  NAME_DESC
   CODE_ASC
   CODE_DESC
   SUFFIX_ASC
@@ -51929,6 +51932,9 @@ input DetectorEntityCondition {
 
   """Checks for equality with the object’s `detectorTypeId` field."""
   detectorTypeId: Int
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
 
   """Checks for equality with the object’s `code` field."""
   code: String
@@ -51967,6 +51973,9 @@ input DetectorEntityFilter {
 
   """Filter by the object’s `detectorTypeId` field."""
   detectorTypeId: IntFilter
+
+  """Filter by the object’s `name` field."""
+  name: StringFilter
 
   """Filter by the object’s `code` field."""
   code: StringFilter

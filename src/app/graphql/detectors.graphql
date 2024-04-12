@@ -141,6 +141,7 @@ query allDetectorsEntities($first: Int, $offset: Int, $filter: DetectorEntityFil
       serialNumber
       remarks
       prefix
+      name
       ownerId
       labelDate
       initials
@@ -150,6 +151,7 @@ query allDetectorsEntities($first: Int, $offset: Int, $filter: DetectorEntityFil
     }
   }
 }
+
 
 #-------------------------------------------------------------------------------
 mutation UpdateDetector($id: Int!, $patch: DetectorPatch!) 

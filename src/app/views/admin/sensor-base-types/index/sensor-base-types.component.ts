@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllSensorBaseTypesGQL, AllSensorTypesIndicesGQL, DeleteSensorBaseTypeGQL, DeleteSensorTypeGQL, SensorBaseType, SensorBaseTypesOrderBy, SensorTypesIndex, SensorTypesIndicesOrderBy } from "../../../../../generated/graphql";
+import { AllSensorBaseTypesGQL, AllSensorTypesIndicesGQL, DeleteSensorBaseTypeGQL, DeleteSensorTypeGQL, QueryAllSensorBaseTypesArgs, SensorBaseType, SensorBaseTypesOrderBy, SensorTypesIndex, SensorTypesIndicesOrderBy } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -24,14 +24,15 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
   objectSingle = 'Sensor Base Type';
   objectPlural = 'Sensor Base Types';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllSensorBaseTypesArgs = {
     orderBy: [SensorBaseTypesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -84,14 +85,14 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
   }
 
   tableHeaders: TableHead<SensorBaseTypesOrderBy>[] = [
-    { key: 'prefix', label: "Prefix", asc: SensorBaseTypesOrderBy.PrefixAsc, desc: SensorBaseTypesOrderBy.PrefixDesc },
-    { key: 'suffix', label: "Suffix", asc: SensorBaseTypesOrderBy.SuffixAsc, desc: SensorBaseTypesOrderBy.SuffixDesc },
-    { key: 'series', label: "Series", asc: SensorBaseTypesOrderBy.SeriesAsc, desc: SensorBaseTypesOrderBy.SeriesDesc },
-    { key: 'maintenance_interval_months', label: "Maint. Int.", asc: SensorBaseTypesOrderBy.MaintenanceIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.MaintenanceIntervalMonthsDesc },
-    { key: 'replacement_interval_months', label: "Rep. Int.", asc: SensorBaseTypesOrderBy.ReplacementIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.ReplacementIntervalMonthsDesc },
-    { key: 'quotation_interval_months', label: "Quo. Int.", asc: SensorBaseTypesOrderBy.QuotationIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.QuotationIntervalMonthsDesc },
-    { key: 'principle', label: "Principle", asc: SensorBaseTypesOrderBy.PrincipleByPrincipleIdNameAsc, desc: SensorBaseTypesOrderBy.PrincipleByPrincipleIdNameDesc },
-    { key: 'volume', label: "Volume", asc: SensorBaseTypesOrderBy.VolumeAsc, desc: SensorBaseTypesOrderBy.VolumeDesc },
+    { type: 'string', key: 'prefix', label: "Prefix", asc: SensorBaseTypesOrderBy.PrefixAsc, desc: SensorBaseTypesOrderBy.PrefixDesc },
+    { type: 'string', key: 'suffix', label: "Suffix", asc: SensorBaseTypesOrderBy.SuffixAsc, desc: SensorBaseTypesOrderBy.SuffixDesc },
+    { type: 'string', key: 'series', label: "Series", asc: SensorBaseTypesOrderBy.SeriesAsc, desc: SensorBaseTypesOrderBy.SeriesDesc },
+    { type: 'number', key: 'maintenanceIntervalMonths', label: "Maint. Int.", asc: SensorBaseTypesOrderBy.MaintenanceIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.MaintenanceIntervalMonthsDesc },
+    { type: 'number', key: 'replacementIntervalMonths', label: "Rep. Int.", asc: SensorBaseTypesOrderBy.ReplacementIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.ReplacementIntervalMonthsDesc },
+    { type: 'number', key: 'quotationIntervalMonths', label: "Quo. Int.", asc: SensorBaseTypesOrderBy.QuotationIntervalMonthsAsc, desc: SensorBaseTypesOrderBy.QuotationIntervalMonthsDesc },
+    { type: 'string', key: 'principleByPrincipleId$name', label: "Principle", asc: SensorBaseTypesOrderBy.PrincipleByPrincipleIdNameAsc, desc: SensorBaseTypesOrderBy.PrincipleByPrincipleIdNameDesc },
+    { type: 'number', key: 'volume', label: "Volume", asc: SensorBaseTypesOrderBy.VolumeAsc, desc: SensorBaseTypesOrderBy.VolumeDesc },
   ]
 
   mapTableData(sensorBaseTypes: SensorBaseType[]): any[] {
@@ -101,10 +102,10 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
         prefix: { url: null, value: sensorBaseType?.prefix } as TableField,
         suffix: { url: null, value: sensorBaseType?.suffix } as TableField,
         series: { url: null, value: sensorBaseType?.series } as TableField,
-        maintenance_interval_months: { url: null, value: sensorBaseType?.maintenanceIntervalMonths } as TableField,
-        replacement_interval_months: { url: null, value: sensorBaseType?.replacementIntervalMonths } as TableField,
-        quotation_interval_months: { url: null, value: sensorBaseType?.quotationIntervalMonths } as TableField,
-        principle: { url: null, value: sensorBaseType?.principleByPrincipleId?.name } as TableField,
+        maintenanceIntervalMonths: { url: null, value: sensorBaseType?.maintenanceIntervalMonths } as TableField,
+        replacementIntervalMonths: { url: null, value: sensorBaseType?.replacementIntervalMonths } as TableField,
+        quotationIntervalMonths: { url: null, value: sensorBaseType?.quotationIntervalMonths } as TableField,
+        principleByPrincipleId$name: { url: null, value: sensorBaseType?.principleByPrincipleId?.name } as TableField,
         volume: { url: null, value: sensorBaseType?.volume } as TableField,
       };
     });

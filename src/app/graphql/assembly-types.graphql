@@ -1,13 +1,8 @@
 #-------------------------------------------------------------------------------
-query AssemblyTypeEntities($first: Int, $offset: Int, $search: String!, $orderBy: [AssemblyTypesEntitiesOrderBy!])
+query AssemblyTypeEntities($first: Int, $offset: Int, $filter: AssemblyTypesEntityFilter!, $orderBy: [AssemblyTypesEntitiesOrderBy!])
 {
   assemblyTypes: allAssemblyTypesEntities(
-    filter: {
-      or: [
-        { name: { includesInsensitive: $search } },
-        { cdartikel: { includesInsensitive: $search } }
-      ]
-    },
+    filter: $filter
     orderBy: $orderBy,
     first: $first,  # Use first to limit the number of results
     offset: $offset # Use offset to specify the number of results to skip

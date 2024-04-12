@@ -7,13 +7,14 @@
                 (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
                 (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData" [inline_selector]="'detector-form'" [isInlineCreating]="isInlineCreating"
+                [data]="tableData"	 [inline_selector]="'detector-form'" [isInlineCreating]="isInlineCreating"
                 (toggleInlineCreating)="toggleInlineCreating()">
                 <calgas-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
                     [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
                     (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></calgas-form>
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
+            [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large
@@ -37,7 +38,7 @@
                 [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
                 (closeModal)="closeDeleteModal()"></delete-modal>
         </modal-component> -->
-            <!-- <app-card-table [isDeletable]="true" (create)="openCreateModal()" (edit)="openEditModal($event)" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"
+            <!-- <app-card-table [isDeletable]="true" (create)="openCreateModal()" (edit)="openEditModal($event)" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"	
                 [title]="objectPlural" [object]="objectSingle"></app-card-table>
 
             <!-- Your table content here -->

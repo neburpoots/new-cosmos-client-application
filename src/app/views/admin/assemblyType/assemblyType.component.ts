@@ -5,7 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { TableField } from "../../../models/utils/tableField";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable, Subject, map, of, startWith, switchMap } from "rxjs";
-import { AssemblyTypeEntitiesGQL, AssemblyTypeEntitiesQuery, AssemblyTypesEntitiesOrderBy, AssemblyTypesEntity, AssemblyTypesOrderBy } from "../../../../generated/graphql";
+import { AssemblyTypeEntitiesGQL, AssemblyTypeEntitiesQuery, AssemblyTypesEntitiesOrderBy, AssemblyTypesEntity, AssemblyTypesOrderBy, QueryAllAssemblyTypesArgs, QueryAllAssemblyTypesEntitiesArgs } from "../../../../generated/graphql";
 import { BaseEntity } from "../base/base-entity.component";
 import { SearchFilters } from "../../../models/utils/searchFilters";
 
@@ -16,19 +16,20 @@ import { TableHead } from "../../../models/utils/tableHead";
   templateUrl: "./assemblyType.component.html",
 })
 
-export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> implements OnInit{
+export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> implements OnInit {
 
   objectSingle = 'Assembly type';
   objectPlural = 'Assembly types';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllAssemblyTypesEntitiesArgs = {
     orderBy: [AssemblyTypesEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -49,9 +50,10 @@ export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> imple
   ) {
     super(router, toastr, route, http, assemblyTypeService, null);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   //maps for the url to be set at the front
   mapTableData(assemblyTypes: AssemblyTypesEntity[]): any[] {
@@ -73,16 +75,16 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     });
   }
 
-  tableHeaders : TableHead<AssemblyTypesEntitiesOrderBy>[] = [
-		{ key: 'name', label: "Name", asc: AssemblyTypesEntitiesOrderBy.NameAsc, desc: AssemblyTypesEntitiesOrderBy.NameDesc },
-		{ key: 'cdartikel', label: "CD Artikel", asc: AssemblyTypesEntitiesOrderBy.CdartikelAsc, desc: AssemblyTypesEntitiesOrderBy.CdartikelDesc },
-		{ key: 'free', label: "Free", asc: AssemblyTypesEntitiesOrderBy.VoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.VoorraadDesc },
-		{ key: 'res', label: "Res.", asc: AssemblyTypesEntitiesOrderBy.GereserveerdAsc, desc: AssemblyTypesEntitiesOrderBy.GereserveerdDesc },
-		{ key: 'min', label: "Min", asc: AssemblyTypesEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MinvoorraadDesc },
-		{ key: 'max', label: "Max", asc: AssemblyTypesEntitiesOrderBy.MaxvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MaxvoorraadDesc },
-		{ key: 'advice', label: "Advice", asc: AssemblyTypesEntitiesOrderBy.AdviceAsc, desc: AssemblyTypesEntitiesOrderBy.AdviceDesc },
-		{ key: 'created', label: "Created", asc: AssemblyTypesEntitiesOrderBy.CreatedAsc, desc: AssemblyTypesEntitiesOrderBy.CreatedDesc },
-		{ key: 'initials', label: "By", asc: AssemblyTypesEntitiesOrderBy.OwnerIdAsc, desc: AssemblyTypesEntitiesOrderBy.OwnerIdDesc },
-	]
+  tableHeaders: TableHead<AssemblyTypesEntitiesOrderBy>[] = [
+    { type: 'string', key: 'name', label: "Name", asc: AssemblyTypesEntitiesOrderBy.NameAsc, desc: AssemblyTypesEntitiesOrderBy.NameDesc },
+    { type: 'string', key: 'cdartikel', label: "CD Artikel", asc: AssemblyTypesEntitiesOrderBy.CdartikelAsc, desc: AssemblyTypesEntitiesOrderBy.CdartikelDesc },
+    { type: 'number', key: 'free', label: "Free", asc: AssemblyTypesEntitiesOrderBy.VoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.VoorraadDesc },
+    { type: 'number', key: 'res', label: "Res.", asc: AssemblyTypesEntitiesOrderBy.GereserveerdAsc, desc: AssemblyTypesEntitiesOrderBy.GereserveerdDesc },
+    { type: 'number', key: 'min', label: "Min", asc: AssemblyTypesEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MinvoorraadDesc },
+    { type: 'number', key: 'max', label: "Max", asc: AssemblyTypesEntitiesOrderBy.MaxvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MaxvoorraadDesc },
+    { type: 'number', key: 'advice', label: "Advice", asc: AssemblyTypesEntitiesOrderBy.AdviceAsc, desc: AssemblyTypesEntitiesOrderBy.AdviceDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: AssemblyTypesEntitiesOrderBy.CreatedAsc, desc: AssemblyTypesEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: AssemblyTypesEntitiesOrderBy.OwnerIdAsc, desc: AssemblyTypesEntitiesOrderBy.OwnerIdDesc },
+  ]
 
 }

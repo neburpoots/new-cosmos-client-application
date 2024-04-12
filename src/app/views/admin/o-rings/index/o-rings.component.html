@@ -17,6 +17,7 @@
                     (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></o-rings-form>
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
+            [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large
