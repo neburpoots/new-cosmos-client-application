@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from "@angular/core";
 import { trigger, state, style, animate, transition } from "@angular/animations";
-import { faCoffee, faDeleteLeft, faFilePdf, faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCoffee, faDeleteLeft, faFileExport, faFilePdf, faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { SatPopover } from "@ncstate/sat-popover";
 import dayjs from "dayjs";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -30,7 +30,7 @@ export class TableComponent implements OnInit {
   @Input() title: string = "";
   @Input() object: string = "";
   @Input() inline_selector: string = "";
-
+  @Input() isInlineCreateable: boolean = true;
   // @Input() paginationInfo: any = {};
   @Input() isEditable: boolean = false;
   @Input() isDeletable: boolean = false;
@@ -61,6 +61,8 @@ export class TableComponent implements OnInit {
   @Output() view = new EventEmitter<number>();
   @Output() closeView = new EventEmitter<void>();
 
+  @Output() export = new EventEmitter<void>();
+
   @Output() toggleInlineCreating = new EventEmitter<void>();
 
   @Output() setTableWidths = new EventEmitter<number[]>();
@@ -71,6 +73,7 @@ export class TableComponent implements OnInit {
   faFilePdf = faFilePdf;
   faFilter = faFilter;
   faDeleteLeft = faDeleteLeft
+  faFileExport = faFileExport
 
   filterBuilder = new FilterBuilder(this.columns);
 
@@ -170,6 +173,10 @@ export class TableComponent implements OnInit {
 
     console.log(this.searchCriteria)
 
+  }
+
+  async exportTable(): Promise<void> {
+    this.export.emit();
   }
 
 

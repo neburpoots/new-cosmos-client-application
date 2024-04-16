@@ -96,6 +96,8 @@ export class AuthService
 
 	login(username: string, password: string): Observable<boolean>
 	{			
+	    localStorage.removeItem('jwtToken');
+		
 		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});	
 	
 		return this.authenticateService.mutate({username: username, password: password}).pipe

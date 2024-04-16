@@ -103,13 +103,13 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
   }
 
   tableHeaders: TableHead<DetectorTypesEntitiesOrderBy>[] = [
-    { type: '', key: 'name', label: "Type", asc: DetectorTypesEntitiesOrderBy.NameAsc, desc: DetectorTypesEntitiesOrderBy.NameDesc },
-    { type: '', key: 'prefix', label: "Prefix", asc: DetectorTypesEntitiesOrderBy.PrefixAsc, desc: DetectorTypesEntitiesOrderBy.PrefixDesc },
-    { type: '', key: 'code', label: "Code", asc: DetectorTypesEntitiesOrderBy.CodeAsc, desc: DetectorTypesEntitiesOrderBy.CodeDesc },
-    { type: '', key: 'suffix', label: "Suffix", asc: DetectorTypesEntitiesOrderBy.SuffixAsc, desc: DetectorTypesEntitiesOrderBy.SuffixDesc },
-    { type: '', key: 'sensorCount', label: "Sensors", asc: DetectorTypesEntitiesOrderBy.SensorCountAsc, desc: DetectorTypesEntitiesOrderBy.SensorCountDesc },
-    { type: '', key: 'created', label: "Created", asc: DetectorTypesEntitiesOrderBy.CreatedAsc, desc: DetectorTypesEntitiesOrderBy.CreatedDesc },
-    { type: '', key: 'initials', label: "By", asc: DetectorTypesEntitiesOrderBy.InitialsAsc, desc: DetectorTypesEntitiesOrderBy.InitialsDesc },
+    { type: 'string', key: 'name', label: "Type", asc: DetectorTypesEntitiesOrderBy.NameAsc, desc: DetectorTypesEntitiesOrderBy.NameDesc },
+    { type: 'string', key: 'prefix', label: "Prefix", asc: DetectorTypesEntitiesOrderBy.PrefixAsc, desc: DetectorTypesEntitiesOrderBy.PrefixDesc },
+    { type: 'string', key: 'code', label: "Code", asc: DetectorTypesEntitiesOrderBy.CodeAsc, desc: DetectorTypesEntitiesOrderBy.CodeDesc },
+    { type: 'string', key: 'suffix', label: "Suffix", asc: DetectorTypesEntitiesOrderBy.SuffixAsc, desc: DetectorTypesEntitiesOrderBy.SuffixDesc },
+    { type: 'number', key: 'sensorCount', label: "Sensors", asc: DetectorTypesEntitiesOrderBy.SensorCountAsc, desc: DetectorTypesEntitiesOrderBy.SensorCountDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: DetectorTypesEntitiesOrderBy.CreatedAsc, desc: DetectorTypesEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: DetectorTypesEntitiesOrderBy.InitialsAsc, desc: DetectorTypesEntitiesOrderBy.InitialsDesc },
   ]
 
 }

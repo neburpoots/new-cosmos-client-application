@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllElectrolyteEntitiesGQL, AllMembraneEntitiesGQL, AllORingEntitiesGQL, AllPyrolyserEntitiesGQL,  DeleteElectrolyteGQL,  DeleteMembraneGQL,  DeletePyrolyserGQL, ElectrolyteEntitiesOrderBy, ElectrolyteEntity, ElectrolytesOrderBy, MembraneEntitiesOrderBy, MembraneEntity, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity } from "../../../../../generated/graphql";
+import { AllElectrolyteEntitiesGQL, AllMembraneEntitiesGQL, AllORingEntitiesGQL, AllPyrolyserEntitiesGQL, DeleteElectrolyteGQL, DeleteMembraneGQL, DeletePyrolyserGQL, ElectrolyteEntitiesOrderBy, ElectrolyteEntity, ElectrolytesOrderBy, MembraneEntitiesOrderBy, MembraneEntity, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllElectrolyteEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -24,14 +24,15 @@ export class ElectrolytesComponent extends BaseEntity<ElectrolyteEntity> impleme
   objectSingle = 'Electrolyte';
   objectPlural = 'Electrolytes';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllElectrolyteEntitiesArgs = {
     orderBy: [ElectrolyteEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -54,7 +55,7 @@ export class ElectrolytesComponent extends BaseEntity<ElectrolyteEntity> impleme
     };
   }
 
-  //IMPORTANT THIS IS THE NAME OF THE OBJECT IN DATA: {allGases: {nodes: []}}
+  //IMPORTANT THIS IS THE NAME OF THE OBJECT IN DATA: {allElectrolyteEntities: {nodes: []}}
   //json return object for getter
   //This is the object name of the nodes: return
   //check the get all method and see what it returns and set to this object
@@ -69,23 +70,24 @@ export class ElectrolytesComponent extends BaseEntity<ElectrolyteEntity> impleme
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private electrolyteService: AllElectrolyteEntitiesGQL,
     private deleteElectrolyteService: DeleteElectrolyteGQL
-  ,
+    ,
     protected override router: Router
   ) {
     super(router, toastr, route, http, electrolyteService, deleteElectrolyteService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<ElectrolyteEntitiesOrderBy>[] = [
-    { key: 'part', label: "Part", asc: ElectrolyteEntitiesOrderBy.CdartikelAsc, desc: ElectrolyteEntitiesOrderBy.CdartikelDesc },
-    { key: 'name', label: "Name", asc: ElectrolyteEntitiesOrderBy.NameAsc, desc: ElectrolyteEntitiesOrderBy.NameDesc },
-    { key: 'omschr', label: "Description", asc: ElectrolyteEntitiesOrderBy.OmschrAsc, desc: ElectrolyteEntitiesOrderBy.OmschrDesc },
-    { key: 'replacement_interval_months', label: "Rep. Int.", asc: ElectrolyteEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: ElectrolyteEntitiesOrderBy.ReplacementIntervalMonthsDesc },
-    { key: 'volume', label: "Volume", asc: ElectrolyteEntitiesOrderBy.VolumeAsc, desc: ElectrolyteEntitiesOrderBy.VolumeDesc },
-    { key: 'created', label: "Created", asc: ElectrolyteEntitiesOrderBy.CreatedAsc, desc: ElectrolyteEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: ElectrolyteEntitiesOrderBy.InitialsAsc, desc: ElectrolyteEntitiesOrderBy.InitialsDesc },
+    { type: 'string', key: 'cdartikel', label: "Part", asc: ElectrolyteEntitiesOrderBy.CdartikelAsc, desc: ElectrolyteEntitiesOrderBy.CdartikelDesc },
+    { type: 'string', key: 'name', label: "Name", asc: ElectrolyteEntitiesOrderBy.NameAsc, desc: ElectrolyteEntitiesOrderBy.NameDesc },
+    { type: 'string', key: 'omschr', label: "Description", asc: ElectrolyteEntitiesOrderBy.OmschrAsc, desc: ElectrolyteEntitiesOrderBy.OmschrDesc },
+    { type: 'number', key: 'replacementIntervalMonths', label: "Rep. Int.", asc: ElectrolyteEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: ElectrolyteEntitiesOrderBy.ReplacementIntervalMonthsDesc },
+    { type: 'number', key: 'volume', label: "Volume", asc: ElectrolyteEntitiesOrderBy.VolumeAsc, desc: ElectrolyteEntitiesOrderBy.VolumeDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: ElectrolyteEntitiesOrderBy.CreatedAsc, desc: ElectrolyteEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: ElectrolyteEntitiesOrderBy.InitialsAsc, desc: ElectrolyteEntitiesOrderBy.InitialsDesc },
   ]
 
 
@@ -93,13 +95,13 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return electrolytes.map((electrolyte: ElectrolyteEntity) => {
       return {
         id: { url: null, value: electrolyte.id } as TableField,
-        part: { url: null, value: electrolyte?.cdartikel } as TableField,
+        cdartikel: { url: null, value: electrolyte?.cdartikel } as TableField,
         name: { url: null, value: electrolyte?.name } as TableField,
         omschr: { url: null, value: electrolyte?.omschr } as TableField,
-        replacement_interval_months: { url: null, value: electrolyte?.replacementIntervalMonths } as TableField,
+        replacementIntervalMonths: { url: null, value: electrolyte?.replacementIntervalMonths } as TableField,
         volume: { url: null, value: electrolyte?.volume } as TableField,
         created: { url: null, value: electrolyte?.created } as TableField,
-        by: { url: null, value: electrolyte?.initials } as TableField,
+        initials: { url: null, value: electrolyte?.initials } as TableField,
       };
     });
   }

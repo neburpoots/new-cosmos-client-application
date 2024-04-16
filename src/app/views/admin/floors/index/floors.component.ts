@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllAreaEntitiesGQL, AllFloorEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteFloorGQL, FloorEntitiesOrderBy, FloorEntity} from "../../../../../generated/graphql";
+import { AllAreaEntitiesGQL, AllFloorEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteFloorGQL, FloorEntitiesOrderBy, FloorEntity, QueryAllFloorEntitiesArgs} from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,14 +25,15 @@ export class FloorsComponent extends BaseEntity<FloorEntity> implements OnInit {
   objectSingle = 'Floor';
   objectPlural = 'Floors';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllFloorEntitiesArgs = {
     orderBy: [FloorEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   //Just a console log to check the data
@@ -80,11 +81,11 @@ this.checkQueryParams();
 this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<FloorEntitiesOrderBy>[] = [
-    { key: 'end_user_name', label: "End User", asc: FloorEntitiesOrderBy.EndUserNameAsc, desc: FloorEntitiesOrderBy.EndUserNameDesc },
-    { key: 'building_name', label: "Building", asc: FloorEntitiesOrderBy.BuildingNameAsc, desc: FloorEntitiesOrderBy.BuildingNameDesc },
-    { key: 'name', label: "Floor", asc: FloorEntitiesOrderBy.NameAsc, desc: FloorEntitiesOrderBy.NameDesc },
-    { key: 'created', label: "Created", asc: FloorEntitiesOrderBy.CreatedAsc, desc: FloorEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: FloorEntitiesOrderBy.InitialsAsc, desc: FloorEntitiesOrderBy.InitialsDesc },
+    { type: 'string', key: 'endUserName', label: "End User", asc: FloorEntitiesOrderBy.EndUserNameAsc, desc: FloorEntitiesOrderBy.EndUserNameDesc },
+    { type: 'string', key: 'buildingName', label: "Building", asc: FloorEntitiesOrderBy.BuildingNameAsc, desc: FloorEntitiesOrderBy.BuildingNameDesc },
+    { type: 'string', key: 'name', label: "Floor", asc: FloorEntitiesOrderBy.NameAsc, desc: FloorEntitiesOrderBy.NameDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: FloorEntitiesOrderBy.CreatedAsc, desc: FloorEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: FloorEntitiesOrderBy.InitialsAsc, desc: FloorEntitiesOrderBy.InitialsDesc },
   ]
 
 
@@ -93,11 +94,11 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return floors.map((floor: FloorEntity) => {
       return {
         id: { url: null, value: floor.id } as TableField,
-        end_user_name: { url: null, value: floor?.endUserName } as TableField,
-        building_name: { url: null, value: floor?.buildingName } as TableField,
+        endUserName: { url: null, value: floor?.endUserName } as TableField,
+        buildingName: { url: null, value: floor?.buildingName } as TableField,
         name: { url: null, value: floor?.name } as TableField,
         created: { url: null, value: floor?.created } as TableField,
-        by: { url: null, value: floor?.initials } as TableField,
+        initials: { url: null, value: floor?.initials } as TableField,
       };
     });
   }

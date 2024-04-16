@@ -38,15 +38,15 @@ export abstract class BaseFormComponent<T> {
 
 
     //when the form is submitted this is the criteria to be used to refresh the data used id as standard since it is the most common
-    //override this incase of a different primary key
-    refreshCriteria: SearchFilters = {
+    refreshCriteria: any = {
         orderBy: [this.baseOrderBy],
-        search: "",
-        limit: 10,
+        first: 10,
         offset: 0,
-        totalPages: 0,
-        total: 0,
-        page: 1,
+        filter: {
+            and: [
+
+            ]
+        },
     }
 
 
@@ -83,7 +83,7 @@ export abstract class BaseFormComponent<T> {
 
 
     async create(data: T): Promise<void> {
-        this.createService.mutate({body: data}).subscribe(
+        this.createService.mutate({ body: data }).subscribe(
             (response) => {
                 console.log('Response:', response);
                 this.toastr.success(`${this.objectSingle} created successfully`, 'Success');
@@ -92,6 +92,7 @@ export abstract class BaseFormComponent<T> {
                 this.refreshData();
             },
             (error) => {
+                console.error('Error:', error);
                 this.toastr.error(error?.message, 'Error');
                 // this.toastr.error(error?.error?.message, 'Error');
             }
@@ -156,4 +157,12 @@ export abstract class BaseFormComponent<T> {
     //gets called oninit to load dependent data
     //sets the edit data to the form
     abstract setEditData(changes: any): void;
+
+    getRequiredErrorMessage(name: string): string {
+        return `${name} is required`;
+    }
+
+    getNumberErrorMessage(name: string): string {
+        return `${name} must be a number`;
+    }
 }

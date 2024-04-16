@@ -70204,26 +70204,40 @@ type SensorTypesIndex {
   calFlowRate: Float
   restrictor: Boolean
   battery: Boolean
+  pyrolyserVoltage: Float
+  volume: Int
+  ownerId: Int
+  elementCount: Int
   membraneSeal: Boolean
   siliconeSheet: Boolean
   sensorTypeArtikelOmschr: String
   prefix: String
+  sensorBaseTypeId: Int
   suffix: String
   principleName: String
+  principleId: Int
+  rangeId: Int
   highEu: Float
   engineeringUnits: String
   target: String
+  gasId: Int
+  electrolyteId: Int
   electrolyteName: String
   electrolyteCdartikel: String
+  membraneId: Int
   membraneName: String
   membraneCdartikel: String
+  oRingsId: Int
   oRingName: String
   oRingCdartikel: String
+  pyrolyserId: Int
   pyrolyserName: String
   pyrolyserCdartikel: String
+  filterId: Int
   filterName: String
   filterCdartikel: String
   calGasName: String
+  calGasId: Int
   calGasConcentration: Float
   calEngineeringUnits: String
   maintenanceIntervalMonths: Int
@@ -70262,6 +70276,14 @@ enum SensorTypesIndicesOrderBy {
   RESTRICTOR_DESC
   BATTERY_ASC
   BATTERY_DESC
+  PYROLYSER_VOLTAGE_ASC
+  PYROLYSER_VOLTAGE_DESC
+  VOLUME_ASC
+  VOLUME_DESC
+  OWNER_ID_ASC
+  OWNER_ID_DESC
+  ELEMENT_COUNT_ASC
+  ELEMENT_COUNT_DESC
   MEMBRANE_SEAL_ASC
   MEMBRANE_SEAL_DESC
   SILICONE_SHEET_ASC
@@ -70270,38 +70292,58 @@ enum SensorTypesIndicesOrderBy {
   SENSOR_TYPE_ARTIKEL_OMSCHR_DESC
   PREFIX_ASC
   PREFIX_DESC
+  SENSOR_BASE_TYPE_ID_ASC
+  SENSOR_BASE_TYPE_ID_DESC
   SUFFIX_ASC
   SUFFIX_DESC
   PRINCIPLE_NAME_ASC
   PRINCIPLE_NAME_DESC
+  PRINCIPLE_ID_ASC
+  PRINCIPLE_ID_DESC
+  RANGE_ID_ASC
+  RANGE_ID_DESC
   HIGH_EU_ASC
   HIGH_EU_DESC
   ENGINEERING_UNITS_ASC
   ENGINEERING_UNITS_DESC
   TARGET_ASC
   TARGET_DESC
+  GAS_ID_ASC
+  GAS_ID_DESC
+  ELECTROLYTE_ID_ASC
+  ELECTROLYTE_ID_DESC
   ELECTROLYTE_NAME_ASC
   ELECTROLYTE_NAME_DESC
   ELECTROLYTE_CDARTIKEL_ASC
   ELECTROLYTE_CDARTIKEL_DESC
+  MEMBRANE_ID_ASC
+  MEMBRANE_ID_DESC
   MEMBRANE_NAME_ASC
   MEMBRANE_NAME_DESC
   MEMBRANE_CDARTIKEL_ASC
   MEMBRANE_CDARTIKEL_DESC
+  O_RINGS_ID_ASC
+  O_RINGS_ID_DESC
   O_RING_NAME_ASC
   O_RING_NAME_DESC
   O_RING_CDARTIKEL_ASC
   O_RING_CDARTIKEL_DESC
+  PYROLYSER_ID_ASC
+  PYROLYSER_ID_DESC
   PYROLYSER_NAME_ASC
   PYROLYSER_NAME_DESC
   PYROLYSER_CDARTIKEL_ASC
   PYROLYSER_CDARTIKEL_DESC
+  FILTER_ID_ASC
+  FILTER_ID_DESC
   FILTER_NAME_ASC
   FILTER_NAME_DESC
   FILTER_CDARTIKEL_ASC
   FILTER_CDARTIKEL_DESC
   CAL_GAS_NAME_ASC
   CAL_GAS_NAME_DESC
+  CAL_GAS_ID_ASC
+  CAL_GAS_ID_DESC
   CAL_GAS_CONCENTRATION_ASC
   CAL_GAS_CONCENTRATION_DESC
   CAL_ENGINEERING_UNITS_ASC
@@ -70347,6 +70389,18 @@ input SensorTypesIndexCondition {
   """Checks for equality with the object’s `battery` field."""
   battery: Boolean
 
+  """Checks for equality with the object’s `pyrolyserVoltage` field."""
+  pyrolyserVoltage: Float
+
+  """Checks for equality with the object’s `volume` field."""
+  volume: Int
+
+  """Checks for equality with the object’s `ownerId` field."""
+  ownerId: Int
+
+  """Checks for equality with the object’s `elementCount` field."""
+  elementCount: Int
+
   """Checks for equality with the object’s `membraneSeal` field."""
   membraneSeal: Boolean
 
@@ -70359,11 +70413,20 @@ input SensorTypesIndexCondition {
   """Checks for equality with the object’s `prefix` field."""
   prefix: String
 
+  """Checks for equality with the object’s `sensorBaseTypeId` field."""
+  sensorBaseTypeId: Int
+
   """Checks for equality with the object’s `suffix` field."""
   suffix: String
 
   """Checks for equality with the object’s `principleName` field."""
   principleName: String
+
+  """Checks for equality with the object’s `principleId` field."""
+  principleId: Int
+
+  """Checks for equality with the object’s `rangeId` field."""
+  rangeId: Int
 
   """Checks for equality with the object’s `highEu` field."""
   highEu: Float
@@ -70374,11 +70437,20 @@ input SensorTypesIndexCondition {
   """Checks for equality with the object’s `target` field."""
   target: String
 
+  """Checks for equality with the object’s `gasId` field."""
+  gasId: Int
+
+  """Checks for equality with the object’s `electrolyteId` field."""
+  electrolyteId: Int
+
   """Checks for equality with the object’s `electrolyteName` field."""
   electrolyteName: String
 
   """Checks for equality with the object’s `electrolyteCdartikel` field."""
   electrolyteCdartikel: String
+
+  """Checks for equality with the object’s `membraneId` field."""
+  membraneId: Int
 
   """Checks for equality with the object’s `membraneName` field."""
   membraneName: String
@@ -70386,17 +70458,26 @@ input SensorTypesIndexCondition {
   """Checks for equality with the object’s `membraneCdartikel` field."""
   membraneCdartikel: String
 
+  """Checks for equality with the object’s `oRingsId` field."""
+  oRingsId: Int
+
   """Checks for equality with the object’s `oRingName` field."""
   oRingName: String
 
   """Checks for equality with the object’s `oRingCdartikel` field."""
   oRingCdartikel: String
 
+  """Checks for equality with the object’s `pyrolyserId` field."""
+  pyrolyserId: Int
+
   """Checks for equality with the object’s `pyrolyserName` field."""
   pyrolyserName: String
 
   """Checks for equality with the object’s `pyrolyserCdartikel` field."""
   pyrolyserCdartikel: String
+
+  """Checks for equality with the object’s `filterId` field."""
+  filterId: Int
 
   """Checks for equality with the object’s `filterName` field."""
   filterName: String
@@ -70406,6 +70487,9 @@ input SensorTypesIndexCondition {
 
   """Checks for equality with the object’s `calGasName` field."""
   calGasName: String
+
+  """Checks for equality with the object’s `calGasId` field."""
+  calGasId: Int
 
   """Checks for equality with the object’s `calGasConcentration` field."""
   calGasConcentration: Float
@@ -70458,6 +70542,18 @@ input SensorTypesIndexFilter {
   """Filter by the object’s `battery` field."""
   battery: BooleanFilter
 
+  """Filter by the object’s `pyrolyserVoltage` field."""
+  pyrolyserVoltage: FloatFilter
+
+  """Filter by the object’s `volume` field."""
+  volume: IntFilter
+
+  """Filter by the object’s `ownerId` field."""
+  ownerId: IntFilter
+
+  """Filter by the object’s `elementCount` field."""
+  elementCount: IntFilter
+
   """Filter by the object’s `membraneSeal` field."""
   membraneSeal: BooleanFilter
 
@@ -70470,11 +70566,20 @@ input SensorTypesIndexFilter {
   """Filter by the object’s `prefix` field."""
   prefix: StringFilter
 
+  """Filter by the object’s `sensorBaseTypeId` field."""
+  sensorBaseTypeId: IntFilter
+
   """Filter by the object’s `suffix` field."""
   suffix: StringFilter
 
   """Filter by the object’s `principleName` field."""
   principleName: StringFilter
+
+  """Filter by the object’s `principleId` field."""
+  principleId: IntFilter
+
+  """Filter by the object’s `rangeId` field."""
+  rangeId: IntFilter
 
   """Filter by the object’s `highEu` field."""
   highEu: FloatFilter
@@ -70485,11 +70590,20 @@ input SensorTypesIndexFilter {
   """Filter by the object’s `target` field."""
   target: StringFilter
 
+  """Filter by the object’s `gasId` field."""
+  gasId: IntFilter
+
+  """Filter by the object’s `electrolyteId` field."""
+  electrolyteId: IntFilter
+
   """Filter by the object’s `electrolyteName` field."""
   electrolyteName: StringFilter
 
   """Filter by the object’s `electrolyteCdartikel` field."""
   electrolyteCdartikel: StringFilter
+
+  """Filter by the object’s `membraneId` field."""
+  membraneId: IntFilter
 
   """Filter by the object’s `membraneName` field."""
   membraneName: StringFilter
@@ -70497,17 +70611,26 @@ input SensorTypesIndexFilter {
   """Filter by the object’s `membraneCdartikel` field."""
   membraneCdartikel: StringFilter
 
+  """Filter by the object’s `oRingsId` field."""
+  oRingsId: IntFilter
+
   """Filter by the object’s `oRingName` field."""
   oRingName: StringFilter
 
   """Filter by the object’s `oRingCdartikel` field."""
   oRingCdartikel: StringFilter
 
+  """Filter by the object’s `pyrolyserId` field."""
+  pyrolyserId: IntFilter
+
   """Filter by the object’s `pyrolyserName` field."""
   pyrolyserName: StringFilter
 
   """Filter by the object’s `pyrolyserCdartikel` field."""
   pyrolyserCdartikel: StringFilter
+
+  """Filter by the object’s `filterId` field."""
+  filterId: IntFilter
 
   """Filter by the object’s `filterName` field."""
   filterName: StringFilter
@@ -70517,6 +70640,9 @@ input SensorTypesIndexFilter {
 
   """Filter by the object’s `calGasName` field."""
   calGasName: StringFilter
+
+  """Filter by the object’s `calGasId` field."""
+  calGasId: IntFilter
 
   """Filter by the object’s `calGasConcentration` field."""
   calGasConcentration: FloatFilter

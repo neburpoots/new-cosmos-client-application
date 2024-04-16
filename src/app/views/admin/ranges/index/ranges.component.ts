@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { TableField } from "../../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllRangesGQL, DeleteRangeGQL, Range, RangesOrderBy } from "../../../../../generated/graphql";
+import { AllRangesGQL, DeleteRangeGQL, QueryAllRangesArgs, Range, RangesOrderBy } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -22,14 +22,14 @@ export class RangesComponent extends BaseEntity<Range> implements OnInit {
   objectSingle = 'Range';
   objectPlural = 'Ranges';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllRangesArgs = {
     orderBy: [RangesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -74,28 +74,29 @@ export class RangesComponent extends BaseEntity<Range> implements OnInit {
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private rangeService: AllRangesGQL,
     private deleteRangeService: DeleteRangeGQL
-  ,
+    ,
     protected override router: Router
   ) {
     super(router, toastr, route, http, rangeService, deleteRangeService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<RangesOrderBy>[] = [
-    { key: 'gas', label: "Gas", asc: RangesOrderBy.GasByGasIdNameAsc, desc: RangesOrderBy.GasByGasIdNameDesc },
-    { key: 'lowEu', label: "Low Eu", asc: RangesOrderBy.LowEuAsc, desc: RangesOrderBy.LowEuDesc },
-    { key: 'highEu', label: "High Eu", asc: RangesOrderBy.HighEuAsc, desc: RangesOrderBy.HighEuDesc },
-    { key: 'engineeringUnits', label: "Engineering Units", asc: RangesOrderBy.EngineeringUnitsAsc, desc: RangesOrderBy.EngineeringUnitsDesc },
-    { key: 'alarm1Level', label: "A1 Level", asc: RangesOrderBy.Alarm_1LevelAsc, desc: RangesOrderBy.Alarm_1LevelDesc },
-    { key: 'alarm1DirectionUp', label: "A1 Dir.", asc: RangesOrderBy.Alarm_1DirectionUpAsc, desc: RangesOrderBy.Alarm_1DirectionUpDesc },
-    { key: 'alarm2Level', label: "A2 Level", asc: RangesOrderBy.Alarm_2LevelAsc, desc: RangesOrderBy.Alarm_2LevelDesc },
-    { key: 'alarm2DirectionUp', label: "A2 Dir.", asc: RangesOrderBy.Alarm_2DirectionUpAsc, desc: RangesOrderBy.Alarm_2DirectionUpDesc },
-    { key: 'warning1Level', label: "W1 Level", asc: RangesOrderBy.Warning_1LevelAsc, desc: RangesOrderBy.Warning_1LevelDesc },
-    { key: 'warning2Level', label: "W2 Level", asc: RangesOrderBy.Warning_2LevelAsc, desc: RangesOrderBy.Warning_2LevelDesc },
-    { key: 'alarmUnits', label: "Alarm Units", asc: RangesOrderBy.AlarmUnitsAsc, desc: RangesOrderBy.AlarmUnitsDesc},
-    { key: 'precision', label: "Precision", asc: RangesOrderBy.PrecisionAsc, desc: RangesOrderBy.PrecisionDesc },
+    { type: 'string', key: 'gasByGasId$name', label: "Gas", asc: RangesOrderBy.GasByGasIdNameAsc, desc: RangesOrderBy.GasByGasIdNameDesc },
+    { type: 'number', key: 'lowEu', label: "Low Eu", asc: RangesOrderBy.LowEuAsc, desc: RangesOrderBy.LowEuDesc },
+    { type: 'number', key: 'highEu', label: "High Eu", asc: RangesOrderBy.HighEuAsc, desc: RangesOrderBy.HighEuDesc },
+    { type: 'string', key: 'engineeringUnits', label: "Engineering Units", asc: RangesOrderBy.EngineeringUnitsAsc, desc: RangesOrderBy.EngineeringUnitsDesc },
+    { type: 'number', key: 'alarm1Level', label: "A1 Level", asc: RangesOrderBy.Alarm_1LevelAsc, desc: RangesOrderBy.Alarm_1LevelDesc },
+    { type: 'boolean', key: 'alarm1DirectionUp', label: "A1 Dir.", asc: RangesOrderBy.Alarm_1DirectionUpAsc, desc: RangesOrderBy.Alarm_1DirectionUpDesc },
+    { type: 'number', key: 'alarm2Level', label: "A2 Level", asc: RangesOrderBy.Alarm_2LevelAsc, desc: RangesOrderBy.Alarm_2LevelDesc },
+    { type: 'boolean', key: 'alarm2DirectionUp', label: "A2 Dir.", asc: RangesOrderBy.Alarm_2DirectionUpAsc, desc: RangesOrderBy.Alarm_2DirectionUpDesc },
+    { type: 'number', key: 'warning1Level', label: "W1 Level", asc: RangesOrderBy.Warning_1LevelAsc, desc: RangesOrderBy.Warning_1LevelDesc },
+    { type: 'number', key: 'warning2Level', label: "W2 Level", asc: RangesOrderBy.Warning_2LevelAsc, desc: RangesOrderBy.Warning_2LevelDesc },
+    { type: 'boolean', key: 'alarmUnits', label: "Alarm Units", asc: RangesOrderBy.AlarmUnitsAsc, desc: RangesOrderBy.AlarmUnitsDesc },
+    { type: 'number', key: 'precision', label: "Precision", asc: RangesOrderBy.PrecisionAsc, desc: RangesOrderBy.PrecisionDesc },
   ]
 
 
@@ -104,7 +105,7 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return ranges.map((range: Range) => {
       return {
         id: { url: 'user/ranges', value: range.id } as TableField,
-        gas: { url: null, value: range?.gasByGasId?.name } as TableField,
+        gasByGasId$name: { url: null, value: range?.gasByGasId?.name } as TableField,
         lowEu: { url: null, value: range?.lowEu } as TableField,
         highEu: { url: null, value: range?.highEu } as TableField,
         engineeringUnits: { url: null, value: range?.engineeringUnits } as TableField,

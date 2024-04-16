@@ -64,6 +64,8 @@ query allRanges(
       highEuNumeric
       lowEu
       modified
+      warning1Level
+      warning2Level
       nodeId
       ownerId
       precision

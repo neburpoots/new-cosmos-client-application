@@ -4,7 +4,7 @@ import { TableField } from "../../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../../models/utils/tableHeader";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllChemicalCompoundsGQL, ChemicalCompound, ChemicalCompoundsOrderBy, DeleteCalGasGQL, DeleteChemicalCompoundGQL } from "../../../../../generated/graphql";
+import { AllChemicalCompoundsGQL, ChemicalCompound, ChemicalCompoundsOrderBy, DeleteCalGasGQL, DeleteChemicalCompoundGQL, QueryAllChemicalCompoundsArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -23,14 +23,15 @@ export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> imp
   objectSingle = 'Chemical Compound';
   objectPlural = 'Chemical Compounds';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllChemicalCompoundsArgs = {
     orderBy: [ChemicalCompoundsOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -71,34 +72,25 @@ export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> imp
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private chemicalCompoundService: AllChemicalCompoundsGQL,
     private deleteChemicalCompoundService: DeleteChemicalCompoundGQL
-  ,
+    ,
     protected override router: Router
   ) {
     super(router, toastr, route, http, chemicalCompoundService, deleteChemicalCompoundService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
-
-
-  // tableHeaders : TableHeader[] = [
-  //   { displayName: 'Gas', sortValue: 'gas.name', key: 'gas'  },
-  //   { displayName: 'Concentration', sortValue: 'concentration', key: 'concentration'},
-  //   { displayName: 'Engineering Units', sortValue: 'engineering_units', key: 'engineering_units'},
-  //   { displayName: 'CD Artikel', sortValue: 'cdartikel', key: 'cdartikel'},
-  //   { displayName: 'Created', sortValue: 'created', key: 'created'},
-  //   { displayName: 'By', sortValue: 'owner.initials', key: 'by'},
-  // ];
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<ChemicalCompoundsOrderBy>[] = [
-    { key: 'name', label: "Name", asc: ChemicalCompoundsOrderBy.NameAsc, desc: ChemicalCompoundsOrderBy.NameDesc },
-    { key: 'other_name', label: "Alias", asc: ChemicalCompoundsOrderBy.OtherNameAsc, desc: ChemicalCompoundsOrderBy.OtherNameAsc },
-    { key: 'formula', label: "Formula", asc: ChemicalCompoundsOrderBy.FormulaAsc, desc: ChemicalCompoundsOrderBy.FormulaDesc },
-    { key: 'cas', label: "CAS#", asc: ChemicalCompoundsOrderBy.CasAsc, desc: ChemicalCompoundsOrderBy.CasDesc },
-    { key: 'icsc', label: "ICSC#", asc: ChemicalCompoundsOrderBy.IcscAsc, desc: ChemicalCompoundsOrderBy.IcscDesc },
-    { key: 'molar_mass', label: "Molar Mass", asc: ChemicalCompoundsOrderBy.MolarMassAsc, desc: ChemicalCompoundsOrderBy.MolarMassDesc },
-    { key: 'density', label: "Density", asc: ChemicalCompoundsOrderBy.DensityAsc, desc: ChemicalCompoundsOrderBy.DensityDesc },
-    { key: 'url', label: "URL", asc: ChemicalCompoundsOrderBy.UrlAsc, desc: ChemicalCompoundsOrderBy.UrlDesc },
+    { type: 'string', key: 'name', label: "Name", asc: ChemicalCompoundsOrderBy.NameAsc, desc: ChemicalCompoundsOrderBy.NameDesc },
+    { type: 'string', key: 'otherName', label: "Alias", asc: ChemicalCompoundsOrderBy.OtherNameAsc, desc: ChemicalCompoundsOrderBy.OtherNameAsc },
+    { type: 'string', key: 'formula', label: "Formula", asc: ChemicalCompoundsOrderBy.FormulaAsc, desc: ChemicalCompoundsOrderBy.FormulaDesc },
+    { type: 'string', key: 'cas', label: "CAS#", asc: ChemicalCompoundsOrderBy.CasAsc, desc: ChemicalCompoundsOrderBy.CasDesc },
+    { type: 'string', key: 'icsc', label: "ICSC#", asc: ChemicalCompoundsOrderBy.IcscAsc, desc: ChemicalCompoundsOrderBy.IcscDesc },
+    { type: 'number', key: 'molarMass', label: "Molar Mass", asc: ChemicalCompoundsOrderBy.MolarMassAsc, desc: ChemicalCompoundsOrderBy.MolarMassDesc },
+    { type: 'number', key: 'density', label: "Density", asc: ChemicalCompoundsOrderBy.DensityAsc, desc: ChemicalCompoundsOrderBy.DensityDesc },
+    { type: 'string', key: 'url', label: "URL", asc: ChemicalCompoundsOrderBy.UrlAsc, desc: ChemicalCompoundsOrderBy.UrlDesc },
   ]
 
 
@@ -108,14 +100,13 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
       return {
         id: { url: 'api/calGasses', value: chemicalCompound.id } as TableField,
         name: { url: null, value: chemicalCompound?.name } as TableField,
-        other_name: { url: null, value: chemicalCompound?.otherName } as TableField,
+        otherName: { url: null, value: chemicalCompound?.otherName } as TableField,
         formula: { url: null, value: chemicalCompound?.formula } as TableField,
         cas: { url: null, value: chemicalCompound?.cas } as TableField,
         icsc: { url: null, value: chemicalCompound?.icsc } as TableField,
-        molar_mass: { url: null, value: chemicalCompound.molarMass } as TableField,
+        molarMass: { url: null, value: chemicalCompound.molarMass } as TableField,
         density: { url: null, value: chemicalCompound?.density } as TableField,
         url: { url: chemicalCompound?.url, value: chemicalCompound?.url } as TableField,
-
       };
     });
   }

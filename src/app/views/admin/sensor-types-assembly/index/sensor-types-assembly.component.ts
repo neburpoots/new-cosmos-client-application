@@ -45,11 +45,8 @@ export class SensorTypeAssembliesComponent extends BaseEntity<SensorTypesIndex> 
     this.childComponent.setEditData(this.editData);
   }
 
-  get editData(): any {
-    return {
-      id: this.selectedItem?.id,
-
-    };
+  get editData(): SensorTypesIndex | null {
+    return this.selectedItem || null
   }
 
   //IMPORTANT THIS IS THE NAME OF THE OBJECT IN DATA: {allGases: {nodes: []}}

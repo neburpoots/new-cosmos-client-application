@@ -10,12 +10,13 @@
     </div>
 
     <div class="flex">
-      <div  [satPopoverAnchor]="filters"  (click)="filters.open()"
+      <div [satPopoverAnchor]="filters" (click)="filters.open()"
         class="mr-[-10px] cursor-pointer bg-cosmosDark ease-in-out flex items-center hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-full py-[5px] px-[14px] ">
         <fa-icon [icon]="faFilter"></fa-icon>
 
 
-        <sat-popover (afterClose)="recoverSavedFilters()"  hasBackdrop verticalAlign="center" horizontalAlign="before" #filters>
+        <sat-popover (afterClose)="recoverSavedFilters()" hasBackdrop verticalAlign="center" horizontalAlign="before"
+          #filters>
           <div class="bg-cosmosDark rounded-lg flex gap-2 flex-col p-4">
             <h2 class="text-white font-bold">Filters</h2>
             @for(filterInput of filterBuilder.filterInputs; track filterInput; let activeIndex = $index) {
@@ -108,19 +109,24 @@
       </div>
       <span class="relative flex" *ngIf="filterBuilder.currentFilters.length > 0">
 
-        <span class="text-white leading-[0.4rem] h-6 relative inline-flex rounded-full p-2 text-xs bg-cosmosDarker rounded-full bg-cosmosDarker">{{filterBuilder.currentFilters.length}}</span>
+        <span
+          class="text-white leading-[0.4rem] h-6 relative inline-flex rounded-full p-2 text-xs bg-cosmosDarker rounded-full bg-cosmosDarker">{{filterBuilder.currentFilters.length}}</span>
       </span>
     </div>
-
+    <button type="button" (click)="exportTable()"
+      class="ml-2 cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker transition transition-colors hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 hover: font-medium rounded-full text-sm px-[14px] py-2.5 text-center">
+      <fa-icon [icon]="faFileExport"></fa-icon>
+    </button>
   </div>
 
 
-
-  <div>
-    <button type="button" *ngIf="isCreatable" (click)="openCreateModal()"
-      class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-l-full text-sm pl-5 pr-2 py-2.5 text-center mb-2">
+  <div *ngIf="isCreatable">
+    <button type="button" (click)="openCreateModal()"
+      class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-l-full text-sm pl-5 pr-2 py-2.5 text-center mb-2"
+      [ngClass]="!isInlineCreateable ? 'rounded-r-full pr-5' : 'rounded-r-none'">
       Add {{ object }}</button>
-    <button type="button" *ngIf="isCreatable" (click)="setInlineCreating()"
+
+    <button type="button" *ngIf="isInlineCreateable" (click)="setInlineCreating()"
       class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-r-full text-sm pr-5 pl-2 py-2.5 text-center mb-2">
       +</button>
   </div>

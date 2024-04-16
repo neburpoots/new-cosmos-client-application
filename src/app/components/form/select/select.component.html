@@ -1,14 +1,34 @@
-<div [formGroup]="form" class="flex flex-col gap-1" [ngClass]="{
-        'p-1': inline,
+<div [formGroup]="form" class="flex flex-col" [ngClass]="{
+        'p-1 text-sm': inline,
     }">
-    <select [ngClass]="{
-        'border-green-600 border' : form.get('selectedOption')?.value,
-        'text-sm': inline,
-    }     
-    " #selectValue (change)="changeEmit(selectValue.value)"
+    <label *ngIf="!inline" [for]="name" [ngClass]="{
+        'text-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
+        'text-green-600': form.get(name)?.valid && form && form.controls[name].touched,
+        'text-slate-800': !form.get(name)?.touched && !isSubmitted,
+    }">{{displayName}}</label>
+    <select 
+        
+    #selectValue (change)="changeEmit(selectValue.value)"
         class="rounded-2xl focus:border-0 rounded-2xl focus:ring-0 focus:outline-cosmosDark " id="selectedOption"
-        [formControlName]="name">
-        <option [value]="null" disabled>{{placeholder}}</option>
-        <option *ngFor="let option of options" [value]="option.id">{{ option.name }}</option>
+        [formControlName]="name" [ngClass]="{
+            'text-sm': inline,
+            'border-red-500 focus:outline-red-500': (form.get(name)?.errors && form && form.controls[name].touched) || (isSubmitted && form.get(name)?.errors),
+            'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
+            'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched && !isSubmitted,
+        }">
+        <option [ngClass]="{
+            'text-sm': inline,}" [value]="null" [disabled]="isRequired">{{placeholder}}</option>
+        <option [ngClass]="{
+                'text-sm': inline,}" *ngFor="let option of options" [value]="option.id">
+            {{calculateName(option)}}
+        </option>
     </select>
+    <ng-container *ngFor="let error of errors">
+        <div class="text-red-500">
+            <div
+                *ngIf="(form.get(name)?.hasError(error.name) && form && form.controls[name].touched) || (form.get(name)?.hasError(error.name) && isSubmitted)">
+                {{error.message}}
+            </div>
+        </div>
+    </ng-container>
 </div>

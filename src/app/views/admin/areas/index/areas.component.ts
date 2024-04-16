@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllAreaEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL} from "../../../../../generated/graphql";
+import { AllAreaEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, QueryAllAreaEntitiesArgs} from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,14 +25,15 @@ export class AreasComponent extends BaseEntity<AreaEntity> implements OnInit {
   objectSingle = 'Area';
   objectPlural = 'Areas';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllAreaEntitiesArgs = {
     orderBy: [AreaEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -80,12 +81,12 @@ this.checkQueryParams();
 this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<AreaEntitiesOrderBy>[] = [
-    { key: 'end_user_name', label: "End User", asc: AreaEntitiesOrderBy.EndUserNameAsc, desc: AreaEntitiesOrderBy.EndUserNameDesc },
-    { key: 'building_name', label: "Building", asc: AreaEntitiesOrderBy.BuildingNameAsc, desc: AreaEntitiesOrderBy.BuildingNameDesc },
-    { key: 'floor_name', label: "Floor", asc: AreaEntitiesOrderBy.FloorNameAsc, desc: AreaEntitiesOrderBy.FloorNameDesc },
-    { key: 'name', label: "Area", asc: AreaEntitiesOrderBy.NameAsc, desc: AreaEntitiesOrderBy.NameDesc },
-    { key: 'created', label: "Created", asc: AreaEntitiesOrderBy.CreatedAsc, desc: AreaEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: AreaEntitiesOrderBy.InitialsAsc, desc: AreaEntitiesOrderBy.InitialsDesc },
+    { type: 'string', key: 'endUserName', label: "End User", asc: AreaEntitiesOrderBy.EndUserNameAsc, desc: AreaEntitiesOrderBy.EndUserNameDesc },
+    { type: 'string', key: 'buildingName', label: "Building", asc: AreaEntitiesOrderBy.BuildingNameAsc, desc: AreaEntitiesOrderBy.BuildingNameDesc },
+    { type: 'string', key: 'floorName', label: "Floor", asc: AreaEntitiesOrderBy.FloorNameAsc, desc: AreaEntitiesOrderBy.FloorNameDesc },
+    { type: 'string', key: 'name', label: "Area", asc: AreaEntitiesOrderBy.NameAsc, desc: AreaEntitiesOrderBy.NameDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: AreaEntitiesOrderBy.CreatedAsc, desc: AreaEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: AreaEntitiesOrderBy.InitialsAsc, desc: AreaEntitiesOrderBy.InitialsDesc },
   ]
 
 
@@ -94,12 +95,12 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return areas.map((area: AreaEntity) => {
       return {
         id: { url: null, value: area.id } as TableField,
-        end_user_name: { url: null, value: area?.endUserName } as TableField,
-        building_name: { url: null, value: area?.buildingName } as TableField,
-        floor_name: { url: null, value: area?.floorName } as TableField,
+        endUserName: { url: null, value: area?.endUserName } as TableField,
+        buildingName: { url: null, value: area?.buildingName } as TableField,
+        floorName: { url: null, value: area?.floorName } as TableField,
         name: { url: null, value: area?.name } as TableField,
         created: { url: null, value: area?.created } as TableField,
-        by: { url: null, value: area?.initials } as TableField,
+        initials: { url: null, value: area?.initials } as TableField,
       };
     });
   }

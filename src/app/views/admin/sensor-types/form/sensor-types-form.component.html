@@ -1,41 +1,36 @@
 <h2 *ngIf="!isInlineCreating" class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
-<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'sticky flex items-start pt-1' : 'flex flex-col gap-5'"
+<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'sticky flex items-start pt-1' : 'grid grid-cols-2 gap-5'"
     (ngSubmit)="onSubmit()">
 
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[0] : null">
-        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'cdartikel'" [inline]="isInlineCreating"
-            [displayName]="'Part'" [touched]="myForm.controls['cdartikel'].touched"
-            [errors]="[{ name: 'required', message: 'Part is required' }]"></input-component>
+    @for(property of object; track property.position) {
+    @if(property.component === 'select') {
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[property.position] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[property.position] : null">
+        <select-component [form]="myForm" [name]="property.name" [displayName]="property.displayName"
+            [options]="property.options" [inline]="isInlineCreating" [placeholder]="property.placeholder"
+            [isSubmitted]="isSubmitted"
+            [isRequired]="property?.isRequired"
+            [touched]="myForm.controls[property.name].touched" [customName]="property.customName"
+            [errors]="[{ name: 'required', message: getRequiredErrorMessage(property.displayName) }]">
+        </select-component>
     </div>
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
-        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'name'" [inline]="isInlineCreating"
-            [displayName]="'Name'" [touched]="myForm.controls['name'].touched"
-            [errors]="[{ name: 'required', message: 'Name is required' }]"></input-component>
+    } @else {
+    <div class="items-center flex" [style.min-width.px]="isInlineCreating ? cellWidths[property.position] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[property.position] : null">
+        <input-component class="w-full" [isSubmitted]="isSubmitted" [form]="myForm" [name]="property.name"
+            [inline]="isInlineCreating" [displayName]="property.displayName" [inputType]="property.type"
+            [touched]="myForm.controls[property.name].touched" [errors]="[{ name: 'required', message: getRequiredErrorMessage(property.displayName) },
+                { name: 'pattern', message: getNumberErrorMessage(property.displayName) }    
+                ]
+                    
+                    "></input-component>
     </div>
+    }
+    }
 
+    <div *ngIf="!isInlineCreating">
 
-    <div *ngIf="isInlineCreating" [style.min-width.px]="isInlineCreating ? cellWidths[2] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[2] : null">
     </div>
-
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[3] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[3] : null">
-        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'replacement_interval_months'"
-            [inline]="isInlineCreating" [displayName]="'Replacement Interval Months'"
-            [touched]="myForm.controls['replacement_interval_months'].touched" [errors]="[{ name: 'required', message: 'Replacement interval months is required' }, { name: 'pattern' ,
-            message: 'Replacement interval months must be a number' }]"></input-component>
-    </div>
-
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[4] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null">
-        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'quantity'" [inline]="isInlineCreating"
-            [displayName]="'Quantity'" [touched]="myForm.controls['quantity'].touched" [errors]="[{ name: 'required', message: 'Quantity is required' }, { name: 'pattern' ,
-        message: 'Quantity must be a number' }]"></input-component>
-    </div>
-
-
 
 
     <!-- This is is for modal form -->

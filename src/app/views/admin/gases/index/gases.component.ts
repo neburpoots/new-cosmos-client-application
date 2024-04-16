@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllGasesGQL, AllPrinciplesGQL, DeleteGasGQL, DeletePrincipleGQL, Gas, GasesOrderBy, Principle, PrinciplesOrderBy } from "../../../../../generated/graphql";
+import { AllGasesGQL, AllPrinciplesGQL, DeleteGasGQL, DeletePrincipleGQL, Gas, GasesOrderBy, Principle, PrinciplesOrderBy, QueryAllGasesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,14 +25,14 @@ export class GasesComponent extends BaseEntity<Gas> implements OnInit {
   objectSingle = 'Gas';
   objectPlural = 'Gases';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllGasesArgs = {
     orderBy: [GasesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -74,9 +74,9 @@ this.checkQueryParams();
 this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<GasesOrderBy>[] = [
-    { key: 'name', label: "Name", asc: GasesOrderBy.NameAsc, desc: GasesOrderBy.NameDesc },
-    { key: 'created', label: "Created", asc: GasesOrderBy.CreatedAsc, desc: GasesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: GasesOrderBy.UserByOwnerIdInitialsAsc, desc: GasesOrderBy.UserByOwnerIdInitialsDesc },
+    { type: 'string', key: 'name', label: "Name", asc: GasesOrderBy.NameAsc, desc: GasesOrderBy.NameDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: GasesOrderBy.CreatedAsc, desc: GasesOrderBy.CreatedDesc },
+    { type: 'string', key: 'userByOwnerId$initials', label: "By", asc: GasesOrderBy.UserByOwnerIdInitialsAsc, desc: GasesOrderBy.UserByOwnerIdInitialsDesc },
   ]
 
 
@@ -86,7 +86,7 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
         id: { url: null, value: gas.id } as TableField,
         name: { url: null, value: gas?.name } as TableField,
         created: { url: null, value: gas?.created } as TableField,
-        by: { url: null, value: gas?.userByOwnerId?.initials } as TableField,
+        userByOwnerId$initials: { url: null, value: gas?.userByOwnerId?.initials } as TableField,
       };
     });
   }

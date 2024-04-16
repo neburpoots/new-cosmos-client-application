@@ -1,3 +1,25 @@
+
+query allCalibrationGasesNoPagination
+    {
+    allCalgasEntities {
+    nodes {
+      id
+      cdartikel
+      concentration
+      created
+      engineeringUnits
+      gasCreated
+      gasId
+      initials
+      modified
+      name
+      ownerId
+      username
+    }     
+    }
+}
+
+#-------------------------------------------------------------------------------
 query allCalibrationGases($first: Int, $offset: Int, $filter: CalgasEntityFilter, $orderBy: [CalgasEntitiesOrderBy!]) {
   calGases: allCalgasEntities(
     filter: $filter

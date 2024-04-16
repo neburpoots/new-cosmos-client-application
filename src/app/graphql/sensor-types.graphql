@@ -53,6 +53,20 @@ query allSensorTypesIndices($first: Int, $offset: Int, $filter: SensorTypesIndex
       pyrolyserName
       pyrolyserCdartikel
       principleName
+      sensorBaseTypeId
+      rangeId
+      principleId
+      oRingsId
+      membraneId
+      gasId
+      filterId
+      electrolyteId
+      calGasId
+      pyrolyserId
+      volume
+      pyrolyserVoltage
+      ownerId
+      elementCount
     }
   }
 }

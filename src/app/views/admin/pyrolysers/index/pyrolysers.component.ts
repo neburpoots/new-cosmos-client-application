@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllPyrolyserEntitiesGQL,  DeletePyrolyserGQL, PyrolyserEntitiesOrderBy, PyrolyserEntity } from "../../../../../generated/graphql";
+import { AllPyrolyserEntitiesGQL,  DeletePyrolyserGQL, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllPyrolyserEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,14 +25,15 @@ export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> implements 
   objectSingle = 'Pyrolyser';
   objectPlural = 'Pyrolysers';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllPyrolyserEntitiesArgs = {
     orderBy: [PyrolyserEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -79,12 +80,12 @@ this.checkQueryParams();
 this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<PyrolyserEntitiesOrderBy>[] = [
-    { key: 'part', label: "Part", asc: PyrolyserEntitiesOrderBy.CdartikelAsc, desc: PyrolyserEntitiesOrderBy.CdartikelDesc },
-    { key: 'name', label: "Name", asc: PyrolyserEntitiesOrderBy.NameAsc, desc: PyrolyserEntitiesOrderBy.NameDesc },
-    { key: 'omschr', label: "Description", asc: PyrolyserEntitiesOrderBy.OmschrAsc, desc: PyrolyserEntitiesOrderBy.OmschrDesc },
-    { key: 'replacement_interval_months', label: "Rep. Int.", asc: PyrolyserEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: PyrolyserEntitiesOrderBy.ReplacementIntervalMonthsDesc },
-    { key: 'created', label: "Created", asc: PyrolyserEntitiesOrderBy.CreatedAsc, desc: PyrolyserEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: PyrolyserEntitiesOrderBy.InitialsAsc, desc: PyrolyserEntitiesOrderBy.InitialsDesc },
+    { type: 'string', key: 'cdartikel', label: "Part", asc: PyrolyserEntitiesOrderBy.CdartikelAsc, desc: PyrolyserEntitiesOrderBy.CdartikelDesc },
+    { type: 'string', key: 'name', label: "Name", asc: PyrolyserEntitiesOrderBy.NameAsc, desc: PyrolyserEntitiesOrderBy.NameDesc },
+    { type: 'string', key: 'omschr', label: "Description", asc: PyrolyserEntitiesOrderBy.OmschrAsc, desc: PyrolyserEntitiesOrderBy.OmschrDesc },
+    { type: 'number', key: 'replacementIntervalMonths', label: "Rep. Int.", asc: PyrolyserEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: PyrolyserEntitiesOrderBy.ReplacementIntervalMonthsDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: PyrolyserEntitiesOrderBy.CreatedAsc, desc: PyrolyserEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: PyrolyserEntitiesOrderBy.InitialsAsc, desc: PyrolyserEntitiesOrderBy.InitialsDesc },
   ]
 
 
@@ -92,12 +93,12 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return pyrolysers.map((pyrolyser: PyrolyserEntity) => {
       return {
         id: { url: null, value: pyrolyser.id } as TableField,
-        part: { url: null, value: pyrolyser?.cdartikel } as TableField,
+        cdartikel: { url: null, value: pyrolyser?.cdartikel } as TableField,
         name: { url: null, value: pyrolyser?.name } as TableField,
         omschr: { url: null, value: pyrolyser?.omschr } as TableField,
-        replacement_interval_months: { url: null, value: pyrolyser?.replacementIntervalMonths } as TableField,
+        replacementIntervalMonths: { url: null, value: pyrolyser?.replacementIntervalMonths } as TableField,
         created: { url: null, value: pyrolyser?.created } as TableField,
-        by: { url: null, value: pyrolyser?.initials } as TableField,
+        initials: { url: null, value: pyrolyser?.initials } as TableField,
       };
     });
   }

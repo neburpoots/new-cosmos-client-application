@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllAreaEntitiesGQL, AllSamplePointEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteSamplePointGQL, SamplePointEntitiesOrderBy, SamplePointEntity} from "../../../../../generated/graphql";
+import { AllAreaEntitiesGQL, AllSamplePointEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteSamplePointGQL, QueryAllSamplePointEntitiesArgs, SamplePointEntitiesOrderBy, SamplePointEntity} from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -24,14 +24,15 @@ export class SamplePointsComponent extends BaseEntity<SamplePointEntity> impleme
   objectSingle = 'Sample Point';
   objectPlural = 'Sample Points';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllSamplePointEntitiesArgs = {
     orderBy: [SamplePointEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -79,28 +80,27 @@ this.checkQueryParams();
 this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<SamplePointEntitiesOrderBy>[] = [
-    { key: 'end_user_name', label: "End User", asc: SamplePointEntitiesOrderBy.EndUserNameAsc, desc: SamplePointEntitiesOrderBy.EndUserNameDesc },
-    { key: 'building_name', label: "Building", asc: SamplePointEntitiesOrderBy.BuildingNameAsc, desc: SamplePointEntitiesOrderBy.BuildingNameDesc },
-    { key: 'floor_name', label: "Floor", asc: SamplePointEntitiesOrderBy.FloorNameAsc, desc: SamplePointEntitiesOrderBy.FloorNameDesc },
-    { key: 'area_name', label: "Area", asc: SamplePointEntitiesOrderBy.AreaNameAsc, desc: SamplePointEntitiesOrderBy.AreaNameDesc },
-    { key: 'name', label: "Tool", asc: SamplePointEntitiesOrderBy.NameAsc, desc: SamplePointEntitiesOrderBy.NameDesc },
-    { key: 'created', label: "Created", asc: SamplePointEntitiesOrderBy.CreatedAsc, desc: SamplePointEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: SamplePointEntitiesOrderBy.InitialsAsc, desc: SamplePointEntitiesOrderBy.InitialsDesc },
+    { type: 'string', key: 'endUserName', label: "End User", asc: SamplePointEntitiesOrderBy.EndUserNameAsc, desc: SamplePointEntitiesOrderBy.EndUserNameDesc },
+    { type: 'string', key: 'buildingName', label: "Building", asc: SamplePointEntitiesOrderBy.BuildingNameAsc, desc: SamplePointEntitiesOrderBy.BuildingNameDesc },
+    { type: 'string', key: 'floorName', label: "Floor", asc: SamplePointEntitiesOrderBy.FloorNameAsc, desc: SamplePointEntitiesOrderBy.FloorNameDesc },
+    { type: 'string', key: 'areaName', label: "Area", asc: SamplePointEntitiesOrderBy.AreaNameAsc, desc: SamplePointEntitiesOrderBy.AreaNameDesc },
+    { type: 'string', key: 'name', label: "Tool", asc: SamplePointEntitiesOrderBy.NameAsc, desc: SamplePointEntitiesOrderBy.NameDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: SamplePointEntitiesOrderBy.CreatedAsc, desc: SamplePointEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: SamplePointEntitiesOrderBy.InitialsAsc, desc: SamplePointEntitiesOrderBy.InitialsDesc },
   ]
 
 
-  mapTableData(areas: SamplePointEntity[]): any[] {
-    console.log(areas)
-    return areas.map((area: SamplePointEntity) => {
+  mapTableData(samplePoints: SamplePointEntity[]): any[] {
+    return samplePoints.map((samplePoint: SamplePointEntity) => {
       return {
-        id: { url: null, value: area.id } as TableField,
-        end_user_name: { url: null, value: area?.endUserName } as TableField,
-        building_name: { url: null, value: area?.buildingName } as TableField,
-        floor_name: { url: null, value: area?.floorName } as TableField,
-        area_name: { url: null, value: area?.areaName } as TableField,
-        name: { url: null, value: area?.name } as TableField,
-        created: { url: null, value: area?.created } as TableField,
-        by: { url: null, value: area?.initials } as TableField,
+        id: { url: null, value: samplePoint.id } as TableField,
+        endUserName: { url: null, value: samplePoint?.endUserName } as TableField,
+        buildingName: { url: null, value: samplePoint?.buildingName } as TableField,
+        floorName: { url: null, value: samplePoint?.floorName } as TableField,
+        areaName: { url: null, value: samplePoint?.areaName } as TableField,
+        name: { url: null, value: samplePoint?.name } as TableField,
+        created: { url: null, value: samplePoint?.created } as TableField,
+        initials: { url: null, value: samplePoint?.initials } as TableField,
       };
     });
   }

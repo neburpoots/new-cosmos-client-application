@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllMembraneEntitiesGQL, AllORingEntitiesGQL, AllPyrolyserEntitiesGQL,  DeleteMembraneGQL,  DeletePyrolyserGQL, MembraneEntitiesOrderBy, MembraneEntity, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity } from "../../../../../generated/graphql";
+import { AllMembraneEntitiesGQL, AllORingEntitiesGQL, AllPyrolyserEntitiesGQL,  DeleteMembraneGQL,  DeletePyrolyserGQL, MembraneEntitiesOrderBy, MembraneEntity, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllMembraneEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -24,14 +24,14 @@ export class MembranesComponent extends BaseEntity<MembraneEntity> implements On
   objectSingle = 'Membrane';
   objectPlural = 'Membranes';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllMembraneEntitiesArgs = {
     orderBy: [MembraneEntitiesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -78,13 +78,13 @@ this.checkQueryParams();
 this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<MembraneEntitiesOrderBy>[] = [
-    { key: 'part', label: "Part", asc: MembraneEntitiesOrderBy.CdartikelAsc, desc: MembraneEntitiesOrderBy.CdartikelDesc },
-    { key: 'name', label: "Name", asc: MembraneEntitiesOrderBy.NameAsc, desc: MembraneEntitiesOrderBy.NameDesc },
-    { key: 'omschr', label: "Description", asc: MembraneEntitiesOrderBy.OmschrAsc, desc: MembraneEntitiesOrderBy.OmschrDesc },
-    { key: 'replacement_interval_months', label: "Rep. Int.", asc: MembraneEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: MembraneEntitiesOrderBy.ReplacementIntervalMonthsDesc },
-    { key: 'quantity', label: "Quantity", asc: MembraneEntitiesOrderBy.QuantityAsc, desc: MembraneEntitiesOrderBy.QuantityDesc },
-    { key: 'created', label: "Created", asc: MembraneEntitiesOrderBy.CreatedAsc, desc: MembraneEntitiesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: MembraneEntitiesOrderBy.InitialsAsc, desc: MembraneEntitiesOrderBy.InitialsDesc },
+    { type: 'string', key: 'cdartikel', label: "Part", asc: MembraneEntitiesOrderBy.CdartikelAsc, desc: MembraneEntitiesOrderBy.CdartikelDesc },
+    { type: 'string', key: 'name', label: "Name", asc: MembraneEntitiesOrderBy.NameAsc, desc: MembraneEntitiesOrderBy.NameDesc },
+    { type: 'string', key: 'omschr', label: "Description", asc: MembraneEntitiesOrderBy.OmschrAsc, desc: MembraneEntitiesOrderBy.OmschrDesc },
+    { type: 'number', key: 'replacementIntervalMonths', label: "Rep. Int.", asc: MembraneEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: MembraneEntitiesOrderBy.ReplacementIntervalMonthsDesc },
+    { type: 'number', key: 'quantity', label: "Quantity", asc: MembraneEntitiesOrderBy.QuantityAsc, desc: MembraneEntitiesOrderBy.QuantityDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: MembraneEntitiesOrderBy.CreatedAsc, desc: MembraneEntitiesOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: MembraneEntitiesOrderBy.InitialsAsc, desc: MembraneEntitiesOrderBy.InitialsDesc },
   ]
 
 
@@ -92,13 +92,13 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return membranes.map((membrane: MembraneEntity) => {
       return {
         id: { url: null, value: membrane.id } as TableField,
-        part: { url: null, value: membrane?.cdartikel } as TableField,
+        cdartikel: { url: null, value: membrane?.cdartikel } as TableField,
         name: { url: null, value: membrane?.name } as TableField,
         omschr: { url: null, value: membrane?.omschr } as TableField,
-        replacement_interval_months: { url: null, value: membrane?.replacementIntervalMonths } as TableField,
+        replacementIntervalMonths: { url: null, value: membrane?.replacementIntervalMonths } as TableField,
         quantity: { url: null, value: membrane?.quantity } as TableField,
         created: { url: null, value: membrane?.created } as TableField,
-        by: { url: null, value: membrane?.initials } as TableField,
+        initials: { url: null, value: membrane?.initials } as TableField,
       };
     });
   }

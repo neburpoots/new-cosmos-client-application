@@ -6,33 +6,34 @@
                 (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
                 (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData"	 [inline_selector]="'membranes-form'"
+                [data]="tableData"	 [inline_selector]="'sensor-types-form'"
                 [isInlineCreating]="isInlineCreating"
+                [isInlineCreateable]="false"
                 (toggleInlineCreating)="toggleInlineCreating()"	
                 >
-                <membranes-form
+                <sensor-types-form
                     [baseOrderBy]="baseOrderBy"
                 (refresh)="fetch($event)" [objectSingle]="objectSingle"
                     [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
-                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></membranes-form>
+                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></sensor-types-form>
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
             [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
-            <modal-component [width]="ModalWidth.Large
+            <modal-component [width]="ModalWidth.ExtraLarge
         " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <membranes-form
+                <sensor-types-form
                 [baseOrderBy]="baseOrderBy"
                 [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refresh)="fetch()"
-                    (closeModal)="closeCreateModal()"></membranes-form>
+                    (closeModal)="closeCreateModal()"></sensor-types-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-                <membranes-form #editModal [objectPlural]="objectPlural"
+                <sensor-types-form #editModal [objectPlural]="objectPlural"
                 [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
-                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></membranes-form>
+                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></sensor-types-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Medium

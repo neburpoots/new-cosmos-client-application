@@ -65495,36 +65495,50 @@ export type SensorTypesIndex = {
   calEngineeringUnits?: Maybe<Scalars['String']['output']>;
   calFlowRate?: Maybe<Scalars['Float']['output']>;
   calGasConcentration?: Maybe<Scalars['Float']['output']>;
+  calGasId?: Maybe<Scalars['Int']['output']>;
   calGasName?: Maybe<Scalars['String']['output']>;
   calResponse?: Maybe<Scalars['Float']['output']>;
   code?: Maybe<Scalars['String']['output']>;
   createdDate?: Maybe<Scalars['String']['output']>;
   electrolyteCdartikel?: Maybe<Scalars['String']['output']>;
+  electrolyteId?: Maybe<Scalars['Int']['output']>;
   electrolyteName?: Maybe<Scalars['String']['output']>;
+  elementCount?: Maybe<Scalars['Int']['output']>;
   engineeringUnits?: Maybe<Scalars['String']['output']>;
   filterCdartikel?: Maybe<Scalars['String']['output']>;
+  filterId?: Maybe<Scalars['Int']['output']>;
   filterName?: Maybe<Scalars['String']['output']>;
   flowRate?: Maybe<Scalars['Float']['output']>;
+  gasId?: Maybe<Scalars['Int']['output']>;
   highEu?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   maintenanceIntervalMonths?: Maybe<Scalars['Int']['output']>;
   membraneCdartikel?: Maybe<Scalars['String']['output']>;
+  membraneId?: Maybe<Scalars['Int']['output']>;
   membraneName?: Maybe<Scalars['String']['output']>;
   membraneSeal?: Maybe<Scalars['Boolean']['output']>;
   model?: Maybe<Scalars['String']['output']>;
   oRingCdartikel?: Maybe<Scalars['String']['output']>;
   oRingName?: Maybe<Scalars['String']['output']>;
+  oRingsId?: Maybe<Scalars['Int']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
   prefix?: Maybe<Scalars['String']['output']>;
+  principleId?: Maybe<Scalars['Int']['output']>;
   principleName?: Maybe<Scalars['String']['output']>;
   pyrolyserCdartikel?: Maybe<Scalars['String']['output']>;
+  pyrolyserId?: Maybe<Scalars['Int']['output']>;
   pyrolyserName?: Maybe<Scalars['String']['output']>;
+  pyrolyserVoltage?: Maybe<Scalars['Float']['output']>;
+  rangeId?: Maybe<Scalars['Int']['output']>;
   replacementIntervalMonths?: Maybe<Scalars['Int']['output']>;
   restrictor?: Maybe<Scalars['Boolean']['output']>;
+  sensorBaseTypeId?: Maybe<Scalars['Int']['output']>;
   sensorTypeArtikelOmschr?: Maybe<Scalars['String']['output']>;
   sensorTypeCdartikel?: Maybe<Scalars['String']['output']>;
   siliconeSheet?: Maybe<Scalars['Boolean']['output']>;
   suffix?: Maybe<Scalars['String']['output']>;
   target?: Maybe<Scalars['String']['output']>;
+  volume?: Maybe<Scalars['Int']['output']>;
 };
 
 /**
@@ -65540,6 +65554,8 @@ export type SensorTypesIndexCondition = {
   calFlowRate?: InputMaybe<Scalars['Float']['input']>;
   /** Checks for equality with the object’s `calGasConcentration` field. */
   calGasConcentration?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `calGasId` field. */
+  calGasId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `calGasName` field. */
   calGasName?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `calResponse` field. */
@@ -65550,16 +65566,24 @@ export type SensorTypesIndexCondition = {
   createdDate?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `electrolyteCdartikel` field. */
   electrolyteCdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `electrolyteId` field. */
+  electrolyteId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `electrolyteName` field. */
   electrolyteName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `elementCount` field. */
+  elementCount?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `engineeringUnits` field. */
   engineeringUnits?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `filterCdartikel` field. */
   filterCdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `filterId` field. */
+  filterId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `filterName` field. */
   filterName?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `flowRate` field. */
   flowRate?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `gasId` field. */
+  gasId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `highEu` field. */
   highEu?: InputMaybe<Scalars['Float']['input']>;
   /** Checks for equality with the object’s `id` field. */
@@ -65568,6 +65592,8 @@ export type SensorTypesIndexCondition = {
   maintenanceIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `membraneCdartikel` field. */
   membraneCdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `membraneId` field. */
+  membraneId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `membraneName` field. */
   membraneName?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `membraneSeal` field. */
@@ -65578,18 +65604,32 @@ export type SensorTypesIndexCondition = {
   oRingCdartikel?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `oRingName` field. */
   oRingName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `oRingsId` field. */
+  oRingsId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `prefix` field. */
   prefix?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `principleId` field. */
+  principleId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `principleName` field. */
   principleName?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `pyrolyserCdartikel` field. */
   pyrolyserCdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `pyrolyserId` field. */
+  pyrolyserId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `pyrolyserName` field. */
   pyrolyserName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `pyrolyserVoltage` field. */
+  pyrolyserVoltage?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `rangeId` field. */
+  rangeId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `restrictor` field. */
   restrictor?: InputMaybe<Scalars['Boolean']['input']>;
+  /** Checks for equality with the object’s `sensorBaseTypeId` field. */
+  sensorBaseTypeId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `sensorTypeArtikelOmschr` field. */
   sensorTypeArtikelOmschr?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `sensorTypeCdartikel` field. */
@@ -65600,6 +65640,8 @@ export type SensorTypesIndexCondition = {
   suffix?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `target` field. */
   target?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `volume` field. */
+  volume?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** A filter to be used against `SensorTypesIndex` object types. All fields are combined with a logical ‘and.’ */
@@ -65614,6 +65656,8 @@ export type SensorTypesIndexFilter = {
   calFlowRate?: InputMaybe<FloatFilter>;
   /** Filter by the object’s `calGasConcentration` field. */
   calGasConcentration?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `calGasId` field. */
+  calGasId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `calGasName` field. */
   calGasName?: InputMaybe<StringFilter>;
   /** Filter by the object’s `calResponse` field. */
@@ -65624,16 +65668,24 @@ export type SensorTypesIndexFilter = {
   createdDate?: InputMaybe<StringFilter>;
   /** Filter by the object’s `electrolyteCdartikel` field. */
   electrolyteCdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `electrolyteId` field. */
+  electrolyteId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `electrolyteName` field. */
   electrolyteName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `elementCount` field. */
+  elementCount?: InputMaybe<IntFilter>;
   /** Filter by the object’s `engineeringUnits` field. */
   engineeringUnits?: InputMaybe<StringFilter>;
   /** Filter by the object’s `filterCdartikel` field. */
   filterCdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `filterId` field. */
+  filterId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `filterName` field. */
   filterName?: InputMaybe<StringFilter>;
   /** Filter by the object’s `flowRate` field. */
   flowRate?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `gasId` field. */
+  gasId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `highEu` field. */
   highEu?: InputMaybe<FloatFilter>;
   /** Filter by the object’s `id` field. */
@@ -65642,6 +65694,8 @@ export type SensorTypesIndexFilter = {
   maintenanceIntervalMonths?: InputMaybe<IntFilter>;
   /** Filter by the object’s `membraneCdartikel` field. */
   membraneCdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `membraneId` field. */
+  membraneId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `membraneName` field. */
   membraneName?: InputMaybe<StringFilter>;
   /** Filter by the object’s `membraneSeal` field. */
@@ -65654,20 +65708,34 @@ export type SensorTypesIndexFilter = {
   oRingCdartikel?: InputMaybe<StringFilter>;
   /** Filter by the object’s `oRingName` field. */
   oRingName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `oRingsId` field. */
+  oRingsId?: InputMaybe<IntFilter>;
   /** Checks for any expressions in this list. */
   or?: InputMaybe<Array<SensorTypesIndexFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `prefix` field. */
   prefix?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `principleId` field. */
+  principleId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `principleName` field. */
   principleName?: InputMaybe<StringFilter>;
   /** Filter by the object’s `pyrolyserCdartikel` field. */
   pyrolyserCdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `pyrolyserId` field. */
+  pyrolyserId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `pyrolyserName` field. */
   pyrolyserName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `pyrolyserVoltage` field. */
+  pyrolyserVoltage?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `rangeId` field. */
+  rangeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `replacementIntervalMonths` field. */
   replacementIntervalMonths?: InputMaybe<IntFilter>;
   /** Filter by the object’s `restrictor` field. */
   restrictor?: InputMaybe<BooleanFilter>;
+  /** Filter by the object’s `sensorBaseTypeId` field. */
+  sensorBaseTypeId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sensorTypeArtikelOmschr` field. */
   sensorTypeArtikelOmschr?: InputMaybe<StringFilter>;
   /** Filter by the object’s `sensorTypeCdartikel` field. */
@@ -65678,6 +65746,8 @@ export type SensorTypesIndexFilter = {
   suffix?: InputMaybe<StringFilter>;
   /** Filter by the object’s `target` field. */
   target?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `volume` field. */
+  volume?: InputMaybe<IntFilter>;
 };
 
 /** A connection to a list of `SensorTypesIndex` values. */
@@ -65712,6 +65782,8 @@ export enum SensorTypesIndicesOrderBy {
   CalFlowRateDesc = 'CAL_FLOW_RATE_DESC',
   CalGasConcentrationAsc = 'CAL_GAS_CONCENTRATION_ASC',
   CalGasConcentrationDesc = 'CAL_GAS_CONCENTRATION_DESC',
+  CalGasIdAsc = 'CAL_GAS_ID_ASC',
+  CalGasIdDesc = 'CAL_GAS_ID_DESC',
   CalGasNameAsc = 'CAL_GAS_NAME_ASC',
   CalGasNameDesc = 'CAL_GAS_NAME_DESC',
   CalResponseAsc = 'CAL_RESPONSE_ASC',
@@ -65722,16 +65794,24 @@ export enum SensorTypesIndicesOrderBy {
   CreatedDateDesc = 'CREATED_DATE_DESC',
   ElectrolyteCdartikelAsc = 'ELECTROLYTE_CDARTIKEL_ASC',
   ElectrolyteCdartikelDesc = 'ELECTROLYTE_CDARTIKEL_DESC',
+  ElectrolyteIdAsc = 'ELECTROLYTE_ID_ASC',
+  ElectrolyteIdDesc = 'ELECTROLYTE_ID_DESC',
   ElectrolyteNameAsc = 'ELECTROLYTE_NAME_ASC',
   ElectrolyteNameDesc = 'ELECTROLYTE_NAME_DESC',
+  ElementCountAsc = 'ELEMENT_COUNT_ASC',
+  ElementCountDesc = 'ELEMENT_COUNT_DESC',
   EngineeringUnitsAsc = 'ENGINEERING_UNITS_ASC',
   EngineeringUnitsDesc = 'ENGINEERING_UNITS_DESC',
   FilterCdartikelAsc = 'FILTER_CDARTIKEL_ASC',
   FilterCdartikelDesc = 'FILTER_CDARTIKEL_DESC',
+  FilterIdAsc = 'FILTER_ID_ASC',
+  FilterIdDesc = 'FILTER_ID_DESC',
   FilterNameAsc = 'FILTER_NAME_ASC',
   FilterNameDesc = 'FILTER_NAME_DESC',
   FlowRateAsc = 'FLOW_RATE_ASC',
   FlowRateDesc = 'FLOW_RATE_DESC',
+  GasIdAsc = 'GAS_ID_ASC',
+  GasIdDesc = 'GAS_ID_DESC',
   HighEuAsc = 'HIGH_EU_ASC',
   HighEuDesc = 'HIGH_EU_DESC',
   IdAsc = 'ID_ASC',
@@ -65740,6 +65820,8 @@ export enum SensorTypesIndicesOrderBy {
   MaintenanceIntervalMonthsDesc = 'MAINTENANCE_INTERVAL_MONTHS_DESC',
   MembraneCdartikelAsc = 'MEMBRANE_CDARTIKEL_ASC',
   MembraneCdartikelDesc = 'MEMBRANE_CDARTIKEL_DESC',
+  MembraneIdAsc = 'MEMBRANE_ID_ASC',
+  MembraneIdDesc = 'MEMBRANE_ID_DESC',
   MembraneNameAsc = 'MEMBRANE_NAME_ASC',
   MembraneNameDesc = 'MEMBRANE_NAME_DESC',
   MembraneSealAsc = 'MEMBRANE_SEAL_ASC',
@@ -65747,22 +65829,36 @@ export enum SensorTypesIndicesOrderBy {
   ModelAsc = 'MODEL_ASC',
   ModelDesc = 'MODEL_DESC',
   Natural = 'NATURAL',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  ORingsIdAsc = 'O_RINGS_ID_ASC',
+  ORingsIdDesc = 'O_RINGS_ID_DESC',
   ORingCdartikelAsc = 'O_RING_CDARTIKEL_ASC',
   ORingCdartikelDesc = 'O_RING_CDARTIKEL_DESC',
   ORingNameAsc = 'O_RING_NAME_ASC',
   ORingNameDesc = 'O_RING_NAME_DESC',
   PrefixAsc = 'PREFIX_ASC',
   PrefixDesc = 'PREFIX_DESC',
+  PrincipleIdAsc = 'PRINCIPLE_ID_ASC',
+  PrincipleIdDesc = 'PRINCIPLE_ID_DESC',
   PrincipleNameAsc = 'PRINCIPLE_NAME_ASC',
   PrincipleNameDesc = 'PRINCIPLE_NAME_DESC',
   PyrolyserCdartikelAsc = 'PYROLYSER_CDARTIKEL_ASC',
   PyrolyserCdartikelDesc = 'PYROLYSER_CDARTIKEL_DESC',
+  PyrolyserIdAsc = 'PYROLYSER_ID_ASC',
+  PyrolyserIdDesc = 'PYROLYSER_ID_DESC',
   PyrolyserNameAsc = 'PYROLYSER_NAME_ASC',
   PyrolyserNameDesc = 'PYROLYSER_NAME_DESC',
+  PyrolyserVoltageAsc = 'PYROLYSER_VOLTAGE_ASC',
+  PyrolyserVoltageDesc = 'PYROLYSER_VOLTAGE_DESC',
+  RangeIdAsc = 'RANGE_ID_ASC',
+  RangeIdDesc = 'RANGE_ID_DESC',
   ReplacementIntervalMonthsAsc = 'REPLACEMENT_INTERVAL_MONTHS_ASC',
   ReplacementIntervalMonthsDesc = 'REPLACEMENT_INTERVAL_MONTHS_DESC',
   RestrictorAsc = 'RESTRICTOR_ASC',
   RestrictorDesc = 'RESTRICTOR_DESC',
+  SensorBaseTypeIdAsc = 'SENSOR_BASE_TYPE_ID_ASC',
+  SensorBaseTypeIdDesc = 'SENSOR_BASE_TYPE_ID_DESC',
   SensorTypeArtikelOmschrAsc = 'SENSOR_TYPE_ARTIKEL_OMSCHR_ASC',
   SensorTypeArtikelOmschrDesc = 'SENSOR_TYPE_ARTIKEL_OMSCHR_DESC',
   SensorTypeCdartikelAsc = 'SENSOR_TYPE_CDARTIKEL_ASC',
@@ -65772,7 +65868,9 @@ export enum SensorTypesIndicesOrderBy {
   SuffixAsc = 'SUFFIX_ASC',
   SuffixDesc = 'SUFFIX_DESC',
   TargetAsc = 'TARGET_ASC',
-  TargetDesc = 'TARGET_DESC'
+  TargetDesc = 'TARGET_DESC',
+  VolumeAsc = 'VOLUME_ASC',
+  VolumeDesc = 'VOLUME_DESC'
 }
 
 /** Methods to use when ordering `SensorType`. */
@@ -81688,6 +81786,11 @@ export type DeleteBuildingMutationVariables = Exact<{
 
 export type DeleteBuildingMutation = { __typename?: 'Mutation', deleteBuildingById?: { __typename?: 'DeleteBuildingPayload', clientMutationId?: string | null } | null };
 
+export type AllCalibrationGasesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllCalibrationGasesNoPaginationQuery = { __typename?: 'Query', allCalgasEntities?: { __typename?: 'CalgasEntitiesConnection', nodes: Array<{ __typename?: 'CalgasEntity', id?: number | null, cdartikel?: string | null, concentration?: number | null, created?: any | null, engineeringUnits?: string | null, gasCreated?: any | null, gasId?: number | null, initials?: string | null, modified?: any | null, name?: string | null, ownerId?: number | null, username?: string | null }> } | null };
+
 export type AllCalibrationGasesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -82207,7 +82310,7 @@ export type AllRangesQueryVariables = Exact<{
 }>;
 
 
-export type AllRangesQuery = { __typename?: 'Query', allRanges?: { __typename?: 'RangesConnection', totalCount: number, nodes: Array<{ __typename?: 'Range', id: number, created?: any | null, alarm1DirectionUp?: boolean | null, alarm1Level?: any | null, alarm2DirectionUp?: boolean | null, alarm2Level?: any | null, alarmUnits?: boolean | null, engineeringUnits?: string | null, highEu?: number | null, highEuBackup?: number | null, highEuNumeric?: any | null, lowEu?: number | null, modified?: any | null, nodeId: string, ownerId?: number | null, precision?: number | null, range?: string | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, gasByGasId?: { __typename?: 'Gas', name?: string | null, id: number, formula?: string | null, created?: any | null } | null }> } | null };
+export type AllRangesQuery = { __typename?: 'Query', allRanges?: { __typename?: 'RangesConnection', totalCount: number, nodes: Array<{ __typename?: 'Range', id: number, created?: any | null, alarm1DirectionUp?: boolean | null, alarm1Level?: any | null, alarm2DirectionUp?: boolean | null, alarm2Level?: any | null, alarmUnits?: boolean | null, engineeringUnits?: string | null, highEu?: number | null, highEuBackup?: number | null, highEuNumeric?: any | null, lowEu?: number | null, modified?: any | null, warning1Level?: any | null, warning2Level?: any | null, nodeId: string, ownerId?: number | null, precision?: number | null, range?: string | null, userByOwnerId?: { __typename?: 'User', initials?: string | null, id: number } | null, gasByGasId?: { __typename?: 'Gas', name?: string | null, id: number, formula?: string | null, created?: any | null } | null }> } | null };
 
 export type CreateRangeMutationVariables = Exact<{
   body: RangeInput;
@@ -82318,7 +82421,7 @@ export type AllSensorTypesIndicesQueryVariables = Exact<{
 }>;
 
 
-export type AllSensorTypesIndicesQuery = { __typename?: 'Query', sensorTypes?: { __typename?: 'SensorTypesIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'SensorTypesIndex', battery?: boolean | null, calEngineeringUnits?: string | null, calFlowRate?: number | null, calGasConcentration?: number | null, calGasName?: string | null, calResponse?: number | null, code?: string | null, createdDate?: string | null, electrolyteCdartikel?: string | null, electrolyteName?: string | null, engineeringUnits?: string | null, filterCdartikel?: string | null, filterName?: string | null, flowRate?: number | null, highEu?: number | null, id?: number | null, maintenanceIntervalMonths?: number | null, membraneCdartikel?: string | null, membraneName?: string | null, membraneSeal?: boolean | null, model?: string | null, oRingCdartikel?: string | null, oRingName?: string | null, prefix?: string | null, target?: string | null, suffix?: string | null, siliconeSheet?: boolean | null, sensorTypeCdartikel?: string | null, sensorTypeArtikelOmschr?: string | null, restrictor?: boolean | null, replacementIntervalMonths?: number | null, pyrolyserName?: string | null, pyrolyserCdartikel?: string | null, principleName?: string | null }> } | null };
+export type AllSensorTypesIndicesQuery = { __typename?: 'Query', sensorTypes?: { __typename?: 'SensorTypesIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'SensorTypesIndex', battery?: boolean | null, calEngineeringUnits?: string | null, calFlowRate?: number | null, calGasConcentration?: number | null, calGasName?: string | null, calResponse?: number | null, code?: string | null, createdDate?: string | null, electrolyteCdartikel?: string | null, electrolyteName?: string | null, engineeringUnits?: string | null, filterCdartikel?: string | null, filterName?: string | null, flowRate?: number | null, highEu?: number | null, id?: number | null, maintenanceIntervalMonths?: number | null, membraneCdartikel?: string | null, membraneName?: string | null, membraneSeal?: boolean | null, model?: string | null, oRingCdartikel?: string | null, oRingName?: string | null, prefix?: string | null, target?: string | null, suffix?: string | null, siliconeSheet?: boolean | null, sensorTypeCdartikel?: string | null, sensorTypeArtikelOmschr?: string | null, restrictor?: boolean | null, replacementIntervalMonths?: number | null, pyrolyserName?: string | null, pyrolyserCdartikel?: string | null, principleName?: string | null, sensorBaseTypeId?: number | null, rangeId?: number | null, principleId?: number | null, oRingsId?: number | null, membraneId?: number | null, gasId?: number | null, filterId?: number | null, electrolyteId?: number | null, calGasId?: number | null, pyrolyserId?: number | null, volume?: number | null, pyrolyserVoltage?: number | null, ownerId?: number | null, elementCount?: number | null }> } | null };
 
 export type CreateSensorTypeMutationVariables = Exact<{
   body: SensorTypeInput;
@@ -83191,6 +83294,37 @@ export const DeleteBuildingDocument = gql`
   })
   export class DeleteBuildingGQL extends Apollo.Mutation<DeleteBuildingMutation, DeleteBuildingMutationVariables> {
     override document = DeleteBuildingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllCalibrationGasesNoPaginationDocument = gql`
+    query allCalibrationGasesNoPagination {
+  allCalgasEntities {
+    nodes {
+      id
+      cdartikel
+      concentration
+      created
+      engineeringUnits
+      gasCreated
+      gasId
+      initials
+      modified
+      name
+      ownerId
+      username
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllCalibrationGasesNoPaginationGQL extends Apollo.Query<AllCalibrationGasesNoPaginationQuery, AllCalibrationGasesNoPaginationQueryVariables> {
+    override document = AllCalibrationGasesNoPaginationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -84996,6 +85130,8 @@ export const AllRangesDocument = gql`
       highEuNumeric
       lowEu
       modified
+      warning1Level
+      warning2Level
       nodeId
       ownerId
       precision
@@ -85510,6 +85646,20 @@ export const AllSensorTypesIndicesDocument = gql`
       pyrolyserName
       pyrolyserCdartikel
       principleName
+      sensorBaseTypeId
+      rangeId
+      principleId
+      oRingsId
+      membraneId
+      gasId
+      filterId
+      electrolyteId
+      calGasId
+      pyrolyserId
+      volume
+      pyrolyserVoltage
+      ownerId
+      elementCount
     }
   }
 }

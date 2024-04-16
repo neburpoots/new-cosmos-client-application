@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllPrinciplesGQL, DeletePrincipleGQL, Principle, PrinciplesOrderBy } from "../../../../../generated/graphql";
+import { AllPrinciplesGQL, DeletePrincipleGQL, Principle, PrinciplesOrderBy, QueryAllPrinciplesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,14 +25,15 @@ export class PrinciplesComponent extends BaseEntity<Principle> implements OnInit
   objectSingle = 'Principle';
   objectPlural = 'Principles';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllPrinciplesArgs = {
     orderBy: [PrinciplesOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -74,9 +75,9 @@ this.checkQueryParams();
 this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<PrinciplesOrderBy>[] = [
-    { key: 'name', label: "Name", asc: PrinciplesOrderBy.NameAsc, desc: PrinciplesOrderBy.NameDesc },
-    { key: 'created', label: "Created", asc: PrinciplesOrderBy.CreatedAsc, desc: PrinciplesOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: PrinciplesOrderBy.UserByOwnerIdInitialsAsc, desc: PrinciplesOrderBy.UserByOwnerIdInitialsDesc },
+    { type: 'string', key: 'name', label: "Name", asc: PrinciplesOrderBy.NameAsc, desc: PrinciplesOrderBy.NameDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: PrinciplesOrderBy.CreatedAsc, desc: PrinciplesOrderBy.CreatedDesc },
+    { type: 'string', key: 'userByOwnerId$initials', label: "By", asc: PrinciplesOrderBy.UserByOwnerIdInitialsAsc, desc: PrinciplesOrderBy.UserByOwnerIdInitialsDesc },
   ]
 
 
@@ -87,7 +88,7 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
         id: { url: null, value: principle.id } as TableField,
         name: { url: null, value: principle?.name } as TableField,
         created: { url: null, value: principle?.created } as TableField,
-        by: { url: null, value: principle?.userByOwnerId?.initials } as TableField,
+        userByOwnerId$initials: { url: null, value: principle?.userByOwnerId?.initials } as TableField,
       };
     });
   }

@@ -12,7 +12,7 @@ export class LoginComponent {
   constructor(private toastr: ToastrService, private authService: AuthService, private router: Router) { }
 
   async login(username: string, password: string): Promise<void> {
-    console.log(username, password)
+
     await this.authService.login(username, password).subscribe
       (
         result => {

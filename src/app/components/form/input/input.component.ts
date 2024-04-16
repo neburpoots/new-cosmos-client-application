@@ -11,6 +11,7 @@ export class InputComponent {
   @Input() name: string = '';
   @Input() inline: boolean = false;
   @Input() errors: any[] = [];
+  @Input() suffix: string | null = null;
   @Input() form: FormGroup = new FormGroup({});
   @Input() touched: any = false;
   @Input() inputType: string = 'text';

@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllApplicationsGQL, AllGasesGQL, Application, ApplicationsOrderBy, DeleteApplicationGQL, DeleteGasGQL, Gas, GasesOrderBy, Principle } from "../../../../../generated/graphql";
+import { AllApplicationsGQL, AllGasesGQL, Application, ApplicationsOrderBy, DeleteApplicationGQL, DeleteGasGQL, Gas, GasesOrderBy, Principle, QueryAllApplicationsArgs, QueryAllFilterEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,14 +25,15 @@ export class ApplicationsComponent extends BaseEntity<Application> implements On
   objectSingle = 'Application';
   objectPlural = 'Applications';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllApplicationsArgs = {
     orderBy: [ApplicationsOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   ngOnInit(): void {
@@ -74,9 +75,9 @@ this.checkQueryParams();
 this.nodes$ = this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<ApplicationsOrderBy>[] = [
-    { key: 'name', label: "Name", asc: ApplicationsOrderBy.NameAsc, desc: ApplicationsOrderBy.NameDesc },
-    { key: 'created', label: "Created", asc: ApplicationsOrderBy.CreatedAsc, desc: ApplicationsOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: ApplicationsOrderBy.UserByOwnerIdInitialsAsc, desc: ApplicationsOrderBy.UserByOwnerIdInitialsDesc },
+    { type: 'string', key: 'name', label: "Name", asc: ApplicationsOrderBy.NameAsc, desc: ApplicationsOrderBy.NameDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: ApplicationsOrderBy.CreatedAsc, desc: ApplicationsOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: ApplicationsOrderBy.UserByOwnerIdInitialsAsc, desc: ApplicationsOrderBy.UserByOwnerIdInitialsDesc },
   ]
 
 
@@ -87,7 +88,7 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
         id: { url: null, value: application.id } as TableField,
         name: { url: null, value: application?.name } as TableField,
         created: { url: null, value: application?.created } as TableField,
-        by: { url: null, value: application?.userByOwnerId?.initials } as TableField,
+        initials: { url: null, value: application?.userByOwnerId?.initials } as TableField,
       };
     });
   }

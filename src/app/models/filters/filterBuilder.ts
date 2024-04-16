@@ -134,7 +134,24 @@ export class FilterBuilder {
 
         await this.columns.forEach((column) => {
             if (column.type === 'string') {
-                orFilter.push({ [column.key]: { includesInsensitive: this.globalSearch } })
+
+                //FOR EMBEDDED OBJECTS SPLIT THE VARIABLE AT $ AND CREATE A NESTED OBJECT
+                const dynamicFilterEmbedding: Record<string, any> = {};
+
+                // Assuming orderByColumn is in the format 'nestedProperty$subproperty'
+                const columns = column.key.split('$');
+                let currentObject = dynamicFilterEmbedding;
+
+                for (let i = 0; i < columns.length - 1; i++) {
+                    currentObject[columns[i]] = {};
+                    currentObject = currentObject[columns[i]];
+                }
+
+                currentObject[columns[columns.length - 1]] = { includesInsensitive: this.globalSearch };
+
+                orFilter.push(dynamicFilterEmbedding);
+
+                // orFilter.push({ [column.key]: { includesInsensitive: this.globalSearch } })
             }
         })
 

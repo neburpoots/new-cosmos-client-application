@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllAreaEntitiesGQL, AllBuildingsGQL, AllFloorEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, Building, BuildingsOrderBy, DeleteAreaGQL, DeleteBuildingGQL, DeleteFloorGQL, FloorEntitiesOrderBy, FloorEntity} from "../../../../../generated/graphql";
+import { AllAreaEntitiesGQL, AllBuildingsGQL, AllFloorEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, Building, BuildingsOrderBy, DeleteAreaGQL, DeleteBuildingGQL, DeleteFloorGQL, FloorEntitiesOrderBy, FloorEntity, QueryAllBuildingsArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -25,14 +25,15 @@ export class BuildingsComponent extends BaseEntity<Building> implements OnInit {
   objectSingle = 'Building';
   objectPlural = 'Buildings';
 
-  searchCriteria: SearchFilters = {
+  searchCriteria: QueryAllBuildingsArgs = {
     orderBy: [BuildingsOrderBy.IdDesc],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 1,
+    filter: {
+      and: [
+
+      ]
+    },
   }
 
   //Just a console log to check the data
@@ -72,15 +73,16 @@ export class BuildingsComponent extends BaseEntity<Building> implements OnInit {
   ) {
     super(router, toastr, route, http, buildingService, deleteBuildingService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<BuildingsOrderBy>[] = [
-    { key: 'end_user_name', label: "End User", asc: BuildingsOrderBy.EndUserByEndUserIdNameAsc, desc: BuildingsOrderBy.EndUserByEndUserIdNameDesc },
-    { key: 'name', label: "Building", asc: BuildingsOrderBy.NameAsc, desc: BuildingsOrderBy.NameDesc },
-    { key: 'created', label: "Created", asc: BuildingsOrderBy.CreatedAsc, desc: BuildingsOrderBy.CreatedDesc },
-    { key: 'by', label: "By", asc: BuildingsOrderBy.UserByOwnerIdInitialsAsc, desc: BuildingsOrderBy.UserByOwnerIdInitialsDesc },
+    { type: 'string', key: 'endUserByEndUserId$name', label: "End User", asc: BuildingsOrderBy.EndUserByEndUserIdNameAsc, desc: BuildingsOrderBy.EndUserByEndUserIdNameDesc },
+    { type: 'string', key: 'name', label: "Building", asc: BuildingsOrderBy.NameAsc, desc: BuildingsOrderBy.NameDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: BuildingsOrderBy.CreatedAsc, desc: BuildingsOrderBy.CreatedDesc },
+    { type: 'string', key: 'initials', label: "By", asc: BuildingsOrderBy.UserByOwnerIdInitialsAsc, desc: BuildingsOrderBy.UserByOwnerIdInitialsDesc },
   ]
 
 
@@ -88,10 +90,10 @@ this.nodes$ = this.loadData(this.searchCriteria);  }
     return buildings.map((building: Building) => {
       return {
         id: { url: null, value: building.id } as TableField,
-        end_user_name: { url: null, value: building?.endUserByEndUserId?.name } as TableField,
+        endUserByEndUserId$name: { url: null, value: building?.endUserByEndUserId?.name } as TableField,
         name: { url: null, value: building?.name } as TableField,
         created: { url: null, value: building?.created } as TableField,
-        by: { url: null, value: building?.userByOwnerId?.initials } as TableField,
+        initials: { url: null, value: building?.userByOwnerId?.initials } as TableField,
       };
     });
   }
