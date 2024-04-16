@@ -8,6 +8,7 @@
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
                 [data]="tableData"	 [inline_selector]="'calgas-form'"
                 [isInlineCreating]="isInlineCreating"
+                (export)="openExportModal()"
                 (toggleInlineCreating)="toggleInlineCreating()"	
                 >
                 <calgas-form
@@ -40,6 +41,16 @@
                 <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
                     [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
                     (closeModal)="closeDeleteModal()"></delete-modal>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+                <export [objectPlural]="objectPlural"
+                 [objectSingle]="objectSingle"
+                 [data]="tableData"
+                 (export)="exportData($event)"
+                 [tableHeaders]="tableHeaders"
+                     (closeModal)="closeExportModal()"></export>
             </modal-component>
         </div>
     </div>

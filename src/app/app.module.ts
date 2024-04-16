@@ -109,10 +109,12 @@ import { SensorBaseTypeComponent } from "./views/admin/sensor-base-types/index/s
 import { SensorBaseTypesFormComponent } from "./views/admin/sensor-base-types/form/sensor-base-types-form.component";
 import { SensorTypeAssembliesComponent } from "./views/admin/sensor-types-assembly/index/sensor-types-assembly.component";
 import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/index/assembly-multivers.component";
+import { ExportComponent } from "./components/export/export.component";
 
 @NgModule({
   declarations: [
     AppComponent,
+    ExportComponent,
     DashboardComponent,
     PaginationComponent,
     CardBarChartComponent,

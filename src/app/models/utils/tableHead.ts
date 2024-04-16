@@ -3,5 +3,5 @@ export interface TableHead<T> {
     asc: T;
     desc: T;
     key: string;
-    type?: 'string' | 'number' | 'boolean' | 'datetime';
+    type: 'string' | 'number' | 'boolean' | 'datetime';
 }

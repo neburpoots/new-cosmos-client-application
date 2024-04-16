@@ -12,6 +12,8 @@ import { TableHead } from "../../../models/utils/tableHead";
 import { start } from "@popperjs/core";
 import { ModalWidth } from "../../../models/enums/modalWidth.enum";
 import { Router } from '@angular/router';
+import { exportOptions } from "../../../models/utils/export";
+import { FileService } from "../../../services/file/file.service";
 
 @Component({
   selector: "app-base-entity",
@@ -63,6 +65,7 @@ export abstract class BaseEntity<T> {
   isEditModalVisible: boolean = false;
   isDeleteModalVisible: boolean = false;
   isViewModalVisible: boolean = false;
+  isExportModalVisible: boolean = false;
 
   //table widths for inline editing and creating
   cellWidths: number[] = [];
@@ -76,7 +79,7 @@ export abstract class BaseEntity<T> {
   //this is the orderby that is used in case of removal of order by in table component
   abstract baseOrderBy: any;
 
-  constructor(protected router: Router, protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
+  constructor(protected fileService: FileService, protected router: Router, protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
     protected getService: Query<any, any>, protected deleteService: Mutation<any, any> | null,
   ) { }
 
@@ -153,8 +156,10 @@ export abstract class BaseEntity<T> {
   }
 
   //cannot be abstract because it is not used in all components
+  //sets the edit data for the form
   setEditData(): any { };
 
+  //loads data for popover on assembly multivers
   loadDetailData(id: any): void { };
 
   async openEditModal(id: number): Promise<void> {
@@ -168,12 +173,50 @@ export abstract class BaseEntity<T> {
     this.isEditModalVisible = false;
   }
 
+  exportData(exportOptions: exportOptions) {
+
+    let query = this.searchCriteria;
+
+    if (exportOptions.records === 'all') {
+      query.first = this.totalResults;
+      query.filters = { and: [] }
+      query.offset = 0;
+    }
+
+    if (exportOptions.records === 'filtered') {
+      query.first = this.totalResults;
+      query.offset = 0;
+    }
+
+    this.getService.fetch(query).subscribe((response) => {
+      let objects = response.data[this.Key];
+
+      exportOptions.data = objects.nodes.map((object: any) => {
+        let data: any = {};
+        exportOptions.exportHeaders.forEach((header: any) => {
+          data[header] = object[header];
+        });
+        return data;
+      });
+
+    });
+
+  }
+
   setSelectedItem(id: number): void {
     this.nodes$.subscribe(value => {
       this.selectedItem = value.find((item: any) => item.id === id);
 
       this.setEditData();
     });
+  }
+
+  openExportModal(): void {
+    this.isExportModalVisible = true;
+  }
+
+  closeExportModal(): void {
+    this.isExportModalVisible = false;
   }
 
   openDeleteModal(id: number): void {
