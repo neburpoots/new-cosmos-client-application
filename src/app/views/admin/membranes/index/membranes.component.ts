@@ -5,12 +5,13 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllMembraneEntitiesGQL, AllORingEntitiesGQL, AllPyrolyserEntitiesGQL,  DeleteMembraneGQL,  DeletePyrolyserGQL, MembraneEntitiesOrderBy, MembraneEntity, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllMembraneEntitiesArgs } from "../../../../../generated/graphql";
+import { AllMembraneEntitiesGQL, AllORingEntitiesGQL, AllPyrolyserEntitiesGQL, DeleteMembraneGQL, DeletePyrolyserGQL, MembraneEntitiesOrderBy, MembraneEntity, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllMembraneEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { MembranesFormComponent } from "../form/membranes-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-membranes",
@@ -69,13 +70,15 @@ export class MembranesComponent extends BaseEntity<MembraneEntity> implements On
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private membraneService: AllMembraneEntitiesGQL,
     private deleteMembraneService: DeleteMembraneGQL,
-    protected override router: Router
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, membraneService, deleteMembraneService);
+    super(fileService, router, toastr, route, http, membraneService, deleteMembraneService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<MembraneEntitiesOrderBy>[] = [
     { type: 'string', key: 'cdartikel', label: "Part", asc: MembraneEntitiesOrderBy.CdartikelAsc, desc: MembraneEntitiesOrderBy.CdartikelDesc },

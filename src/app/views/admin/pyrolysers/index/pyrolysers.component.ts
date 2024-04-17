@@ -5,12 +5,13 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllPyrolyserEntitiesGQL,  DeletePyrolyserGQL, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllPyrolyserEntitiesArgs } from "../../../../../generated/graphql";
+import { AllPyrolyserEntitiesGQL, DeletePyrolyserGQL, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllPyrolyserEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { PyrolysersFormComponent } from "../form/pyrolysers-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-pyrolysers",
@@ -70,14 +71,16 @@ export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> implements 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private pyrolyserService: AllPyrolyserEntitiesGQL,
     private deletePyrolyserService: DeletePyrolyserGQL
-  ,
-    protected override router: Router
+    ,
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, pyrolyserService, deletePyrolyserService);
+    super(fileService, router, toastr, route, http, pyrolyserService, deletePyrolyserService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<PyrolyserEntitiesOrderBy>[] = [
     { type: 'string', key: 'cdartikel', label: "Part", asc: PyrolyserEntitiesOrderBy.CdartikelAsc, desc: PyrolyserEntitiesOrderBy.CdartikelDesc },

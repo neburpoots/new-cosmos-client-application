@@ -60,8 +60,6 @@ export class FilterBuilder {
 
     columnTypes: string[] = [];
 
-    baseTableRow: any;
-
     constructor(columns: TableHead<any>[]) {
         this.currentFilters = [];
         this.columns = columns;

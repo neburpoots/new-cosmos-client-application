@@ -5,12 +5,13 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllAreaEntitiesGQL, AllFloorEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteFloorGQL, FloorEntitiesOrderBy, FloorEntity, QueryAllFloorEntitiesArgs} from "../../../../../generated/graphql";
+import { AllAreaEntitiesGQL, AllFloorEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteFloorGQL, FloorEntitiesOrderBy, FloorEntity, QueryAllFloorEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { FloorFormComponent } from "../form/floors-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-floors",
@@ -71,14 +72,16 @@ export class FloorsComponent extends BaseEntity<FloorEntity> implements OnInit {
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private floorService: AllFloorEntitiesGQL,
     private deleteFloorService: DeleteFloorGQL
-  ,
-    protected override router: Router
+    ,
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, floorService, deleteFloorService);
+    super(fileService, router, toastr, route, http, floorService, deleteFloorService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<FloorEntitiesOrderBy>[] = [
     { type: 'string', key: 'endUserName', label: "End User", asc: FloorEntitiesOrderBy.EndUserNameAsc, desc: FloorEntitiesOrderBy.EndUserNameDesc },

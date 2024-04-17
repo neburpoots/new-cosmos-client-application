@@ -10,6 +10,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { ChemicalCompoundsFormComponent } from "../form/chemical-compounds-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-chemical-compounds",
@@ -73,9 +74,10 @@ export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> imp
     private chemicalCompoundService: AllChemicalCompoundsGQL,
     private deleteChemicalCompoundService: DeleteChemicalCompoundGQL
     ,
-    protected override router: Router
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, chemicalCompoundService, deleteChemicalCompoundService);
+    super(fileService, router, toastr, route, http, chemicalCompoundService, deleteChemicalCompoundService);
 
     this.checkQueryParams();
 

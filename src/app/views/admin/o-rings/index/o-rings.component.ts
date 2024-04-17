@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { ORingsFormComponent } from "../form/o-rings-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-o-rings",
@@ -72,9 +73,10 @@ export class ORingsComponent extends BaseEntity<ORingEntity> implements OnInit {
     private oRingService: AllORingEntitiesGQL,
     private deleteORingService: DeletePyrolyserGQL
     ,
-    protected override router: Router
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, oRingService, deleteORingService);
+    super(fileService, router, toastr, route, http, oRingService, deleteORingService);
 
     this.checkQueryParams();
 
@@ -82,18 +84,18 @@ export class ORingsComponent extends BaseEntity<ORingEntity> implements OnInit {
   }
 
   tableHeaders: TableHead<ORingEntitiesOrderBy>[] = [
-    { key: 'cdartikel', label: "Part", asc: ORingEntitiesOrderBy.CdartikelAsc, desc: ORingEntitiesOrderBy.CdartikelDesc, type: 'string'},
+    { key: 'cdartikel', label: "Part", asc: ORingEntitiesOrderBy.CdartikelAsc, desc: ORingEntitiesOrderBy.CdartikelDesc, type: 'string' },
     { key: 'name', label: "Name", asc: ORingEntitiesOrderBy.NameAsc, desc: ORingEntitiesOrderBy.NameDesc, type: 'string' },
     { key: 'omschr', label: "Description", asc: ORingEntitiesOrderBy.OmschrAsc, desc: ORingEntitiesOrderBy.OmschrDesc, type: 'string' },
     { key: 'replacementIntervalMonths', label: "Rep. Int.", asc: ORingEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: ORingEntitiesOrderBy.ReplacementIntervalMonthsDesc, type: 'number' },
-    { key: 'quantity', label: "Quantity", asc: ORingEntitiesOrderBy.QuantityAsc, desc: ORingEntitiesOrderBy.QuantityDesc, type: 'number'},
+    { key: 'quantity', label: "Quantity", asc: ORingEntitiesOrderBy.QuantityAsc, desc: ORingEntitiesOrderBy.QuantityDesc, type: 'number' },
     { key: 'created', label: "Created", asc: ORingEntitiesOrderBy.CreatedAsc, desc: ORingEntitiesOrderBy.CreatedDesc, type: 'datetime' },
     { key: 'initials', label: "By", asc: ORingEntitiesOrderBy.InitialsAsc, desc: ORingEntitiesOrderBy.InitialsDesc, type: 'string' },
   ]
 
 
   mapTableData(orings: ORingEntity[]): any[] {
-    let object = orings.map((oring: ORingEntity) => {
+    return orings.map((oring: ORingEntity) => {
       return {
         id: { url: null, value: oring.id } as TableField,
         cdartikel: { url: null, value: oring?.cdartikel } as TableField,
@@ -105,16 +107,6 @@ export class ORingsComponent extends BaseEntity<ORingEntity> implements OnInit {
         initials: { url: null, value: oring?.initials } as TableField,
       };
     });
-
-    //ASSIGN THE FIRST VALUE
-    //This is for an edge case where the filter returns no results
-    //This means further filtering will not work because the dynamic filtering does not know the types
-    //this fixes it by saving the first result from the first fetch
-    if (object.length > 0) {
-      this.baseTableRow = object[0];
-    }
-
-    return object;
   }
 
 

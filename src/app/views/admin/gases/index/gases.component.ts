@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { GasesFormComponent } from "../form/gases-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-gases",
@@ -65,13 +66,15 @@ export class GasesComponent extends BaseEntity<Gas> implements OnInit {
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private gasesService: AllGasesGQL,
     private deleteGasService: DeleteGasGQL,
-    protected override router: Router
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, gasesService, deleteGasService);
+    super(fileService, router, toastr, route, http, gasesService, deleteGasService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<GasesOrderBy>[] = [
     { type: 'string', key: 'name', label: "Name", asc: GasesOrderBy.NameAsc, desc: GasesOrderBy.NameDesc },

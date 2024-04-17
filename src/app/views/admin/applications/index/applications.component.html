@@ -6,33 +6,28 @@
                 (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
                 (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData"	 [inline_selector]="'gases-form'"
-                [isInlineCreating]="isInlineCreating"
-                (toggleInlineCreating)="toggleInlineCreating()"	
-                >
-                <applications-form
-                    [baseOrderBy]="baseOrderBy"
-                (refresh)="fetch($event)" [objectSingle]="objectSingle"
+                [data]="tableData" [inline_selector]="'gases-form'" [isInlineCreating]="isInlineCreating"
+                (export)="openExportModal()"
+                (toggleInlineCreating)="toggleInlineCreating()">
+                <applications-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
                     [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
                     (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></applications-form>
             </table-component>
-            <app-pagination-component [searchCriteria]="searchCriteria"
-            [totalResults]="totalResults"
+            <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large
         " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <applications-form
-                [baseOrderBy]="baseOrderBy"
-                [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refresh)="fetch()"
+                <applications-form [baseOrderBy]="baseOrderBy" [objectPlural]="objectPlural"
+                    [objectSingle]="objectSingle" (refresh)="fetch()"
                     (closeModal)="closeCreateModal()"></applications-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-                <applications-form #editModal [objectPlural]="objectPlural"
-                [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
-                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></applications-form>
+                <applications-form #editModal [objectPlural]="objectPlural" [baseOrderBy]="baseOrderBy"
+                    [objectSingle]="objectSingle" (refresh)="fetch()" (object)="editData"
+                    (closeModal)="closeEditModal()"></applications-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Medium
@@ -40,6 +35,13 @@
                 <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
                     [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
                     (closeModal)="closeDeleteModal()"></delete-modal>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+                <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
+                </export>
             </modal-component>
         </div>
     </div>

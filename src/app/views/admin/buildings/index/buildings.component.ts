@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { BuildingFormComponent } from "../form/building-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-buildings",
@@ -69,9 +70,10 @@ export class BuildingsComponent extends BaseEntity<Building> implements OnInit {
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private buildingService: AllBuildingsGQL,
     private deleteBuildingService: DeleteBuildingGQL,
-    protected override router: Router
+    protected override router: Router,
+protected override fileService : FileService
   ) {
-    super(router, toastr, route, http, buildingService, deleteBuildingService);
+    super(fileService, router, toastr, route, http, buildingService, deleteBuildingService);
 
     this.checkQueryParams();
 

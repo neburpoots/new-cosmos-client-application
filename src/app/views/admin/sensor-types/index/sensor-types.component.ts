@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { SensorTypesFormComponent } from "../form/sensor-types-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-sensor-types",
@@ -64,9 +65,10 @@ export class SensorTypeComponent extends BaseEntity<SensorTypesIndex> implements
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private sensorTypeService: AllSensorTypesIndicesGQL,
     private deleteSensorService: DeleteSensorTypeGQL,
-    protected override router: Router
+    protected override router: Router,
+protected override fileService : FileService
   ) {
-    super(router, toastr, route, http, sensorTypeService, deleteSensorService);
+    super(fileService, router, toastr, route, http, sensorTypeService, deleteSensorService);
 
     this.checkQueryParams();
     this.nodes$ = this.loadData(this.searchCriteria);

@@ -8,6 +8,7 @@
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
                 [data]="tableData"	 [inline_selector]="'ranges-form'"
                 [isInlineCreating]="isInlineCreating"
+                (export)="openExportModal()"
                 (toggleInlineCreating)="toggleInlineCreating()"	
                 >
                 <ranges-form
@@ -41,6 +42,13 @@
                     [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
                     (closeModal)="closeDeleteModal()"></delete-modal>
             </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+            <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
+            </export>
+        </modal-component>
         </div>
     </div>
 </div>

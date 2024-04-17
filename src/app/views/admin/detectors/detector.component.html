@@ -8,6 +8,7 @@
                 (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
                 [data]="tableData"	 [inline_selector]="'detector-form'" [isInlineCreating]="isInlineCreating"
+                (export)="openExportModal()"
                 (toggleInlineCreating)="toggleInlineCreating()">
                 <calgas-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
                     [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
@@ -24,36 +25,13 @@
                 <detector-form [baseOrderBy]="baseOrderBy" [objectPlural]="objectPlural" [objectSingle]="objectSingle"
                     (refresh)="fetch()" (closeModal)="closeCreateModal()"></detector-form>
             </modal-component>
-            <!-- 
-        <modal-component [width]="ModalWidth.Large
-        " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-            <calgas-form #calibrationGasEdit [objectPlural]="objectPlural"
-            [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
-                (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></calgas-form>
-        </modal-component>
-
-        <modal-component [width]="ModalWidth.Medium
-    " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
-            <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
-                [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
-                (closeModal)="closeDeleteModal()"></delete-modal>
-        </modal-component> -->
-            <!-- <app-card-table [isDeletable]="true" (create)="openCreateModal()" (edit)="openEditModal($event)" (delete)="openDeleteModal($event)" (searchCriteriaChange)="loadFilteredItems($event)" [searchCriteria]="searchCriteria" [columns]="tableHeaders" [data]="tableData"	
-                [title]="objectPlural" [object]="objectSingle"></app-card-table>
-
-            <!-- Your table content here -->
-            <!-- <app-pagination [paginatedResult]="data" (paginationChange)="onPaginationChange($event)"></app-pagination>
 
             <modal-component [width]="ModalWidth.Large
-            " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <detector-form [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refresh)="loadItems()" (closeModal)="closeCreateModal()"></detector-form>
-            </modal-component>
-
-            <modal-component
-            [width]="ModalWidth.Small
-            " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
-                <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase" [selectedItem]="selectedItem" (deleteHandler)="delete($event)" (closeModal)="closeDeleteModal()"></delete-modal>
-            </modal-component> -->
+            " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+            <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
+            </export>
+        </modal-component>
         </div>
     </div>
 </div>

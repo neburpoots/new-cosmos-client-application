@@ -10,6 +10,7 @@ import { BaseEntity } from "../base/base-entity.component";
 import { SearchFilters } from "../../../models/utils/searchFilters";
 
 import { TableHead } from "../../../models/utils/tableHead";
+import { FileService } from "../../../services/file/file.service";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -46,9 +47,10 @@ export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> imple
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private assemblyTypeService: AssemblyTypeEntitiesGQL,
-    protected override router: Router
+    protected override router: Router,
+protected override fileService : FileService
   ) {
-    super(router, toastr, route, http, assemblyTypeService, null);
+    super(fileService, router, toastr, route, http, assemblyTypeService, null);
 
     this.checkQueryParams();
 

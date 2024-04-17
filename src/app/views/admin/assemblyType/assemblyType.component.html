@@ -2,36 +2,19 @@
 
     <div class="h-full w-full flex items-center">
         <div class="mt-[100px] w-full mb-12 px-4">
-            <table-component
-            [baseOrderBy]="baseOrderBy"
-            [isEditable]="false"  [isDeletable]="false"
-            [isCreatable]="false"
-            [title]="objectPlural" [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"	></table-component>
-            <app-pagination-component [searchCriteria]="searchCriteria"
-            [totalResults]="totalResults"
-
-            (paginationChange)="fetch($event)"
-            ></app-pagination-component>
-
-            <!-- <modal-component [width]="ModalWidth.Large
-            " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                    <calgas-form [objectPlural]="objectPlural" [objectSingle]="objectSingle"
-                        (refresh)="loadItems()" (closeModal)="closeCreateModal()"></calgas-form>
-                </modal-component> -->
-            <!-- 
+            <table-component [baseOrderBy]="baseOrderBy" [isEditable]="false" [isDeletable]="false"
+                [isCreatable]="false" [title]="objectPlural" [searchCriteria]="searchCriteria"
+                
+                (export)="openExportModal()" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"></table-component>
+            <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="totalResults"
+                (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large
-            " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-                <calgas-form #calibrationGasEdit [objectPlural]="objectPlural" [objectSingle]="objectSingle"
-                    (refresh)="loadItems()" (object)="editData" (closeModal)="closeEditModal()"></calgas-form>
-            </modal-component> -->
-<!-- 
-            <modal-component [width]="ModalWidth.Medium
-        " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
-                <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
-                    [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
-                    (closeModal)="closeDeleteModal()"></delete-modal>
-            </modal-component> -->
+            " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+                <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
+                </export>
+            </modal-component>
         </div>
     </div>
 </div>

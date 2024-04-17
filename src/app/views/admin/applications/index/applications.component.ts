@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { ApplicationsFormComponent } from "../form/applications-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-applications",
@@ -66,13 +67,15 @@ export class ApplicationsComponent extends BaseEntity<Application> implements On
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private applicationsService: AllApplicationsGQL,
     private deleteApplicationService: DeleteApplicationGQL,
-    protected override router: Router
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, applicationsService, deleteApplicationService);
+    super(fileService, router, toastr, route, http, applicationsService, deleteApplicationService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<ApplicationsOrderBy>[] = [
     { type: 'string', key: 'name', label: "Name", asc: ApplicationsOrderBy.NameAsc, desc: ApplicationsOrderBy.NameDesc },

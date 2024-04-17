@@ -10,6 +10,7 @@ import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-assembly-multivers",
@@ -56,9 +57,10 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private assemblyMVService: AllAssemblyMultiversEntitiesGQL,
     private assemblyLineService: AllAssemblyLinesMultiversEntitiesGQL,
-    protected override router: Router
+    protected override router: Router,
+protected override fileService : FileService
   ) {
-    super(router, toastr, route, http, assemblyMVService, null);
+    super(fileService, router, toastr, route, http, assemblyMVService, null);
 
     this.checkQueryParams();
 

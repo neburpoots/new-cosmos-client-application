@@ -6,33 +6,28 @@
                 (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
                 (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData"	 [inline_selector]="'electrolytes-form'"
-                [isInlineCreating]="isInlineCreating"
-                (toggleInlineCreating)="toggleInlineCreating()"	
-                >
-                <electrolytes-form
-                    [baseOrderBy]="baseOrderBy"
-                (refresh)="fetch($event)" [objectSingle]="objectSingle"
+                [data]="tableData" [inline_selector]="'electrolytes-form'" [isInlineCreating]="isInlineCreating"
+                (export)="openExportModal()"
+                (toggleInlineCreating)="toggleInlineCreating()">
+                <electrolytes-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
                     [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
                     (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></electrolytes-form>
             </table-component>
-            <app-pagination-component [searchCriteria]="searchCriteria"
-            [totalResults]="totalResults"
+            <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large
         " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <electrolytes-form
-                [baseOrderBy]="baseOrderBy"
-                [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refresh)="fetch()"
+                <electrolytes-form [baseOrderBy]="baseOrderBy" [objectPlural]="objectPlural"
+                    [objectSingle]="objectSingle" (refresh)="fetch()"
                     (closeModal)="closeCreateModal()"></electrolytes-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-                <electrolytes-form #editModal [objectPlural]="objectPlural"
-                [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
-                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></electrolytes-form>
+                <electrolytes-form #editModal [objectPlural]="objectPlural" [baseOrderBy]="baseOrderBy"
+                    [objectSingle]="objectSingle" (refresh)="fetch()" (object)="editData"
+                    (closeModal)="closeEditModal()"></electrolytes-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Medium
@@ -40,6 +35,13 @@
                 <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
                     [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
                     (closeModal)="closeDeleteModal()"></delete-modal>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+                <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
+                </export>
             </modal-component>
         </div>
     </div>

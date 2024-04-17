@@ -41,14 +41,9 @@ export abstract class BaseEntity<T> {
 
   abstract nodes$: Observable<Array<T>>;
 
-
-
   protected refetchTrigger: Subject<void> = new Subject<void>();
 
-
   abstract tableHeaders: TableHead<any>[];
-
-  // abstract orderByEnum: any;
 
   abstract Key: string;
 
@@ -70,11 +65,6 @@ export abstract class BaseEntity<T> {
   //table widths for inline editing and creating
   cellWidths: number[] = [];
   isInlineCreating: boolean = false;
-
-  //This row is used by the filters incase of the filter not having any results 
-  //this causes the filtering on the table to not work
-  //at the first get this baseTableRow is set an can then be referenced even on a null value.
-  baseTableRow: any = {};
 
   //this is the orderby that is used in case of removal of order by in table component
   abstract baseOrderBy: any;
@@ -173,16 +163,56 @@ export abstract class BaseEntity<T> {
     this.isEditModalVisible = false;
   }
 
-  exportData(exportOptions: exportOptions) {
+  exportName(input: string) {
+    // Replace spaces with underscores and convert to lowercase
+    return input.replace(/\s+/g, '_').toLowerCase() + '_export';
+  }
 
-    let query = this.searchCriteria;
+  downloadExcelFile(exportOptions: exportOptions) {
+    this.fileService.downloadExcel(exportOptions).subscribe(response => {
+      // Initiate download
+      const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${exportOptions.exportName}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    });
+  }
 
+  downloadCSVFile(exportOptions: exportOptions) {
+    this.fileService.downloadCSV(exportOptions).subscribe(response => {
+      // Initiate download
+      const blob = new Blob([response], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${exportOptions.exportName}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    });
+  }
+
+  async exportData(exportOptions: exportOptions) {
+
+    let query = { ...this.searchCriteria };
+
+    //dynamically set the export name
+    exportOptions.exportName = this.exportName(this.objectPluralLowerCase);
+
+    //if all records then no offset no filter and first is total results
     if (exportOptions.records === 'all') {
       query.first = this.totalResults;
       query.filters = { and: [] }
       query.offset = 0;
     }
 
+    //if filtered result then no offset and first is total results
     if (exportOptions.records === 'filtered') {
       query.first = this.totalResults;
       query.offset = 0;
@@ -194,13 +224,42 @@ export abstract class BaseEntity<T> {
       exportOptions.data = objects.nodes.map((object: any) => {
         let data: any = {};
         exportOptions.exportHeaders.forEach((header: any) => {
-          data[header] = object[header];
+
+          //This code looks at the table header key
+          //it splits this on the $. This is also used for filtering
+          //It loops over the object so that the correct embedded object can be found.
+          //For instance {userByOwnerId$initials} will look for object.userByOwnerId.initials
+          const dynamicObjectEmbedding: Record<string, any> = {};
+
+          const embedding = header.split('$');
+
+          let returnValue: any = {};
+          for (let i = 0; i < embedding.length; i++) {
+            if (i === 0) {
+              returnValue = object[embedding[i]];
+            } else {
+              if(returnValue == null) {
+                returnValue = null;
+                break;
+              }
+              returnValue = returnValue[embedding[i]];
+            }
+          }
+          console.log(returnValue)
+
+          data[header] = returnValue;
         });
         return data;
       });
 
-    });
+      console.log(exportOptions)
 
+      if (exportOptions.type === 'csv') {
+        this.downloadCSVFile(exportOptions);
+      } else if (exportOptions.type === 'excel') {
+        this.downloadExcelFile(exportOptions);
+      }
+    });
   }
 
   setSelectedItem(id: number): void {

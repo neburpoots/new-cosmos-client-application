@@ -5,18 +5,23 @@
             <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
                 (setTableWidths)="setTableWidths($event)" (edit)="openEditModal($event)" [isCreatable]="false"
                 [detailPagePrefix]="'/user/assemblymultivers/'" [isViewable]="true" (closeView)="closeViewModal()"
-                [title]="objectPlural" 
-                (view)="openViewModal($event)"
-                
-                [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)"
-                [columns]="tableHeaders" [data]="tableData"	 [inline_selector]="'filters-form'">
+                [title]="objectPlural" (view)="openViewModal($event)" [searchCriteria]="searchCriteria"
+                (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"
+                (export)="openExportModal()"
+                [inline_selector]="'filters-form'">
                 <assembly-multivers-popover [assemblyMultiversLines]="assemblyMultiversLines"
                     [item]="selectedItem"></assembly-multivers-popover>
 
             </table-component>
-            <app-pagination-component [searchCriteria]="searchCriteria"
-            [totalResults]="totalResults"
+            <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
+
+            <modal-component [width]="ModalWidth.Large
+                " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+                <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
+                </export>
+            </modal-component>
         </div>
     </div>
 </div>

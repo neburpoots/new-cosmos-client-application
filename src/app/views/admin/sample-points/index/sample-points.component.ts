@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { SamplePointsFormComponent } from "../form/sample-point-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-sample-points",
@@ -71,9 +72,10 @@ export class SamplePointsComponent extends BaseEntity<SamplePointEntity> impleme
     private samplePointService: AllSamplePointEntitiesGQL,
     private deleteSamplePointService: DeleteSamplePointGQL
   ,
-    protected override router: Router
+    protected override router: Router,
+protected override fileService : FileService
   ) {
-    super(router, toastr, route, http, samplePointService, deleteSamplePointService);
+    super(fileService, router, toastr, route, http, samplePointService, deleteSamplePointService);
 
 this.checkQueryParams();
 

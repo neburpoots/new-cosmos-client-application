@@ -11,6 +11,7 @@ import { SearchFilters } from "../../../models/utils/searchFilters";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../models/utils/tableHead";
 import { DetectorTypeFormComponent } from "./form/detector-type-form.component";
+import { FileService } from "../../../services/file/file.service";
 
 @Component({
   selector: "app-detector",
@@ -65,9 +66,10 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
     private detectorTypeEntitiesService: AllDetectorTypeEntitiesGQL,
     private deleteDetectorTypeService: DeleteDetectorTypeGQL
     ,
-    protected override router: Router
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, detectorTypeEntitiesService, deleteDetectorTypeService);
+    super(fileService, router, toastr, route, http, detectorTypeEntitiesService, deleteDetectorTypeService);
 
     this.checkQueryParams();
 

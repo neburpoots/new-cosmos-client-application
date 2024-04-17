@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { SensorBaseTypesFormComponent } from "../form/sensor-base-types-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-sensor-base-types",
@@ -74,9 +75,10 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private sensorBaseTypeService: AllSensorBaseTypesGQL,
     private deleteSensorBaseTypeService: DeleteSensorBaseTypeGQL,
-    protected override router: Router
+    protected override router: Router,
+protected override fileService : FileService
   ) {
-    super(router, toastr, route, http, sensorBaseTypeService, deleteSensorBaseTypeService);
+    super(fileService, router, toastr, route, http, sensorBaseTypeService, deleteSensorBaseTypeService);
 
     this.checkQueryParams();
 

@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { FiltersFormComponent } from "../form/filters-form.component";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-filters",
@@ -73,9 +74,10 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
     private filterService: AllFilterEntitiesGQL,
     private deleteFilterService: DeleteFilterGQL
     ,
-    protected override router: Router
+    protected override router: Router,
+    protected override fileService: FileService
   ) {
-    super(router, toastr, route, http, filterService, deleteFilterService);
+    super(fileService, router, toastr, route, http, filterService, deleteFilterService);
 
     this.checkQueryParams();
 
@@ -84,10 +86,10 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
 
   tableHeaders: TableHead<FilterEntitiesOrderBy>[] = [
     { key: 'cdartikel', label: "Part", asc: FilterEntitiesOrderBy.CdartikelAsc, desc: FilterEntitiesOrderBy.CdartikelDesc, type: 'string' },
-    { key: 'name', label: "Name", asc: FilterEntitiesOrderBy.NameAsc, desc: FilterEntitiesOrderBy.NameDesc, type: 'string'},
+    { key: 'name', label: "Name", asc: FilterEntitiesOrderBy.NameAsc, desc: FilterEntitiesOrderBy.NameDesc, type: 'string' },
     { key: 'omschr', label: "Description", asc: FilterEntitiesOrderBy.OmschrAsc, desc: FilterEntitiesOrderBy.OmschrDesc, type: 'string' },
-    { key: 'replacementIntervalMonths', label: "Rep. Int.", asc: FilterEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: FilterEntitiesOrderBy.ReplacementIntervalMonthsDesc, type: 'number'},
-    { key: 'consumable', label: "Consumable", asc: FilterEntitiesOrderBy.ConsumableAsc, desc: FilterEntitiesOrderBy.ConsumableDesc, type: 'boolean'},
+    { key: 'replacementIntervalMonths', label: "Rep. Int.", asc: FilterEntitiesOrderBy.ReplacementIntervalMonthsAsc, desc: FilterEntitiesOrderBy.ReplacementIntervalMonthsDesc, type: 'number' },
+    { key: 'consumable', label: "Consumable", asc: FilterEntitiesOrderBy.ConsumableAsc, desc: FilterEntitiesOrderBy.ConsumableDesc, type: 'boolean' },
     { key: 'created', label: "Created", asc: FilterEntitiesOrderBy.CreatedAsc, desc: FilterEntitiesOrderBy.CreatedDesc, type: 'datetime' },
     { key: 'initials', label: "By", asc: FilterEntitiesOrderBy.InitialsAsc, desc: FilterEntitiesOrderBy.InitialsDesc, type: 'string' },
   ]

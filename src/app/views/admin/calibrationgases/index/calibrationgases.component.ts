@@ -11,6 +11,7 @@ import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
+import { FileService } from "../../../../services/file/file.service";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -71,9 +72,10 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
     private calGasService: AllCalibrationGasesGQL,
     private deleteCalGasService: DeleteCalGasGQL
     ,
-    protected override router: Router
+    protected override router: Router,
+    protected override fileService : FileService,
   ) {
-    super(router, toastr, route, http, calGasService, deleteCalGasService);
+    super(fileService, router, toastr, route, http, calGasService, deleteCalGasService);
 
     this.checkQueryParams();
 
