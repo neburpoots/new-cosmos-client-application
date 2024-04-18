@@ -182,58 +182,36 @@ query allusers(
 }
 
 #-------------------------------------------------------------------------------
-mutation CreateUser(
-    $body: UserInput!
-) {
-  createUser(
-    input: {user: $body}
+mutation CreateUserWithGroups($body: CreateUserWithGroupsInput!) {
+  createUserWithGroups(
+    input: $body
   ) {
-    user {
-            id,
-            username,
-            created,
-            fullname
-            modified,
-            initials,
-            groupByGroupId {
-                name
-                id
-            }
-        } 
-  }
-}
-
-#-------------------------------------------------------------------------------
-mutation Updateuser(
-    $id: Int!, $patch: UserPatch!
-) {
-  updateUserById(
-    input: {
-		id: $id
-		userPatch: $patch	
+    results {
+        created
+        username,
+        userId
     }
+  }
+}
+
+
+
+#-------------------------------------------------------------------------------
+mutation UpdateUserWithGroups(
+    $patch: UpdateUserWithGroupsInput!
+) {
+  updateUserWithGroups(
+    input: $patch
   ) {
-    user {
-            id,
-            username,
-            created,
-            fullname
-            modified,
-            initials,
-            groupByGroupId {
-                name
-                id
-            }
-        } 
+    clientMutationId
   }
 }
 
 #-------------------------------------------------------------------------------
-mutation DeleteUser($id: Int!)
+mutation DeleteUserWithUserGroups($id: Int!)
 {
-	deleteUserById(input:{id: $id})
+	deleteuserandgroups(input:{pUserId: $id})
 	{
 		clientMutationId
 	}  
 }
-

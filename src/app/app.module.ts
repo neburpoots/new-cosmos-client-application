@@ -112,6 +112,8 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/inde
 import { ExportComponent } from "./components/export/export.component";
 import { UsersFormComponent } from "./views/admin/users/form/users-form.component";
 import { UsersComponent } from "./views/admin/users/index/users.component";
+import { GroupsComponent } from "./views/admin/groups/index/groups.component";
+import { GroupsFormComponent } from "./views/admin/groups/form/groups-form.component";
 
 @NgModule({
   declarations: [
@@ -203,7 +205,10 @@ import { UsersComponent } from "./views/admin/users/index/users.component";
     SensorTypesFormComponent,
     SensorTypeAssembliesComponent,
     UsersComponent,
-    UsersFormComponent
+    UsersFormComponent,
+    GroupsComponent,
+    GroupsFormComponent
+
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

@@ -8605,6 +8605,7 @@ type Query implements Node {
   userTaskById(id: Int!): UserTask
   userTaskByUserIdAndTaskId(userId: Int!, taskId: Int!): UserTask
   userById(id: Int!): User
+  userByUsername(username: String!): User
   usersGroupById(id: Int!): UsersGroup
   usersGroupByUserIdAndGroupId(userId: Int!, groupId: Int!): UsersGroup
   voorradenByCdartikelAndCdmagazijn(cdartikel: String!, cdmagazijn: String!): Voorraden
@@ -78224,6 +78225,14 @@ type Mutation {
     input: UpdateUserByIdInput!
   ): UpdateUserPayload
 
+  """Updates a single `User` using a unique key and a patch."""
+  updateUserByUsername(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateUserByUsernameInput!
+  ): UpdateUserPayload
+
   """Updates a single `Voorraden` using its globally unique id and a patch."""
   updateVoorraden(
     """
@@ -80578,6 +80587,14 @@ type Mutation {
     input: DeleteUserByIdInput!
   ): DeleteUserPayload
 
+  """Deletes a single `User` using a unique key."""
+  deleteUserByUsername(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteUserByUsernameInput!
+  ): DeleteUserPayload
+
   """Deletes a single `UsersGroup` using its globally unique id."""
   deleteUsersGroup(
     """
@@ -80685,12 +80702,36 @@ type Mutation {
     """
     input: CreateGroupInput!
   ): CreateGroupPayload
+  createGroupWithPermissions(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateGroupWithPermissionsInput!
+  ): CreateGroupWithPermissionsPayload
   createSensors(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: CreateSensorsInput!
   ): CreateSensorsPayload
+  createUserWithGroups(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateUserWithGroupsInput!
+  ): CreateUserWithGroupsPayload
+  deleteGroupAndPermissions(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteGroupAndPermissionsInput!
+  ): DeleteGroupAndPermissionsPayload
+  deleteuserandgroups(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteuserandgroupsInput!
+  ): DeleteuserandgroupsPayload
   dueClass(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -80745,12 +80786,24 @@ type Mutation {
     """
     input: UpdateDetectorAndSensorsInput!
   ): UpdateDetectorAndSensorsPayload
+  updateGroupWithPermissions(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateGroupWithPermissionsInput!
+  ): UpdateGroupWithPermissionsPayload
   updateUserGroups(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
     input: UpdateUserGroupsInput!
   ): UpdateUserGroupsPayload
+  updateUserWithGroups(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateUserWithGroupsInput!
+  ): UpdateUserWithGroupsPayload
   upsertDetectorSensorBySensorId(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
@@ -96919,6 +96972,21 @@ input UpdateUserByIdInput {
   id: Int!
 }
 
+"""All input for the `updateUserByUsername` mutation."""
+input UpdateUserByUsernameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `User` being updated.
+  """
+  userPatch: UserPatch!
+  username: String!
+}
+
 """The output of our update `Voorraden` mutation."""
 type UpdateVoorradenPayload {
   """
@@ -103950,6 +104018,16 @@ input DeleteUserByIdInput {
   id: Int!
 }
 
+"""All input for the `deleteUserByUsername` mutation."""
+input DeleteUserByUsernameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  username: String!
+}
+
 """The output of our delete `UsersGroup` mutation."""
 type DeleteUsersGroupPayload {
   """
@@ -104306,6 +104384,42 @@ input CreateGroupInput {
   name: String
 }
 
+"""The output of our `createGroupWithPermissions` mutation."""
+type CreateGroupWithPermissionsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  results: [CreateGroupWithPermissionsRecord]
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""The return type of our `createGroupWithPermissions` mutation."""
+type CreateGroupWithPermissionsRecord {
+  groupD: Int
+  groupPermissionId: Int
+  name: String
+  created: Datetime
+  modified: Datetime
+}
+
+"""All input for the `createGroupWithPermissions` mutation."""
+input CreateGroupWithPermissionsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  pName: String
+  pWriteIds: [Int]
+  pReadIds: [Int]
+}
+
 """The output of our `createSensors` mutation."""
 type CreateSensorsPayload {
   """
@@ -104342,6 +104456,91 @@ input CreateSensorInput {
   zeroResponse: Float
   spanResponse: Float
   usedSpanConcentration: Float
+}
+
+"""The output of our `createUserWithGroups` mutation."""
+type CreateUserWithGroupsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  results: [CreateUserWithGroupsRecord]
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""The return type of our `createUserWithGroups` mutation."""
+type CreateUserWithGroupsRecord {
+  userId: Int
+  username: String
+  created: Datetime
+  modified: Datetime
+}
+
+"""All input for the `createUserWithGroups` mutation."""
+input CreateUserWithGroupsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  pUsername: String
+  pFullname: String
+  pPassword: String
+  pInitials: String
+  pGroups: [Int]
+}
+
+"""The output of our `deleteGroupAndPermissions` mutation."""
+type DeleteGroupAndPermissionsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteGroupAndPermissions` mutation."""
+input DeleteGroupAndPermissionsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  pGroupId: Int
+}
+
+"""The output of our `deleteuserandgroups` mutation."""
+type DeleteuserandgroupsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `deleteuserandgroups` mutation."""
+input DeleteuserandgroupsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  pUserId: Int
 }
 
 """The output of our `dueClass` mutation."""
@@ -104623,6 +104822,43 @@ input UpdateDetectorAndSensorsSensorInput {
   simsTag: String
 }
 
+"""The output of our `updateGroupWithPermissions` mutation."""
+type UpdateGroupWithPermissionsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+  results: [UpdateGroupWithPermissionsRecord]
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""The return type of our `updateGroupWithPermissions` mutation."""
+type UpdateGroupWithPermissionsRecord {
+  groupId: Int
+  groupPermissionId: Int
+  name: String
+  created: Datetime
+  modified: Datetime
+}
+
+"""All input for the `updateGroupWithPermissions` mutation."""
+input UpdateGroupWithPermissionsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  pGroupId: Int
+  pName: String
+  pWriteIds: [Int]
+  pReadIds: [Int]
+}
+
 """The output of our `updateUserGroups` mutation."""
 type UpdateUserGroupsPayload {
   """
@@ -104656,6 +104892,35 @@ input UpdateUserGroupsInput {
   clientMutationId: String
   userId: Int
   groupIds: [Int]
+}
+
+"""The output of our `updateUserWithGroups` mutation."""
+type UpdateUserWithGroupsPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+}
+
+"""All input for the `updateUserWithGroups` mutation."""
+input UpdateUserWithGroupsInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  pUserId: Int
+  pUsername: String
+  pFullname: String
+  pInitials: String
+  pGroups: [Int]
+  pPassword: String
 }
 
 """The output of our `upsertDetectorSensorBySensorId` mutation."""

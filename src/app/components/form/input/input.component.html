@@ -4,7 +4,9 @@
         'text-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
         'text-green-600': form.get(name)?.valid && form && form.controls[name].touched,
         'text-slate-800': !form.get(name)?.touched && !isSubmitted
-    }">{{displayName}}</label>
+    }">{{displayName}}
+<div *ngIf="description" class="mb-1 text-xs text-slate-500">{{description}}</div>    
+</label>
 
 <div class="relative inline-flex w-full">
 
@@ -33,7 +35,10 @@
             <span *ngIf="!inline" class="ml-3 text-slate-800">{{displayName}}</span>
         </label>
 
-        <input *ngSwitchCase="'password'" type="password" [ngClass]="{
+        <input
+        #inputValue 
+        (change)="changeEmit(inputValue.value)"
+        *ngSwitchCase="'password'" type="password" [ngClass]="{
             'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched,
             'border-red-500 test focus:outline-red-500': isSubmitted && form.get(name)?.errors,
             'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,

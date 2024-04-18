@@ -12192,6 +12192,41 @@ export type CreateGroupRightPayloadGroupRightEdgeArgs = {
   orderBy?: InputMaybe<Array<GroupRightsOrderBy>>;
 };
 
+/** All input for the `createGroupWithPermissions` mutation. */
+export type CreateGroupWithPermissionsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  pName?: InputMaybe<Scalars['String']['input']>;
+  pReadIds?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  pWriteIds?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+/** The output of our `createGroupWithPermissions` mutation. */
+export type CreateGroupWithPermissionsPayload = {
+  __typename?: 'CreateGroupWithPermissionsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  results?: Maybe<Array<Maybe<CreateGroupWithPermissionsRecord>>>;
+};
+
+/** The return type of our `createGroupWithPermissions` mutation. */
+export type CreateGroupWithPermissionsRecord = {
+  __typename?: 'CreateGroupWithPermissionsRecord';
+  created?: Maybe<Scalars['Datetime']['output']>;
+  groupD?: Maybe<Scalars['Int']['output']>;
+  groupPermissionId?: Maybe<Scalars['Int']['output']>;
+  modified?: Maybe<Scalars['Datetime']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
 /** All input for the create `Hardware` mutation. */
 export type CreateHardwareInput = {
   /**
@@ -14482,6 +14517,42 @@ export type CreateUserTaskPayload = {
 /** The output of our create `UserTask` mutation. */
 export type CreateUserTaskPayloadUserTaskEdgeArgs = {
   orderBy?: InputMaybe<Array<UserTasksOrderBy>>;
+};
+
+/** All input for the `createUserWithGroups` mutation. */
+export type CreateUserWithGroupsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  pFullname?: InputMaybe<Scalars['String']['input']>;
+  pGroups?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  pInitials?: InputMaybe<Scalars['String']['input']>;
+  pPassword?: InputMaybe<Scalars['String']['input']>;
+  pUsername?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The output of our `createUserWithGroups` mutation. */
+export type CreateUserWithGroupsPayload = {
+  __typename?: 'CreateUserWithGroupsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  results?: Maybe<Array<Maybe<CreateUserWithGroupsRecord>>>;
+};
+
+/** The return type of our `createUserWithGroups` mutation. */
+export type CreateUserWithGroupsRecord = {
+  __typename?: 'CreateUserWithGroupsRecord';
+  created?: Maybe<Scalars['Datetime']['output']>;
+  modified?: Maybe<Scalars['Datetime']['output']>;
+  userId?: Maybe<Scalars['Int']['output']>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 /** All input for the create `Voorraden` mutation. */
@@ -19052,6 +19123,28 @@ export type DeleteGasPayloadGasEdgeArgs = {
   orderBy?: InputMaybe<Array<GasesOrderBy>>;
 };
 
+/** All input for the `deleteGroupAndPermissions` mutation. */
+export type DeleteGroupAndPermissionsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  pGroupId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** The output of our `deleteGroupAndPermissions` mutation. */
+export type DeleteGroupAndPermissionsPayload = {
+  __typename?: 'DeleteGroupAndPermissionsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+};
+
 /** All input for the `deleteGroupById` mutation. */
 export type DeleteGroupByIdInput = {
   /**
@@ -22378,6 +22471,16 @@ export type DeleteUserByIdInput = {
   id: Scalars['Int']['input'];
 };
 
+/** All input for the `deleteUserByUsername` mutation. */
+export type DeleteUserByUsernameInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  username: Scalars['String']['input'];
+};
+
 /** All input for the `deleteUser` mutation. */
 export type DeleteUserInput = {
   /**
@@ -22790,6 +22893,28 @@ export type DeleteWeeklyHourRemarkPayload = {
 /** The output of our delete `WeeklyHourRemark` mutation. */
 export type DeleteWeeklyHourRemarkPayloadWeeklyHourRemarkEdgeArgs = {
   orderBy?: InputMaybe<Array<WeeklyHourRemarksOrderBy>>;
+};
+
+/** All input for the `deleteuserandgroups` mutation. */
+export type DeleteuserandgroupsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  pUserId?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** The output of our `deleteuserandgroups` mutation. */
+export type DeleteuserandgroupsPayload = {
+  __typename?: 'DeleteuserandgroupsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
 };
 
 export type Detector = Node & {
@@ -42577,6 +42702,7 @@ export type Mutation = {
   createGroupPermission?: Maybe<CreateGroupPermissionPayload>;
   /** Creates a single `GroupRight`. */
   createGroupRight?: Maybe<CreateGroupRightPayload>;
+  createGroupWithPermissions?: Maybe<CreateGroupWithPermissionsPayload>;
   /** Creates a single `Hardware`. */
   createHardware?: Maybe<CreateHardwarePayload>;
   /** Creates a single `IncomingDocument`. */
@@ -42702,6 +42828,7 @@ export type Mutation = {
   createUserRight?: Maybe<CreateUserRightPayload>;
   /** Creates a single `UserTask`. */
   createUserTask?: Maybe<CreateUserTaskPayload>;
+  createUserWithGroups?: Maybe<CreateUserWithGroupsPayload>;
   /** Creates a single `Voorraden`. */
   createVoorraden?: Maybe<CreateVoorradenPayload>;
   /** Creates a single `VoorradenLog`. */
@@ -42948,6 +43075,7 @@ export type Mutation = {
   deleteGasByName?: Maybe<DeleteGasPayload>;
   /** Deletes a single `Group` using its globally unique id. */
   deleteGroup?: Maybe<DeleteGroupPayload>;
+  deleteGroupAndPermissions?: Maybe<DeleteGroupAndPermissionsPayload>;
   /** Deletes a single `Group` using a unique key. */
   deleteGroupById?: Maybe<DeleteGroupPayload>;
   /** Deletes a single `GroupPermission` using its globally unique id. */
@@ -43264,6 +43392,8 @@ export type Mutation = {
   deleteUser?: Maybe<DeleteUserPayload>;
   /** Deletes a single `User` using a unique key. */
   deleteUserById?: Maybe<DeleteUserPayload>;
+  /** Deletes a single `User` using a unique key. */
+  deleteUserByUsername?: Maybe<DeleteUserPayload>;
   /** Deletes a single `UserRight` using its globally unique id. */
   deleteUserRight?: Maybe<DeleteUserRightPayload>;
   /** Deletes a single `UserRight` using a unique key. */
@@ -43300,6 +43430,7 @@ export type Mutation = {
   deleteWeeklyHourRemarkById?: Maybe<DeleteWeeklyHourRemarkPayload>;
   /** Deletes a single `WeeklyHourRemark` using a unique key. */
   deleteWeeklyHourRemarkByUserIdAndTaskIdAndDate?: Maybe<DeleteWeeklyHourRemarkPayload>;
+  deleteuserandgroups?: Maybe<DeleteuserandgroupsPayload>;
   dueClass?: Maybe<DueClassPayload>;
   exchangeDetectors?: Maybe<ExchangeDetectorsPayload>;
   exchangeDetectorsById?: Maybe<ExchangeDetectorsByIdPayload>;
@@ -43561,6 +43692,7 @@ export type Mutation = {
   updateGroupRightByGroupIdAndPath?: Maybe<UpdateGroupRightPayload>;
   /** Updates a single `GroupRight` using a unique key and a patch. */
   updateGroupRightById?: Maybe<UpdateGroupRightPayload>;
+  updateGroupWithPermissions?: Maybe<UpdateGroupWithPermissionsPayload>;
   /** Updates a single `Hardware` using its globally unique id and a patch. */
   updateHardware?: Maybe<UpdateHardwarePayload>;
   /** Updates a single `Hardware` using a unique key and a patch. */
@@ -43863,6 +43995,8 @@ export type Mutation = {
   updateUser?: Maybe<UpdateUserPayload>;
   /** Updates a single `User` using a unique key and a patch. */
   updateUserById?: Maybe<UpdateUserPayload>;
+  /** Updates a single `User` using a unique key and a patch. */
+  updateUserByUsername?: Maybe<UpdateUserPayload>;
   updateUserGroups?: Maybe<UpdateUserGroupsPayload>;
   /** Updates a single `UserRight` using its globally unique id and a patch. */
   updateUserRight?: Maybe<UpdateUserRightPayload>;
@@ -43876,6 +44010,7 @@ export type Mutation = {
   updateUserTaskById?: Maybe<UpdateUserTaskPayload>;
   /** Updates a single `UserTask` using a unique key and a patch. */
   updateUserTaskByUserIdAndTaskId?: Maybe<UpdateUserTaskPayload>;
+  updateUserWithGroups?: Maybe<UpdateUserWithGroupsPayload>;
   /** Updates a single `Voorraden` using its globally unique id and a patch. */
   updateVoorraden?: Maybe<UpdateVoorradenPayload>;
   /** Updates a single `Voorraden` using a unique key and a patch. */
@@ -44213,6 +44348,12 @@ export type MutationCreateGroupPermissionArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateGroupRightArgs = {
   input: CreateGroupRightInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateGroupWithPermissionsArgs = {
+  input: CreateGroupWithPermissionsInput;
 };
 
 
@@ -44591,6 +44732,12 @@ export type MutationCreateUserRightArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUserTaskArgs = {
   input: CreateUserTaskInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateUserWithGroupsArgs = {
+  input: CreateUserWithGroupsInput;
 };
 
 
@@ -45329,6 +45476,12 @@ export type MutationDeleteGasByNameArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteGroupArgs = {
   input: DeleteGroupInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteGroupAndPermissionsArgs = {
+  input: DeleteGroupAndPermissionsInput;
 };
 
 
@@ -46281,6 +46434,12 @@ export type MutationDeleteUserByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteUserByUsernameArgs = {
+  input: DeleteUserByUsernameInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteUserRightArgs = {
   input: DeleteUserRightInput;
 };
@@ -46385,6 +46544,12 @@ export type MutationDeleteWeeklyHourRemarkByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteWeeklyHourRemarkByUserIdAndTaskIdAndDateArgs = {
   input: DeleteWeeklyHourRemarkByUserIdAndTaskIdAndDateInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteuserandgroupsArgs = {
+  input: DeleteuserandgroupsInput;
 };
 
 
@@ -47195,6 +47360,12 @@ export type MutationUpdateGroupRightByGroupIdAndPathArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateGroupRightByIdArgs = {
   input: UpdateGroupRightByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateGroupWithPermissionsArgs = {
+  input: UpdateGroupWithPermissionsInput;
 };
 
 
@@ -48105,6 +48276,12 @@ export type MutationUpdateUserByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateUserByUsernameArgs = {
+  input: UpdateUserByUsernameInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateUserGroupsArgs = {
   input: UpdateUserGroupsInput;
 };
@@ -48143,6 +48320,12 @@ export type MutationUpdateUserTaskByIdArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateUserTaskByUserIdAndTaskIdArgs = {
   input: UpdateUserTaskByUserIdAndTaskIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateUserWithGroupsArgs = {
+  input: UpdateUserWithGroupsInput;
 };
 
 
@@ -53801,6 +53984,7 @@ export type Query = Node & {
   /** Reads a single `User` using its globally unique `ID`. */
   user?: Maybe<User>;
   userById?: Maybe<User>;
+  userByUsername?: Maybe<User>;
   /** Reads a single `UserRight` using its globally unique `ID`. */
   userRight?: Maybe<UserRight>;
   userRightById?: Maybe<UserRight>;
@@ -59009,6 +59193,12 @@ export type QueryUserArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryUserByIdArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryUserByUsernameArgs = {
+  username: Scalars['String']['input'];
 };
 
 
@@ -72641,6 +72831,42 @@ export type UpdateGroupRightPayloadGroupRightEdgeArgs = {
   orderBy?: InputMaybe<Array<GroupRightsOrderBy>>;
 };
 
+/** All input for the `updateGroupWithPermissions` mutation. */
+export type UpdateGroupWithPermissionsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  pGroupId?: InputMaybe<Scalars['Int']['input']>;
+  pName?: InputMaybe<Scalars['String']['input']>;
+  pReadIds?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  pWriteIds?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+};
+
+/** The output of our `updateGroupWithPermissions` mutation. */
+export type UpdateGroupWithPermissionsPayload = {
+  __typename?: 'UpdateGroupWithPermissionsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  results?: Maybe<Array<Maybe<UpdateGroupWithPermissionsRecord>>>;
+};
+
+/** The return type of our `updateGroupWithPermissions` mutation. */
+export type UpdateGroupWithPermissionsRecord = {
+  __typename?: 'UpdateGroupWithPermissionsRecord';
+  created?: Maybe<Scalars['Datetime']['output']>;
+  groupId?: Maybe<Scalars['Int']['output']>;
+  groupPermissionId?: Maybe<Scalars['Int']['output']>;
+  modified?: Maybe<Scalars['Datetime']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
 /** All input for the `updateHardwareById` mutation. */
 export type UpdateHardwareByIdInput = {
   /**
@@ -76048,6 +76274,18 @@ export type UpdateUserByIdInput = {
   userPatch: UserPatch;
 };
 
+/** All input for the `updateUserByUsername` mutation. */
+export type UpdateUserByUsernameInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  /** An object where the defined keys will be set on the `User` being updated. */
+  userPatch: UserPatch;
+  username: Scalars['String']['input'];
+};
+
 /** All input for the `updateUserGroups` mutation. */
 export type UpdateUserGroupsInput = {
   /**
@@ -76245,6 +76483,33 @@ export type UpdateUserTaskPayload = {
 /** The output of our update `UserTask` mutation. */
 export type UpdateUserTaskPayloadUserTaskEdgeArgs = {
   orderBy?: InputMaybe<Array<UserTasksOrderBy>>;
+};
+
+/** All input for the `updateUserWithGroups` mutation. */
+export type UpdateUserWithGroupsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  pFullname?: InputMaybe<Scalars['String']['input']>;
+  pGroups?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  pInitials?: InputMaybe<Scalars['String']['input']>;
+  pPassword?: InputMaybe<Scalars['String']['input']>;
+  pUserId?: InputMaybe<Scalars['Int']['input']>;
+  pUsername?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** The output of our `updateUserWithGroups` mutation. */
+export type UpdateUserWithGroupsPayload = {
+  __typename?: 'UpdateUserWithGroupsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']['output']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
 };
 
 /** All input for the `updateVoorradenByCdartikelAndCdmagazijn` mutation. */
@@ -82110,29 +82375,28 @@ export type AllGroupsQueryVariables = Exact<{
 }>;
 
 
-export type AllGroupsQuery = { __typename?: 'Query', allGroups?: { __typename?: 'GroupsConnection', totalCount: number, nodes: Array<{ __typename?: 'Group', id: number, name?: string | null, modified?: any | null, ownerId?: number | null, groupPermissionByGroupId?: { __typename?: 'GroupPermission', id: number, writeIds: Array<number | null>, readIds: Array<number | null> } | null }> } | null };
+export type AllGroupsQuery = { __typename?: 'Query', allGroups?: { __typename?: 'GroupsConnection', totalCount: number, nodes: Array<{ __typename?: 'Group', id: number, name?: string | null, modified?: any | null, ownerId?: number | null, created?: any | null, groupPermissionByGroupId?: { __typename?: 'GroupPermission', id: number, writeIds: Array<number | null>, readIds: Array<number | null> } | null }> } | null };
 
-export type CreateGroupMutationVariables = Exact<{
-  body: CreateGroupInput;
+export type CreateGroupWithPermissionsMutationVariables = Exact<{
+  body: CreateGroupWithPermissionsInput;
 }>;
 
 
-export type CreateGroupMutation = { __typename?: 'Mutation', createGroup?: { __typename?: 'CreateGroupPayload', group?: { __typename?: 'Group', id: number, name?: string | null, modified?: any | null, ownerId?: number | null, groupPermissionByGroupId?: { __typename?: 'GroupPermission', id: number, writeIds: Array<number | null>, readIds: Array<number | null> } | null } | null } | null };
+export type CreateGroupWithPermissionsMutation = { __typename?: 'Mutation', createGroupWithPermissions?: { __typename?: 'CreateGroupWithPermissionsPayload', results?: Array<{ __typename?: 'CreateGroupWithPermissionsRecord', groupD?: number | null, groupPermissionId?: number | null, name?: string | null } | null> | null } | null };
 
-export type UpdateGroupMutationVariables = Exact<{
+export type UpdateGroupWithPermissionsMutationVariables = Exact<{
+  patch: UpdateGroupWithPermissionsInput;
+}>;
+
+
+export type UpdateGroupWithPermissionsMutation = { __typename?: 'Mutation', updateGroupWithPermissions?: { __typename?: 'UpdateGroupWithPermissionsPayload', results?: Array<{ __typename?: 'UpdateGroupWithPermissionsRecord', groupPermissionId?: number | null, name?: string | null } | null> | null } | null };
+
+export type DeleteGroupAndPermissionMutationVariables = Exact<{
   id: Scalars['Int']['input'];
-  patch: GroupPatch;
 }>;
 
 
-export type UpdateGroupMutation = { __typename?: 'Mutation', updateGroupById?: { __typename?: 'UpdateGroupPayload', group?: { __typename?: 'Group', id: number, name?: string | null, modified?: any | null, ownerId?: number | null, groupPermissionByGroupId?: { __typename?: 'GroupPermission', id: number, writeIds: Array<number | null>, readIds: Array<number | null> } | null } | null } | null };
-
-export type DeleteGroupByIdMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type DeleteGroupByIdMutation = { __typename?: 'Mutation', deleteGroupById?: { __typename?: 'DeleteGroupPayload', clientMutationId?: string | null } | null };
+export type DeleteGroupAndPermissionMutation = { __typename?: 'Mutation', deleteGroupAndPermissions?: { __typename?: 'DeleteGroupAndPermissionsPayload', clientMutationId?: string | null } | null };
 
 export type JwtTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -82516,27 +82780,26 @@ export type AllusersQueryVariables = Exact<{
 
 export type AllusersQuery = { __typename?: 'Query', allUsers?: { __typename?: 'UsersConnection', totalCount: number, nodes: Array<{ __typename?: 'User', id: number, username?: string | null, created?: any | null, fullname?: string | null, modified?: any | null, initials?: string | null, usersGroupsByUserId: { __typename?: 'UsersGroupsConnection', nodes: Array<{ __typename?: 'UsersGroup', id: number, groupByGroupId?: { __typename?: 'Group', id: number, name?: string | null } | null }> } }> } | null };
 
-export type CreateUserMutationVariables = Exact<{
-  body: UserInput;
+export type CreateUserWithGroupsMutationVariables = Exact<{
+  body: CreateUserWithGroupsInput;
 }>;
 
 
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', user?: { __typename?: 'User', id: number, username?: string | null, created?: any | null, fullname?: string | null, modified?: any | null, initials?: string | null, groupByGroupId?: { __typename?: 'Group', name?: string | null, id: number } | null } | null } | null };
+export type CreateUserWithGroupsMutation = { __typename?: 'Mutation', createUserWithGroups?: { __typename?: 'CreateUserWithGroupsPayload', results?: Array<{ __typename?: 'CreateUserWithGroupsRecord', created?: any | null, username?: string | null, userId?: number | null } | null> | null } | null };
 
-export type UpdateuserMutationVariables = Exact<{
+export type UpdateUserWithGroupsMutationVariables = Exact<{
+  patch: UpdateUserWithGroupsInput;
+}>;
+
+
+export type UpdateUserWithGroupsMutation = { __typename?: 'Mutation', updateUserWithGroups?: { __typename?: 'UpdateUserWithGroupsPayload', clientMutationId?: string | null } | null };
+
+export type DeleteUserWithUserGroupsMutationVariables = Exact<{
   id: Scalars['Int']['input'];
-  patch: UserPatch;
 }>;
 
 
-export type UpdateuserMutation = { __typename?: 'Mutation', updateUserById?: { __typename?: 'UpdateUserPayload', user?: { __typename?: 'User', id: number, username?: string | null, created?: any | null, fullname?: string | null, modified?: any | null, initials?: string | null, groupByGroupId?: { __typename?: 'Group', name?: string | null, id: number } | null } | null } | null };
-
-export type DeleteUserMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type DeleteUserMutation = { __typename?: 'Mutation', deleteUserById?: { __typename?: 'DeleteUserPayload', clientMutationId?: string | null } | null };
+export type DeleteUserWithUserGroupsMutation = { __typename?: 'Mutation', deleteuserandgroups?: { __typename?: 'DeleteuserandgroupsPayload', clientMutationId?: string | null } | null };
 
 export const LocalDetectorFieldsFragmentDoc = gql`
     fragment localDetectorFields on Detector {
@@ -84460,6 +84723,8 @@ export const AllGroupsDocument = gql`
       name
       modified
       ownerId
+      modified
+      created
       groupPermissionByGroupId {
         id
         writeIds
@@ -84480,19 +84745,13 @@ export const AllGroupsDocument = gql`
       super(apollo);
     }
   }
-export const CreateGroupDocument = gql`
-    mutation CreateGroup($body: CreateGroupInput!) {
-  createGroup(input: $body) {
-    group {
-      id
+export const CreateGroupWithPermissionsDocument = gql`
+    mutation CreateGroupWithPermissions($body: CreateGroupWithPermissionsInput!) {
+  createGroupWithPermissions(input: $body) {
+    results {
+      groupD
+      groupPermissionId
       name
-      modified
-      ownerId
-      groupPermissionByGroupId {
-        id
-        writeIds
-        readIds
-      }
     }
   }
 }
@@ -84501,26 +84760,19 @@ export const CreateGroupDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class CreateGroupGQL extends Apollo.Mutation<CreateGroupMutation, CreateGroupMutationVariables> {
-    override document = CreateGroupDocument;
+  export class CreateGroupWithPermissionsGQL extends Apollo.Mutation<CreateGroupWithPermissionsMutation, CreateGroupWithPermissionsMutationVariables> {
+    override document = CreateGroupWithPermissionsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
-export const UpdateGroupDocument = gql`
-    mutation UpdateGroup($id: Int!, $patch: GroupPatch!) {
-  updateGroupById(input: {id: $id, groupPatch: $patch}) {
-    group {
-      id
+export const UpdateGroupWithPermissionsDocument = gql`
+    mutation UpdateGroupWithPermissions($patch: UpdateGroupWithPermissionsInput!) {
+  updateGroupWithPermissions(input: $patch) {
+    results {
+      groupPermissionId
       name
-      modified
-      ownerId
-      groupPermissionByGroupId {
-        id
-        writeIds
-        readIds
-      }
     }
   }
 }
@@ -84529,16 +84781,16 @@ export const UpdateGroupDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class UpdateGroupGQL extends Apollo.Mutation<UpdateGroupMutation, UpdateGroupMutationVariables> {
-    override document = UpdateGroupDocument;
+  export class UpdateGroupWithPermissionsGQL extends Apollo.Mutation<UpdateGroupWithPermissionsMutation, UpdateGroupWithPermissionsMutationVariables> {
+    override document = UpdateGroupWithPermissionsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
-export const DeleteGroupByIdDocument = gql`
-    mutation DeleteGroupById($id: Int!) {
-  deleteGroupById(input: {id: $id}) {
+export const DeleteGroupAndPermissionDocument = gql`
+    mutation DeleteGroupAndPermission($id: Int!) {
+  deleteGroupAndPermissions(input: {pGroupId: $id}) {
     clientMutationId
   }
 }
@@ -84547,8 +84799,8 @@ export const DeleteGroupByIdDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class DeleteGroupByIdGQL extends Apollo.Mutation<DeleteGroupByIdMutation, DeleteGroupByIdMutationVariables> {
-    override document = DeleteGroupByIdDocument;
+  export class DeleteGroupAndPermissionGQL extends Apollo.Mutation<DeleteGroupAndPermissionMutation, DeleteGroupAndPermissionMutationVariables> {
+    override document = DeleteGroupAndPermissionDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -86110,20 +86362,13 @@ export const AllusersDocument = gql`
       super(apollo);
     }
   }
-export const CreateUserDocument = gql`
-    mutation CreateUser($body: UserInput!) {
-  createUser(input: {user: $body}) {
-    user {
-      id
-      username
+export const CreateUserWithGroupsDocument = gql`
+    mutation CreateUserWithGroups($body: CreateUserWithGroupsInput!) {
+  createUserWithGroups(input: $body) {
+    results {
       created
-      fullname
-      modified
-      initials
-      groupByGroupId {
-        name
-        id
-      }
+      username
+      userId
     }
   }
 }
@@ -86132,45 +86377,16 @@ export const CreateUserDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class CreateUserGQL extends Apollo.Mutation<CreateUserMutation, CreateUserMutationVariables> {
-    override document = CreateUserDocument;
+  export class CreateUserWithGroupsGQL extends Apollo.Mutation<CreateUserWithGroupsMutation, CreateUserWithGroupsMutationVariables> {
+    override document = CreateUserWithGroupsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
-export const UpdateuserDocument = gql`
-    mutation Updateuser($id: Int!, $patch: UserPatch!) {
-  updateUserById(input: {id: $id, userPatch: $patch}) {
-    user {
-      id
-      username
-      created
-      fullname
-      modified
-      initials
-      groupByGroupId {
-        name
-        id
-      }
-    }
-  }
-}
-    `;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class UpdateuserGQL extends Apollo.Mutation<UpdateuserMutation, UpdateuserMutationVariables> {
-    override document = UpdateuserDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const DeleteUserDocument = gql`
-    mutation DeleteUser($id: Int!) {
-  deleteUserById(input: {id: $id}) {
+export const UpdateUserWithGroupsDocument = gql`
+    mutation UpdateUserWithGroups($patch: UpdateUserWithGroupsInput!) {
+  updateUserWithGroups(input: $patch) {
     clientMutationId
   }
 }
@@ -86179,8 +86395,26 @@ export const DeleteUserDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class DeleteUserGQL extends Apollo.Mutation<DeleteUserMutation, DeleteUserMutationVariables> {
-    override document = DeleteUserDocument;
+  export class UpdateUserWithGroupsGQL extends Apollo.Mutation<UpdateUserWithGroupsMutation, UpdateUserWithGroupsMutationVariables> {
+    override document = UpdateUserWithGroupsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteUserWithUserGroupsDocument = gql`
+    mutation DeleteUserWithUserGroups($id: Int!) {
+  deleteuserandgroups(input: {pUserId: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteUserWithUserGroupsGQL extends Apollo.Mutation<DeleteUserWithUserGroupsMutation, DeleteUserWithUserGroupsMutationVariables> {
+    override document = DeleteUserWithUserGroupsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

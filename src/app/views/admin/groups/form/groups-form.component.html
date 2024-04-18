@@ -1,0 +1,83 @@
+<h2 *ngIf="!isInlineCreating" class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
+<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'sticky flex items-start pt-1' : 'flex flex-col gap-5'"
+    (ngSubmit)="onSubmit()">
+
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'name'" [inline]="isInlineCreating"
+            [displayName]="'Name'" [touched]="myForm.controls['name'].touched"
+            [errors]="[{ name: 'required', message: 'Name is required' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
+
+        <select-component [form]="myForm" [name]="'write_permission'" [displayName]="'Write Permissions'"
+            [options]="permissions" (onChange)="setPermission($event, selectedWritePermissions)"
+            [inline]="isInlineCreating" [placeholder]="'Select write permissions to add to the list'"
+            [touched]="myForm.controls['write_permission'].touched"
+            [errors]="[{ name: 'required', message: 'Write permission is required' }]">
+        </select-component>
+        <div class="items-center mt-2 flex flex-row wrap flex-wrap gap-2">
+            Selected write permissions:
+            @for(item of selectedWritePermissions; track item.id) {
+            <div
+                class="text-sm font-semibold items-center flex px-4 py-1 rounded-full text-white bg-cosmosDarker gap-4">
+                {{item.name}}
+                <button type="button" class="text-lg"
+                    (click)="deleteWritePermission(item.id)">x</button>
+            </div>
+            }
+        </div>
+
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[2] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[2] : null">
+
+        <select-component [form]="myForm" [name]="'read_permission'" [displayName]="'Read Permissions'"
+            [options]="permissions" (onChange)="setPermission($event, selectedReadPermissions)"
+            [inline]="isInlineCreating" [placeholder]="'Select read permissions to add to the list'"
+            [touched]="myForm.controls['read_permission'].touched"
+            [errors]="[{ name: 'required', message: 'Read permissions is required' }]">
+        </select-component>
+        <div class="items-center mt-2 flex flex-row wrap flex-wrap gap-2">
+            Selected read permissions:
+            @for(item of selectedReadPermissions; track item.id) {
+            <div
+                class="text-sm font-semibold items-center flex px-4 py-1 rounded-full text-white bg-cosmosDarker gap-4">
+                {{item.name}}
+                <button type="button" class="text-lg"
+                    (click)="deleteReadPermission(item.id)">x</button>
+            </div>
+            }
+        </div>
+
+    </div>
+
+
+    <!-- This is is for modal form -->
+    <div *ngIf="!isInlineCreating" class="flex flex-row mt-auto justify-end items-center gap-2">
+        <button type="button" (click)="close()"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Close</button>
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">{{id
+            ? "Edit" : "Add"}} {{objectSingle}}</button>
+    </div>
+
+    <!-- This is the inline form -->
+    <div *ngIf="isInlineCreating" [style.min-width.px]="cellWidths[cellWidths.length - 2]"
+        [style.max-width.px]="cellWidths[cellWidths.length - 2]"
+        class="h-full sticky right-0 flex bg-white gap-1 items-start p-1 pt-1 justify-center ml-auto">
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
+            <i class="fa fa-lg fa-check" aria-hidden="true"></i>
+        </button>
+        <div (click)="toggleInlineCreating.emit()"
+            class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
+            <i class="fa fa-lg fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+
+</form>

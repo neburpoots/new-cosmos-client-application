@@ -43,6 +43,7 @@ import { SensorBaseTypeComponent } from "./views/admin/sensor-base-types/index/s
 import { SensorTypeAssembliesComponent } from "./views/admin/sensor-types-assembly/index/sensor-types-assembly.component";
 import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/index/assembly-multivers.component";
 import { UsersComponent } from "./views/admin/users/index/users.component";
+import { GroupsComponent } from "./views/admin/groups/index/groups.component";
 
 const routes: Routes = [
   // user views
@@ -90,6 +91,10 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent
+      },
+      {
+        path: 'groups',
+        component: GroupsComponent
       },
       {
         path: 'sensor-types-assembly', component: SensorTypeAssembliesComponent

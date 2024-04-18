@@ -6,7 +6,7 @@ import { CalgasDto } from '../../../../models/dto/calgasDto';
 import { Gas } from '../../../../models/entities/gas';
 import { SearchCriteria } from '../../../../models/utils/searchCriteria';
 import { BaseFormComponent } from '../../base/form/base-form.component';
-import { AllGasesNoPaginationGQL, AllGroupsNoPaginationGQL, CreateCalGasGQL, CreateUserGQL, UpdateCalGasGQL, UserInput } from '../../../../../generated/graphql';
+import { AllGasesNoPaginationGQL, AllGroupsNoPaginationGQL, CreateCalGasGQL, CreateUserWithGroupsGQL, CreateUserWithGroupsInput, UpdateCalGasGQL, UpdateUserWithGroupsGQL, UpdateUserWithGroupsInput, UserInput } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
 import { FormSelect } from '../../../../models/utils/formSelect';
 
@@ -15,7 +15,7 @@ import { FormSelect } from '../../../../models/utils/formSelect';
     templateUrl: './users-form.component.html',
     styles: []
 })
-export class UsersFormComponent extends BaseFormComponent<UserInput> {
+export class UsersFormComponent extends BaseFormComponent<CreateUserWithGroupsInput> {
 
     @Input() object: any = {
         username: '',
@@ -32,21 +32,26 @@ export class UsersFormComponent extends BaseFormComponent<UserInput> {
 
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         , groupService: AllGroupsNoPaginationGQL,
-        createCalGasService: CreateUserGQL,
-        editCalGasService: UpdateCalGasGQL
+        createUserGroupService: CreateUserWithGroupsGQL,
+        editUserWithGroupsService: UpdateUserWithGroupsGQL
     ) {
-        super(toastr, fb, createCalGasService, editCalGasService)
+        super(toastr, fb, createUserGroupService, editUserWithGroupsService)
 
         this.groups = [];
 
         this.setUpDependentData(groupService);
+
+        //if edit then password is not required
+        let passwordValidation = this.id ? [Validators.minLength(6)] : [Validators.required, Validators.minLength(6)];
+        let confimPasswordValidation = this.id ? [Validators.minLength(6)] : [Validators.required, Validators.minLength(6)];
+
         this.myForm = this.fb.group({
             username: [this.object.gas, [Validators.required]],
             fullname: [this.object.fullname, [Validators.required]],
             initials: [this.object.initials, [Validators.required]],
-            password: [this.object.password, [Validators.required, Validators.minLength(6)]],
-            confirmPassword: [this.object.confirmPassword, [Validators.required, this.confirmPasswordValidator]],
-            group: [this.object.group, []],
+            password: [this.object.password, passwordValidation],
+            confirmPassword: [this.object.confirmPassword, confimPasswordValidation],
+            group: [this.object.group],
         });
     }
 
@@ -58,21 +63,80 @@ export class UsersFormComponent extends BaseFormComponent<UserInput> {
         if (password && confirmPassword && password.value !== confirmPassword) {
             return { 'passwordMismatch': true };
         }
+        
         return null;
     }
 
-    createDto(): UserInput {
+    // if the password is not empty then make the confirm password required
+    // only used for edit
+    async makeConfirmPasswordRequired(password: string) {
+        if (password && password.length > 0) {
+            this.myForm.get('confirmPassword')?.setValidators([Validators.required, Validators.minLength(6), this.confirmPasswordValidator]);
+            this.myForm.get('confirmPassword')?.updateValueAndValidity();
+        } else {
+            this.myForm.get('confirmPassword')?.setValidators([Validators.minLength(6), this.confirmPasswordValidator]);
+            this.myForm.get('confirmPassword')?.updateValueAndValidity();
+        }
+    }
+
+    createDto(): CreateUserWithGroupsInput {
         //todo setup owner_id, ownerId
         return {
-            username: this.myForm.value.username,
-            fullname: this.myForm.value.fullname,
-            password: this.myForm.value.password, 
-            initials: this.myForm.value.initials,
-            created: new Date(),
-            modified: new Date(),
+            pUsername: this.myForm.value.username,
+            pFullname: this.myForm.value.fullname,
+            pPassword: this.myForm.value.password, 
+            pInitials: this.myForm.value.initials,
+            pGroups: this.selectedGroups.map(g => g.id),
+        }
+    }
+
+    createUpdateDto(): UpdateUserWithGroupsInput {
+
+        let object : UpdateUserWithGroupsInput = {
+            pUserId: this.object.id,
+            pUsername: this.myForm.value.username,
+            pFullname: this.myForm.value.fullname,
+            pInitials: this.myForm.value.initials,
+            pGroups: this.selectedGroups.map(g => g.id),
         }
 
+        if(this.myForm.value.password) {
+            object.pPassword = this.myForm.value.password;
+        }
+
+        return object;
     }
+
+    
+    //override this to empty the selected groups
+    override async refreshData(): Promise<void> {
+        this.selectedGroups = [];
+
+        if (this.isInlineCreating) {
+            this.refresh.emit();
+            this.toggleInlineCreating.emit();
+        } else {
+            this.refresh.emit();
+        }
+    }
+
+    //override this for the custom update user function
+    override async update(data: any): Promise<void> {
+
+        this.updateService.mutate({ patch: await this.createUpdateDto() }).subscribe(
+            (response) => {
+                console.log('Response:', response);
+                this.toastr.success(`${this.objectSingle} updated successfully`, 'Success');
+                this.myForm.reset();
+                this.closeModal.emit();
+                this.refreshData();
+            },
+            (error) => {
+                this.toastr.error(error.message, 'Error');
+            }
+        );
+    }
+
 
     deleteGroup(group_id: number) {
         this.selectedGroups = this.selectedGroups.filter(g => g.id !== group_id);
@@ -88,24 +152,6 @@ export class UsersFormComponent extends BaseFormComponent<UserInput> {
         this.myForm.patchValue({ group: null })
     }
 
-    //override create method since user needs to insert queries
-    override async create(data: any): Promise<void> {
-        this.createService.mutate({ body: data }).subscribe(
-            (response) => {
-                console.log('Response:', response);
-                this.toastr.success(`${this.objectSingle} created successfully`, 'Success');
-                this.myForm.reset();
-                this.closeModal.emit();
-                this.refreshData();
-            },
-            (error) => {
-                console.error('Error:', error);
-                this.toastr.error(error?.message, 'Error');
-                // this.toastr.error(error?.error?.message, 'Error');
-            }
-        );
-    }
-
     async setUpDependentData(groupService: Query<any, any>) {
         groupService.fetch().subscribe(result => {
             console.log(result)
@@ -115,12 +161,28 @@ export class UsersFormComponent extends BaseFormComponent<UserInput> {
 
     //on edit set to selected assembly
     setEditData(changes: any): void {
+        console.log('Changes:', changes)
+
+        this.selectedGroups = changes.groups;
+
+        let passwordControl = this.myForm.get('password');
+        let confirmPasswordControl = this.myForm.get('confirmPassword');
+
+        //if edit then password is not required
+        if (passwordControl && confirmPasswordControl) {
+            passwordControl.setValidators([Validators.minLength(6)]);
+            confirmPasswordControl.setValidators([Validators.minLength(6), this.confirmPasswordValidator]);
+
+            passwordControl.updateValueAndValidity();
+            confirmPasswordControl.updateValueAndValidity();
+        }
+
         this.object = {
             id: changes.id,
-            concentration: changes.concentration,
-            engineering_units: changes.engineering_units,
-            cdartikel: changes.cdartikel,
-            gas: changes.gas,
+            fullname: changes.fullname,
+            username: changes.username,
+            initials: changes.initials,
+            group: null
         };
 
         this.myForm.patchValue(this.object);

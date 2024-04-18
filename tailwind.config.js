@@ -1,23 +1,20 @@
-const plugin = require("tailwindcss/plugin");
-const colors = require("tailwindcss/colors");
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    colors: {
-      ...colors,
-      cosmosLight: '#20c997',
-      cosmosDark: "#008C8C",
-      cosmosDarker: "#006666",
-    },
     extend: {
       minHeight: {
         "screen-75": "75vh",
       },
       fontSize: {
         55: "55rem",
+      },
+      colors: {
+        cosmosLight: '#20c997',
+        cosmosDark: "#008C8C",
+        cosmosDarker: "#006666",
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
@@ -89,49 +86,6 @@ module.exports = {
     "disabled",
   ],
   plugins: [
-    require("@tailwindcss/forms"),
-    plugin(function ({ addComponents, theme }) {
-      const screens = theme("screens", {});
-      addComponents([
-        {
-          ".container": { width: "100%" },
-        },
-        {
-          [`@media (min-width: ${screens.sm})`]: {
-            ".container": {
-              "max-width": "640px",
-            },
-          },
-        },
-        {
-          [`@media (min-width: ${screens.md})`]: {
-            ".container": {
-              "max-width": "768px",
-            },
-          },
-        },
-        {
-          [`@media (min-width: ${screens.lg})`]: {
-            ".container": {
-              "max-width": "1024px",
-            },
-          },
-        },
-        {
-          [`@media (min-width: ${screens.xl})`]: {
-            ".container": {
-              "max-width": "1280px",
-            },
-          },
-        },
-        {
-          [`@media (min-width: ${screens["2xl"]})`]: {
-            ".container": {
-              "max-width": "1280px",
-            },
-          },
-        },
-      ]);
-    }),
+    require('@tailwindcss/forms'),
   ],
 };

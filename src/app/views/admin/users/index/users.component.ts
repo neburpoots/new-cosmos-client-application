@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../../models/utils/tableHeader";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllCalibrationGasesGQL, AllusersGQL, CalGasesOrderBy, CalgasEntitiesOrderBy, CalgasEntity, DeleteCalGasGQL, DeleteUserGQL, QueryAllCalgasEntitiesArgs, QueryAllUsersArgs, User, UsersOrderBy } from "../../../../../generated/graphql";
+import { AllCalibrationGasesGQL, AllusersGQL, DeleteUserWithUserGroupsGQL, QueryAllUsersArgs, User, UsersOrderBy } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -51,7 +51,10 @@ export class UsersComponent extends BaseEntity<User> implements OnInit {
   get editData(): any {
     return {
       id: this.selectedItem?.id,
-
+      username: this.selectedItem?.username,
+      fullname: this.selectedItem?.fullname,
+      initials: this.selectedItem?.initials,
+      groups: this.selectedItem?.usersGroupsByUserId?.nodes.map((group: any) => group.groupByGroupId),     
     };
   }
 
@@ -67,7 +70,7 @@ export class UsersComponent extends BaseEntity<User> implements OnInit {
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private userService: AllusersGQL,
-    private deleteUserService: DeleteUserGQL
+    private deleteUserService: DeleteUserWithUserGroupsGQL
     ,
     protected override router: Router,
     protected override fileService : FileService,
@@ -82,9 +85,9 @@ export class UsersComponent extends BaseEntity<User> implements OnInit {
   tableHeaders: TableHead<UsersOrderBy>[] = [
     { type: 'string', key: 'fullname', label: "Full Name", asc: UsersOrderBy.FullnameAsc, desc: UsersOrderBy.FullnameDesc },
     { type: 'number', key: 'username', label: "Username", asc: UsersOrderBy.UsernameAsc, desc: UsersOrderBy.UsernameDesc },
+    { type: 'string', key: 'initials', label: "Initials", asc: UsersOrderBy.InitialsAsc, desc: UsersOrderBy.InitialsDesc },
     { type: 'string', key: 'usersGroupsByUserId$some$groupByGroupId$name', label: "Groups", asc: UsersOrderBy.UsersGroupsByUserIdCountAsc, desc: UsersOrderBy.UsersGroupsByUserIdCountDesc },
     { type: 'datetime', key: 'created', label: "Created", asc: UsersOrderBy.CreatedAsc, desc: UsersOrderBy.CreatedDesc },
-    { type: 'string', key: 'initials', label: "By", asc: UsersOrderBy.InitialsAsc, desc: UsersOrderBy.InitialsDesc },
   ]
 
   createGroupString(groups: any): string {

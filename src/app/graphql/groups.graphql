@@ -41,6 +41,8 @@ query allGroups(
             name,
             modified,
             ownerId,
+            modified,
+            created
             groupPermissionByGroupId {
                 id
                 writeIds
@@ -51,54 +53,38 @@ query allGroups(
 }
 
 #-------------------------------------------------------------------------------
-mutation CreateGroup(
-    $body: CreateGroupInput!
+mutation CreateGroupWithPermissions(
+    $body: CreateGroupWithPermissionsInput!
 ) {
-  createGroup(
+  createGroupWithPermissions(
     input: $body
   ) {
-    group {
-            id,
-            name,
-            modified,
-            ownerId,
-            groupPermissionByGroupId {
-                id
-                writeIds
-                readIds
-            }
+    results {
+            groupD
+            groupPermissionId
+            name
         } 
   }
 }
 
 #-------------------------------------------------------------------------------
-mutation UpdateGroup(
-    $id: Int!, $patch: GroupPatch!
+mutation UpdateGroupWithPermissions(
+    $patch: UpdateGroupWithPermissionsInput!
 ) {
-  updateGroupById(
-    input: {
-		id: $id
-		groupPatch: $patch	
-    }
+  updateGroupWithPermissions(
+    input: $patch
   ) {
-    group {
-            id,
-            name,
-            modified,
-            ownerId,
-            groupPermissionByGroupId {
-                id
-                writeIds
-                readIds
-            }
+    results {
+            groupPermissionId
+            name
         } 
   }
 }
 
 #-------------------------------------------------------------------------------
-mutation DeleteGroupById($id: Int!)
+mutation DeleteGroupAndPermission($id: Int!)
 {
-	deleteGroupById(input:{id: $id})
+	deleteGroupAndPermissions(input:{pGroupId: $id})
 	{
 		clientMutationId
 	}  

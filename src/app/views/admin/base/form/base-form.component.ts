@@ -63,13 +63,14 @@ export abstract class BaseFormComponent<T> {
 
     close(): void {
         this.myForm.reset();
-
         this.closeModal.emit();
     }
 
     setSubmitted(): void {
         this.isSubmitted = true;
     }
+
+    
 
     //refreshes the data
     async refreshData(): Promise<void> {
@@ -100,6 +101,7 @@ export abstract class BaseFormComponent<T> {
     }
 
 
+
     get id(): number {
         return (this.object as any).id;
     }
@@ -118,7 +120,6 @@ export abstract class BaseFormComponent<T> {
                 this.toastr.error(error.message, 'Error');
             }
         );
-
     }
 
     onSubmit(): void {

@@ -7,9 +7,9 @@
                 (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
                 [data]="tableData"	 [inline_selector]="'users-form'"
-                [isInlineCreating]="isInlineCreating"
+                [isInlineCreateable]="false"
                 (export)="openExportModal()"
-                (toggleInlineCreating)="toggleInlineCreating()"	
+                
                 >
                 <users-form
                     [baseOrderBy]="baseOrderBy"
@@ -31,9 +31,9 @@
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-                <calgas-form #editModal [objectPlural]="objectPlural"
+                <users-form #editModal [objectPlural]="objectPlural"
                 [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
-                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></calgas-form>
+                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></users-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Medium

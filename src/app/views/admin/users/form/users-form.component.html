@@ -36,19 +36,26 @@
     </div>
     <div [style.min-width.px]="isInlineCreating ? cellWidths[3] : null"
         [style.max-width.px]="isInlineCreating ? cellWidths[3] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'initials'" [inline]="isInlineCreating"
+            [displayName]="'Initials'" [touched]="myForm.controls['initials'].touched"
+            [errors]="[{ name: 'required', message: 'Initials is required' }]"></input-component>
+    </div>
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[4] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null">
         <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'password'" [inline]="isInlineCreating"
-            [displayName]="'Password'" [touched]="myForm.controls['password'].touched"
-            [inputType]="'password'"
+        (onChange)="makeConfirmPasswordRequired($event)"    
+        [description]="id ? 'Same password is kept on empty password fields' : null"
+        [displayName]="'Password'" [touched]="myForm.controls['password'].touched" [inputType]="'password'"
             [errors]="[{ name: 'required', message: 'Fullname is required' },
         { name: 'minlength', message: 'Password must be at least 6 characters long' }
         ]"></input-component>
     </div>
-    <div [style.min-width.px]="isInlineCreating ? cellWidths[4] : null"
-        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null">
-        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'confirmPassword'" [inline]="isInlineCreating"
-            [displayName]="'Confirm Password'" [touched]="myForm.controls['confirmPassword'].touched"
-            [inputType]="'password'"
-            [errors]="[{ name: 'required', message: 'Confirm password is required' },
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[5] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[5] : null">
+        <input-component 
+        [isSubmitted]="isSubmitted" [form]="myForm" [name]="'confirmPassword'"
+            [inline]="isInlineCreating" [displayName]="'Confirm Password'"
+            [touched]="myForm.controls['confirmPassword'].touched" [inputType]="'password'" [errors]="[{ name: 'required', message: 'Confirm password is required' },
         { name: 'passwordMismatch', message: 'Passwords don\'t match' }
         
         ]"></input-component>
