@@ -82097,52 +82097,42 @@ export type DeleteGasMutation = { __typename?: 'Mutation', deleteGasById?: { __t
 
 export type GroupFieldsFragment = { __typename?: 'Group', id: number, name?: string | null };
 
-export type CacheGroupsQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllGroupsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CacheGroupsQuery = { __typename?: 'Query', groups?: { __typename?: 'GroupsConnection', nodes: Array<{ __typename?: 'Group', id: number, name?: string | null }> } | null };
+export type AllGroupsNoPaginationQuery = { __typename?: 'Query', allGroups?: { __typename?: 'GroupsConnection', nodes: Array<{ __typename?: 'Group', id: number, name?: string | null, modified?: any | null, ownerId?: number | null, groupPermissionByGroupId?: { __typename?: 'GroupPermission', id: number, writeIds: Array<number | null>, readIds: Array<number | null> } | null }> } | null };
 
-export type GroupsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GroupsQuery = { __typename?: 'Query', groups?: { __typename?: 'GroupsConnection', nodes: Array<{ __typename?: 'Group', id: number, name?: string | null, groupPermission?: { __typename?: 'GroupPermission', id: number, readIds: Array<number | null>, writeIds: Array<number | null> } | null }> } | null };
-
-export type GroupQueryVariables = Exact<{
-  id: Scalars['Int']['input'];
+export type AllGroupsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: GroupFilter;
+  orderBy?: InputMaybe<Array<GroupsOrderBy> | GroupsOrderBy>;
 }>;
 
 
-export type GroupQuery = { __typename?: 'Query', group?: { __typename?: 'Group', id: number, name?: string | null, groupPermission?: { __typename?: 'GroupPermission', id: number, readIds: Array<number | null>, writeIds: Array<number | null> } | null } | null };
-
-export type DeleteGroupMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type DeleteGroupMutation = { __typename?: 'Mutation', deleteGroupById?: { __typename?: 'DeleteGroupPayload', clientMutationId?: string | null } | null };
-
-export type PermissionsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PermissionsQuery = { __typename?: 'Query', permissions?: { __typename?: 'PermissionsConnection', nodes: Array<{ __typename?: 'Permission', id: number, name?: string | null }> } | null };
+export type AllGroupsQuery = { __typename?: 'Query', allGroups?: { __typename?: 'GroupsConnection', totalCount: number, nodes: Array<{ __typename?: 'Group', id: number, name?: string | null, modified?: any | null, ownerId?: number | null, groupPermissionByGroupId?: { __typename?: 'GroupPermission', id: number, writeIds: Array<number | null>, readIds: Array<number | null> } | null }> } | null };
 
 export type CreateGroupMutationVariables = Exact<{
-  name?: InputMaybe<Scalars['String']['input']>;
+  body: CreateGroupInput;
 }>;
 
 
-export type CreateGroupMutation = { __typename?: 'Mutation', createGroup?: { __typename?: 'CreateGroupPayload', group?: { __typename?: 'Group', id: number, name?: string | null, groupPermission?: { __typename?: 'GroupPermission', id: number, readIds: Array<number | null>, writeIds: Array<number | null> } | null } | null } | null };
+export type CreateGroupMutation = { __typename?: 'Mutation', createGroup?: { __typename?: 'CreateGroupPayload', group?: { __typename?: 'Group', id: number, name?: string | null, modified?: any | null, ownerId?: number | null, groupPermissionByGroupId?: { __typename?: 'GroupPermission', id: number, writeIds: Array<number | null>, readIds: Array<number | null> } | null } | null } | null };
 
 export type UpdateGroupMutationVariables = Exact<{
   id: Scalars['Int']['input'];
-  name?: InputMaybe<Scalars['String']['input']>;
-  groupPermissionId: Scalars['Int']['input'];
-  readIds?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>> | InputMaybe<Scalars['Int']['input']>>;
-  writeIds?: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>> | InputMaybe<Scalars['Int']['input']>>;
+  patch: GroupPatch;
 }>;
 
 
-export type UpdateGroupMutation = { __typename?: 'Mutation', updateGroupById?: { __typename?: 'UpdateGroupPayload', group?: { __typename?: 'Group', id: number, name?: string | null } | null } | null, updateGroupPermissionById?: { __typename?: 'UpdateGroupPermissionPayload', groupPermission?: { __typename?: 'GroupPermission', id: number, readIds: Array<number | null>, writeIds: Array<number | null> } | null } | null };
+export type UpdateGroupMutation = { __typename?: 'Mutation', updateGroupById?: { __typename?: 'UpdateGroupPayload', group?: { __typename?: 'Group', id: number, name?: string | null, modified?: any | null, ownerId?: number | null, groupPermissionByGroupId?: { __typename?: 'GroupPermission', id: number, writeIds: Array<number | null>, readIds: Array<number | null> } | null } | null } | null };
+
+export type DeleteGroupByIdMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteGroupByIdMutation = { __typename?: 'Mutation', deleteGroupById?: { __typename?: 'DeleteGroupPayload', clientMutationId?: string | null } | null };
 
 export type JwtTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -82222,6 +82212,11 @@ export type DeleteORingMutationVariables = Exact<{
 
 
 export type DeleteORingMutation = { __typename?: 'Mutation', deleteORingById?: { __typename?: 'DeleteORingPayload', clientMutationId?: string | null } | null };
+
+export type AllPermissionsNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllPermissionsNoPaginationQuery = { __typename?: 'Query', allPermissions?: { __typename?: 'PermissionsConnection', nodes: Array<{ __typename?: 'Permission', id: number, name?: string | null }> } | null };
 
 export type AllPrinciplesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -82447,6 +82442,14 @@ export type DeleteSensorTypeMutation = { __typename?: 'Mutation', deleteSensorTy
 
 export type LocalSensorFieldsFragment = { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number };
 
+export type UpdateUsersGroupMutationVariables = Exact<{
+  userId: Scalars['Int']['input'];
+  groupIds: Array<InputMaybe<Scalars['Int']['input']>> | InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type UpdateUsersGroupMutation = { __typename?: 'Mutation', updateUserGroups?: { __typename?: 'UpdateUserGroupsPayload', user?: { __typename?: 'User', fullname?: string | null, usersGroupsByUserId: { __typename?: 'UsersGroupsConnection', nodes: Array<{ __typename?: 'UsersGroup', id: number, userId: number, groupId: number }> } } | null } | null };
+
 export type LocalUserFieldsFragment = { __typename?: 'User', id: number, username?: string | null, fullname?: string | null, initials?: string | null, holidayStartBalance?: number | null, overtimeStartBalance?: number | null };
 
 export type UsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -82497,6 +82500,43 @@ export type AuthenticateMutationVariables = Exact<{
 
 
 export type AuthenticateMutation = { __typename?: 'Mutation', authenticate?: { __typename?: 'AuthenticatePayload', jwtToken?: any | null } | null };
+
+export type AllUsersNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllUsersNoPaginationQuery = { __typename?: 'Query', allUsers?: { __typename?: 'UsersConnection', nodes: Array<{ __typename?: 'User', id: number, username?: string | null, created?: any | null, modified?: any | null, fullname?: string | null, initials?: string | null, groupByGroupId?: { __typename?: 'Group', name?: string | null, id: number } | null }> } | null };
+
+export type AllusersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: UserFilter;
+  orderBy?: InputMaybe<Array<UsersOrderBy> | UsersOrderBy>;
+}>;
+
+
+export type AllusersQuery = { __typename?: 'Query', allUsers?: { __typename?: 'UsersConnection', totalCount: number, nodes: Array<{ __typename?: 'User', id: number, username?: string | null, created?: any | null, fullname?: string | null, modified?: any | null, initials?: string | null, usersGroupsByUserId: { __typename?: 'UsersGroupsConnection', nodes: Array<{ __typename?: 'UsersGroup', id: number, groupByGroupId?: { __typename?: 'Group', id: number, name?: string | null } | null }> } }> } | null };
+
+export type CreateUserMutationVariables = Exact<{
+  body: UserInput;
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', user?: { __typename?: 'User', id: number, username?: string | null, created?: any | null, fullname?: string | null, modified?: any | null, initials?: string | null, groupByGroupId?: { __typename?: 'Group', name?: string | null, id: number } | null } | null } | null };
+
+export type UpdateuserMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: UserPatch;
+}>;
+
+
+export type UpdateuserMutation = { __typename?: 'Mutation', updateUserById?: { __typename?: 'UpdateUserPayload', user?: { __typename?: 'User', id: number, username?: string | null, created?: any | null, fullname?: string | null, modified?: any | null, initials?: string | null, groupByGroupId?: { __typename?: 'Group', name?: string | null, id: number } | null } | null } | null };
+
+export type DeleteUserMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteUserMutation = { __typename?: 'Mutation', deleteUserById?: { __typename?: 'DeleteUserPayload', clientMutationId?: string | null } | null };
 
 export const LocalDetectorFieldsFragmentDoc = gql`
     fragment localDetectorFields on Detector {
@@ -84383,98 +84423,48 @@ export const DeleteGasDocument = gql`
       super(apollo);
     }
   }
-export const CacheGroupsDocument = gql`
-    query CacheGroups {
-  groups: allGroups {
+export const AllGroupsNoPaginationDocument = gql`
+    query allGroupsNoPagination {
+  allGroups {
     nodes {
-      ...groupFields
-    }
-  }
-}
-    ${GroupFieldsFragmentDoc}`;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class CacheGroupsGQL extends Apollo.Query<CacheGroupsQuery, CacheGroupsQueryVariables> {
-    override document = CacheGroupsDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const GroupsDocument = gql`
-    query Groups {
-  groups: allGroups(orderBy: NAME_ASC) {
-    nodes {
-      ...groupFields
-      groupPermission: groupPermissionByGroupId {
+      id
+      name
+      modified
+      ownerId
+      groupPermissionByGroupId {
         id
-        readIds
         writeIds
+        readIds
       }
     }
   }
 }
-    ${GroupFieldsFragmentDoc}`;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class GroupsGQL extends Apollo.Query<GroupsQuery, GroupsQueryVariables> {
-    override document = GroupsDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const GroupDocument = gql`
-    query Group($id: Int!) {
-  group: groupById(id: $id) {
-    ...groupFields
-    groupPermission: groupPermissionByGroupId {
-      id
-      readIds
-      writeIds
-    }
-  }
-}
-    ${GroupFieldsFragmentDoc}`;
-
-  @Injectable({
-    providedIn: 'root'
-  })
-  export class GroupGQL extends Apollo.Query<GroupQuery, GroupQueryVariables> {
-    override document = GroupDocument;
-    
-    constructor(apollo: Apollo.Apollo) {
-      super(apollo);
-    }
-  }
-export const DeleteGroupDocument = gql`
-    mutation DeleteGroup($id: Int!) {
-  deleteGroupById(input: {id: $id}) {
-    clientMutationId
-  }
-}
     `;
 
   @Injectable({
     providedIn: 'root'
   })
-  export class DeleteGroupGQL extends Apollo.Mutation<DeleteGroupMutation, DeleteGroupMutationVariables> {
-    override document = DeleteGroupDocument;
+  export class AllGroupsNoPaginationGQL extends Apollo.Query<AllGroupsNoPaginationQuery, AllGroupsNoPaginationQueryVariables> {
+    override document = AllGroupsNoPaginationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
-export const PermissionsDocument = gql`
-    query Permissions {
-  permissions: allPermissions {
+export const AllGroupsDocument = gql`
+    query allGroups($first: Int, $offset: Int, $filter: GroupFilter!, $orderBy: [GroupsOrderBy!]) {
+  allGroups(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
+    totalCount
     nodes {
       id
       name
+      modified
+      ownerId
+      groupPermissionByGroupId {
+        id
+        writeIds
+        readIds
+      }
     }
   }
 }
@@ -84483,27 +84473,30 @@ export const PermissionsDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class PermissionsGQL extends Apollo.Query<PermissionsQuery, PermissionsQueryVariables> {
-    override document = PermissionsDocument;
+  export class AllGroupsGQL extends Apollo.Query<AllGroupsQuery, AllGroupsQueryVariables> {
+    override document = AllGroupsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
 export const CreateGroupDocument = gql`
-    mutation CreateGroup($name: String) {
-  createGroup(input: {name: $name}) {
+    mutation CreateGroup($body: CreateGroupInput!) {
+  createGroup(input: $body) {
     group {
-      ...groupFields
-      groupPermission: groupPermissionByGroupId {
+      id
+      name
+      modified
+      ownerId
+      groupPermissionByGroupId {
         id
-        readIds
         writeIds
+        readIds
       }
     }
   }
 }
-    ${GroupFieldsFragmentDoc}`;
+    `;
 
   @Injectable({
     providedIn: 'root'
@@ -84516,29 +84509,46 @@ export const CreateGroupDocument = gql`
     }
   }
 export const UpdateGroupDocument = gql`
-    mutation UpdateGroup($id: Int!, $name: String, $groupPermissionId: Int!, $readIds: [Int], $writeIds: [Int]) {
-  updateGroupById(input: {id: $id, groupPatch: {name: $name}}) {
+    mutation UpdateGroup($id: Int!, $patch: GroupPatch!) {
+  updateGroupById(input: {id: $id, groupPatch: $patch}) {
     group {
-      ...groupFields
-    }
-  }
-  updateGroupPermissionById(
-    input: {id: $groupPermissionId, groupPermissionPatch: {readIds: $readIds, writeIds: $writeIds}}
-  ) {
-    groupPermission {
       id
-      readIds
-      writeIds
+      name
+      modified
+      ownerId
+      groupPermissionByGroupId {
+        id
+        writeIds
+        readIds
+      }
     }
   }
 }
-    ${GroupFieldsFragmentDoc}`;
+    `;
 
   @Injectable({
     providedIn: 'root'
   })
   export class UpdateGroupGQL extends Apollo.Mutation<UpdateGroupMutation, UpdateGroupMutationVariables> {
     override document = UpdateGroupDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteGroupByIdDocument = gql`
+    mutation DeleteGroupById($id: Int!) {
+  deleteGroupById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteGroupByIdGQL extends Apollo.Mutation<DeleteGroupByIdMutation, DeleteGroupByIdMutationVariables> {
+    override document = DeleteGroupByIdDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -84805,6 +84815,27 @@ export const DeleteORingDocument = gql`
   })
   export class DeleteORingGQL extends Apollo.Mutation<DeleteORingMutation, DeleteORingMutationVariables> {
     override document = DeleteORingDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllPermissionsNoPaginationDocument = gql`
+    query allPermissionsNoPagination {
+  allPermissions {
+    nodes {
+      id
+      name
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllPermissionsNoPaginationGQL extends Apollo.Query<AllPermissionsNoPaginationQuery, AllPermissionsNoPaginationQueryVariables> {
+    override document = AllPermissionsNoPaginationDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
@@ -85807,6 +85838,33 @@ export const DeleteSensorTypeDocument = gql`
       super(apollo);
     }
   }
+export const UpdateUsersGroupDocument = gql`
+    mutation UpdateUsersGroup($userId: Int!, $groupIds: [Int]!) {
+  updateUserGroups(input: {userId: $userId, groupIds: $groupIds}) {
+    user {
+      fullname
+      usersGroupsByUserId {
+        nodes {
+          id
+          userId
+          groupId
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateUsersGroupGQL extends Apollo.Mutation<UpdateUsersGroupMutation, UpdateUsersGroupMutationVariables> {
+    override document = UpdateUsersGroupDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UsersDocument = gql`
     query Users {
   users: allUsers {
@@ -85983,6 +86041,146 @@ export const AuthenticateDocument = gql`
   })
   export class AuthenticateGQL extends Apollo.Mutation<AuthenticateMutation, AuthenticateMutationVariables> {
     override document = AuthenticateDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllUsersNoPaginationDocument = gql`
+    query allUsersNoPagination {
+  allUsers {
+    nodes {
+      id
+      username
+      created
+      modified
+      fullname
+      initials
+      groupByGroupId {
+        name
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllUsersNoPaginationGQL extends Apollo.Query<AllUsersNoPaginationQuery, AllUsersNoPaginationQueryVariables> {
+    override document = AllUsersNoPaginationDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllusersDocument = gql`
+    query allusers($first: Int, $offset: Int, $filter: UserFilter!, $orderBy: [UsersOrderBy!]) {
+  allUsers(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
+    totalCount
+    nodes {
+      id
+      username
+      created
+      fullname
+      modified
+      initials
+      usersGroupsByUserId {
+        nodes {
+          id
+          groupByGroupId {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllusersGQL extends Apollo.Query<AllusersQuery, AllusersQueryVariables> {
+    override document = AllusersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateUserDocument = gql`
+    mutation CreateUser($body: UserInput!) {
+  createUser(input: {user: $body}) {
+    user {
+      id
+      username
+      created
+      fullname
+      modified
+      initials
+      groupByGroupId {
+        name
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateUserGQL extends Apollo.Mutation<CreateUserMutation, CreateUserMutationVariables> {
+    override document = CreateUserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateuserDocument = gql`
+    mutation Updateuser($id: Int!, $patch: UserPatch!) {
+  updateUserById(input: {id: $id, userPatch: $patch}) {
+    user {
+      id
+      username
+      created
+      fullname
+      modified
+      initials
+      groupByGroupId {
+        name
+        id
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateuserGQL extends Apollo.Mutation<UpdateuserMutation, UpdateuserMutationVariables> {
+    override document = UpdateuserDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteUserDocument = gql`
+    mutation DeleteUser($id: Int!) {
+  deleteUserById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteUserGQL extends Apollo.Mutation<DeleteUserMutation, DeleteUserMutationVariables> {
+    override document = DeleteUserDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

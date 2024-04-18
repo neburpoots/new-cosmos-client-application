@@ -6,148 +6,97 @@ fragment groupFields on Group
 }
 
 #-------------------------------------------------------------------------------
-query CacheGroups
-{
-	groups: allGroups
-	{	
-		nodes 
-		{
-			...groupFields			
-		}
-	}	
+query allGroupsNoPagination
+    {
+    allGroups {
+        nodes {
+            id,
+            name,
+            modified,
+            ownerId,
+            groupPermissionByGroupId {
+                id
+                writeIds
+                readIds
+            }
+        }       
+    }
 }
 
 #-------------------------------------------------------------------------------
-query Groups
-{
-	groups: allGroups(orderBy: NAME_ASC)
-	{	
-		nodes 
-		{
-			...groupFields			
-			groupPermission: groupPermissionByGroupId
-			{			
-				id
-				readIds
-				writeIds			
-			}
-		}
-	}       
+query allGroups(
+    $first: Int, $offset: Int, $filter: GroupFilter!, $orderBy: [GroupsOrderBy!]
+)
+    {
+    allGroups(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+    ) {
+        totalCount
+        
+        nodes {
+            id,
+            name,
+            modified,
+            ownerId,
+            groupPermissionByGroupId {
+                id
+                writeIds
+                readIds
+            }
+        }        
+    }
 }
 
 #-------------------------------------------------------------------------------
-query Group($id: Int!)
-{
-	group: groupById(id: $id)
-	{
-		...groupFields	
-		groupPermission: groupPermissionByGroupId 
-		{			
-			id
-			readIds
-			writeIds			
-		}
-	}
+mutation CreateGroup(
+    $body: CreateGroupInput!
+) {
+  createGroup(
+    input: $body
+  ) {
+    group {
+            id,
+            name,
+            modified,
+            ownerId,
+            groupPermissionByGroupId {
+                id
+                writeIds
+                readIds
+            }
+        } 
+  }
 }
 
 #-------------------------------------------------------------------------------
-mutation DeleteGroup($id: Int!)
-{
-	deleteGroupById(input:{id: $id})
-	{
-		clientMutationId
-	}  
+mutation UpdateGroup(
+    $id: Int!, $patch: GroupPatch!
+) {
+  updateGroupById(
+    input: {
+		id: $id
+		groupPatch: $patch	
+    }
+  ) {
+    group {
+            id,
+            name,
+            modified,
+            ownerId,
+            groupPermissionByGroupId {
+                id
+                writeIds
+                readIds
+            }
+        } 
+  }
 }
 
 #-------------------------------------------------------------------------------
-query Permissions
-{
-	permissions: allPermissions
-	{	
-		nodes 
-		{
-			id
-			name
-		}
-	}       
-}
-
-#-------------------------------------------------------------------------------
-mutation CreateGroup($name: String) 
-{
-	createGroup
-	(
-		input: 
-		{			
-			name: $name		
-		}
-	) 
-	{
-		group 
-		{
-			...groupFields		
-			groupPermission: groupPermissionByGroupId
-			{			
-				id
-				readIds
-				writeIds			
-			}
-		}
-	}		
-}
-
-#-------------------------------------------------------------------------------
-mutation UpdateGroup
-(
-	$id: Int!
-	$name: String	
-	$groupPermissionId: Int!
-	$readIds: [Int]
-	$writeIds: [Int]
-) 
-{
-	updateGroupById 
-	(
-		input: 
-		{
-			id: $id, 
-			groupPatch: 
-			{
-				name: $name 				
-			}
-		}
-	) 
-	{
-		group 
-		{
-			...groupFields			
-		}
-	}
-	
-	updateGroupPermissionById
-	(
-		input: 
-		{
-			id: $groupPermissionId, 
-			groupPermissionPatch: 
-			{
-				readIds: $readIds 				
-				writeIds: $writeIds 				
-			}
-		}
-	)
-	{
-		groupPermission 
-		{
-			id
-			readIds
-			writeIds
-		}
-	}
-}
-
-#-------------------------------------------------------------------------------
-mutation DeleteGroup($id: Int!)
+mutation DeleteGroupById($id: Int!)
 {
 	deleteGroupById(input:{id: $id})
 	{

@@ -110,6 +110,8 @@ import { SensorBaseTypesFormComponent } from "./views/admin/sensor-base-types/fo
 import { SensorTypeAssembliesComponent } from "./views/admin/sensor-types-assembly/index/sensor-types-assembly.component";
 import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/index/assembly-multivers.component";
 import { ExportComponent } from "./components/export/export.component";
+import { UsersFormComponent } from "./views/admin/users/form/users-form.component";
+import { UsersComponent } from "./views/admin/users/index/users.component";
 
 @NgModule({
   declarations: [
@@ -199,7 +201,9 @@ import { ExportComponent } from "./components/export/export.component";
     ElectrolytesComponent,
     SensorTypeComponent,
     SensorTypesFormComponent,
-    SensorTypeAssembliesComponent
+    SensorTypeAssembliesComponent,
+    UsersComponent,
+    UsersFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

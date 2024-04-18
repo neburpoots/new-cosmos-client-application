@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/authentication/auth.service";
-import { faBolt, faBoxOpen, faBuilding, faCashRegister, faChartSimple, faCloud, faCodeCompare, faEllipsis, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountain, faMountainSun, faPanorama, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faBolt, faBoxOpen, faBuilding, faCashRegister, faChartSimple, faCloud, faCodeCompare, faEllipsis, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountain, faMountainSun, faPanorama, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { Router } from "@angular/router";
 import { NavBarIcon } from "../../models/utils/navbarItem";
 
@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   miscDropdownActive: boolean = false;
   servicesDropdownActive: boolean = false;
   productsDropdownActive: boolean = false;
+  registrationDropdownActive: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -45,6 +46,26 @@ export class SidebarComponent implements OnInit {
   faBoxOpen = faBoxOpen
   faUserCog = faUserCog
   faChartSimple = faChartSimple
+  faUsers = faUsers
+  faPeopleGroup = faPeopleGroup
+  faAddressCard = faAddressCard
+
+  registration: NavBarIcon[] = [
+    {
+      title: "Users",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faUsers,
+      url: "/user/users",
+    },
+    {
+      title: "Groups",
+      active: false,
+      // icon4: "ni-tv-2 text-primary",
+      icon6: faPeopleGroup,
+      url: "/user/groups",
+    }
+  ]
 
   assembly: NavBarIcon[] = [
     {
@@ -254,6 +275,8 @@ export class SidebarComponent implements OnInit {
     this.miscDropdownActive = false;
     this.servicesDropdownActive = false;
     this.productsDropdownActive = false;
+    this.registrationDropdownActive = false;
+
   }
 
 
@@ -286,5 +309,10 @@ export class SidebarComponent implements OnInit {
   toggleProductsDropdown() {
     this.closeAllMenus();
     this.productsDropdownActive = !this.productsDropdownActive;
+  }
+
+  toggleRegistrationDropdown() {
+    this.closeAllMenus();
+    this.registrationDropdownActive = !this.registrationDropdownActive;
   }
 }

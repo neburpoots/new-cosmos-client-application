@@ -242,6 +242,15 @@ export abstract class BaseEntity<T> {
                 returnValue = null;
                 break;
               }
+
+              //if many to many relation then just stringify the array
+              //The some is a filter type for many to many.
+              //used for users table where groups is an array
+              if(embedding[i] === 'some') {
+                returnValue = JSON.stringify(returnValue['nodes']);
+                break;
+              }
+
               returnValue = returnValue[embedding[i]];
             }
           }

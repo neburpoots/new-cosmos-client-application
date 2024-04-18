@@ -1,0 +1,22 @@
+#-------------------------------------------------------------------------------
+mutation UpdateUsersGroup(
+    $userId: Int!, $groupIds: [Int]!
+) {
+  updateUserGroups(
+    input: {
+		userId: $userId
+		groupIds: $groupIds	
+    }
+  ) {
+    user {
+        fullname
+        usersGroupsByUserId {
+            nodes {
+                id
+                userId
+                groupId
+            }
+        }
+    }
+  }
+}

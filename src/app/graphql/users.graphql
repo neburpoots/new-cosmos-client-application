@@ -129,3 +129,111 @@ mutation Authenticate($username: String!, $password: String!)
 		jwtToken	 
 	}
 }
+
+#-------------------------------------------------------------------------------
+query allUsersNoPagination
+    {
+    allUsers {
+        nodes {
+            id,
+            username,
+            created,
+            modified,
+            fullname
+            initials,
+            groupByGroupId {
+                name
+                id
+            }
+        }       
+    }
+}
+
+#-------------------------------------------------------------------------------
+query allusers(
+    $first: Int, $offset: Int, $filter: UserFilter!, $orderBy: [UsersOrderBy!]
+)
+    {
+    allUsers(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+    ) {
+        totalCount
+        nodes {
+            id,
+            username,
+            created,
+            fullname
+            modified,
+            initials,
+            usersGroupsByUserId {
+                nodes {
+                    id
+                    groupByGroupId {
+                        id
+                        name
+                    }
+                }
+            }
+        }        
+    }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateUser(
+    $body: UserInput!
+) {
+  createUser(
+    input: {user: $body}
+  ) {
+    user {
+            id,
+            username,
+            created,
+            fullname
+            modified,
+            initials,
+            groupByGroupId {
+                name
+                id
+            }
+        } 
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation Updateuser(
+    $id: Int!, $patch: UserPatch!
+) {
+  updateUserById(
+    input: {
+		id: $id
+		userPatch: $patch	
+    }
+  ) {
+    user {
+            id,
+            username,
+            created,
+            fullname
+            modified,
+            initials,
+            groupByGroupId {
+                name
+                id
+            }
+        } 
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteUser($id: Int!)
+{
+	deleteUserById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}
+

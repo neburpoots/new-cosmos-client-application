@@ -1,0 +1,10 @@
+
+query allPermissionsNoPagination
+    {
+    allPermissions {
+        nodes {
+            id,
+            name,
+        }       
+    }
+}

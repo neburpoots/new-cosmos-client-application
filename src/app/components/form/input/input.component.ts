@@ -14,6 +14,6 @@ export class InputComponent {
   @Input() suffix: string | null = null;
   @Input() form: FormGroup = new FormGroup({});
   @Input() touched: any = false;
-  @Input() inputType: string = 'text';
+  @Input() inputType: 'date' | 'checkbox' | 'textarea' | 'text' | 'password' = 'text';
   @Input() isSubmitted: boolean = false;
 }
