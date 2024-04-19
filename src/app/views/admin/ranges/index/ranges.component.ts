@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { RangesFormComponent } from "../form/ranges-form.component";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-ranges",
@@ -77,9 +78,10 @@ export class RangesComponent extends BaseEntity<Range> implements OnInit {
     private deleteRangeService: DeleteRangeGQL
     ,
     protected override router: Router,
-    protected override fileService: FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, rangeService, deleteRangeService);
+    super(authService, fileService, router, toastr, route, http, rangeService, deleteRangeService);
 
     this.checkQueryParams();
 

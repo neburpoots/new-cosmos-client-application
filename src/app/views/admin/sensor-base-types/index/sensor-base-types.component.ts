@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { SensorBaseTypesFormComponent } from "../form/sensor-base-types-form.component";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-sensor-base-types",
@@ -76,9 +77,10 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
     private sensorBaseTypeService: AllSensorBaseTypesGQL,
     private deleteSensorBaseTypeService: DeleteSensorBaseTypeGQL,
     protected override router: Router,
-protected override fileService : FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, sensorBaseTypeService, deleteSensorBaseTypeService);
+    super(authService, fileService, router, toastr, route, http, sensorBaseTypeService, deleteSensorBaseTypeService);
 
     this.checkQueryParams();
 

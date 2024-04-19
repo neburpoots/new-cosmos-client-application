@@ -11,6 +11,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-assembly-multivers",
@@ -58,9 +59,10 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
     private assemblyMVService: AllAssemblyMultiversEntitiesGQL,
     private assemblyLineService: AllAssemblyLinesMultiversEntitiesGQL,
     protected override router: Router,
-protected override fileService : FileService
+    protected override fileService : FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, assemblyMVService, null);
+    super(authService, fileService, router, toastr, route, http, assemblyMVService, null);
 
     this.checkQueryParams();
 

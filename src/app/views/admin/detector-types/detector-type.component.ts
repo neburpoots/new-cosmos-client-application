@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../models/utils/tableHead";
 import { DetectorTypeFormComponent } from "./form/detector-type-form.component";
 import { FileService } from "../../../services/file/file.service";
+import { AuthService } from "../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-detector",
@@ -64,12 +65,12 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private detectorTypeEntitiesService: AllDetectorTypeEntitiesGQL,
-    private deleteDetectorTypeService: DeleteDetectorTypeGQL
-    ,
+    private deleteDetectorTypeService: DeleteDetectorTypeGQL,
     protected override router: Router,
-    protected override fileService: FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, detectorTypeEntitiesService, deleteDetectorTypeService);
+    super(authService, fileService, router, toastr, route, http, detectorTypeEntitiesService, deleteDetectorTypeService);
 
     this.checkQueryParams();
 

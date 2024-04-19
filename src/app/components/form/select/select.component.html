@@ -19,8 +19,10 @@
         <option [ngClass]="{
             'text-sm': inline,}" [value]="null" [disabled]="isRequired">{{placeholder}}</option>
         <option [ngClass]="{
-                'text-sm': inline,}" *ngFor="let option of options" [value]="option.id">
-            {{calculateName(option)}}
+                'text-sm': inline,
+                'bg-green-100 flex justify-between': isSelected(option),
+                }" *ngFor="let option of options" [value]="option.id">
+            {{calculateName(option)}} {{isSelected(option) ? '✓' : ''}}
         </option>
     </select>
     <ng-container *ngFor="let error of errors">

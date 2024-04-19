@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { FileService } from "../../../../services/file/file.service";
 import { UsersFormComponent } from "../form/users-form.component";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-users",
@@ -74,8 +75,10 @@ export class UsersComponent extends BaseEntity<User> implements OnInit {
     ,
     protected override router: Router,
     protected override fileService : FileService,
+    protected override authService : AuthService
+
   ) {
-    super(fileService, router, toastr, route, http, userService, deleteUserService);
+    super(authService, fileService, router, toastr, route, http, userService, deleteUserService);
 
     this.checkQueryParams();
 

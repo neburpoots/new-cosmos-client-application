@@ -1,26 +1,34 @@
-<div (mouseleave)="toggleDropdown($event)">
-  <a class="text-slate-500 block" (mouseenter)="toggleDropdown($event)" #btnDropdownRef>
-    <div class="items-center flex transition ease-in-out hover:scale-110">
-      <span
-        class="text-xl h-12 w-12 text-sm p-4 text-white bg-cosmosDark inline-flex items-center justify-center rounded-full">
-        <i class="fa fa-user"></i>
-      </span>
-    </div>
-  </a>
-  <div class="min-w-48 z-50" #popoverDropdownRef>
-    <div
-      class="bg-cosmosDark rounded-xl transition ease-in-out hover:scale-110 text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-      [ngClass]="dropdownPopoverShow ? 'block' : 'hidden'">
-      <li (click)="logout()">
-        <div [routerLink]="['/user/assembly']" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
-          adminDashboard.isActive
-            ? 'text-white hover:text-white'
-            : 'text-white hover:text-white'
-        " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
-          class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg cursor-pointer "><i
-            class="mr-2 fa fa-sign-out" aria-hidden="true"></i>
-          Sign out</div>
-      </li>
-    </div>
+<div [satPopoverAnchor]="userDropdown" (click)="userDropdown.toggle()">
+  <div class="hover:cursor-pointer  flex transition ease-in-out hover:scale-110">
+    <span
+      class="text-xl h-12 w-12 text-sm p-4 text-white bg-cosmosDark inline-flex items-center justify-center rounded-full">
+      <i class="fa fa-user"></i>
+    </span>
   </div>
+  <sat-popover #userDropdown verticalAlign="below" hasBackdrop horizontalAlign="center">
+    <div class="bg-cosmosDark rounded-xl transition ease-in-out hover:scale-110 flex flex-col min-w-48 z-50">
+
+      <div
+        class="transition text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48">
+        <li (click)="logout()">
+          <div class="text-sm block text  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg cursor-pointer ">
+            {{currentUsername}}</div>
+        </li>
+      </div>
+      <div
+        class="bg-cosmosDark rounded-xl  text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48">
+        <li (click)="logout()">
+          <div routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
+            adminDashboard.isActive
+              ? 'text-white hover:text-white'
+              : 'text-white hover:text-white'
+          " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
+            class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg cursor-pointer "><i
+              class="mr-2 fa fa-sign-out" aria-hidden="true"></i>
+            Sign out</div>
+        </li>
+      </div>
+    </div>
+  </sat-popover>
+
 </div>

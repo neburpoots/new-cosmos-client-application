@@ -12,6 +12,7 @@ import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-calibrationgasses",
@@ -40,6 +41,7 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
   ngOnInit(): void {
     console.log(this.nodes$);
     this.nodes$.subscribe(result => console.log(result));
+
   }
 
 
@@ -70,12 +72,12 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private calGasService: AllCalibrationGasesGQL,
-    private deleteCalGasService: DeleteCalGasGQL
-    ,
+    private deleteCalGasService: DeleteCalGasGQL,
     protected override router: Router,
-    protected override fileService : FileService,
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, calGasService, deleteCalGasService);
+    super(authService, fileService, router, toastr, route, http, calGasService, deleteCalGasService);
 
     this.checkQueryParams();
 

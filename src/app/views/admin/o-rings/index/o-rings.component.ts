@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { ORingsFormComponent } from "../form/o-rings-form.component";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-o-rings",
@@ -74,9 +75,10 @@ export class ORingsComponent extends BaseEntity<ORingEntity> implements OnInit {
     private deleteORingService: DeletePyrolyserGQL
     ,
     protected override router: Router,
-    protected override fileService: FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, oRingService, deleteORingService);
+    super(authService, fileService, router, toastr, route, http, oRingService, deleteORingService);
 
     this.checkQueryParams();
 

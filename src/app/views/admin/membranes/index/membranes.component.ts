@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { MembranesFormComponent } from "../form/membranes-form.component";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-membranes",
@@ -71,9 +72,10 @@ export class MembranesComponent extends BaseEntity<MembraneEntity> implements On
     private membraneService: AllMembraneEntitiesGQL,
     private deleteMembraneService: DeleteMembraneGQL,
     protected override router: Router,
-    protected override fileService: FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, membraneService, deleteMembraneService);
+    super(authService, fileService, router, toastr, route, http, membraneService, deleteMembraneService);
 
     this.checkQueryParams();
 

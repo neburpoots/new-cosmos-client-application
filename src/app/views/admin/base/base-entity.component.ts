@@ -14,6 +14,7 @@ import { ModalWidth } from "../../../models/enums/modalWidth.enum";
 import { Router } from '@angular/router';
 import { exportOptions } from "../../../models/utils/export";
 import { FileService } from "../../../services/file/file.service";
+import { AuthService } from "../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-base-entity",
@@ -69,9 +70,23 @@ export abstract class BaseEntity<T> {
   //this is the orderby that is used in case of removal of order by in table component
   abstract baseOrderBy: any;
 
-  constructor(protected fileService: FileService, protected router: Router, protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
+  hasWritePermission: boolean = false;
+
+  constructor(
+    protected authService: AuthService,
+    protected fileService: FileService, protected router: Router, protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
     protected getService: Query<any, any>, protected deleteService: Mutation<any, any> | null,
-  ) { }
+  ) {
+
+    
+    this.route.url.subscribe(urlSegments => {
+      const currentUrl = urlSegments.map(segment => segment.path).join('/');
+      console.log(currentUrl)
+      this.authService.checkWritePermission(currentUrl).subscribe(value => {
+        this.hasWritePermission = value;
+      });
+    });
+   }
 
   checkQueryParams(): void {
     this.route.queryParams.subscribe(params => {

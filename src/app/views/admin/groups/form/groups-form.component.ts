@@ -9,6 +9,7 @@ import { BaseFormComponent } from '../../base/form/base-form.component';
 import { AllGasesNoPaginationGQL, AllGroupsNoPaginationGQL, AllPermissionsNoPaginationGQL, CreateCalGasGQL, CreateGroupWithPermissionsGQL, CreateGroupWithPermissionsInput, CreateUserWithGroupsGQL, CreateUserWithGroupsInput, UpdateCalGasGQL, UpdateGroupWithPermissionsGQL, UpdateGroupWithPermissionsInput, UpdateUserWithGroupsGQL, UpdateUserWithGroupsInput, UserInput } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
 import { FormSelect } from '../../../../models/utils/formSelect';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 @Component({
     selector: 'groups-form',
@@ -28,12 +29,17 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
     selectedWritePermissions: any[] = [];
     selectedReadPermissions: any[] = [];
 
+    authService : AuthService;
+
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         , permissionService: AllPermissionsNoPaginationGQL,
         createService: CreateGroupWithPermissionsGQL,
-        editService: UpdateGroupWithPermissionsGQL
+        editService: UpdateGroupWithPermissionsGQL,
+        authService: AuthService,
     ) {
         super(toastr, fb, createService, editService)
+
+        this.authService = authService;
 
         this.permissions = [];
 
@@ -69,6 +75,8 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
     override async refreshData(): Promise<void> {
         this.selectedReadPermissions = [];
         this.selectedWritePermissions = [];
+
+        this.authService.refreshPermissions();
 
         if (this.isInlineCreating) {
             this.refresh.emit();

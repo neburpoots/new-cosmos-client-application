@@ -18,6 +18,9 @@ export class SelectComponent {
   @Input() placeholder: any = '';
   @Input() selectedOption: any = '';
   @Input() isRequired: boolean = true;
+  
+  //array of items that have been selected
+  @Input() selectedItems: any[] = [];
 
   //if name doesn't exist use this string array with the keys of the props to fill the select
   @Input() customName: any[] | null = null;
@@ -26,6 +29,13 @@ export class SelectComponent {
 
   changeEmit(event: any) {
     this.onChange.emit(event);
+  }
+
+  isSelected(option: any) {
+    if(this.selectedItems.some((item: any) => item.id === option.id)) {
+        return true
+    }
+    return false
   }
 
 

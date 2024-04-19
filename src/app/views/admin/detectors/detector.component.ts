@@ -12,6 +12,7 @@ import { SearchFilters } from "../../../models/utils/searchFilters";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../models/utils/tableHead";
 import { FileService } from "../../../services/file/file.service";
+import { AuthService } from "../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-detector",
@@ -64,9 +65,10 @@ export class DetectorComponent extends BaseEntity<DetectorEntity> implements OnI
     private deleteDetectorService: DeleteDetectorGQL
     ,
     protected override router: Router,
-    protected override fileService: FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, detectorEntitiesService, deleteDetectorService);
+    super(authService, fileService, router, toastr, route, http, detectorEntitiesService, deleteDetectorService);
 
     this.checkQueryParams();
 

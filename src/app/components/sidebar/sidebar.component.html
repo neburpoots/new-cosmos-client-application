@@ -59,7 +59,7 @@
 
       <ul class="md:flex-col md:min-w-full flex flex-col list-none">
         <li class="items-center">
-          <a [routerLink]="['/user/dashboard']" class="text-md py-3 font-semibold block" routerLinkActive
+          <a [routerLink]="['/']" class="text-md py-3 font-semibold block" routerLinkActive
             #adminDashboard="routerLinkActive" [ngClass]="
               adminDashboard.isActive
                 ? 'text-white hover:text-white'
@@ -90,132 +90,42 @@
             </ul>
           </div>
         </div>
-        <div class="relative">
-          <button class="text-md text-slate-200 py-3  font-semibold block hover:text-white" type="button"
-            (click)="toggleAssembliesDropdown()">
-            <i class="fa fa-cog  mr-2 "></i>Assembly
-          </button>
-          <div *ngIf="assemblyDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
-            <ul class="list-none">
-              @for (item of assembly; track $index) {
-              <li><a [routerLink]="[item.url]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
-          isActive(item.url)
-            ? 'text-white hover:text-white'
-            : 'text-white hover:text-white'
-        " [ngClass]="isActive(item.url) ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
-                  @if(item.icon6) {
-                  <fa-icon class="mr-4" [icon]="item.icon6"></fa-icon>
-                  } @else if (item.icon4) {
-                  <i [ngClass]="item.icon4" aria-hidden="true"></i>
-                  }
-                  {{item.title}}</a></li>
-              }
 
-            </ul>
-          </div>
-          <button class="text-md text-slate-200 py-3  font-semibold  block hover:text-white" type="button"
-            (click)="toggleProductsDropdown()">
-            <fa-icon [icon]="faBoxOpen"></fa-icon>
-            Products
-          </button>
-          <div *ngIf="productsDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
-            <ul class="list-none">
-              @for (item of products; track $index) {
-              <li><a [routerLink]="[item.url]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
-        isActive(item.url)
+        @for(navigationItem of navigationObject; track $index) {
+        <button class="text-md text-slate-200 py-3 text-left  font-semibold block hover:text-white" type="button"
+          (click)="toggleNavbarDropdown($index)">
+          @if(navigationItem.icon6) {
+          <fa-icon class="" [icon]="navigationItem.icon6"></fa-icon>
+          } @else if (navigationItem.icon4) {
+          <i class="mr-2" [ngClass]="navigationItem.icon4" aria-hidden="true"></i>
+          }
+          {{navigationItem.name}}
+        </button>
+        <div *ngIf="navigationItem.active" class=" w-48 bg-cosmosDarker border-slate-200 ">
+          <ul class="list-none">
+            @for (item of navigationItem.items; let itemindex = $index; track itemindex) {
+            <li *ngIf="(authService.checkPermission(item.route.permission_id) | async)"><a [routerLink]="[item.route.path]"
+                routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
+        isActive(item.route.path)
           ? 'text-white hover:text-white'
           : 'text-white hover:text-white'
-      " [ngClass]="isActive(item.url) ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
+      " [ngClass]="isActive(item.route.path) ? 'bg-cosmosDark text-white' : ''"
+                class="flex text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
+                <div class="min-w-[30px]">
                   @if(item.icon6) {
-                  <fa-icon class="mr-4" [icon]="item.icon6"></fa-icon>
+                  <fa-icon class="" [icon]="item.icon6"></fa-icon>
                   } @else if (item.icon4) {
-                  <i [ngClass]="item.icon4" aria-hidden="true"></i>
+                  <i class="" [ngClass]="item.icon4" aria-hidden="true"></i>
                   }
-                  {{item.title}}</a></li>
-              }
+                </div>
 
-            </ul>
-          </div>
+                {{item.title}}
+              </a></li>
+            }
 
-          <button class="text-md text-slate-200 py-3  font-semibold block hover:text-white" type="button"
-            (click)="toggleRegistrationDropdown()">
-            <fa-icon class="mr-1" [icon]="faAddressCard"></fa-icon>Registration
-          </button>
-          <div *ngIf="registrationDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
-            <ul class="list-none">
-              @for (item of registration; track $index) {
-              <li><a [routerLink]="[item.url]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
-      isActive(item.url)
-        ? 'text-white hover:text-white'
-        : 'text-white hover:text-white'
-    " [ngClass]="isActive(item.url) ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
-                  @if(item.icon6) {
-                  <fa-icon class="mr-4" [icon]="item.icon6"></fa-icon>
-                  } @else if (item.icon4) {
-                  <i [ngClass]="item.icon4" aria-hidden="true"></i>
-                  }
-                  {{item.title}}</a></li>
-              }
-
-            </ul>
-          </div>
-
-          <button class="text-md text-slate-200 py-3  font-semibold  block hover:text-white" type="button"
-            (click)="toggleServicesDropdown()">
-            <fa-icon [icon]="faServer"></fa-icon>
-            Services
-          </button>
-          <div *ngIf="servicesDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
-            <ul class="list-none">
-              @for (item of services; track $index) {
-              <li><a [routerLink]="[item.url]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
-        isActive(item.url)
-          ? 'text-white hover:text-white'
-          : 'text-white hover:text-white'
-      " [ngClass]="isActive(item.url) ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
-                  @if(item.icon6) {
-                  <fa-icon class="mr-4" [icon]="item.icon6"></fa-icon>
-                  } @else if (item.icon4) {
-                  <i [ngClass]="item.icon4" aria-hidden="true"></i>
-                  }
-                  {{item.title}}</a></li>
-              }
-
-            </ul>
-          </div>
-
-          <button class="text-md text-slate-200 py-3  font-semibold  block hover:text-white" type="button"
-            (click)="togglemiscDropdown()">
-            <fa-icon [icon]="faListUl"></fa-icon>
-            Misc
-          </button>
-          <div *ngIf="miscDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
-            <ul class="list-none">
-              @for (item of misc; track $index) {
-              <li><a [routerLink]="[item.url]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
-          isActive(item.url)
-            ? 'text-white hover:text-white'
-            : 'text-white hover:text-white'
-        " [ngClass]="isActive(item.url) ? 'bg-cosmosDark text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
-                  @if(item.icon6) {
-                  <fa-icon class="mr-4" [icon]="item.icon6"></fa-icon>
-                  } @else if (item.icon4) {
-                  <i [ngClass]="item.icon4" aria-hidden="true"></i>
-                  }
-                  {{item.title}}</a></li>
-              }
-
-            </ul>
-          </div>
-
+          </ul>
         </div>
-
-
+        }
       </ul>
 
       <!-- Divider -->

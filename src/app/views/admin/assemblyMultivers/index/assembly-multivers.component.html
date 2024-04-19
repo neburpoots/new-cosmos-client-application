@@ -4,7 +4,7 @@
         <div class="mt-[100px] w-full mb-12 px-4">
             <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
                 (setTableWidths)="setTableWidths($event)" (edit)="openEditModal($event)" [isCreatable]="false"
-                [detailPagePrefix]="'/user/assemblymultivers/'" [isViewable]="true" (closeView)="closeViewModal()"
+                [detailPagePrefix]="'/assemblies-multivers/'" [isViewable]="true" (closeView)="closeViewModal()"
                 [title]="objectPlural" (view)="openViewModal($event)" [searchCriteria]="searchCriteria"
                 (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"
                 (export)="openExportModal()"

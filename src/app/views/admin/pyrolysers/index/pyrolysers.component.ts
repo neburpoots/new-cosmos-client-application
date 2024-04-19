@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { PyrolysersFormComponent } from "../form/pyrolysers-form.component";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-pyrolysers",
@@ -73,9 +74,10 @@ export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> implements 
     private deletePyrolyserService: DeletePyrolyserGQL
     ,
     protected override router: Router,
-    protected override fileService: FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, pyrolyserService, deletePyrolyserService);
+    super(authService, fileService, router, toastr, route, http, pyrolyserService, deletePyrolyserService);
 
     this.checkQueryParams();
 

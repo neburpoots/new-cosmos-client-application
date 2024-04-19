@@ -1,5 +1,5 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule, inject } from "@angular/core";
+import { Routes, RouterModule, mapToCanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
 
 // layouts
 import { AdminComponent } from "./layouts/admin/admin.component";
@@ -44,76 +44,287 @@ import { SensorTypeAssembliesComponent } from "./views/admin/sensor-types-assemb
 import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/index/assembly-multivers.component";
 import { UsersComponent } from "./views/admin/users/index/users.component";
 import { GroupsComponent } from "./views/admin/groups/index/groups.component";
+import { AuthGuard } from "./services/authentication/auth.guard";
+import { faAddressCard, faBolt, faBoxOpen, faBuilding, faCashRegister, faChartSimple, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { NavBarIcon } from "./models/utils/navbarItem";
+
+//id is the permission id in db
+export class RoutePermission {
+  path: string;
+  component: any;
+  canActivate: any;
+  permission_id: any;
+
+  constructor(path: string, component: any, permission_id: any) {
+    this.path = path;
+    this.component = component;
+    this.permission_id = permission_id;
+    this.canActivate = [(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) => inject(AuthGuard).canActivate(next, state, permission_id)];
+  }
+}
+
+export interface menuItem {
+  name: string;
+  active: boolean;
+  icon6?: any;
+  icon4?: string;
+  items: NavBarIcon[];
+}
+
+export const navigationObject: menuItem[] = [
+  {
+    name: "Assembly",
+    icon4: "fa fa-cog",
+    active: false,
+    items: [
+      {
+        title: "Assemblies MV",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faUserCog,
+        route: new RoutePermission("assemblies-multivers", AssemblyMultiversComponent, 6),
+      },
+      {
+        title: "Assembly Types",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faCodeCompare,
+        route: new RoutePermission("assembly-types", AssemblyTypeComponent, 9),
+      },
+      {
+        title: "Calibration gases",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faCloud,
+        route: new RoutePermission("calibration-gases", CalibrationGasesComponent, 8),
+      },
+      {
+        title: "Detectors",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faChartSimple,
+        route: new RoutePermission("detectors", DetectorComponent, 18),
+      },
+      {
+        title: "Sensor Types",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faTowerBroadcast,
+        route: new RoutePermission("sensor-types-assembly", SensorTypeAssembliesComponent, 17),
+      },
+      {
+        title: "Sensor Base Types",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faSatelliteDish,
+        route: new RoutePermission("sensor-base-types", SensorBaseTypeComponent, 19),
+      }
+    ]
+  },
+  {
+    name: "Products",
+    active: false,
+    icon6: faBoxOpen,
+    items: [
+      {
+        title: "Detector Types",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faGauge,
+        route: new RoutePermission("detector-types", DetectorTypeComponent, 10),
+      },
+      {
+        title: "Sensor Types",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faTowerBroadcast,
+        route: new RoutePermission("sensor-types", SensorTypeComponent, 4),
+      },
+      {
+        title: "Electrolytes",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faFlaskVial,
+        route: new RoutePermission("electrolytes", ElectrolytesComponent, 15),
+      },
+      {
+        title: "Membranes",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faBolt,
+        route: new RoutePermission("membranes", MembranesComponent, 14),
+      },
+      {
+        title: "Filters",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faFilter,
+        route: new RoutePermission("filters", FiltersComponent, 13),
+      },
+      {
+        title: "O-Rings",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faRing,
+        route: new RoutePermission("o-rings", ORingsComponent, 12),
+      },
+      {
+        title: "Pyrolysers",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faCashRegister,
+        route: new RoutePermission("pyrolysers", PyrolysersComponent, 11),
+      },
+    ]
+  },
+  {
+    name: "Registration",
+    active: false,
+    icon6: faAddressCard,
+    items: [
+      {
+        title: "Users",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faUsers,
+        route: new RoutePermission("users", UsersComponent, 1)
+      },
+      {
+        title: "Groups",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faPeopleGroup,
+        route: new RoutePermission("groups", GroupsComponent, 2)
+      }
+    ]
+  },
+  {
+    name: 'Services',
+    active: false,
+    icon6: faServer,
+    items: [
+      {
+        title: "Add Detector",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faPlus,
+        route: new RoutePermission("add-detector", DetectorComponent, 18),
+      },
+      {
+        title: "Add Sensor",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faPlus,
+        route: new RoutePermission("add-sensor", SensorTypeComponent, 4),
+      },
+      {
+        title: "Sensor Lists",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faTowerCell,
+        route: new RoutePermission("sensor-types", SensorTypeComponent, 4),
+      },
+      {
+        title: "Sample Points",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faHouseSignal,
+        route: new RoutePermission("sample-points", SamplePointsComponent, 24),
+      },
+      {
+        title: "Applications",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faToiletPortable,
+        route: new RoutePermission("applications", ApplicationsComponent, 23),
+      },
+      {
+        title: "Buildings",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faBuilding,
+        route: new RoutePermission("buildings", BuildingsComponent, 22),
+      },
+      {
+        title: "Floors",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faShop,
+        route: new RoutePermission("floors", FloorsComponent, 21),
+      },
+      {
+        title: "Areas",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faMountainSun,
+        route: new RoutePermission("areas", AreasComponent, 20),
+      },
+    ]
+  },
+  {
+    name: 'Misc',
+    active: false,
+    icon6: faListUl,
+    items: [
+      {
+        title: "Principles",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faVialCircleCheck,
+        route: new RoutePermission("principles", PrinciplesComponent, 16),
+      },
+      {
+        title: "Chemical Compounds",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faVial,
+        route: new RoutePermission("chemical-compounds", ChemicalCompoundsComponent, 26),
+      },
+      {
+        title: "Gases",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faCloud,
+        route: new RoutePermission("gases", GasesComponent, 25),
+      },
+      {
+        title: "Ranges",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faRuler,
+        route: new RoutePermission("ranges", RangesComponent, 27),
+      },
+    ]
+  }
+];
+
+const insertRoutes = (menuItem : menuItem) => {
+  return menuItem.items.map((item) => {
+    return item.route
+  })
+}
+
+export const allAuthenticatedRoutes = [
+  ...insertRoutes(navigationObject[0]),
+  ...insertRoutes(navigationObject[1]),
+  ...insertRoutes(navigationObject[2]),
+  ...insertRoutes(navigationObject[3]),
+  ...insertRoutes(navigationObject[4]),
+]
+
 
 const routes: Routes = [
   // user views
+  //id is the permission id
   {
-    path: "user",
+    path: "",
     component: AdminComponent,
     children: [
-      { path: "dashboard", component: DashboardComponent },
-      { path: "assemblymultivers", component: AssemblyMultiversComponent },
-      { path: "assemblymultivers/:id", component: AssemblyMultiversDetailComponent }, // Add the dynamic parameter ":userId"
-      { path: "calibrationgases", component: CalibrationGasesComponent },
-      { path: "assembly-types", component: AssemblyTypeComponent },
-      { 
-        path: 'assembly-types/:id', 
-        component: AssemblyTypeComponent,		
-      },
-      {
-        path: 'detector-types',
-        component: DetectorTypeComponent
-      },
-      {
-        path: 'pyrolysers',
-        component: PyrolysersComponent
-      },
-      {
-        path: 'o-rings',
-        component: ORingsComponent
-      },
-      {
-        path: 'filters',
-        component: FiltersComponent
-      },
-      {
-        path: 'membranes',
-        component: MembranesComponent
-      },
-      {
-        path: 'electrolytes',
-        component: ElectrolytesComponent
-      },
-      {
-        path: 'principles',
-        component: PrinciplesComponent
-      },
-      {
-        path: 'users',
-        component: UsersComponent
-      },
-      {
-        path: 'groups',
-        component: GroupsComponent
-      },
-      {
-        path: 'sensor-types-assembly', component: SensorTypeAssembliesComponent
-      },
-      { path: "detectors", component: DetectorComponent },
-      { path: "settings", component: SettingsComponent },
-      { path: "tables", component: TablesComponent },
-      { path: "maps", component: MapsComponent },
-      { path: "sensor-base-types", component: SensorBaseTypeComponent},
-      { path: "sensor-types", component: SensorTypeComponent},
-      { path: "areas", component: AreasComponent },
-      { path: "floors", component: FloorsComponent },
-      { path: "buildings", component: BuildingsComponent},
-      { path: "applications", component: ApplicationsComponent},
-      { path: "sample-points", component: SamplePointsComponent},
-      { path: "gases", component: GasesComponent},
-      { path: "chemical-compounds", component: ChemicalCompoundsComponent},
-      { path: "ranges", component: RangesComponent},
-      { path: "", redirectTo: "dashboard", pathMatch: "full" },
+      ...allAuthenticatedRoutes,
+      new RoutePermission("assemblies-multivers/:id", AssemblyMultiversDetailComponent, 7),
+      // new RoutePermission("", DashboardComponent, 5),
+      new RoutePermission("", DashboardComponent, 5),
+      
     ],
   },
   // auth views
@@ -122,19 +333,13 @@ const routes: Routes = [
     component: AuthComponent,
     children: [
       { path: "login", component: LoginComponent },
-      { path: "register", component: RegisterComponent },
       { path: "", redirectTo: "login", pathMatch: "full" },
     ],
   },
-  // no layout views
-  { path: "profile", component: ProfileComponent },
-  { path: "landing", component: LandingComponent },
-  { path: "", component: IndexComponent },
-  { path: "**", redirectTo: "", pathMatch: "full" },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

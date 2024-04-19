@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { GasesFormComponent } from "../form/gases-form.component";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-gases",
@@ -67,9 +68,10 @@ export class GasesComponent extends BaseEntity<Gas> implements OnInit {
     private gasesService: AllGasesGQL,
     private deleteGasService: DeleteGasGQL,
     protected override router: Router,
-    protected override fileService: FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, gasesService, deleteGasService);
+    super(authService, fileService, router, toastr, route, http, gasesService, deleteGasService);
 
     this.checkQueryParams();
 

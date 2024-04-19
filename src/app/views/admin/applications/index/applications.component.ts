@@ -12,6 +12,7 @@ import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { ApplicationsFormComponent } from "../form/applications-form.component";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-applications",
@@ -68,9 +69,10 @@ export class ApplicationsComponent extends BaseEntity<Application> implements On
     private applicationsService: AllApplicationsGQL,
     private deleteApplicationService: DeleteApplicationGQL,
     protected override router: Router,
-    protected override fileService: FileService
+    protected override fileService: FileService,
+    protected override authService: AuthService
   ) {
-    super(fileService, router, toastr, route, http, applicationsService, deleteApplicationService);
+    super(authService, fileService, router, toastr, route, http, applicationsService, deleteApplicationService);
 
     this.checkQueryParams();
 

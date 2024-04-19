@@ -8,6 +8,7 @@ import { AuthenticateGQL, CurrentReadPermissionsGQL, CurrentReadPermissionsQuery
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
+import { allAuthenticatedRoutes } from '../../app-routing.module';
 
 //------------------------------------------------------------------------------
 type CurrentReadPermissions = Exclude<CurrentReadPermissionsQuery['currentReadPermissions'], null | undefined>;
@@ -57,48 +58,10 @@ export class AuthService
 		).subscribe();	
 	}
 
-	async clearCache()
-	{			
-		return caches.keys().then
-		(
-			keys => Promise.all
-			(
-				keys.filter(key => key.includes(':data')).map
-				(
-					(key) => 
-					{
-						//console.log(key);
-						caches.open(key).then
-						(
-							(eachCache) => 
-							{
-								eachCache.keys().then
-								(
-									(requests) => 
-									{														
-										requests.forEach
-										(
-											(eachRequest) => 
-											{ 
-												//console.log(eachRequest); 
-												return eachCache.delete(eachRequest); 
-											}
-										);
-									}														
-								)
-							}
-						)										
-					}
-				)
-			)
-		);
-	}
-
 	login(username: string, password: string): Observable<boolean>
 	{			
 	    localStorage.removeItem('jwtToken');
 		
-		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});	
 	
 		return this.authenticateService.mutate({username: username, password: password}).pipe
 		(
@@ -115,57 +78,111 @@ export class AuthService
 						return of(false);
 					}
 
-					// this.toastService.add({type: ToastType.Success, message: 'Logged in successfully!', delay: 2});
 					
-					// write jwtToken
-					this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: data?.authenticate?.jwtToken}});	
-															
 					localStorage.setItem('jwtToken', data?.authenticate?.jwtToken);
-					// this.router.navigate(['/admin/dashboard']);
 
 					// currentUsername
-					return combineLatest
-					(
-						[
-							this.currentUsernameService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data}) => data.currentUsername)),
-							this.currentReadPermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data: {currentReadPermissions}}) => currentReadPermissions?.nodes || [])),
-							this.currentWritePermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data: {currentWritePermissions}}) => currentWritePermissions?.nodes || [])),
-						]
-					).pipe
-					(
-						tap
-						(
-							([currentUsername, currentReadPermissions, currentWritePermissions]) => 
-							{
-								this.currentUsername$.next(currentUsername);
-								this.currentReadPermissions$.next(currentReadPermissions);
-								this.currentWritePermissions$.next(currentWritePermissions);
-							}
-						),
-						map(() => true)
-					)
-				}				
+					return this.getPermissions();
+				}			
 			)		
 		);		
 	}
+
+	refreshPermissions(): Observable<boolean> {
+		return this.getPermissions().pipe(
+		  tap(() => {
+			// Optionally add any logic here that you want to execute after refreshing permissions
+			console.log('Permissions refreshed');
+		  }),
+		  map(() => true)
+		);
+	  }
+
+	getPermissions(): Observable<boolean> {
+		return combineLatest
+		(
+			[
+				this.currentUsernameService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data}) => data.currentUsername)),
+				this.currentReadPermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data: {currentReadPermissions}}) => currentReadPermissions?.nodes || [])),
+				this.currentWritePermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data: {currentWritePermissions}}) => currentWritePermissions?.nodes || [])),
+			]
+		).pipe
+		(
+			tap
+			(
+				([currentUsername, currentReadPermissions, currentWritePermissions]) => 
+				{
+					this.currentUsername$.next(currentUsername);
+					this.currentReadPermissions$.next(currentReadPermissions);
+					this.currentWritePermissions$.next(currentWritePermissions);
+				}
+			),
+			map(() => true)
+		)
+	}
 	
-	logout(): Observable<boolean>
+	logout(): void
 	{	
 		this.currentUsername$.next(null);
 		//this.currentReadPermissions$.next(null);
 		
 		// clear jwtToken
-		this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});
+		// this.apollo.client.cache.writeQuery({query: JwtTokenDocument, data: {jwtToken: null}});
 		
 		localStorage.removeItem('jwtToken');
 		
 		this.router.navigate(['/auth/login']);
+					
+	}
 
-		// clear cache
-		return from(this.apollo.client.clearStore()).pipe
+	checkPermission(permission_id: number): Observable<boolean>
+	{
+
+		return this.currentReadPermissions$.pipe
 		(
-			switchMap(() => from(this.clearCache())),
-			map(_ => true)			
-		);						
+			map
+			(
+				(permissions) => 
+				{
+					let ids = permissions.map(permission => permission.id);
+
+					//exclude dashboard
+					if(permission_id === 5) 
+					{
+						return true;
+					}
+
+					// Compare permissions with permission_id
+					const hasPermission = ids.includes(permission_id);
+					return hasPermission;
+				}
+			)
+		);
+	}
+
+	checkWritePermission(url: string): Observable<boolean>
+	{
+		return this.currentWritePermissions$.pipe
+		(
+			map
+			(
+				(permissions) => 
+				{
+					let route = allAuthenticatedRoutes.find(route => route.path === url);
+					console.log(route);
+					if(!route)
+					{
+						return false;
+					}
+					
+					if(permissions.map((item) => item.id).includes(route.permission_id)) {
+						return true;
+					}
+					
+					return false;
+					
+				}
+			)
+		);
 	}
 }

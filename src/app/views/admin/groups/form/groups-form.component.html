@@ -17,6 +17,7 @@
             [options]="permissions" (onChange)="setPermission($event, selectedWritePermissions)"
             [inline]="isInlineCreating" [placeholder]="'Select write permissions to add to the list'"
             [touched]="myForm.controls['write_permission'].touched"
+            [selectedItems]="selectedWritePermissions"
             [errors]="[{ name: 'required', message: 'Write permission is required' }]">
         </select-component>
         <div class="items-center mt-2 flex flex-row wrap flex-wrap gap-2">
@@ -40,6 +41,7 @@
             [options]="permissions" (onChange)="setPermission($event, selectedReadPermissions)"
             [inline]="isInlineCreating" [placeholder]="'Select read permissions to add to the list'"
             [touched]="myForm.controls['read_permission'].touched"
+            [selectedItems]="selectedReadPermissions"
             [errors]="[{ name: 'required', message: 'Read permissions is required' }]">
         </select-component>
         <div class="items-center mt-2 flex flex-row wrap flex-wrap gap-2">

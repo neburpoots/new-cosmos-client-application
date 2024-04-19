@@ -18,7 +18,7 @@ export class LoginComponent {
         result => {
           //console.log(result);	
           if (result) {
-            this.router.navigate(['/user/dashboard'])
+            this.router.navigate(['/'])
             this.toastr.success('Logged in successfully!', 'Success');
 
           }

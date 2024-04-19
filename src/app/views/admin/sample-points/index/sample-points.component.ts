@@ -5,13 +5,14 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllAreaEntitiesGQL, AllSamplePointEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteSamplePointGQL, QueryAllSamplePointEntitiesArgs, SamplePointEntitiesOrderBy, SamplePointEntity} from "../../../../../generated/graphql";
+import { AllAreaEntitiesGQL, AllSamplePointEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteSamplePointGQL, QueryAllSamplePointEntitiesArgs, SamplePointEntitiesOrderBy, SamplePointEntity } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { SamplePointsFormComponent } from "../form/sample-point-form.component";
 import { FileService } from "../../../../services/file/file.service";
+import { AuthService } from "../../../../services/authentication/auth.service";
 
 @Component({
   selector: "app-sample-points",
@@ -70,16 +71,18 @@ export class SamplePointsComponent extends BaseEntity<SamplePointEntity> impleme
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private samplePointService: AllSamplePointEntitiesGQL,
-    private deleteSamplePointService: DeleteSamplePointGQL
-  ,
+    private deleteSamplePointService: DeleteSamplePointGQL,
     protected override router: Router,
-protected override fileService : FileService
+    protected override fileService: FileService,
+    protected override authService : AuthService
+
   ) {
-    super(fileService, router, toastr, route, http, samplePointService, deleteSamplePointService);
+    super(authService, fileService, router, toastr, route, http, samplePointService, deleteSamplePointService);
 
-this.checkQueryParams();
+    this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+    this.nodes$ = this.loadData(this.searchCriteria);
+  }
 
   tableHeaders: TableHead<SamplePointEntitiesOrderBy>[] = [
     { type: 'string', key: 'endUserName', label: "End User", asc: SamplePointEntitiesOrderBy.EndUserNameAsc, desc: SamplePointEntitiesOrderBy.EndUserNameDesc },
