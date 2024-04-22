@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./calibrationgases.component.html",
 })
 
-export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implements OnInit {
+export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> {
 
 
   @ViewChild('editModal') childComponent!: CalibrationGasesFormComponent;
@@ -37,13 +37,6 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
       ]
     },
   }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-
-  }
-
 
   override setEditData() {
     console.log(this.editData)
@@ -68,8 +61,6 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
 
   baseOrderBy = CalgasEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<CalgasEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private calGasService: AllCalibrationGasesGQL,
     private deleteCalGasService: DeleteCalGasGQL,
@@ -81,7 +72,7 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> implemen
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
 

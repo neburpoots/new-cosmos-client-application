@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./principles.component.html",
 })
 
-export class PrinciplesComponent extends BaseEntity<Principle> implements OnInit {
+export class PrinciplesComponent extends BaseEntity<Principle> {
 
 
   @ViewChild('editModal') childComponent!: PrinciplesFormComponent;
@@ -36,11 +36,6 @@ export class PrinciplesComponent extends BaseEntity<Principle> implements OnInit
 
       ]
     },
-  }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
   }
 
   override setEditData() {
@@ -62,8 +57,6 @@ export class PrinciplesComponent extends BaseEntity<Principle> implements OnInit
 
   baseOrderBy = PrinciplesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<Principle>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private principleService: AllPrinciplesGQL,
     private deletePrincipleService: DeletePrincipleGQL,
@@ -75,7 +68,7 @@ export class PrinciplesComponent extends BaseEntity<Principle> implements OnInit
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<PrinciplesOrderBy>[] = [

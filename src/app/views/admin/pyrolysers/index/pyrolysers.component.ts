@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./pyrolysers.component.html",
 })
 
-export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> implements OnInit {
+export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> {
 
 
   @ViewChild('editModal') childComponent!: PyrolysersFormComponent;
@@ -36,11 +36,6 @@ export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> implements 
 
       ]
     },
-  }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
   }
 
   override setEditData() {
@@ -67,8 +62,6 @@ export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> implements 
   //This is the fallback order by on changes in the table
   baseOrderBy = PyrolyserEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<PyrolyserEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private pyrolyserService: AllPyrolyserEntitiesGQL,
     private deletePyrolyserService: DeletePyrolyserGQL
@@ -81,7 +74,7 @@ export class PyrolysersComponent extends BaseEntity<PyrolyserEntity> implements 
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<PyrolyserEntitiesOrderBy>[] = [

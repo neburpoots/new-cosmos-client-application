@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./buildings.component.html",
 })
 
-export class BuildingsComponent extends BaseEntity<Building> implements OnInit {
+export class BuildingsComponent extends BaseEntity<Building> {
 
 
   @ViewChild('editModal') childComponent!: BuildingFormComponent;
@@ -39,10 +39,6 @@ export class BuildingsComponent extends BaseEntity<Building> implements OnInit {
   }
 
   //Just a console log to check the data
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   override setEditData() {
     console.log(this.editData)
@@ -66,8 +62,6 @@ export class BuildingsComponent extends BaseEntity<Building> implements OnInit {
 
   baseOrderBy = BuildingsOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<Building>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private buildingService: AllBuildingsGQL,
     private deleteBuildingService: DeleteBuildingGQL,
@@ -79,7 +73,7 @@ export class BuildingsComponent extends BaseEntity<Building> implements OnInit {
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<BuildingsOrderBy>[] = [

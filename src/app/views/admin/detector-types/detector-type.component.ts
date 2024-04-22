@@ -19,7 +19,7 @@ import { AuthService } from "../../../services/authentication/auth.service";
   templateUrl: "./detector-type.component.html",
 })
 
-export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> implements OnInit {
+export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> {
 
   @ViewChild('editModal') childComponent!: DetectorTypeFormComponent;
 
@@ -50,13 +50,6 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
   //This is the default order by for the table
   baseOrderBy = DetectorTypesEntitiesOrderBy.IdDesc;
 
-  //The observable data that is retrieved
-  override nodes$: Observable<Array<DetectorTypesEntity>>;
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   override setEditData() {
     this.childComponent.setEditData(this.editData);
@@ -74,7 +67,7 @@ export class DetectorTypeComponent extends BaseEntity<DetectorTypesEntity> imple
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
 

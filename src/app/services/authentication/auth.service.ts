@@ -24,6 +24,7 @@ type CurrentWritePermissions = Exclude<CurrentWritePermissionsQuery['currentWrit
 export class AuthService 
 {
 	//cache: ApolloCache<any>;	
+	currentUsername: string|null|undefined;
 	currentUsername$ = new ReplaySubject<string|null|undefined>(1);
 	currentReadPermissions$ = new ReplaySubject<CurrentReadPermissions['nodes']>(1);	  
 	currentWritePermissions$ = new ReplaySubject<CurrentWritePermissions['nodes']>(1);	
@@ -43,14 +44,14 @@ export class AuthService
 			tap(({data: {currentUsername}}) => this.currentUsername$.next(currentUsername)),			
 			switchMap
 			(
-				() => this.currentReadPermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe
+				() => this.currentReadPermissionsService.fetch({}, {fetchPolicy: 'no-cache'}).pipe
 				(
 					tap(({data: {currentReadPermissions}}) => this.currentReadPermissions$.next(currentReadPermissions?.nodes || []))
 				)
 			),
 			switchMap
 			(
-				() => this.currentWritePermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe
+				() => this.currentWritePermissionsService.fetch({}, {fetchPolicy: 'no-cache'}).pipe
 				(
 					tap(({data: {currentWritePermissions}}) => this.currentWritePermissions$.next(currentWritePermissions?.nodes || []))
 				)
@@ -112,6 +113,7 @@ export class AuthService
 			(
 				([currentUsername, currentReadPermissions, currentWritePermissions]) => 
 				{
+					this.currentUsername = currentUsername;
 					this.currentUsername$.next(currentUsername);
 					this.currentReadPermissions$.next(currentReadPermissions);
 					this.currentWritePermissions$.next(currentWritePermissions);

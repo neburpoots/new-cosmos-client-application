@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./o-rings.component.html",
 })
 
-export class ORingsComponent extends BaseEntity<ORingEntity> implements OnInit {
+export class ORingsComponent extends BaseEntity<ORingEntity> {
 
 
   @ViewChild('editModal') childComponent!: ORingsFormComponent;
@@ -36,11 +36,6 @@ export class ORingsComponent extends BaseEntity<ORingEntity> implements OnInit {
 
       ]
     },
-  }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
   }
 
   override setEditData() {
@@ -68,8 +63,6 @@ export class ORingsComponent extends BaseEntity<ORingEntity> implements OnInit {
   //This is the fallback order by on changes in the table
   baseOrderBy = ORingEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<ORingEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private oRingService: AllORingEntitiesGQL,
     private deleteORingService: DeletePyrolyserGQL
@@ -82,7 +75,7 @@ export class ORingsComponent extends BaseEntity<ORingEntity> implements OnInit {
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<ORingEntitiesOrderBy>[] = [

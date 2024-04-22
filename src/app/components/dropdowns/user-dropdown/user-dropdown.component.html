@@ -9,21 +9,17 @@
     <div class="bg-cosmosDark rounded-xl transition ease-in-out hover:scale-110 flex flex-col min-w-48 z-50">
 
       <div
-        class="transition text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48">
+        class="transition text-base z-50 float-left py-2 list-none text-left rounded min-w-48">
         <li (click)="logout()">
-          <div class="text-sm block text  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg cursor-pointer ">
-            {{currentUsername}}</div>
+          <div class="text-sm block text font-semibold text-white py-2 px-4 hover:bg-cosmosDark rounded-lg cursor-pointer ">
+            Logged in as: {{authService.currentUsername}}</div>
         </li>
       </div>
       <div
-        class="bg-cosmosDark rounded-xl  text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48">
+        class="bg-cosmosDark rounded-xl  text-base z-50 float-left py-2 list-none text-left rounded min-w-48">
         <li (click)="logout()">
-          <div routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
-            adminDashboard.isActive
-              ? 'text-white hover:text-white'
-              : 'text-white hover:text-white'
-          " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
-            class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg cursor-pointer "><i
+          <div routerLinkActive #adminDashboard="routerLinkActive" 
+            class="text-sm block  font-semibold   text-white py-2 px-4 hover:bg-cosmosDark rounded-lg cursor-pointer "><i
               class="mr-2 fa fa-sign-out" aria-hidden="true"></i>
             Sign out</div>
         </li>

@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./electrolytes.component.html",
 })
 
-export class ElectrolytesComponent extends BaseEntity<ElectrolyteEntity> implements OnInit {
+export class ElectrolytesComponent extends BaseEntity<ElectrolyteEntity> {
 
   @ViewChild('editModal') childComponent!: ElectrolytesFormComponent;
 
@@ -37,10 +37,6 @@ export class ElectrolytesComponent extends BaseEntity<ElectrolyteEntity> impleme
     },
   }
 
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   override setEditData() {
     console.log(this.editData)
@@ -67,8 +63,6 @@ export class ElectrolytesComponent extends BaseEntity<ElectrolyteEntity> impleme
   //This is the fallback order by on changes in the table
   baseOrderBy = ElectrolytesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<ElectrolyteEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private electrolyteService: AllElectrolyteEntitiesGQL,
     private deleteElectrolyteService: DeleteElectrolyteGQL,
@@ -80,7 +74,7 @@ export class ElectrolytesComponent extends BaseEntity<ElectrolyteEntity> impleme
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<ElectrolyteEntitiesOrderBy>[] = [

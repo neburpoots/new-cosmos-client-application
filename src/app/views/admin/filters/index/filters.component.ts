@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./filters.component.html",
 })
 
-export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit {
+export class FiltersComponent extends BaseEntity<FilterEntity> {
 
 
   @ViewChild('editModal') childComponent!: FiltersFormComponent;
@@ -36,12 +36,6 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
 
       ]
     },
-  }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-
   }
 
   override setEditData() {
@@ -69,8 +63,6 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
   //This is the fallback order by on changes in the table
   baseOrderBy = FilterEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<FilterEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private filterService: AllFilterEntitiesGQL,
     private deleteFilterService: DeleteFilterGQL,
@@ -82,7 +74,7 @@ export class FiltersComponent extends BaseEntity<FilterEntity> implements OnInit
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<FilterEntitiesOrderBy>[] = [

@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./floors.component.html",
 })
 
-export class FloorsComponent extends BaseEntity<FloorEntity> implements OnInit {
+export class FloorsComponent extends BaseEntity<FloorEntity> {
 
 
   @ViewChild('editModal') childComponent!: FloorFormComponent;
@@ -39,10 +39,6 @@ export class FloorsComponent extends BaseEntity<FloorEntity> implements OnInit {
   }
 
   //Just a console log to check the data
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   override setEditData() {
     console.log(this.editData)
@@ -68,8 +64,6 @@ export class FloorsComponent extends BaseEntity<FloorEntity> implements OnInit {
 
   baseOrderBy = FloorEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<FloorEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private floorService: AllFloorEntitiesGQL,
     private deleteFloorService: DeleteFloorGQL
@@ -82,7 +76,7 @@ export class FloorsComponent extends BaseEntity<FloorEntity> implements OnInit {
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<FloorEntitiesOrderBy>[] = [

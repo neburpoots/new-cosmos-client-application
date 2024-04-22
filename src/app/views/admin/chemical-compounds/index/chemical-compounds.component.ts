@@ -18,7 +18,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./chemical-compounds.component.html",
 })
 
-export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> implements OnInit {
+export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> {
 
   @ViewChild('editModal') childComponent!: ChemicalCompoundsFormComponent;
 
@@ -36,10 +36,6 @@ export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> imp
     },
   }
 
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
 
   override setEditData() {
@@ -69,8 +65,6 @@ export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> imp
 
   baseOrderBy = ChemicalCompoundsOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<ChemicalCompound>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private chemicalCompoundService: AllChemicalCompoundsGQL,
     private deleteChemicalCompoundService: DeleteChemicalCompoundGQL,
@@ -82,7 +76,7 @@ export class ChemicalCompoundsComponent extends BaseEntity<ChemicalCompound> imp
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<ChemicalCompoundsOrderBy>[] = [

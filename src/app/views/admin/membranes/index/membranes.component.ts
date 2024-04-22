@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./membranes.component.html",
 })
 
-export class MembranesComponent extends BaseEntity<MembraneEntity> implements OnInit {
+export class MembranesComponent extends BaseEntity<MembraneEntity> {
 
   @ViewChild('editModal') childComponent!: MembranesFormComponent;
 
@@ -34,11 +34,6 @@ export class MembranesComponent extends BaseEntity<MembraneEntity> implements On
       and: [
       ]
     },
-  }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
   }
 
   override setEditData() {
@@ -66,8 +61,6 @@ export class MembranesComponent extends BaseEntity<MembraneEntity> implements On
   //This is the fallback order by on changes in the table
   baseOrderBy = MembraneEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<MembraneEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private membraneService: AllMembraneEntitiesGQL,
     private deleteMembraneService: DeleteMembraneGQL,
@@ -79,7 +72,7 @@ export class MembranesComponent extends BaseEntity<MembraneEntity> implements On
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<MembraneEntitiesOrderBy>[] = [

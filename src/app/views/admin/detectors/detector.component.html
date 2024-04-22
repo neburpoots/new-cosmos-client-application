@@ -5,9 +5,9 @@
 
             <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
                 (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
-                (delete)="openDeleteModal($event)" [isEditable]="true" [isDeletable]="true" [title]="objectPlural"
+                (delete)="openDeleteModal($event)" [isCreatable]="hasWritePermission" [isEditable]="hasWritePermission" [isDeletable]="hasWritePermission" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData"	 [inline_selector]="'detector-form'" [isInlineCreating]="isInlineCreating"
+                [data]="tableData" [inline_selector]="'detector-form'" [isInlineCreating]="isInlineCreating"
                 (export)="openExportModal()"
                 (toggleInlineCreating)="toggleInlineCreating()">
                 <calgas-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"

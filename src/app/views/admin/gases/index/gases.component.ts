@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./gases.component.html",
 })
 
-export class GasesComponent extends BaseEntity<Gas> implements OnInit {
+export class GasesComponent extends BaseEntity<Gas> {
 
 
   @ViewChild('editModal') childComponent!: GasesFormComponent;
@@ -37,10 +37,6 @@ export class GasesComponent extends BaseEntity<Gas> implements OnInit {
     },
   }
 
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   override setEditData() {
     console.log(this.editData)
@@ -62,8 +58,6 @@ export class GasesComponent extends BaseEntity<Gas> implements OnInit {
 
   baseOrderBy = GasesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<Gas>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private gasesService: AllGasesGQL,
     private deleteGasService: DeleteGasGQL,
@@ -75,7 +69,7 @@ export class GasesComponent extends BaseEntity<Gas> implements OnInit {
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<GasesOrderBy>[] = [

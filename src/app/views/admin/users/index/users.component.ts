@@ -39,13 +39,12 @@ export class UsersComponent extends BaseEntity<User> implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
+    // console.log(this.nodes$);
+    // this.nodes$.subscribe(result => console.log(result));
   }
 
 
   override setEditData() {
-    console.log(this.editData)
     this.childComponent.setEditData(this.editData);
   }
 
@@ -67,8 +66,6 @@ export class UsersComponent extends BaseEntity<User> implements OnInit {
 
   baseOrderBy = UsersOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<User>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private userService: AllusersGQL,
     private deleteUserService: DeleteUserWithUserGroupsGQL
@@ -82,7 +79,7 @@ export class UsersComponent extends BaseEntity<User> implements OnInit {
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<UsersOrderBy>[] = [

@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./groups.component.html",
 })
 
-export class GroupsComponent extends BaseEntity<Group> implements OnInit {
+export class GroupsComponent extends BaseEntity<Group> {
 
 
   @ViewChild('editModal') childComponent!: GroupsFormComponent;
@@ -37,12 +37,6 @@ export class GroupsComponent extends BaseEntity<Group> implements OnInit {
       ]
     },
   }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
-
 
   override setEditData() {
     console.log(this.editData)
@@ -65,8 +59,6 @@ export class GroupsComponent extends BaseEntity<Group> implements OnInit {
 
   baseOrderBy = UsersOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<Group>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private groupService: AllGroupsGQL,
     private deleteGroupService: DeleteGroupAndPermissionGQL
@@ -79,7 +71,7 @@ export class GroupsComponent extends BaseEntity<Group> implements OnInit {
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<GroupsOrderBy>[] = [

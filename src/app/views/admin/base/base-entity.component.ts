@@ -28,6 +28,7 @@ export abstract class BaseEntity<T> {
   abstract objectPlural: string;
 
   totalResults: number = 0;
+  data: any[] = [];
 
   get objectSingleLowerCase(): string {
     return this.objectSingle!.toLowerCase();
@@ -39,8 +40,6 @@ export abstract class BaseEntity<T> {
 
   //This is the selected item that is used for editing and deleting.
   selectedItem: T | undefined;
-
-  abstract nodes$: Observable<Array<T>>;
 
   protected refetchTrigger: Subject<void> = new Subject<void>();
 
@@ -77,16 +76,15 @@ export abstract class BaseEntity<T> {
     protected fileService: FileService, protected router: Router, protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
     protected getService: Query<any, any>, protected deleteService: Mutation<any, any> | null,
   ) {
-
-    
     this.route.url.subscribe(urlSegments => {
       const currentUrl = urlSegments.map(segment => segment.path).join('/');
-      console.log(currentUrl)
       this.authService.checkWritePermission(currentUrl).subscribe(value => {
         this.hasWritePermission = value;
       });
     });
-   }
+
+
+  }
 
   checkQueryParams(): void {
     this.route.queryParams.subscribe(params => {
@@ -125,35 +123,22 @@ export abstract class BaseEntity<T> {
     this.router.navigate([], { queryParams: queryParams });
   }
 
-
-  loadData(searchCriteria: any) {
-    console.log(searchCriteria)
-    return this.refetchTrigger.pipe(
-      startWith(null),
-      switchMap(() =>
-        this.getService.watch(searchCriteria ? searchCriteria : this.searchCriteria, { fetchPolicy: 'no-cache' }).valueChanges.pipe
-          (
-            map(({ data }) => {
-              console.log(data)
-              let objects = data[this.Key];
-              // this.searchCriteria.total = objects?.totalCount || 0;
-              // this.searchCriteria.totalPage  s = Math.ceil(this.searchCriteria.total / this.searchCriteria.limit);
-              this.totalResults = objects?.totalCount || 0;
-
-              this.tableData = this.mapTableData(objects?.nodes);
-              return objects?.nodes.filter((object: any) => object) || [];
-            }
-            )
-          )));
+  loadData(searchCriteria: any): void {
+    this.getService.fetch(searchCriteria ? searchCriteria : this.searchCriteria, {fetchPolicy: 'no-cache'}).subscribe(result => {
+      console.log( result?.data[this.Key]?.nodes)
+      this.data = result?.data[this.Key]?.nodes || [];
+      this.totalResults = result?.data[this.Key]?.totalCount || 0;
+      this.tableData = this.mapTableData(result?.data[this.Key]?.nodes);
+      console.log(this.tableData)
+    });
   }
 
   async fetch(searchCriteria?: any) {
-    console.log(searchCriteria)
     if (searchCriteria) {
       this.searchCriteria = searchCriteria;
     }
     this.setQueryParams();
-    this.refetchTrigger.next();
+    this.loadData(searchCriteria);
   }
 
   // Call this method whenever you want to trigger a refetch
@@ -253,7 +238,7 @@ export abstract class BaseEntity<T> {
             if (i === 0) {
               returnValue = object[embedding[i]];
             } else {
-              if(returnValue == null) {
+              if (returnValue == null) {
                 returnValue = null;
                 break;
               }
@@ -261,7 +246,7 @@ export abstract class BaseEntity<T> {
               //if many to many relation then just stringify the array
               //The some is a filter type for many to many.
               //used for users table where groups is an array
-              if(embedding[i] === 'some') {
+              if (embedding[i] === 'some') {
                 returnValue = JSON.stringify(returnValue['nodes']);
                 break;
               }
@@ -286,12 +271,12 @@ export abstract class BaseEntity<T> {
     });
   }
 
-  setSelectedItem(id: number): void {
-    this.nodes$.subscribe(value => {
-      this.selectedItem = value.find((item: any) => item.id === id);
 
-      this.setEditData();
-    });
+  setSelectedItem(id: number): void {
+
+    this.selectedItem = this.data.find((item: any) => item.id === id);
+
+    this.setEditData();
   }
 
   openExportModal(): void {

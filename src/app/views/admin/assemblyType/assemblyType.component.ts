@@ -18,7 +18,7 @@ import { AuthService } from "../../../services/authentication/auth.service";
   templateUrl: "./assemblyType.component.html",
 })
 
-export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> implements OnInit {
+export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> {
 
   objectSingle = 'Assembly type';
   objectPlural = 'Assembly types';
@@ -34,17 +34,11 @@ export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> imple
     },
   }
 
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   //json return object for getter
   Key = 'assemblyTypes';
 
   baseOrderBy = AssemblyTypesOrderBy.IdDesc;
-
-  override nodes$: Observable<Array<AssemblyTypesEntity>>;
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private assemblyTypeService: AssemblyTypeEntitiesGQL,
@@ -56,7 +50,7 @@ export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> imple
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   //maps for the url to be set at the front

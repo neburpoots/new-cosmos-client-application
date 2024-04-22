@@ -18,7 +18,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./assembly-multivers.component.html",
 })
 
-export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEntity> implements OnInit {
+export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEntity> {
 
 
   objectSingle = 'Assembly Multivers';
@@ -35,10 +35,6 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
     },
   }
 
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   assemblyMultiversLines: AssemblyLineEntity[] = [];
 
@@ -53,8 +49,6 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
   //This is the fallback order by on changes in the table
   baseOrderBy = AssemblyMultiversEntitiesOrderBy.AssemblageOrderDesc;
 
-  override nodes$: Observable<Array<AssemblyMultiversEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private assemblyMVService: AllAssemblyMultiversEntitiesGQL,
     private assemblyLineService: AllAssemblyLinesMultiversEntitiesGQL,
@@ -66,7 +60,7 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   override async loadDetailData(id: string): Promise<void> {

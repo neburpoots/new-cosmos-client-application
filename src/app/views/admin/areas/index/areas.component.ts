@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./areas.component.html",
 })
 
-export class AreasComponent extends BaseEntity<AreaEntity> implements OnInit {
+export class AreasComponent extends BaseEntity<AreaEntity> {
 
 
   @ViewChild('editModal') childComponent!: AreasFormComponent;
@@ -38,10 +38,6 @@ export class AreasComponent extends BaseEntity<AreaEntity> implements OnInit {
     },
   }
 
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   override setEditData() {
     console.log(this.editData)
@@ -68,8 +64,6 @@ export class AreasComponent extends BaseEntity<AreaEntity> implements OnInit {
 
   baseOrderBy = AreaEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<AreaEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private areasService: AllAreaEntitiesGQL,
     private deleteAreaService: DeleteAreaGQL,
@@ -81,7 +75,7 @@ export class AreasComponent extends BaseEntity<AreaEntity> implements OnInit {
 
 this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<AreaEntitiesOrderBy>[] = [
     { type: 'string', key: 'endUserName', label: "End User", asc: AreaEntitiesOrderBy.EndUserNameAsc, desc: AreaEntitiesOrderBy.EndUserNameDesc },

@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./applications.component.html",
 })
 
-export class ApplicationsComponent extends BaseEntity<Application> implements OnInit {
+export class ApplicationsComponent extends BaseEntity<Application> {
 
 
   @ViewChild('editModal') childComponent!: ApplicationsFormComponent;
@@ -38,10 +38,6 @@ export class ApplicationsComponent extends BaseEntity<Application> implements On
     },
   }
 
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   override setEditData() {
     console.log(this.editData)
@@ -63,8 +59,6 @@ export class ApplicationsComponent extends BaseEntity<Application> implements On
 
   baseOrderBy = ApplicationsOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<Application>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private applicationsService: AllApplicationsGQL,
     private deleteApplicationService: DeleteApplicationGQL,
@@ -76,7 +70,7 @@ export class ApplicationsComponent extends BaseEntity<Application> implements On
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<ApplicationsOrderBy>[] = [

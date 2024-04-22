@@ -19,7 +19,7 @@ import { AuthService } from "../../../services/authentication/auth.service";
   templateUrl: "./detector.component.html",
 })
 
-export class DetectorComponent extends BaseEntity<DetectorEntity> implements OnInit {
+export class DetectorComponent extends BaseEntity<DetectorEntity> {
 
   @ViewChild('detectorEdit') childComponent!: DetectorFormComponent;
 
@@ -46,14 +46,6 @@ export class DetectorComponent extends BaseEntity<DetectorEntity> implements OnI
 
   baseOrderBy = DetectorEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<DetectorEntity>>;
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
-
-
   override setEditData() {
     console.log(this.editData)
     this.childComponent.setEditData(this.editData);
@@ -72,7 +64,7 @@ export class DetectorComponent extends BaseEntity<DetectorEntity> implements OnI
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
 

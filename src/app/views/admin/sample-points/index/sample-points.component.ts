@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./sample-points.component.html",
 })
 
-export class SamplePointsComponent extends BaseEntity<SamplePointEntity> implements OnInit {
+export class SamplePointsComponent extends BaseEntity<SamplePointEntity> {
 
   @ViewChild('editModal') childComponent!: SamplePointsFormComponent;
 
@@ -35,11 +35,6 @@ export class SamplePointsComponent extends BaseEntity<SamplePointEntity> impleme
 
       ]
     },
-  }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
   }
 
   override setEditData() {
@@ -67,8 +62,6 @@ export class SamplePointsComponent extends BaseEntity<SamplePointEntity> impleme
 
   baseOrderBy = SamplePointEntitiesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<SamplePointEntity>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private samplePointService: AllSamplePointEntitiesGQL,
     private deleteSamplePointService: DeleteSamplePointGQL,
@@ -81,7 +74,7 @@ export class SamplePointsComponent extends BaseEntity<SamplePointEntity> impleme
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<SamplePointEntitiesOrderBy>[] = [

@@ -17,7 +17,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./ranges.component.html",
 })
 
-export class RangesComponent extends BaseEntity<Range> implements OnInit {
+export class RangesComponent extends BaseEntity<Range> {
 
   @ViewChild('editModal') childComponent!: RangesFormComponent;
 
@@ -33,12 +33,6 @@ export class RangesComponent extends BaseEntity<Range> implements OnInit {
       ]
     },
   }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
-
 
   override setEditData() {
     console.log(this.editData)
@@ -71,8 +65,6 @@ export class RangesComponent extends BaseEntity<Range> implements OnInit {
 
   baseOrderBy = RangesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<Range>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private rangeService: AllRangesGQL,
     private deleteRangeService: DeleteRangeGQL
@@ -85,7 +77,7 @@ export class RangesComponent extends BaseEntity<Range> implements OnInit {
 
     this.checkQueryParams();
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<RangesOrderBy>[] = [

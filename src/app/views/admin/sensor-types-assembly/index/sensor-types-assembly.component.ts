@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./sensor-types-assembly.component.html",
 })
 
-export class SensorTypeAssembliesComponent extends BaseEntity<SensorTypesIndex> implements OnInit {
+export class SensorTypeAssembliesComponent extends BaseEntity<SensorTypesIndex> {
 
   @ViewChild('editModal') childComponent!: SensorTypesFormComponent;
 
@@ -35,11 +35,6 @@ export class SensorTypeAssembliesComponent extends BaseEntity<SensorTypesIndex> 
 
       ]
     },
-  }
-
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
   }
 
   override setEditData() {
@@ -61,8 +56,6 @@ export class SensorTypeAssembliesComponent extends BaseEntity<SensorTypesIndex> 
   //This is the fallback order by on changes in the table
   baseOrderBy = SensorTypesIndicesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<SensorTypesIndex>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private sensorTypeService: AllSensorTypesIndicesGQL,
     private deleteSensorService: DeleteSensorTypeGQL,
@@ -75,7 +68,7 @@ export class SensorTypeAssembliesComponent extends BaseEntity<SensorTypesIndex> 
 
 this.checkQueryParams();
 
-this.nodes$ = this.loadData(this.searchCriteria);  }
+this.loadData(this.searchCriteria);  }
 
   tableHeaders: TableHead<SensorTypesIndicesOrderBy>[] = [
     { type: 'string', key: 'prefix', label: "Prefix", asc: SensorTypesIndicesOrderBy.PrefixAsc, desc: SensorTypesIndicesOrderBy.PrefixDesc },

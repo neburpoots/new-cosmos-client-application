@@ -19,7 +19,7 @@ import { AuthService } from "../../../../services/authentication/auth.service";
   templateUrl: "./sensor-base-types.component.html",
 })
 
-export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implements OnInit {
+export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> {
 
   @ViewChild('editModal') childComponent!: SensorBaseTypesFormComponent;
 
@@ -37,10 +37,6 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
     },
   }
 
-  ngOnInit(): void {
-    console.log(this.nodes$);
-    this.nodes$.subscribe(result => console.log(result));
-  }
 
   override setEditData() {
     console.log(this.editData)
@@ -71,8 +67,6 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
   //This is the fallback order by on changes in the table
   baseOrderBy = SensorBaseTypesOrderBy.IdDesc;
 
-  override nodes$: Observable<Array<SensorBaseType>>;
-
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private sensorBaseTypeService: AllSensorBaseTypesGQL,
     private deleteSensorBaseTypeService: DeleteSensorBaseTypeGQL,
@@ -85,7 +79,7 @@ export class SensorBaseTypeComponent extends BaseEntity<SensorBaseType> implemen
     this.checkQueryParams();
 
 
-    this.nodes$ = this.loadData(this.searchCriteria);
+    this.loadData(this.searchCriteria);
   }
 
   tableHeaders: TableHead<SensorBaseTypesOrderBy>[] = [

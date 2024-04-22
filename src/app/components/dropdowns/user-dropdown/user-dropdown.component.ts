@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
+import { Component, AfterViewInit, ViewChild, ElementRef, OnInit } from "@angular/core";
 import { createPopper } from "@popperjs/core";
 import { AuthService } from "../../../services/authentication/auth.service";
 
@@ -11,10 +11,7 @@ export class UserDropdownComponent {
   currentUsername: string = "User";
 
   constructor(protected authService: AuthService) {
-    authService.currentUsername$.subscribe(user => {
-      console.log(user);
-      this.currentUsername = user ?? "User";
-    });
+
   }
 
 
