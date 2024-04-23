@@ -4,6 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Mutation, Query } from 'apollo-angular';
 import { SearchFilters } from '../../../../models/utils/searchFilters';
+import { AuthService } from '../../../../services/authentication/auth.service';
+
+import dayjs from 'dayjs'
+
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
 
 @Component({
     selector: 'base-form',
@@ -49,16 +55,20 @@ export abstract class BaseFormComponent<T> {
         },
     }
 
+    dayjs = dayjs;
 
     protected isSubmitted = false;
 
     constructor(
+        protected authService: AuthService,
         protected toastr: ToastrService,
         protected fb: FormBuilder,
         protected createService: Mutation<any, any>,
-        protected updateService: Mutation<any, any>,
-
+        protected updateService: Mutation<any, any>
     ) {
+        dayjs.extend(utc);
+        dayjs.extend(timezone);
+        dayjs.tz.setDefault('Europe/Berlin');
     }
 
     close(): void {
@@ -84,6 +94,7 @@ export abstract class BaseFormComponent<T> {
 
 
     async create(data: T): Promise<void> {
+        
         this.createService.mutate({ body: data }).subscribe(
             (response) => {
                 console.log('Response:', response);
@@ -102,6 +113,7 @@ export abstract class BaseFormComponent<T> {
 
 
 
+    //should always get the id if possible
     get id(): number {
         return (this.object as any).id;
     }

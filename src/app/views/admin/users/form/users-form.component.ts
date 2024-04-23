@@ -9,6 +9,7 @@ import { BaseFormComponent } from '../../base/form/base-form.component';
 import { AllGasesNoPaginationGQL, AllGroupsNoPaginationGQL, CreateCalGasGQL, CreateUserWithGroupsGQL, CreateUserWithGroupsInput, UpdateCalGasGQL, UpdateUserWithGroupsGQL, UpdateUserWithGroupsInput, UserInput } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
 import { FormSelect } from '../../../../models/utils/formSelect';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 @Component({
     selector: 'users-form',
@@ -33,9 +34,10 @@ export class UsersFormComponent extends BaseFormComponent<CreateUserWithGroupsIn
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         , groupService: AllGroupsNoPaginationGQL,
         createUserGroupService: CreateUserWithGroupsGQL,
-        editUserWithGroupsService: UpdateUserWithGroupsGQL
+        editUserWithGroupsService: UpdateUserWithGroupsGQL,
+        authService: AuthService
     ) {
-        super(toastr, fb, createUserGroupService, editUserWithGroupsService)
+        super(authService, toastr, fb, createUserGroupService, editUserWithGroupsService)
 
         this.groups = [];
 

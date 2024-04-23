@@ -18,7 +18,6 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 // no layouts views
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
-import { ProfileComponent } from "./views/profile/profile.component";
 import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
 import { DetectorComponent } from "./views/admin/detectors/detector.component";
 import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
@@ -47,6 +46,7 @@ import { GroupsComponent } from "./views/admin/groups/index/groups.component";
 import { AuthGuard } from "./services/authentication/auth.guard";
 import { faAddressCard, faBolt, faBoxOpen, faBuilding, faCashRegister, faChartSimple, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { NavBarIcon } from "./models/utils/navbarItem";
+import { ProfileComponent } from "./views/admin/users/profile/profile.component";
 
 //id is the permission id in db
 export class RoutePermission {
@@ -321,6 +321,7 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       ...allAuthenticatedRoutes,
+      new RoutePermission("profile", ProfileComponent, 7),
       new RoutePermission("assemblies-multivers/:id", AssemblyMultiversDetailComponent, 7),
       // new RoutePermission("", DashboardComponent, 5),
       new RoutePermission("", DashboardComponent, 5),

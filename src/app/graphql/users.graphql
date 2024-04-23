@@ -215,3 +215,25 @@ mutation DeleteUserWithUserGroups($id: Int!)
 		clientMutationId
 	}  
 }
+
+#-------------------------------------------------------------------------------
+query CurrentUserInfo
+{
+	currentUserInfo {
+            id,
+            username,
+            created,
+            fullname
+            modified,
+            initials,
+            usersGroupsByUserId {
+                nodes {
+                    id
+                    groupByGroupId {
+                        id
+                        name
+                    }
+                }
+            }
+    }
+}

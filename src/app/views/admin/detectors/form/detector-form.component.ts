@@ -8,6 +8,7 @@ import { DetectorDto } from '../../../../models/dto/detectorDto';
 import { BaseFormComponent } from '../../base/form/base-form.component';
 import { FormSelect } from '../../../../models/utils/formSelect';
 import { CreateDetectorGQL } from '../../../../../generated/graphql';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 @Component({
     selector: 'detector-form',
@@ -34,9 +35,10 @@ export class DetectorFormComponent extends BaseFormComponent<DetectorDto> {
         protected override fb: FormBuilder, 
         // private detectorTypeService: DetectorTypeService, 
         
-        private tempService: CreateDetectorGQL
+        private tempService: CreateDetectorGQL,
+        authService: AuthService
         ) {
-        super(toastr, fb, tempService, tempService)
+        super(authService, toastr, fb, tempService, tempService)
         this.detectorTypes = [];
 
         this.myForm = this.fb.group({

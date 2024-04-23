@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BaseFormComponent } from '../../base/form/base-form.component';
 import { AllBuildingsNoPaginationGQL, AllEndUsersNoPaginationGQL, AllFloorsNoPaginationGQL, AreaInput, Building, CreateAreaGQL, CreateGasGQL, EndUser, Floor, GasInput, UpdateAreaGQL, UpdateGasGQL } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 
 @Component({
@@ -39,10 +40,10 @@ export class AreasFormComponent extends BaseFormComponent<AreaInput> {
         editService: UpdateAreaGQL,
         endUserService: AllEndUsersNoPaginationGQL,
         buildingService: AllBuildingsNoPaginationGQL,
-        floorService: AllFloorsNoPaginationGQL
-
+        floorService: AllFloorsNoPaginationGQL,
+        authService: AuthService
         ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
         
         this.buildingService = buildingService;
         this.floorService = floorService;
@@ -67,9 +68,9 @@ export class AreasFormComponent extends BaseFormComponent<AreaInput> {
         return {
             floorId: +this.myForm.value.floor,
             name: this.myForm.value.name,
-            created: new Date(),
-            modified: new Date(),
-            ownerId: 10
+            created: !this.id ? this.dayjs().format() : undefined,
+            modified: this.dayjs().format(),
+            ownerId: this.authService?.currentUserInfo?.id,
         }
     }
 

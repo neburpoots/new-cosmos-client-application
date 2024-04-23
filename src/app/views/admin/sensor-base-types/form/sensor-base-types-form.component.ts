@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BaseFormComponent } from '../../base/form/base-form.component';
 import { AllPrinciplesNoPaginationGQL, CreateMembraneGQL,  CreateSensorBaseTypeGQL,  Principle,  SensorBaseTypeInput,  SensorTypeInput, UpdateMembraneGQL, UpdateSensorBaseTypeGQL } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 
 @Component({
@@ -31,9 +32,10 @@ export class SensorBaseTypesFormComponent extends BaseFormComponent<SensorBaseTy
         ,
         createService: CreateSensorBaseTypeGQL,
         editService: UpdateSensorBaseTypeGQL,
-        principleService: AllPrinciplesNoPaginationGQL
+        principleService: AllPrinciplesNoPaginationGQL,
+        authService: AuthService
         ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
 
         this.principles = [];
 
@@ -62,9 +64,9 @@ export class SensorBaseTypesFormComponent extends BaseFormComponent<SensorBaseTy
             quotationIntervalMonths: +this.myForm.value.quotation_interval_months,
             principleId: +this.myForm.value.principleId,
             volume: +this.myForm.value.volume,
-            created: this.object.id ? this.object.created : new Date(), //if id exists then it is an edit
-            modified: new Date(),
-            ownerId: 10
+            created: !this.id ? this.dayjs().format() : undefined,
+            modified: this.dayjs().format(),
+            ownerId: this.authService?.currentUserInfo?.id,
         }
     }
 

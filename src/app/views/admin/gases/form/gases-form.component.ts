@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BaseFormComponent } from '../../base/form/base-form.component';
 import { CreateGasGQL, GasInput, UpdateGasGQL } from '../../../../../generated/graphql';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 
 @Component({
@@ -21,9 +22,10 @@ export class GasesFormComponent extends BaseFormComponent<GasInput> {
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         ,
         createService: CreateGasGQL,
-        editService: UpdateGasGQL
+        editService: UpdateGasGQL,
+        authService: AuthService
         ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
 
         this.myForm = this.fb.group({
             name: [this.object.name, [Validators.required]],
@@ -34,9 +36,9 @@ export class GasesFormComponent extends BaseFormComponent<GasInput> {
         //todo setup owner_id, ownerId
         return {
             name: this.myForm.value.name,
-            created: new Date(),
-            modified: new Date(),
-            ownerId: 10
+            created: !this.id ? this.dayjs().format() : undefined,
+            modified: this.dayjs().format(),
+            ownerId: this.authService?.currentUserInfo?.id,
         }
     }
 

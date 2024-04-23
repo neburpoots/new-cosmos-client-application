@@ -9,6 +9,7 @@ import { BaseFormComponent } from '../../base/form/base-form.component';
 import { AllGasesNoPaginationGQL, CreateCalGasGQL, UpdateCalGasGQL } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
 import { FormSelect } from '../../../../models/utils/formSelect';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 @Component({
     selector: 'calgas-form',
@@ -32,9 +33,10 @@ export class CalibrationGasesFormComponent extends BaseFormComponent<CalgasDto> 
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         , gasesService: AllGasesNoPaginationGQL,
         createCalGasService: CreateCalGasGQL,
-        editCalGasService: UpdateCalGasGQL
+        editCalGasService: UpdateCalGasGQL,
+        authService: AuthService
         ) {
-        super(toastr, fb, createCalGasService, editCalGasService)
+        super(authService, toastr, fb, createCalGasService, editCalGasService)
         
         this.gases = [];
 
@@ -50,13 +52,13 @@ export class CalibrationGasesFormComponent extends BaseFormComponent<CalgasDto> 
     createDto(): any {
         //todo setup owner_id, ownerId
         return {
-            ownerId: 10,
+            ownerId: this.authService?.currentUserInfo?.id,
             concentration: +this.myForm.value.concentration,
             engineeringUnits: this.myForm.value.engineering_units,
             gasId: +this.myForm.value.gas,
             cdartikel: this.myForm.value.cdartikel,
-            created: new Date(),
-            modified: new Date(),
+            created: !this.id ? this.dayjs().format() : undefined,
+            modified: this.dayjs().format(),
         }
 
     }

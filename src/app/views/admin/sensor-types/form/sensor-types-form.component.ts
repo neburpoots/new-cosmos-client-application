@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BaseFormComponent } from '../../base/form/base-form.component';
 import { AllCalibrationGasesNoPaginationGQL, AllChemicalCompoundsNoPaginationGQL, AllElectrolytesNoPaginationGQL, AllFiltersNoPaginationGQL, AllMembranesNoPaginationGQL, AllORingsNoPaginationGQL, AllPyrolysersNoPaginationGQL, AllRangesNoPaginationGQL, AllSensorBaseTypesNoPaginationGQL, CreateMembraneGQL, CreateSensorTypeGQL, SensorTypeInput, SensorTypesIndex, UpdateMembraneGQL, UpdateSensorTypeGQL } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 
 @Component({
@@ -290,9 +291,10 @@ export class SensorTypesFormComponent extends BaseFormComponent<SensorTypeInput>
         oRingsService: AllORingsNoPaginationGQL,
         filtersService: AllFiltersNoPaginationGQL,
         rangeService: AllRangesNoPaginationGQL,
-        pyrolyserService: AllPyrolysersNoPaginationGQL
+        pyrolyserService: AllPyrolysersNoPaginationGQL,
+        authService: AuthService
     ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
 
         this.setUpDependentData(sensorBaseTypesService, calGasesService, electrolytesService, 
             membranesService, oRingsService, filtersService, rangeService, pyrolyserService);
@@ -331,7 +333,9 @@ export class SensorTypesFormComponent extends BaseFormComponent<SensorTypeInput>
             replacementIntervalMonths: +this.myForm.value.replacementIntervalMonths,
             cdartikel: this.myForm.value.part,
             volume: +this.myForm.value.volume,
-            ownerId: 10,
+            created: !this.id ? this.dayjs().format() : undefined,
+            modified: this.dayjs().format(),
+            ownerId: this.authService?.currentUserInfo?.id ?? 10,
         }
     }
 

@@ -21,7 +21,6 @@ import { RegisterComponent } from "./views/auth/register/register.component";
 // no layouts views
 import { IndexComponent } from "./views/index/index.component";
 import { LandingComponent } from "./views/landing/landing.component";
-import { ProfileComponent } from "./views/profile/profile.component";
 
 // components for views and layouts
 
@@ -114,6 +113,13 @@ import { UsersFormComponent } from "./views/admin/users/form/users-form.componen
 import { UsersComponent } from "./views/admin/users/index/users.component";
 import { GroupsComponent } from "./views/admin/groups/index/groups.component";
 import { GroupsFormComponent } from "./views/admin/groups/form/groups-form.component";
+import { ProfileComponent } from "./views/admin/users/profile/profile.component";
+import { registerLocaleData } from "@angular/common";
+
+import localeEu from '@angular/common/locales/eu'; // Import the locale data for EU timezone
+import { DayjsConfigService } from "./services/utils/dayjsConfig.service";
+registerLocaleData(localeEu);
+
 
 @NgModule({
   declarations: [
@@ -219,7 +225,7 @@ import { GroupsFormComponent } from "./views/admin/groups/form/groups-form.compo
     preventDuplicates: true, // Prevent duplicate toastrs from being shown
   }), ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule, FontAwesomeModule, SatPopoverModule, ApolloModule, GraphQLModule],
   providers: [AuthService,
-  
+    DayjsConfigService
   ],
   bootstrap: [AppComponent],
 })

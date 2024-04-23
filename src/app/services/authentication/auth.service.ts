@@ -4,7 +4,7 @@ import { ReplaySubject, Observable, of, from, combineLatest } from 'rxjs';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 //import { ApolloCache } from '@apollo/client/core';
-import { AuthenticateGQL, CurrentReadPermissionsGQL, CurrentReadPermissionsQuery, CurrentUsernameGQL, CurrentWritePermissionsGQL, CurrentWritePermissionsQuery, JwtTokenDocument } from '../../../generated/graphql';
+import { AuthenticateGQL, CurrentReadPermissionsGQL, CurrentReadPermissionsQuery, CurrentUserInfoGQL, CurrentUsernameGQL, CurrentWritePermissionsGQL, CurrentWritePermissionsQuery, JwtTokenDocument, User } from '../../../generated/graphql';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
@@ -25,23 +25,30 @@ export class AuthService
 {
 	//cache: ApolloCache<any>;	
 	currentUsername: string|null|undefined;
+	currentUserInfo: User|null|undefined;
 	currentUsername$ = new ReplaySubject<string|null|undefined>(1);
 	currentReadPermissions$ = new ReplaySubject<CurrentReadPermissions['nodes']>(1);	  
 	currentWritePermissions$ = new ReplaySubject<CurrentWritePermissions['nodes']>(1);	
 
 	constructor(private authenticateService: AuthenticateGQL, 
 		private currentUsernameService: CurrentUsernameGQL, 
+		private currentUserInfoService : CurrentUserInfoGQL,
 		private currentReadPermissionsService: CurrentReadPermissionsGQL, 
 		private currentWritePermissionsService: CurrentWritePermissionsGQL, 
 		private apollo: Apollo, private toastrService: ToastrService,
 		private router: Router
 		) 
 	{ 
-		//this.cache = this.apollo.client.cache;		
-
-		this.currentUsernameService.fetch({}, {fetchPolicy: 'cache-only'}).pipe
+		//this.cache = this.apollo.client.cache;
+		
+		this.currentUserInfoService.fetch({}, {fetchPolicy: 'no-cache'}).pipe
 		(
-			tap(({data: {currentUsername}}) => this.currentUsername$.next(currentUsername)),			
+			tap(({data}) => this.currentUserInfo = data.currentUserInfo as User)
+		).subscribe();
+
+		this.currentUsernameService.fetch({}, {fetchPolicy: 'no-cache'}).pipe
+		(
+			tap(({data: {currentUsername}}) => this.currentUsername = currentUsername),			
 			switchMap
 			(
 				() => this.currentReadPermissionsService.fetch({}, {fetchPolicy: 'no-cache'}).pipe

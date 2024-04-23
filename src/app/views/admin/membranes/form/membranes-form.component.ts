@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BaseFormComponent } from '../../base/form/base-form.component';
 import { CreateGasGQL, CreateMembraneGQL, CreateORingGQL, MembraneInput, ORingInput, UpdateMembraneGQL, UpdateORingGQL } from '../../../../../generated/graphql';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 
 @Component({
@@ -24,9 +25,10 @@ export class MembranesFormComponent extends BaseFormComponent<MembraneInput> {
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         ,
         createService: CreateMembraneGQL,
-        editService: UpdateMembraneGQL
+        editService: UpdateMembraneGQL,
+        authService: AuthService
         ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
 
         this.myForm = this.fb.group({
             name: [this.object.name, [Validators.required]],
@@ -43,9 +45,9 @@ export class MembranesFormComponent extends BaseFormComponent<MembraneInput> {
             cdartikel: this.myForm.value.cdartikel,
             replacementIntervalMonths: +this.myForm.value.replacement_interval_months,
             quantity: +this.myForm.value.quantity,
-            created: this.object.id ? this.object.created : new Date(), //if id exists then it is an edit
-            modified: new Date(),
-            ownerId: 10
+            created: !this.id ? this.dayjs().format() : undefined,
+            modified: this.dayjs().format(),
+            ownerId: this.authService?.currentUserInfo?.id,
         }
     }
 

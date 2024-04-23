@@ -1,30 +1,26 @@
-<div [satPopoverAnchor]="userDropdown" (click)="userDropdown.toggle()">
-  <div class="hover:cursor-pointer  flex transition ease-in-out hover:scale-110">
+<div (mouseenter)="toggle()" (mouseleave)="toggle()" class="flex">
+  <div *ngIf="isUserDropdownOpen" [@fadeIn]
+    class="absolute right-[50px] top-[10px] bg-cosmosDarker rounded-3xl transition ease-in-out flex flex-col min-w-48 z-50">
+
+    <div class="transition  text-base z-50 float-left py-2 list-none text-left rounded min-w-48">
+      <li>
+        <div class="text-sm block text font-semibold text-white py-2 px-4 rounded-lg ">
+          <a [routerLink]="['/profile']">{{authService.currentUserInfo?.fullname}}</a></div>
+      </li>
+    </div>
+    <div class="mb-2 text-base z-50 float-left py-2  list-none text-left rounded min-w-48">
+      <li (click)="logout()">
+        <div routerLinkActive #adminDashboard="routerLinkActive"
+          class="text-sm block  font-semibold  py-3 text-white mx-2  px-4 hover:bg-cosmosDark rounded-lg cursor-pointer "><i
+            class="mr-2 fa fa-sign-out" aria-hidden="true"></i>
+          Sign out</div>
+      </li>
+    </div>
+  </div>
+  <div class="hover:cursor-pointer z-50  flex transition ease-in-out hover:scale-110">
     <span
       class="text-xl h-12 w-12 text-sm p-4 text-white bg-cosmosDark inline-flex items-center justify-center rounded-full">
       <i class="fa fa-user"></i>
     </span>
   </div>
-  <sat-popover #userDropdown verticalAlign="below" hasBackdrop horizontalAlign="center">
-    <div class="bg-cosmosDark rounded-xl transition ease-in-out hover:scale-110 flex flex-col min-w-48 z-50">
-
-      <div
-        class="transition text-base z-50 float-left py-2 list-none text-left rounded min-w-48">
-        <li (click)="logout()">
-          <div class="text-sm block text font-semibold text-white py-2 px-4 hover:bg-cosmosDark rounded-lg cursor-pointer ">
-            Logged in as: {{authService.currentUsername}}</div>
-        </li>
-      </div>
-      <div
-        class="bg-cosmosDark rounded-xl  text-base z-50 float-left py-2 list-none text-left rounded min-w-48">
-        <li (click)="logout()">
-          <div routerLinkActive #adminDashboard="routerLinkActive" 
-            class="text-sm block  font-semibold   text-white py-2 px-4 hover:bg-cosmosDark rounded-lg cursor-pointer "><i
-              class="mr-2 fa fa-sign-out" aria-hidden="true"></i>
-            Sign out</div>
-        </li>
-      </div>
-    </div>
-  </sat-popover>
-
 </div>

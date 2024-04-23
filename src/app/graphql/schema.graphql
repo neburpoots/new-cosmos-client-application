@@ -8641,6 +8641,7 @@ type Query implements Node {
     filter: PermissionFilter
   ): PermissionsConnection
   currentUserId: Int
+  currentUserInfo: User
   currentUsername: String
   currentWriteIds: [Int]
 

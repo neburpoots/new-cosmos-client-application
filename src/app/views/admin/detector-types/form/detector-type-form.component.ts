@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BaseFormComponent } from '../../base/form/base-form.component';
 import { CreateDetectorTypeGQL, DetectorTypeInput, UpdateDetectorTypeGQL } from '../../../../../generated/graphql';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 @Component({
     selector: 'detector-type-form',
@@ -25,9 +26,10 @@ export class DetectorTypeFormComponent extends BaseFormComponent<DetectorTypeInp
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         ,
         createService: CreateDetectorTypeGQL,
-        editService: UpdateDetectorTypeGQL
+        editService: UpdateDetectorTypeGQL,
+        authService: AuthService
     ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
 
         this.myForm = this.fb.group({
             prefix: [this.object.prefix, []],
@@ -43,13 +45,13 @@ export class DetectorTypeFormComponent extends BaseFormComponent<DetectorTypeInp
 
     createDto(): any {
         return {
-            ownerId: 10,
             prefix: this.myForm.value.prefix,
             code: this.myForm.value.code,
             suffix: this.myForm.value.suffix,
             sensorCount: +this.myForm.value.sensor_count,
-            created: new Date(),
-            modified: new Date(),
+            created: !this.id ? this.dayjs().format() : undefined,
+            modified: this.dayjs().format(),
+            ownerId: this.authService?.currentUserInfo?.id,
         }
     }
 

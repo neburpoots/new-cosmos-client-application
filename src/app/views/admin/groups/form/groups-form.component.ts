@@ -29,15 +29,13 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
     selectedWritePermissions: any[] = [];
     selectedReadPermissions: any[] = [];
 
-    authService : AuthService;
-
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         , permissionService: AllPermissionsNoPaginationGQL,
         createService: CreateGroupWithPermissionsGQL,
         editService: UpdateGroupWithPermissionsGQL,
         authService: AuthService,
     ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
 
         this.authService = authService;
 

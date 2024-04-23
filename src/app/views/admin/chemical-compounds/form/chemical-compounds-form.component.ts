@@ -5,6 +5,7 @@ import { BaseFormComponent } from '../../base/form/base-form.component';
 import { AllGasesNoPaginationGQL, ChemicalCompoundInput, CreateCalGasGQL, CreateChemicalCompoundGQL, UpdateCalGasGQL, UpdateChemicalCompoundGQL } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
 import { FormSelect } from '../../../../models/utils/formSelect';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 @Component({
     selector: 'chemical-compounds-form',
@@ -31,9 +32,10 @@ export class ChemicalCompoundsFormComponent extends BaseFormComponent<ChemicalCo
         protected override toastr: ToastrService,
         protected override fb: FormBuilder,
         createService: CreateChemicalCompoundGQL,
-        editService: UpdateChemicalCompoundGQL
+        editService: UpdateChemicalCompoundGQL,
+        authService: AuthService
     ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
 
         this.myForm = this.fb.group({
             name: [this.object.name, [Validators.required]],
@@ -58,9 +60,9 @@ export class ChemicalCompoundsFormComponent extends BaseFormComponent<ChemicalCo
             molarMass: +this.myForm.value.molarMass,
             density: +this.myForm.value.density,
             url: this.myForm.value.url,
-            ownerId: 10,
-            created: new Date(),
-            modified: new Date(),
+            created: !this.id ? this.dayjs().format() : undefined,
+            modified: this.dayjs().format(),
+            ownerId: this.authService?.currentUserInfo?.id,
         }
 
     }

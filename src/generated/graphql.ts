@@ -53643,6 +53643,7 @@ export type Query = Node & {
   /** Reads and enables pagination through a set of `Permission`. */
   currentReadPermissions?: Maybe<PermissionsConnection>;
   currentUserId?: Maybe<Scalars['Int']['output']>;
+  currentUserInfo?: Maybe<User>;
   currentUsername?: Maybe<Scalars['String']['output']>;
   currentWriteIds?: Maybe<Array<Maybe<Scalars['Int']['output']>>>;
   /** Reads and enables pagination through a set of `Permission`. */
@@ -82801,6 +82802,11 @@ export type DeleteUserWithUserGroupsMutationVariables = Exact<{
 
 export type DeleteUserWithUserGroupsMutation = { __typename?: 'Mutation', deleteuserandgroups?: { __typename?: 'DeleteuserandgroupsPayload', clientMutationId?: string | null } | null };
 
+export type CurrentUserInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CurrentUserInfoQuery = { __typename?: 'Query', currentUserInfo?: { __typename?: 'User', id: number, username?: string | null, created?: any | null, fullname?: string | null, modified?: any | null, initials?: string | null, usersGroupsByUserId: { __typename?: 'UsersGroupsConnection', nodes: Array<{ __typename?: 'UsersGroup', id: number, groupByGroupId?: { __typename?: 'Group', id: number, name?: string | null } | null }> } } | null };
+
 export const LocalDetectorFieldsFragmentDoc = gql`
     fragment localDetectorFields on Detector {
   id
@@ -86415,6 +86421,38 @@ export const DeleteUserWithUserGroupsDocument = gql`
   })
   export class DeleteUserWithUserGroupsGQL extends Apollo.Mutation<DeleteUserWithUserGroupsMutation, DeleteUserWithUserGroupsMutationVariables> {
     override document = DeleteUserWithUserGroupsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CurrentUserInfoDocument = gql`
+    query CurrentUserInfo {
+  currentUserInfo {
+    id
+    username
+    created
+    fullname
+    modified
+    initials
+    usersGroupsByUserId {
+      nodes {
+        id
+        groupByGroupId {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CurrentUserInfoGQL extends Apollo.Query<CurrentUserInfoQuery, CurrentUserInfoQueryVariables> {
+    override document = CurrentUserInfoDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

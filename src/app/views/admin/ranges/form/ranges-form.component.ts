@@ -5,6 +5,7 @@ import { BaseFormComponent } from '../../base/form/base-form.component';
 import { AllGasesNoPaginationGQL, ChemicalCompoundInput, CreateCalGasGQL, CreateChemicalCompoundGQL, CreateRangeGQL, RangeInput, UpdateChemicalCompoundGQL, UpdateRangeGQL } from '../../../../../generated/graphql';
 import { Query } from 'apollo-angular';
 import { FormSelect } from '../../../../models/utils/formSelect';
+import { AuthService } from '../../../../services/authentication/auth.service';
 
 @Component({
     selector: 'ranges-form',
@@ -38,9 +39,10 @@ export class RangesFormComponent extends BaseFormComponent<RangeInput> {
         protected override fb: FormBuilder,
         gasesService: AllGasesNoPaginationGQL,
         createService: CreateRangeGQL,
-        editService: UpdateRangeGQL
+        editService: UpdateRangeGQL,
+        authService: AuthService
     ) {
-        super(toastr, fb, createService, editService)
+        super(authService, toastr, fb, createService, editService)
 
         this.gases = [];
 

@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllORingEntitiesGQL, AllPyrolyserEntitiesGQL, DeletePyrolyserGQL, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllORingEntitiesArgs } from "../../../../../generated/graphql";
+import { AllORingEntitiesGQL, AllPyrolyserEntitiesGQL, DeleteORingGQL, DeletePyrolyserGQL, ORingEntitiesOrderBy, ORingEntity, PyrolyserEntitiesOrderBy, PyrolyserEntity, QueryAllORingEntitiesArgs } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";
@@ -65,7 +65,7 @@ export class ORingsComponent extends BaseEntity<ORingEntity> {
 
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private oRingService: AllORingEntitiesGQL,
-    private deleteORingService: DeletePyrolyserGQL
+    private deleteORingService: DeleteORingGQL
     ,
     protected override router: Router,
     protected override fileService: FileService,

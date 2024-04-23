@@ -1,0 +1,28 @@
+<div class="min-h-[100vh] flex px-4 md:px-10 justify-center">
+
+    <div class="h-full w-full flex items-center">
+        <div class="w-full mb-12 pt-12 px-8">
+            <div class="pt-24 flex flex-col gap-6">
+                <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2 text-center">
+                    <div class="flex items-center justify-center ">
+                        <div class="mt-[-100px] bg-cosmosDark rounded-full p-8 px-10">
+                            <fa-icon [size]="'7x'" class="text-white" [icon]="faUser"></fa-icon>
+                        </div>
+                    </div>
+                    <h1 class="text-2xl text-roboto font-bold text-gray-800">{{authService.currentUserInfo?.fullname}}
+                    </h1>
+                    <p>Initials: {{authService.currentUserInfo?.initials}}</p>
+                    <p>Groups: 
+                        @for (item of authService.currentUserInfo?.usersGroupsByUserId?.nodes; track item.id; let idx = $index) {
+                            <span *ngIf="idx !== 0">, </span>
+                            <span>{{item.groupByGroupId?.name}}</span>
+                        } @empty {
+                            <p class="text-gray-200">User has no roles</p>
+                        }
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
