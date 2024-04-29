@@ -1,0 +1,224 @@
+<div class="min-h-[100vh] flex px-4 md:px-10 justify-center">
+
+  <div class="h-full w-full flex items-center">
+    <div class="w-full mb-12 pt-12 px-4">
+      <div *ngIf="item" class="pt-12 flex flex-col gap-6">
+        <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
+          <h1 class="text-2xl text-roboto font-bold text-gray-800">Purchase Advice
+            ({{item?.crediteur?.zoeknaam}} / {{item?.cdcrediteur}})</h1>
+          <p>View the details of the Purchase advice here.</p>
+        </div>
+        <div *ngIf="item?.crediteur?.notities?.nodes?.length > 0"
+          class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
+          <h2 class="text-lg text-roboto font-bold text-gray-800">Notes</h2>
+          <p>
+            @for (line of item?.crediteur?.notities?.nodes; track line.cdnotitie) {
+            {{line.tekst}}
+            }
+          </p>
+        </div>
+        @for(opdracht of item?.factureeropdrachtIndex?.nodes; track opdracht.factuuropdracht) {
+        <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2 ">
+          <div class="flex gap-10">
+            <h2 class="text-xl text-roboto font-bold text-gray-800">#{{opdracht?.factuuropdracht}} -
+              {{opdracht?.zoeknaam}}</h2>
+          </div>
+
+          <div class=" overflow-auto overflow-y-hidden">
+            <table id="myTable" class="items-center w-full bg-transparent border-collapse">
+              <thead>
+                <tr class="bg-slate-100 font-roboto  rounded-lg text-slate-800">
+                  <th></th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Part</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Composition</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Description</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Order Code</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Stock</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">SO</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">AO</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">Free</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">PO</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Min</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Max</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Price</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Currency</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Batch</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">PO Advice</th>
+
+                </tr>
+              </thead>
+
+
+
+              <tbody>
+
+                @for (line of opdracht?.besteladviesWithStockSupplier?.nodes; track line.cdartikel) {
+                <tr>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    <input type="checkbox" [checked]="isInArray(line.cdartikel, opdracht.factuuropdracht)"
+                      (change)="addItem(line.cdartikel, opdracht.factuuropdracht)" /></td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.cdartikel }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.cdartsamenstellingen }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.omschr }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.bestcode }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.voorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.gereserveerd) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.assemblaf) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.vrij) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.inkopen) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.minvoorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.maxvoorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.inkoopprijs }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.isovaluta }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.besthoeveelheid) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.aantal) }}</td>
+
+                </tr>
+                }
+
+
+
+              </tbody>
+
+
+            </table>
+
+          </div>
+
+        </div>
+        }
+        <div *ngIf="item?.besteladvies?.nodes.length > 0" class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2 ">
+          <div class="flex gap-10">
+            <h2 class="text-xl text-roboto font-bold text-gray-800">Stock</h2>
+          </div>
+
+          <div class=" overflow-auto overflow-y-hidden">
+            <table id="myTable" class="items-center w-full bg-transparent border-collapse">
+              <thead>
+                <tr class="bg-slate-100 font-roboto  rounded-lg text-slate-800">
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Part</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Composition</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Description</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Order Code</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Stock</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">SO</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">AO</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">Free</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">PO</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Min</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Max</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Price</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Currency</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Batch</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">PO Advice</th>
+
+                </tr>
+              </thead>
+
+
+
+              <tbody>
+
+                @for (line of item?.besteladvies?.nodes; track line.cdartikel) {
+                <tr>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.cdartikel }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.cdartsamenstellingen }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.omschr }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.bestcode }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.voorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.gereserveerd) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.assemblaf) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.vrij) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.inkopen) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.minvoorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.maxvoorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.inkoopprijs }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.isovaluta }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.besthoeveelheid) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.aantal) }}</td>
+
+                </tr>
+                }
+
+
+
+              </tbody>
+
+
+            </table>
+
+
+
+          </div>
+
+        </div>
+        <div  *ngIf="item?.factureeropdrachtIndex?.nodes.length > 0" class="flex flex-row mt-auto justify-start items-center gap-2">
+          <button type="button" (click)="addPartsToArtikelFactExclusion()"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Move
+            selected parts to stock</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

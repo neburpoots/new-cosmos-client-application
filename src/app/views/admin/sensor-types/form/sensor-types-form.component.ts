@@ -6,13 +6,11 @@ import { AllCalibrationGasesNoPaginationGQL, AllChemicalCompoundsNoPaginationGQL
 import { Query } from 'apollo-angular';
 import { AuthService } from '../../../../services/authentication/auth.service';
 
-
 @Component({
     selector: 'sensor-types-form',
     templateUrl: './sensor-types-form.component.html',
 })
 export class SensorTypesFormComponent extends BaseFormComponent<SensorTypeInput> {
-
 
     myForm: FormGroup;
 
@@ -427,7 +425,6 @@ export class SensorTypesFormComponent extends BaseFormComponent<SensorTypeInput>
             part: changes?.sensorTypeCdartikel,
             volume: changes?.volume,
             ownerId: changes?.ownerId,
-            
         };
 
         this.myForm.patchValue(editValues);

@@ -117,9 +117,10 @@ import { ProfileComponent } from "./views/admin/users/profile/profile.component"
 import { registerLocaleData } from "@angular/common";
 
 import localeEu from '@angular/common/locales/eu'; // Import the locale data for EU timezone
-import { DayjsConfigService } from "./services/utils/dayjsConfig.service";
+import { StockSuppliersComponent } from "./views/admin/stock-suppliers/index/stock-suppliers.component";
+import { StockSuppliersFormComponent } from "./views/admin/stock-suppliers/form/stock-suppliers-form.component";
+import { StockSuppliersDetailComponent } from "./views/admin/stock-suppliers/detail/stock-suppliers-detail.component";
 registerLocaleData(localeEu);
-
 
 @NgModule({
   declarations: [
@@ -213,8 +214,10 @@ registerLocaleData(localeEu);
     UsersComponent,
     UsersFormComponent,
     GroupsComponent,
-    GroupsFormComponent
-
+    GroupsFormComponent,
+    StockSuppliersComponent,
+    StockSuppliersFormComponent,
+    StockSuppliersDetailComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)
@@ -224,8 +227,7 @@ registerLocaleData(localeEu);
     progressAnimation: 'increasing', // Set the animation type for the progress bar ('increasing' or 'decreasing')
     preventDuplicates: true, // Prevent duplicate toastrs from being shown
   }), ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule, FontAwesomeModule, SatPopoverModule, ApolloModule, GraphQLModule],
-  providers: [AuthService,
-    DayjsConfigService
+  providers: [AuthService
   ],
   bootstrap: [AppComponent],
 })

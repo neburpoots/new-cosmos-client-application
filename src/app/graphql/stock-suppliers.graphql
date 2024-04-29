@@ -1,0 +1,116 @@
+#-------------------------------------------------------------------------------
+query allStockSuppliers($first: Int, $offset: Int, $filter: StockSuppliersIndexFilter!, $orderBy: [StockSuppliersIndicesOrderBy!]) {
+  allStockSuppliersIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      zoeknaam
+      tztAdvice
+      totalStockVvp
+      totalReservedVvp
+      totalPoVvp
+      totalAdvice
+      id
+      cdcrediteur
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+query stockSupplierById($id: Int!) {
+  stockSupplierById(id: $id) {
+    factureeropdrachtIndex {
+      nodes {
+        factuuropdracht
+        factuurnummer
+        referentie
+        cdbetcond
+        opdrachtdatum
+        zoeknaam
+        besteladviesWithStockSupplier(stockSupplierIdParam: $id) {
+          nodes {
+            vrij
+            voorraad
+            stockSupplierId
+            omschr
+            minvoorraad
+            maxvoorraad
+            inkopen
+            isovaluta
+            inkoopprijs
+            gereserveerd
+            factuuropdracht
+            cdartsamenstellingen
+            cdartikel
+            besthoeveelheid
+            bestcode
+            assemblaf
+            aantal
+          }
+        }
+      }
+    }
+    shipmentDays
+    shipmentDay
+    ownerId
+    name
+    modified
+    id
+    created
+    cdcrediteur
+            besteladvies( filter: {
+                factuuropdracht: { isNull: true}
+            }) {
+                      nodes {
+            vrij
+            voorraad
+            stockSupplierId
+            omschr
+            minvoorraad
+            maxvoorraad
+            inkopen
+            isovaluta
+            inkoopprijs
+            gereserveerd
+            factuuropdracht
+            cdartsamenstellingen
+            cdartikel
+            besthoeveelheid
+            bestcode
+            assemblaf
+            aantal
+          }
+        }
+    crediteur {
+      naam
+      zoeknaam
+      notities {
+        nodes {
+          cdnotitie
+          tekst
+        }
+      }
+
+    }
+  }
+}
+
+
+#-------------------------------------------------------------------------------
+mutation CreateFactopdrachtArtikelExclusion(
+    $body: FactopdrachtArtikelExclusionInput!
+) {
+  createFactopdrachtArtikelExclusion(
+    input: {factopdrachtArtikelExclusion: $body}
+  ) {
+    factopdrachtArtikelExclusion {
+        id
+        factuuropdracht
+        cdartikel
+    }
+  }
+}

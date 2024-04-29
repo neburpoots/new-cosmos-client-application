@@ -8,6 +8,8 @@
                 [title]="objectPlural" (view)="openViewModal($event)" [searchCriteria]="searchCriteria"
                 (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"
                 (export)="openExportModal()"
+                [isPdf]="true"
+                (pdf)="downloadPdf($event)"
                 [inline_selector]="'filters-form'">
                 <assembly-multivers-popover [assemblyMultiversLines]="assemblyMultiversLines"
                     [item]="selectedItem"></assembly-multivers-popover>

@@ -44,9 +44,11 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/inde
 import { UsersComponent } from "./views/admin/users/index/users.component";
 import { GroupsComponent } from "./views/admin/groups/index/groups.component";
 import { AuthGuard } from "./services/authentication/auth.guard";
-import { faAddressCard, faBolt, faBoxOpen, faBuilding, faCashRegister, faChartSimple, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faBolt, faBoxOpen, faBuilding, faCashRegister, faChartSimple, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import { NavBarIcon } from "./models/utils/navbarItem";
 import { ProfileComponent } from "./views/admin/users/profile/profile.component";
+import { StockSuppliersComponent } from "./views/admin/stock-suppliers/index/stock-suppliers.component";
+import { StockSuppliersDetailComponent } from "./views/admin/stock-suppliers/detail/stock-suppliers-detail.component";
 
 //id is the permission id in db
 export class RoutePermission {
@@ -119,6 +121,20 @@ export const navigationObject: menuItem[] = [
         icon6: faSatelliteDish,
         route: new RoutePermission("sensor-base-types", SensorBaseTypeComponent, 19),
       }
+    ]
+  },
+  {
+    name: "Warehouse",
+    active: false,
+    icon6: faWarehouse,
+    items: [
+      {
+        title: "Stock Suppliers",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faGauge,
+        route: new RoutePermission("stock-suppliers", StockSuppliersComponent, 10),
+      },
     ]
   },
   {
@@ -323,6 +339,7 @@ const routes: Routes = [
       ...allAuthenticatedRoutes,
       new RoutePermission("profile", ProfileComponent, 7),
       new RoutePermission("assemblies-multivers/:id", AssemblyMultiversDetailComponent, 7),
+      new RoutePermission("stock-suppliers/:id", StockSuppliersDetailComponent, 28),
       // new RoutePermission("", DashboardComponent, 5),
       new RoutePermission("", DashboardComponent, 5),
       

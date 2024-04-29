@@ -8018,6 +8018,8 @@ export type Besteladvy = {
   besthoeveelheid?: Maybe<Scalars['BigFloat']['output']>;
   cdartikel?: Maybe<Scalars['String']['output']>;
   cdartsamenstellingen?: Maybe<Scalars['JSON']['output']>;
+  /** Reads and enables pagination through a set of `FactureeropdrachtIndex`. */
+  factureeropdrachtIndex: FactureeropdrachtIndicesConnection;
   factuuropdracht?: Maybe<Scalars['String']['output']>;
   gereserveerd?: Maybe<Scalars['BigFloat']['output']>;
   inkoopprijs?: Maybe<Scalars['BigFloat']['output']>;
@@ -8029,6 +8031,16 @@ export type Besteladvy = {
   stockSupplierId?: Maybe<Scalars['Int']['output']>;
   voorraad?: Maybe<Scalars['BigFloat']['output']>;
   vrij?: Maybe<Scalars['BigFloat']['output']>;
+};
+
+
+export type BesteladvyFactureeropdrachtIndexArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<FactureeropdrachtIndexFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /**
@@ -14744,6 +14756,8 @@ export type Crediteur = {
   krbperc?: Maybe<Scalars['BigFloat']['output']>;
   naam?: Maybe<Scalars['String']['output']>;
   naamstraat?: Maybe<Scalars['String']['output']>;
+  /** Reads and enables pagination through a set of `Notity`. */
+  notities: NotitiesConnection;
   nummerkvk?: Maybe<Scalars['String']['output']>;
   ondernemersnr?: Maybe<Scalars['String']['output']>;
   opslpercinkoop?: Maybe<Scalars['BigFloat']['output']>;
@@ -14761,6 +14775,16 @@ export type Crediteur = {
   telefoonmobiel?: Maybe<Scalars['String']['output']>;
   woonplaats?: Maybe<Scalars['String']['output']>;
   zoeknaam?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type CrediteurNotitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<NotityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /**
@@ -30682,12 +30706,25 @@ export type FactureeropdrachtFilter = {
 
 export type FactureeropdrachtIndex = {
   __typename?: 'FactureeropdrachtIndex';
+  /** Reads and enables pagination through a set of `Besteladvy`. */
+  besteladviesWithStockSupplier: BesteladviesConnection;
   cdbetcond?: Maybe<Scalars['String']['output']>;
   factuurnummer?: Maybe<Scalars['String']['output']>;
   factuuropdracht?: Maybe<Scalars['String']['output']>;
   opdrachtdatum?: Maybe<Scalars['Date']['output']>;
   referentie?: Maybe<Scalars['String']['output']>;
   zoeknaam?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type FactureeropdrachtIndexBesteladviesWithStockSupplierArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<BesteladvyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  stockSupplierIdParam?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /**
@@ -67764,8 +67801,13 @@ export enum StockItemsOrderBy {
 
 export type StockSupplier = Node & {
   __typename?: 'StockSupplier';
+  /** Reads and enables pagination through a set of `Besteladvy`. */
+  besteladvies: BesteladviesConnection;
   cdcrediteur: Scalars['String']['output'];
   created?: Maybe<Scalars['Datetime']['output']>;
+  crediteur?: Maybe<Crediteur>;
+  /** Reads and enables pagination through a set of `FactureeropdrachtIndex`. */
+  factureeropdrachtIndex: FactureeropdrachtIndicesConnection;
   id: Scalars['Int']['output'];
   modified?: Maybe<Scalars['Datetime']['output']>;
   name?: Maybe<Scalars['String']['output']>;
@@ -67776,6 +67818,26 @@ export type StockSupplier = Node & {
   shipmentDays: Scalars['Int']['output'];
   /** Reads a single `User` that is related to this `StockSupplier`. */
   userByOwnerId?: Maybe<User>;
+};
+
+
+export type StockSupplierBesteladviesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<BesteladvyFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type StockSupplierFactureeropdrachtIndexArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<FactureeropdrachtIndexFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /**
@@ -82707,6 +82769,30 @@ export type DeleteSensorTypeMutation = { __typename?: 'Mutation', deleteSensorTy
 
 export type LocalSensorFieldsFragment = { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number };
 
+export type AllStockSuppliersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: StockSuppliersIndexFilter;
+  orderBy?: InputMaybe<Array<StockSuppliersIndicesOrderBy> | StockSuppliersIndicesOrderBy>;
+}>;
+
+
+export type AllStockSuppliersQuery = { __typename?: 'Query', allStockSuppliersIndices?: { __typename?: 'StockSuppliersIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'StockSuppliersIndex', zoeknaam?: string | null, tztAdvice?: any | null, totalStockVvp?: any | null, totalReservedVvp?: any | null, totalPoVvp?: any | null, totalAdvice?: any | null, id?: number | null, cdcrediteur?: string | null }> } | null };
+
+export type StockSupplierByIdQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type StockSupplierByIdQuery = { __typename?: 'Query', stockSupplierById?: { __typename?: 'StockSupplier', shipmentDays: number, shipmentDay?: number | null, ownerId: number, name?: string | null, modified?: any | null, id: number, created?: any | null, cdcrediteur: string, factureeropdrachtIndex: { __typename?: 'FactureeropdrachtIndicesConnection', nodes: Array<{ __typename?: 'FactureeropdrachtIndex', factuuropdracht?: string | null, factuurnummer?: string | null, referentie?: string | null, cdbetcond?: string | null, opdrachtdatum?: any | null, zoeknaam?: string | null, besteladviesWithStockSupplier: { __typename?: 'BesteladviesConnection', nodes: Array<{ __typename?: 'Besteladvy', vrij?: any | null, voorraad?: any | null, stockSupplierId?: number | null, omschr?: string | null, minvoorraad?: any | null, maxvoorraad?: any | null, inkopen?: any | null, isovaluta?: string | null, inkoopprijs?: any | null, gereserveerd?: any | null, factuuropdracht?: string | null, cdartsamenstellingen?: any | null, cdartikel?: string | null, besthoeveelheid?: any | null, bestcode?: string | null, assemblaf?: any | null, aantal?: any | null }> } }> }, besteladvies: { __typename?: 'BesteladviesConnection', nodes: Array<{ __typename?: 'Besteladvy', vrij?: any | null, voorraad?: any | null, stockSupplierId?: number | null, omschr?: string | null, minvoorraad?: any | null, maxvoorraad?: any | null, inkopen?: any | null, isovaluta?: string | null, inkoopprijs?: any | null, gereserveerd?: any | null, factuuropdracht?: string | null, cdartsamenstellingen?: any | null, cdartikel?: string | null, besthoeveelheid?: any | null, bestcode?: string | null, assemblaf?: any | null, aantal?: any | null }> }, crediteur?: { __typename?: 'Crediteur', naam?: string | null, zoeknaam?: string | null, notities: { __typename?: 'NotitiesConnection', nodes: Array<{ __typename?: 'Notity', cdnotitie?: number | null, tekst?: string | null }> } } | null } | null };
+
+export type CreateFactopdrachtArtikelExclusionMutationVariables = Exact<{
+  body: FactopdrachtArtikelExclusionInput;
+}>;
+
+
+export type CreateFactopdrachtArtikelExclusionMutation = { __typename?: 'Mutation', createFactopdrachtArtikelExclusion?: { __typename?: 'CreateFactopdrachtArtikelExclusionPayload', factopdrachtArtikelExclusion?: { __typename?: 'FactopdrachtArtikelExclusion', id: number, factuuropdracht: string, cdartikel: string } | null } | null };
+
 export type UpdateUsersGroupMutationVariables = Exact<{
   userId: Scalars['Int']['input'];
   groupIds: Array<InputMaybe<Scalars['Int']['input']>> | InputMaybe<Scalars['Int']['input']>;
@@ -86091,6 +86177,148 @@ export const DeleteSensorTypeDocument = gql`
   })
   export class DeleteSensorTypeGQL extends Apollo.Mutation<DeleteSensorTypeMutation, DeleteSensorTypeMutationVariables> {
     override document = DeleteSensorTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllStockSuppliersDocument = gql`
+    query allStockSuppliers($first: Int, $offset: Int, $filter: StockSuppliersIndexFilter!, $orderBy: [StockSuppliersIndicesOrderBy!]) {
+  allStockSuppliersIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      zoeknaam
+      tztAdvice
+      totalStockVvp
+      totalReservedVvp
+      totalPoVvp
+      totalAdvice
+      id
+      cdcrediteur
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllStockSuppliersGQL extends Apollo.Query<AllStockSuppliersQuery, AllStockSuppliersQueryVariables> {
+    override document = AllStockSuppliersDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const StockSupplierByIdDocument = gql`
+    query stockSupplierById($id: Int!) {
+  stockSupplierById(id: $id) {
+    factureeropdrachtIndex {
+      nodes {
+        factuuropdracht
+        factuurnummer
+        referentie
+        cdbetcond
+        opdrachtdatum
+        zoeknaam
+        besteladviesWithStockSupplier(stockSupplierIdParam: $id) {
+          nodes {
+            vrij
+            voorraad
+            stockSupplierId
+            omschr
+            minvoorraad
+            maxvoorraad
+            inkopen
+            isovaluta
+            inkoopprijs
+            gereserveerd
+            factuuropdracht
+            cdartsamenstellingen
+            cdartikel
+            besthoeveelheid
+            bestcode
+            assemblaf
+            aantal
+          }
+        }
+      }
+    }
+    shipmentDays
+    shipmentDay
+    ownerId
+    name
+    modified
+    id
+    created
+    cdcrediteur
+    besteladvies(filter: {factuuropdracht: {isNull: true}}) {
+      nodes {
+        vrij
+        voorraad
+        stockSupplierId
+        omschr
+        minvoorraad
+        maxvoorraad
+        inkopen
+        isovaluta
+        inkoopprijs
+        gereserveerd
+        factuuropdracht
+        cdartsamenstellingen
+        cdartikel
+        besthoeveelheid
+        bestcode
+        assemblaf
+        aantal
+      }
+    }
+    crediteur {
+      naam
+      zoeknaam
+      notities {
+        nodes {
+          cdnotitie
+          tekst
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class StockSupplierByIdGQL extends Apollo.Query<StockSupplierByIdQuery, StockSupplierByIdQueryVariables> {
+    override document = StockSupplierByIdDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateFactopdrachtArtikelExclusionDocument = gql`
+    mutation CreateFactopdrachtArtikelExclusion($body: FactopdrachtArtikelExclusionInput!) {
+  createFactopdrachtArtikelExclusion(input: {factopdrachtArtikelExclusion: $body}) {
+    factopdrachtArtikelExclusion {
+      id
+      factuuropdracht
+      cdartikel
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateFactopdrachtArtikelExclusionGQL extends Apollo.Mutation<CreateFactopdrachtArtikelExclusionMutation, CreateFactopdrachtArtikelExclusionMutationVariables> {
+    override document = CreateFactopdrachtArtikelExclusionDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

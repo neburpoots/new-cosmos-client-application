@@ -43,12 +43,9 @@ export class TableComponent implements OnInit {
   @Input() color: string = "light";
   @Input() searchCriteria: any = {
     orderBy: [],
-    search: "",
-    limit: 10,
+    first: 10,
     offset: 0,
-    totalPages: 0,
-    total: 0,
-    page: 0,
+    filter: { and: [] },
   };
   @Input() popoverComponent: any; // 'any' is used for flexibility; you can use a more specific type if needed
   @Output() pdf = new EventEmitter<number>();
@@ -89,7 +86,8 @@ export class TableComponent implements OnInit {
   }
 
 
-  formattedDate(date: string): string {
+  formattedDate(date: string | undefined): string {
+    if (!date) return '-';
     const hasTime = date.includes('00:00'); // Check if the date string includes a time component
     const isTime = date.includes('T'); // Check if the date string includes a time component
 

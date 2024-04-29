@@ -24,7 +24,7 @@ export abstract class FileService {
       'Content-Type': 'application/json',
       'Accept': 'text/csv', // Specify that we expect a CSV file in response
     });
-    return this.http.post(`${this.url}/generateCSV`, options, { headers: headers, responseType: 'text' });
+    return this.http.post(`${this.url}/api/export/csv`, options, { headers: headers, responseType: 'text' });
   }
 
   downloadExcel(options: exportOptions): Observable<any> {
@@ -32,7 +32,11 @@ export abstract class FileService {
       'Content-Type': 'application/json',
       'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify that we expect an Excel file in response
     });
-    return this.http.post(`${this.url}/generateExcel`, options, { headers: headers, responseType: 'blob' });
+    return this.http.post(`${this.url}/api/export/excel`, options, { headers: headers, responseType: 'blob' });
+  }
+
+  downloadPdf(prefix : string, id: number): Observable<Blob> {
+    return this.http.get<any>(`${this.url}/${prefix}/${id}`, { responseType: 'blob' as 'json' });
   }
     
 }

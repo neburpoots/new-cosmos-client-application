@@ -200,8 +200,11 @@
               } @else if (item[column['key']]['url']) {
               <a [routerLink]="item[column['key']]['url']">{{ item[column['key']]['value'] }}</a>
 
-              } @else if (isValidDate(item[column['key']]['value'])) {
+              } @else if (column['type'] === 'datetime') {
+                
               {{ formattedDate(item[column['key']]['value'])}}
+              } @else if (column['type'] === 'number') {
+                {{ item[column['key']]['value'] ? item[column['key']]['value'] : '-'}}
               }
               @else {
               {{ item[column['key']]['value'] ? item[column['key']]['value'] : '-'}}
@@ -210,14 +213,6 @@
             </td>
             <td *ngIf="isDeletable || isEditable || isViewable || isPdf"
               class="mt-2 sticky right-0 flex bg-white gap-1 items-center justify-center">
-              <div *ngIf="isEditable" (click)="openEditModal(item['id']?.value)"
-                class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
-                <i class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i>
-              </div>
-              <div *ngIf="isDeletable" (click)="openDeleteModal(item['id']?.value)"
-                class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
-                <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
-              </div>
               <a [routerLink]="detailPagePrefix + item['id']?.value">
                 <div *ngIf="isViewable" [satPopoverAnchor]="popover" (mouseover)="popover.open()"
                   (mouseenter)="openViewModal(item['id'].value)" (mouseleave)="popover.close()"
@@ -228,6 +223,14 @@
                   </sat-popover>
                 </div>
               </a>
+              <div *ngIf="isEditable" (click)="openEditModal(item['id']?.value)"
+                class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
+                <i class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i>
+              </div>
+              <div *ngIf="isDeletable" (click)="openDeleteModal(item['id']?.value)"
+                class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
+                <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
+              </div>
               <button *ngIf="isPdf" (click)="downloadPdf(item['id'].value)"
                 class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] pl-[8px] pr-[5px] ">
                 <fa-icon [icon]="faFilePdf"></fa-icon>

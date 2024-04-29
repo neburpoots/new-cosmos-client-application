@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { ReplaySubject, Observable, of, from, combineLatest } from 'rxjs';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { ReplaySubject, Observable, of, from, combineLatest, throwError } from 'rxjs';
+import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 //import { ApolloCache } from '@apollo/client/core';
 import { AuthenticateGQL, CurrentReadPermissionsGQL, CurrentReadPermissionsQuery, CurrentUserInfoGQL, CurrentUsernameGQL, CurrentWritePermissionsGQL, CurrentWritePermissionsQuery, JwtTokenDocument, User } from '../../../generated/graphql';
@@ -43,7 +43,12 @@ export class AuthService
 		
 		this.currentUserInfoService.fetch({}, {fetchPolicy: 'no-cache'}).pipe
 		(
-			tap(({data}) => this.currentUserInfo = data.currentUserInfo as User)
+			tap(({data}) => this.currentUserInfo = data.currentUserInfo as User),
+			catchError((error : any) =>
+			{
+				this.router.navigate(['/auth/login']);
+				return throwError(error);
+			})
 		).subscribe();
 
 		this.currentUsernameService.fetch({}, {fetchPolicy: 'no-cache'}).pipe

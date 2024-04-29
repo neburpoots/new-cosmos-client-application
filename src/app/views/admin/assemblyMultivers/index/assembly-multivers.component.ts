@@ -24,6 +24,8 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
   objectSingle = 'Assembly Multivers';
   objectPlural = 'Assemblies Multivers';
 
+  override pdfPrefix = "api/assemblies-multivers/pdf";
+
   searchCriteria: QueryAllAssemblyMultiversEntitiesArgs = {
     orderBy: [AssemblyMultiversEntitiesOrderBy.AssemblageOrderDesc],
     first: 10,

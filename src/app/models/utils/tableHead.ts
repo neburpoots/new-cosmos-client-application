@@ -3,5 +3,6 @@ export interface TableHead<T> {
     asc: T;
     desc: T;
     key: string;
+    round?: number;
     type: 'string' | 'number' | 'boolean' | 'datetime' | 'array';
 }

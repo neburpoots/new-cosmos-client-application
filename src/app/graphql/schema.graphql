@@ -38497,6 +38497,515 @@ type StockSupplier implements Node {
 
   """Reads a single `User` that is related to this `StockSupplier`."""
   userByOwnerId: User
+
+  """Reads and enables pagination through a set of `Besteladvy`."""
+  besteladvies(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: BesteladvyFilter
+  ): BesteladviesConnection!
+  crediteur: Crediteur
+
+  """
+  Reads and enables pagination through a set of `FactureeropdrachtIndex`.
+  """
+  factureeropdrachtIndex(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: FactureeropdrachtIndexFilter
+  ): FactureeropdrachtIndicesConnection!
+}
+
+"""A connection to a list of `Besteladvy` values."""
+type BesteladviesConnection {
+  """A list of `Besteladvy` objects."""
+  nodes: [Besteladvy!]!
+
+  """
+  A list of edges which contains the `Besteladvy` and cursor to aid in pagination.
+  """
+  edges: [BesteladviesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Besteladvy` you could get from the connection."""
+  totalCount: Int!
+}
+
+type Besteladvy {
+  stockSupplierId: Int
+  factuuropdracht: String
+  cdartikel: String
+  cdartsamenstellingen: JSON
+  omschr: String
+  bestcode: String
+  inkoopprijs: BigFloat
+  besthoeveelheid: BigFloat
+  voorraad: BigFloat
+  gereserveerd: BigFloat
+  assemblaf: BigFloat
+  vrij: BigFloat
+  inkopen: BigFloat
+  minvoorraad: BigFloat
+  maxvoorraad: BigFloat
+  isovaluta: String
+  aantal: BigFloat
+
+  """
+  Reads and enables pagination through a set of `FactureeropdrachtIndex`.
+  """
+  factureeropdrachtIndex(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: FactureeropdrachtIndexFilter
+  ): FactureeropdrachtIndicesConnection!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""A connection to a list of `FactureeropdrachtIndex` values."""
+type FactureeropdrachtIndicesConnection {
+  """A list of `FactureeropdrachtIndex` objects."""
+  nodes: [FactureeropdrachtIndex!]!
+
+  """
+  A list of edges which contains the `FactureeropdrachtIndex` and cursor to aid in pagination.
+  """
+  edges: [FactureeropdrachtIndicesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `FactureeropdrachtIndex` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type FactureeropdrachtIndex {
+  factuuropdracht: String
+  factuurnummer: String
+  referentie: String
+  cdbetcond: String
+  opdrachtdatum: Date
+  zoeknaam: String
+
+  """Reads and enables pagination through a set of `Besteladvy`."""
+  besteladviesWithStockSupplier(
+    stockSupplierIdParam: Int
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: BesteladvyFilter
+  ): BesteladviesConnection!
+}
+
+"""
+A filter to be used against `Besteladvy` object types. All fields are combined with a logical ‘and.’
+"""
+input BesteladvyFilter {
+  """Filter by the object’s `stockSupplierId` field."""
+  stockSupplierId: IntFilter
+
+  """Filter by the object’s `factuuropdracht` field."""
+  factuuropdracht: StringFilter
+
+  """Filter by the object’s `cdartikel` field."""
+  cdartikel: StringFilter
+
+  """Filter by the object’s `omschr` field."""
+  omschr: StringFilter
+
+  """Filter by the object’s `bestcode` field."""
+  bestcode: StringFilter
+
+  """Filter by the object’s `inkoopprijs` field."""
+  inkoopprijs: BigFloatFilter
+
+  """Filter by the object’s `besthoeveelheid` field."""
+  besthoeveelheid: BigFloatFilter
+
+  """Filter by the object’s `voorraad` field."""
+  voorraad: BigFloatFilter
+
+  """Filter by the object’s `gereserveerd` field."""
+  gereserveerd: BigFloatFilter
+
+  """Filter by the object’s `assemblaf` field."""
+  assemblaf: BigFloatFilter
+
+  """Filter by the object’s `vrij` field."""
+  vrij: BigFloatFilter
+
+  """Filter by the object’s `inkopen` field."""
+  inkopen: BigFloatFilter
+
+  """Filter by the object’s `minvoorraad` field."""
+  minvoorraad: BigFloatFilter
+
+  """Filter by the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloatFilter
+
+  """Filter by the object’s `isovaluta` field."""
+  isovaluta: StringFilter
+
+  """Filter by the object’s `aantal` field."""
+  aantal: BigFloatFilter
+
+  """Checks for all expressions in this list."""
+  and: [BesteladvyFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [BesteladvyFilter!]
+
+  """Negates the expression."""
+  not: BesteladvyFilter
+}
+
+"""A `FactureeropdrachtIndex` edge in the connection."""
+type FactureeropdrachtIndicesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `FactureeropdrachtIndex` at the end of the edge."""
+  node: FactureeropdrachtIndex!
+}
+
+"""
+A filter to be used against `FactureeropdrachtIndex` object types. All fields are combined with a logical ‘and.’
+"""
+input FactureeropdrachtIndexFilter {
+  """Filter by the object’s `factuuropdracht` field."""
+  factuuropdracht: StringFilter
+
+  """Filter by the object’s `factuurnummer` field."""
+  factuurnummer: StringFilter
+
+  """Filter by the object’s `referentie` field."""
+  referentie: StringFilter
+
+  """Filter by the object’s `cdbetcond` field."""
+  cdbetcond: StringFilter
+
+  """Filter by the object’s `opdrachtdatum` field."""
+  opdrachtdatum: DateFilter
+
+  """Filter by the object’s `zoeknaam` field."""
+  zoeknaam: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [FactureeropdrachtIndexFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [FactureeropdrachtIndexFilter!]
+
+  """Negates the expression."""
+  not: FactureeropdrachtIndexFilter
+}
+
+"""A `Besteladvy` edge in the connection."""
+type BesteladviesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Besteladvy` at the end of the edge."""
+  node: Besteladvy!
+}
+
+type Crediteur {
+  cdrelatie: Int
+  cdcrediteur: String
+  zoeknaam: String
+  naam: String
+  naamstraat: String
+  straat: String
+  woonplaats: String
+  postcode: String
+  cdland: String
+  persoon: String
+  telefoon: String
+  telefoonmobiel: String
+  telefax: String
+  email: String
+  btwnummer: String
+  datumverif: Date
+  debnrcred: String
+  cdvaluta: String
+  cdbetcond: String
+  cdlevcond: String
+  cdtaal: String
+  cdjournaal: Int
+  nummerkvk: String
+  plaatskvk: String
+  datumkvk: Date
+  cdgrbrekening: String
+  btwscenario: Int
+  homepage: String
+  cdstroom: Int
+  cdvervoer: Int
+  cdverkeer: Int
+  cdstelsel: Int
+  cdtype: String
+  cdgoedcode: Int
+  telebankfact: String
+  opslpercinkoop: BigFloat
+  aanmaakdatum: Date
+  datumltstewijz: Date
+  cdonderaannemer: String
+  status: String
+  controleBetkenmerk: String
+  ondernemersnr: String
+  guidItem: String
+  sysCreate: String
+  sysUpdate: String
+  fichegeboortedatum: Date
+  fichenationaalnr: BigFloat
+  ficheaard: String
+  fichenaam: String
+  fichevoornaam: String
+  ficheberoep: String
+  fichenaamechtgenoot: String
+  fichehandicap: String
+  ficheburgstand: String
+  fichegezinstoestand: String
+  fichekinderen: Int
+  fichetenlaste: Int
+  btwopkredb: String
+  krbperc: BigFloat
+  overhIdNr: String
+
+  """Reads and enables pagination through a set of `Notity`."""
+  notities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: NotityFilter
+  ): NotitiesConnection!
+}
+
+"""A connection to a list of `Notity` values."""
+type NotitiesConnection {
+  """A list of `Notity` objects."""
+  nodes: [Notity!]!
+
+  """
+  A list of edges which contains the `Notity` and cursor to aid in pagination.
+  """
+  edges: [NotitiesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Notity` you could get from the connection."""
+  totalCount: Int!
+}
+
+type Notity {
+  cdnotitie: Int
+  cdsoort: String
+  datum: Date
+  aktiedatum: Date
+  afgehandeld: String
+  document: String
+  cdrelatie: Int
+  tekst: String
+  onderwerp: String
+  gebruiker: String
+  herkomst: String
+  sellijstid: Int
+  cddebiteur: String
+  cdcrediteur: String
+  guidWfWorkflow: String
+  guidItemHerkomst: String
+  wfTabelnaamHerkomst: String
+  guidWfProces: String
+  guidItem: String
+  wfTabelnaam: String
+  docVolgnummer: Int
+}
+
+"""A `Notity` edge in the connection."""
+type NotitiesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Notity` at the end of the edge."""
+  node: Notity!
+}
+
+"""
+A filter to be used against `Notity` object types. All fields are combined with a logical ‘and.’
+"""
+input NotityFilter {
+  """Filter by the object’s `cdnotitie` field."""
+  cdnotitie: IntFilter
+
+  """Filter by the object’s `cdsoort` field."""
+  cdsoort: StringFilter
+
+  """Filter by the object’s `datum` field."""
+  datum: DateFilter
+
+  """Filter by the object’s `aktiedatum` field."""
+  aktiedatum: DateFilter
+
+  """Filter by the object’s `afgehandeld` field."""
+  afgehandeld: StringFilter
+
+  """Filter by the object’s `document` field."""
+  document: StringFilter
+
+  """Filter by the object’s `cdrelatie` field."""
+  cdrelatie: IntFilter
+
+  """Filter by the object’s `tekst` field."""
+  tekst: StringFilter
+
+  """Filter by the object’s `onderwerp` field."""
+  onderwerp: StringFilter
+
+  """Filter by the object’s `gebruiker` field."""
+  gebruiker: StringFilter
+
+  """Filter by the object’s `herkomst` field."""
+  herkomst: StringFilter
+
+  """Filter by the object’s `sellijstid` field."""
+  sellijstid: IntFilter
+
+  """Filter by the object’s `cddebiteur` field."""
+  cddebiteur: StringFilter
+
+  """Filter by the object’s `cdcrediteur` field."""
+  cdcrediteur: StringFilter
+
+  """Filter by the object’s `guidWfWorkflow` field."""
+  guidWfWorkflow: StringFilter
+
+  """Filter by the object’s `guidItemHerkomst` field."""
+  guidItemHerkomst: StringFilter
+
+  """Filter by the object’s `wfTabelnaamHerkomst` field."""
+  wfTabelnaamHerkomst: StringFilter
+
+  """Filter by the object’s `guidWfProces` field."""
+  guidWfProces: StringFilter
+
+  """Filter by the object’s `guidItem` field."""
+  guidItem: StringFilter
+
+  """Filter by the object’s `wfTabelnaam` field."""
+  wfTabelnaam: StringFilter
+
+  """Filter by the object’s `docVolgnummer` field."""
+  docVolgnummer: IntFilter
+
+  """Checks for all expressions in this list."""
+  and: [NotityFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [NotityFilter!]
+
+  """Negates the expression."""
+  not: NotityFilter
 }
 
 """A `StockSupplier` edge in the connection."""
@@ -45850,11 +46359,6 @@ type ArtikelLog implements Node {
   old: JSON
 }
 
-"""
-The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
-"""
-scalar JSON
-
 """A `ArtikelLog` edge in the connection."""
 type ArtikelLogsEdge {
   """A cursor for use in pagination."""
@@ -48921,52 +49425,6 @@ input AssemblyTypesEntityFilter {
   not: AssemblyTypesEntityFilter
 }
 
-"""A connection to a list of `Besteladvy` values."""
-type BesteladviesConnection {
-  """A list of `Besteladvy` objects."""
-  nodes: [Besteladvy!]!
-
-  """
-  A list of edges which contains the `Besteladvy` and cursor to aid in pagination.
-  """
-  edges: [BesteladviesEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Besteladvy` you could get from the connection."""
-  totalCount: Int!
-}
-
-type Besteladvy {
-  stockSupplierId: Int
-  factuuropdracht: String
-  cdartikel: String
-  cdartsamenstellingen: JSON
-  omschr: String
-  bestcode: String
-  inkoopprijs: BigFloat
-  besthoeveelheid: BigFloat
-  voorraad: BigFloat
-  gereserveerd: BigFloat
-  assemblaf: BigFloat
-  vrij: BigFloat
-  inkopen: BigFloat
-  minvoorraad: BigFloat
-  maxvoorraad: BigFloat
-  isovaluta: String
-  aantal: BigFloat
-}
-
-"""A `Besteladvy` edge in the connection."""
-type BesteladviesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Besteladvy` at the end of the edge."""
-  node: Besteladvy!
-}
-
 """Methods to use when ordering `Besteladvy`."""
 enum BesteladviesOrderBy {
   NATURAL
@@ -49061,68 +49519,6 @@ input BesteladvyCondition {
 
   """Checks for equality with the object’s `aantal` field."""
   aantal: BigFloat
-}
-
-"""
-A filter to be used against `Besteladvy` object types. All fields are combined with a logical ‘and.’
-"""
-input BesteladvyFilter {
-  """Filter by the object’s `stockSupplierId` field."""
-  stockSupplierId: IntFilter
-
-  """Filter by the object’s `factuuropdracht` field."""
-  factuuropdracht: StringFilter
-
-  """Filter by the object’s `cdartikel` field."""
-  cdartikel: StringFilter
-
-  """Filter by the object’s `omschr` field."""
-  omschr: StringFilter
-
-  """Filter by the object’s `bestcode` field."""
-  bestcode: StringFilter
-
-  """Filter by the object’s `inkoopprijs` field."""
-  inkoopprijs: BigFloatFilter
-
-  """Filter by the object’s `besthoeveelheid` field."""
-  besthoeveelheid: BigFloatFilter
-
-  """Filter by the object’s `voorraad` field."""
-  voorraad: BigFloatFilter
-
-  """Filter by the object’s `gereserveerd` field."""
-  gereserveerd: BigFloatFilter
-
-  """Filter by the object’s `assemblaf` field."""
-  assemblaf: BigFloatFilter
-
-  """Filter by the object’s `vrij` field."""
-  vrij: BigFloatFilter
-
-  """Filter by the object’s `inkopen` field."""
-  inkopen: BigFloatFilter
-
-  """Filter by the object’s `minvoorraad` field."""
-  minvoorraad: BigFloatFilter
-
-  """Filter by the object’s `maxvoorraad` field."""
-  maxvoorraad: BigFloatFilter
-
-  """Filter by the object’s `isovaluta` field."""
-  isovaluta: StringFilter
-
-  """Filter by the object’s `aantal` field."""
-  aantal: BigFloatFilter
-
-  """Checks for all expressions in this list."""
-  and: [BesteladvyFilter!]
-
-  """Checks for any expressions in this list."""
-  or: [BesteladvyFilter!]
-
-  """Negates the expression."""
-  not: BesteladvyFilter
 }
 
 """A connection to a list of `BieStatus` values."""
@@ -49736,69 +50132,6 @@ type CrediteursConnection {
 
   """The count of *all* `Crediteur` you could get from the connection."""
   totalCount: Int!
-}
-
-type Crediteur {
-  cdrelatie: Int
-  cdcrediteur: String
-  zoeknaam: String
-  naam: String
-  naamstraat: String
-  straat: String
-  woonplaats: String
-  postcode: String
-  cdland: String
-  persoon: String
-  telefoon: String
-  telefoonmobiel: String
-  telefax: String
-  email: String
-  btwnummer: String
-  datumverif: Date
-  debnrcred: String
-  cdvaluta: String
-  cdbetcond: String
-  cdlevcond: String
-  cdtaal: String
-  cdjournaal: Int
-  nummerkvk: String
-  plaatskvk: String
-  datumkvk: Date
-  cdgrbrekening: String
-  btwscenario: Int
-  homepage: String
-  cdstroom: Int
-  cdvervoer: Int
-  cdverkeer: Int
-  cdstelsel: Int
-  cdtype: String
-  cdgoedcode: Int
-  telebankfact: String
-  opslpercinkoop: BigFloat
-  aanmaakdatum: Date
-  datumltstewijz: Date
-  cdonderaannemer: String
-  status: String
-  controleBetkenmerk: String
-  ondernemersnr: String
-  guidItem: String
-  sysCreate: String
-  sysUpdate: String
-  fichegeboortedatum: Date
-  fichenationaalnr: BigFloat
-  ficheaard: String
-  fichenaam: String
-  fichevoornaam: String
-  ficheberoep: String
-  fichenaamechtgenoot: String
-  fichehandicap: String
-  ficheburgstand: String
-  fichegezinstoestand: String
-  fichekinderen: Int
-  fichetenlaste: Int
-  btwopkredb: String
-  krbperc: BigFloat
-  overhIdNr: String
 }
 
 """A `Crediteur` edge in the connection."""
@@ -56563,43 +56896,6 @@ input FactopdrachtregelTotalAmountFilter {
   not: FactopdrachtregelTotalAmountFilter
 }
 
-"""A connection to a list of `FactureeropdrachtIndex` values."""
-type FactureeropdrachtIndicesConnection {
-  """A list of `FactureeropdrachtIndex` objects."""
-  nodes: [FactureeropdrachtIndex!]!
-
-  """
-  A list of edges which contains the `FactureeropdrachtIndex` and cursor to aid in pagination.
-  """
-  edges: [FactureeropdrachtIndicesEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """
-  The count of *all* `FactureeropdrachtIndex` you could get from the connection.
-  """
-  totalCount: Int!
-}
-
-type FactureeropdrachtIndex {
-  factuuropdracht: String
-  factuurnummer: String
-  referentie: String
-  cdbetcond: String
-  opdrachtdatum: Date
-  zoeknaam: String
-}
-
-"""A `FactureeropdrachtIndex` edge in the connection."""
-type FactureeropdrachtIndicesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `FactureeropdrachtIndex` at the end of the edge."""
-  node: FactureeropdrachtIndex!
-}
-
 """Methods to use when ordering `FactureeropdrachtIndex`."""
 enum FactureeropdrachtIndicesOrderBy {
   NATURAL
@@ -56639,38 +56935,6 @@ input FactureeropdrachtIndexCondition {
 
   """Checks for equality with the object’s `zoeknaam` field."""
   zoeknaam: String
-}
-
-"""
-A filter to be used against `FactureeropdrachtIndex` object types. All fields are combined with a logical ‘and.’
-"""
-input FactureeropdrachtIndexFilter {
-  """Filter by the object’s `factuuropdracht` field."""
-  factuuropdracht: StringFilter
-
-  """Filter by the object’s `factuurnummer` field."""
-  factuurnummer: StringFilter
-
-  """Filter by the object’s `referentie` field."""
-  referentie: StringFilter
-
-  """Filter by the object’s `cdbetcond` field."""
-  cdbetcond: StringFilter
-
-  """Filter by the object’s `opdrachtdatum` field."""
-  opdrachtdatum: DateFilter
-
-  """Filter by the object’s `zoeknaam` field."""
-  zoeknaam: StringFilter
-
-  """Checks for all expressions in this list."""
-  and: [FactureeropdrachtIndexFilter!]
-
-  """Checks for any expressions in this list."""
-  or: [FactureeropdrachtIndexFilter!]
-
-  """Negates the expression."""
-  not: FactureeropdrachtIndexFilter
 }
 
 """A connection to a list of `FactureeropdrachtMv` values."""
@@ -64134,56 +64398,6 @@ input MembraneEntityFilter {
   not: MembraneEntityFilter
 }
 
-"""A connection to a list of `Notity` values."""
-type NotitiesConnection {
-  """A list of `Notity` objects."""
-  nodes: [Notity!]!
-
-  """
-  A list of edges which contains the `Notity` and cursor to aid in pagination.
-  """
-  edges: [NotitiesEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `Notity` you could get from the connection."""
-  totalCount: Int!
-}
-
-type Notity {
-  cdnotitie: Int
-  cdsoort: String
-  datum: Date
-  aktiedatum: Date
-  afgehandeld: String
-  document: String
-  cdrelatie: Int
-  tekst: String
-  onderwerp: String
-  gebruiker: String
-  herkomst: String
-  sellijstid: Int
-  cddebiteur: String
-  cdcrediteur: String
-  guidWfWorkflow: String
-  guidItemHerkomst: String
-  wfTabelnaamHerkomst: String
-  guidWfProces: String
-  guidItem: String
-  wfTabelnaam: String
-  docVolgnummer: Int
-}
-
-"""A `Notity` edge in the connection."""
-type NotitiesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `Notity` at the end of the edge."""
-  node: Notity!
-}
-
 """Methods to use when ordering `Notity`."""
 enum NotitiesOrderBy {
   NATURAL
@@ -64297,83 +64511,6 @@ input NotityCondition {
 
   """Checks for equality with the object’s `docVolgnummer` field."""
   docVolgnummer: Int
-}
-
-"""
-A filter to be used against `Notity` object types. All fields are combined with a logical ‘and.’
-"""
-input NotityFilter {
-  """Filter by the object’s `cdnotitie` field."""
-  cdnotitie: IntFilter
-
-  """Filter by the object’s `cdsoort` field."""
-  cdsoort: StringFilter
-
-  """Filter by the object’s `datum` field."""
-  datum: DateFilter
-
-  """Filter by the object’s `aktiedatum` field."""
-  aktiedatum: DateFilter
-
-  """Filter by the object’s `afgehandeld` field."""
-  afgehandeld: StringFilter
-
-  """Filter by the object’s `document` field."""
-  document: StringFilter
-
-  """Filter by the object’s `cdrelatie` field."""
-  cdrelatie: IntFilter
-
-  """Filter by the object’s `tekst` field."""
-  tekst: StringFilter
-
-  """Filter by the object’s `onderwerp` field."""
-  onderwerp: StringFilter
-
-  """Filter by the object’s `gebruiker` field."""
-  gebruiker: StringFilter
-
-  """Filter by the object’s `herkomst` field."""
-  herkomst: StringFilter
-
-  """Filter by the object’s `sellijstid` field."""
-  sellijstid: IntFilter
-
-  """Filter by the object’s `cddebiteur` field."""
-  cddebiteur: StringFilter
-
-  """Filter by the object’s `cdcrediteur` field."""
-  cdcrediteur: StringFilter
-
-  """Filter by the object’s `guidWfWorkflow` field."""
-  guidWfWorkflow: StringFilter
-
-  """Filter by the object’s `guidItemHerkomst` field."""
-  guidItemHerkomst: StringFilter
-
-  """Filter by the object’s `wfTabelnaamHerkomst` field."""
-  wfTabelnaamHerkomst: StringFilter
-
-  """Filter by the object’s `guidWfProces` field."""
-  guidWfProces: StringFilter
-
-  """Filter by the object’s `guidItem` field."""
-  guidItem: StringFilter
-
-  """Filter by the object’s `wfTabelnaam` field."""
-  wfTabelnaam: StringFilter
-
-  """Filter by the object’s `docVolgnummer` field."""
-  docVolgnummer: IntFilter
-
-  """Checks for all expressions in this list."""
-  and: [NotityFilter!]
-
-  """Checks for any expressions in this list."""
-  or: [NotityFilter!]
-
-  """Negates the expression."""
-  not: NotityFilter
 }
 
 """A connection to a list of `NotitiesMv` values."""

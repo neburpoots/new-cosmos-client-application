@@ -27,6 +27,9 @@ export abstract class BaseEntity<T> {
   abstract objectSingle: string;
   abstract objectPlural: string;
 
+  //override this to the route of the pdf
+  pdfPrefix: string = 'api/'
+
   totalResults: number = 0;
   data: any[] = [];
 
@@ -197,6 +200,24 @@ export abstract class BaseEntity<T> {
       document.body.removeChild(a);
     });
   }
+
+  //
+  downloadPdf(id: number): void {
+    this.fileService.downloadPdf(this.pdfPrefix, id).subscribe((data: Blob) => {
+      // Create a Blob URL for the downloaded file
+      const file = new Blob([data], { type: 'application/pdf' }); // Adjust the MIME type accordingly
+      const fileUrl = URL.createObjectURL(file);
+
+      // Create a download link and trigger a click event to download the file
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = `assembliesmultivers_${id}.pdf`; // Specify the desired file name
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  }
+
 
   async exportData(exportOptions: exportOptions) {
 
