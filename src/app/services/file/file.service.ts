@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { PaginatedResult } from '../../models/utils/pagination';
 import { SearchCriteria } from '../../models/utils/searchCriteria';
 import AssemblyType from '../../models/entities/assemblyType';
-import { exportOptions } from '../../models/utils/export';
+import { ExportOptions } from '../../models/utils/export';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export abstract class FileService {
     this.url = 'http://localhost:8080';
   }
 
-  downloadCSV(options: exportOptions): Observable<any> {
+  downloadCSV(options: ExportOptions): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'text/csv', // Specify that we expect a CSV file in response
@@ -27,7 +27,7 @@ export abstract class FileService {
     return this.http.post(`${this.url}/api/export/csv`, options, { headers: headers, responseType: 'text' });
   }
 
-  downloadExcel(options: exportOptions): Observable<any> {
+  downloadExcel(options: ExportOptions): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // Specify that we expect an Excel file in response
@@ -37,6 +37,10 @@ export abstract class FileService {
 
   downloadPdf(prefix : string, id: number): Observable<Blob> {
     return this.http.get<any>(`${this.url}/${prefix}/${id}`, { responseType: 'blob' as 'json' });
+  }
+
+  downloadPdfWithBody(prefix : string, id: number,  body: any): Observable<Blob> {
+    return this.http.post<any>(`${this.url}/${prefix}/${id}`, body, { responseType: 'blob' as 'json' });
   }
     
 }

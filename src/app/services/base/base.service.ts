@@ -3,29 +3,26 @@ import { Component, Inject, Injectable, OnInit, SimpleChanges } from "@angular/c
 import { HttpClient, HttpResponse } from "@angular/common/http";
 
 import { ToastrService } from "ngx-toastr";
-import { TableHeader } from "../../../models/utils/tableHeader";
 import { ActivatedRoute } from "@angular/router";
 import { Apollo, Mutation, Query } from "apollo-angular";
 import { Observable, Subject, map, startWith, switchMap } from "rxjs";
-import { SearchFilters } from "../../../models/utils/searchFilters";
-import { TableHead } from "../../../models/utils/tableHead";
+
 import { start } from "@popperjs/core";
-import { ModalWidth } from "../../../models/enums/modalWidth.enum";
 import { Router } from '@angular/router';
-import { ExportOptions } from "../../../models/utils/export";
-import { FileService } from "../../../services/file/file.service";
-import { AuthService } from "../../../services/authentication/auth.service";
+import { TableHead } from "../../models/utils/tableHead";
+import { ModalWidth } from "../../models/enums/modalWidth.enum";
+import { AuthService } from "../authentication/auth.service";
+import { FileService } from "../file/file.service";
+import { ExportOptions } from "../../models/utils/export";
 
-@Component({
-  selector: "app-base-entity",
-  templateUrl: "./base-entity.component.html",
-})
-export abstract class BaseEntity<T> {
 
-  abstract searchCriteria: any;
+@Injectable()
+export class BaseService<T> {
 
-  abstract objectSingle: string;
-  abstract objectPlural: string;
+  searchCriteria: any;
+
+  objectSingle: string = '';
+  objectPlural: string = '';
 
   //override this to the route of the pdf
   pdfPrefix: string = 'api/'
@@ -46,11 +43,11 @@ export abstract class BaseEntity<T> {
 
   protected refetchTrigger: Subject<void> = new Subject<void>();
 
-  abstract tableHeaders: TableHead<any>[];
+  tableHeaders: TableHead<any>[] | undefined;
 
-  abstract Key: string;
+  Key: string = '';
 
-  abstract mapTableData(data: any[]): any[];
+  mapTableData : any = (data: any) => data;
 
   tableData: any[] = [];
 
@@ -70,14 +67,17 @@ export abstract class BaseEntity<T> {
   isInlineCreating: boolean = false;
 
   //this is the orderby that is used in case of removal of order by in table component
-  abstract baseOrderBy: any;
+  baseOrderBy: any;
 
   hasWritePermission: boolean = false;
 
+  protected getService: Query<any, any> | undefined;
+
+  protected deleteService: Mutation<any, any> | undefined;
+
   constructor(
     protected authService: AuthService,
-    protected fileService: FileService, protected router: Router, protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient,
-    protected getService: Query<any, any>, protected deleteService: Mutation<any, any> | null,
+    protected fileService: FileService, protected router: Router, protected toastr: ToastrService, protected route: ActivatedRoute, protected http: HttpClient
   ) {
     this.route.url.subscribe(urlSegments => {
       const currentUrl = urlSegments.map(segment => segment.path).join('/');
@@ -85,7 +85,18 @@ export abstract class BaseEntity<T> {
         this.hasWritePermission = value;
       });
     });
+  }
 
+  setUpBaseService(getService : Query<any, any>, deleteService : Mutation<any, any> | undefined, key: string, tableHeaders: TableHead<any>[], searchCriteria: any) {
+    this.getService = getService;
+    this.deleteService = deleteService;
+    this.Key = key;
+    this.tableHeaders = tableHeaders;
+    this.searchCriteria = searchCriteria;
+
+    this.checkQueryParams();
+
+    this.loadData(this.searchCriteria);
 
   }
 
@@ -127,6 +138,11 @@ export abstract class BaseEntity<T> {
   }
 
   loadData(searchCriteria: any): void {
+    
+    if (!this.getService) {
+      return;
+    }
+
     this.getService.fetch(searchCriteria ? searchCriteria : this.searchCriteria, {fetchPolicy: 'no-cache'}).subscribe(result => {
       console.log( result?.data[this.Key]?.nodes)
       this.data = result?.data[this.Key]?.nodes || [];
@@ -237,6 +253,10 @@ export abstract class BaseEntity<T> {
     if (exportOptions.records === 'filtered') {
       query.first = this.totalResults;
       query.offset = 0;
+    }
+
+    if(!this.getService) {
+        return;
     }
 
     this.getService.fetch(query).subscribe((response) => {

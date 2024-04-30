@@ -7,17 +7,12 @@ import { AuthComponent } from "./layouts/auth/auth.component";
 
 // user views
 import { DashboardComponent } from "./views/admin/dashboard/dashboard.component";
-import { MapsComponent } from "./views/admin/maps/maps.component";
-import { SettingsComponent } from "./views/admin/settings/settings.component";
-import { TablesComponent } from "./views/admin/tables/tables.component";
 
 // auth views
 import { LoginComponent } from "./views/auth/login/login.component";
-import { RegisterComponent } from "./views/auth/register/register.component";
 
 // no layouts views
-import { IndexComponent } from "./views/index/index.component";
-import { LandingComponent } from "./views/landing/landing.component";
+
 import { CalibrationGasesComponent } from "./views/admin/calibrationgases/index/calibrationgases.component";
 import { DetectorComponent } from "./views/admin/detectors/detector.component";
 import { AssemblyMultiversDetailComponent } from "./views/admin/assemblyMultivers/detail/assembly-multivers-detail.component";
@@ -73,6 +68,7 @@ export interface menuItem {
   items: NavBarIcon[];
 }
 
+//this is also used in sidebar. Thats why it is in this format
 export const navigationObject: menuItem[] = [
   {
     name: "Assembly",
@@ -326,6 +322,7 @@ export const allAuthenticatedRoutes = [
   ...insertRoutes(navigationObject[2]),
   ...insertRoutes(navigationObject[3]),
   ...insertRoutes(navigationObject[4]),
+  ...insertRoutes(navigationObject[5]),
 ]
 
 

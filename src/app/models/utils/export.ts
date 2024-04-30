@@ -7,7 +7,7 @@ export type SelectedRows = {
     selected: boolean;
 } 
 
-export type exportOptions = {
+export type ExportOptions = {
     type: 'csv' | 'excel';
     withHeaders: boolean;
     exportName?: string;

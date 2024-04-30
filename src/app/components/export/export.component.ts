@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Mutation, Query } from 'apollo-angular';
 import { TableHead } from '../../models/utils/tableHead';
 import { faFileCsv, faFileExcel } from '@fortawesome/free-solid-svg-icons';
-import { ExportType, SelectedRows, exportOptions } from '../../models/utils/export';
+import { ExportOptions, ExportType, SelectedRows } from '../../models/utils/export';
 
 @Component({
     selector: 'export',
@@ -14,7 +14,7 @@ import { ExportType, SelectedRows, exportOptions } from '../../models/utils/expo
 export class ExportComponent implements OnInit {
 
     @Output() closeModal = new EventEmitter<void>();
-    @Output() export = new EventEmitter<exportOptions>();
+    @Output() export = new EventEmitter<ExportOptions>();
 
     step: number = 1;
 
@@ -83,7 +83,7 @@ export class ExportComponent implements OnInit {
 
     async exportData() {
 
-        let object : exportOptions = {
+        let object : ExportOptions = {
             type: this.exportType,
             records: this.selectRows.find(row => row.selected)?.key as 'all' | 'paginated' | 'filtered',
             exportHeaders: this.exportColumns,

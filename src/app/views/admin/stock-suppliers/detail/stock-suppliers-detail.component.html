@@ -3,10 +3,18 @@
   <div class="h-full w-full flex items-center">
     <div class="w-full mb-12 pt-12 px-4">
       <div *ngIf="item" class="pt-12 flex flex-col gap-6">
-        <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
-          <h1 class="text-2xl text-roboto font-bold text-gray-800">Purchase Advice
-            ({{item?.crediteur?.zoeknaam}} / {{item?.cdcrediteur}})</h1>
-          <p>View the details of the Purchase advice here.</p>
+        <div class="bg-white flex justify-between rounded-2xl px-5 py-7 gap-2">
+          <div>
+            <h1 class="text-2xl text-roboto font-bold text-gray-800">Purchase Advice
+              ({{item?.crediteur?.zoeknaam}} / {{item?.cdcrediteur}})</h1>
+            <p>View the details of the Purchase advice here.</p>
+          </div>
+
+
+          <button (click)="retrieveFile()"
+          class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] pl-[8px] pr-[5px] ">
+          <fa-icon [size]="'lg'"[icon]="faFilePdf"></fa-icon>
+        </button>
         </div>
         <div *ngIf="item?.crediteur?.notities?.nodes?.length > 0"
           class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2">
@@ -19,7 +27,7 @@
         </div>
         @for(opdracht of item?.factureeropdrachtIndex?.nodes; track opdracht.factuuropdracht) {
         <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2 ">
-          <div class="flex gap-10">
+          <div class="flex justify-between gap-10">
             <h2 class="text-xl text-roboto font-bold text-gray-800">#{{opdracht?.factuuropdracht}} -
               {{opdracht?.zoeknaam}}</h2>
           </div>

@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CreateFactopdrachtArtikelExclusionGQL, StockSupplier, StockSupplierByIdGQL } from '../../../../../generated/graphql';
 import { Subject } from 'rxjs';
+import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
+import { FileService } from '../../../../services/file/file.service';
 
 @Component({
     selector: 'stock-suppliers-detail',
@@ -24,6 +26,8 @@ export class StockSuppliersDetailComponent {
 
     addArray: any[] = []
 
+    faFilePdf = faFilePdf;
+
     id: number | null = null;
 
     protected refetchTrigger: Subject<void> = new Subject<void>();
@@ -31,6 +35,7 @@ export class StockSuppliersDetailComponent {
     constructor(private route: ActivatedRoute, private toastr: ToastrService,
         private stockSupplier: StockSupplierByIdGQL,
         private router: Router,
+        private fileService: FileService,
         private createFactOpdrachtArtikelExclusion: CreateFactopdrachtArtikelExclusionGQL,
     ) { }
 
@@ -46,6 +51,22 @@ export class StockSuppliersDetailComponent {
         }
         this.addArray.push({ cdartikel: cdartikel, factuuropdracht: factuuropdracht });
     }
+
+    async retrieveFile() {
+        this.fileService.downloadPdfWithBody("api/stock-suppliers/pdf", this.item.id, this.item).subscribe((data: Blob) => {
+          // Create a Blob URL for the downloaded file
+          const file = new Blob([data], { type: 'application/pdf' }); // Adjust the MIME type accordingly
+          const fileUrl = URL.createObjectURL(file);
+    
+          // Create a download link and trigger a click event to download the file
+          const link = document.createElement('a');
+          link.href = fileUrl;
+          link.download = `purchase_advice_${this.item.crediteur.zoeknaam}_${this.item.id}.pdf`; // Specify the desired file name
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+      }
     
 
     async loadDetails(): Promise<void> {
@@ -70,7 +91,11 @@ export class StockSuppliersDetailComponent {
     async addPartsToArtikelFactExclusion() {
         try {
             await this.addArray.forEach(async (item) => {
-                await this.createFactOpdrachtArtikelExclusion.mutate({ body: { factuuropdracht: item.factuuropdracht, cdartikel: item.cdartikel } });
+                await this.createFactOpdrachtArtikelExclusion.mutate({ body: { factuuropdracht: item.factuuropdracht, cdartikel: item.cdartikel } }).subscribe(
+                    result => {
+                        console.log(result);
+                    }
+                );
             });
 
             this.loadDetails();

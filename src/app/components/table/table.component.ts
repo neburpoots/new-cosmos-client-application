@@ -173,6 +173,10 @@ export class TableComponent implements OnInit {
 
   }
 
+  returnRoundedValue(round: number, value: number): string {    
+    return value.toFixed(round);
+  }
+
   async exportTable(): Promise<void> {
     this.export.emit();
   }
