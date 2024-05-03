@@ -16,6 +16,7 @@ module.exports = {
         cosmosLight: '#20c997',
         cosmosDark: "#008C8C",
         cosmosDarker: "#006666",
+        cosmosDarkest: "#004040", //#007682
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
@@ -87,6 +88,7 @@ module.exports = {
     "disabled",
   ],
   plugins: [
+    require('tailwind-scrollbar'),
     require('@tailwindcss/forms'),
   ],
 };

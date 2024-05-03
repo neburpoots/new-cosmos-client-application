@@ -4,12 +4,12 @@
     <label *ngIf="!inline" [for]="name" [ngClass]="{
         'text-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
         'text-green-600': form.get(name)?.valid && form && form.controls[name].touched,
-        'text-slate-800': !form.get(name)?.touched && !isSubmitted,
+        'text-slate-800 dark:text-slate-200': !form.get(name)?.touched && !isSubmitted,
     }">{{displayName}}</label>
     <select 
         
     #selectValue (change)="changeEmit(selectValue.value)"
-        class="rounded-2xl focus:border-0 rounded-2xl focus:ring-0 focus:outline-cosmosDark " id="selectedOption"
+        class="rounded-2xl focus:border-0 rounded-2xl focus:ring-0 focus:outline-cosmosDark dark:bg-slate-800" id="selectedOption"
         [formControlName]="name" [ngClass]="{
             'text-sm': inline,
             'border-red-500 focus:outline-red-500': (form.get(name)?.errors && form && form.controls[name].touched) || (isSubmitted && form.get(name)?.errors),

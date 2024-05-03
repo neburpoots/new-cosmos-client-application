@@ -1,5 +1,5 @@
 <nav
-  class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden bg-cosmosDarker flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+  class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden bg-cosmosDarker dark:bg-cosmosDarkest flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
   <div
     class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
     <!-- Toggler -->
@@ -76,13 +76,13 @@
             (click)="toggleFavoritesDropdown()">
             <i class="fa fa-star   mr-2 "></i>Favorites
           </button>
-          <div *ngIf="favoritesDropdownActive" class=" w-48 bg-cosmosDarker border-slate-200 ">
+          <div *ngIf="favoritesDropdownActive" class=" w-48 bg-cosmosDarker dark:bg-cosmosDarkest border-slate-200 ">
             <ul class="list-none">
               <li><a [routerLink]="['/user/assembly']" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
               adminDashboard.isActive
                 ? 'text-white hover:text-white'
                 : 'text-white hover:text-white'
-            " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark text-white' : ''"
+            " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark dark:bg-cosmosDarkest text-white' : ''"
                   class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
                     class="mr-2 fa fa-cog" aria-hidden="true"></i>
                   Assembly</a></li>
@@ -101,7 +101,7 @@
           }
           {{navigationItem.name}}
         </button>
-        <div *ngIf="navigationItem.active" class=" w-48 bg-cosmosDarker border-slate-200 ">
+        <div *ngIf="navigationItem.active" class=" w-48 bg-cosmosDarker dark:bg-cosmosDarkest border-slate-200 ">
           <ul class="list-none">
             @for (item of navigationItem.items; let itemindex = $index; track itemindex) {
             <li *ngIf="(authService.checkPermission(item.route.permission_id) | async)"><a [routerLink]="[item.route.path]"

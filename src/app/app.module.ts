@@ -33,7 +33,6 @@ import { CardProfileComponent } from "./components/cards/card-profile/card-profi
 import { CardSettingsComponent } from "./components/cards/card-settings/card-settings.component";
 import { CardSocialTrafficComponent } from "./components/cards/card-social-traffic/card-social-traffic.component";
 import { CardStatsComponent } from "./components/cards/card-stats/card-stats.component";
-import { CardTableComponent } from "./components/cards/card-table/card-table.component";
 import { FooterAdminComponent } from "./components/footers/footer-admin/footer-admin.component";
 import { FooterComponent } from "./components/footers/footer/footer.component";
 import { FooterSmallComponent } from "./components/footers/footer-small/footer-small.component";
@@ -151,7 +150,6 @@ registerLocaleData(localeEu);
     CardSettingsComponent,
     CardSocialTrafficComponent,
     CardStatsComponent,
-    CardTableComponent,
     HeaderStatsComponent,
     MapExampleComponent,
     AuthNavbarComponent,

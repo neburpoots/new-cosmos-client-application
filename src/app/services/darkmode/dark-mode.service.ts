@@ -14,8 +14,8 @@ export class DarkModeService {
     this.applyDarkModeClass();
   }
 
-  toggleDarkMode(darkMode?: boolean) {
-    this.isDarkMode = darkMode ? darkMode : !this.isDarkMode;
+  toggleDarkMode(darkMode: boolean) {
+    this.isDarkMode = darkMode;
     this.applyDarkModeClass();
 
     // Save dark mode state to localStorage

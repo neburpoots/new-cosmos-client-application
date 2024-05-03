@@ -1,11 +1,11 @@
-<div [formGroup]="form" class="flex flex-col justify-center" [class]="inline ? 'text-xs p-1' : ''">
+<div [formGroup]="form" class="flex-col justify-center " [class]="inline ? 'text-xs p-1' : ''">
     <label *ngIf="!inline && inputType !== 'checkbox' " [for]="name" [ngClass]="{
         
         'text-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
         'text-green-600': form.get(name)?.valid && form && form.controls[name].touched,
-        'text-slate-800': !form.get(name)?.touched && !isSubmitted
+        'text-slate-800 dark:text-slate-200': !form.get(name)?.touched && !isSubmitted
     }">{{displayName}}
-        <div *ngIf="description" class="mb-1 text-xs text-slate-500">{{description}}</div>
+        <div *ngIf="description" class="mb-1 text-xs text-slate-500 dark:text-slate-100">{{description}}</div>
     </label>
 
     <div class="relative inline-flex w-full">
@@ -15,7 +15,7 @@
           'border-red-500 focus:outline-red-500': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
           'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
           'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched && !isSubmitted
-        }" [placeholder]="displayName" class="w-full bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+        }" [placeholder]="displayName" class="w-full bg-white dark:bg-slate-700 focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
                 [id]="name" [formControlName]="name"></textarea>
 
             <input *ngSwitchCase="'date'" type="date" [ngClass]="{
@@ -33,7 +33,7 @@
                 <div
                     class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-cosmosDarker rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-cosmosDark">
                 </div>
-                <span *ngIf="!inline" class="ml-3 text-slate-800">{{displayName}}</span>
+                <span *ngIf="!inline" class="ml-3 text-slate-800 dark:text-slate-200">{{displayName}}</span>
             </label>
 
             <input #inputValue (change)="changeEmit(inputValue.value)" *ngSwitchCase="'password'" type="password"
@@ -50,21 +50,21 @@
             <div *ngSwitchDefault class="border relative rounded-2xl flex w-full" [ngClass]="{
         'border-red-500 ': form.get(name)?.errors && form && form.controls[name].touched || (isSubmitted && form.get(name)?.errors),
         'border-green-600': form.get(name)?.valid && form && form.controls[name].touched,
-        'border-slate-300': !form.get(name)?.touched && !isSubmitted
+        'border-slate-300 dark:border-slate-400 ': !form.get(name)?.touched && !isSubmitted
             }">
                 <input [type]="inputType" #inputValue (input)="changeEmit(inputValue.value)" [ngClass]="{
                                 'rounded-r-2xl': !suffix,
                                'border-red-500 ': form.get(name)?.errors && form && form.controls[name].touched,
                                'border-red-500 test ': isSubmitted && form.get(name)?.errors,
                                
-                               'border-slate-200': !form.get(name)?.touched && !isSubmitted,
+                               'border-slate-200 dark:border-slate-700 ': !form.get(name)?.touched && !isSubmitted,
                                'text-sm': inline 
                            }" [placeholder]="displayName"
-                    class="w-full bg-white focus:border-0 border-0 rounded-l-2xl focus:ring-0" [id]="name"
+                    class="dark:placeholder-slate-300 w-full bg-white dark:bg-slate-700  focus:border-0 border-0 rounded-l-2xl focus:ring-0 overflow-hidden" [id]="name"
                     [formControlName]="name">
                 <div *ngIf="suffix" class="flex items-center">
                     <span
-                        class="bg-slate-50 w-max text-grey-800 px-3 py-2 border-l border-r rounded-r-2xl focus:outline-none">{{suffix}}</span>
+                        class="bg-slate-50 w-max text-grey-800 px-3 py-2 border-l border-r rounded-r-2xl overflow-hidden focus:outline-none">{{suffix}}</span>
                 </div>
             </div>
 

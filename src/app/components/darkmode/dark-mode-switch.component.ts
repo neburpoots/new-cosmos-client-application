@@ -14,6 +14,6 @@ export class DarkModeSwitchComponent {
   }
 
   toggleDarkMode() {
-    this.darkModeService.toggleDarkMode();
+    this.darkModeService.toggleDarkMode(!this.darkModeService.isDarkMode);
   }
 }

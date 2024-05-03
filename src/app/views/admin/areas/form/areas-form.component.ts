@@ -68,6 +68,7 @@ export class AreasFormComponent extends BaseFormComponent<AreaInput> {
         return {
             floorId: +this.myForm.value.floor,
             name: this.myForm.value.name,
+            remarks: this.myForm.value.remarks,
             created: !this.id ? this.dayjs().format() : undefined,
             modified: this.dayjs().format(),
             ownerId: this.authService?.currentUserInfo?.id,

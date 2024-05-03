@@ -5,7 +5,7 @@ import { TableHead } from "../../../models/utils/tableHead";
 export const applicationTableHeaders: TableHead<ApplicationsOrderBy>[] = [
     { type: 'string', key: 'name', label: "Name", asc: ApplicationsOrderBy.NameAsc, desc: ApplicationsOrderBy.NameDesc },
     { type: 'datetime', key: 'created', label: "Created", asc: ApplicationsOrderBy.CreatedAsc, desc: ApplicationsOrderBy.CreatedDesc },
-    { type: 'string', key: 'initials', label: "By", asc: ApplicationsOrderBy.UserByOwnerIdInitialsAsc, desc: ApplicationsOrderBy.UserByOwnerIdInitialsDesc },
+    { type: 'string', key: 'userByOwnerId$initials', label: "By", asc: ApplicationsOrderBy.UserByOwnerIdInitialsAsc, desc: ApplicationsOrderBy.UserByOwnerIdInitialsDesc },
   ]
 
 export const mapApplicationTableData = (applications: Application[]): any[] => {

@@ -6,18 +6,18 @@
           class="fa fa-search"></i></span>
       <input (ngModelChange)="loadData($event)" [(ngModel)]="filterBuilder.globalSearch" type="text"
         placeholder="Search here..."
-        class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-400 text-slate-600 relative bg-white bg-white rounded-2xl text-sm  w-full pl-10" />
+        class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-400 text-slate-600 relative bg-white dark:bg-slate-900 dark:text-slate-50 rounded-2xl text-sm  w-full pl-10" />
     </div>
 
     <div class="flex">
       <div [satPopoverAnchor]="filters" (click)="filters.open()"
-        class="mr-[-10px] cursor-pointer bg-cosmosDark ease-in-out flex items-center hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-full py-[5px] px-[14px] ">
+        class="mr-[-10px] cursor-pointer bg-cosmosDark dark:bg-cosmosDarker ease-in-out flex items-center hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-full py-[5px] px-[14px] ">
         <fa-icon [icon]="faFilter"></fa-icon>
 
 
         <sat-popover (afterClose)="recoverSavedFilters()" hasBackdrop verticalAlign="center" horizontalAlign="before"
           #filters>
-          <div class="bg-cosmosDark rounded-lg flex gap-2 flex-col p-4">
+          <div class="bg-cosmosDark dark:bg-cosmosDarkest rounded-lg flex gap-2 flex-col p-4">
             <h2 class="text-white font-bold">Filters</h2>
             @for(filterInput of filterBuilder.filterInputs; track filterInput; let activeIndex = $index) {
             <div>
@@ -65,7 +65,7 @@
 
                 </div>
                 <button type="button" (click)="deleteFilterInput(filterInput.id)"
-                  class="text-white font-semibold px-4 rounded-full bg-cosmosDarker cursor-pointer">
+                  class="text-white font-semibold px-4 rounded-full bg-cosmosDarker  cursor-pointer">
                   <fa-icon [icon]="faDeleteLeft"></fa-icon>
                 </button>
 
@@ -114,7 +114,7 @@
       </span>
     </div>
     <button type="button" (click)="exportTable()"
-      class="ml-2 cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker transition transition-colors hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 hover: font-medium rounded-full text-sm px-[14px] py-2.5 text-center">
+      class="ml-2 cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:bg-cosmosDarker transition transition-colors hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 hover: font-medium rounded-full text-sm px-[14px] py-2.5 text-center">
       <fa-icon [icon]="faFileExport"></fa-icon>
     </button>
   </div>
@@ -122,26 +122,26 @@
 
   <div *ngIf="isCreatable">
     <button type="button" (click)="openCreateModal()"
-      class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-l-full text-sm pl-5 pr-2 py-2.5 text-center mb-2"
+      class="cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:dark:bg-cosmosDarkest hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-l-full text-sm pl-5 pr-2 py-2.5 text-center mb-2"
       [ngClass]="!isInlineCreateable ? 'rounded-r-full pr-5' : 'rounded-r-none'">
       Add {{ object }}</button>
 
     <button type="button" *ngIf="isInlineCreateable" (click)="setInlineCreating()"
-      class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-r-full text-sm pr-5 pl-2 py-2.5 text-center mb-2">
+      class="cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:dark:bg-cosmosDarkest hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-r-full text-sm pr-5 pl-2 py-2.5 text-center mb-2">
       +</button>
   </div>
 
 </div>
 <div [@fadeInOut]="true"
-  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm rounded-2xl bg-slate-50 p-4"
-  [ngClass]="color === 'light' ? 'bg-white' : 'bg-red-900 text-white'">
-  <div class="block w-full overflow-x-auto overflow-y-hidden">
-    <div class="text-slate-900 text-lg font-semibold mb-2">{{ title }}
+  class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm rounded-2xl bg-slate-50 dark:bg-slate-900 p-4"
+ >
+  <div class="block w-full overflow-x-auto overflow-y-hidden scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300">
+    <div class="text-slate-900 dark:text-slate-200 text-lg font-semibold mb-2">{{ title }}
     </div>
-    <div class="rounded-2xl overflow-auto overflow-y-hidden">
+    <div class="rounded-2xl overflow-auto scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-slate-400 scrollbar-track-slate-700">
       <table id="myTable" class="items-center w-full bg-transparent border-collapse">
         <thead>
-          <tr *ngIf="searchCriteria.orderBy.length > 0" class="bg-slate-100 font-roboto  rounded-lg text-slate-800">
+          <tr *ngIf="searchCriteria.orderBy.length > 0" class="dark:bg-slate-950 bg-slate-100 font-roboto  rounded-lg text-slate-800 dark:text-slate-200">
 
             <th *ngFor="let column of columns; let i = index" class="cursor-pointer px-6 align-middle py-4 text-xs uppercase whitespace-nowrap font-semibold text-left
                       {{ i === 0 ? 'rounded-tl-lg rounded-bl-lg' : '' }}
@@ -170,9 +170,9 @@
               </div>
             </th>
             <th *ngIf="isDeletable || isEditable || isViewable || isPdf"
-              class="bg-slate-100 sticky right-0 rounded-tr-lg text-slate-800 rounded-br-lg">
+              class="bg-slate-100 dark:bg-slate-950 sticky right-0 rounded-tr-lg rounded-br-lg">
               <div
-                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap ">
+                class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 dark:text-slate-200 whitespace-nowrap ">
                 Actions
               </div>
             </th>
@@ -191,7 +191,7 @@
           <tr *ngFor="let item of data">
 
             <td *ngFor="let column of columns"
-              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-3">
+              class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 dark:text-slate-200 whitespace-nowrap p-3">
               @if (isBoolean(item[column['key']]['value'])) {
               <span class="text-base" *ngIf="item[column['key']]['value']"><i
                   class="fa fa-md fa-check-circle text-green-700 text-lg w-8"></i></span>
@@ -216,7 +216,7 @@
 
             </td>
             <td *ngIf="isDeletable || isEditable || isViewable || isPdf"
-              class="mt-2 sticky right-0 flex bg-white gap-1 items-center justify-center">
+              class="mt-2 sticky right-0 flex bg-white dark:bg-slate-900 gap-1 items-center justify-center">
               <a [routerLink]="detailPagePrefix + item['id']?.value">
                 <div *ngIf="isViewable" [satPopoverAnchor]="popover" (mouseover)="popover.open()"
                   (mouseenter)="openViewModal(item['id'].value)" (mouseleave)="popover.close()"
@@ -228,7 +228,7 @@
                 </div>
               </a>
               <div *ngIf="isEditable" (click)="openEditModal(item['id']?.value)"
-                class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
+                class="cursor-pointer bg-cosmosDark dark:bg-cosmosDarker  hover:dark:bg-cosmosDarker ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
                 <i class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i>
               </div>
               <div *ngIf="isDeletable" (click)="openDeleteModal(item['id']?.value)"

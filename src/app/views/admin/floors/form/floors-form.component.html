@@ -40,7 +40,7 @@
     <!-- This is the inline form -->
     <div *ngIf="isInlineCreating" [style.min-width.px]="cellWidths[cellWidths.length - 2]"
         [style.max-width.px]="cellWidths[cellWidths.length - 2]"
-        class="h-full sticky right-0 flex bg-white gap-1 items-start p-1 pt-1 justify-center ml-auto">
+        class="h-full sticky right-0 flex bg-white dark:bg-slate-900 gap-1 items-start p-1 pt-1 justify-center ml-auto">
         <button type="submit" (click)="setSubmitted()"
             class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
             <i class="fa fa-lg fa-check" aria-hidden="true"></i>

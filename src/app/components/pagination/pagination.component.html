@@ -8,7 +8,7 @@
                 <li [class.disabled]="currentPage === 1">
                     <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
 
-                        <div class="shadow-lg rounded-full bg-cosmosDark px-4 py-3 cursor-pointer">
+                        <div class="shadow-lg rounded-full bg-cosmosDark dark:bg-cosmosDarker  hover:dark:bg-cosmosDarker ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 px-4 py-3 cursor-pointer">
 
                             <i class="fa fa-arrow-left text-white" aria-hidden="true"></i>
 
@@ -18,12 +18,12 @@
 
                 </li>
                 <li class="page-item">
-                    <a class="page-link text-xl">{{ currentPage }}/{{pages}}</a>
+                    <a class="page-link text-xl dark:text-slate-50">{{ currentPage }}/{{pages}}</a>
                 </li>
                 <li [class.disabled]="currentPage === pages">
 
                     <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
-                        <div class="shadow-lg rounded-full bg-cosmosDark px-4 py-3 cursor-pointer">
+                        <div class="shadow-lg rounded-full bg-cosmosDark dark:bg-cosmosDarker  hover:dark:bg-cosmosDarker ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 px-4 py-3 cursor-pointer">
                             <i class="fa fa-arrow-right text-white" aria-hidden="true"></i>
 
                         </div>

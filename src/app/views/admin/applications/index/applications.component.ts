@@ -93,7 +93,7 @@ export class ApplicationsComponent {
         id: { url: null, value: application.id } as TableField,
         name: { url: null, value: application?.name } as TableField,
         created: { url: null, value: application?.created } as TableField,
-        initials: { url: null, value: application?.userByOwnerId?.initials } as TableField,
+        userByOwnerId$initials: { url: null, value: application?.userByOwnerId?.initials } as TableField,
       };
     });
   }
