@@ -14773,6 +14773,8 @@ export type Crediteur = {
   telefax?: Maybe<Scalars['String']['output']>;
   telefoon?: Maybe<Scalars['String']['output']>;
   telefoonmobiel?: Maybe<Scalars['String']['output']>;
+  /** Reads and enables pagination through a set of `VooradenIndex`. */
+  vooradenIndex: VooradenIndicesConnection;
   woonplaats?: Maybe<Scalars['String']['output']>;
   zoeknaam?: Maybe<Scalars['String']['output']>;
 };
@@ -14782,6 +14784,16 @@ export type CrediteurNotitiesArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
   filter?: InputMaybe<NotityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type CrediteurVooradenIndexArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<VooradenIndexFilter>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -53521,6 +53533,8 @@ export type Query = Node & {
   allSensorSettings?: Maybe<SensorSettingsConnection>;
   /** Reads and enables pagination through a set of `SensorTestResult`. */
   allSensorTestResults?: Maybe<SensorTestResultsConnection>;
+  /** Reads and enables pagination through a set of `SensorTestResultsEntity`. */
+  allSensorTestResultsEntities?: Maybe<SensorTestResultsEntitiesConnection>;
   /** Reads and enables pagination through a set of `SensorType`. */
   allSensorTypes?: Maybe<SensorTypesConnection>;
   /** Reads and enables pagination through a set of `SensorTypesChecklist`. */
@@ -56826,6 +56840,19 @@ export type QueryAllSensorTestResultsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<SensorTestResultsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllSensorTestResultsEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<SensorTestResultsEntityCondition>;
+  filter?: InputMaybe<SensorTestResultsEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<SensorTestResultsEntitiesOrderBy>>;
 };
 
 
@@ -63511,6 +63538,7 @@ export type SensorIndex = {
   id?: Maybe<Scalars['Int']['output']>;
   label?: Maybe<Scalars['String']['output']>;
   range?: Maybe<Scalars['String']['output']>;
+  sensorOrderId?: Maybe<Scalars['Int']['output']>;
   sensorType?: Maybe<Scalars['String']['output']>;
   sensorTypeId?: Maybe<Scalars['Int']['output']>;
   sensorTypeSort?: Maybe<Scalars['String']['output']>;
@@ -63540,6 +63568,8 @@ export type SensorIndexCondition = {
   label?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `range` field. */
   range?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorOrderId` field. */
+  sensorOrderId?: InputMaybe<Scalars['Int']['input']>;
   /** Checks for equality with the object’s `sensorType` field. */
   sensorType?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `sensorTypeId` field. */
@@ -63576,6 +63606,8 @@ export type SensorIndexFilter = {
   or?: InputMaybe<Array<SensorIndexFilter>>;
   /** Filter by the object’s `range` field. */
   range?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorOrderId` field. */
+  sensorOrderId?: InputMaybe<IntFilter>;
   /** Filter by the object’s `sensorType` field. */
   sensorType?: InputMaybe<StringFilter>;
   /** Filter by the object’s `sensorTypeId` field. */
@@ -63629,6 +63661,8 @@ export enum SensorIndicesOrderBy {
   Natural = 'NATURAL',
   RangeAsc = 'RANGE_ASC',
   RangeDesc = 'RANGE_DESC',
+  SensorOrderIdAsc = 'SENSOR_ORDER_ID_ASC',
+  SensorOrderIdDesc = 'SENSOR_ORDER_ID_DESC',
   SensorTypeAsc = 'SENSOR_TYPE_ASC',
   SensorTypeDesc = 'SENSOR_TYPE_DESC',
   SensorTypeIdAsc = 'SENSOR_TYPE_ID_ASC',
@@ -64861,6 +64895,292 @@ export type SensorTestResultsEdge = {
   cursor?: Maybe<Scalars['Cursor']['output']>;
   /** The `SensorTestResult` at the end of the edge. */
   node: SensorTestResult;
+};
+
+/** A connection to a list of `SensorTestResultsEntity` values. */
+export type SensorTestResultsEntitiesConnection = {
+  __typename?: 'SensorTestResultsEntitiesConnection';
+  /** A list of edges which contains the `SensorTestResultsEntity` and cursor to aid in pagination. */
+  edges: Array<SensorTestResultsEntitiesEdge>;
+  /** A list of `SensorTestResultsEntity` objects. */
+  nodes: Array<SensorTestResultsEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `SensorTestResultsEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `SensorTestResultsEntity` edge in the connection. */
+export type SensorTestResultsEntitiesEdge = {
+  __typename?: 'SensorTestResultsEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `SensorTestResultsEntity` at the end of the edge. */
+  node: SensorTestResultsEntity;
+};
+
+/** Methods to use when ordering `SensorTestResultsEntity`. */
+export enum SensorTestResultsEntitiesOrderBy {
+  CalGasNameAsc = 'CAL_GAS_NAME_ASC',
+  CalGasNameDesc = 'CAL_GAS_NAME_DESC',
+  CalRangeAsc = 'CAL_RANGE_ASC',
+  CalRangeDesc = 'CAL_RANGE_DESC',
+  CreatedAsc = 'CREATED_ASC',
+  CreatedDateAsc = 'CREATED_DATE_ASC',
+  CreatedDateDesc = 'CREATED_DATE_DESC',
+  CreatedDesc = 'CREATED_DESC',
+  DateAsc = 'DATE_ASC',
+  DateDesc = 'DATE_DESC',
+  DebiteurNaamAsc = 'DEBITEUR_NAAM_ASC',
+  DebiteurNaamDesc = 'DEBITEUR_NAAM_DESC',
+  FactureeropdrachtReferentieAsc = 'FACTUREEROPDRACHT_REFERENTIE_ASC',
+  FactureeropdrachtReferentieDesc = 'FACTUREEROPDRACHT_REFERENTIE_DESC',
+  FactuuropdrachtAsc = 'FACTUUROPDRACHT_ASC',
+  FactuuropdrachtDesc = 'FACTUUROPDRACHT_DESC',
+  FactuuropdrachtOldAsc = 'FACTUUROPDRACHT_OLD_ASC',
+  FactuuropdrachtOldDesc = 'FACTUUROPDRACHT_OLD_DESC',
+  FsCalGasIdAsc = 'FS_CAL_GAS_ID_ASC',
+  FsCalGasIdDesc = 'FS_CAL_GAS_ID_DESC',
+  GasNameAsc = 'GAS_NAME_ASC',
+  GasNameDesc = 'GAS_NAME_DESC',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  ModifiedAsc = 'MODIFIED_ASC',
+  ModifiedDesc = 'MODIFIED_DESC',
+  Natural = 'NATURAL',
+  OwnerIdAsc = 'OWNER_ID_ASC',
+  OwnerIdDesc = 'OWNER_ID_DESC',
+  OwnerInitialsAsc = 'OWNER_INITIALS_ASC',
+  OwnerInitialsDesc = 'OWNER_INITIALS_DESC',
+  SensorIdAsc = 'SENSOR_ID_ASC',
+  SensorIdDesc = 'SENSOR_ID_DESC',
+  SensorLabelAsc = 'SENSOR_LABEL_ASC',
+  SensorLabelDateAsc = 'SENSOR_LABEL_DATE_ASC',
+  SensorLabelDateDesc = 'SENSOR_LABEL_DATE_DESC',
+  SensorLabelDesc = 'SENSOR_LABEL_DESC',
+  SensorOrderIdAsc = 'SENSOR_ORDER_ID_ASC',
+  SensorOrderIdDesc = 'SENSOR_ORDER_ID_DESC',
+  SensorRangeAsc = 'SENSOR_RANGE_ASC',
+  SensorRangeDesc = 'SENSOR_RANGE_DESC',
+  SensorSerialNumberAsc = 'SENSOR_SERIAL_NUMBER_ASC',
+  SensorSerialNumberDesc = 'SENSOR_SERIAL_NUMBER_DESC',
+  SensorTypeAndModeAsc = 'SENSOR_TYPE_AND_MODE_ASC',
+  SensorTypeAndModeDesc = 'SENSOR_TYPE_AND_MODE_DESC',
+  SensorTypeAsc = 'SENSOR_TYPE_ASC',
+  SensorTypeDesc = 'SENSOR_TYPE_DESC',
+  SensorTypeModeAsc = 'SENSOR_TYPE_MODE_ASC',
+  SensorTypeModeDesc = 'SENSOR_TYPE_MODE_DESC',
+  SpanDeviationAsc = 'SPAN_DEVIATION_ASC',
+  SpanDeviationDesc = 'SPAN_DEVIATION_DESC',
+  SpanResponseAsc = 'SPAN_RESPONSE_ASC',
+  SpanResponseDesc = 'SPAN_RESPONSE_DESC',
+  SpanResponsePlusUnitsAsc = 'SPAN_RESPONSE_PLUS_UNITS_ASC',
+  SpanResponsePlusUnitsDesc = 'SPAN_RESPONSE_PLUS_UNITS_DESC',
+  UsedSpanConcentrationAsc = 'USED_SPAN_CONCENTRATION_ASC',
+  UsedSpanConcentrationDesc = 'USED_SPAN_CONCENTRATION_DESC',
+  UsedSpanConcentrationPlusUnitsAsc = 'USED_SPAN_CONCENTRATION_PLUS_UNITS_ASC',
+  UsedSpanConcentrationPlusUnitsDesc = 'USED_SPAN_CONCENTRATION_PLUS_UNITS_DESC',
+  UserIdAsc = 'USER_ID_ASC',
+  UserIdDesc = 'USER_ID_DESC',
+  UserInitialsAsc = 'USER_INITIALS_ASC',
+  UserInitialsDesc = 'USER_INITIALS_DESC',
+  ZeroDeviationAsc = 'ZERO_DEVIATION_ASC',
+  ZeroDeviationDesc = 'ZERO_DEVIATION_DESC',
+  ZeroResponseAsc = 'ZERO_RESPONSE_ASC',
+  ZeroResponseDesc = 'ZERO_RESPONSE_DESC',
+  ZeroResponsePlusUnitsAsc = 'ZERO_RESPONSE_PLUS_UNITS_ASC',
+  ZeroResponsePlusUnitsDesc = 'ZERO_RESPONSE_PLUS_UNITS_DESC'
+}
+
+export type SensorTestResultsEntity = {
+  __typename?: 'SensorTestResultsEntity';
+  calGasName?: Maybe<Scalars['String']['output']>;
+  calRange?: Maybe<Scalars['String']['output']>;
+  created?: Maybe<Scalars['Datetime']['output']>;
+  createdDate?: Maybe<Scalars['String']['output']>;
+  date?: Maybe<Scalars['Date']['output']>;
+  debiteurNaam?: Maybe<Scalars['String']['output']>;
+  factureeropdrachtReferentie?: Maybe<Scalars['String']['output']>;
+  factuuropdracht?: Maybe<Scalars['String']['output']>;
+  factuuropdrachtOld?: Maybe<Scalars['String']['output']>;
+  fsCalGasId?: Maybe<Scalars['Int']['output']>;
+  gasName?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  modified?: Maybe<Scalars['Datetime']['output']>;
+  ownerId?: Maybe<Scalars['Int']['output']>;
+  ownerInitials?: Maybe<Scalars['String']['output']>;
+  sensorId?: Maybe<Scalars['Int']['output']>;
+  sensorLabel?: Maybe<Scalars['String']['output']>;
+  sensorLabelDate?: Maybe<Scalars['String']['output']>;
+  sensorOrderId?: Maybe<Scalars['Int']['output']>;
+  sensorRange?: Maybe<Scalars['String']['output']>;
+  sensorSerialNumber?: Maybe<Scalars['String']['output']>;
+  sensorType?: Maybe<Scalars['String']['output']>;
+  sensorTypeAndMode?: Maybe<Scalars['String']['output']>;
+  sensorTypeMode?: Maybe<Scalars['String']['output']>;
+  spanDeviation?: Maybe<Scalars['Float']['output']>;
+  spanResponse?: Maybe<Scalars['Float']['output']>;
+  spanResponsePlusUnits?: Maybe<Scalars['String']['output']>;
+  usedSpanConcentration?: Maybe<Scalars['Float']['output']>;
+  usedSpanConcentrationPlusUnits?: Maybe<Scalars['String']['output']>;
+  userId?: Maybe<Scalars['Int']['output']>;
+  userInitials?: Maybe<Scalars['String']['output']>;
+  zeroDeviation?: Maybe<Scalars['Float']['output']>;
+  zeroResponse?: Maybe<Scalars['Float']['output']>;
+  zeroResponsePlusUnits?: Maybe<Scalars['String']['output']>;
+};
+
+/**
+ * A condition to be used against `SensorTestResultsEntity` object types. All
+ * fields are tested for equality and combined with a logical ‘and.’
+ */
+export type SensorTestResultsEntityCondition = {
+  /** Checks for equality with the object’s `calGasName` field. */
+  calGasName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `calRange` field. */
+  calRange?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `created` field. */
+  created?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `createdDate` field. */
+  createdDate?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `date` field. */
+  date?: InputMaybe<Scalars['Date']['input']>;
+  /** Checks for equality with the object’s `debiteurNaam` field. */
+  debiteurNaam?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `factureeropdrachtReferentie` field. */
+  factureeropdrachtReferentie?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `factuuropdracht` field. */
+  factuuropdracht?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `factuuropdrachtOld` field. */
+  factuuropdrachtOld?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `fsCalGasId` field. */
+  fsCalGasId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `gasName` field. */
+  gasName?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `id` field. */
+  id?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `modified` field. */
+  modified?: InputMaybe<Scalars['Datetime']['input']>;
+  /** Checks for equality with the object’s `ownerId` field. */
+  ownerId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `ownerInitials` field. */
+  ownerInitials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorId` field. */
+  sensorId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `sensorLabel` field. */
+  sensorLabel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorLabelDate` field. */
+  sensorLabelDate?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorOrderId` field. */
+  sensorOrderId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `sensorRange` field. */
+  sensorRange?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorSerialNumber` field. */
+  sensorSerialNumber?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorType` field. */
+  sensorType?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorTypeAndMode` field. */
+  sensorTypeAndMode?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `sensorTypeMode` field. */
+  sensorTypeMode?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `spanDeviation` field. */
+  spanDeviation?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `spanResponse` field. */
+  spanResponse?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `spanResponsePlusUnits` field. */
+  spanResponsePlusUnits?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `usedSpanConcentration` field. */
+  usedSpanConcentration?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `usedSpanConcentrationPlusUnits` field. */
+  usedSpanConcentrationPlusUnits?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `userId` field. */
+  userId?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `userInitials` field. */
+  userInitials?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `zeroDeviation` field. */
+  zeroDeviation?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `zeroResponse` field. */
+  zeroResponse?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `zeroResponsePlusUnits` field. */
+  zeroResponsePlusUnits?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A filter to be used against `SensorTestResultsEntity` object types. All fields are combined with a logical ‘and.’ */
+export type SensorTestResultsEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<SensorTestResultsEntityFilter>>;
+  /** Filter by the object’s `calGasName` field. */
+  calGasName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `calRange` field. */
+  calRange?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `created` field. */
+  created?: InputMaybe<DatetimeFilter>;
+  /** Filter by the object’s `createdDate` field. */
+  createdDate?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `date` field. */
+  date?: InputMaybe<DateFilter>;
+  /** Filter by the object’s `debiteurNaam` field. */
+  debiteurNaam?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `factureeropdrachtReferentie` field. */
+  factureeropdrachtReferentie?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `factuuropdracht` field. */
+  factuuropdracht?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `factuuropdrachtOld` field. */
+  factuuropdrachtOld?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `fsCalGasId` field. */
+  fsCalGasId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `gasName` field. */
+  gasName?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `id` field. */
+  id?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `modified` field. */
+  modified?: InputMaybe<DatetimeFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<SensorTestResultsEntityFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<SensorTestResultsEntityFilter>>;
+  /** Filter by the object’s `ownerId` field. */
+  ownerId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `ownerInitials` field. */
+  ownerInitials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorId` field. */
+  sensorId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorLabel` field. */
+  sensorLabel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorLabelDate` field. */
+  sensorLabelDate?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorOrderId` field. */
+  sensorOrderId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `sensorRange` field. */
+  sensorRange?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorSerialNumber` field. */
+  sensorSerialNumber?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorType` field. */
+  sensorType?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorTypeAndMode` field. */
+  sensorTypeAndMode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `sensorTypeMode` field. */
+  sensorTypeMode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `spanDeviation` field. */
+  spanDeviation?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `spanResponse` field. */
+  spanResponse?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `spanResponsePlusUnits` field. */
+  spanResponsePlusUnits?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `usedSpanConcentration` field. */
+  usedSpanConcentration?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `usedSpanConcentrationPlusUnits` field. */
+  usedSpanConcentrationPlusUnits?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `userId` field. */
+  userId?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `userInitials` field. */
+  userInitials?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `zeroDeviation` field. */
+  zeroDeviation?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `zeroResponse` field. */
+  zeroResponse?: InputMaybe<FloatFilter>;
+  /** Filter by the object’s `zeroResponsePlusUnits` field. */
+  zeroResponsePlusUnits?: InputMaybe<StringFilter>;
 };
 
 /** Methods to use when ordering `SensorTestResult`. */
@@ -80448,6 +80768,7 @@ export type VooradenIndex = {
   bestcode?: Maybe<Scalars['String']['output']>;
   besthoeveelheid?: Maybe<Scalars['BigFloat']['output']>;
   cdartikel?: Maybe<Scalars['String']['output']>;
+  cdcrediteur?: Maybe<Scalars['String']['output']>;
   gereserveerd?: Maybe<Scalars['BigFloat']['output']>;
   inkoopprijs?: Maybe<Scalars['BigFloat']['output']>;
   inkopen?: Maybe<Scalars['BigFloat']['output']>;
@@ -80472,6 +80793,8 @@ export type VooradenIndexCondition = {
   besthoeveelheid?: InputMaybe<Scalars['BigFloat']['input']>;
   /** Checks for equality with the object’s `cdartikel` field. */
   cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `cdcrediteur` field. */
+  cdcrediteur?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `gereserveerd` field. */
   gereserveerd?: InputMaybe<Scalars['BigFloat']['input']>;
   /** Checks for equality with the object’s `inkoopprijs` field. */
@@ -80504,6 +80827,8 @@ export type VooradenIndexFilter = {
   besthoeveelheid?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `cdartikel` field. */
   cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdcrediteur` field. */
+  cdcrediteur?: InputMaybe<StringFilter>;
   /** Filter by the object’s `gereserveerd` field. */
   gereserveerd?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `inkoopprijs` field. */
@@ -80560,6 +80885,8 @@ export enum VooradenIndicesOrderBy {
   BesthoeveelheidDesc = 'BESTHOEVEELHEID_DESC',
   CdartikelAsc = 'CDARTIKEL_ASC',
   CdartikelDesc = 'CDARTIKEL_DESC',
+  CdcrediteurAsc = 'CDCREDITEUR_ASC',
+  CdcrediteurDesc = 'CDCREDITEUR_DESC',
   GereserveerdAsc = 'GERESERVEERD_ASC',
   GereserveerdDesc = 'GERESERVEERD_DESC',
   InkoopprijsAsc = 'INKOOPPRIJS_ASC',
@@ -82730,10 +83057,44 @@ export type DeleteSensorBaseTypeMutationVariables = Exact<{
 
 export type DeleteSensorBaseTypeMutation = { __typename?: 'Mutation', deleteSensorBaseTypeById?: { __typename?: 'DeleteSensorBaseTypePayload', clientMutationId?: string | null } | null };
 
-export type AllSensorTypesNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
+export type AllSensorTestResultsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: SensorTestResultsEntityFilter;
+  orderBy?: InputMaybe<Array<SensorTestResultsEntitiesOrderBy> | SensorTestResultsEntitiesOrderBy>;
+}>;
 
 
-export type AllSensorTypesNoPaginationQuery = { __typename?: 'Query', allSensorTypesIndices?: { __typename?: 'SensorTypesIndicesConnection', nodes: Array<{ __typename?: 'SensorTypesIndex', id?: number | null, sensorTypeArtikelOmschr?: string | null }> } | null };
+export type AllSensorTestResultsQuery = { __typename?: 'Query', allSensorTestResultsEntities?: { __typename?: 'SensorTestResultsEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'SensorTestResultsEntity', id?: number | null, zeroResponsePlusUnits?: string | null, zeroResponse?: number | null, zeroDeviation?: number | null, userInitials?: string | null, userId?: number | null, usedSpanConcentrationPlusUnits?: string | null, usedSpanConcentration?: number | null, spanResponsePlusUnits?: string | null, spanResponse?: number | null, spanDeviation?: number | null, sensorTypeMode?: string | null, sensorTypeAndMode?: string | null, sensorType?: string | null, sensorSerialNumber?: string | null, sensorRange?: string | null, sensorOrderId?: number | null, sensorLabelDate?: string | null, sensorLabel?: string | null, sensorId?: number | null, ownerInitials?: string | null, ownerId?: number | null, modified?: any | null, fsCalGasId?: number | null, gasName?: string | null, factuuropdrachtOld?: string | null, factuuropdracht?: string | null, factureeropdrachtReferentie?: string | null, debiteurNaam?: string | null, date?: any | null, createdDate?: string | null, created?: any | null, calRange?: string | null, calGasName?: string | null }> } | null };
+
+export type CreateSensorTestResultMutationVariables = Exact<{
+  body: SensorTestResultInput;
+}>;
+
+
+export type CreateSensorTestResultMutation = { __typename?: 'Mutation', createSensorTestResult?: { __typename?: 'CreateSensorTestResultPayload', sensorTestResult?: { __typename?: 'SensorTestResult', id: number, zeroResponse: number, userId: number, usedSpanConcentration?: number | null, spanResponse: number, sensorOrderId?: number | null, sensorId: number, ownerId: number, modified?: any | null, nodeId: string, fsCalGasId?: number | null, date?: any | null, created?: any | null, factuuropdrachtOld?: string | null } | null } | null };
+
+export type UpdateSensorTestResultMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: SensorTestResultPatch;
+}>;
+
+
+export type UpdateSensorTestResultMutation = { __typename?: 'Mutation', updateSensorTestResultById?: { __typename?: 'UpdateSensorTestResultPayload', sensorTestResult?: { __typename?: 'SensorTestResult', id: number, zeroResponse: number, userId: number, usedSpanConcentration?: number | null, spanResponse: number, sensorOrderId?: number | null, sensorId: number, ownerId: number, modified?: any | null, nodeId: string, fsCalGasId?: number | null, date?: any | null, created?: any | null, factuuropdrachtOld?: string | null } | null } | null };
+
+export type DeleteSensorTestResultMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type DeleteSensorTestResultMutation = { __typename?: 'Mutation', deleteSensorTestResultById?: { __typename?: 'DeleteSensorTestResultPayload', clientMutationId?: string | null } | null };
+
+export type AllSensorTypesNoPaginationQueryVariables = Exact<{
+  filter?: InputMaybe<SensorTypesIndexFilter>;
+}>;
+
+
+export type AllSensorTypesNoPaginationQuery = { __typename?: 'Query', allSensorTypesIndices?: { __typename?: 'SensorTypesIndicesConnection', nodes: Array<{ __typename?: 'SensorTypesIndex', battery?: boolean | null, calEngineeringUnits?: string | null, calFlowRate?: number | null, calGasConcentration?: number | null, calGasName?: string | null, calResponse?: number | null, code?: string | null, createdDate?: string | null, electrolyteCdartikel?: string | null, electrolyteName?: string | null, engineeringUnits?: string | null, filterCdartikel?: string | null, filterName?: string | null, flowRate?: number | null, highEu?: number | null, id?: number | null, maintenanceIntervalMonths?: number | null, membraneCdartikel?: string | null, membraneName?: string | null, membraneSeal?: boolean | null, model?: string | null, oRingCdartikel?: string | null, oRingName?: string | null, prefix?: string | null, target?: string | null, suffix?: string | null, siliconeSheet?: boolean | null, sensorTypeCdartikel?: string | null, sensorTypeArtikelOmschr?: string | null, restrictor?: boolean | null, replacementIntervalMonths?: number | null, pyrolyserName?: string | null, pyrolyserCdartikel?: string | null, principleName?: string | null, sensorBaseTypeId?: number | null, rangeId?: number | null, principleId?: number | null, oRingsId?: number | null, membraneId?: number | null, gasId?: number | null, filterId?: number | null, electrolyteId?: number | null, calGasId?: number | null, pyrolyserId?: number | null, volume?: number | null, pyrolyserVoltage?: number | null, ownerId?: number | null, elementCount?: number | null }> } | null };
 
 export type AllSensorTypesIndicesQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -82768,6 +83129,16 @@ export type DeleteSensorTypeMutationVariables = Exact<{
 export type DeleteSensorTypeMutation = { __typename?: 'Mutation', deleteSensorTypeById?: { __typename?: 'DeleteSensorTypePayload', clientMutationId?: string | null } | null };
 
 export type LocalSensorFieldsFragment = { __typename?: 'Sensor', id: number, serialNumber: string, labelDate?: any | null, created: any, sensorTypeId: number };
+
+export type AllSensorsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<SensorIndexFilter>;
+  orderBy?: InputMaybe<Array<SensorIndicesOrderBy> | SensorIndicesOrderBy>;
+}>;
+
+
+export type AllSensorsQuery = { __typename?: 'Query', sensors?: { __typename?: 'SensorIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'SensorIndex', id?: number | null, sensorType?: string | null, serialNumber?: string | null, sensorTypeSort?: string | null, sensorTypeId?: number | null, range?: string | null, label?: string | null, gasName?: string | null, formattedLabelDate?: string | null, factuuropdracht?: string | null, sensorOrderId?: number | null, detectorSensorId?: number | null, debiteurNaam?: string | null, createdDate?: string | null }> } | null };
 
 export type AllStockSuppliersQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -85956,12 +86327,201 @@ export const DeleteSensorBaseTypeDocument = gql`
       super(apollo);
     }
   }
-export const AllSensorTypesNoPaginationDocument = gql`
-    query allSensorTypesNoPagination {
-  allSensorTypesIndices {
+export const AllSensorTestResultsDocument = gql`
+    query allSensorTestResults($first: Int, $offset: Int, $filter: SensorTestResultsEntityFilter!, $orderBy: [SensorTestResultsEntitiesOrderBy!]) {
+  allSensorTestResultsEntities(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
     nodes {
       id
+      zeroResponsePlusUnits
+      zeroResponse
+      zeroDeviation
+      userInitials
+      userId
+      usedSpanConcentrationPlusUnits
+      usedSpanConcentration
+      spanResponsePlusUnits
+      spanResponse
+      spanDeviation
+      sensorTypeMode
+      sensorTypeAndMode
+      sensorType
+      sensorSerialNumber
+      sensorRange
+      sensorOrderId
+      sensorLabelDate
+      sensorLabel
+      sensorId
+      ownerInitials
+      ownerId
+      modified
+      fsCalGasId
+      gasName
+      factuuropdrachtOld
+      factuuropdracht
+      factureeropdrachtReferentie
+      debiteurNaam
+      date
+      createdDate
+      created
+      calRange
+      calGasName
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllSensorTestResultsGQL extends Apollo.Query<AllSensorTestResultsQuery, AllSensorTestResultsQueryVariables> {
+    override document = AllSensorTestResultsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateSensorTestResultDocument = gql`
+    mutation CreateSensorTestResult($body: SensorTestResultInput!) {
+  createSensorTestResult(input: {sensorTestResult: $body}) {
+    sensorTestResult {
+      id
+      zeroResponse
+      userId
+      usedSpanConcentration
+      spanResponse
+      sensorOrderId
+      sensorId
+      ownerId
+      modified
+      nodeId
+      fsCalGasId
+      date
+      created
+      factuuropdrachtOld
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateSensorTestResultGQL extends Apollo.Mutation<CreateSensorTestResultMutation, CreateSensorTestResultMutationVariables> {
+    override document = CreateSensorTestResultDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateSensorTestResultDocument = gql`
+    mutation UpdateSensorTestResult($id: Int!, $patch: SensorTestResultPatch!) {
+  updateSensorTestResultById(input: {id: $id, sensorTestResultPatch: $patch}) {
+    sensorTestResult {
+      id
+      zeroResponse
+      userId
+      usedSpanConcentration
+      spanResponse
+      sensorOrderId
+      sensorId
+      ownerId
+      modified
+      nodeId
+      fsCalGasId
+      date
+      created
+      factuuropdrachtOld
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateSensorTestResultGQL extends Apollo.Mutation<UpdateSensorTestResultMutation, UpdateSensorTestResultMutationVariables> {
+    override document = UpdateSensorTestResultDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DeleteSensorTestResultDocument = gql`
+    mutation DeleteSensorTestResult($id: Int!) {
+  deleteSensorTestResultById(input: {id: $id}) {
+    clientMutationId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteSensorTestResultGQL extends Apollo.Mutation<DeleteSensorTestResultMutation, DeleteSensorTestResultMutationVariables> {
+    override document = DeleteSensorTestResultDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllSensorTypesNoPaginationDocument = gql`
+    query allSensorTypesNoPagination($filter: SensorTypesIndexFilter) {
+  allSensorTypesIndices(filter: $filter) {
+    nodes {
+      battery
+      calEngineeringUnits
+      calFlowRate
+      calGasConcentration
+      calGasName
+      calResponse
+      code
+      createdDate
+      electrolyteCdartikel
+      electrolyteName
+      engineeringUnits
+      filterCdartikel
+      filterName
+      flowRate
+      highEu
+      id
+      maintenanceIntervalMonths
+      membraneCdartikel
+      membraneName
+      membraneSeal
+      model
+      oRingCdartikel
+      oRingName
+      prefix
+      target
+      suffix
+      siliconeSheet
+      sensorTypeCdartikel
       sensorTypeArtikelOmschr
+      restrictor
+      replacementIntervalMonths
+      pyrolyserName
+      pyrolyserCdartikel
+      principleName
+      sensorBaseTypeId
+      rangeId
+      principleId
+      oRingsId
+      membraneId
+      gasId
+      filterId
+      electrolyteId
+      calGasId
+      pyrolyserId
+      volume
+      pyrolyserVoltage
+      ownerId
+      elementCount
     }
   }
 }
@@ -86177,6 +86737,45 @@ export const DeleteSensorTypeDocument = gql`
   })
   export class DeleteSensorTypeGQL extends Apollo.Mutation<DeleteSensorTypeMutation, DeleteSensorTypeMutationVariables> {
     override document = DeleteSensorTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllSensorsDocument = gql`
+    query allSensors($first: Int, $offset: Int, $filter: SensorIndexFilter, $orderBy: [SensorIndicesOrderBy!]) {
+  sensors: allSensorIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      sensorType
+      serialNumber
+      sensorTypeSort
+      sensorTypeId
+      range
+      label
+      gasName
+      formattedLabelDate
+      factuuropdracht
+      sensorOrderId
+      detectorSensorId
+      debiteurNaam
+      createdDate
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllSensorsGQL extends Apollo.Query<AllSensorsQuery, AllSensorsQueryVariables> {
+    override document = AllSensorsDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

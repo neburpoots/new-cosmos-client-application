@@ -1,0 +1,107 @@
+#-------------------------------------------------------------------------------
+query allSensorTestResults($first: Int, $offset: Int, $filter: SensorTestResultsEntityFilter!, $orderBy: [SensorTestResultsEntitiesOrderBy!]) {
+  allSensorTestResultsEntities(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      zeroResponsePlusUnits
+      zeroResponse
+      zeroDeviation
+      userInitials
+      userId
+      usedSpanConcentrationPlusUnits
+      usedSpanConcentration
+      spanResponsePlusUnits
+      spanResponse
+      spanDeviation
+      sensorTypeMode
+      sensorTypeAndMode
+      sensorType
+      sensorSerialNumber
+      sensorRange
+      sensorOrderId
+      sensorLabelDate
+      sensorLabel
+      sensorId
+      ownerInitials
+      ownerId
+      modified
+      fsCalGasId
+      gasName
+      factuuropdrachtOld
+      factuuropdracht
+      factureeropdrachtReferentie
+      debiteurNaam
+      date
+      createdDate
+      created
+      calRange
+      calGasName
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateSensorTestResult($body: SensorTestResultInput!) {
+  createSensorTestResult(input: {sensorTestResult: $body}) {
+    sensorTestResult {
+      id
+      zeroResponse
+      userId
+      usedSpanConcentration
+      spanResponse
+      sensorOrderId
+      sensorId
+      ownerId
+      modified
+      nodeId
+      fsCalGasId
+      date
+      created
+      factuuropdrachtOld
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation UpdateSensorTestResult(
+    $id: Int!, $patch: SensorTestResultPatch!
+) {
+  updateSensorTestResultById(
+    input: {
+		id: $id
+		sensorTestResultPatch: $patch	
+    }
+  ) {
+    sensorTestResult {
+            id
+            zeroResponse
+            userId
+            usedSpanConcentration
+            spanResponse
+            sensorOrderId
+            sensorId
+            ownerId
+            modified
+            nodeId
+            fsCalGasId
+            date
+            created
+            factuuropdrachtOld
+        } 
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation DeleteSensorTestResult($id: Int!)
+{
+	deleteSensorTestResultById(input:{id: $id})
+	{
+		clientMutationId
+	}  
+}

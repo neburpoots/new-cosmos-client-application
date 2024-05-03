@@ -15,7 +15,7 @@ export class InputComponent {
   @Input() form: FormGroup = new FormGroup({});
   @Input() touched: any = false;
   @Input() description: string | null = null;
-  @Input() inputType: 'date' | 'checkbox' | 'textarea' | 'text' | 'password' = 'text';
+  @Input() inputType: 'number' | 'date' | 'checkbox' | 'textarea' | 'text' | 'password' = 'text';
   @Input() isSubmitted: boolean = false;
   @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
 

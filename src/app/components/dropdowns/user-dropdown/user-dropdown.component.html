@@ -8,7 +8,12 @@
           <a [routerLink]="['/profile']">{{authService.currentUserInfo?.fullname}}</a></div>
       </li>
     </div>
-    <div class="mb-2 text-base z-50 float-left py-2  list-none text-left rounded min-w-48">
+    <div class="py-2 px-4 mt-1 text-base z-50 float-left py-2  list-none text-left rounded min-w-48">
+      <li >
+        <app-dark-mode-switch></app-dark-mode-switch>
+      </li>
+    </div>
+    <div class="text-base z-50 mb-2 float-left py-2  list-none text-left rounded min-w-48">
       <li (click)="logout()">
         <div routerLinkActive #adminDashboard="routerLinkActive"
           class="text-sm block  font-semibold  py-3 text-white mx-2  px-4 hover:bg-cosmosDark rounded-lg cursor-pointer "><i

@@ -225,19 +225,21 @@ export abstract class BaseEntity<T> {
 
     //dynamically set the export name
     exportOptions.exportName = this.exportName(this.objectPluralLowerCase);
-
+    console.log(exportOptions)
     //if all records then no offset no filter and first is total results
     if (exportOptions.records === 'all') {
-      query.first = this.totalResults;
-      query.filters = { and: [] }
+      query.first = null;
+      query.filter = { and: [] }
       query.offset = 0;
     }
 
     //if filtered result then no offset and first is total results
     if (exportOptions.records === 'filtered') {
-      query.first = this.totalResults;
+      query.first = null;
       query.offset = 0;
     }
+
+    console.log(query)
 
     this.getService.fetch(query).subscribe((response) => {
       let objects = response.data[this.Key];
@@ -275,7 +277,7 @@ export abstract class BaseEntity<T> {
               returnValue = returnValue[embedding[i]];
             }
           }
-          console.log(returnValue)
+          // console.log(returnValue)
 
           data[header] = returnValue;
         });

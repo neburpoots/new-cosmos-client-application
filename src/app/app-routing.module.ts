@@ -39,11 +39,12 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/inde
 import { UsersComponent } from "./views/admin/users/index/users.component";
 import { GroupsComponent } from "./views/admin/groups/index/groups.component";
 import { AuthGuard } from "./services/authentication/auth.guard";
-import { faAddressCard, faBolt, faBoxOpen, faBuilding, faCashRegister, faChartSimple, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck, faWarehouse } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faBolt, faBoxOpen, faBoxesStacked, faBuilding, faCashRegister, faChartSimple, faClipboard, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPaste, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import { NavBarIcon } from "./models/utils/navbarItem";
 import { ProfileComponent } from "./views/admin/users/profile/profile.component";
 import { StockSuppliersComponent } from "./views/admin/stock-suppliers/index/stock-suppliers.component";
 import { StockSuppliersDetailComponent } from "./views/admin/stock-suppliers/detail/stock-suppliers-detail.component";
+import { SensorTestResultsComponent } from "./views/admin/sensor-base-types copy/index/sensor-test-results.component";
 
 //id is the permission id in db
 export class RoutePermission {
@@ -104,6 +105,13 @@ export const navigationObject: menuItem[] = [
         route: new RoutePermission("detectors", DetectorComponent, 18),
       },
       {
+        title: "Sensor Test Results",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faPaste,
+        route: new RoutePermission("sensor-test-results", SensorTestResultsComponent, 29),
+      },
+      {
         title: "Sensor Types",
         active: false,
         // icon4: "ni-tv-2 text-primary",
@@ -128,7 +136,7 @@ export const navigationObject: menuItem[] = [
         title: "Stock Suppliers",
         active: false,
         // icon4: "ni-tv-2 text-primary",
-        icon6: faGauge,
+        icon6: faBoxesStacked,
         route: new RoutePermission("stock-suppliers", StockSuppliersComponent, 10),
       },
     ]

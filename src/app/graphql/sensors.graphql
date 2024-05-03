@@ -7,3 +7,32 @@ fragment localSensorFields on Sensor
 	created
     sensorTypeId
 }
+
+#-------------------------------------------------------------------------------
+query allSensors($first: Int, $offset: Int, $filter: SensorIndexFilter, $orderBy: [SensorIndicesOrderBy!]) {
+  sensors: allSensorIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      id
+      sensorType
+      serialNumber
+      sensorTypeSort
+      sensorTypeId
+      range
+      label
+      gasName
+      formattedLabelDate
+      factuuropdracht
+      sensorOrderId
+      detectorSensorId
+      debiteurNaam
+      createdDate
+    }
+  }
+}
+

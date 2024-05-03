@@ -7239,6 +7239,42 @@ type Query implements Node {
     filter: SensorTestResultFilter
   ): SensorTestResultsConnection
 
+  """
+  Reads and enables pagination through a set of `SensorTestResultsEntity`.
+  """
+  allSensorTestResultsEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `SensorTestResultsEntity`."""
+    orderBy: [SensorTestResultsEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SensorTestResultsEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: SensorTestResultsEntityFilter
+  ): SensorTestResultsEntitiesConnection
+
   """Reads and enables pagination through a set of `SensorType`."""
   allSensorTypes(
     """Only read the first `n` values of the set."""
@@ -38879,6 +38915,32 @@ type Crediteur {
     """
     filter: NotityFilter
   ): NotitiesConnection!
+
+  """Reads and enables pagination through a set of `VooradenIndex`."""
+  vooradenIndex(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: VooradenIndexFilter
+  ): VooradenIndicesConnection!
 }
 
 """A connection to a list of `Notity` values."""
@@ -39006,6 +39068,105 @@ input NotityFilter {
 
   """Negates the expression."""
   not: NotityFilter
+}
+
+"""A connection to a list of `VooradenIndex` values."""
+type VooradenIndicesConnection {
+  """A list of `VooradenIndex` objects."""
+  nodes: [VooradenIndex!]!
+
+  """
+  A list of edges which contains the `VooradenIndex` and cursor to aid in pagination.
+  """
+  edges: [VooradenIndicesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `VooradenIndex` you could get from the connection."""
+  totalCount: Int!
+}
+
+type VooradenIndex {
+  cdartikel: String
+  voorraad: BigFloat
+  gereserveerd: BigFloat
+  assemblaf: BigFloat
+  vrij: BigFloat
+  inkopen: BigFloat
+  minvoorraad: BigFloat
+  maxvoorraad: BigFloat
+  omschr: String
+  bestcode: String
+  inkoopprijs: BigFloat
+  besthoeveelheid: BigFloat
+  isovaluta: String
+  cdcrediteur: String
+}
+
+"""A `VooradenIndex` edge in the connection."""
+type VooradenIndicesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `VooradenIndex` at the end of the edge."""
+  node: VooradenIndex!
+}
+
+"""
+A filter to be used against `VooradenIndex` object types. All fields are combined with a logical ‘and.’
+"""
+input VooradenIndexFilter {
+  """Filter by the object’s `cdartikel` field."""
+  cdartikel: StringFilter
+
+  """Filter by the object’s `voorraad` field."""
+  voorraad: BigFloatFilter
+
+  """Filter by the object’s `gereserveerd` field."""
+  gereserveerd: BigFloatFilter
+
+  """Filter by the object’s `assemblaf` field."""
+  assemblaf: BigFloatFilter
+
+  """Filter by the object’s `vrij` field."""
+  vrij: BigFloatFilter
+
+  """Filter by the object’s `inkopen` field."""
+  inkopen: BigFloatFilter
+
+  """Filter by the object’s `minvoorraad` field."""
+  minvoorraad: BigFloatFilter
+
+  """Filter by the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloatFilter
+
+  """Filter by the object’s `omschr` field."""
+  omschr: StringFilter
+
+  """Filter by the object’s `bestcode` field."""
+  bestcode: StringFilter
+
+  """Filter by the object’s `inkoopprijs` field."""
+  inkoopprijs: BigFloatFilter
+
+  """Filter by the object’s `besthoeveelheid` field."""
+  besthoeveelheid: BigFloatFilter
+
+  """Filter by the object’s `isovaluta` field."""
+  isovaluta: StringFilter
+
+  """Filter by the object’s `cdcrediteur` field."""
+  cdcrediteur: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [VooradenIndexFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [VooradenIndexFilter!]
+
+  """Negates the expression."""
+  not: VooradenIndexFilter
 }
 
 """A `StockSupplier` edge in the connection."""
@@ -69452,6 +69613,7 @@ type SensorIndex {
   createdDate: String
   factuuropdracht: String
   debiteurNaam: String
+  sensorOrderId: Int
   sensorTypeId: Int
   detectorSensorId: Int
 }
@@ -69490,6 +69652,8 @@ enum SensorIndicesOrderBy {
   FACTUUROPDRACHT_DESC
   DEBITEUR_NAAM_ASC
   DEBITEUR_NAAM_DESC
+  SENSOR_ORDER_ID_ASC
+  SENSOR_ORDER_ID_DESC
   SENSOR_TYPE_ID_ASC
   SENSOR_TYPE_ID_DESC
   DETECTOR_SENSOR_ID_ASC
@@ -69534,6 +69698,9 @@ input SensorIndexCondition {
   """Checks for equality with the object’s `debiteurNaam` field."""
   debiteurNaam: String
 
+  """Checks for equality with the object’s `sensorOrderId` field."""
+  sensorOrderId: Int
+
   """Checks for equality with the object’s `sensorTypeId` field."""
   sensorTypeId: Int
 
@@ -69577,6 +69744,9 @@ input SensorIndexFilter {
 
   """Filter by the object’s `debiteurNaam` field."""
   debiteurNaam: StringFilter
+
+  """Filter by the object’s `sensorOrderId` field."""
+  sensorOrderId: IntFilter
 
   """Filter by the object’s `sensorTypeId` field."""
   sensorTypeId: IntFilter
@@ -70012,6 +70182,372 @@ input SensorSettingFilter {
 
   """Negates the expression."""
   not: SensorSettingFilter
+}
+
+"""A connection to a list of `SensorTestResultsEntity` values."""
+type SensorTestResultsEntitiesConnection {
+  """A list of `SensorTestResultsEntity` objects."""
+  nodes: [SensorTestResultsEntity!]!
+
+  """
+  A list of edges which contains the `SensorTestResultsEntity` and cursor to aid in pagination.
+  """
+  edges: [SensorTestResultsEntitiesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `SensorTestResultsEntity` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type SensorTestResultsEntity {
+  id: Int
+  sensorId: Int
+  date: Date
+  zeroResponse: Float
+  spanResponse: Float
+  created: Datetime
+  modified: Datetime
+  ownerId: Int
+  factuuropdrachtOld: String
+  userId: Int
+  sensorTypeAndMode: String
+  fsCalGasId: Int
+  usedSpanConcentration: Float
+  sensorOrderId: Int
+  sensorType: String
+  sensorTypeMode: String
+  sensorSerialNumber: String
+  sensorRange: String
+  sensorLabel: String
+  gasName: String
+  calRange: String
+  calGasName: String
+  userInitials: String
+  sensorLabelDate: String
+  zeroResponsePlusUnits: String
+  usedSpanConcentrationPlusUnits: String
+  spanResponsePlusUnits: String
+  zeroDeviation: Float
+  spanDeviation: Float
+  factureeropdrachtReferentie: String
+  createdDate: String
+  ownerInitials: String
+  factuuropdracht: String
+  debiteurNaam: String
+}
+
+"""A `SensorTestResultsEntity` edge in the connection."""
+type SensorTestResultsEntitiesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `SensorTestResultsEntity` at the end of the edge."""
+  node: SensorTestResultsEntity!
+}
+
+"""Methods to use when ordering `SensorTestResultsEntity`."""
+enum SensorTestResultsEntitiesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  SENSOR_ID_ASC
+  SENSOR_ID_DESC
+  DATE_ASC
+  DATE_DESC
+  ZERO_RESPONSE_ASC
+  ZERO_RESPONSE_DESC
+  SPAN_RESPONSE_ASC
+  SPAN_RESPONSE_DESC
+  CREATED_ASC
+  CREATED_DESC
+  MODIFIED_ASC
+  MODIFIED_DESC
+  OWNER_ID_ASC
+  OWNER_ID_DESC
+  FACTUUROPDRACHT_OLD_ASC
+  FACTUUROPDRACHT_OLD_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  SENSOR_TYPE_AND_MODE_ASC
+  SENSOR_TYPE_AND_MODE_DESC
+  FS_CAL_GAS_ID_ASC
+  FS_CAL_GAS_ID_DESC
+  USED_SPAN_CONCENTRATION_ASC
+  USED_SPAN_CONCENTRATION_DESC
+  SENSOR_ORDER_ID_ASC
+  SENSOR_ORDER_ID_DESC
+  SENSOR_TYPE_ASC
+  SENSOR_TYPE_DESC
+  SENSOR_TYPE_MODE_ASC
+  SENSOR_TYPE_MODE_DESC
+  SENSOR_SERIAL_NUMBER_ASC
+  SENSOR_SERIAL_NUMBER_DESC
+  SENSOR_RANGE_ASC
+  SENSOR_RANGE_DESC
+  SENSOR_LABEL_ASC
+  SENSOR_LABEL_DESC
+  GAS_NAME_ASC
+  GAS_NAME_DESC
+  CAL_RANGE_ASC
+  CAL_RANGE_DESC
+  CAL_GAS_NAME_ASC
+  CAL_GAS_NAME_DESC
+  USER_INITIALS_ASC
+  USER_INITIALS_DESC
+  SENSOR_LABEL_DATE_ASC
+  SENSOR_LABEL_DATE_DESC
+  ZERO_RESPONSE_PLUS_UNITS_ASC
+  ZERO_RESPONSE_PLUS_UNITS_DESC
+  USED_SPAN_CONCENTRATION_PLUS_UNITS_ASC
+  USED_SPAN_CONCENTRATION_PLUS_UNITS_DESC
+  SPAN_RESPONSE_PLUS_UNITS_ASC
+  SPAN_RESPONSE_PLUS_UNITS_DESC
+  ZERO_DEVIATION_ASC
+  ZERO_DEVIATION_DESC
+  SPAN_DEVIATION_ASC
+  SPAN_DEVIATION_DESC
+  FACTUREEROPDRACHT_REFERENTIE_ASC
+  FACTUREEROPDRACHT_REFERENTIE_DESC
+  CREATED_DATE_ASC
+  CREATED_DATE_DESC
+  OWNER_INITIALS_ASC
+  OWNER_INITIALS_DESC
+  FACTUUROPDRACHT_ASC
+  FACTUUROPDRACHT_DESC
+  DEBITEUR_NAAM_ASC
+  DEBITEUR_NAAM_DESC
+}
+
+"""
+A condition to be used against `SensorTestResultsEntity` object types. All
+fields are tested for equality and combined with a logical ‘and.’
+"""
+input SensorTestResultsEntityCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `sensorId` field."""
+  sensorId: Int
+
+  """Checks for equality with the object’s `date` field."""
+  date: Date
+
+  """Checks for equality with the object’s `zeroResponse` field."""
+  zeroResponse: Float
+
+  """Checks for equality with the object’s `spanResponse` field."""
+  spanResponse: Float
+
+  """Checks for equality with the object’s `created` field."""
+  created: Datetime
+
+  """Checks for equality with the object’s `modified` field."""
+  modified: Datetime
+
+  """Checks for equality with the object’s `ownerId` field."""
+  ownerId: Int
+
+  """Checks for equality with the object’s `factuuropdrachtOld` field."""
+  factuuropdrachtOld: String
+
+  """Checks for equality with the object’s `userId` field."""
+  userId: Int
+
+  """Checks for equality with the object’s `sensorTypeAndMode` field."""
+  sensorTypeAndMode: String
+
+  """Checks for equality with the object’s `fsCalGasId` field."""
+  fsCalGasId: Int
+
+  """Checks for equality with the object’s `usedSpanConcentration` field."""
+  usedSpanConcentration: Float
+
+  """Checks for equality with the object’s `sensorOrderId` field."""
+  sensorOrderId: Int
+
+  """Checks for equality with the object’s `sensorType` field."""
+  sensorType: String
+
+  """Checks for equality with the object’s `sensorTypeMode` field."""
+  sensorTypeMode: String
+
+  """Checks for equality with the object’s `sensorSerialNumber` field."""
+  sensorSerialNumber: String
+
+  """Checks for equality with the object’s `sensorRange` field."""
+  sensorRange: String
+
+  """Checks for equality with the object’s `sensorLabel` field."""
+  sensorLabel: String
+
+  """Checks for equality with the object’s `gasName` field."""
+  gasName: String
+
+  """Checks for equality with the object’s `calRange` field."""
+  calRange: String
+
+  """Checks for equality with the object’s `calGasName` field."""
+  calGasName: String
+
+  """Checks for equality with the object’s `userInitials` field."""
+  userInitials: String
+
+  """Checks for equality with the object’s `sensorLabelDate` field."""
+  sensorLabelDate: String
+
+  """Checks for equality with the object’s `zeroResponsePlusUnits` field."""
+  zeroResponsePlusUnits: String
+
+  """
+  Checks for equality with the object’s `usedSpanConcentrationPlusUnits` field.
+  """
+  usedSpanConcentrationPlusUnits: String
+
+  """Checks for equality with the object’s `spanResponsePlusUnits` field."""
+  spanResponsePlusUnits: String
+
+  """Checks for equality with the object’s `zeroDeviation` field."""
+  zeroDeviation: Float
+
+  """Checks for equality with the object’s `spanDeviation` field."""
+  spanDeviation: Float
+
+  """
+  Checks for equality with the object’s `factureeropdrachtReferentie` field.
+  """
+  factureeropdrachtReferentie: String
+
+  """Checks for equality with the object’s `createdDate` field."""
+  createdDate: String
+
+  """Checks for equality with the object’s `ownerInitials` field."""
+  ownerInitials: String
+
+  """Checks for equality with the object’s `factuuropdracht` field."""
+  factuuropdracht: String
+
+  """Checks for equality with the object’s `debiteurNaam` field."""
+  debiteurNaam: String
+}
+
+"""
+A filter to be used against `SensorTestResultsEntity` object types. All fields are combined with a logical ‘and.’
+"""
+input SensorTestResultsEntityFilter {
+  """Filter by the object’s `id` field."""
+  id: IntFilter
+
+  """Filter by the object’s `sensorId` field."""
+  sensorId: IntFilter
+
+  """Filter by the object’s `date` field."""
+  date: DateFilter
+
+  """Filter by the object’s `zeroResponse` field."""
+  zeroResponse: FloatFilter
+
+  """Filter by the object’s `spanResponse` field."""
+  spanResponse: FloatFilter
+
+  """Filter by the object’s `created` field."""
+  created: DatetimeFilter
+
+  """Filter by the object’s `modified` field."""
+  modified: DatetimeFilter
+
+  """Filter by the object’s `ownerId` field."""
+  ownerId: IntFilter
+
+  """Filter by the object’s `factuuropdrachtOld` field."""
+  factuuropdrachtOld: StringFilter
+
+  """Filter by the object’s `userId` field."""
+  userId: IntFilter
+
+  """Filter by the object’s `sensorTypeAndMode` field."""
+  sensorTypeAndMode: StringFilter
+
+  """Filter by the object’s `fsCalGasId` field."""
+  fsCalGasId: IntFilter
+
+  """Filter by the object’s `usedSpanConcentration` field."""
+  usedSpanConcentration: FloatFilter
+
+  """Filter by the object’s `sensorOrderId` field."""
+  sensorOrderId: IntFilter
+
+  """Filter by the object’s `sensorType` field."""
+  sensorType: StringFilter
+
+  """Filter by the object’s `sensorTypeMode` field."""
+  sensorTypeMode: StringFilter
+
+  """Filter by the object’s `sensorSerialNumber` field."""
+  sensorSerialNumber: StringFilter
+
+  """Filter by the object’s `sensorRange` field."""
+  sensorRange: StringFilter
+
+  """Filter by the object’s `sensorLabel` field."""
+  sensorLabel: StringFilter
+
+  """Filter by the object’s `gasName` field."""
+  gasName: StringFilter
+
+  """Filter by the object’s `calRange` field."""
+  calRange: StringFilter
+
+  """Filter by the object’s `calGasName` field."""
+  calGasName: StringFilter
+
+  """Filter by the object’s `userInitials` field."""
+  userInitials: StringFilter
+
+  """Filter by the object’s `sensorLabelDate` field."""
+  sensorLabelDate: StringFilter
+
+  """Filter by the object’s `zeroResponsePlusUnits` field."""
+  zeroResponsePlusUnits: StringFilter
+
+  """Filter by the object’s `usedSpanConcentrationPlusUnits` field."""
+  usedSpanConcentrationPlusUnits: StringFilter
+
+  """Filter by the object’s `spanResponsePlusUnits` field."""
+  spanResponsePlusUnits: StringFilter
+
+  """Filter by the object’s `zeroDeviation` field."""
+  zeroDeviation: FloatFilter
+
+  """Filter by the object’s `spanDeviation` field."""
+  spanDeviation: FloatFilter
+
+  """Filter by the object’s `factureeropdrachtReferentie` field."""
+  factureeropdrachtReferentie: StringFilter
+
+  """Filter by the object’s `createdDate` field."""
+  createdDate: StringFilter
+
+  """Filter by the object’s `ownerInitials` field."""
+  ownerInitials: StringFilter
+
+  """Filter by the object’s `factuuropdracht` field."""
+  factuuropdracht: StringFilter
+
+  """Filter by the object’s `debiteurNaam` field."""
+  debiteurNaam: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [SensorTestResultsEntityFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [SensorTestResultsEntityFilter!]
+
+  """Negates the expression."""
+  not: SensorTestResultsEntityFilter
 }
 
 """A connection to a list of `SensorTypesChecklist` values."""
@@ -74027,48 +74563,6 @@ input VerrekenprijsIndexFilter {
   not: VerrekenprijsIndexFilter
 }
 
-"""A connection to a list of `VooradenIndex` values."""
-type VooradenIndicesConnection {
-  """A list of `VooradenIndex` objects."""
-  nodes: [VooradenIndex!]!
-
-  """
-  A list of edges which contains the `VooradenIndex` and cursor to aid in pagination.
-  """
-  edges: [VooradenIndicesEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """The count of *all* `VooradenIndex` you could get from the connection."""
-  totalCount: Int!
-}
-
-type VooradenIndex {
-  cdartikel: String
-  voorraad: BigFloat
-  gereserveerd: BigFloat
-  assemblaf: BigFloat
-  vrij: BigFloat
-  inkopen: BigFloat
-  minvoorraad: BigFloat
-  maxvoorraad: BigFloat
-  omschr: String
-  bestcode: String
-  inkoopprijs: BigFloat
-  besthoeveelheid: BigFloat
-  isovaluta: String
-}
-
-"""A `VooradenIndex` edge in the connection."""
-type VooradenIndicesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `VooradenIndex` at the end of the edge."""
-  node: VooradenIndex!
-}
-
 """Methods to use when ordering `VooradenIndex`."""
 enum VooradenIndicesOrderBy {
   NATURAL
@@ -74098,6 +74592,8 @@ enum VooradenIndicesOrderBy {
   BESTHOEVEELHEID_DESC
   ISOVALUTA_ASC
   ISOVALUTA_DESC
+  CDCREDITEUR_ASC
+  CDCREDITEUR_DESC
 }
 
 """
@@ -74143,59 +74639,9 @@ input VooradenIndexCondition {
 
   """Checks for equality with the object’s `isovaluta` field."""
   isovaluta: String
-}
 
-"""
-A filter to be used against `VooradenIndex` object types. All fields are combined with a logical ‘and.’
-"""
-input VooradenIndexFilter {
-  """Filter by the object’s `cdartikel` field."""
-  cdartikel: StringFilter
-
-  """Filter by the object’s `voorraad` field."""
-  voorraad: BigFloatFilter
-
-  """Filter by the object’s `gereserveerd` field."""
-  gereserveerd: BigFloatFilter
-
-  """Filter by the object’s `assemblaf` field."""
-  assemblaf: BigFloatFilter
-
-  """Filter by the object’s `vrij` field."""
-  vrij: BigFloatFilter
-
-  """Filter by the object’s `inkopen` field."""
-  inkopen: BigFloatFilter
-
-  """Filter by the object’s `minvoorraad` field."""
-  minvoorraad: BigFloatFilter
-
-  """Filter by the object’s `maxvoorraad` field."""
-  maxvoorraad: BigFloatFilter
-
-  """Filter by the object’s `omschr` field."""
-  omschr: StringFilter
-
-  """Filter by the object’s `bestcode` field."""
-  bestcode: StringFilter
-
-  """Filter by the object’s `inkoopprijs` field."""
-  inkoopprijs: BigFloatFilter
-
-  """Filter by the object’s `besthoeveelheid` field."""
-  besthoeveelheid: BigFloatFilter
-
-  """Filter by the object’s `isovaluta` field."""
-  isovaluta: StringFilter
-
-  """Checks for all expressions in this list."""
-  and: [VooradenIndexFilter!]
-
-  """Checks for any expressions in this list."""
-  or: [VooradenIndexFilter!]
-
-  """Negates the expression."""
-  not: VooradenIndexFilter
+  """Checks for equality with the object’s `cdcrediteur` field."""
+  cdcrediteur: String
 }
 
 """A connection to a list of `Voorraden` values."""

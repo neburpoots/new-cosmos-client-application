@@ -1,13 +1,65 @@
 #-------------------------------------------------------------------------------
-query allSensorTypesNoPagination
+
+query allSensorTypesNoPagination(
+    $filter: SensorTypesIndexFilter
+)
     {
-    allSensorTypesIndices {
+    allSensorTypesIndices(
+        filter: $filter
+    ) {
         nodes {
-            id,
-            sensorTypeArtikelOmschr
+      battery
+      calEngineeringUnits
+      calFlowRate
+      calGasConcentration
+      calGasName
+      calResponse
+      code
+      createdDate
+      electrolyteCdartikel
+      electrolyteName
+      engineeringUnits
+      filterCdartikel
+      filterName
+      flowRate
+      highEu
+      id
+      maintenanceIntervalMonths
+      membraneCdartikel
+      membraneName
+      membraneSeal
+      model
+      oRingCdartikel
+      oRingName
+      prefix
+      target
+      suffix
+      siliconeSheet
+      sensorTypeCdartikel
+      sensorTypeArtikelOmschr
+      restrictor
+      replacementIntervalMonths
+      pyrolyserName
+      pyrolyserCdartikel
+      principleName
+      sensorBaseTypeId
+      rangeId
+      principleId
+      oRingsId
+      membraneId
+      gasId
+      filterId
+      electrolyteId
+      calGasId
+      pyrolyserId
+      volume
+      pyrolyserVoltage
+      ownerId
+      elementCount
         }       
     }
 }
+
 
 #-------------------------------------------------------------------------------
 query allSensorTypesIndices($first: Int, $offset: Int, $filter: SensorTypesIndexFilter!, $orderBy: [SensorTypesIndicesOrderBy!]) {

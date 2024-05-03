@@ -13,13 +13,15 @@ import { TableHead } from "../../../../models/utils/tableHead";
 import { ApplicationsFormComponent } from "../form/applications-form.component";
 import { FileService } from "../../../../services/file/file.service";
 import { AuthService } from "../../../../services/authentication/auth.service";
+import { BaseService } from "../../../../services/base/base.service";
+import { applicationTableHeaders } from "../application";
 
 @Component({
   selector: "app-applications",
   templateUrl: "./applications.component.html",
 })
 
-export class ApplicationsComponent extends BaseEntity<Application> {
+export class ApplicationsComponent {
 
 
   @ViewChild('editModal') childComponent!: ApplicationsFormComponent;
@@ -39,15 +41,14 @@ export class ApplicationsComponent extends BaseEntity<Application> {
   }
 
 
-  override setEditData() {
-    console.log(this.editData)
+  setEditData() {
     this.childComponent.setEditData(this.editData);
   }
 
   get editData(): any {
     return {
-      id: this.selectedItem?.id,
-      name: this.selectedItem?.name,
+      id: this.baseService.selectedItem?.id,
+      name: this.baseService.selectedItem?.name,
     };
   }
 
@@ -59,25 +60,30 @@ export class ApplicationsComponent extends BaseEntity<Application> {
 
   baseOrderBy = ApplicationsOrderBy.IdDesc;
 
-  constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
+  constructor(
     private applicationsService: AllApplicationsGQL,
     private deleteApplicationService: DeleteApplicationGQL,
-    protected override router: Router,
-    protected override fileService: FileService,
-    protected override authService: AuthService
+    protected baseService : BaseService<Application>,
+    protected route: ActivatedRoute,
   ) {
-    super(authService, fileService, router, toastr, route, http, applicationsService, deleteApplicationService);
 
-    this.checkQueryParams();
+    baseService.setUpBaseService(
+      route, 
+      this.applicationsService, 
+      this.deleteApplicationService, 
+      this.Key, 
+      this.tableHeaders, 
+      this.searchCriteria,
+      this.mapTableData,
+      this.objectPlural,
+      this.objectSingle,
+    );
 
-    this.loadData(this.searchCriteria);
+    baseService.setUpEditBaseService(this.setEditData.bind(this))
+
   }
 
-  tableHeaders: TableHead<ApplicationsOrderBy>[] = [
-    { type: 'string', key: 'name', label: "Name", asc: ApplicationsOrderBy.NameAsc, desc: ApplicationsOrderBy.NameDesc },
-    { type: 'datetime', key: 'created', label: "Created", asc: ApplicationsOrderBy.CreatedAsc, desc: ApplicationsOrderBy.CreatedDesc },
-    { type: 'string', key: 'initials', label: "By", asc: ApplicationsOrderBy.UserByOwnerIdInitialsAsc, desc: ApplicationsOrderBy.UserByOwnerIdInitialsDesc },
-  ]
+  tableHeaders = applicationTableHeaders;
 
 
   mapTableData(applications: Application[]): any[] {

@@ -120,11 +120,18 @@ import localeEu from '@angular/common/locales/eu'; // Import the locale data for
 import { StockSuppliersComponent } from "./views/admin/stock-suppliers/index/stock-suppliers.component";
 import { StockSuppliersFormComponent } from "./views/admin/stock-suppliers/form/stock-suppliers-form.component";
 import { StockSuppliersDetailComponent } from "./views/admin/stock-suppliers/detail/stock-suppliers-detail.component";
+import { BaseService } from "./services/base/base.service";
+import { SensorTestResultsComponent } from "./views/admin/sensor-base-types copy/index/sensor-test-results.component";
+import { SensorTestResultsFormComponent } from "./views/admin/sensor-base-types copy/form/sensor-test-results-form.component";
+import { DarkModeSwitchComponent } from "./components/darkmode/dark-mode-switch.component";
+import { DarkModeService } from "./services/darkmode/dark-mode.service";
+import { AppInitializerService, initializeApp } from "./services/darkmode/app-inititializer.service";
 registerLocaleData(localeEu);
 
 @NgModule({
   declarations: [
     AppComponent,
+    DarkModeSwitchComponent,
     ExportComponent,
     DashboardComponent,
     PaginationComponent,
@@ -217,7 +224,9 @@ registerLocaleData(localeEu);
     GroupsFormComponent,
     StockSuppliersComponent,
     StockSuppliersFormComponent,
-    StockSuppliersDetailComponent
+    StockSuppliersDetailComponent,
+    SensorTestResultsComponent,
+    SensorTestResultsFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)
@@ -227,7 +236,17 @@ registerLocaleData(localeEu);
     progressAnimation: 'increasing', // Set the animation type for the progress bar ('increasing' or 'decreasing')
     preventDuplicates: true, // Prevent duplicate toastrs from being shown
   }), ReactiveFormsModule, BrowserModule, AppRoutingModule, HttpClientModule, BrowserAnimationsModule, FormsModule, FontAwesomeModule, SatPopoverModule, ApolloModule, GraphQLModule],
-  providers: [AuthService
+  providers: [
+    DarkModeService,
+    AppInitializerService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AppInitializerService],
+      multi: true
+    },
+    AuthService,
+    BaseService,
   ],
   bootstrap: [AppComponent],
 })
