@@ -84,7 +84,7 @@ export class UsersComponent extends BaseEntity<User> implements OnInit {
 
   tableHeaders: TableHead<UsersOrderBy>[] = [
     { type: 'string', key: 'fullname', label: "Full Name", asc: UsersOrderBy.FullnameAsc, desc: UsersOrderBy.FullnameDesc },
-    { type: 'number', key: 'username', label: "Username", asc: UsersOrderBy.UsernameAsc, desc: UsersOrderBy.UsernameDesc },
+    { type: 'string', key: 'username', label: "Username", asc: UsersOrderBy.UsernameAsc, desc: UsersOrderBy.UsernameDesc },
     { type: 'string', key: 'initials', label: "Initials", asc: UsersOrderBy.InitialsAsc, desc: UsersOrderBy.InitialsDesc },
     { type: 'string', key: 'usersGroupsByUserId$some$groupByGroupId$name', label: "Groups", asc: UsersOrderBy.UsersGroupsByUserIdCountAsc, desc: UsersOrderBy.UsersGroupsByUserIdCountDesc },
     { type: 'datetime', key: 'created', label: "Created", asc: UsersOrderBy.CreatedAsc, desc: UsersOrderBy.CreatedDesc },

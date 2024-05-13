@@ -39,12 +39,13 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/inde
 import { UsersComponent } from "./views/admin/users/index/users.component";
 import { GroupsComponent } from "./views/admin/groups/index/groups.component";
 import { AuthGuard } from "./services/authentication/auth.guard";
-import { faAddressCard, faBolt, faBoxOpen, faBoxesStacked, faBuilding, faCashRegister, faChartSimple, faClipboard, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPaste, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck, faWarehouse } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faBolt, faBoxOpen, faBoxesStacked, faBuilding, faCartArrowDown, faCashRegister, faChartSimple, faClipboard, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPaste, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import { NavBarIcon } from "./models/utils/navbarItem";
 import { ProfileComponent } from "./views/admin/users/profile/profile.component";
 import { StockSuppliersComponent } from "./views/admin/stock-suppliers/index/stock-suppliers.component";
 import { StockSuppliersDetailComponent } from "./views/admin/stock-suppliers/detail/stock-suppliers-detail.component";
-import { SensorTestResultsComponent } from "./views/admin/sensor-base-types copy/index/sensor-test-results.component";
+import { SensorTestResultsComponent } from "./views/admin/sensor-test-results/index/sensor-test-results.component";
+import { PurchaseStatusComponent } from "./views/admin/purchase-status/index/purchase-status.component";
 
 //id is the permission id in db
 export class RoutePermission {
@@ -139,6 +140,13 @@ export const navigationObject: menuItem[] = [
         icon6: faBoxesStacked,
         route: new RoutePermission("stock-suppliers", StockSuppliersComponent, 10),
       },
+      {
+        title: "Purchase Status",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faCartArrowDown,
+        route: new RoutePermission("purchase-status", PurchaseStatusComponent, 30),
+      }
     ]
   },
   {
@@ -347,7 +355,6 @@ const routes: Routes = [
       new RoutePermission("stock-suppliers/:id", StockSuppliersDetailComponent, 28),
       // new RoutePermission("", DashboardComponent, 5),
       new RoutePermission("", DashboardComponent, 5),
-      
     ],
   },
   // auth views

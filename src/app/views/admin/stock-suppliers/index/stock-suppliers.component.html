@@ -14,23 +14,11 @@
                 [detailPagePrefix]="'/stock-suppliers/'" [isViewable]="true"
                 (toggleInlineCreating)="toggleInlineCreating()"	
                 >
-                <areas-form
-                    [baseOrderBy]="baseOrderBy"
-                (refresh)="fetch($event)" [objectSingle]="objectSingle"
-                    [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
-                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></areas-form>
+               
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
             [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
-
-            <modal-component [width]="ModalWidth.Large
-        " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-                <areas-form
-                [baseOrderBy]="baseOrderBy"
-                [objectPlural]="objectPlural" [objectSingle]="objectSingle" (refresh)="fetch()"
-                    (closeModal)="closeCreateModal()"></areas-form>
-            </modal-component>
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">

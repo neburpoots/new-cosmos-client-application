@@ -1,6 +1,6 @@
 <div (mouseenter)="toggle()" (mouseleave)="toggle()" class="flex">
   <div *ngIf="isUserDropdownOpen" [@fadeIn]
-    class="absolute right-[50px] top-[10px] bg-cosmosDarker rounded-3xl transition ease-in-out flex flex-col min-w-48 z-50">
+    class="absolute right-[50px] top-[10px] bg-cosmosDarker dark:bg-cosmosDarkest rounded-3xl transition ease-in-out flex flex-col min-w-48 z-50">
 
     <div class="transition  text-base z-50 float-left py-2 list-none text-left rounded min-w-48">
       <li>
@@ -24,7 +24,7 @@
   </div>
   <div class="hover:cursor-pointer z-50  flex transition ease-in-out hover:scale-110">
     <span
-      class="text-xl h-12 w-12 text-sm p-4 text-white bg-cosmosDark inline-flex items-center justify-center rounded-full">
+      class="text-xl h-12 w-12 text-sm p-4 text-white bg-cosmosDark dark:bg-cosmosDarker inline-flex items-center justify-center rounded-full">
       <i class="fa fa-user"></i>
     </span>
   </div>

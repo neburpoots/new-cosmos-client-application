@@ -34815,6 +34815,8 @@ export type InkooporderIndex = {
   __typename?: 'InkooporderIndex';
   cdvaluta?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
+  /** Reads and enables pagination through a set of `InkooporderregelsIndex`. */
+  inkooporderregelsIndex: InkooporderregelsIndicesConnection;
   naam?: Maybe<Scalars['String']['output']>;
   orderdatum?: Maybe<Scalars['Date']['output']>;
   ordernummer?: Maybe<Scalars['String']['output']>;
@@ -34822,6 +34824,16 @@ export type InkooporderIndex = {
   referentie?: Maybe<Scalars['String']['output']>;
   shipmentDay?: Maybe<Scalars['Int']['output']>;
   shipmentDays?: Maybe<Scalars['Int']['output']>;
+};
+
+
+export type InkooporderIndexInkooporderregelsIndexArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<InkooporderregelsIndexFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /**
@@ -35854,6 +35866,7 @@ export type InkooporderregelsIndex = {
   factuuropdracht?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   inkooporderregelLineId?: Maybe<Scalars['Int']['output']>;
+  inkooporderregelLines?: Maybe<InkooporderregelLine>;
   inkopdrRglGuid?: Maybe<Scalars['String']['output']>;
   omschr?: Maybe<Scalars['String']['output']>;
   ordernummer?: Maybe<Scalars['String']['output']>;
@@ -82909,6 +82922,31 @@ export type DeletePrincipleMutationVariables = Exact<{
 
 export type DeletePrincipleMutation = { __typename?: 'Mutation', deletePrincipleById?: { __typename?: 'DeletePrinciplePayload', clientMutationId?: string | null } | null };
 
+export type AllPurchaseStatusesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: InkooporderIndexFilter;
+  orderBy?: InputMaybe<Array<InkooporderIndicesOrderBy> | InkooporderIndicesOrderBy>;
+}>;
+
+
+export type AllPurchaseStatusesQuery = { __typename?: 'Query', allInkooporderIndices?: { __typename?: 'InkooporderIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'InkooporderIndex', shipmentDays?: number | null, shipmentDay?: number | null, persoonnaam?: string | null, referentie?: string | null, ordernummer?: string | null, orderdatum?: any | null, naam?: string | null, email?: string | null, cdvaluta?: string | null, inkooporderregelsIndex: { __typename?: 'InkooporderregelsIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'InkooporderregelsIndex', status?: string | null, shipmentDate?: any | null, remarks?: string | null, prijs?: any | null, orderregel?: number | null, ordernummer?: string | null, omschr?: string | null, inkopdrRglGuid?: string | null, inkooporderregelLineId?: number | null, id?: string | null, factuuropdracht?: string | null, factopdrRglGuid?: string | null, deliveryYearWeek?: number | null, deliveryWeek?: string | null, deliveryDateConfirmed?: boolean | null, deliveryDate?: any | null, cdmagazijn?: string | null, cdartikel?: string | null, bestcode?: string | null, aantalopenstaand?: any | null, aantalbesteld?: any | null, inkooporderregelLines?: { __typename?: 'InkooporderregelLine', status?: string | null, shipmentDate?: any | null, remarks?: string | null, nodeId: string, inkopdrRglGuid?: string | null, id: number, factopdrRglGuid?: string | null, deliveryDateConfirmed?: boolean | null, deliveryDate?: any | null, _cdartikel?: string | null, _aantalbesteld?: any | null, _aantalopenstaand?: any | null } | null }> } }> } | null };
+
+export type UpdateInkooporderregelLineMutationVariables = Exact<{
+  id: Scalars['Int']['input'];
+  patch: InkooporderregelLinePatch;
+}>;
+
+
+export type UpdateInkooporderregelLineMutation = { __typename?: 'Mutation', updateInkooporderregelLineById?: { __typename?: 'UpdateInkooporderregelLinePayload', inkooporderregelLine?: { __typename?: 'InkooporderregelLine', status?: string | null, shipmentDate?: any | null, remarks?: string | null, nodeId: string, inkopdrRglGuid?: string | null, id: number, factopdrRglGuid?: string | null, deliveryDateConfirmed?: boolean | null, deliveryDate?: any | null, _cdartikel?: string | null, _aantalbesteld?: any | null, _aantalopenstaand?: any | null } | null } | null };
+
+export type CreateInkooporderregelLineMutationVariables = Exact<{
+  body: InkooporderregelLineInput;
+}>;
+
+
+export type CreateInkooporderregelLineMutation = { __typename?: 'Mutation', createInkooporderregelLine?: { __typename?: 'CreateInkooporderregelLinePayload', inkooporderregelLine?: { __typename?: 'InkooporderregelLine', status?: string | null, shipmentDate?: any | null, remarks?: string | null, nodeId: string, inkopdrRglGuid?: string | null, id: number, factopdrRglGuid?: string | null, deliveryDateConfirmed?: boolean | null, deliveryDate?: any | null, _cdartikel?: string | null, _aantalbesteld?: any | null, _aantalopenstaand?: any | null } | null } | null };
+
 export type AllPyrolysersNoPaginationQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -83056,6 +83094,13 @@ export type DeleteSensorBaseTypeMutationVariables = Exact<{
 
 
 export type DeleteSensorBaseTypeMutation = { __typename?: 'Mutation', deleteSensorBaseTypeById?: { __typename?: 'DeleteSensorBaseTypePayload', clientMutationId?: string | null } | null };
+
+export type CreateSensorOrderMutationVariables = Exact<{
+  body: SensorOrderInput;
+}>;
+
+
+export type CreateSensorOrderMutation = { __typename?: 'Mutation', createSensorOrder?: { __typename?: 'CreateSensorOrderPayload', sensorOrder?: { __typename?: 'SensorOrder', id: number, verifiedUserId?: number | null, sensorId: number, ownerId: number, nodeId: string, modified?: any | null, factuuropdracht: string, created: any, checkedUserId?: number | null } | null } | null };
 
 export type AllSensorTestResultsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
@@ -85684,6 +85729,144 @@ export const DeletePrincipleDocument = gql`
       super(apollo);
     }
   }
+export const AllPurchaseStatusesDocument = gql`
+    query allPurchaseStatuses($first: Int, $offset: Int, $filter: InkooporderIndexFilter!, $orderBy: [InkooporderIndicesOrderBy!]) {
+  allInkooporderIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      shipmentDays
+      shipmentDay
+      persoonnaam
+      referentie
+      ordernummer
+      orderdatum
+      naam
+      email
+      cdvaluta
+      inkooporderregelsIndex {
+        totalCount
+        nodes {
+          status
+          shipmentDate
+          remarks
+          prijs
+          orderregel
+          ordernummer
+          omschr
+          inkopdrRglGuid
+          inkooporderregelLineId
+          id
+          factuuropdracht
+          factopdrRglGuid
+          deliveryYearWeek
+          deliveryWeek
+          deliveryDateConfirmed
+          deliveryDate
+          cdmagazijn
+          cdartikel
+          bestcode
+          aantalopenstaand
+          aantalbesteld
+          inkooporderregelLines {
+            status
+            shipmentDate
+            remarks
+            nodeId
+            inkopdrRglGuid
+            id
+            factopdrRglGuid
+            deliveryDateConfirmed
+            deliveryDate
+            _cdartikel
+            _aantalbesteld
+            _aantalopenstaand
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllPurchaseStatusesGQL extends Apollo.Query<AllPurchaseStatusesQuery, AllPurchaseStatusesQueryVariables> {
+    override document = AllPurchaseStatusesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UpdateInkooporderregelLineDocument = gql`
+    mutation UpdateInkooporderregelLine($id: Int!, $patch: InkooporderregelLinePatch!) {
+  updateInkooporderregelLineById(
+    input: {id: $id, inkooporderregelLinePatch: $patch}
+  ) {
+    inkooporderregelLine {
+      status
+      shipmentDate
+      remarks
+      nodeId
+      inkopdrRglGuid
+      id
+      factopdrRglGuid
+      deliveryDateConfirmed
+      deliveryDate
+      _cdartikel
+      _aantalbesteld
+      _aantalopenstaand
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UpdateInkooporderregelLineGQL extends Apollo.Mutation<UpdateInkooporderregelLineMutation, UpdateInkooporderregelLineMutationVariables> {
+    override document = UpdateInkooporderregelLineDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateInkooporderregelLineDocument = gql`
+    mutation CreateInkooporderregelLine($body: InkooporderregelLineInput!) {
+  createInkooporderregelLine(input: {inkooporderregelLine: $body}) {
+    inkooporderregelLine {
+      status
+      shipmentDate
+      remarks
+      nodeId
+      inkopdrRglGuid
+      id
+      factopdrRglGuid
+      deliveryDateConfirmed
+      deliveryDate
+      _cdartikel
+      _aantalbesteld
+      _aantalopenstaand
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateInkooporderregelLineGQL extends Apollo.Mutation<CreateInkooporderregelLineMutation, CreateInkooporderregelLineMutationVariables> {
+    override document = CreateInkooporderregelLineDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AllPyrolysersNoPaginationDocument = gql`
     query allPyrolysersNoPagination {
   allPyrolysers {
@@ -86322,6 +86505,34 @@ export const DeleteSensorBaseTypeDocument = gql`
   })
   export class DeleteSensorBaseTypeGQL extends Apollo.Mutation<DeleteSensorBaseTypeMutation, DeleteSensorBaseTypeMutationVariables> {
     override document = DeleteSensorBaseTypeDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const CreateSensorOrderDocument = gql`
+    mutation CreateSensorOrder($body: SensorOrderInput!) {
+  createSensorOrder(input: {sensorOrder: $body}) {
+    sensorOrder {
+      id
+      verifiedUserId
+      sensorId
+      ownerId
+      nodeId
+      modified
+      factuuropdracht
+      created
+      checkedUserId
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateSensorOrderGQL extends Apollo.Mutation<CreateSensorOrderMutation, CreateSensorOrderMutationVariables> {
+    override document = CreateSensorOrderDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

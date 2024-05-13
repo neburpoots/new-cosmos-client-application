@@ -3,11 +3,11 @@
   <div class="h-full w-full flex items-center">
     <div class="w-full mb-12 pt-12 px-4">
       <div *ngIf="item" class="pt-12 flex flex-col gap-6">
-        <div class="bg-white flex justify-between rounded-2xl px-5 py-7 gap-2">
-          <div>
-            <h1 class="text-2xl text-roboto font-bold text-gray-800">Purchase Advice
+        <div class="flex justify-between bg-white dark:text-slate-100 dark:bg-slate-900 rounded-2xl px-5 py-7 gap-2">
+          <div class="">
+            <h1 class="text-2xl text-roboto font-bold dark:text-slate-200 text-gray-800">Purchase Advice
               ({{item?.crediteur?.zoeknaam}} / {{item?.cdcrediteur}})</h1>
-            <p>View the details of the Purchase advice here.</p>
+            <p class="dark:text-slate-300">View the details of the Purchase advice here.</p>
           </div>
 
 
@@ -26,16 +26,16 @@
           </p>
         </div>
         @for(opdracht of item?.factureeropdrachtIndex?.nodes; track opdracht.factuuropdracht) {
-        <div class="bg-white rounded-2xl px-5 py-7 flex flex-col gap-2 ">
+        <div class="bg-white dark:text-slate-100 dark:bg-slate-900 rounded-2xl px-5 py-7 flex flex-col gap-2">
           <div class="flex justify-between gap-10">
-            <h2 class="text-xl text-roboto font-bold text-gray-800">#{{opdracht?.factuuropdracht}} -
+            <h2 class="text-xl text-roboto font-bold dark:text-slate-200 text-gray-800">#{{opdracht?.factuuropdracht}} -
               {{opdracht?.zoeknaam}}</h2>
           </div>
 
-          <div class=" overflow-auto overflow-y-hidden">
+          <div class=" overflow-auto overflow-y-hidden scrollbar-thumb-rounded-full dark:scrollbar-track-rounded-full dark:scrollbar dark:scrollbar-thumb-slate-600 dark:scrollbar-thumb-slate-400 dark:scrollbar-track-slate-700">
             <table id="myTable" class="items-center w-full bg-transparent border-collapse">
               <thead>
-                <tr class="bg-slate-100 font-roboto  rounded-lg text-slate-800">
+                <tr class="bg-slate-100 font-roboto dark:bg-slate-950 dark:text-slate-200 rounded-lg text-slate-800">
                   <th></th>
                   <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Part</th>
                   <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Composition</th>
@@ -61,55 +61,55 @@
               <tbody>
 
                 @for (line of opdracht?.besteladviesWithStockSupplier?.nodes; track line.cdartikel) {
-                <tr>
+                <tr class="">
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     <input type="checkbox" [checked]="isInArray(line.cdartikel, opdracht.factuuropdracht)"
                       (change)="addItem(line.cdartikel, opdracht.factuuropdracht)" /></td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ line?.cdartikel }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ line?.cdartsamenstellingen }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ line?.omschr }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ line?.bestcode }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.voorraad) }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.gereserveerd) }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.assemblaf) }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.vrij) }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.inkopen) }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.minvoorraad) }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.maxvoorraad) }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ line?.inkoopprijs }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ line?.isovaluta }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.besthoeveelheid) }}</td>
                   <td
-                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 whitespace-nowrap p-1">
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ roundNumber(line?.aantal) }}</td>
 
                 </tr>
@@ -131,7 +131,7 @@
             <h2 class="text-xl text-roboto font-bold text-gray-800">Stock</h2>
           </div>
 
-          <div class=" overflow-auto overflow-y-hidden">
+          <div class=" overflow-auto overflow-y-hidden scrollbar-thumb-rounded-full dark:scrollbar-track-rounded-full dark:scrollbar dark:scrollbar-thumb-slate-600 dark:scrollbar-thumb-slate-400 dark:scrollbar-track-slate-700">
             <table id="myTable" class="items-center w-full bg-transparent border-collapse">
               <thead>
                 <tr class="bg-slate-100 font-roboto  rounded-lg text-slate-800">

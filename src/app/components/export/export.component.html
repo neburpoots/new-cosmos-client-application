@@ -4,8 +4,8 @@
 
     <div class="flex gap-2 justify-evenly">
         <button class="bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
-            'bg-cosmosDarker border-black': exportType === 'excel',	
-            'border-stone-100': exportType !== 'excel',	
+            'bg-cosmosDarker border-black dark:border-stone-100': exportType === 'excel',	
+            'border-stone-100 dark:border-slate-800': exportType !== 'excel',	
         }" (click)="setExportType('excel')">
             <div class="p-5">
                 <fa-icon [size]="'7x'" class="text-white" [icon]="faFileExcel"></fa-icon>
@@ -14,8 +14,8 @@
         </button>
 
         <button class="bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
-            'bg-cosmosDarker border-black': exportType === 'csv',
-            'border-stone-100': exportType !== 'csv',	
+            'bg-cosmosDarker border-black dark:border-stone-100': exportType === 'csv',
+            'border-stone-100 dark:border-slate-800': exportType !== 'csv',	
         }" (click)="setExportType('csv')">
             <div class="p-5">
                 <fa-icon [size]="'7x'" class="text-white" [icon]="faFileCsv"></fa-icon>
@@ -52,17 +52,17 @@
 
     <div class="flex gap-2 justify-evenly">
         <button class="bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
-                'bg-cosmosDarker border-black': withHeaders,
-                'border-stone-100': !withHeaders,	
+                'bg-cosmosDarker border-black dark:border-stone-100': withHeaders,
+                'border-stone-100 dark:border-slate-800': !withHeaders,	
             }" (click)="setWithHeaders(true)">
-            <div class="p-2 text-left">
-                <table class="border-collapse bg-white">
+            <div class="p-2 text-left text-black">
+                <table class="border-collapse  bg-white">
                     <th class="border border-gray-400" *ngFor="let header of allIncludedExportHeaders.slice(0,2)">
                         {{header['label']}}
                     </th>
                     <tr *ngFor="let item of data.slice(0, 2)">
                         <td class="border border-gray-400" *ngFor="let header of allIncludedExportHeaders.slice(0, 2)">
-                            {{item[header['key']]['value']}}
+                            {{item[header['key']]['value'] ? item[header['key']]['value'] : '-'}}
                         </td>
                     </tr>
 
@@ -72,14 +72,14 @@
 
         </button>
         <button class="bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
-                'bg-cosmosDarker border-black': !withHeaders,	
-                'border-stone-100': withHeaders,	
+                'bg-cosmosDarker border-black dark:border-stone-100': !withHeaders,	
+                'border-stone-100 dark:border-slate-800': withHeaders,	
             }" (click)="setWithHeaders(false)">
-            <div class="flex justify-center p-2 text-left">
+            <div class="flex justify-center p-2 text-left text-black">
                 <table class="border-collapse bg-white">
                     <tr *ngFor="let item of data.slice(0, 3)">
                         <td class="border border-gray-400" *ngFor="let header of allIncludedExportHeaders.slice(0, 2)">
-                            {{item[header['key']]['value']}}
+                            {{item[header['key']]['value'] ? item[header['key']]['value'] : '-'}}
                         </td>
                     </tr>
 
@@ -94,8 +94,8 @@
     <div class="grid grid-cols-3 gap-2">
         @for(item of selectRows; track item.key) {
         <button class="flex flex-col items-center justify-evenly bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
-                        'bg-cosmosDarker border-black': item.selected,
-                        'border-stone-100': !item.selected,	
+                        'bg-cosmosDarker border-black dark:border-stone-100': item.selected,
+                        'border-stone-100 dark:border-slate-800': !item.selected,	
                     }" (click)="setExportRecords(item.key)"
                     >
             <div class="flex justify-center text-white text-center">{{item.title}}</div>

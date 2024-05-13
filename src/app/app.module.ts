@@ -120,11 +120,12 @@ import { StockSuppliersComponent } from "./views/admin/stock-suppliers/index/sto
 import { StockSuppliersFormComponent } from "./views/admin/stock-suppliers/form/stock-suppliers-form.component";
 import { StockSuppliersDetailComponent } from "./views/admin/stock-suppliers/detail/stock-suppliers-detail.component";
 import { BaseService } from "./services/base/base.service";
-import { SensorTestResultsComponent } from "./views/admin/sensor-base-types copy/index/sensor-test-results.component";
-import { SensorTestResultsFormComponent } from "./views/admin/sensor-base-types copy/form/sensor-test-results-form.component";
 import { DarkModeSwitchComponent } from "./components/darkmode/dark-mode-switch.component";
 import { DarkModeService } from "./services/darkmode/dark-mode.service";
 import { AppInitializerService, initializeApp } from "./services/darkmode/app-inititializer.service";
+import { SensorTestResultsComponent } from "./views/admin/sensor-test-results/index/sensor-test-results.component";
+import { SensorTestResultsFormComponent } from "./views/admin/sensor-test-results/form/sensor-test-results-form.component";
+import { PurchaseStatusComponent } from "./views/admin/purchase-status/index/purchase-status.component";
 registerLocaleData(localeEu);
 
 @NgModule({
@@ -224,7 +225,8 @@ registerLocaleData(localeEu);
     StockSuppliersFormComponent,
     StockSuppliersDetailComponent,
     SensorTestResultsComponent,
-    SensorTestResultsFormComponent
+    SensorTestResultsFormComponent,
+    PurchaseStatusComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

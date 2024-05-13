@@ -1,0 +1,114 @@
+#-------------------------------------------------------------------------------
+query allPurchaseStatuses($first: Int, $offset: Int, $filter: InkooporderIndexFilter!, $orderBy: [InkooporderIndicesOrderBy!]) {
+  allInkooporderIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      shipmentDays
+      shipmentDay
+      persoonnaam
+      referentie
+      ordernummer
+      orderdatum
+      naam
+      email
+      cdvaluta
+      inkooporderregelsIndex {
+        totalCount
+        nodes {
+          status
+          shipmentDate
+          remarks
+          prijs
+          orderregel
+          ordernummer
+          omschr
+          inkopdrRglGuid
+          inkooporderregelLineId
+          id
+          factuuropdracht
+          factopdrRglGuid
+          deliveryYearWeek
+          deliveryWeek
+          deliveryDateConfirmed
+          deliveryDate
+          cdmagazijn
+          cdartikel
+          bestcode
+          aantalopenstaand
+          aantalbesteld
+          inkooporderregelLines {
+            status
+            shipmentDate
+            remarks
+            nodeId
+            inkopdrRglGuid
+            id
+            factopdrRglGuid
+            deliveryDateConfirmed
+            deliveryDate
+            _cdartikel
+            _aantalbesteld
+            _aantalopenstaand
+          }
+        }
+      }
+    }
+  }
+}
+
+
+#-------------------------------------------------------------------------------
+mutation UpdateInkooporderregelLine(
+    $id: Int!, $patch: InkooporderregelLinePatch!
+) {
+  updateInkooporderregelLineById(
+    input: {
+		id: $id
+		inkooporderregelLinePatch: $patch	
+    }
+  ) {
+    inkooporderregelLine {
+            status
+            shipmentDate
+            remarks
+            nodeId
+            inkopdrRglGuid
+            id
+            factopdrRglGuid
+            deliveryDateConfirmed
+            deliveryDate
+            _cdartikel
+            _aantalbesteld
+            _aantalopenstaand
+    }
+  }
+}
+
+#-------------------------------------------------------------------------------
+mutation CreateInkooporderregelLine(
+    $body: InkooporderregelLineInput!
+) {
+  createInkooporderregelLine(
+    input: {inkooporderregelLine: $body}
+  ) {
+    inkooporderregelLine {
+            status
+            shipmentDate
+            remarks
+            nodeId
+            inkopdrRglGuid
+            id
+            factopdrRglGuid
+            deliveryDateConfirmed
+            deliveryDate
+            _cdartikel
+            _aantalbesteld
+            _aantalopenstaand
+    }
+  }
+}

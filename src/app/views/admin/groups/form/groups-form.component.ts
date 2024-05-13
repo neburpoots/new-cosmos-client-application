@@ -10,6 +10,7 @@ import { AllGasesNoPaginationGQL, AllGroupsNoPaginationGQL, AllPermissionsNoPagi
 import { Query } from 'apollo-angular';
 import { FormSelect } from '../../../../models/utils/formSelect';
 import { AuthService } from '../../../../services/authentication/auth.service';
+import { faCircleXmark, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'groups-form',
@@ -23,6 +24,8 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
         read_permission: null,
         write_permission: null,
     };
+
+    faCircleXmark = faCircleXmark
 
     myForm: FormGroup;
     permissions: any[];

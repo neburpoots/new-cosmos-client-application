@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TOAST_CONFIG, ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { of } from 'rxjs';
-import { AllApplicationsGQL, Application, ApplicationsOrderBy, DeleteApplicationGQL } from '../../../../generated/graphql';
+import { AllApplicationsGQL, Application, ApplicationsOrderBy, CurrentUserInfoGQL, DeleteApplicationGQL } from '../../../../generated/graphql';
 import { FileService } from '../../../services/file/file.service';
 import { AuthService } from '../../../services/authentication/auth.service';
 import { DebugElement, InjectionToken, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -13,7 +13,7 @@ import { APOLLO_OPTIONS, Apollo, ApolloModule } from 'apollo-angular';
 import { TableField } from '../../../models/utils/tableField';
 import { ApolloClient, HttpLink } from '@apollo/client';
 import { By } from '@angular/platform-browser';
-import { createApollo } from '../../../graphql.module';
+import { GraphQLModule, createApollo } from '../../../graphql.module';
 import { applicationTableHeaders } from './application';
 
 export function findComponent<T>(
@@ -66,7 +66,8 @@ describe('ApplicationsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ApplicationsComponent);
     component = fixture.componentInstance;
-    baseService = TestBed.inject(BaseService); // Inject BaseService
+    baseService = TestBed.inject(BaseService<Application>); // Inject BaseService
+
     fixture.detectChanges();
   });
 
@@ -93,7 +94,9 @@ describe('ApplicationsComponent', () => {
     expect(table.properties['columns'].length).toBe(applicationTableHeaders.length);
   });
 
-
+  it('Test base service', () => {
+    
+  });
 
 });
 
@@ -102,6 +105,7 @@ describe('ApplicationsComponent', () => {
 //   let service: BaseService<Application>; // Replace `any` with the appropriate type
 
 //   let activatedRouteMock: Partial<ActivatedRoute>;
+//   let authService: AuthService; // Inject BaseService for testing
 
 //   // Define a mock UrlSegment array
 //   const urlSegments: UrlSegment[] = [
@@ -132,6 +136,11 @@ describe('ApplicationsComponent', () => {
 //       providers: [
 //         AllApplicationsGQL,
 //         DeleteApplicationGQL,
+//         {
+//           provide: CurrentUserInfoGQL,
+//           useValue: spyOn<CurrentUserInfoGQL>,
+          
+//         },
 //         AuthService,
 //         { provide: ActivatedRoute, useValue: activatedRouteMock },
 //         {
@@ -140,19 +149,28 @@ describe('ApplicationsComponent', () => {
 //             navigate = jasmine.createSpy('navigate'); // Mock the navigate method
 //           }
 //         },
-//         { provide: ToastrService, useValue: spyOn<ToastrService> },
+//         { provide: ToastrService, useValue: spyOn<ToastrService>, 
+          
+//         },
+//         {
+//           provide: GraphQLModule
+//         },
+//         {
+//           provide: Apollo,
+//           useValue: spyOn<Apollo>
+//         },
+
 //         BaseService<Application> // Assuming this is providing dependencies required by the component
 //       ],
 //       schemas: [NO_ERRORS_SCHEMA],
 //     });
 //     service = TestBed.inject(BaseService);
-
+//     authService = TestBed.inject(AuthService);
 //     // Call setUpBaseService and setUpEditBaseService before each test
 //     service.setUpBaseService(
 //       TestBed.inject(ActivatedRoute),
 //       TestBed.inject(AllApplicationsGQL),
 //       TestBed.inject(DeleteApplicationGQL),
-
 //       'allApplications',
 //       [
 //         { type: 'string', key: 'name', label: "Name", asc: ApplicationsOrderBy.NameAsc, desc: ApplicationsOrderBy.NameDesc },

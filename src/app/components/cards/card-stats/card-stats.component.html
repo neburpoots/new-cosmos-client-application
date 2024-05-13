@@ -1,25 +1,25 @@
 <div
-  class="relative flex flex-col min-w-0 break-words bg-white bg-opacity-50 backdrop-blur-xl rounded-2xl mb-6 xl:mb-0 shadow-lg"
+  class="font-roboto relative flex flex-col min-w-0 break-words bg-white dark:bg-slate-900 bg-opacity-50 backdrop-blur-xl rounded-2xl mb-6 xl:mb-0 shadow-lg"
 >
   <div class="flex-auto p-4">
     <div class="flex flex-wrap">
       <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-        <h5 class="text-slate-800 uppercase font-bold text-xs">
+        <h5 class="dark:text-slate-200 text-slate-800 font-roboto font-bold text-xs">
           {{ statSubtitle }}
         </h5>
-        <span class="font-semibold text-xl text-black">
+        <span class="font-semibold dark:text-white text-xl text-black">
           {{ statTitle }}
         </span>
       </div>
       <div class="relative w-auto pl-4 flex-initial">
         <div
-          class="text-white p-3 text-center bg-cosmosDark inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full"
+          class="dark:bg-cosmosDarker text-white p-3 text-center bg-cosmosDark inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full"
         >
           <i [ngClass]="statIconName"></i>
         </div>
       </div>
     </div>
-    <p class="text-sm text-slate-900 font-semibold mt-4">
+    <p class="text-sm text-slate-900 dark:text-slate-300 font-semibold mt-4">
       <span class="mr-2" [ngClass]="statPercentColor">
         <i [ngClass]="statArrow === 'up' ? 'fa fa-arrow-up' : 'fa fa-arrow-down'"></i>
         {{ statPercent }}%

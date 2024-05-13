@@ -40,11 +40,24 @@ export class StockSuppliersComponent extends BaseEntity<StockSuppliersIndex> {
     },
   }
 
+
+  override async loadDetailData(id: number): Promise<any> {
+    try {
+
+      await this.stockSupplier.fetch({ id }, { fetchPolicy: 'no-cache' }).subscribe(result => {
+        this.retrieveFile(id, result?.data?.stockSupplierById as StockSupplier || null);
+      });
+
+    } catch (error) {
+      this.toastr.error(`Error fetching ${this.objectPluralLowerCase}`, 'Error');
+    }
+  }
+
   override async downloadPdf(id: number): Promise<void> {
     const data = await this.loadDetailData(id);
   }
 
-  async retrieveFile(id : number, body : any) {
+  async retrieveFile(id: number, body: any) {
     this.fileService.downloadPdfWithBody(this.pdfPrefix, id, body).subscribe((data: Blob) => {
       // Create a Blob URL for the downloaded file
       const file = new Blob([data], { type: 'application/pdf' }); // Adjust the MIME type accordingly
@@ -60,17 +73,6 @@ export class StockSuppliersComponent extends BaseEntity<StockSuppliersIndex> {
     });
   }
 
-  override async loadDetailData(id: number): Promise<any> {
-    try {
-
-      await this.stockSupplier.fetch({ id }, { fetchPolicy: 'no-cache' }).subscribe(result => {
-        this.retrieveFile(id, result?.data?.stockSupplierById as StockSupplier || null);
-      });
-
-    } catch (error) {
-      this.toastr.error(`Error fetching ${this.objectPluralLowerCase}`, 'Error');
-    }
-  }
 
 
   override setEditData() {

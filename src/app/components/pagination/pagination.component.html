@@ -37,7 +37,7 @@
     <div>
         <div class="flex items-center gap-2">
             <select
-                class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDark border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
+                class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDark dark:bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
                 id="selectedOption" #offset (change)="limitChange(+offset.value)">
                 <!-- (change)="onPageSizeChange($event)"> -->
                 <option [defaultSelected]="10" [value]="10" >10 items per page</option>

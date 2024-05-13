@@ -94,6 +94,7 @@ export abstract class BaseFormComponent<T> {
 
 
     async create(data: T): Promise<void> {
+        console.log('Data:', data)
         
         this.createService.mutate({ body: data }).subscribe(
             (response) => {

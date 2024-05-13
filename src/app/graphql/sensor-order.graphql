@@ -1,0 +1,16 @@
+#-------------------------------------------------------------------------------
+mutation CreateSensorOrder($body: SensorOrderInput!) {
+  createSensorOrder(input: {sensorOrder: $body}) {
+    sensorOrder {
+      id
+      verifiedUserId
+      sensorId
+      ownerId
+      nodeId
+      modified
+      factuuropdracht
+      created
+      checkedUserId
+    }
+  }
+}

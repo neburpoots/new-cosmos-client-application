@@ -74,6 +74,7 @@ export class AuthService
 	login(username: string, password: string): Observable<boolean>
 	{			
 	    localStorage.removeItem('jwtToken');
+	
 		
 	
 		return this.authenticateService.mutate({username: username, password: password}).pipe
@@ -98,7 +99,7 @@ export class AuthService
 					return this.getPermissions();
 				}			
 			)		
-		);		
+		);	
 	}
 
 	refreshPermissions(): Observable<boolean> {
@@ -115,6 +116,7 @@ export class AuthService
 		return combineLatest
 		(
 			[
+				this.currentUserInfoService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data}) => data.currentUserInfo as User)),
 				this.currentUsernameService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data}) => data.currentUsername)),
 				this.currentReadPermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data: {currentReadPermissions}}) => currentReadPermissions?.nodes || [])),
 				this.currentWritePermissionsService.fetch({}, {fetchPolicy: 'network-only'}).pipe(map(({data: {currentWritePermissions}}) => currentWritePermissions?.nodes || [])),
@@ -123,8 +125,9 @@ export class AuthService
 		(
 			tap
 			(
-				([currentUsername, currentReadPermissions, currentWritePermissions]) => 
+				([currentUserInfoService, currentUsername, currentReadPermissions, currentWritePermissions]) => 
 				{
+					this.currentUserInfo = currentUserInfoService;
 					this.currentUsername = currentUsername;
 					this.currentUsername$.next(currentUsername);
 					this.currentReadPermissions$.next(currentReadPermissions);

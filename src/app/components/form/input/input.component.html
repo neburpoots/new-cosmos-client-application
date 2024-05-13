@@ -23,7 +23,7 @@
           'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
           'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched && !isSubmitted
         }" [placeholder]="displayName"
-                class=" w-full  bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300" [id]="name"
+                class=" w-full  bg-white dark:bg-slate-800 focus:border-0 rounded-2xl focus:ring-0 border-slate-300" [id]="name"
                 [formControlName]="name">
 
             <label *ngSwitchCase="'checkbox'" class="h-full inline-flex items-center cursor-pointer" [ngClass]="{
@@ -42,9 +42,9 @@
             'border-red-500 test focus:outline-red-500': isSubmitted && form.get(name)?.errors,
             'border-green-600 focus:outline-green-600': form.get(name)?.valid && form && form.controls[name].touched,
             'border-slate-300 focus:outline-slate-300': !form.get(name)?.touched && !isSubmitted,
-            'text-sm': inline 
+            'text-sm dark:text-white': inline 
           }" [placeholder]="displayName"
-                class="w-full bg-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300" [id]="name"
+                class="w-full bg-white dark:placeholder-slate-300 dark:bg-slate-700 focus:border-0 rounded-2xl focus:ring-0 border-slate-300" [id]="name"
                 [formControlName]="name">
 
             <div *ngSwitchDefault class="border relative rounded-2xl flex w-full" [ngClass]="{
@@ -58,13 +58,13 @@
                                'border-red-500 test ': isSubmitted && form.get(name)?.errors,
                                
                                'border-slate-200 dark:border-slate-700 ': !form.get(name)?.touched && !isSubmitted,
-                               'text-sm': inline 
+                               'text-sm dark:text-white': inline 
                            }" [placeholder]="displayName"
                     class="dark:placeholder-slate-300 w-full bg-white dark:bg-slate-700  focus:border-0 border-0 rounded-l-2xl focus:ring-0 overflow-hidden" [id]="name"
                     [formControlName]="name">
                 <div *ngIf="suffix" class="flex items-center">
                     <span
-                        class="bg-slate-50 w-max text-grey-800 px-3 py-2 border-l border-r rounded-r-2xl overflow-hidden focus:outline-none">{{suffix}}</span>
+                        class="bg-slate-50 dark:bg-slate-800 w-max text-grey-800 px-3 py-2 border-l border-r rounded-r-2xl overflow-hidden focus:outline-none">{{suffix}}</span>
                 </div>
             </div>
 

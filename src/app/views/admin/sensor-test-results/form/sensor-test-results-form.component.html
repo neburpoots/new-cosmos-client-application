@@ -1,0 +1,183 @@
+<h2 *ngIf="!isInlineCreating" class="text-xl mb-2 font-semibold">{{id ? "Edit" : "Add"}} {{objectSingle}}</h2>
+<form [formGroup]="myForm" [ngClass]="isInlineCreating ? 'sticky flex items-start pt-1' : 'flex flex-col gap-5'"
+    (ngSubmit)="onSubmit()">
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[0] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[0] : null">
+        <input-component (onChange)="setSerialNumber($event)" [isSubmitted]="isSubmitted" [form]="myForm"
+            [name]="'serialNumber'" [inline]="isInlineCreating" [displayName]="'Search Sensor by Serial Number'"
+            [touched]="myForm.controls['serialNumber'].touched"
+            [errors]="[{ name: 'required', message: 'Serial Number is required' }]"></input-component>
+    </div>
+
+    <div class="flex justify-between">
+        <div>
+            <p class="mb-2">Suggested Sensors:</p>
+            <ul *ngIf="suggestedSensors.length > 0"
+                class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+
+                <li *ngFor="let sensor of suggestedSensors"
+                    class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    <div class="flex items-center ps-3">
+                        <input [id]="sensor.serialNumber" type="radio" [value]="sensor.id" name="list-radio"
+                            (click)="setSensor(sensor)"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                        <label [for]="sensor.serialNumber"
+                            class="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{sensor.label}}
+                        </label>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <div class="mt-2 bg-cosmosDark text-white font-semibold rounded-lg p-2 w-fit h-fit" *ngIf="selectedSensor">
+            <p class="">Selected sensor: {{selectedSensor.label}}</p>
+            <p class="">Factuuropdracht: {{selectedSensor.factuuropdracht ? selectedSensor.factuuropdracht :  'Geen factuur gekoppeld.'}}</p>
+        </div>
+
+    </div>
+
+    <div *ngIf="!selectedSensor?.factuuropdracht" [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
+        <input-component [isSubmitted]="isSubmitted" [form]="myForm" [name]="'order'" [inline]="isInlineCreating"
+            [displayName]="'Order'" [touched]="myForm.controls['order'].touched"
+            [description]="'Deze sensor heeft geen factuuropdracht en moet aan een factuuropdracht gekoppeld worden.'"
+            [errors]="[{ name: 'required', message: 'Order is required' }]"></input-component>
+    </div>
+
+    <!-- <div [style.min-width.px]="isInlineCreating ? cellWidths[2] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[2] : null">
+        <select-component [form]="myForm" [name]="'sensorBaseTypeId'" [displayName]="'Base Type'"
+            [options]="sensorBaseTypes" [inline]="isInlineCreating" [placeholder]="'Select a Sensor Base Type'"
+            [touched]="myForm.controls['sensorBaseTypeId'].touched" (onChange)="selectedBaseType($event)"
+            [customName]="[['prefix'], ['suffix']]"
+            [errors]="[{ name: 'required', message: 'Sensor Base type is required' }]">
+        </select-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[3] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[3] : null">
+        <select-component *ngIf="sensorTypes.length > 0" (onChange)="selectedSensorType($event)" [form]="myForm"
+            [name]="'sensorTypeId'" [displayName]="'Type'" [options]="sensorTypes" [inline]="isInlineCreating"
+            [customName]="[['prefix'], ['code'], ['suffix'], ' ', ['model'], ' ( ', ['highEu'], '  ', ['engineeringUnits'], ' ', ['target'], ')']"
+            [placeholder]="'Select a Sensor Type'" [touched]="myForm.controls['sensorTypeId'].touched"
+            [errors]="[{ name: 'required', message: 'Sensor type is required' }]">
+        </select-component>
+    </div> -->
+
+
+    <!-- <div [style.min-width.px]="isInlineCreating ? cellWidths[4] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null">
+        <input-component [isSubmitted]="isSubmitted" [inputType]="'date'" [form]="myForm" [name]="'labelDate'"
+            [displayName]="'Label date'" [touched]="myForm.controls['labelDate'].touched"
+            [errors]="[{ name: 'required', message: 'Label date is required' }]"></input-component>
+    </div> -->
+
+    <div *ngIf="myForm.value.sensorId" [style.min-width.px]="isInlineCreating ? cellWidths[5] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[5] : null">
+        <input-component [inputType]="'number'" (onChange)="setZeroResponse($event, 1)" [isSubmitted]="isSubmitted"
+            [form]="myForm" [name]="'zeroResponse'" [inline]="isInlineCreating" [displayName]="'Zero Response'"
+            [touched]="myForm.controls['zeroResponse'].touched"
+            [errors]="[{ name: 'required', message: 'Zero response is required' }]"></input-component>
+    </div>
+
+    <div *ngIf="myForm.value.sensorId" [style.min-width.px]="isInlineCreating ? cellWidths[6] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[6] : null">
+        <input-component (onChange)="setZeroResponse($event, 2)" [isSubmitted]="isSubmitted" [form]="myForm"
+            [name]="'zeroResponsePercentage'" [inline]="isInlineCreating" [displayName]="'Zero Response'"
+            [suffix]="'(% FS)'" [inputType]="'number'" [touched]="myForm.controls['zeroResponsePercentage'].touched"
+            [errors]="[{ name: 'required', message: 'Zero response is required' }]"></input-component>
+    </div>
+
+    <div *ngIf="myForm.value.sensorId" [style.min-width.px]="isInlineCreating ? cellWidths[7] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[7] : null">
+        <input-component (onChange)="setZeroResponse($event, 3)" [isSubmitted]="isSubmitted" [form]="myForm"
+            [name]="'zeroResponseMa'" [inline]="isInlineCreating" [displayName]="'Zero Resp.'" [suffix]="'(2~6 mA)'"
+            [touched]="myForm.controls['zeroResponseMa'].touched" [inputType]="'number'"
+            [errors]="[{ name: 'required', message: 'Zero response is required' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[8] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[8] : null">
+        <select-component (onChange)="selectedCalGasType($event)" [form]="myForm" [name]="'fsCalGasId'"
+            [displayName]="'Type'" [options]="calGases" [inline]="isInlineCreating"
+            [customName]="[['name'], ' (', ['concentration'], ' ', ['engineeringUnits'], ')']"
+            [placeholder]="'Select a Cal Gas'" [touched]="myForm.controls['fsCalGasId'].touched"
+            [errors]="[{ name: 'required', message: 'Cal Gas is required' }]">
+        </select-component>
+    </div>
+
+    <div *ngIf="myForm.value.fsCalGasId" [style.min-width.px]="isInlineCreating ? cellWidths[9] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[9] : null">
+        <input-component [inputType]="'number'" [isSubmitted]="isSubmitted" [form]="myForm"
+            [name]="'usedSpanConcentration'" [inline]="isInlineCreating" [displayName]="'Used Span Concentration'"
+            [touched]="myForm.controls['usedSpanConcentration'].touched"
+            [errors]="[{ name: 'required', message: 'Span Concentration is required' }]"></input-component>
+    </div>
+
+    <div *ngIf="myForm.value.fsCalGasId" [style.min-width.px]="isInlineCreating ? cellWidths[5] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[5] : null">
+        <input-component [inputType]="'number'" (onChange)="setSpanResponse($event, 1)" [isSubmitted]="isSubmitted"
+            [form]="myForm" [name]="'spanResponse'" [inline]="isInlineCreating" [displayName]="'Span Response'"
+            [touched]="myForm.controls['spanResponse'].touched"
+            [errors]="[{ name: 'required', message: 'Span response is required' }]"></input-component>
+    </div>
+
+    <div *ngIf="myForm.value.fsCalGasId" [style.min-width.px]="isInlineCreating ? cellWidths[6] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[6] : null">
+        <input-component (onChange)="setSpanResponse($event, 2)" [isSubmitted]="isSubmitted" [form]="myForm"
+            [name]="'spanResponsePercentage'" [inline]="isInlineCreating" [displayName]="'Span Resp.'"
+            [suffix]="'(% FS)'" [inputType]="'number'" [touched]="myForm.controls['spanResponsePercentage'].touched"
+            [errors]="[{ name: 'required', message: 'Span response Percentage is required' }]"></input-component>
+    </div>
+
+    <div *ngIf="myForm.value.fsCalGasId" [style.min-width.px]="isInlineCreating ? cellWidths[7] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[7] : null">
+        <input-component (onChange)="setSpanResponse($event, 3)" [isSubmitted]="isSubmitted" [form]="myForm"
+            [name]="'spanResponseMa'" [inline]="isInlineCreating" [displayName]="'Zero Resp.'" [suffix]="'(2~6 mA)'"
+            [suffix]="'(2~6 mA)'" [touched]="myForm.controls['spanResponseMa'].touched" [inputType]="'number'"
+            [errors]="[{ name: 'required', message: 'Span Resp. (2~6 mA) is required' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[4] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[4] : null">
+        <input-component [isSubmitted]="isSubmitted" [inputType]="'date'" [form]="myForm" [name]="'testDate'"
+            [displayName]="'Test date'" [touched]="myForm.controls['testDate'].touched"
+            [errors]="[{ name: 'required', message: 'Test date is required' }]"></input-component>
+    </div>
+
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[8] : null"
+        [style.max-width.px]="isInlineCreating ? cellWidths[8] : null">
+        <select-component [form]="myForm" [name]="'userId'" [displayName]="'Carried out by'" [options]="users"
+            [inline]="isInlineCreating" [customName]="[['fullname']]" [placeholder]="'Select an User'"
+            [touched]="myForm.controls['userId'].touched"
+            [errors]="[{ name: 'required', message: 'User is required' }]">
+        </select-component>
+    </div>
+
+    <!-- This is is for modal form -->
+    <div *ngIf="!isInlineCreating" class="flex flex-row mt-auto justify-end items-center gap-2">
+        <button type="button" (click)="close()"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Close</button>
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">{{id
+            ? "Edit" : "Add"}} {{objectSingle}}</button>
+    </div>
+
+    <!-- This is the inline form -->
+    <div *ngIf="isInlineCreating" [style.min-width.px]="cellWidths[cellWidths.length - 2]"
+        [style.max-width.px]="cellWidths[cellWidths.length - 2]"
+        class="h-full sticky right-0 flex bg-white dark:bg-slate-900 gap-1 items-start p-1 pt-1 justify-center ml-auto">
+        <button type="submit" (click)="setSubmitted()"
+            class="cursor-pointer bg-cosmosDark ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
+            <i class="fa fa-lg fa-check" aria-hidden="true"></i>
+        </button>
+        <div (click)="toggleInlineCreating.emit()"
+            class="cursor-pointer bg-red-600 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl px-[7px] p-[5px] ">
+            <i class="fa fa-lg fa-times" aria-hidden="true"></i>
+        </div>
+    </div>
+
+</form>

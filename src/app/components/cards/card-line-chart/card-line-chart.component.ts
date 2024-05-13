@@ -1,12 +1,17 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Chart } from "chart.js";
+import { DarkModeService } from "../../../services/darkmode/dark-mode.service";
 
 @Component({
   selector: "app-card-line-chart",
   templateUrl: "./card-line-chart.component.html",
 })
 export class CardLineChartComponent implements OnInit {
-  constructor() {}
+  darkModeService : DarkModeService;
+  constructor(darkModeService : DarkModeService) {
+
+    this.darkModeService = darkModeService;
+  }
 
   ngOnInit() {}
   ngAfterViewInit() {
@@ -66,7 +71,7 @@ export class CardLineChartComponent implements OnInit {
           xAxes: [
             {
               ticks: {
-                fontColor: "rgba(255,255,255,.7)",
+                fontColor: this.darkModeService.isDarkMode ? "rgba(0,0,0,.7)" : "rgba(255,255,255,.7)"
               },
               display: true,
               scaleLabel: {

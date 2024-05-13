@@ -59295,6 +59295,182 @@ type InkooporderIndex {
   persoonnaam: String
   shipmentDays: Int
   shipmentDay: Int
+
+  """
+  Reads and enables pagination through a set of `InkooporderregelsIndex`.
+  """
+  inkooporderregelsIndex(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: InkooporderregelsIndexFilter
+  ): InkooporderregelsIndicesConnection!
+}
+
+"""A connection to a list of `InkooporderregelsIndex` values."""
+type InkooporderregelsIndicesConnection {
+  """A list of `InkooporderregelsIndex` objects."""
+  nodes: [InkooporderregelsIndex!]!
+
+  """
+  A list of edges which contains the `InkooporderregelsIndex` and cursor to aid in pagination.
+  """
+  edges: [InkooporderregelsIndicesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `InkooporderregelsIndex` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type InkooporderregelsIndex {
+  id: String
+  ordernummer: String
+  orderregel: Int
+  cdartikel: String
+  omschr: String
+  inkopdrRglGuid: String
+  bestcode: String
+  prijs: BigFloat
+  cdmagazijn: String
+  aantalbesteld: BigFloat
+  aantalopenstaand: BigFloat
+  inkooporderregelLineId: Int
+  status: String
+  shipmentDate: Date
+  deliveryDate: Date
+  deliveryWeek: String
+  deliveryYearWeek: Int
+  deliveryDateConfirmed: Boolean
+  remarks: String
+  factopdrRglGuid: String
+  factuuropdracht: String
+  inkooporderregelLines: InkooporderregelLine
+}
+
+type InkooporderregelLine implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  _cdartikel: String
+  _aantalbesteld: BigFloat
+  _aantalopenstaand: BigFloat
+  deliveryDate: Date
+  remarks: String
+  deliveryDateConfirmed: Boolean
+  status: String
+  inkopdrRglGuid: String
+  factopdrRglGuid: String
+  id: Int!
+  shipmentDate: Date
+}
+
+"""A `InkooporderregelsIndex` edge in the connection."""
+type InkooporderregelsIndicesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `InkooporderregelsIndex` at the end of the edge."""
+  node: InkooporderregelsIndex!
+}
+
+"""
+A filter to be used against `InkooporderregelsIndex` object types. All fields are combined with a logical ‘and.’
+"""
+input InkooporderregelsIndexFilter {
+  """Filter by the object’s `id` field."""
+  id: StringFilter
+
+  """Filter by the object’s `ordernummer` field."""
+  ordernummer: StringFilter
+
+  """Filter by the object’s `orderregel` field."""
+  orderregel: IntFilter
+
+  """Filter by the object’s `cdartikel` field."""
+  cdartikel: StringFilter
+
+  """Filter by the object’s `omschr` field."""
+  omschr: StringFilter
+
+  """Filter by the object’s `inkopdrRglGuid` field."""
+  inkopdrRglGuid: StringFilter
+
+  """Filter by the object’s `bestcode` field."""
+  bestcode: StringFilter
+
+  """Filter by the object’s `prijs` field."""
+  prijs: BigFloatFilter
+
+  """Filter by the object’s `cdmagazijn` field."""
+  cdmagazijn: StringFilter
+
+  """Filter by the object’s `aantalbesteld` field."""
+  aantalbesteld: BigFloatFilter
+
+  """Filter by the object’s `aantalopenstaand` field."""
+  aantalopenstaand: BigFloatFilter
+
+  """Filter by the object’s `inkooporderregelLineId` field."""
+  inkooporderregelLineId: IntFilter
+
+  """Filter by the object’s `status` field."""
+  status: StringFilter
+
+  """Filter by the object’s `shipmentDate` field."""
+  shipmentDate: DateFilter
+
+  """Filter by the object’s `deliveryDate` field."""
+  deliveryDate: DateFilter
+
+  """Filter by the object’s `deliveryWeek` field."""
+  deliveryWeek: StringFilter
+
+  """Filter by the object’s `deliveryYearWeek` field."""
+  deliveryYearWeek: IntFilter
+
+  """Filter by the object’s `deliveryDateConfirmed` field."""
+  deliveryDateConfirmed: BooleanFilter
+
+  """Filter by the object’s `remarks` field."""
+  remarks: StringFilter
+
+  """Filter by the object’s `factopdrRglGuid` field."""
+  factopdrRglGuid: StringFilter
+
+  """Filter by the object’s `factuuropdracht` field."""
+  factuuropdracht: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [InkooporderregelsIndexFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [InkooporderregelsIndexFilter!]
+
+  """Negates the expression."""
+  not: InkooporderregelsIndexFilter
 }
 
 """A `InkooporderIndex` edge in the connection."""
@@ -60085,24 +60261,6 @@ type InkooporderregelLinesConnection {
   totalCount: Int!
 }
 
-type InkooporderregelLine implements Node {
-  """
-  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
-  """
-  nodeId: ID!
-  _cdartikel: String
-  _aantalbesteld: BigFloat
-  _aantalopenstaand: BigFloat
-  deliveryDate: Date
-  remarks: String
-  deliveryDateConfirmed: Boolean
-  status: String
-  inkopdrRglGuid: String
-  factopdrRglGuid: String
-  id: Int!
-  shipmentDate: Date
-}
-
 """A `InkooporderregelLine` edge in the connection."""
 type InkooporderregelLinesEdge {
   """A cursor for use in pagination."""
@@ -60555,58 +60713,6 @@ input InkooporderregelsFactopdrachtregelFilter {
   not: InkooporderregelsFactopdrachtregelFilter
 }
 
-"""A connection to a list of `InkooporderregelsIndex` values."""
-type InkooporderregelsIndicesConnection {
-  """A list of `InkooporderregelsIndex` objects."""
-  nodes: [InkooporderregelsIndex!]!
-
-  """
-  A list of edges which contains the `InkooporderregelsIndex` and cursor to aid in pagination.
-  """
-  edges: [InkooporderregelsIndicesEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """
-  The count of *all* `InkooporderregelsIndex` you could get from the connection.
-  """
-  totalCount: Int!
-}
-
-type InkooporderregelsIndex {
-  id: String
-  ordernummer: String
-  orderregel: Int
-  cdartikel: String
-  omschr: String
-  inkopdrRglGuid: String
-  bestcode: String
-  prijs: BigFloat
-  cdmagazijn: String
-  aantalbesteld: BigFloat
-  aantalopenstaand: BigFloat
-  inkooporderregelLineId: Int
-  status: String
-  shipmentDate: Date
-  deliveryDate: Date
-  deliveryWeek: String
-  deliveryYearWeek: Int
-  deliveryDateConfirmed: Boolean
-  remarks: String
-  factopdrRglGuid: String
-  factuuropdracht: String
-}
-
-"""A `InkooporderregelsIndex` edge in the connection."""
-type InkooporderregelsIndicesEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `InkooporderregelsIndex` at the end of the edge."""
-  node: InkooporderregelsIndex!
-}
-
 """Methods to use when ordering `InkooporderregelsIndex`."""
 enum InkooporderregelsIndicesOrderBy {
   NATURAL
@@ -60721,83 +60827,6 @@ input InkooporderregelsIndexCondition {
 
   """Checks for equality with the object’s `factuuropdracht` field."""
   factuuropdracht: String
-}
-
-"""
-A filter to be used against `InkooporderregelsIndex` object types. All fields are combined with a logical ‘and.’
-"""
-input InkooporderregelsIndexFilter {
-  """Filter by the object’s `id` field."""
-  id: StringFilter
-
-  """Filter by the object’s `ordernummer` field."""
-  ordernummer: StringFilter
-
-  """Filter by the object’s `orderregel` field."""
-  orderregel: IntFilter
-
-  """Filter by the object’s `cdartikel` field."""
-  cdartikel: StringFilter
-
-  """Filter by the object’s `omschr` field."""
-  omschr: StringFilter
-
-  """Filter by the object’s `inkopdrRglGuid` field."""
-  inkopdrRglGuid: StringFilter
-
-  """Filter by the object’s `bestcode` field."""
-  bestcode: StringFilter
-
-  """Filter by the object’s `prijs` field."""
-  prijs: BigFloatFilter
-
-  """Filter by the object’s `cdmagazijn` field."""
-  cdmagazijn: StringFilter
-
-  """Filter by the object’s `aantalbesteld` field."""
-  aantalbesteld: BigFloatFilter
-
-  """Filter by the object’s `aantalopenstaand` field."""
-  aantalopenstaand: BigFloatFilter
-
-  """Filter by the object’s `inkooporderregelLineId` field."""
-  inkooporderregelLineId: IntFilter
-
-  """Filter by the object’s `status` field."""
-  status: StringFilter
-
-  """Filter by the object’s `shipmentDate` field."""
-  shipmentDate: DateFilter
-
-  """Filter by the object’s `deliveryDate` field."""
-  deliveryDate: DateFilter
-
-  """Filter by the object’s `deliveryWeek` field."""
-  deliveryWeek: StringFilter
-
-  """Filter by the object’s `deliveryYearWeek` field."""
-  deliveryYearWeek: IntFilter
-
-  """Filter by the object’s `deliveryDateConfirmed` field."""
-  deliveryDateConfirmed: BooleanFilter
-
-  """Filter by the object’s `remarks` field."""
-  remarks: StringFilter
-
-  """Filter by the object’s `factopdrRglGuid` field."""
-  factopdrRglGuid: StringFilter
-
-  """Filter by the object’s `factuuropdracht` field."""
-  factuuropdracht: StringFilter
-
-  """Checks for all expressions in this list."""
-  and: [InkooporderregelsIndexFilter!]
-
-  """Checks for any expressions in this list."""
-  or: [InkooporderregelsIndexFilter!]
-
-  """Negates the expression."""
-  not: InkooporderregelsIndexFilter
 }
 
 """A connection to a list of `InkoopprijsChangesIndex` values."""
