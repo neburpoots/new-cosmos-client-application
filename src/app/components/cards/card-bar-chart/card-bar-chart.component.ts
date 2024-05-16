@@ -1,15 +1,44 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, SimpleChanges, Input } from "@angular/core";
 import { Chart } from "chart.js/auto";
+import { DarkModeService } from "../../../services/darkmode/dark-mode.service";
+import { DashboardTable } from "../../../../generated/graphql";
 
 @Component({
   selector: "app-card-bar-chart",
   templateUrl: "./card-bar-chart.component.html",
 })
-export class CardBarChartComponent implements OnInit, AfterViewInit {
-  constructor() {}
+export class CardBarChartComponent implements OnInit {
+
+  @Input() data: DashboardTable[] = [];
+  chart: Chart | undefined;
+
+  darkModeService : DarkModeService;
+  constructor(darkModeService : DarkModeService) {
+
+    this.darkModeService = darkModeService;
+  }
 
   ngOnInit() {}
-  ngAfterViewInit() {
+
+  ngOnChanges(changes: SimpleChanges) {
+    // React to changes in input data
+    // console.log(changes);
+    if (changes['data']) {
+      // console.log('test')
+      this.renderChart();
+    }
+  }
+
+  ngOnDestroy() {
+    // Ensure the chart instance is destroyed to prevent canvas reuse errors
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
+  renderChart() {
+    if(this.chart) this.chart.destroy();
+
     let config : any = {
       type: "bar",
       data: {
@@ -21,13 +50,18 @@ export class CardBarChartComponent implements OnInit, AfterViewInit {
           "May",
           "June",
           "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
         ],
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: "#20c997",
             borderColor: "#20c997",
-            data: [30, 78, 56, 34, 100, 45, 13],
+            data: this.data.filter((d) => d.year === new Date().getFullYear()).map((d) => +d.distinctOffertenummerCount) || [],
             fill: false,
             barThickness: 8,
           },
@@ -36,7 +70,7 @@ export class CardBarChartComponent implements OnInit, AfterViewInit {
             fill: false,
             backgroundColor: "#006666",
             borderColor: "#006666",
-            data: [27, 68, 86, 74, 10, 4, 87],
+            data: this.data.filter((d) => d.year === new Date().getFullYear() - 1).map((d) => +d.distinctOffertenummerCount) || [],
             barThickness: 8,
           },
         ],
@@ -104,6 +138,6 @@ export class CardBarChartComponent implements OnInit, AfterViewInit {
     };
     let ctx: any = document.getElementById("bar-chart");
     ctx = ctx.getContext("2d");
-    new Chart(ctx, config);
+    this.chart = new Chart(ctx, config);
   }
 }

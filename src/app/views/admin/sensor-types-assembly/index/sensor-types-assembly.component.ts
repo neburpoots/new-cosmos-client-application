@@ -81,7 +81,7 @@ this.loadData(this.searchCriteria);  }
     { type: 'number', key: 'flowRate', label: "Flow", asc: SensorTypesIndicesOrderBy.FlowRateAsc, desc: SensorTypesIndicesOrderBy.FlowRateDesc },
     { type: 'string', key: 'calGasName', label: "Cal. Gas", asc: SensorTypesIndicesOrderBy.CalGasNameAsc, desc: SensorTypesIndicesOrderBy.CalGasNameDesc },
     { type: 'number', key: 'calGasConcentration', label: "Cal. Conc.", asc: SensorTypesIndicesOrderBy.CalGasConcentrationAsc, desc: SensorTypesIndicesOrderBy.CalGasConcentrationDesc },
-    { type: 'number', key: 'calEngineeringUnits', label: "Cal. Units.", asc: SensorTypesIndicesOrderBy.CalEngineeringUnitsAsc, desc: SensorTypesIndicesOrderBy.CalEngineeringUnitsDesc },
+    { type: 'string', key: 'calEngineeringUnits', label: "Cal. Units.", asc: SensorTypesIndicesOrderBy.CalEngineeringUnitsAsc, desc: SensorTypesIndicesOrderBy.CalEngineeringUnitsDesc },
     { type: 'number', key: 'calResponse', label: "Cal. Resp.", asc: SensorTypesIndicesOrderBy.CalResponseAsc, desc: SensorTypesIndicesOrderBy.CalResponseDesc},
     { type: 'number', key: 'calFlowRate', label: "Cal. Flow", asc: SensorTypesIndicesOrderBy.CalFlowRateAsc, desc: SensorTypesIndicesOrderBy.CalFlowRateDesc },
     { type: 'string', key: 'electrolyteName', label: "Electrolyte", asc: SensorTypesIndicesOrderBy.ElectrolyteNameAsc, desc: SensorTypesIndicesOrderBy.ElectrolyteNameDesc },

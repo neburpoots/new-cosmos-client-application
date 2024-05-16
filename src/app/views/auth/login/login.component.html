@@ -1,10 +1,10 @@
 <div class="container mx-auto px-4 h-full">
   <div class="flex content-center items-center justify-center h-full">
     <div class="w-full sm:w-2/3 lg:w-4/12 px-4">
-      <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-slate-200 border-0">
+      <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-2xl bg-slate-200 dark:bg-slate-800 border-0">
         <div class="rounded-t mb-0 px-6 py-6">
           <div class="text-center mb-3">
-            <h6 class="text-slate-500 text-base font-bold">Sign in with credentials</h6>
+            <h6 class="text-slate-500 dark:text-slate-300 text-base font-semibold font-roboto">Sign in with credentials</h6>
           </div>
 
           <hr class="mt-6 border-b-1 border-slate-300" />
@@ -13,20 +13,20 @@
 
           <form  (ngSubmit)="login(username.value, password.value)">
             <div class="relative w-full mb-3">
-              <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="username">
+              <label class="text-slate-800 dark:text-slate-200" htmlFor="username">
                 Username
               </label>
               <input type="text" id="username" #username
-                class="border-0 focus:outline-green-600 px-3 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="dark:text-white mt-1 dark:placeholder-slate-300 w-full bg-white dark:bg-slate-700  focus:border-0 border-0 rounded-2xl focus:ring-0 overflow-hidden"
                 placeholder="Username" />
             </div>
 
             <div class="relative w-full mb-3">
-              <label class="block uppercase text-slate-600 text-xs font-bold mb-2" htmlFor="grid-password">
+              <label class="text-slate-800 dark:text-slate-200" htmlFor="grid-password">
                 Password
               </label>
               <input #password type="password"
-                class="border-0 px-3 focus:outline-green-600 py-3 placeholder-slate-300 text-slate-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                class="dark:text-white w-full bg-white dark:placeholder-slate-300 dark:bg-slate-700 focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
                 placeholder="Password" />
             </div>
             <div class="text-center mt-6">

@@ -15671,6 +15671,82 @@ export enum CrediteursOrderBy {
   ZoeknaamDesc = 'ZOEKNAAM_DESC'
 }
 
+export type DashboardTable = {
+  __typename?: 'DashboardTable';
+  distinctOffertenummerCount?: Maybe<Scalars['BigInt']['output']>;
+  month?: Maybe<Scalars['Float']['output']>;
+  totalPerMonth?: Maybe<Scalars['BigFloat']['output']>;
+  year?: Maybe<Scalars['Float']['output']>;
+};
+
+/**
+ * A condition to be used against `DashboardTable` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type DashboardTableCondition = {
+  /** Checks for equality with the object’s `distinctOffertenummerCount` field. */
+  distinctOffertenummerCount?: InputMaybe<Scalars['BigInt']['input']>;
+  /** Checks for equality with the object’s `month` field. */
+  month?: InputMaybe<Scalars['Float']['input']>;
+  /** Checks for equality with the object’s `totalPerMonth` field. */
+  totalPerMonth?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `year` field. */
+  year?: InputMaybe<Scalars['Float']['input']>;
+};
+
+/** A filter to be used against `DashboardTable` object types. All fields are combined with a logical ‘and.’ */
+export type DashboardTableFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<DashboardTableFilter>>;
+  /** Filter by the object’s `distinctOffertenummerCount` field. */
+  distinctOffertenummerCount?: InputMaybe<BigIntFilter>;
+  /** Filter by the object’s `month` field. */
+  month?: InputMaybe<FloatFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<DashboardTableFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<DashboardTableFilter>>;
+  /** Filter by the object’s `totalPerMonth` field. */
+  totalPerMonth?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `year` field. */
+  year?: InputMaybe<FloatFilter>;
+};
+
+/** A connection to a list of `DashboardTable` values. */
+export type DashboardTablesConnection = {
+  __typename?: 'DashboardTablesConnection';
+  /** A list of edges which contains the `DashboardTable` and cursor to aid in pagination. */
+  edges: Array<DashboardTablesEdge>;
+  /** A list of `DashboardTable` objects. */
+  nodes: Array<DashboardTable>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `DashboardTable` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `DashboardTable` edge in the connection. */
+export type DashboardTablesEdge = {
+  __typename?: 'DashboardTablesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `DashboardTable` at the end of the edge. */
+  node: DashboardTable;
+};
+
+/** Methods to use when ordering `DashboardTable`. */
+export enum DashboardTablesOrderBy {
+  DistinctOffertenummerCountAsc = 'DISTINCT_OFFERTENUMMER_COUNT_ASC',
+  DistinctOffertenummerCountDesc = 'DISTINCT_OFFERTENUMMER_COUNT_DESC',
+  MonthAsc = 'MONTH_ASC',
+  MonthDesc = 'MONTH_DESC',
+  Natural = 'NATURAL',
+  TotalPerMonthAsc = 'TOTAL_PER_MONTH_ASC',
+  TotalPerMonthDesc = 'TOTAL_PER_MONTH_DESC',
+  YearAsc = 'YEAR_ASC',
+  YearDesc = 'YEAR_DESC'
+}
+
 /** A filter to be used against Date fields. All fields are combined with a logical ‘and.’ */
 export type DateFilter = {
   /** Not equal to the specified value, treating null like an ordinary value. */
@@ -53246,6 +53322,8 @@ export type Query = Node & {
   allCrediteurMvs?: Maybe<CrediteurMvsConnection>;
   /** Reads and enables pagination through a set of `Crediteur`. */
   allCrediteurs?: Maybe<CrediteursConnection>;
+  /** Reads and enables pagination through a set of `DashboardTable`. */
+  allDashboardTables?: Maybe<DashboardTablesConnection>;
   /** Reads and enables pagination through a set of `DebiteurMv`. */
   allDebiteurMvs?: Maybe<DebiteurMvsConnection>;
   /** Reads and enables pagination through a set of `Debiteur`. */
@@ -54903,6 +54981,19 @@ export type QueryAllCrediteursArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<CrediteursOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllDashboardTablesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<DashboardTableCondition>;
+  filter?: InputMaybe<DashboardTableFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<DashboardTablesOrderBy>>;
 };
 
 
@@ -82528,6 +82619,11 @@ export type DeleteChemicalCompoundMutationVariables = Exact<{
 
 export type DeleteChemicalCompoundMutation = { __typename?: 'Mutation', deleteChemicalCompoundById?: { __typename?: 'DeleteChemicalCompoundPayload', clientMutationId?: string | null } | null };
 
+export type DashboardQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DashboardQuery = { __typename?: 'Query', allDashboardTables?: { __typename?: 'DashboardTablesConnection', totalCount: number, nodes: Array<{ __typename?: 'DashboardTable', month?: number | null, totalPerMonth?: any | null, year?: number | null, distinctOffertenummerCount?: any | null }> } | null };
+
 export type DeleteDetectorTypeMutationVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
@@ -84399,6 +84495,30 @@ export const DeleteChemicalCompoundDocument = gql`
   })
   export class DeleteChemicalCompoundGQL extends Apollo.Mutation<DeleteChemicalCompoundMutation, DeleteChemicalCompoundMutationVariables> {
     override document = DeleteChemicalCompoundDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DashboardDocument = gql`
+    query dashboard {
+  allDashboardTables {
+    totalCount
+    nodes {
+      month
+      totalPerMonth
+      year
+      distinctOffertenummerCount
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DashboardGQL extends Apollo.Query<DashboardQuery, DashboardQueryVariables> {
+    override document = DashboardDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

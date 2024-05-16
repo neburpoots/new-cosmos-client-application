@@ -54,7 +54,7 @@ export class SidebarComponent implements OnInit {
   navigationObject = navigationObject
 
   isActive(url: string): boolean {
-    return this.router.isActive('user/' + url, true);
+    return this.router.isActive(url, true);
   }
 
   ngOnInit() { }

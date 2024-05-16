@@ -71,25 +71,6 @@
             Dashboard
           </a>
         </li>
-        <div class="relative">
-          <button class="text-md text-slate-200 py-3  font-semibold block hover:text-white" type="button"
-            (click)="toggleFavoritesDropdown()">
-            <i class="fa fa-star   mr-2 "></i>Favorites
-          </button>
-          <div *ngIf="favoritesDropdownActive" class=" w-48 bg-cosmosDarker dark:bg-cosmosDarkest border-slate-200 ">
-            <ul class="list-none">
-              <li><a [routerLink]="['/user/assembly']" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
-              adminDashboard.isActive
-                ? 'text-white hover:text-white'
-                : 'text-white hover:text-white'
-            " [ngClass]="adminDashboard.isActive ? 'bg-cosmosDark dark:bg-cosmosDarkest text-white' : ''"
-                  class="text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg"><i
-                    class="mr-2 fa fa-cog" aria-hidden="true"></i>
-                  Assembly</a></li>
-
-            </ul>
-          </div>
-        </div>
 
         @for(navigationItem of navigationObject; track $index) {
         <button class="text-md text-slate-200 py-3 text-left  font-semibold block hover:text-white" type="button"
@@ -104,12 +85,12 @@
         <div *ngIf="navigationItem.active" class=" w-48 bg-cosmosDarker dark:bg-cosmosDarkest border-slate-200 ">
           <ul class="list-none">
             @for (item of navigationItem.items; let itemindex = $index; track itemindex) {
-            <li *ngIf="(authService.checkPermission(item.route.permission_id) | async)"><a [routerLink]="[item.route.path]"
-                routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
+            <li *ngIf="(authService.checkPermission(item.route.permission_id) | async)"><a
+                [routerLink]="[item.route.path]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
         isActive(item.route.path)
           ? 'text-white hover:text-white'
           : 'text-white hover:text-white'
-      " [ngClass]="isActive(item.route.path) ? 'bg-cosmosDark text-white' : ''"
+      " [ngClass]="isActive(item.route.path) ? 'bg-cosmosDark dark:bg-cosmosDarker text-white' : ''"
                 class="flex text-sm block  py-2 px-4 text-slate-200 hover:bg-cosmosDark rounded-lg">
                 <div class="min-w-[30px]">
                   @if(item.icon6) {

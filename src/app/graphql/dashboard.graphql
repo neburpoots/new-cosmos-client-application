@@ -1,0 +1,11 @@
+query dashboard {
+  allDashboardTables {
+    totalCount
+    nodes {
+      month
+      totalPerMonth
+      year
+      distinctOffertenummerCount
+    }
+  }
+}

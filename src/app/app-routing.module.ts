@@ -73,6 +73,28 @@ export interface menuItem {
 //this is also used in sidebar. Thats why it is in this format
 export const navigationObject: menuItem[] = [
   {
+    name: "Favorites",
+    icon4: "fa fa-star",
+    active: false,
+    items: [
+      {
+        title: "Assemblies MV",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faUserCog,
+        route: new RoutePermission("assemblies-multivers", AssemblyMultiversComponent, 6),
+      },
+      {
+        title: "Purchase Status",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faCartArrowDown,
+        route: new RoutePermission("purchase-status", PurchaseStatusComponent, 30),
+      }
+
+    ]
+  },
+  {
     name: "Assembly",
     icon4: "fa fa-cog",
     active: false,

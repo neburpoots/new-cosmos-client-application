@@ -1,20 +1,53 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, Input, SimpleChanges } from "@angular/core";
 import { Chart } from "chart.js";
 import { DarkModeService } from "../../../services/darkmode/dark-mode.service";
+import { DashboardTable } from "../../../../generated/graphql";
 
 @Component({
   selector: "app-card-line-chart",
   templateUrl: "./card-line-chart.component.html",
 })
 export class CardLineChartComponent implements OnInit {
+
+  @Input() data: DashboardTable[] = [];
+
+  chart: Chart | undefined;
+
   darkModeService : DarkModeService;
   constructor(darkModeService : DarkModeService) {
-
     this.darkModeService = darkModeService;
   }
 
   ngOnInit() {}
-  ngAfterViewInit() {
+
+  // ngOnAfterViewInit() {
+  //   this.renderChart();
+  // }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // React to changes in input data
+    console.log(changes);
+
+    if (changes['data']) {
+
+      console.log(changes);
+      this.renderChart();
+    }
+  }
+
+  ngOnDestroy() {
+    // Ensure the chart instance is destroyed to prevent canvas reuse errors
+    if (this.chart) {
+      this.chart.destroy();
+    }
+  }
+
+
+  renderChart() {
+    if(this.chart) this.chart.destroy();
+
+    console.log(this.data.filter((d) => d.year === new Date().getFullYear()))
+
     var config : any = {
       type: "line",
       data: {
@@ -26,13 +59,18 @@ export class CardLineChartComponent implements OnInit {
           "May",
           "June",
           "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
         ],
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: "#20c997",
             borderColor: "#20c997",
-            data: [65, 78, 66, 44, 56, 67, 75],
+            data: this.data.filter((d) => d.year === new Date().getFullYear()).map((d) => +d.totalPerMonth) || [],
             fill: false,
           },
           {
@@ -40,7 +78,7 @@ export class CardLineChartComponent implements OnInit {
             fill: false,
             backgroundColor: "#006666",
             borderColor: "#006666",
-            data: [40, 68, 86, 74, 56, 60, 87],
+            data: this.data.filter((d) => d.year === new Date().getFullYear() - 1).map((d) => +d.totalPerMonth) || [],
           },
         ],
       },
@@ -117,6 +155,6 @@ export class CardLineChartComponent implements OnInit {
     };
     let ctx: any = document.getElementById("line-chart") as HTMLCanvasElement;
     ctx = ctx.getContext("2d");
-    new Chart(ctx, config);
+    this.chart = new Chart(ctx, config);
   }
 }
