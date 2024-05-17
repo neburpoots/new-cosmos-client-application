@@ -65,6 +65,7 @@ export class RoutePermission {
 export interface menuItem {
   name: string;
   active: boolean;
+  show: boolean;
   icon6?: any;
   icon4?: string;
   items: NavBarIcon[];
@@ -76,6 +77,7 @@ export const navigationObject: menuItem[] = [
     name: "Favorites",
     icon4: "fa fa-star",
     active: false,
+    show: false,
     items: [
       {
         title: "Assemblies MV",
@@ -98,6 +100,7 @@ export const navigationObject: menuItem[] = [
     name: "Assembly",
     icon4: "fa fa-cog",
     active: false,
+    show: false,
     items: [
       {
         title: "Assemblies MV",
@@ -153,6 +156,7 @@ export const navigationObject: menuItem[] = [
   {
     name: "Warehouse",
     active: false,
+    show: false,
     icon6: faWarehouse,
     items: [
       {
@@ -174,6 +178,7 @@ export const navigationObject: menuItem[] = [
   {
     name: "Products",
     active: false,
+    show: false,
     icon6: faBoxOpen,
     items: [
       {
@@ -229,6 +234,7 @@ export const navigationObject: menuItem[] = [
   },
   {
     name: "Registration",
+    show: false,
     active: false,
     icon6: faAddressCard,
     items: [
@@ -250,6 +256,7 @@ export const navigationObject: menuItem[] = [
   },
   {
     name: 'Services',
+    show: false,
     active: false,
     icon6: faServer,
     items: [
@@ -313,6 +320,7 @@ export const navigationObject: menuItem[] = [
   },
   {
     name: 'Misc',
+    show: false,
     active: false,
     icon6: faListUl,
     items: [

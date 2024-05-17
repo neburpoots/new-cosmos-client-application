@@ -73,7 +73,7 @@
         </li>
 
         @for(navigationItem of navigationObject; track $index) {
-        <button class="text-md text-slate-200 py-3 text-left  font-semibold block hover:text-white" type="button"
+        <button *ngIf="navigationItem.show" class="text-md text-slate-200 py-3 text-left  font-semibold block hover:text-white" type="button"
           (click)="toggleNavbarDropdown($index)">
           @if(navigationItem.icon6) {
           <fa-icon class="" [icon]="navigationItem.icon6"></fa-icon>
@@ -85,7 +85,7 @@
         <div *ngIf="navigationItem.active" class=" w-48 bg-cosmosDarker dark:bg-cosmosDarkest border-slate-200 ">
           <ul class="list-none">
             @for (item of navigationItem.items; let itemindex = $index; track itemindex) {
-            <li *ngIf="(authService.checkPermission(item.route.permission_id) | async)"><a
+            <li ><a
                 [routerLink]="[item.route.path]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
         isActive(item.route.path)
           ? 'text-white hover:text-white'
