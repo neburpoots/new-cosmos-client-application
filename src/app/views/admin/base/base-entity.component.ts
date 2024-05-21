@@ -6,7 +6,7 @@ import { ToastrService } from "ngx-toastr";
 import { TableHeader } from "../../../models/utils/tableHeader";
 import { ActivatedRoute } from "@angular/router";
 import { Apollo, Mutation, Query } from "apollo-angular";
-import { Observable, Subject, map, startWith, switchMap } from "rxjs";
+import { Observable, Subject, catchError, map, of, startWith, switchMap } from "rxjs";
 import { SearchFilters } from "../../../models/utils/searchFilters";
 import { TableHead } from "../../../models/utils/tableHead";
 import { start } from "@popperjs/core";
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { ExportOptions } from "../../../models/utils/export";
 import { FileService } from "../../../services/file/file.service";
 import { AuthService } from "../../../services/authentication/auth.service";
+import { ApolloError } from "@apollo/client/errors";
 
 @Component({
   selector: "app-base-entity",
@@ -127,8 +128,8 @@ export abstract class BaseEntity<T> {
   }
 
   loadData(searchCriteria: any): void {
-    this.getService.fetch(searchCriteria ? searchCriteria : this.searchCriteria, {fetchPolicy: 'no-cache'}).subscribe(result => {
-      console.log( result?.data[this.Key]?.nodes)
+    this.getService.fetch(searchCriteria ? searchCriteria : this.searchCriteria, { fetchPolicy: 'no-cache' }).subscribe(result => {
+      console.log(result?.data[this.Key]?.nodes)
       this.data = result?.data[this.Key]?.nodes || [];
       this.totalResults = result?.data[this.Key]?.totalCount || 0;
       this.tableData = this.mapTableData(result?.data[this.Key]?.nodes);
@@ -358,19 +359,52 @@ export abstract class BaseEntity<T> {
     }
     let deleteId = id.id;
 
-    this.deleteService.mutate
-      (
-        { id: deleteId },
-        {
-          update: cache => {
-            cache.evict({ id: this.objectSingle + ' ' + id });
-          }
+
+    this.deleteService.mutate(
+      { id: deleteId },
+      {
+        update: cache => {
+          cache.evict({ id: this.objectSingle + ' ' + id });
         }
-      ).subscribe(() => {
+      }
+    ).pipe(
+      catchError(error => {
+        if (error instanceof ApolloError) {
+          // Log the detailed error information
+          console.error('ApolloError:', error);
+    
+          // Extract and handle specific error details
+          const graphQLErrors = error.graphQLErrors;
+          const networkError = error.networkError;
+          const message = error.message;
+    
+          // Display error messages
+          if (graphQLErrors && graphQLErrors.length > 0) {
+            graphQLErrors.forEach(err => {
+              this.toastr.error(err.message, 'GraphQL Error');
+            });
+          } else if (networkError) {
+            this.toastr.error(networkError.message, 'Network Error');
+          } else {
+            this.toastr.error(message, 'Error');
+          }
+        } else {
+          // Handle other types of errors
+          this.toastr.error('An unexpected error occurred', 'Error');
+          console.error('Unexpected Error:', error);
+        }
+        
+        return of(null); // Return a fallback value or observable
+      })
+    ).subscribe((result) => {
+      if(result) {
         this.fetch();
         this.closeDeleteModal();
         this.toastr.success(`${this.objectSingle} deleted successfully`, 'Success');
-      });
+      }
+    });
+
+
   }
 
 }

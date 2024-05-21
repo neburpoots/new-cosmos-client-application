@@ -125,7 +125,7 @@ export class UsersFormComponent extends BaseFormComponent<CreateUserWithGroupsIn
     //override this for the custom update user function
     override async update(data: any): Promise<void> {
 
-        this.updateService.mutate({ patch: await this.createUpdateDto() }).subscribe(
+        this.updateService.mutate({ patch: await this.createUpdateDto() }, { fetchPolicy: 'no-cache'}).subscribe(
             (response) => {
                 console.log('Response:', response);
                 this.toastr.success(`${this.objectSingle} updated successfully`, 'Success');
@@ -155,7 +155,7 @@ export class UsersFormComponent extends BaseFormComponent<CreateUserWithGroupsIn
     }
 
     async setUpDependentData(groupService: Query<any, any>) {
-        groupService.fetch().subscribe(result => {
+        groupService.fetch(null, { fetchPolicy: 'no-cache'}).subscribe(result => {
             console.log(result)
             this.groups = result?.data?.allGroups?.nodes || [];
         });

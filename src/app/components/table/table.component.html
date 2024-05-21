@@ -5,6 +5,7 @@
         class="z-10 h-full leading-snug font-normal absolute text-center text-slate-400 absolute bg-transparent rounded-2xl text-base items-center justify-center w-8 pl-3 py-3"><i
           class="fa fa-search"></i></span>
       <input (ngModelChange)="loadData($event)" [(ngModel)]="filterBuilder.globalSearch" type="text"
+        id="globalSearch"
         placeholder="Search here..."
         class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-400 text-slate-600 relative bg-white dark:bg-slate-900 dark:text-slate-50 rounded-2xl text-sm  w-full pl-10" />
     </div>
@@ -121,12 +122,12 @@
 
 
   <div *ngIf="isCreatable">
-    <button type="button" (click)="openCreateModal()"
+    <button type="button" (click)="openCreateModal()" id="createButton"
       class="cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:dark:bg-cosmosDarkest hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-l-full text-sm pl-5 pr-2 py-2.5 text-center mb-2"
       [ngClass]="!isInlineCreateable ? 'rounded-r-full pr-5' : 'rounded-r-none'">
       Add {{ object }}</button>
 
-    <button type="button" *ngIf="isInlineCreateable" (click)="setInlineCreating()"
+    <button type="button" *ngIf="isInlineCreateable" (click)="setInlineCreating()" id="createButtonInline"
       class="cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:dark:bg-cosmosDarkest hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-r-full text-sm pr-5 pl-2 py-2.5 text-center mb-2">
       +</button>
   </div>
@@ -183,7 +184,7 @@
 
 
 
-        <tbody *ngIf="data.length > 0">
+        <tbody *ngIf="data.length > 0" id="mainTableBody">
 
           <tr [style.max-width.px]="totalWidth">
             <td [attr.colspan]="columns.length + 1"><ng-content [select]="inline_selector"></ng-content></td>
@@ -234,12 +235,12 @@
                 class="cursor-pointer bg-cosmosDark dark:bg-cosmosDarker ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] pl-[8px] pr-[5px] ">
                 <fa-icon [icon]="faFilePdf"></fa-icon>
               </button>
-              <div *ngIf="isEditable" (click)="openEditModal(item['id']?.value)"
+              <div *ngIf="isEditable" (click)="openEditModal(item['id']?.value)" id="editButton"
                 class="cursor-pointer bg-cosmosDark dark:bg-cosmosDarker  hover:dark:bg-cosmosDarker ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl p-[5px] pl-[7px]">
                 <i class="fa fa-lg fa-pencil-square-o" aria-hidden="true"></i>
               </div>
 
-              <div *ngIf="isDeletable" (click)="openDeleteModal(item['id']?.value)"
+              <div *ngIf="isDeletable" (click)="openDeleteModal(item['id']?.value)" id="deleteButton"
                 class="cursor-pointer bg-red-600 dark:bg-red-700 ease-in-out hover:bg-red-700 transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] px-[7px] ">
                 <i class="fa fa-lg fa-trash" aria-hidden="true"></i>
               </div>

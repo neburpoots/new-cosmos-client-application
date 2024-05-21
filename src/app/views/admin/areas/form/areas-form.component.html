@@ -10,7 +10,7 @@
             [errors]="[{ name: 'required', message: 'End User is required' }]">
         </select-component>
     </div>
-    <div  [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
+    <div [style.min-width.px]="isInlineCreating ? cellWidths[1] : null"
         [style.max-width.px]="isInlineCreating ? cellWidths[1] : null">
         <select-component *ngIf="buildings.length > 0" (onChange)="selectedBuilding($event)" [form]="myForm" [name]="'building'"
             [displayName]="'Building'" [options]="buildings" [inline]="isInlineCreating"

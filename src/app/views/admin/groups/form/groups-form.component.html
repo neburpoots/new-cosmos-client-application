@@ -48,10 +48,10 @@
             Selected read permissions:
             @for(item of selectedReadPermissions; track item.id) {
             <div
-                class="text-sm font-semibold items-center flex px-4 py-1 rounded-full text-white bg-cosmosDarker gap-4">
+                class="text-sm font-semibold items-center flex px-2 pl-4 py-1 rounded-full text-white bg-cosmosDarker gap-4">
                 {{item.name}}
                 <button type="button" class="text-lg"
-                    (click)="deleteReadPermission(item.id)">x</button>
+                    (click)="deleteReadPermission(item.id)"><fa-icon [icon]="faCircleXmark" /></button>
             </div>
             }
         </div>

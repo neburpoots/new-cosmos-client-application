@@ -77,7 +77,7 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
         this.selectedReadPermissions = [];
         this.selectedWritePermissions = [];
 
-        this.authService.refreshPermissions();
+        this.authService.getPermissions();
 
         if (this.isInlineCreating) {
             this.refresh.emit();

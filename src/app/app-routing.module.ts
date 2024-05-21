@@ -369,6 +369,7 @@ export const allAuthenticatedRoutes = [
   ...insertRoutes(navigationObject[3]),
   ...insertRoutes(navigationObject[4]),
   ...insertRoutes(navigationObject[5]),
+  ...insertRoutes(navigationObject[6]),
 ]
 
 

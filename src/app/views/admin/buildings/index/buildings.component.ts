@@ -80,7 +80,7 @@ export class BuildingsComponent extends BaseEntity<Building> {
     { type: 'string', key: 'endUserByEndUserId$name', label: "End User", asc: BuildingsOrderBy.EndUserByEndUserIdNameAsc, desc: BuildingsOrderBy.EndUserByEndUserIdNameDesc },
     { type: 'string', key: 'name', label: "Building", asc: BuildingsOrderBy.NameAsc, desc: BuildingsOrderBy.NameDesc },
     { type: 'datetime', key: 'created', label: "Created", asc: BuildingsOrderBy.CreatedAsc, desc: BuildingsOrderBy.CreatedDesc },
-    { type: 'string', key: 'initials', label: "By", asc: BuildingsOrderBy.UserByOwnerIdInitialsAsc, desc: BuildingsOrderBy.UserByOwnerIdInitialsDesc },
+    { type: 'string', key: 'userByOwnerId$initials', label: "By", asc: BuildingsOrderBy.UserByOwnerIdInitialsAsc, desc: BuildingsOrderBy.UserByOwnerIdInitialsDesc },
   ]
 
 
@@ -91,7 +91,7 @@ export class BuildingsComponent extends BaseEntity<Building> {
         endUserByEndUserId$name: { url: null, value: building?.endUserByEndUserId?.name } as TableField,
         name: { url: null, value: building?.name } as TableField,
         created: { url: null, value: building?.created } as TableField,
-        initials: { url: null, value: building?.userByOwnerId?.initials } as TableField,
+        userByOwnerId$initials: { url: null, value: building?.userByOwnerId?.initials } as TableField,
       };
     });
   }

@@ -13,16 +13,7 @@ export class LoginComponent {
 
   async login(username: string, password: string): Promise<void> {
 
-    await this.authService.login(username, password).subscribe
-      (
-        result => {
-          //console.log(result);	
-          if (result) {
-            this.router.navigate(['/'])
-            this.toastr.success('Logged in successfully!', 'Success');
-
-          }
-        }
-      );;
+    await this.authService.login(username, password);
+    console.log(this.authService.currentReadPermissions$);
   }
 }

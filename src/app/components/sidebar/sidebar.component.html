@@ -62,18 +62,18 @@
           <a [routerLink]="['/']" class="text-md py-3 font-semibold block" routerLinkActive
             #adminDashboard="routerLinkActive" [ngClass]="
               adminDashboard.isActive
-                ? 'text-white hover:text-white'
+                ? 'text-slate-200 hover:text-white'
                 : 'text-slate-200 hover:text-white'
             ">
             <i class="fa fa-dashboard mr-2 text-sm" [ngClass]="
-                adminDashboard.isActive ? 'text-white' : 'text-slate-100'
+                adminDashboard.isActive ? 'text-white' : 'text-slate-200'
               "></i>
             Dashboard
           </a>
         </li>
 
         @for(navigationItem of navigationObject; track $index) {
-        <button *ngIf="navigationItem.show" class="text-md text-slate-200 py-3 text-left  font-semibold block hover:text-white" type="button"
+        <button *ngIf="navigationItem.show" [id]="navigationItem.name" class="text-md text-slate-200 py-3 text-left  font-semibold block hover:text-white" type="button"
           (click)="toggleNavbarDropdown($index)">
           @if(navigationItem.icon6) {
           <fa-icon class="" [icon]="navigationItem.icon6"></fa-icon>
@@ -82,11 +82,12 @@
           }
           {{navigationItem.name}}
         </button>
-        <div *ngIf="navigationItem.active" class=" w-48 bg-cosmosDarker dark:bg-cosmosDarkest border-slate-200 ">
+        <div *ngIf="navigationItem.active"  class=" w-48 bg-cosmosDarker dark:bg-cosmosDarkest border-slate-200 ">
           <ul class="list-none">
             @for (item of navigationItem.items; let itemindex = $index; track itemindex) {
             <li ><a
-                [routerLink]="[item.route.path]" routerLinkActive #adminDetectorTypes="routerLinkActive" [ngClass]="
+              [id]="item.title"
+                [routerLink]="[item.route.path]" routerLinkActive #route="routerLinkActive" [ngClass]="
         isActive(item.route.path)
           ? 'text-white hover:text-white'
           : 'text-white hover:text-white'
@@ -115,7 +116,7 @@
 
       <ul class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
 
-        <li (click)="logout()" class="cursor-pointer items-center">
+        <li (click)="logout()" id="logout" class="cursor-pointer items-center">
           <div class="text-md py-3 font-semibold block" routerLinkActive #adminDashboard="routerLinkActive" [ngClass]="
               adminDashboard.isActive
                 ? 'text-white hover:text-white'

@@ -11,32 +11,29 @@
         </div>
         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
 
-          <form  (ngSubmit)="login(username.value, password.value)">
+          <form (ngSubmit)="login(username.value, password.value)">
             <div class="relative w-full mb-3">
-              <label class="text-slate-800 dark:text-slate-200" htmlFor="username">
-                Username
-              </label>
-              <input type="text" id="username" #username
-                class="dark:text-white mt-1 dark:placeholder-slate-300 w-full bg-white dark:bg-slate-700  focus:border-0 border-0 rounded-2xl focus:ring-0 overflow-hidden"
-                placeholder="Username" />
+              <label class="text-slate-800 dark:text-slate-200" htmlFor="username">Username</label>
+              <input type="text" id="username" #username name="username"
+                     class="dark:text-white mt-1 dark:placeholder-slate-300 w-full bg-white dark:bg-slate-700 focus:border-0 border-0 rounded-2xl focus:ring-0 overflow-hidden"
+                     placeholder="Username" />
             </div>
-
             <div class="relative w-full mb-3">
-              <label class="text-slate-800 dark:text-slate-200" htmlFor="grid-password">
-                Password
-              </label>
-              <input #password type="password"
-                class="dark:text-white w-full bg-white dark:placeholder-slate-300 dark:bg-slate-700 focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
-                placeholder="Password" />
+              <label class="text-slate-800 dark:text-slate-200" htmlFor="grid-password">Password</label>
+              <input #password type="password" id="password" name="password"
+                     class="dark:text-white w-full bg-white dark:placeholder-slate-300 dark:bg-slate-700 focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
+                     placeholder="Password" />
             </div>
             <div class="text-center mt-6">
-              <button
-                class="bg-cosmosDarker rounded-2xl text-white active:bg-slate-600 text-sm font-bold  px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                type="submit" (click)="login(username.value, password.value)">
+              <button 
+              id="login-button"
+              class="bg-cosmosDarker rounded-2xl text-white active:bg-slate-600 text-sm font-bold px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      type="submit">
                 Sign in
               </button>
             </div>
           </form>
+          
         </div>
       </div>
 

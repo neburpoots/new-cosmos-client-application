@@ -28,7 +28,6 @@ export class SidebarComponent implements OnInit {
     this.navigationObject.forEach((item, i) => {
       item.items.forEach((subItem, j) => {
         this.authService.checkPermission(subItem.route.permission_id).subscribe(allowed => {
-          this.authService.currentReadPermissions$.subscribe(permissions => console.log(JSON.parse(JSON.stringify(permissions))))
           if (allowed) {
             item.show = true;
           }
@@ -99,31 +98,6 @@ export class SidebarComponent implements OnInit {
 
   isAllowedCurrentItem: boolean = false;
   //check permissions for main menu button if all submenus false then return false
-  checkPermissionForAll(items: NavBarIcon[]): any {
-
-
-    for (let item of items) {
-
-      const result = this.authService.checkPermission(item.route.permission_id).subscribe(allowed => {
-        if (allowed) {
-          return true;
-        } else {
-          return false;
-        }
-      })
-      console.log(result)
-      return true;
-      // console.log(item.route.permission_id)
-      // console.log(this.authService.currentReadPermissions$.subscribe(permissions => console.log(permissions)))
-      // console.log(this.authService.checkPermission(item.route.permission_id))
-      // if(this.authService.checkPermission(item.route.permission_id)) {
-      //   return true;
-      // }
-    }
-
-
-  }
-
 
   // Method to toggle the dropdown state
   toggleFavoritesDropdown() {
