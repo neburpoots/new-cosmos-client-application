@@ -4,14 +4,13 @@
       <span
         class="z-10 h-full leading-snug font-normal absolute text-center text-slate-400 absolute bg-transparent rounded-2xl text-base items-center justify-center w-8 pl-3 py-3"><i
           class="fa fa-search"></i></span>
-      <input (ngModelChange)="loadData($event)" [(ngModel)]="filterBuilder.globalSearch" type="text"
-        id="globalSearch"
+      <input (ngModelChange)="loadData($event)" [(ngModel)]="filterBuilder.globalSearch" type="text" id="globalSearch"
         placeholder="Search here..."
         class="border-0 px-3 focus:ring-0 focus:outline-cosmosDark focus:border-gray-900 py-3 placeholder-slate-400 text-slate-600 relative bg-white dark:bg-slate-900 dark:text-slate-50 rounded-2xl text-sm  w-full pl-10" />
     </div>
 
     <div class="flex">
-      <div [satPopoverAnchor]="filters" (click)="filters.open()"
+      <div [satPopoverAnchor]="filters" id="filterButton" (click)="filters.open()"
         class="mr-[-10px] cursor-pointer bg-cosmosDark dark:bg-cosmosDarker ease-in-out flex items-center hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-full py-[5px] px-[14px] ">
         <fa-icon [icon]="faFilter"></fa-icon>
 
@@ -25,14 +24,15 @@
               <div class="flex flex-row gap-2">
                 <select
                   class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
-                  id="selectedOption" #filter (change)="selectColumnFilter(filter.value, activeIndex)">
+                  [id]="'filter-name-' + activeIndex" #filter (change)="selectColumnFilter(filter.value, activeIndex)">
                   <option [value]="'placeholder'" disabled [defaultSelected]="'placeholder'">Select a column</option>
                   <!-- (change)="onPageSizeChange($event)"> -->
                   <option *ngFor="let header of columns" [value]="header.key">{{ header.label }}</option>
                 </select>
                 <select *ngIf="filterInput.filterTypes"
                   class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
-                  id="selectedOption" #filterTypes (change)="selectTypeFilter(+filterTypes.value, filterInput)">
+                  [id]="'filter-type-' + activeIndex" #filterTypes
+                  (change)="selectTypeFilter(+filterTypes.value, filterInput)">
                   <option [value]="'placeholder'" disabled [defaultSelected]="'placeholder'">Type of filter</option>
                   <!-- (change)="onPageSizeChange($event)"> -->
                   <option *ngFor="let filterOption of filterInput.filterTypes" [value]="filterOption.id">{{
@@ -41,19 +41,23 @@
                 <div *ngIf="filterInput.selectedFilterType">
                   @if([1,2].includes(filterInput.selectedFilterType.id)) {
                   <input type="'text" [placeholder]="filterInput.selectedFilterType.label"
+                    [id]="'filter-value-' + activeIndex"
                     class="w-[120px] px-4 py-4 text-sm placeholder-slate-200 bg-cosmosDarker text-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
                     [(ngModel)]="filterInput.value">
                   } @else if([4,5,6].includes(filterInput.selectedFilterType.id)) {
                   <input type="number" [placeholder]="filterInput.selectedFilterType.label"
+                    [id]="'filter-value-' + activeIndex"
                     class="w-[120px] placeholder-slate-200 bg-cosmosDarker text-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
                     [(ngModel)]="filterInput.value">
                   } @else if([10,11,12].includes(filterInput.selectedFilterType.id)) {
                   <input type="date" [placeholder]="filterInput.selectedFilterType.label"
+                    [id]="'filter-value-' + activeIndex"
                     class="w-[120px] placeholder-slate-200 bg-cosmosDarker text-white focus:border-0 rounded-2xl focus:ring-0 border-slate-300"
                     [(ngModel)]="filterInput.value">
                   } @else if([7, 3].includes(filterInput.selectedFilterType.id)) {
                   <div class="relative inline-flex">
                     <input [(ngModel)]="rangeInput" [type]="filterInput.selectedFilterType.id === 3 ? 'text' : 'number'"
+                      [id]="'filter-value-' + activeIndex"
                       class="rounded-2xl w-[120px] bg-cosmosDarker text-white appearance-none border py-2 px-3 pr-12 focus:outline-none focus:ring-2 focus:ring-cosmosDark focus:border-transparent">
                     <span class="relative">
                       <button type="button" (click)="addtoFilterInputRange(filterInput, rangeInput)"
@@ -91,6 +95,7 @@
 
             <div class="flex gap-2 mt-4 justify-end">
               <button type="button" (click)="addInputFilter()"
+              id="addFilterButton"
                 class="text-sm shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer">
                 New Filter +
               </button>
@@ -99,6 +104,7 @@
                 Clear filters
               </button>
               <button
+              id="applyFiltersButton"
                 class="text-sm shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer"
                 type="button" (click)="applyFilters()">
                 Save filters
@@ -114,7 +120,7 @@
           class="text-white leading-[0.4rem] h-6 relative inline-flex rounded-full p-2 text-xs bg-cosmosDarker dark:bg-cosmosDarkest rounded-full">{{filterBuilder.currentFilters.length}}</span>
       </span>
     </div>
-    <button type="button" (click)="exportTable()"
+    <button type="button" (click)="exportTable()" id="exportButton"
       class="ml-2 cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:bg-cosmosDarker transition transition-colors hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 hover: font-medium rounded-full text-sm px-[14px] py-2.5 text-center">
       <fa-icon [icon]="faFileExport"></fa-icon>
     </button>
@@ -231,7 +237,7 @@
                   </sat-popover>
                 </div>
               </a>
-              <button *ngIf="isPdf" (click)="downloadPdf(item['id'].value)"
+              <button *ngIf="isPdf" (click)="downloadPdf(item['id'].value)" id="pdfButton"
                 class="cursor-pointer bg-cosmosDark dark:bg-cosmosDarker ease-in-out hover:bg-cosmosDarker transition transition-colors hover:scale-110 trans text-white rounded-xl py-[5px] pl-[8px] pr-[5px] ">
                 <fa-icon [icon]="faFilePdf"></fa-icon>
               </button>

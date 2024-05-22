@@ -120,7 +120,7 @@ export class FilterBuilder {
 
             return {
                 greaterThanOrEqualTo: fomattedDate,
-                smallerThanOrEqualTo: endDate
+                lessThanOrEqualTo: endDate
             }
 
         }

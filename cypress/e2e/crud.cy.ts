@@ -1,14 +1,32 @@
 import applications from "../crud-objects/applications";
 import areas from "../crud-objects/areas";
 import buildings from "../crud-objects/buildings";
+import calGases from "../crud-objects/cal-gases";
 import chemicalCompounds from "../crud-objects/chemical-compounds";
+import detectorTypes from "../crud-objects/detector-types";
+import electrolytes from "../crud-objects/electrolytes";
+import filters from "../crud-objects/filters";
 import floors from "../crud-objects/floors";
 import gas from "../crud-objects/gas";
+import membranes from "../crud-objects/membranes";
+import oRings from "../crud-objects/o-rings";
 import principle from "../crud-objects/principle";
+import pyrolysers from "../crud-objects/pyrolysers";
 import ranges from "../crud-objects/ranges";
 import samplePoints from "../crud-objects/sample-points";
+import sensorBaseTypes from "../crud-objects/sensor-base-types";
+import sensorType from "../crud-objects/sensor-type";
 
 let crudTestCases = [
+    calGases,
+    sensorType,
+    sensorBaseTypes,
+    detectorTypes,
+    electrolytes,
+    membranes,
+    filters,
+    oRings,
+    pyrolysers,
     samplePoints,
     applications,
     buildings,
@@ -87,7 +105,7 @@ crudTestCases.forEach(testCase => {
                     cy.get(bodyElement.type + '[name="' + bodyElement.name + '"]').type(itemValue);
                 });
 
-                cy.get('button[type="submit"]').click();
+                cy.get('div.flex-row button[type="submit"]').click();
 
             });
         }
@@ -119,7 +137,7 @@ crudTestCases.forEach(testCase => {
                     cy.get(bodyElement.type + '[name="' + bodyElement.name + '"]').clear().type(bodyElement.value);
                 });
 
-                cy.get('button[type="submit"]').click();
+                cy.get('div.flex-row button[type="submit"]').click();
 
             });
         }

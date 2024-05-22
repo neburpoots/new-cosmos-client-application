@@ -5,7 +5,7 @@ export default {
     menuId: '#Products',
     createBody: [
         {
-            name: 'name',
+            name: 'cdartikel',
             type: 'input',
             value: '24092384'
         },

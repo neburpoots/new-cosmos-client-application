@@ -3,7 +3,9 @@
     <h2 class="text-xl mb-5 text-center font-semibold">Choose the type of export</h2>
 
     <div class="flex gap-2 justify-evenly">
-        <button class="bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
+        <button class="bg-cosmosDark p-2 border-2 rounded-xl" 
+        id="exportExcel"
+        [ngClass]="{
             'bg-cosmosDarker border-black dark:border-stone-100': exportType === 'excel',	
             'border-stone-100 dark:border-slate-800': exportType !== 'excel',	
         }" (click)="setExportType('excel')">
@@ -13,7 +15,9 @@
             <div class="text-white">Excel</div>
         </button>
 
-        <button class="bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
+        <button class="bg-cosmosDark p-2 border-2 rounded-xl"
+        id="exportCSV"
+        [ngClass]="{
             'bg-cosmosDarker border-black dark:border-stone-100': exportType === 'csv',
             'border-stone-100 dark:border-slate-800': exportType !== 'csv',	
         }" (click)="setExportType('csv')">
@@ -93,7 +97,9 @@
     <h2 class="text-xl mb-5 text-center font-semibold">Select records</h2>
     <div class="grid grid-cols-3 gap-2">
         @for(item of selectRows; track item.key) {
-        <button class="flex flex-col items-center justify-evenly bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
+        <button 
+        [id]="item.key"
+        class="flex flex-col items-center justify-evenly bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
                         'bg-cosmosDarker border-black dark:border-stone-100': item.selected,
                         'border-stone-100 dark:border-slate-800': !item.selected,	
                     }" (click)="setExportRecords(item.key)"
@@ -118,9 +124,11 @@
             step</button>
 
         <button *ngIf="step < 4" type="button" (click)="setStep(step + 1)"
+            id="nextStep"
             class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Next</button>
         <button *ngIf="step === 4"
             type="button" (click)="exportData()"
+            id="downloadExport"
             class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Download file</button>
 
     </div>

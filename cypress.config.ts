@@ -13,6 +13,7 @@ export default defineConfig({
       bundler: 'webpack',
     },
     specPattern: '**/*.cy.ts'
-  }
-  
+  },
+  downloadsFolder: 'cypress/downloads',
+  trashAssetsBeforeRuns: true
 })
