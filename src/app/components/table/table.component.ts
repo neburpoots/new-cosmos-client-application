@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from "@angular/core";
 import { trigger, state, style, animate, transition } from "@angular/animations";
-import { faCoffee, faDeleteLeft, faFileExport, faFilePdf, faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCoffee, faDeleteLeft, faFileCsv, faFileExcel, faFileExport, faFilePdf, faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { SatPopover } from "@ncstate/sat-popover";
 import dayjs from "dayjs";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -59,6 +59,7 @@ export class TableComponent implements OnInit {
   @Output() closeView = new EventEmitter<void>();
 
   @Output() export = new EventEmitter<void>();
+  @Output() exportExcel = new EventEmitter<void>();
 
   @Output() toggleInlineCreating = new EventEmitter<void>();
 
@@ -70,7 +71,8 @@ export class TableComponent implements OnInit {
   faFilePdf = faFilePdf;
   faFilter = faFilter;
   faDeleteLeft = faDeleteLeft
-  faFileExport = faFileExport
+  faFileExport = faFileCsv
+  faFileExcel = faFileExcel
 
   filterBuilder = new FilterBuilder(this.columns);
 
@@ -181,6 +183,10 @@ export class TableComponent implements OnInit {
     this.export.emit();
   }
 
+  async exportExcelTable(): Promise<void> {
+    this.exportExcel.emit();
+  }
+
 
   downloadPdf(id: number): void {
     this.pdf.emit(id);
@@ -281,6 +287,9 @@ export class TableComponent implements OnInit {
 
   async applyFilters(): Promise<void> {
     try {
+      
+      //reset the offset to 0
+      this.searchCriteria.offset = 0;
 
       let filters = await this.filterBuilder.getFilters();
 

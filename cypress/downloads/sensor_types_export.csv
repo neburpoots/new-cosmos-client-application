@@ -1,0 +1,11 @@
+sensorTypeCdartikel,sensorTypeArtikelOmschr,prefix,code,suffix,target,highEu,engineeringUnits,electrolyteName,membraneName,oRingName,pyrolyserName,filterName,maintenanceIntervalMonths,replacementIntervalMonths,principleName
+30179,"Sensor XDS-X7CF, 1ppm ClF3",XDS-,X7CF,,ClF3,1,ppm,,,,,,6,12,Electrochemical
+31249,"Sensor CHS-7F2N, 5000ppm C2H5OH",CHS-7F,2N40,,C2H5OH,5000,ppm,,,,,,6,36,Hot-wire Semiconductor
+31146,"Sensor CLS-7DNF, 100ppm NF3 w/ KF-6S-Y1",CLS-,7DNF,,NF3,100,ppm,,,,,,6,24,Electrochemical
+,,GS-,2801,PI,VOC,50,ppm,,,,,,6,18,Photoionization
+20221,"Sensor GS-7050KTSA, 0.5ppm B2H6",GS-,7050,KTSA,B2H6,0.5,ppm,,,,,,6,36,Electrochemical
+30020,"Sensor CDS-07GH, 1ppm GeH4",CDS-,07GH,,GeH4,1,ppm,,,,,,6,18,Electrochemical
+,,GS-,2801,PI,C6H6,1,ppm,,,,,,6,18,Photoionization
+,,GS-,2801,PI,VOC,75,ppm,,,,,,6,18,Photoionization
+,,CDS-,07PF,,PF3,10,ppm,,,,,,6,18,Electrochemical
+,,CDS-,07CF,,ClF3,1,ppm,,,,,,6,18,Electrochemical

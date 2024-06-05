@@ -17,9 +17,76 @@ query allAssemblyMultiversEntities($first: Int, $offset: Int, $filter: AssemblyM
       assemblageDatum
       assemblageOrder
       cdartikel
+      gereserveerd
       cdmagazijn
       commentaar
       omschr
+      guidItem
+      orderDatum
+      status
+      sysCreate
+      sysUpdate
+      waardeGeassembleerd
+      minvoorraad
+      maxvoorraad
+      inkopen
+      voorraad
+      bestcode
+    }
+  }
+}
+
+query allAssemblyLinesMultiversEntities($assemblage_order: String, $first: Int, $offset: Int, $search: String!, $orderBy: [AssemblyLineEntitiesOrderBy!]) {
+  allAssemblyLineEntities: allAssemblyLineEntities(
+    filter: {or: [{cdartikel: {includesInsensitive: $search}}], and: [{assemblageOrder: {equalTo: $assemblage_order}}]}
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      omschr
+      zoeknaam
+      waardeGebruikt
+      voorraad
+      minvoorraad
+      maxvoorraad
+      locatie
+      inkvolgnr
+      inkopen
+      gereserveerd
+      cdmagazijn
+      cdcrediteur
+      cdartikel
+      bestcode
+      assemblageOrder
+      assemblageDatum
+      advice
+      aantalSamenstelling
+      aantalNorm
+      aantalGebruikt
+    }
+  }
+}
+
+query assemblyMultiversById($id: String) {
+  assemblyMultiversById: allAssemblyMultiversEntities(
+    filter: {assemblageOrder: {equalTo: $id}}
+  ) {
+    totalCount
+    nodes {
+      id
+      aantal
+      omschr
+      aantalGeassembleerd
+      aantalgereservbij
+      advice
+      afdrukAssemblageBon
+      assemblageDatum
+      assemblageOrder
+      cdartikel
+      cdmagazijn
+      commentaar
       guidItem
       orderDatum
       status

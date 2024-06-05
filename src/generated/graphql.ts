@@ -6804,6 +6804,8 @@ export enum AssemblyMultiversEntitiesOrderBy {
   CdmagazijnDesc = 'CDMAGAZIJN_DESC',
   CommentaarAsc = 'COMMENTAAR_ASC',
   CommentaarDesc = 'COMMENTAAR_DESC',
+  GereserveerdAsc = 'GERESERVEERD_ASC',
+  GereserveerdDesc = 'GERESERVEERD_DESC',
   GuidItemAsc = 'GUID_ITEM_ASC',
   GuidItemDesc = 'GUID_ITEM_DESC',
   IdAsc = 'ID_ASC',
@@ -6844,6 +6846,7 @@ export type AssemblyMultiversEntity = {
   cdartikel?: Maybe<Scalars['String']['output']>;
   cdmagazijn?: Maybe<Scalars['String']['output']>;
   commentaar?: Maybe<Scalars['String']['output']>;
+  gereserveerd?: Maybe<Scalars['BigFloat']['output']>;
   guidItem?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   inkopen?: Maybe<Scalars['BigFloat']['output']>;
@@ -6885,6 +6888,8 @@ export type AssemblyMultiversEntityCondition = {
   cdmagazijn?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `commentaar` field. */
   commentaar?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `gereserveerd` field. */
+  gereserveerd?: InputMaybe<Scalars['BigFloat']['input']>;
   /** Checks for equality with the object’s `guidItem` field. */
   guidItem?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `id` field. */
@@ -6937,6 +6942,8 @@ export type AssemblyMultiversEntityFilter = {
   cdmagazijn?: InputMaybe<StringFilter>;
   /** Filter by the object’s `commentaar` field. */
   commentaar?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `gereserveerd` field. */
+  gereserveerd?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `guidItem` field. */
   guidItem?: InputMaybe<StringFilter>;
   /** Filter by the object’s `id` field. */
@@ -82444,7 +82451,7 @@ export type AllAssemblyMultiversEntitiesQueryVariables = Exact<{
 }>;
 
 
-export type AllAssemblyMultiversEntitiesQuery = { __typename?: 'Query', allAssemblyMultiversEntities?: { __typename?: 'AssemblyMultiversEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyMultiversEntity', id?: string | null, aantal?: any | null, aantalGeassembleerd?: any | null, aantalgereservbij?: any | null, advice?: number | null, afdrukAssemblageBon?: string | null, assemblageDatum?: any | null, assemblageOrder?: string | null, cdartikel?: string | null, cdmagazijn?: string | null, commentaar?: string | null, omschr?: string | null, guidItem?: string | null, orderDatum?: any | null, status?: string | null, sysCreate?: string | null, sysUpdate?: string | null, waardeGeassembleerd?: any | null }> } | null };
+export type AllAssemblyMultiversEntitiesQuery = { __typename?: 'Query', allAssemblyMultiversEntities?: { __typename?: 'AssemblyMultiversEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyMultiversEntity', id?: string | null, aantal?: any | null, aantalGeassembleerd?: any | null, aantalgereservbij?: any | null, advice?: number | null, afdrukAssemblageBon?: string | null, assemblageDatum?: any | null, assemblageOrder?: string | null, cdartikel?: string | null, gereserveerd?: any | null, cdmagazijn?: string | null, commentaar?: string | null, omschr?: string | null, guidItem?: string | null, orderDatum?: any | null, status?: string | null, sysCreate?: string | null, sysUpdate?: string | null, waardeGeassembleerd?: any | null, minvoorraad?: any | null, maxvoorraad?: any | null, inkopen?: any | null, voorraad?: any | null, bestcode?: string | null }> } | null };
 
 export type AllAssemblyLinesMultiversEntitiesQueryVariables = Exact<{
   assemblage_order?: InputMaybe<Scalars['String']['input']>;
@@ -83832,6 +83839,7 @@ export const AllAssemblyMultiversEntitiesDocument = gql`
       assemblageDatum
       assemblageOrder
       cdartikel
+      gereserveerd
       cdmagazijn
       commentaar
       omschr
@@ -83841,6 +83849,11 @@ export const AllAssemblyMultiversEntitiesDocument = gql`
       sysCreate
       sysUpdate
       waardeGeassembleerd
+      minvoorraad
+      maxvoorraad
+      inkopen
+      voorraad
+      bestcode
     }
   }
 }

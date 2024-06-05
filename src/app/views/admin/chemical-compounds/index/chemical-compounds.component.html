@@ -9,6 +9,8 @@
                 [data]="tableData" [inline_selector]="'chemical-compounds-form'" [isInlineCreating]="isInlineCreating"
                 (toggleInlineCreating)="toggleInlineCreating()"
                 (export)="openExportModal()"
+
+(exportExcel)="openExportExcelModal()"
                 >
                 <chemical-compounds-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)"
                     [objectSingle]="objectSingle" [objectPlural]="objectPlural" *ngIf="isInlineCreating"
@@ -44,6 +46,13 @@
                 <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
                     (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
                 </export>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+                <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+                </excel-export>
             </modal-component>
         </div>
     </div>

@@ -49,25 +49,9 @@ export class ExportComponent implements OnInit {
     ) {
     }
 
-    get allIncludedExportHeaders(): TableHead<any>[] {
-        const includedHeaders = this.tableHeaders.filter(header => this.exportColumns.includes(header.key));
-        return includedHeaders;
-    }
 
     ngOnInit(): void {
-        this.exportColumns = this.tableHeaders.map(h => h.key);
-    }
-
-    setStep(step: number) {
-        this.step = step;
-    }
-
-    setExportType(type: 'csv' | 'excel') {
-        this.exportType = type;
-    }
-
-    setWithHeaders(withHeaders: boolean) {
-        this.withHeaders = withHeaders;
+        this.exportColumns = this.tableHeaders.map(h => h.label);
     }
 
     setExportRecords(key: string) {
@@ -84,7 +68,7 @@ export class ExportComponent implements OnInit {
     async exportData() {
 
         let object : ExportOptions = {
-            type: this.exportType,
+            type: 'csv',
             records: this.selectRows.find(row => row.selected)?.key as 'all' | 'paginated' | 'filtered',
             exportHeaders: this.exportColumns,
             withHeaders: this.withHeaders

@@ -30,7 +30,10 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
     myForm: FormGroup;
     permissions: any[];
     selectedWritePermissions: any[] = [];
-    selectedReadPermissions: any[] = [];
+    selectedReadPermissions: any[] = [{
+        id: 2,
+        name: "groups"
+    }];
 
     constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
         , permissionService: AllPermissionsNoPaginationGQL,
@@ -109,6 +112,10 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
     }
 
     deleteReadPermission(permission_id: number) {
+        if(permission_id === 2) {
+            this.toastr.error('Groups is a standard permission and cannot be deleted', 'Error');
+            return;
+        }
         this.selectedReadPermissions = this.selectedReadPermissions.filter(g => g.id !== permission_id);
     }
 
@@ -122,6 +129,8 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
             return;
         }
         selectedPermissions.push(this.permissions.find(g => g.id === +permission_id))
+
+        console.log(selectedPermissions)
     }
 
     async setUpDependentData(permissionService: Query<any, any>) {

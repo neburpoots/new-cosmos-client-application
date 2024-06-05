@@ -5,7 +5,7 @@ import { TableField } from "../../../../models/utils/tableField";
 
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AllAreaEntitiesGQL, AllSamplePointEntitiesGQL, AreaEntitiesOrderBy, AreaEntity, DeleteAreaGQL, DeleteSamplePointGQL, QueryAllSamplePointEntitiesArgs, SamplePointEntitiesOrderBy, SamplePointEntity } from "../../../../../generated/graphql";
+import { AllSamplePointEntitiesGQL, DeleteSamplePointGQL, QueryAllSamplePointEntitiesArgs, SamplePointEntitiesOrderBy, SamplePointEntity } from "../../../../../generated/graphql";
 import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
 import { Observable } from "rxjs";

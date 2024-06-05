@@ -122,8 +122,12 @@
     </div>
     <button type="button" (click)="exportTable()" id="exportButton"
       class="ml-2 cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:bg-cosmosDarker transition transition-colors hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 hover: font-medium rounded-full text-sm px-[14px] py-2.5 text-center">
-      <fa-icon [icon]="faFileExport"></fa-icon>
+      <fa-icon [size]="'lg'" [icon]="faFileExport"></fa-icon>
     </button>
+    <button type="button" (click)="exportExcelTable()" id="exportButton"
+    class="cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:bg-cosmosDarker transition transition-colors hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 hover: font-medium rounded-full text-sm px-[16px] py-2.5 text-center">
+    <fa-icon [size]="'lg'"  [icon]="faFileExcel"></fa-icon>
+  </button>
   </div>
 
 

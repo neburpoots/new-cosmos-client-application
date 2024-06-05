@@ -126,6 +126,7 @@ import { AppInitializerService, initializeApp } from "./services/darkmode/app-in
 import { SensorTestResultsComponent } from "./views/admin/sensor-test-results/index/sensor-test-results.component";
 import { SensorTestResultsFormComponent } from "./views/admin/sensor-test-results/form/sensor-test-results-form.component";
 import { PurchaseStatusComponent } from "./views/admin/purchase-status/index/purchase-status.component";
+import { ExcelExportComponent } from "./components/excel-export/excel-export.component";
 registerLocaleData(localeEu);
 
 @NgModule({
@@ -226,7 +227,8 @@ registerLocaleData(localeEu);
     StockSuppliersDetailComponent,
     SensorTestResultsComponent,
     SensorTestResultsFormComponent,
-    PurchaseStatusComponent
+    PurchaseStatusComponent,
+    ExcelExportComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

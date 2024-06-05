@@ -2,47 +2,56 @@
 
     <div class="h-full w-full flex items-center">
         <div class="mt-[100px] w-full mb-12 px-4">
-            <table-component [baseOrderBy]="baseService.baseOrderBy" [object]="baseService.objectSingle"
-                (setTableWidths)="baseService.setTableWidths($event)" (create)="baseService.openCreateModal()" (edit)="baseService.openEditModal($event)"
-                (delete)="baseService.openDeleteModal($event)" [isEditable]="baseService.hasWritePermission" [isDeletable]="baseService.hasWritePermission" [isCreatable]="baseService.hasWritePermission" [title]="objectPlural"
-                [searchCriteria]="searchCriteria" (searchCriteriaChange)="baseService.fetch($event)" [columns]="tableHeaders"
-                [data]="baseService.tableData" [inline_selector]="'gases-form'" [isInlineCreating]="baseService.isInlineCreating"
-                (export)="baseService.openExportModal()"
-                (toggleInlineCreating)="baseService.toggleInlineCreating()">
-                <applications-form [baseOrderBy]="baseOrderBy" (refresh)="baseService.fetch($event)" [objectSingle]="objectSingle"
-                    [objectPlural]="objectPlural" *ngIf="baseService.isInlineCreating" [isInlineCreating]="baseService.isInlineCreating"
-                    (toggleInlineCreating)="baseService.toggleInlineCreating()" [cellWidths]="baseService.cellWidths"></applications-form>
+            <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
+                (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
+                (delete)="openDeleteModal($event)" [isEditable]="hasWritePermission" [isDeletable]="hasWritePermission" [isCreatable]="hasWritePermission" [title]="objectPlural"
+                [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
+                [data]="tableData" [inline_selector]="'applications-form'" [isInlineCreating]="isInlineCreating"
+                (export)="openExportModal()"
+                (exportExcel)="openExportExcelModal()"
+                (toggleInlineCreating)="toggleInlineCreating()">
+                <applications-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
+                    [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
+                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></applications-form>
             </table-component>
-            <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="baseService.totalResults"
-                (paginationChange)="baseService.fetch($event)"></app-pagination-component>
+            <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="totalResults"
+                (paginationChange)="fetch($event)"></app-pagination-component>
 
-            <modal-component [width]="baseService.ModalWidth.Large
-        " [isVisible]="baseService.isCreateModalVisible" (onClose)="baseService.closeCreateModal()">
+            <modal-component [width]="ModalWidth.Large
+        " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
                 <applications-form [baseOrderBy]="baseOrderBy" [objectPlural]="objectPlural"
-                    [objectSingle]="objectSingle" (refresh)="baseService.fetch()"
-                    (closeModal)="baseService.closeCreateModal()"></applications-form>
+                    [objectSingle]="objectSingle" (refresh)="fetch()"
+                    (closeModal)="closeCreateModal()"></applications-form>
             </modal-component>
 
-            <modal-component [width]="baseService.ModalWidth.Large
-            " [isVisible]="baseService.isEditModalVisible" (onClose)="baseService.closeEditModal()">
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
                 <applications-form #editModal [objectPlural]="objectPlural" [baseOrderBy]="baseOrderBy"
-                    [objectSingle]="objectSingle" (refresh)="baseService.fetch()"
-                    (closeModal)="baseService.closeEditModal()"></applications-form>
+                    [objectSingle]="objectSingle" (refresh)="fetch()"
+                    (closeModal)="closeEditModal()"></applications-form>
             </modal-component>
 
-            <modal-component [width]="baseService.ModalWidth.Medium
-        " [isVisible]="baseService.isDeleteModalVisible" (onClose)="baseService.closeDeleteModal()">
-                <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="baseService.objectSingleLowerCase"
-                    [selectedItem]="baseService.selectedItem" (deleteHandler)="baseService.delete($event)"
-                    (closeModal)="baseService.closeDeleteModal()"></delete-modal>
+            <modal-component [width]="ModalWidth.Medium
+        " [isVisible]="isDeleteModalVisible" (onClose)="closeDeleteModal()">
+                <delete-modal [objectSingle]="objectSingle" [objectSingleLowerCase]="objectSingleLowerCase"
+                    [selectedItem]="selectedItem" (deleteHandler)="delete($event)"
+                    (closeModal)="closeDeleteModal()"></delete-modal>
             </modal-component>
 
-            <modal-component [width]="baseService.ModalWidth.Large
-            " [isVisible]="baseService.isExportModalVisible" (onClose)="baseService.closeExportModal()">
-                <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="baseService.tableData"
-                    (export)="baseService.exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="baseService.closeExportModal()">
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+                <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
                 </export>
             </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+                <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+                </excel-export>
+            </modal-component>
+            
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@ import { applicationTableHeaders } from "../application";
   templateUrl: "./applications.component.html",
 })
 
-export class ApplicationsComponent {
+export class ApplicationsComponent extends BaseEntity<Application> {
 
 
   @ViewChild('editModal') childComponent!: ApplicationsFormComponent;
@@ -40,15 +40,15 @@ export class ApplicationsComponent {
     },
   }
 
-
-  setEditData() {
+  override setEditData() {
+    console.log(this.editData)
     this.childComponent.setEditData(this.editData);
   }
 
   get editData(): any {
     return {
-      id: this.baseService.selectedItem?.id,
-      name: this.baseService.selectedItem?.name,
+      id: this.selectedItem?.id,
+      name: this.selectedItem?.name,
     };
   }
 
@@ -61,29 +61,29 @@ export class ApplicationsComponent {
   baseOrderBy = ApplicationsOrderBy.IdDesc;
 
   constructor(
+    protected override toastr: ToastrService, 
+    protected override route: ActivatedRoute, 
+    protected override http: HttpClient,
     private applicationsService: AllApplicationsGQL,
     private deleteApplicationService: DeleteApplicationGQL,
-    protected baseService : BaseService<Application>,
-    protected route: ActivatedRoute,
+    protected override router: Router,
+    protected override fileService: FileService,
+    protected override authService : AuthService
   ) {
 
-    baseService.setUpBaseService(
-      route, 
-      this.applicationsService, 
-      this.deleteApplicationService, 
-      this.Key, 
-      this.tableHeaders, 
-      this.searchCriteria,
-      this.mapTableData,
-      this.objectPlural,
-      this.objectSingle,
-    );
+    super(authService, fileService, router, toastr, route, http, applicationsService, deleteApplicationService);
 
-    baseService.setUpEditBaseService(this.setEditData.bind(this))
+    this.checkQueryParams();
+
+    this.loadData(this.searchCriteria);
 
   }
 
-  tableHeaders = applicationTableHeaders;
+  tableHeaders : TableHead<ApplicationsOrderBy>[] = [
+    { type: 'string', key: 'name', label: "Name", asc: ApplicationsOrderBy.NameAsc, desc: ApplicationsOrderBy.NameDesc },
+    { type: 'datetime', key: 'created', label: "Created", asc: ApplicationsOrderBy.CreatedAsc, desc: ApplicationsOrderBy.CreatedDesc },
+    { type: 'string', key: 'userByOwnerId$initials', label: "By", asc: ApplicationsOrderBy.UserByOwnerIdInitialsAsc, desc: ApplicationsOrderBy.UserByOwnerIdInitialsDesc },
+  ];
 
 
   mapTableData(applications: Application[]): any[] {

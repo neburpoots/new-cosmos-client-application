@@ -6,10 +6,14 @@
                 (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
                 (delete)="openDeleteModal($event)" [isEditable]="hasWritePermission" [isDeletable]="hasWritePermission" [isCreatable]="hasWritePermission" [title]="objectPlural"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData" [inline_selector]="'areas-form'" [isInlineCreating]="isInlineCreating"
-                (export)="openExportModal()" (toggleInlineCreating)="toggleInlineCreating()">
+                [data]="tableData" [inline_selector]="'sample-points-form'" [isInlineCreating]="isInlineCreating"
+                (export)="openExportModal()"
+
+                (exportExcel)="openExportExcelModal()" 
+                (toggleInlineCreating)="toggleInlineCreating()">
                 <sample-point-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
                     [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
+                    
                     (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></sample-point-form>
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="totalResults"
@@ -41,6 +45,13 @@
                 <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
                     (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
                 </export>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+                <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+                </excel-export>
             </modal-component>
         </div>
     </div>

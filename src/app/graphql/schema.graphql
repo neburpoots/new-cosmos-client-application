@@ -49214,6 +49214,7 @@ type AssemblyMultiversEntity {
   aantalgereservbij: BigFloat
   voorraad: BigFloat
   inkopen: BigFloat
+  gereserveerd: BigFloat
   minvoorraad: BigFloat
   maxvoorraad: BigFloat
   bestcode: String
@@ -49270,6 +49271,8 @@ enum AssemblyMultiversEntitiesOrderBy {
   VOORRAAD_DESC
   INKOPEN_ASC
   INKOPEN_DESC
+  GERESERVEERD_ASC
+  GERESERVEERD_DESC
   MINVOORRAAD_ASC
   MINVOORRAAD_DESC
   MAXVOORRAAD_ASC
@@ -49341,6 +49344,9 @@ input AssemblyMultiversEntityCondition {
 
   """Checks for equality with the object’s `inkopen` field."""
   inkopen: BigFloat
+
+  """Checks for equality with the object’s `gereserveerd` field."""
+  gereserveerd: BigFloat
 
   """Checks for equality with the object’s `minvoorraad` field."""
   minvoorraad: BigFloat
@@ -49415,6 +49421,9 @@ input AssemblyMultiversEntityFilter {
 
   """Filter by the object’s `inkopen` field."""
   inkopen: BigFloatFilter
+
+  """Filter by the object’s `gereserveerd` field."""
+  gereserveerd: BigFloatFilter
 
   """Filter by the object’s `minvoorraad` field."""
   minvoorraad: BigFloatFilter

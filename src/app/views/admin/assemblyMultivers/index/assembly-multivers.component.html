@@ -8,6 +8,8 @@
                 [title]="objectPlural" (view)="openViewModal($event)" [searchCriteria]="searchCriteria"
                 (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"
                 (export)="openExportModal()"
+
+(exportExcel)="openExportExcelModal()"
                 [isPdf]="true"
                 (pdf)="downloadPdf($event)"
                 [inline_selector]="'filters-form'">
@@ -23,6 +25,13 @@
                 <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
                     (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
                 </export>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+                <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+                </excel-export>
             </modal-component>
         </div>
     </div>

@@ -65,6 +65,7 @@ export abstract class BaseEntity<T> {
   isDeleteModalVisible: boolean = false;
   isViewModalVisible: boolean = false;
   isExportModalVisible: boolean = false;
+  isExportExcelModalVisible: boolean = false;
 
   //table widths for inline editing and creating
   cellWidths: number[] = [];
@@ -132,6 +133,7 @@ export abstract class BaseEntity<T> {
       console.log(result?.data[this.Key]?.nodes)
       this.data = result?.data[this.Key]?.nodes || [];
       this.totalResults = result?.data[this.Key]?.totalCount || 0;
+      console.log(this.searchCriteria);
       this.tableData = this.mapTableData(result?.data[this.Key]?.nodes);
       console.log(this.tableData)
     });
@@ -244,10 +246,10 @@ export abstract class BaseEntity<T> {
 
     this.getService.fetch(query).subscribe((response) => {
       let objects = response.data[this.Key];
-
+      console.log(this.tableHeaders)
       exportOptions.data = objects.nodes.map((object: any) => {
         let data: any = {};
-        exportOptions.exportHeaders.forEach((header: any) => {
+        this.tableHeaders.map(t => t.key).forEach((header: any) => {
 
           //This code looks at the table header key
           //it splits this on the $. This is also used for filtering
@@ -305,6 +307,14 @@ export abstract class BaseEntity<T> {
 
   openExportModal(): void {
     this.isExportModalVisible = true;
+  }
+
+  openExportExcelModal(): void {
+    this.isExportExcelModalVisible = true;
+  }
+
+  closeExcelExportModal(): void {
+    this.isExportExcelModalVisible = false;
   }
 
   closeExportModal(): void {

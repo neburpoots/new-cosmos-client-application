@@ -4,33 +4,31 @@
         <div class="mt-[100px] w-full mb-12 px-4">
 
             <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
-                (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
-                (delete)="openDeleteModal($event)" [isCreatable]="hasWritePermission" [isEditable]="hasWritePermission" [isDeletable]="hasWritePermission" [title]="objectPlural"
+                (setTableWidths)="setTableWidths($event)" 
+                (delete)="openDeleteModal($event)"  [title]="objectPlural" [isCreatable]="false"
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData" [inline_selector]="'detector-form'" [isInlineCreating]="isInlineCreating"
+                [data]="tableData"  [isInlineCreating]="isInlineCreating"
                 (export)="openExportModal()"
+
+(exportExcel)="openExportExcelModal()"
                 (toggleInlineCreating)="toggleInlineCreating()">
-                <calgas-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
-                    [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
-                    (toggleInlineCreating)="toggleInlineCreating()" [cellWidths]="cellWidths"></calgas-form>
             </table-component>
             <app-pagination-component [searchCriteria]="searchCriteria"
             [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large
-    " [isVisible]="isCreateModalVisible" (onClose)="closeCreateModal()">
-
-
-                <detector-form [baseOrderBy]="baseOrderBy" [objectPlural]="objectPlural" [objectSingle]="objectSingle"
-                    (refresh)="fetch()" (closeModal)="closeCreateModal()"></detector-form>
-            </modal-component>
-
-            <modal-component [width]="ModalWidth.Large
             " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
             <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
                 (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
             </export>
+        </modal-component>
+
+        <modal-component [width]="ModalWidth.Large
+        " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+            <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+            </excel-export>
         </modal-component>
         </div>
     </div>

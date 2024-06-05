@@ -4,27 +4,23 @@
         <div class="mt-[100px] w-full mb-12 px-4">
             <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
                 (setTableWidths)="setTableWidths($event)" (create)="openCreateModal()" (edit)="openEditModal($event)"
-                (delete)="openDeleteModal($event)" [isEditable]="false" [isDeletable]="hasWritePermission" [isCreatable]="false" [title]="objectPlural"
-                [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
-                [data]="tableData"	 [inline_selector]="'areas-form'"
-                [isInlineCreating]="isInlineCreating"
-                (export)="openExportModal()"
-                [isPdf]="true"
-                (pdf)="downloadPdf($event)"
-                [detailPagePrefix]="'/stock-suppliers/'" [isViewable]="true"
-                (toggleInlineCreating)="toggleInlineCreating()"	
-                >
-               
+                [isEditable]="false" [isCreatable]="false" [title]="objectPlural" [searchCriteria]="searchCriteria"
+                (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"
+                [inline_selector]="'areas-form'" [isInlineCreating]="isInlineCreating" (export)="openExportModal()"
+
+(exportExcel)="openExportExcelModal()"
+                [isPdf]="true" (pdf)="downloadPdf($event)" [detailPagePrefix]="'/stock-suppliers/'" [isViewable]="true"
+                (toggleInlineCreating)="toggleInlineCreating()">
+
             </table-component>
-            <app-pagination-component [searchCriteria]="searchCriteria"
-            [totalResults]="totalResults"
+            <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="totalResults"
                 (paginationChange)="fetch($event)"></app-pagination-component>
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isEditModalVisible" (onClose)="closeEditModal()">
-                <areas-form #editModal [objectPlural]="objectPlural"
-                [baseOrderBy]="baseOrderBy" [objectSingle]="objectSingle"
-                    (refresh)="fetch()" (object)="editData" (closeModal)="closeEditModal()"></areas-form>
+                <areas-form #editModal [objectPlural]="objectPlural" [baseOrderBy]="baseOrderBy"
+                    [objectSingle]="objectSingle" (refresh)="fetch()" (object)="editData"
+                    (closeModal)="closeEditModal()"></areas-form>
             </modal-component>
 
             <modal-component [width]="ModalWidth.Medium
@@ -36,10 +32,17 @@
 
             <modal-component [width]="ModalWidth.Large
             " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
-            <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
-                (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
-            </export>
-        </modal-component>
+                <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
+                </export>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+                <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+                </excel-export>
+            </modal-component>
         </div>
     </div>
 </div>

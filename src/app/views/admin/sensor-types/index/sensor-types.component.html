@@ -8,6 +8,8 @@
                 [searchCriteria]="searchCriteria" (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders"
                 [data]="tableData" [inline_selector]="'sensor-types-form'" [isInlineCreating]="isInlineCreating"
                 [isInlineCreateable]="false" (export)="openExportModal()"
+
+(exportExcel)="openExportExcelModal()"
                 (toggleInlineCreating)="toggleInlineCreating()">
                 <sensor-types-form [baseOrderBy]="baseOrderBy" (refresh)="fetch($event)" [objectSingle]="objectSingle"
                     [objectPlural]="objectPlural" *ngIf="isInlineCreating" [isInlineCreating]="isInlineCreating"
@@ -42,6 +44,13 @@
                 <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
                     (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
                 </export>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+                <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+                </excel-export>
             </modal-component>
         </div>
     </div>

@@ -260,20 +260,20 @@ export const navigationObject: menuItem[] = [
     active: false,
     icon6: faServer,
     items: [
-      {
-        title: "Add Detector",
-        active: false,
-        // icon4: "ni-tv-2 text-primary",
-        icon6: faPlus,
-        route: new RoutePermission("add-detector", DetectorComponent, 18),
-      },
-      {
-        title: "Add Sensor",
-        active: false,
-        // icon4: "ni-tv-2 text-primary",
-        icon6: faPlus,
-        route: new RoutePermission("add-sensor", SensorTypeComponent, 4),
-      },
+      // {
+      //   title: "Add Detector",
+      //   active: false,
+      //   // icon4: "ni-tv-2 text-primary",
+      //   icon6: faPlus,
+      //   route: new RoutePermission("add-detector", DetectorComponent, 18),
+      // },
+      // {
+      //   title: "Add Sensor",
+      //   active: false,
+      //   // icon4: "ni-tv-2 text-primary",
+      //   icon6: faPlus,
+      //   route: new RoutePermission("add-sensor", SensorTypeComponent, 4),
+      // },
       {
         title: "Sensor Lists",
         active: false,

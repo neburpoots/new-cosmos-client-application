@@ -1,12 +1,4 @@
-import applications from "../crud-objects/applications";
-import areas from "../crud-objects/areas";
-import buildings from "../crud-objects/buildings";
-import chemicalCompounds from "../crud-objects/chemical-compounds";
-import floors from "../crud-objects/floors";
-import gas from "../crud-objects/gas";
-import principle from "../crud-objects/principle";
-import ranges from "../crud-objects/ranges";
-import samplePoints from "../crud-objects/sample-points";
+
 
 describe(`Test Groups, Users and Permissions`, () => {
 
@@ -49,7 +41,7 @@ describe(`Test Groups, Users and Permissions`, () => {
         cy.get(`input[name="name"]`).type('TestGroup');
 
         cy.get(`#write_permission`).select('users')
-        cy.get(`#read_permission`).select('groups')
+        // cy.get(`#read_permission`).select('groups')
         cy.get(`#read_permission`).select('users')
         cy.get(`#write_permission`).select('groups')
 

@@ -1,109 +1,13 @@
 <div class="flex flex-col gap-5">
-    @if(step === 1) {
-    <h2 class="text-xl mb-5 text-center font-semibold">Choose the type of export</h2>
 
-    <div class="flex gap-2 justify-evenly">
-        <button class="bg-cosmosDark p-2 border-2 rounded-xl" 
-        id="exportExcel"
-        [ngClass]="{
-            'bg-cosmosDarker border-black dark:border-stone-100': exportType === 'excel',	
-            'border-stone-100 dark:border-slate-800': exportType !== 'excel',	
-        }" (click)="setExportType('excel')">
-            <div class="p-5">
-                <fa-icon [size]="'7x'" class="text-white" [icon]="faFileExcel"></fa-icon>
-            </div>
-            <div class="text-white">Excel</div>
-        </button>
-
-        <button class="bg-cosmosDark p-2 border-2 rounded-xl"
-        id="exportCSV"
-        [ngClass]="{
-            'bg-cosmosDarker border-black dark:border-stone-100': exportType === 'csv',
-            'border-stone-100 dark:border-slate-800': exportType !== 'csv',	
-        }" (click)="setExportType('csv')">
-            <div class="p-5">
-                <fa-icon [size]="'7x'" class="text-white" [icon]="faFileCsv"></fa-icon>
-            </div>
-            <div class="text-white">CSV</div>
-
-        </button>
-
-    </div>
-
-    } @else if(step === 2) {
-
-    <h2 class="text-xl mb-5 text-center font-semibold">Select the columns you would like to export</h2>
-
-    <div class="flex justify-center">
-        <div class="grid sm:grid-cols-2 grid-cols-1 gap-2">
-            @for(item of tableHeaders; track item.key) {
-            <label class="h-full inline-flex items-center cursor-pointer" [ngClass]="{
-                    }">
-                <input [id]="item.key" type="checkbox" [checked]="exportColumns.includes(item.key)"
-                    (change)="toggleExportColumn(item.key)" class="sr-only peer">
-                <div
-                    class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-1 peer-focus:ring-blue-300 dark:peer-focus:ring-cosmosDarker rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-cosmosDark">
-                </div>
-                <span class="ml-3 dark:text-slate-200 text-slate-800">{{item.label}}</span>
-            </label>
-            }
-        </div>
-    </div>
-
-
-    } @else if(step === 3 ){
-    <h2 class="text-xl mb-5 text-center font-semibold">With or without headers?</h2>
-
-    <div class="flex gap-2 justify-evenly">
-        <button class="bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
-                'bg-cosmosDarker border-black dark:border-stone-100': withHeaders,
-                'border-stone-100 dark:border-slate-800': !withHeaders,	
-            }" (click)="setWithHeaders(true)">
-            <div class="p-2 text-left text-black">
-                <table class="border-collapse  bg-white">
-                    <th class="border border-gray-400" *ngFor="let header of allIncludedExportHeaders.slice(0,2)">
-                        {{header['label']}}
-                    </th>
-                    <tr *ngFor="let item of data.slice(0, 2)">
-                        <td class="border border-gray-400" *ngFor="let header of allIncludedExportHeaders.slice(0, 2)">
-                            {{item[header['key']]['value'] ? item[header['key']]['value'] : '-'}}
-                        </td>
-                    </tr>
-
-                </table>
-            </div>
-            <div class="text-white">With Headers</div>
-
-        </button>
-        <button class="bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
-                'bg-cosmosDarker border-black dark:border-stone-100': !withHeaders,	
-                'border-stone-100 dark:border-slate-800': withHeaders,	
-            }" (click)="setWithHeaders(false)">
-            <div class="flex justify-center p-2 text-left text-black">
-                <table class="border-collapse bg-white">
-                    <tr *ngFor="let item of data.slice(0, 3)">
-                        <td class="border border-gray-400" *ngFor="let header of allIncludedExportHeaders.slice(0, 2)">
-                            {{item[header['key']]['value'] ? item[header['key']]['value'] : '-'}}
-                        </td>
-                    </tr>
-
-                </table>
-            </div>
-            <div class="text-white">Without Headers</div>
-        </button>
-    </div>
-
-    } @else if(step === 4) {
     <h2 class="text-xl mb-5 text-center font-semibold">Select records</h2>
     <div class="grid grid-cols-3 gap-2">
         @for(item of selectRows; track item.key) {
-        <button 
-        [id]="item.key"
-        class="flex flex-col items-center justify-evenly bg-cosmosDark p-2 border-2 rounded-xl" [ngClass]="{
+        <button [id]="item.key" class="flex flex-col items-center justify-evenly bg-cosmosDark p-2 border-2 rounded-xl"
+            [ngClass]="{
                         'bg-cosmosDarker border-black dark:border-stone-100': item.selected,
                         'border-stone-100 dark:border-slate-800': !item.selected,	
-                    }" (click)="setExportRecords(item.key)"
-                    >
+                    }" (click)="setExportRecords(item.key)">
             <div class="flex justify-center text-white text-center">{{item.title}}</div>
 
             <div class="p-2 text-sm text-stone-100">
@@ -114,22 +18,15 @@
         }
     </div>
 
-    }
+
     <!-- This is is for modal form -->
     <div class="mt-5 flex flex-row justify-center items-center gap-2">
         <button type="button" (click)="close()"
             class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancel</button>
-        <button *ngIf="step > 1" type="button" (click)="setStep(step - 1)"
-            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Previous
-            step</button>
 
-        <button *ngIf="step < 4" type="button" (click)="setStep(step + 1)"
-            id="nextStep"
-            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Next</button>
-        <button *ngIf="step === 4"
-            type="button" (click)="exportData()"
-            id="downloadExport"
-            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Download file</button>
+        <button type="button" (click)="exportData()" id="downloadExport"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Download
+            file</button>
 
     </div>
 

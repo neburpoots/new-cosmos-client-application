@@ -1,0 +1,42 @@
+<div class="flex flex-col gap-5">
+
+    <h2 class="text-xl mb-5 text-center font-semibold">Select records</h2>
+    <div class="grid grid-cols-3 gap-2">
+        @for(item of selectRows; track item.key) {
+        <button [id]="item.key" class="flex flex-col items-center justify-evenly bg-cosmosDark p-2 border-2 rounded-xl"
+            [ngClass]="{
+                        'bg-cosmosDarker border-black dark:border-stone-100': item.selected,
+                        'border-stone-100 dark:border-slate-800': !item.selected,	
+                    }" (click)="setExportRecords(item.key)">
+            <div class="flex justify-center text-white text-center">{{item.title}}</div>
+
+            <div class="p-2 text-sm text-stone-100">
+                {{item.description}}
+            </div>
+
+        </button>
+        }
+    </div>
+
+    <!-- This is is for modal form -->
+    <div class="mt-5 flex flex-row justify-center items-center gap-2">
+        <button type="button" (click)="close()"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancel</button>
+
+
+
+        <button type="button" (click)="exportData()" id="downloadExport"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Download
+            file</button>
+
+    </div>
+
+    <!-- This is is for modal form
+    <div class="mt-5 flex flex-row justify-end items-center gap-2">
+        <button type="button" (click)="close()"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancel</button>
+        <button type="submit"
+            class="cursor-pointer text-white bg-cosmosDark hover:bg-cosmosDarker focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">{{objectSingle}}</button>
+    </div> -->
+
+</div>

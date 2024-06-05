@@ -1,0 +1,11 @@
+gasByGasId$name,lowEu,highEu,engineeringUnits,alarm1Level,alarm1DirectionUp,alarm2Level,alarm2DirectionUp,warning1Level,warning2Level,alarmUnits,precision
+C2H5OH,0,5000,ppm,33,true,66,true,17,,false,0
+PF3,0,10,ppm,,false,,false,,,false,
+C3H8,0,100,%LEL,33.33,true,66.66,true,16.67,,false,0
+SbF5,0,9,ppm,33.33,true,66.67,true,16.67,0,false,2
+ClF3,0,1,ppm,33.33,true,66.66,true,16.67,,false,2
+C2H5OH,0,100,%LEL,33.33,true,66.67,true,16.67,,false,0
+H2S,0,15,ppm,33.33,true,66.67,true,16.67,,false,1
+Cl2,0,20,ppm,,false,,false,,,false,
+DMA,0,50,ppm,,false,,false,,,false,1
+OMCTS,0,100,ppm,33.33,true,66.66,true,16.67,,false,0

@@ -88,6 +88,7 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
     { type: 'string', key: 'commentaar', label: "S/N", asc: AssemblyMultiversEntitiesOrderBy.CommentaarAsc, desc: AssemblyMultiversEntitiesOrderBy.CommentaarDesc },
     { type: 'number', key: 'aantal', label: "Qty", asc: AssemblyMultiversEntitiesOrderBy.AantalAsc, desc: AssemblyMultiversEntitiesOrderBy.AantalDesc },
     { type: 'number', key: 'voorraad', label: "Free", asc: AssemblyMultiversEntitiesOrderBy.VoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.VoorraadDesc },
+    { type: 'number', key: 'gereserveerd', label: "Res.", asc: AssemblyMultiversEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MinvoorraadDesc },
     { type: 'number', key: 'minvoorraad', label: "Min", asc: AssemblyMultiversEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MinvoorraadDesc },
     { type: 'number', key: 'maxvoorraad', label: "Max", asc: AssemblyMultiversEntitiesOrderBy.MaxvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MaxvoorraadDesc },
     { type: 'string', key: 'status', label: "Status", asc: AssemblyMultiversEntitiesOrderBy.StatusAsc, desc: AssemblyMultiversEntitiesOrderBy.StatusDesc }
@@ -95,6 +96,7 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
 
 
   mapTableData(assemblyMVEntities: AssemblyMultiversEntity[]): any[] {
+    console.log(assemblyMVEntities);
     return assemblyMVEntities.map((assemblyMV: AssemblyMultiversEntity) => {
       return {
         id: { url: null, value: assemblyMV.id } as TableField,
@@ -106,6 +108,7 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
         aantal: { url: null, value: assemblyMV?.aantal } as TableField,
         voorraad: { url: null, value: assemblyMV?.voorraad } as TableField,
         minvoorraad: { url: null, value: assemblyMV?.minvoorraad } as TableField,
+        gereserveerd: { url: null, value: assemblyMV?.gereserveerd } as TableField,
         maxvoorraad: { url: null, value: assemblyMV?.maxvoorraad } as TableField,
         status: { url: null, value: assemblyMV?.status } as TableField,
       };
