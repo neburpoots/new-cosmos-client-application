@@ -55,6 +55,14 @@
                  [tableHeaders]="tableHeaders"
                      (closeModal)="closeExportModal()"></export>
             </modal-component>
+
+            
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+                <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+                </excel-export>
+            </modal-component>
         </div>
     </div>
 </div>

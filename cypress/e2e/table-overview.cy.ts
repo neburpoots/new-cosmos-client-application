@@ -272,17 +272,9 @@ testCases.forEach(testCase => {
                     .find('tr') // Find tr elements within tbody
                     .should('have.length.gt', 0); // Assert that the length of tr elements is greater than 0
 
-                cy.get('#exportButton').click();
+                cy.get('#exportCSVButton').click();
 
                 cy.wait(200);
-
-                cy.get('#exportCSV').click();
-
-                cy.get('#nextStep').click();
-
-                cy.get('#nextStep').click();
-
-                cy.get('#nextStep').click();
 
                 cy.get('#paginated').click();
 
@@ -301,17 +293,10 @@ testCases.forEach(testCase => {
                     .find('tr') // Find tr elements within tbody
                     .should('have.length.gt', 0); // Assert that the length of tr elements is greater than 0
 
-                cy.get('#exportButton').click();
 
                 cy.wait(200);
 
-                cy.get('#exportExcel').click();
-
-                cy.get('#nextStep').click();
-
-                cy.get('#nextStep').click();
-
-                cy.get('#nextStep').click();
+                cy.get('#exportExcelButton').click();
 
                 cy.get('#paginated').click();
 
