@@ -43,4 +43,4 @@ Thumbs.db
 
 # #ignore cypress downloads
 
-# /cypress/downloads/
+/cypress/downloads/
