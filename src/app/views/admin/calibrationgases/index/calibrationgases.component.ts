@@ -32,9 +32,7 @@ export class CalibrationGasesComponent extends BaseEntity<CalgasEntity> {
     first: 10,
     offset: 0,
     filter: {
-      and: [
-
-      ]
+      and: []
     },
   }
 

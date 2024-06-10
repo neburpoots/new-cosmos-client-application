@@ -6,15 +6,12 @@ import { TableField } from "../../../../models/utils/tableField";
 import { ToastrService } from "ngx-toastr";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AllApplicationsGQL, AllGasesGQL, Application, ApplicationsOrderBy, DeleteApplicationGQL, DeleteGasGQL, Gas, GasesOrderBy, Principle, QueryAllApplicationsArgs, QueryAllFilterEntitiesArgs } from "../../../../../generated/graphql";
-import { SearchFilters } from "../../../../models/utils/searchFilters";
 import { BaseEntity } from "../../base/base-entity.component";
-import { Observable } from "rxjs";
 import { TableHead } from "../../../../models/utils/tableHead";
 import { ApplicationsFormComponent } from "../form/applications-form.component";
 import { FileService } from "../../../../services/file/file.service";
 import { AuthService } from "../../../../services/authentication/auth.service";
-import { BaseService } from "../../../../services/base/base.service";
-import { applicationTableHeaders } from "../application";
+
 
 @Component({
   selector: "app-applications",
@@ -42,6 +39,13 @@ export class ApplicationsComponent extends BaseEntity<Application> {
 
   override setEditData() {
     console.log(this.editData)
+
+    const queryParams = { ...this.route.snapshot.queryParams };
+
+    queryParams['edit'] = this.editData.id;
+
+    this.router.navigate([], { queryParams: queryParams });
+
     this.childComponent.setEditData(this.editData);
   }
 

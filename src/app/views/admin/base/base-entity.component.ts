@@ -103,15 +103,16 @@ export abstract class BaseEntity<T> {
       // const page = params['page'];
       const search = params['search'];
 
-      // if (page) {
-      //   this.searchCriteria.offset = (page - 1) * this.searchCriteria.limit;
-      //   this.searchCriteria.page = page;
-      // }
+      const offset = params['offset'];
+      if(offset) this.searchCriteria.offset = +offset;
+
+      const first = params['first'];
+
+      console.log(params)
+      if(first) this.searchCriteria.first = +first;
 
       console.log(search)
-      if (search) {
-        this.searchCriteria.search = search;
-      }
+
     });
   }
 
@@ -120,9 +121,11 @@ export abstract class BaseEntity<T> {
     // Get the current query parameters
     const queryParams = { ...this.route.snapshot.queryParams };
 
+
+    console.log(this.searchCriteria)
     // Update the query parameters with new values
-    queryParams['page'] = this.searchCriteria.page;
-    queryParams['search'] = this.searchCriteria.search;
+    queryParams['offset'] = this.searchCriteria.offset;
+    queryParams['first'] = this.searchCriteria.first;
 
     // Navigate to the same route with updated query parameters
     this.router.navigate([], { queryParams: queryParams });

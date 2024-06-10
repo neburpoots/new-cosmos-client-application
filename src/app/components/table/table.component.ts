@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnChanges, SimpleChanges } from "@angular/core";
 import { trigger, state, style, animate, transition } from "@angular/animations";
 import { faCoffee, faDeleteLeft, faFileCsv, faFileExcel, faFileExport, faFilePdf, faFilter, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { SatPopover } from "@ncstate/sat-popover";
@@ -40,13 +40,18 @@ export class TableComponent implements OnInit {
   @Input() isPdf: boolean = false;
   @Input() detailPagePrefix: string = "";
   @Input() isInlineCreating: boolean = false;
-  @Input() color: string = "light";
+  //main search filters
   @Input() searchCriteria: any = {
     orderBy: [],
     first: 10,
     offset: 0,
     filter: { and: [] },
   };
+
+  //these are filters that should come from the parent component and are loaded in the filter popup
+  //Stock levels is an example of this.
+  @Input() staticSearchFilters : filterInput[] = [];
+
   @Input() popoverComponent: any; // 'any' is used for flexibility; you can use a more specific type if needed
   @Output() pdf = new EventEmitter<number>();
   // // @Input() criteriaChangeFunction: Function = () => { console.log("test")};
@@ -85,7 +90,11 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterBuilder.columns = this.columns;
+    this.filterBuilder.currentFilters = this.searchCriteria.filter.and;
+    this.filterBuilder.filterInputs = this.staticSearchFilters;
+    this.filterBuilder.currentFilterInputs = this.staticSearchFilters;
   }
+
 
 
   formattedDate(date: string | undefined): string {
@@ -250,6 +259,8 @@ export class TableComponent implements OnInit {
 
     this.filterBuilder.filterInputs[filterIndex].column = columnName;
     this.filterBuilder.filterInputs[filterIndex].filterTypes = options;
+
+    this.filterBuilder.filterInputs[filterIndex].selectedFilterType = { id: null};
   }
 
   async selectTypeFilter(selectTypeFilter: number, filterInput: filterInput): Promise<void> {

@@ -13,6 +13,7 @@ import { TableHead } from "../../../../models/utils/tableHead";
 import { FileService } from "../../../../services/file/file.service";
 import { AuthService } from "../../../../services/authentication/auth.service";
 import { StockSuppliersFormComponent } from "../form/stock-suppliers-form.component";
+import { filterInput } from "../../../../models/filters/filterBuilder";
 
 @Component({
   selector: "app-stock-suppliers",
@@ -35,10 +36,51 @@ export class StockSuppliersComponent extends BaseEntity<StockSuppliersIndex> {
     offset: 0,
     filter: {
       and: [
-
+        {
+          totalAdvice: {
+            greaterThan: 0
+          }
+        }
       ]
     },
   }
+
+
+  staticFilters: filterInput[] = [
+    {
+      column: "totalAdvice",
+      filterTypes: [
+        {
+          label: "Exact match",
+          id: 4,
+          keyWord: "equalTo"
+        },
+        {
+          label: "Greater than",
+          id: 5,
+          keyWord: "greaterThan"
+        },
+        {
+          label: "Smaller than",
+          id: 6,
+          keyWord: "lessThan"
+        },
+        {
+          label: "Range of items",
+          id: 7,
+          keyWord: "inExpansive"
+        }
+      ],
+      id: 1,
+      selectedFilterType: {
+        label: "Greater than",
+        id: 5,
+        keyWord: "greaterThan"
+      },
+      value: "0",
+      range: []
+    }
+  ]
 
 
   override async loadDetailData(id: number): Promise<any> {

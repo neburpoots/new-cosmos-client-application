@@ -7,9 +7,9 @@
                 [isEditable]="false" [isCreatable]="false" [title]="objectPlural" [searchCriteria]="searchCriteria"
                 (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"
                 [inline_selector]="'areas-form'" [isInlineCreating]="isInlineCreating" (export)="openExportModal()"
-
-(exportExcel)="openExportExcelModal()"
-                [isPdf]="true" (pdf)="downloadPdf($event)" [detailPagePrefix]="'/stock-suppliers/'" [isViewable]="true"
+                [staticSearchFilters]="staticFilters"
+                (exportExcel)="openExportExcelModal()" [isPdf]="true" (pdf)="downloadPdf($event)"
+                [detailPagePrefix]="'/stock-suppliers/'" [isViewable]="true"
                 (toggleInlineCreating)="toggleInlineCreating()">
 
             </table-component>

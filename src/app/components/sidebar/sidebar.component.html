@@ -85,7 +85,7 @@
         <div *ngIf="navigationItem.active"  class=" w-48 bg-cosmosDarker dark:bg-cosmosDarkest border-slate-200 ">
           <ul class="list-none">
             @for (item of navigationItem.items; let itemindex = $index; track itemindex) {
-            <li ><a
+            <li *ngIf="(authService.checkPermission(item.route.permission_id) | async)"><a
               [id]="item.title"
                 [routerLink]="[item.route.path]" routerLinkActive #route="routerLinkActive" [ngClass]="
         isActive(item.route.path)

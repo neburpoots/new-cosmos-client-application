@@ -1,0 +1,114 @@
+#-------------------------------------------------------------------------------
+query allArtikelIndex2($first: Int, $offset: Int, $filter: ArtikelIndex2Filter!, $orderBy: [ArtikelIndex2SOrderBy!]) {
+  allArtikelIndex2S: allArtikelIndex2S(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      cdartikel
+      zoeknaam
+      voorraadVrij
+      voorraadGereserveerd2
+      virtualStock
+      voorraad
+      verrekenprijs
+      status
+      samenstelling
+      samVersie
+      prijsexcl
+      omschr
+      maxvoorraad
+      minvoorraad
+      margin
+      locatie
+      inkopen
+      gereserveerd
+      cdcrediteur
+      cdmagazijn
+      cdartsamenstel
+      assemblbij
+      assemblaf
+    }
+  }
+}
+
+
+#-------------------------------------------------------------------------------
+query stockLevelDetail($first: Int, $offset: Int, $filter: ArtikelIndex2Filter!, $orderBy: [ArtikelIndex2SOrderBy!]) {
+  stockLevelDetail: allArtikelIndex2S(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      cdartikel
+      zoeknaam
+      uitloop
+      artikelComponenten {
+        nodes {
+          cdartikel
+          zoeknaam
+          vrij
+          voorraad
+          virtualStock
+          samVersie
+          omschr
+          minvoorraad
+          maxvoorraad
+          locatie
+          inkopen
+          gereserveerd
+          cdcrediteur
+          cdartsamenstel
+          assemblaf
+          bestcode
+          aantal
+        }
+      }
+      voorraadVrij
+      artikelSamenstellingen {
+        nodes {
+          cdartikel
+          vrij
+          voorraad
+          virtualStock
+          samVersie
+          prijsexcl
+          omschr
+          minvoorraad
+          maxvoorraad
+          margin
+          locatie
+          gereserveerd
+          cdartcomponent
+          assemblaf
+        }
+      }
+      voorraadGereserveerd2
+      virtualStock
+      voorraad
+      verrekenprijs
+      status
+      samenstelling
+      samVersie
+      prijsexcl
+      omschr
+      maxvoorraad
+      minvoorraad
+      margin
+      locatie
+      inkopen
+      gereserveerd
+      cdcrediteur
+      cdmagazijn
+      cdartsamenstel
+      assemblbij
+      assemblaf
+    }
+  }
+}

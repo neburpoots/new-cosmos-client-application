@@ -39,13 +39,15 @@ import { AssemblyMultiversComponent } from "./views/admin/assemblyMultivers/inde
 import { UsersComponent } from "./views/admin/users/index/users.component";
 import { GroupsComponent } from "./views/admin/groups/index/groups.component";
 import { AuthGuard } from "./services/authentication/auth.guard";
-import { faAddressCard, faBolt, faBoxOpen, faBoxesStacked, faBuilding, faCartArrowDown, faCashRegister, faChartSimple, faClipboard, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPaste, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck, faWarehouse } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faArrowsUpDown, faBolt, faBoxOpen, faBoxesStacked, faBuilding, faCartArrowDown, faCashRegister, faChartSimple, faClipboard, faCloud, faCodeCompare, faFilter, faFlaskVial, faGauge, faHouseSignal, faListUl, faMountainSun, faPaste, faPeopleGroup, faPlus, faRing, faRuler, faSatelliteDish, faServer, faShop, faShoppingBasket, faToiletPortable, faTowerBroadcast, faTowerCell, faUserCog, faUsers, faVial, faVialCircleCheck, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import { NavBarIcon } from "./models/utils/navbarItem";
 import { ProfileComponent } from "./views/admin/users/profile/profile.component";
 import { StockSuppliersComponent } from "./views/admin/stock-suppliers/index/stock-suppliers.component";
 import { StockSuppliersDetailComponent } from "./views/admin/stock-suppliers/detail/stock-suppliers-detail.component";
 import { SensorTestResultsComponent } from "./views/admin/sensor-test-results/index/sensor-test-results.component";
 import { PurchaseStatusComponent } from "./views/admin/purchase-status/index/purchase-status.component";
+import { StockLevelsComponent } from "./views/admin/stock-levels/index/stock-levels.component";
+import { StockLevelsDetailComponent } from "./views/admin/stock-levels/detail/stock-levels-detail.component";
 
 //id is the permission id in db
 export class RoutePermission {
@@ -92,7 +94,14 @@ export const navigationObject: menuItem[] = [
         // icon4: "ni-tv-2 text-primary",
         icon6: faCartArrowDown,
         route: new RoutePermission("purchase-status", PurchaseStatusComponent, 30),
-      }
+      },
+      {
+        title: "Stock levels",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faArrowsUpDown,
+        route: new RoutePermission("stock-levels", StockLevelsComponent, 31),
+      },
 
     ]
   },
@@ -150,7 +159,14 @@ export const navigationObject: menuItem[] = [
         // icon4: "ni-tv-2 text-primary",
         icon6: faSatelliteDish,
         route: new RoutePermission("sensor-base-types", SensorBaseTypeComponent, 19),
-      }
+      },
+      {
+        title: "Stock levels",
+        active: false,
+        // icon4: "ni-tv-2 text-primary",
+        icon6: faArrowsUpDown,
+        route: new RoutePermission("stock-levels", StockLevelsComponent, 31),
+      },
     ]
   },
   {
@@ -384,6 +400,7 @@ const routes: Routes = [
       new RoutePermission("profile", ProfileComponent, 7),
       new RoutePermission("assemblies-multivers/:id", AssemblyMultiversDetailComponent, 7),
       new RoutePermission("stock-suppliers/:id", StockSuppliersDetailComponent, 28),
+      new RoutePermission("stock-levels/:id", StockLevelsDetailComponent, 31),
       // new RoutePermission("", DashboardComponent, 5),
       new RoutePermission("", DashboardComponent, 5),
     ],

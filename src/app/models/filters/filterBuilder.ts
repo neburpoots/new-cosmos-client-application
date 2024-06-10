@@ -72,7 +72,9 @@ export class FilterBuilder {
             column: null,
             filterTypes: null,
             id: this.filterInputs.length + 1,
-            selectedFilterType: null,
+            selectedFilterType: {
+                id: 99
+            },
             value: '',
             range: []
         });
@@ -80,6 +82,7 @@ export class FilterBuilder {
 
     //deletes a single filter
     async deleteFilterInput(id: number): Promise<void> {
+        console.log(this.filterInputs)
         this.filterInputs = this.filterInputs.filter((filterInput) => filterInput.id !== id);
     }
 

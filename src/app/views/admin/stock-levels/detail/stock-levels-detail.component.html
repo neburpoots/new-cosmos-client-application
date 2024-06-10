@@ -1,0 +1,326 @@
+<div class="min-h-[100vh] flex px-4 md:px-10 justify-center">
+
+  <div class="h-full w-full flex items-center">
+    <div class="w-full mb-12 pt-12 px-4">
+      <div *ngIf="item" class="pt-12 flex flex-col gap-6">
+        <div class="flex justify-between bg-white dark:text-slate-100 dark:bg-slate-900 rounded-2xl px-5 py-7 gap-2">
+          <div class="">
+            <h1 class="text-2xl text-roboto font-bold dark:text-slate-200 text-gray-800">Stock Levels
+            </h1>
+            <p class="dark:text-slate-300">View the details of the stock here.</p>
+          </div>
+
+
+
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-2xl w-fit px-5 py-7 flex flex-col gap-2">
+          <table id="myTable" class="items-center w-full bg-transparent border-collapse">
+            <tbody>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Code
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{item.cdartikel}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Description
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{item.omschr}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Supplier Code
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{item.cdcrediteur}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Supplier Name
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{item.zoeknaam}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Location
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{item.locatie}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Stock
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{roundNumber(item.voorraad)}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Free
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{roundNumber(item.gereserveerd)}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Min
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{roundNumber(item.minvoorraad)}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Max
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{roundNumber(item.maxvoorraad)}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Max
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{roundNumber(item.maxvoorraad)}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Virtual Free
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{roundNumber(item.virtualStock)}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Price
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{item.prijsexcl}}
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Margin
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+              {{roundNumber(item.margin)}}%
+                </td>
+              </tr>
+              <tr class="">
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                Status
+                </td>
+                <td
+                  class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                {{item.uitloop}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bg-white dark:text-slate-100 dark:bg-slate-900 rounded-2xl px-5 py-7 flex flex-col gap-2">
+          <div class="flex justify-between gap-10">
+            <h2 class="text-xl text-roboto font-bold dark:text-slate-200 text-gray-800">
+              Components</h2>
+          </div>
+
+          <div class=" overflow-auto overflow-y-hidden scrollbar-thumb-rounded-full dark:scrollbar-track-rounded-full dark:scrollbar dark:scrollbar-thumb-slate-600 dark:scrollbar-thumb-slate-400 dark:scrollbar-track-slate-700">
+            <table id="myTable" class="items-center w-full bg-transparent border-collapse">
+              <thead>
+                <tr class="bg-slate-100 font-roboto dark:bg-slate-950 dark:text-slate-200 rounded-lg text-slate-800">
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Qty</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Code</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Description</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Supplier</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Order Code</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Location</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">Min</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">Max</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">Stock</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">PO</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Res. S.</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Res. A.</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">VFree</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Free Stock</th>
+                </tr>
+              </thead>
+
+
+
+              <tbody>
+
+                @for (line of item.artikelComponenten.nodes; track line.cdartikel) {
+                <tr class="">
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.aantal }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.cdartikel }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.omschr }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.zoeknaam }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.bestcode }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.locatie }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{  roundNumber(line?.minvoorraad)}}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.maxvoorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.voorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.inkopen) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.gereserveerd) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.assemblaf) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.vrij) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.virtualStock) }}</td>
+                </tr>
+                }
+
+
+
+              </tbody>
+
+
+            </table>
+
+          </div>
+
+        </div>
+
+        <div class="bg-white dark:text-slate-100 dark:bg-slate-900 rounded-2xl px-5 py-7 flex flex-col gap-2">
+          <div class="flex justify-between gap-10">
+            <h2 class="text-xl text-roboto font-bold dark:text-slate-200 text-gray-800">
+              Component of</h2>
+          </div>
+
+          <div class=" overflow-auto overflow-y-hidden scrollbar-thumb-rounded-full dark:scrollbar-track-rounded-full dark:scrollbar dark:scrollbar-thumb-slate-600 dark:scrollbar-thumb-slate-400 dark:scrollbar-track-slate-700">
+            <table id="myTable" class="items-center w-full bg-transparent border-collapse">
+              <thead>
+                <tr class="bg-slate-100 font-roboto dark:bg-slate-950 dark:text-slate-200 rounded-lg text-slate-800">
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Code</th>
+                  <th class="px-2 align middle p-1 whitespace-nowrap font-semibold text-left">Description</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Location</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">Min</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">Max</th>
+                  <th class="px-2 align-middle p-1  whitespace-nowrap font-semibold text-left">Stock</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Res. S.</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Res. A.</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">VFree</th>
+                  <th class="px-2 align-middle p-1 whitespace-nowrap font-semibold text-left">Free Stock</th>
+                </tr>
+              </thead>
+
+
+
+              <tbody>
+
+                @for (line of item.artikelSamenstellingen.nodes; track line.cdartikel) {
+                <tr class="">
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.cdartikel }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.omschr }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ line?.locatie }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{  roundNumber(line?.minvoorraad)}}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.maxvoorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.voorraad) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.gereserveerd) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.assemblaf) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.vrij) }}</td>
+                  <td
+                    class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
+                    {{ roundNumber(line?.virtualStock) }}</td>
+                </tr>
+                }
+
+
+
+              </tbody>
+
+
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

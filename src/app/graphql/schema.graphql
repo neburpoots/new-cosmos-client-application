@@ -7581,6 +7581,40 @@ type Query implements Node {
     filter: StockItemFilter
   ): StockItemsConnection
 
+  """Reads and enables pagination through a set of `StockLevelEntity`."""
+  allStockLevelEntities(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `StockLevelEntity`."""
+    orderBy: [StockLevelEntitiesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: StockLevelEntityCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: StockLevelEntityFilter
+  ): StockLevelEntitiesConnection
+
   """Reads and enables pagination through a set of `StockSupplier`."""
   allStockSuppliers(
     """Only read the first `n` values of the set."""
@@ -46305,141 +46339,113 @@ type ArtikelIndex2 {
   cdcrediteur: String
   zoeknaam: String
   gereserveerd: BigFloat
-}
+  uitloop: String
 
-"""A `ArtikelIndex2` edge in the connection."""
-type ArtikelIndex2SEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
+  """Reads and enables pagination through a set of `ArtikelComponenten`."""
+  artikelComponenten(
+    """Only read the first `n` values of the set."""
+    first: Int
 
-  """The `ArtikelIndex2` at the end of the edge."""
-  node: ArtikelIndex2!
-}
+    """Only read the last `n` values of the set."""
+    last: Int
 
-"""Methods to use when ordering `ArtikelIndex2`."""
-enum ArtikelIndex2SOrderBy {
-  NATURAL
-  CDARTIKEL_ASC
-  CDARTIKEL_DESC
-  OMSCHR_ASC
-  OMSCHR_DESC
-  PRIJSEXCL_ASC
-  PRIJSEXCL_DESC
-  SAM_VERSIE_ASC
-  SAM_VERSIE_DESC
-  VERREKENPRIJS_ASC
-  VERREKENPRIJS_DESC
-  MARGIN_ASC
-  MARGIN_DESC
-  SAMENSTELLING_ASC
-  SAMENSTELLING_DESC
-  VIRTUAL_STOCK_ASC
-  VIRTUAL_STOCK_DESC
-  CDARTSAMENSTEL_ASC
-  CDARTSAMENSTEL_DESC
-  LOCATIE_ASC
-  LOCATIE_DESC
-  INKOPEN_ASC
-  INKOPEN_DESC
-  ASSEMBLBIJ_ASC
-  ASSEMBLBIJ_DESC
-  ASSEMBLAF_ASC
-  ASSEMBLAF_DESC
-  CDMAGAZIJN_ASC
-  CDMAGAZIJN_DESC
-  MINVOORRAAD_ASC
-  MINVOORRAAD_DESC
-  MAXVOORRAAD_ASC
-  MAXVOORRAAD_DESC
-  VOORRAAD_ASC
-  VOORRAAD_DESC
-  STATUS_ASC
-  STATUS_DESC
-  VOORRAAD_GERESERVEERD2_ASC
-  VOORRAAD_GERESERVEERD2_DESC
-  VOORRAAD_VRIJ_ASC
-  VOORRAAD_VRIJ_DESC
-  CDCREDITEUR_ASC
-  CDCREDITEUR_DESC
-  ZOEKNAAM_ASC
-  ZOEKNAAM_DESC
-  GERESERVEERD_ASC
-  GERESERVEERD_DESC
-}
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
 
-"""
-A condition to be used against `ArtikelIndex2` object types. All fields are
-tested for equality and combined with a logical ‘and.’
-"""
-input ArtikelIndex2Condition {
-  """Checks for equality with the object’s `cdartikel` field."""
-  cdartikel: String
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
 
-  """Checks for equality with the object’s `omschr` field."""
-  omschr: String
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
 
-  """Checks for equality with the object’s `prijsexcl` field."""
-  prijsexcl: BigFloat
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ArtikelComponentenFilter
+  ): ArtikelComponentensConnection!
 
-  """Checks for equality with the object’s `samVersie` field."""
-  samVersie: String
+  """Reads and enables pagination through a set of `ArtikelIndex2`."""
+  artikelIndex2(
+    """Only read the first `n` values of the set."""
+    first: Int
 
-  """Checks for equality with the object’s `verrekenprijs` field."""
-  verrekenprijs: BigFloat
+    """Only read the last `n` values of the set."""
+    last: Int
 
-  """Checks for equality with the object’s `margin` field."""
-  margin: BigFloat
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
 
-  """Checks for equality with the object’s `samenstelling` field."""
-  samenstelling: String
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
 
-  """Checks for equality with the object’s `virtualStock` field."""
-  virtualStock: BigFloat
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
 
-  """Checks for equality with the object’s `cdartsamenstel` field."""
-  cdartsamenstel: String
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ArtikelIndex2Filter
+  ): ArtikelIndex2SConnection!
 
-  """Checks for equality with the object’s `locatie` field."""
-  locatie: String
+  """
+  Reads and enables pagination through a set of `ArtikelSamenstellingen`.
+  """
+  artikelSamenstellingen(
+    """Only read the first `n` values of the set."""
+    first: Int
 
-  """Checks for equality with the object’s `inkopen` field."""
-  inkopen: BigFloat
+    """Only read the last `n` values of the set."""
+    last: Int
 
-  """Checks for equality with the object’s `assemblbij` field."""
-  assemblbij: BigFloat
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
 
-  """Checks for equality with the object’s `assemblaf` field."""
-  assemblaf: BigFloat
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
 
-  """Checks for equality with the object’s `cdmagazijn` field."""
-  cdmagazijn: String
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
 
-  """Checks for equality with the object’s `minvoorraad` field."""
-  minvoorraad: BigFloat
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ArtikelSamenstellingenFilter
+  ): ArtikelSamenstellingensConnection!
 
-  """Checks for equality with the object’s `maxvoorraad` field."""
-  maxvoorraad: BigFloat
+  """Reads and enables pagination through a set of `ArtikelIndex2`."""
+  artsamcomponenten(
+    """Only read the first `n` values of the set."""
+    first: Int
 
-  """Checks for equality with the object’s `voorraad` field."""
-  voorraad: BigFloat
+    """Only read the last `n` values of the set."""
+    last: Int
 
-  """Checks for equality with the object’s `status` field."""
-  status: BigFloat
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
 
-  """Checks for equality with the object’s `voorraadGereserveerd2` field."""
-  voorraadGereserveerd2: BigFloat
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
 
-  """Checks for equality with the object’s `voorraadVrij` field."""
-  voorraadVrij: BigFloat
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
 
-  """Checks for equality with the object’s `cdcrediteur` field."""
-  cdcrediteur: String
-
-  """Checks for equality with the object’s `zoeknaam` field."""
-  zoeknaam: String
-
-  """Checks for equality with the object’s `gereserveerd` field."""
-  gereserveerd: BigFloat
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ArtikelIndex2Filter
+  ): ArtikelIndex2SConnection!
 }
 
 """
@@ -46515,6 +46521,9 @@ input ArtikelIndex2Filter {
   """Filter by the object’s `gereserveerd` field."""
   gereserveerd: BigFloatFilter
 
+  """Filter by the object’s `uitloop` field."""
+  uitloop: StringFilter
+
   """Checks for all expressions in this list."""
   and: [ArtikelIndex2Filter!]
 
@@ -46523,6 +46532,247 @@ input ArtikelIndex2Filter {
 
   """Negates the expression."""
   not: ArtikelIndex2Filter
+}
+
+"""A connection to a list of `ArtikelSamenstellingen` values."""
+type ArtikelSamenstellingensConnection {
+  """A list of `ArtikelSamenstellingen` objects."""
+  nodes: [ArtikelSamenstellingen!]!
+
+  """
+  A list of edges which contains the `ArtikelSamenstellingen` and cursor to aid in pagination.
+  """
+  edges: [ArtikelSamenstellingensEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ArtikelSamenstellingen` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type ArtikelSamenstellingen {
+  samVersie: String
+  cdartcomponent: String
+  cdartikel: String
+  omschr: String
+  prijsexcl: BigFloat
+  locatie: String
+  minvoorraad: BigFloat
+  maxvoorraad: BigFloat
+  voorraad: BigFloat
+  gereserveerd: BigFloat
+  assemblaf: BigFloat
+  vrij: BigFloat
+  margin: BigFloat
+  virtualStock: BigFloat
+}
+
+"""A `ArtikelSamenstellingen` edge in the connection."""
+type ArtikelSamenstellingensEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ArtikelSamenstellingen` at the end of the edge."""
+  node: ArtikelSamenstellingen!
+}
+
+"""
+A filter to be used against `ArtikelSamenstellingen` object types. All fields are combined with a logical ‘and.’
+"""
+input ArtikelSamenstellingenFilter {
+  """Filter by the object’s `samVersie` field."""
+  samVersie: StringFilter
+
+  """Filter by the object’s `cdartcomponent` field."""
+  cdartcomponent: StringFilter
+
+  """Filter by the object’s `cdartikel` field."""
+  cdartikel: StringFilter
+
+  """Filter by the object’s `omschr` field."""
+  omschr: StringFilter
+
+  """Filter by the object’s `prijsexcl` field."""
+  prijsexcl: BigFloatFilter
+
+  """Filter by the object’s `locatie` field."""
+  locatie: StringFilter
+
+  """Filter by the object’s `minvoorraad` field."""
+  minvoorraad: BigFloatFilter
+
+  """Filter by the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloatFilter
+
+  """Filter by the object’s `voorraad` field."""
+  voorraad: BigFloatFilter
+
+  """Filter by the object’s `gereserveerd` field."""
+  gereserveerd: BigFloatFilter
+
+  """Filter by the object’s `assemblaf` field."""
+  assemblaf: BigFloatFilter
+
+  """Filter by the object’s `vrij` field."""
+  vrij: BigFloatFilter
+
+  """Filter by the object’s `margin` field."""
+  margin: BigFloatFilter
+
+  """Filter by the object’s `virtualStock` field."""
+  virtualStock: BigFloatFilter
+
+  """Checks for all expressions in this list."""
+  and: [ArtikelSamenstellingenFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [ArtikelSamenstellingenFilter!]
+
+  """Negates the expression."""
+  not: ArtikelSamenstellingenFilter
+}
+
+"""A `ArtikelIndex2` edge in the connection."""
+type ArtikelIndex2SEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ArtikelIndex2` at the end of the edge."""
+  node: ArtikelIndex2!
+}
+
+"""Methods to use when ordering `ArtikelIndex2`."""
+enum ArtikelIndex2SOrderBy {
+  NATURAL
+  CDARTIKEL_ASC
+  CDARTIKEL_DESC
+  OMSCHR_ASC
+  OMSCHR_DESC
+  PRIJSEXCL_ASC
+  PRIJSEXCL_DESC
+  SAM_VERSIE_ASC
+  SAM_VERSIE_DESC
+  VERREKENPRIJS_ASC
+  VERREKENPRIJS_DESC
+  MARGIN_ASC
+  MARGIN_DESC
+  SAMENSTELLING_ASC
+  SAMENSTELLING_DESC
+  VIRTUAL_STOCK_ASC
+  VIRTUAL_STOCK_DESC
+  CDARTSAMENSTEL_ASC
+  CDARTSAMENSTEL_DESC
+  LOCATIE_ASC
+  LOCATIE_DESC
+  INKOPEN_ASC
+  INKOPEN_DESC
+  ASSEMBLBIJ_ASC
+  ASSEMBLBIJ_DESC
+  ASSEMBLAF_ASC
+  ASSEMBLAF_DESC
+  CDMAGAZIJN_ASC
+  CDMAGAZIJN_DESC
+  MINVOORRAAD_ASC
+  MINVOORRAAD_DESC
+  MAXVOORRAAD_ASC
+  MAXVOORRAAD_DESC
+  VOORRAAD_ASC
+  VOORRAAD_DESC
+  STATUS_ASC
+  STATUS_DESC
+  VOORRAAD_GERESERVEERD2_ASC
+  VOORRAAD_GERESERVEERD2_DESC
+  VOORRAAD_VRIJ_ASC
+  VOORRAAD_VRIJ_DESC
+  CDCREDITEUR_ASC
+  CDCREDITEUR_DESC
+  ZOEKNAAM_ASC
+  ZOEKNAAM_DESC
+  GERESERVEERD_ASC
+  GERESERVEERD_DESC
+  UITLOOP_ASC
+  UITLOOP_DESC
+}
+
+"""
+A condition to be used against `ArtikelIndex2` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input ArtikelIndex2Condition {
+  """Checks for equality with the object’s `cdartikel` field."""
+  cdartikel: String
+
+  """Checks for equality with the object’s `omschr` field."""
+  omschr: String
+
+  """Checks for equality with the object’s `prijsexcl` field."""
+  prijsexcl: BigFloat
+
+  """Checks for equality with the object’s `samVersie` field."""
+  samVersie: String
+
+  """Checks for equality with the object’s `verrekenprijs` field."""
+  verrekenprijs: BigFloat
+
+  """Checks for equality with the object’s `margin` field."""
+  margin: BigFloat
+
+  """Checks for equality with the object’s `samenstelling` field."""
+  samenstelling: String
+
+  """Checks for equality with the object’s `virtualStock` field."""
+  virtualStock: BigFloat
+
+  """Checks for equality with the object’s `cdartsamenstel` field."""
+  cdartsamenstel: String
+
+  """Checks for equality with the object’s `locatie` field."""
+  locatie: String
+
+  """Checks for equality with the object’s `inkopen` field."""
+  inkopen: BigFloat
+
+  """Checks for equality with the object’s `assemblbij` field."""
+  assemblbij: BigFloat
+
+  """Checks for equality with the object’s `assemblaf` field."""
+  assemblaf: BigFloat
+
+  """Checks for equality with the object’s `cdmagazijn` field."""
+  cdmagazijn: String
+
+  """Checks for equality with the object’s `minvoorraad` field."""
+  minvoorraad: BigFloat
+
+  """Checks for equality with the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloat
+
+  """Checks for equality with the object’s `voorraad` field."""
+  voorraad: BigFloat
+
+  """Checks for equality with the object’s `status` field."""
+  status: BigFloat
+
+  """Checks for equality with the object’s `voorraadGereserveerd2` field."""
+  voorraadGereserveerd2: BigFloat
+
+  """Checks for equality with the object’s `voorraadVrij` field."""
+  voorraadVrij: BigFloat
+
+  """Checks for equality with the object’s `cdcrediteur` field."""
+  cdcrediteur: String
+
+  """Checks for equality with the object’s `zoeknaam` field."""
+  zoeknaam: String
+
+  """Checks for equality with the object’s `gereserveerd` field."""
+  gereserveerd: BigFloat
+
+  """Checks for equality with the object’s `uitloop` field."""
+  uitloop: String
 }
 
 """A connection to a list of `ArtikelLog` values."""
@@ -47279,51 +47529,6 @@ input ArtikelMvFilter {
   not: ArtikelMvFilter
 }
 
-"""A connection to a list of `ArtikelSamenstellingen` values."""
-type ArtikelSamenstellingensConnection {
-  """A list of `ArtikelSamenstellingen` objects."""
-  nodes: [ArtikelSamenstellingen!]!
-
-  """
-  A list of edges which contains the `ArtikelSamenstellingen` and cursor to aid in pagination.
-  """
-  edges: [ArtikelSamenstellingensEdge!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """
-  The count of *all* `ArtikelSamenstellingen` you could get from the connection.
-  """
-  totalCount: Int!
-}
-
-type ArtikelSamenstellingen {
-  samVersie: String
-  cdartcomponent: String
-  cdartikel: String
-  omschr: String
-  prijsexcl: BigFloat
-  locatie: String
-  minvoorraad: BigFloat
-  maxvoorraad: BigFloat
-  voorraad: BigFloat
-  gereserveerd: BigFloat
-  assemblaf: BigFloat
-  vrij: BigFloat
-  margin: BigFloat
-  virtualStock: BigFloat
-}
-
-"""A `ArtikelSamenstellingen` edge in the connection."""
-type ArtikelSamenstellingensEdge {
-  """A cursor for use in pagination."""
-  cursor: Cursor
-
-  """The `ArtikelSamenstellingen` at the end of the edge."""
-  node: ArtikelSamenstellingen!
-}
-
 """Methods to use when ordering `ArtikelSamenstellingen`."""
 enum ArtikelSamenstellingensOrderBy {
   NATURAL
@@ -47403,62 +47608,6 @@ input ArtikelSamenstellingenCondition {
 
   """Checks for equality with the object’s `virtualStock` field."""
   virtualStock: BigFloat
-}
-
-"""
-A filter to be used against `ArtikelSamenstellingen` object types. All fields are combined with a logical ‘and.’
-"""
-input ArtikelSamenstellingenFilter {
-  """Filter by the object’s `samVersie` field."""
-  samVersie: StringFilter
-
-  """Filter by the object’s `cdartcomponent` field."""
-  cdartcomponent: StringFilter
-
-  """Filter by the object’s `cdartikel` field."""
-  cdartikel: StringFilter
-
-  """Filter by the object’s `omschr` field."""
-  omschr: StringFilter
-
-  """Filter by the object’s `prijsexcl` field."""
-  prijsexcl: BigFloatFilter
-
-  """Filter by the object’s `locatie` field."""
-  locatie: StringFilter
-
-  """Filter by the object’s `minvoorraad` field."""
-  minvoorraad: BigFloatFilter
-
-  """Filter by the object’s `maxvoorraad` field."""
-  maxvoorraad: BigFloatFilter
-
-  """Filter by the object’s `voorraad` field."""
-  voorraad: BigFloatFilter
-
-  """Filter by the object’s `gereserveerd` field."""
-  gereserveerd: BigFloatFilter
-
-  """Filter by the object’s `assemblaf` field."""
-  assemblaf: BigFloatFilter
-
-  """Filter by the object’s `vrij` field."""
-  vrij: BigFloatFilter
-
-  """Filter by the object’s `margin` field."""
-  margin: BigFloatFilter
-
-  """Filter by the object’s `virtualStock` field."""
-  virtualStock: BigFloatFilter
-
-  """Checks for all expressions in this list."""
-  and: [ArtikelSamenstellingenFilter!]
-
-  """Checks for any expressions in this list."""
-  or: [ArtikelSamenstellingenFilter!]
-
-  """Negates the expression."""
-  not: ArtikelSamenstellingenFilter
 }
 
 """A connection to a list of `Artikelomschr` values."""
@@ -72359,6 +72508,233 @@ input SensorsChecklistFilter {
 
   """Negates the expression."""
   not: SensorsChecklistFilter
+}
+
+"""A connection to a list of `StockLevelEntity` values."""
+type StockLevelEntitiesConnection {
+  """A list of `StockLevelEntity` objects."""
+  nodes: [StockLevelEntity!]!
+
+  """
+  A list of edges which contains the `StockLevelEntity` and cursor to aid in pagination.
+  """
+  edges: [StockLevelEntitiesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `StockLevelEntity` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+type StockLevelEntity {
+  cdartikel: String
+  omschr: String
+  locatie: String
+  marge: String
+  bestcode: String
+  besthoeveelheid: BigFloat
+  inkoopprijs: BigFloat
+  minvoorraad: BigFloat
+  maxvoorraad: BigFloat
+  voorraad: Int
+  inkopen: Int
+  gereserveerd: BigFloat
+  assemblaf: BigFloat
+  assemblbij: BigFloat
+  voorraadVrij: BigFloat
+  cdcrediteur: String
+  cdvaluta: String
+  label: String
+  case: BigFloat
+}
+
+"""A `StockLevelEntity` edge in the connection."""
+type StockLevelEntitiesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `StockLevelEntity` at the end of the edge."""
+  node: StockLevelEntity!
+}
+
+"""Methods to use when ordering `StockLevelEntity`."""
+enum StockLevelEntitiesOrderBy {
+  NATURAL
+  CDARTIKEL_ASC
+  CDARTIKEL_DESC
+  OMSCHR_ASC
+  OMSCHR_DESC
+  LOCATIE_ASC
+  LOCATIE_DESC
+  MARGE_ASC
+  MARGE_DESC
+  BESTCODE_ASC
+  BESTCODE_DESC
+  BESTHOEVEELHEID_ASC
+  BESTHOEVEELHEID_DESC
+  INKOOPPRIJS_ASC
+  INKOOPPRIJS_DESC
+  MINVOORRAAD_ASC
+  MINVOORRAAD_DESC
+  MAXVOORRAAD_ASC
+  MAXVOORRAAD_DESC
+  VOORRAAD_ASC
+  VOORRAAD_DESC
+  INKOPEN_ASC
+  INKOPEN_DESC
+  GERESERVEERD_ASC
+  GERESERVEERD_DESC
+  ASSEMBLAF_ASC
+  ASSEMBLAF_DESC
+  ASSEMBLBIJ_ASC
+  ASSEMBLBIJ_DESC
+  VOORRAAD_VRIJ_ASC
+  VOORRAAD_VRIJ_DESC
+  CDCREDITEUR_ASC
+  CDCREDITEUR_DESC
+  CDVALUTA_ASC
+  CDVALUTA_DESC
+  LABEL_ASC
+  LABEL_DESC
+  CASE_ASC
+  CASE_DESC
+}
+
+"""
+A condition to be used against `StockLevelEntity` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input StockLevelEntityCondition {
+  """Checks for equality with the object’s `cdartikel` field."""
+  cdartikel: String
+
+  """Checks for equality with the object’s `omschr` field."""
+  omschr: String
+
+  """Checks for equality with the object’s `locatie` field."""
+  locatie: String
+
+  """Checks for equality with the object’s `marge` field."""
+  marge: String
+
+  """Checks for equality with the object’s `bestcode` field."""
+  bestcode: String
+
+  """Checks for equality with the object’s `besthoeveelheid` field."""
+  besthoeveelheid: BigFloat
+
+  """Checks for equality with the object’s `inkoopprijs` field."""
+  inkoopprijs: BigFloat
+
+  """Checks for equality with the object’s `minvoorraad` field."""
+  minvoorraad: BigFloat
+
+  """Checks for equality with the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloat
+
+  """Checks for equality with the object’s `voorraad` field."""
+  voorraad: Int
+
+  """Checks for equality with the object’s `inkopen` field."""
+  inkopen: Int
+
+  """Checks for equality with the object’s `gereserveerd` field."""
+  gereserveerd: BigFloat
+
+  """Checks for equality with the object’s `assemblaf` field."""
+  assemblaf: BigFloat
+
+  """Checks for equality with the object’s `assemblbij` field."""
+  assemblbij: BigFloat
+
+  """Checks for equality with the object’s `voorraadVrij` field."""
+  voorraadVrij: BigFloat
+
+  """Checks for equality with the object’s `cdcrediteur` field."""
+  cdcrediteur: String
+
+  """Checks for equality with the object’s `cdvaluta` field."""
+  cdvaluta: String
+
+  """Checks for equality with the object’s `label` field."""
+  label: String
+
+  """Checks for equality with the object’s `case` field."""
+  case: BigFloat
+}
+
+"""
+A filter to be used against `StockLevelEntity` object types. All fields are combined with a logical ‘and.’
+"""
+input StockLevelEntityFilter {
+  """Filter by the object’s `cdartikel` field."""
+  cdartikel: StringFilter
+
+  """Filter by the object’s `omschr` field."""
+  omschr: StringFilter
+
+  """Filter by the object’s `locatie` field."""
+  locatie: StringFilter
+
+  """Filter by the object’s `marge` field."""
+  marge: StringFilter
+
+  """Filter by the object’s `bestcode` field."""
+  bestcode: StringFilter
+
+  """Filter by the object’s `besthoeveelheid` field."""
+  besthoeveelheid: BigFloatFilter
+
+  """Filter by the object’s `inkoopprijs` field."""
+  inkoopprijs: BigFloatFilter
+
+  """Filter by the object’s `minvoorraad` field."""
+  minvoorraad: BigFloatFilter
+
+  """Filter by the object’s `maxvoorraad` field."""
+  maxvoorraad: BigFloatFilter
+
+  """Filter by the object’s `voorraad` field."""
+  voorraad: IntFilter
+
+  """Filter by the object’s `inkopen` field."""
+  inkopen: IntFilter
+
+  """Filter by the object’s `gereserveerd` field."""
+  gereserveerd: BigFloatFilter
+
+  """Filter by the object’s `assemblaf` field."""
+  assemblaf: BigFloatFilter
+
+  """Filter by the object’s `assemblbij` field."""
+  assemblbij: BigFloatFilter
+
+  """Filter by the object’s `voorraadVrij` field."""
+  voorraadVrij: BigFloatFilter
+
+  """Filter by the object’s `cdcrediteur` field."""
+  cdcrediteur: StringFilter
+
+  """Filter by the object’s `cdvaluta` field."""
+  cdvaluta: StringFilter
+
+  """Filter by the object’s `label` field."""
+  label: StringFilter
+
+  """Filter by the object’s `case` field."""
+  case: BigFloatFilter
+
+  """Checks for all expressions in this list."""
+  and: [StockLevelEntityFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [StockLevelEntityFilter!]
+
+  """Negates the expression."""
+  not: StockLevelEntityFilter
 }
 
 """A connection to a list of `StockSuppliersIndex` values."""

@@ -24,16 +24,19 @@
               <div class="flex flex-row gap-2">
                 <select
                   class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
-                  [id]="'filter-name-' + activeIndex" #filter (change)="selectColumnFilter(filter.value, activeIndex)">
-                  <option [value]="'placeholder'" disabled [defaultSelected]="'placeholder'">Select a column</option>
+                  [id]="'filter-name-' + activeIndex" #filter (change)="selectColumnFilter(filter.value, activeIndex)"
+                  [(ngModel)]="filterInput.column"
+                  >
+                  <option [value]="null"  disabled >Select a column</option>
                   <!-- (change)="onPageSizeChange($event)"> -->
-                  <option *ngFor="let header of columns" [value]="header.key">{{ header.label }}</option>
+                  <option *ngFor="let header of columns"  [value]="header.key">{{ header.label }}</option>
                 </select>
                 <select *ngIf="filterInput.filterTypes"
                   class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
                   [id]="'filter-type-' + activeIndex" #filterTypes
+                  [(ngModel)]="filterInput.selectedFilterType.id"
                   (change)="selectTypeFilter(+filterTypes.value, filterInput)">
-                  <option [value]="'placeholder'" disabled [defaultSelected]="'placeholder'">Type of filter</option>
+                  <option [value]="null" disabled >Type of filter</option>
                   <!-- (change)="onPageSizeChange($event)"> -->
                   <option *ngFor="let filterOption of filterInput.filterTypes" [value]="filterOption.id">{{
                     filterOption.label }}</option>

@@ -19,8 +19,7 @@ export class ApplicationsFormComponent extends BaseFormComponent<ApplicationInpu
 
     myForm: FormGroup;
 
-    constructor(protected override toastr: ToastrService, protected override fb: FormBuilder
-        ,
+    constructor(protected override toastr: ToastrService, protected override fb: FormBuilder,
         createService: CreateApplicationGQL,
         editService: UpdateApplicationGQL,
         authService: AuthService
@@ -43,6 +42,8 @@ export class ApplicationsFormComponent extends BaseFormComponent<ApplicationInpu
 
     //on edit set to selected assembly
     setEditData(changes: any): void {
+
+        console.log(changes)
         this.object = {
             id: changes.id,           
             name: changes.name,

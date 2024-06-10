@@ -2627,6 +2627,14 @@ export type ArtikelIndex = {
 
 export type ArtikelIndex2 = {
   __typename?: 'ArtikelIndex2';
+  /** Reads and enables pagination through a set of `ArtikelComponenten`. */
+  artikelComponenten: ArtikelComponentensConnection;
+  /** Reads and enables pagination through a set of `ArtikelIndex2`. */
+  artikelIndex2: ArtikelIndex2SConnection;
+  /** Reads and enables pagination through a set of `ArtikelSamenstellingen`. */
+  artikelSamenstellingen: ArtikelSamenstellingensConnection;
+  /** Reads and enables pagination through a set of `ArtikelIndex2`. */
+  artsamcomponenten: ArtikelIndex2SConnection;
   assemblaf?: Maybe<Scalars['BigFloat']['output']>;
   assemblbij?: Maybe<Scalars['BigFloat']['output']>;
   cdartikel?: Maybe<Scalars['String']['output']>;
@@ -2644,12 +2652,53 @@ export type ArtikelIndex2 = {
   samVersie?: Maybe<Scalars['String']['output']>;
   samenstelling?: Maybe<Scalars['String']['output']>;
   status?: Maybe<Scalars['BigFloat']['output']>;
+  uitloop?: Maybe<Scalars['String']['output']>;
   verrekenprijs?: Maybe<Scalars['BigFloat']['output']>;
   virtualStock?: Maybe<Scalars['BigFloat']['output']>;
   voorraad?: Maybe<Scalars['BigFloat']['output']>;
   voorraadGereserveerd2?: Maybe<Scalars['BigFloat']['output']>;
   voorraadVrij?: Maybe<Scalars['BigFloat']['output']>;
   zoeknaam?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type ArtikelIndex2ArtikelComponentenArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ArtikelComponentenFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type ArtikelIndex2ArtikelIndex2Args = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ArtikelIndex2Filter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type ArtikelIndex2ArtikelSamenstellingenArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ArtikelSamenstellingenFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type ArtikelIndex2ArtsamcomponentenArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<ArtikelIndex2Filter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /**
@@ -2691,6 +2740,8 @@ export type ArtikelIndex2Condition = {
   samenstelling?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `status` field. */
   status?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `uitloop` field. */
+  uitloop?: InputMaybe<Scalars['String']['input']>;
   /** Checks for equality with the object’s `verrekenprijs` field. */
   verrekenprijs?: InputMaybe<Scalars['BigFloat']['input']>;
   /** Checks for equality with the object’s `virtualStock` field. */
@@ -2747,6 +2798,8 @@ export type ArtikelIndex2Filter = {
   samenstelling?: InputMaybe<StringFilter>;
   /** Filter by the object’s `status` field. */
   status?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `uitloop` field. */
+  uitloop?: InputMaybe<StringFilter>;
   /** Filter by the object’s `verrekenprijs` field. */
   verrekenprijs?: InputMaybe<BigFloatFilter>;
   /** Filter by the object’s `virtualStock` field. */
@@ -2820,6 +2873,8 @@ export enum ArtikelIndex2SOrderBy {
   SamVersieDesc = 'SAM_VERSIE_DESC',
   StatusAsc = 'STATUS_ASC',
   StatusDesc = 'STATUS_DESC',
+  UitloopAsc = 'UITLOOP_ASC',
+  UitloopDesc = 'UITLOOP_DESC',
   VerrekenprijsAsc = 'VERREKENPRIJS_ASC',
   VerrekenprijsDesc = 'VERREKENPRIJS_DESC',
   VirtualStockAsc = 'VIRTUAL_STOCK_ASC',
@@ -53649,6 +53704,8 @@ export type Query = Node & {
   allStockGroups?: Maybe<StockGroupsConnection>;
   /** Reads and enables pagination through a set of `StockItem`. */
   allStockItems?: Maybe<StockItemsConnection>;
+  /** Reads and enables pagination through a set of `StockLevelEntity`. */
+  allStockLevelEntities?: Maybe<StockLevelEntitiesConnection>;
   /** Reads and enables pagination through a set of `StockSupplier`. */
   allStockSuppliers?: Maybe<StockSuppliersConnection>;
   /** Reads and enables pagination through a set of `StockSuppliersIndexOld`. */
@@ -57068,6 +57125,19 @@ export type QueryAllStockItemsArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<StockItemsOrderBy>>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllStockLevelEntitiesArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  condition?: InputMaybe<StockLevelEntityCondition>;
+  filter?: InputMaybe<StockLevelEntityFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<StockLevelEntitiesOrderBy>>;
 };
 
 
@@ -68229,6 +68299,187 @@ export enum StockItemsOrderBy {
   UserByOwnerIdWeeklyHoursFullAccessAsc = 'USER_BY_OWNER_ID__WEEKLY_HOURS_FULL_ACCESS_ASC',
   UserByOwnerIdWeeklyHoursFullAccessDesc = 'USER_BY_OWNER_ID__WEEKLY_HOURS_FULL_ACCESS_DESC'
 }
+
+/** A connection to a list of `StockLevelEntity` values. */
+export type StockLevelEntitiesConnection = {
+  __typename?: 'StockLevelEntitiesConnection';
+  /** A list of edges which contains the `StockLevelEntity` and cursor to aid in pagination. */
+  edges: Array<StockLevelEntitiesEdge>;
+  /** A list of `StockLevelEntity` objects. */
+  nodes: Array<StockLevelEntity>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `StockLevelEntity` you could get from the connection. */
+  totalCount: Scalars['Int']['output'];
+};
+
+/** A `StockLevelEntity` edge in the connection. */
+export type StockLevelEntitiesEdge = {
+  __typename?: 'StockLevelEntitiesEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']['output']>;
+  /** The `StockLevelEntity` at the end of the edge. */
+  node: StockLevelEntity;
+};
+
+/** Methods to use when ordering `StockLevelEntity`. */
+export enum StockLevelEntitiesOrderBy {
+  AssemblafAsc = 'ASSEMBLAF_ASC',
+  AssemblafDesc = 'ASSEMBLAF_DESC',
+  AssemblbijAsc = 'ASSEMBLBIJ_ASC',
+  AssemblbijDesc = 'ASSEMBLBIJ_DESC',
+  BestcodeAsc = 'BESTCODE_ASC',
+  BestcodeDesc = 'BESTCODE_DESC',
+  BesthoeveelheidAsc = 'BESTHOEVEELHEID_ASC',
+  BesthoeveelheidDesc = 'BESTHOEVEELHEID_DESC',
+  CaseAsc = 'CASE_ASC',
+  CaseDesc = 'CASE_DESC',
+  CdartikelAsc = 'CDARTIKEL_ASC',
+  CdartikelDesc = 'CDARTIKEL_DESC',
+  CdcrediteurAsc = 'CDCREDITEUR_ASC',
+  CdcrediteurDesc = 'CDCREDITEUR_DESC',
+  CdvalutaAsc = 'CDVALUTA_ASC',
+  CdvalutaDesc = 'CDVALUTA_DESC',
+  GereserveerdAsc = 'GERESERVEERD_ASC',
+  GereserveerdDesc = 'GERESERVEERD_DESC',
+  InkoopprijsAsc = 'INKOOPPRIJS_ASC',
+  InkoopprijsDesc = 'INKOOPPRIJS_DESC',
+  InkopenAsc = 'INKOPEN_ASC',
+  InkopenDesc = 'INKOPEN_DESC',
+  LabelAsc = 'LABEL_ASC',
+  LabelDesc = 'LABEL_DESC',
+  LocatieAsc = 'LOCATIE_ASC',
+  LocatieDesc = 'LOCATIE_DESC',
+  MargeAsc = 'MARGE_ASC',
+  MargeDesc = 'MARGE_DESC',
+  MaxvoorraadAsc = 'MAXVOORRAAD_ASC',
+  MaxvoorraadDesc = 'MAXVOORRAAD_DESC',
+  MinvoorraadAsc = 'MINVOORRAAD_ASC',
+  MinvoorraadDesc = 'MINVOORRAAD_DESC',
+  Natural = 'NATURAL',
+  OmschrAsc = 'OMSCHR_ASC',
+  OmschrDesc = 'OMSCHR_DESC',
+  VoorraadAsc = 'VOORRAAD_ASC',
+  VoorraadDesc = 'VOORRAAD_DESC',
+  VoorraadVrijAsc = 'VOORRAAD_VRIJ_ASC',
+  VoorraadVrijDesc = 'VOORRAAD_VRIJ_DESC'
+}
+
+export type StockLevelEntity = {
+  __typename?: 'StockLevelEntity';
+  assemblaf?: Maybe<Scalars['BigFloat']['output']>;
+  assemblbij?: Maybe<Scalars['BigFloat']['output']>;
+  bestcode?: Maybe<Scalars['String']['output']>;
+  besthoeveelheid?: Maybe<Scalars['BigFloat']['output']>;
+  case?: Maybe<Scalars['BigFloat']['output']>;
+  cdartikel?: Maybe<Scalars['String']['output']>;
+  cdcrediteur?: Maybe<Scalars['String']['output']>;
+  cdvaluta?: Maybe<Scalars['String']['output']>;
+  gereserveerd?: Maybe<Scalars['BigFloat']['output']>;
+  inkoopprijs?: Maybe<Scalars['BigFloat']['output']>;
+  inkopen?: Maybe<Scalars['Int']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  locatie?: Maybe<Scalars['String']['output']>;
+  marge?: Maybe<Scalars['String']['output']>;
+  maxvoorraad?: Maybe<Scalars['BigFloat']['output']>;
+  minvoorraad?: Maybe<Scalars['BigFloat']['output']>;
+  omschr?: Maybe<Scalars['String']['output']>;
+  voorraad?: Maybe<Scalars['Int']['output']>;
+  voorraadVrij?: Maybe<Scalars['BigFloat']['output']>;
+};
+
+/**
+ * A condition to be used against `StockLevelEntity` object types. All fields are
+ * tested for equality and combined with a logical ‘and.’
+ */
+export type StockLevelEntityCondition = {
+  /** Checks for equality with the object’s `assemblaf` field. */
+  assemblaf?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `assemblbij` field. */
+  assemblbij?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `bestcode` field. */
+  bestcode?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `besthoeveelheid` field. */
+  besthoeveelheid?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `case` field. */
+  case?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `cdcrediteur` field. */
+  cdcrediteur?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `cdvaluta` field. */
+  cdvaluta?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `gereserveerd` field. */
+  gereserveerd?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `inkoopprijs` field. */
+  inkoopprijs?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `inkopen` field. */
+  inkopen?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `label` field. */
+  label?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `locatie` field. */
+  locatie?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `marge` field. */
+  marge?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `maxvoorraad` field. */
+  maxvoorraad?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `minvoorraad` field. */
+  minvoorraad?: InputMaybe<Scalars['BigFloat']['input']>;
+  /** Checks for equality with the object’s `omschr` field. */
+  omschr?: InputMaybe<Scalars['String']['input']>;
+  /** Checks for equality with the object’s `voorraad` field. */
+  voorraad?: InputMaybe<Scalars['Int']['input']>;
+  /** Checks for equality with the object’s `voorraadVrij` field. */
+  voorraadVrij?: InputMaybe<Scalars['BigFloat']['input']>;
+};
+
+/** A filter to be used against `StockLevelEntity` object types. All fields are combined with a logical ‘and.’ */
+export type StockLevelEntityFilter = {
+  /** Checks for all expressions in this list. */
+  and?: InputMaybe<Array<StockLevelEntityFilter>>;
+  /** Filter by the object’s `assemblaf` field. */
+  assemblaf?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `assemblbij` field. */
+  assemblbij?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `bestcode` field. */
+  bestcode?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `besthoeveelheid` field. */
+  besthoeveelheid?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `case` field. */
+  case?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `cdartikel` field. */
+  cdartikel?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdcrediteur` field. */
+  cdcrediteur?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `cdvaluta` field. */
+  cdvaluta?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `gereserveerd` field. */
+  gereserveerd?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `inkoopprijs` field. */
+  inkoopprijs?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `inkopen` field. */
+  inkopen?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `label` field. */
+  label?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `locatie` field. */
+  locatie?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `marge` field. */
+  marge?: InputMaybe<StringFilter>;
+  /** Filter by the object’s `maxvoorraad` field. */
+  maxvoorraad?: InputMaybe<BigFloatFilter>;
+  /** Filter by the object’s `minvoorraad` field. */
+  minvoorraad?: InputMaybe<BigFloatFilter>;
+  /** Negates the expression. */
+  not?: InputMaybe<StockLevelEntityFilter>;
+  /** Filter by the object’s `omschr` field. */
+  omschr?: InputMaybe<StringFilter>;
+  /** Checks for any expressions in this list. */
+  or?: InputMaybe<Array<StockLevelEntityFilter>>;
+  /** Filter by the object’s `voorraad` field. */
+  voorraad?: InputMaybe<IntFilter>;
+  /** Filter by the object’s `voorraadVrij` field. */
+  voorraadVrij?: InputMaybe<BigFloatFilter>;
+};
 
 export type StockSupplier = Node & {
   __typename?: 'StockSupplier';
@@ -83288,6 +83539,26 @@ export type AllSensorsQueryVariables = Exact<{
 
 export type AllSensorsQuery = { __typename?: 'Query', sensors?: { __typename?: 'SensorIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'SensorIndex', id?: number | null, sensorType?: string | null, serialNumber?: string | null, sensorTypeSort?: string | null, sensorTypeId?: number | null, range?: string | null, label?: string | null, gasName?: string | null, formattedLabelDate?: string | null, factuuropdracht?: string | null, sensorOrderId?: number | null, detectorSensorId?: number | null, debiteurNaam?: string | null, createdDate?: string | null }> } | null };
 
+export type AllArtikelIndex2QueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: ArtikelIndex2Filter;
+  orderBy?: InputMaybe<Array<ArtikelIndex2SOrderBy> | ArtikelIndex2SOrderBy>;
+}>;
+
+
+export type AllArtikelIndex2Query = { __typename?: 'Query', allArtikelIndex2S?: { __typename?: 'ArtikelIndex2SConnection', totalCount: number, nodes: Array<{ __typename?: 'ArtikelIndex2', cdartikel?: string | null, zoeknaam?: string | null, voorraadVrij?: any | null, voorraadGereserveerd2?: any | null, virtualStock?: any | null, voorraad?: any | null, verrekenprijs?: any | null, status?: any | null, samenstelling?: string | null, samVersie?: string | null, prijsexcl?: any | null, omschr?: string | null, maxvoorraad?: any | null, minvoorraad?: any | null, margin?: any | null, locatie?: string | null, inkopen?: any | null, gereserveerd?: any | null, cdcrediteur?: string | null, cdmagazijn?: string | null, cdartsamenstel?: string | null, assemblbij?: any | null, assemblaf?: any | null }> } | null };
+
+export type StockLevelDetailQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: ArtikelIndex2Filter;
+  orderBy?: InputMaybe<Array<ArtikelIndex2SOrderBy> | ArtikelIndex2SOrderBy>;
+}>;
+
+
+export type StockLevelDetailQuery = { __typename?: 'Query', stockLevelDetail?: { __typename?: 'ArtikelIndex2SConnection', totalCount: number, nodes: Array<{ __typename?: 'ArtikelIndex2', cdartikel?: string | null, zoeknaam?: string | null, uitloop?: string | null, voorraadVrij?: any | null, voorraadGereserveerd2?: any | null, virtualStock?: any | null, voorraad?: any | null, verrekenprijs?: any | null, status?: any | null, samenstelling?: string | null, samVersie?: string | null, prijsexcl?: any | null, omschr?: string | null, maxvoorraad?: any | null, minvoorraad?: any | null, margin?: any | null, locatie?: string | null, inkopen?: any | null, gereserveerd?: any | null, cdcrediteur?: string | null, cdmagazijn?: string | null, cdartsamenstel?: string | null, assemblbij?: any | null, assemblaf?: any | null, artikelComponenten: { __typename?: 'ArtikelComponentensConnection', nodes: Array<{ __typename?: 'ArtikelComponenten', cdartikel?: string | null, zoeknaam?: string | null, vrij?: any | null, voorraad?: any | null, virtualStock?: any | null, samVersie?: string | null, omschr?: string | null, minvoorraad?: any | null, maxvoorraad?: any | null, locatie?: string | null, inkopen?: any | null, gereserveerd?: any | null, cdcrediteur?: string | null, cdartsamenstel?: string | null, assemblaf?: any | null, bestcode?: string | null, aantal?: any | null }> }, artikelSamenstellingen: { __typename?: 'ArtikelSamenstellingensConnection', nodes: Array<{ __typename?: 'ArtikelSamenstellingen', cdartikel?: string | null, vrij?: any | null, voorraad?: any | null, virtualStock?: any | null, samVersie?: string | null, prijsexcl?: any | null, omschr?: string | null, minvoorraad?: any | null, maxvoorraad?: any | null, margin?: any | null, locatie?: string | null, gereserveerd?: any | null, cdartcomponent?: string | null, assemblaf?: any | null }> } }> } | null };
+
 export type AllStockSuppliersQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -87120,6 +87391,142 @@ export const AllSensorsDocument = gql`
   })
   export class AllSensorsGQL extends Apollo.Query<AllSensorsQuery, AllSensorsQueryVariables> {
     override document = AllSensorsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllArtikelIndex2Document = gql`
+    query allArtikelIndex2($first: Int, $offset: Int, $filter: ArtikelIndex2Filter!, $orderBy: [ArtikelIndex2SOrderBy!]) {
+  allArtikelIndex2S: allArtikelIndex2S(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      cdartikel
+      zoeknaam
+      voorraadVrij
+      voorraadGereserveerd2
+      virtualStock
+      voorraad
+      verrekenprijs
+      status
+      samenstelling
+      samVersie
+      prijsexcl
+      omschr
+      maxvoorraad
+      minvoorraad
+      margin
+      locatie
+      inkopen
+      gereserveerd
+      cdcrediteur
+      cdmagazijn
+      cdartsamenstel
+      assemblbij
+      assemblaf
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllArtikelIndex2GQL extends Apollo.Query<AllArtikelIndex2Query, AllArtikelIndex2QueryVariables> {
+    override document = AllArtikelIndex2Document;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const StockLevelDetailDocument = gql`
+    query stockLevelDetail($first: Int, $offset: Int, $filter: ArtikelIndex2Filter!, $orderBy: [ArtikelIndex2SOrderBy!]) {
+  stockLevelDetail: allArtikelIndex2S(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      cdartikel
+      zoeknaam
+      uitloop
+      artikelComponenten {
+        nodes {
+          cdartikel
+          zoeknaam
+          vrij
+          voorraad
+          virtualStock
+          samVersie
+          omschr
+          minvoorraad
+          maxvoorraad
+          locatie
+          inkopen
+          gereserveerd
+          cdcrediteur
+          cdartsamenstel
+          assemblaf
+          bestcode
+          aantal
+        }
+      }
+      voorraadVrij
+      artikelSamenstellingen {
+        nodes {
+          cdartikel
+          vrij
+          voorraad
+          virtualStock
+          samVersie
+          prijsexcl
+          omschr
+          minvoorraad
+          maxvoorraad
+          margin
+          locatie
+          gereserveerd
+          cdartcomponent
+          assemblaf
+        }
+      }
+      voorraadGereserveerd2
+      virtualStock
+      voorraad
+      verrekenprijs
+      status
+      samenstelling
+      samVersie
+      prijsexcl
+      omschr
+      maxvoorraad
+      minvoorraad
+      margin
+      locatie
+      inkopen
+      gereserveerd
+      cdcrediteur
+      cdmagazijn
+      cdartsamenstel
+      assemblbij
+      assemblaf
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class StockLevelDetailGQL extends Apollo.Query<StockLevelDetailQuery, StockLevelDetailQueryVariables> {
+    override document = StockLevelDetailDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -120,12 +120,12 @@ export class GroupsFormComponent extends BaseFormComponent<CreateGroupWithPermis
     }
 
     setPermission(permission_id: string, selectedPermissions: any[]) {
-
         this.object.write_permission = null;
         this.object.read_permission = null;
         this.myForm.patchValue({ read_permission: null, write_permission: null})
 
         if (selectedPermissions.find(g => g.id === +permission_id)) {
+            //remove permission
             return;
         }
         selectedPermissions.push(this.permissions.find(g => g.id === +permission_id))
