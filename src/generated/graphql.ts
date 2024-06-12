@@ -83539,6 +83539,16 @@ export type AllSensorsQueryVariables = Exact<{
 
 export type AllSensorsQuery = { __typename?: 'Query', sensors?: { __typename?: 'SensorIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'SensorIndex', id?: number | null, sensorType?: string | null, serialNumber?: string | null, sensorTypeSort?: string | null, sensorTypeId?: number | null, range?: string | null, label?: string | null, gasName?: string | null, formattedLabelDate?: string | null, factuuropdracht?: string | null, sensorOrderId?: number | null, detectorSensorId?: number | null, debiteurNaam?: string | null, createdDate?: string | null }> } | null };
 
+export type AllArtikelAssemblyIndicesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: ArtikelAssemblyIndexFilter;
+  orderBy?: InputMaybe<Array<ArtikelAssemblyIndicesOrderBy> | ArtikelAssemblyIndicesOrderBy>;
+}>;
+
+
+export type AllArtikelAssemblyIndicesQuery = { __typename?: 'Query', allArtikelAssemblyIndices?: { __typename?: 'ArtikelAssemblyIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'ArtikelAssemblyIndex', cdartikel?: string | null, vrij?: any | null, voorraad?: any | null, verrekenprijs?: any | null, omschr?: string | null, minvoorraad?: any | null, maxvoorraad?: any | null, inkopen?: any | null, gereserveerd?: any | null, besthoeveelheid?: any | null, assemblageArtikel?: string | null, assemblbij?: any | null, advice?: any | null, assemblaf?: any | null }> } | null };
+
 export type AllArtikelIndex2QueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -87391,6 +87401,45 @@ export const AllSensorsDocument = gql`
   })
   export class AllSensorsGQL extends Apollo.Query<AllSensorsQuery, AllSensorsQueryVariables> {
     override document = AllSensorsDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const AllArtikelAssemblyIndicesDocument = gql`
+    query allArtikelAssemblyIndices($first: Int, $offset: Int, $filter: ArtikelAssemblyIndexFilter!, $orderBy: [ArtikelAssemblyIndicesOrderBy!]) {
+  allArtikelAssemblyIndices: allArtikelAssemblyIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      cdartikel
+      vrij
+      voorraad
+      verrekenprijs
+      omschr
+      minvoorraad
+      maxvoorraad
+      inkopen
+      gereserveerd
+      besthoeveelheid
+      assemblageArtikel
+      assemblbij
+      advice
+      assemblaf
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllArtikelAssemblyIndicesGQL extends Apollo.Query<AllArtikelAssemblyIndicesQuery, AllArtikelAssemblyIndicesQueryVariables> {
+    override document = AllArtikelAssemblyIndicesDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

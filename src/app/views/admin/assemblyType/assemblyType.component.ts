@@ -43,7 +43,7 @@ export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> {
   constructor(protected override toastr: ToastrService, protected override route: ActivatedRoute, protected override http: HttpClient,
     private assemblyTypeService: AssemblyTypeEntitiesGQL,
     protected override router: Router,
-    protected override fileService : FileService,
+    protected override fileService: FileService,
     protected override authService: AuthService
   ) {
     super(authService, fileService, router, toastr, route, http, assemblyTypeService, null);
@@ -76,11 +76,11 @@ export class AssemblyTypeComponent extends BaseEntity<AssemblyTypesEntity> {
   tableHeaders: TableHead<AssemblyTypesEntitiesOrderBy>[] = [
     { type: 'string', key: 'name', label: "Name", asc: AssemblyTypesEntitiesOrderBy.NameAsc, desc: AssemblyTypesEntitiesOrderBy.NameDesc },
     { type: 'string', key: 'cdartikel', label: "CD Artikel", asc: AssemblyTypesEntitiesOrderBy.CdartikelAsc, desc: AssemblyTypesEntitiesOrderBy.CdartikelDesc },
-    { type: 'number', key: 'voorraad', label: "Free", asc: AssemblyTypesEntitiesOrderBy.VoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.VoorraadDesc },
-    { type: 'number', key: 'gereserveerd', label: "Res.", asc: AssemblyTypesEntitiesOrderBy.GereserveerdAsc, desc: AssemblyTypesEntitiesOrderBy.GereserveerdDesc },
-    { type: 'number', key: 'minvoorraad', label: "Min", asc: AssemblyTypesEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MinvoorraadDesc },
-    { type: 'number', key: 'maxvoorraad', label: "Max", asc: AssemblyTypesEntitiesOrderBy.MaxvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MaxvoorraadDesc },
-    { type: 'number', key: 'advice', label: "Advice", asc: AssemblyTypesEntitiesOrderBy.AdviceAsc, desc: AssemblyTypesEntitiesOrderBy.AdviceDesc },
+    { type: 'number', round: 0, key: 'voorraad', label: "Free", asc: AssemblyTypesEntitiesOrderBy.VoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.VoorraadDesc },
+    { type: 'number', round: 0, key: 'gereserveerd', label: "Res.", asc: AssemblyTypesEntitiesOrderBy.GereserveerdAsc, desc: AssemblyTypesEntitiesOrderBy.GereserveerdDesc },
+    { type: 'number', round: 0, key: 'minvoorraad', label: "Min", asc: AssemblyTypesEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MinvoorraadDesc },
+    { type: 'number', round: 0, key: 'maxvoorraad', label: "Max", asc: AssemblyTypesEntitiesOrderBy.MaxvoorraadAsc, desc: AssemblyTypesEntitiesOrderBy.MaxvoorraadDesc },
+    { type: 'number', round: 0, key: 'advice', label: "Advice", asc: AssemblyTypesEntitiesOrderBy.AdviceAsc, desc: AssemblyTypesEntitiesOrderBy.AdviceDesc },
     { type: 'datetime', key: 'created', label: "Created", asc: AssemblyTypesEntitiesOrderBy.CreatedAsc, desc: AssemblyTypesEntitiesOrderBy.CreatedDesc },
     { type: 'string', key: 'initials', label: "By", asc: AssemblyTypesEntitiesOrderBy.OwnerIdAsc, desc: AssemblyTypesEntitiesOrderBy.OwnerIdDesc },
   ]

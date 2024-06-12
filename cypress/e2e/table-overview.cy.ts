@@ -242,7 +242,6 @@ testCases.forEach(testCase => {
 
             cy.get('#login-button').click(); // Select the tbody by its ID
 
-            cy.get('form').submit();
 
             cy.contains('Dashboard');
 
@@ -323,6 +322,8 @@ testCases.forEach(testCase => {
                 cy.get('#filterButton').click();
 
                 cy.wait(200);
+
+                cy.get('#addFilterButton').click();
 
                 testCase.filterTest.body.forEach((bodyElement, index) => {
                     cy.get(`#filter-name-${index}`).select(bodyElement.name);

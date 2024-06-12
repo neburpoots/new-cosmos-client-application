@@ -51,11 +51,6 @@ export class StockLevelsDetailComponent {
                             or: [
                                 {
                                     cdartikel: { includesInsensitive: this.cdartikel},
-                                    cdmagazijn: { includesInsensitive: "C"}
-                                },
-                                {
-                                    cdartikel: { includesInsensitive: this.cdartikel},
-                                    cdmagazijn: { includesInsensitive: "NC"}
                                 }
                             ]
                         }

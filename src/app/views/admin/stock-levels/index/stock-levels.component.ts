@@ -113,7 +113,7 @@ export class StockLevelsComponent extends BaseEntity<ArtikelIndex2> {
   }
 
   tableHeaders: TableHead<ArtikelIndex2SOrderBy>[] = [
-    { type: 'string', key: 'cdartikel', label: "Code", asc: ArtikelIndex2SOrderBy.CdcrediteurAsc, desc: ArtikelIndex2SOrderBy.CdcrediteurDesc },
+    { type: 'string', key: 'cdartikel', label: "Code", asc: ArtikelIndex2SOrderBy.CdartikelAsc, desc: ArtikelIndex2SOrderBy.CdartikelDesc },
     { type: 'string', key: 'omschr', label: "Description", asc: ArtikelIndex2SOrderBy.OmschrAsc, desc: ArtikelIndex2SOrderBy.OmschrDesc },
     { type: 'string', key: 'locatie', label: "Locatie", asc: ArtikelIndex2SOrderBy.LocatieAsc, desc: ArtikelIndex2SOrderBy.LocatieAsc },
     { type: 'string', key: 'samenstelling', label: "C.", asc: ArtikelIndex2SOrderBy.SamenstellingAsc, desc: ArtikelIndex2SOrderBy.SamenstellingDesc },

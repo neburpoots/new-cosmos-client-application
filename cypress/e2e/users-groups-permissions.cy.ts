@@ -17,8 +17,6 @@ describe(`Test Groups, Users and Permissions`, () => {
 
         cy.get('#login-button').click(); // Select the tbody by its ID
 
-        cy.get('form').submit();
-
         cy.contains('Dashboard');
 
         cy.wait(200);

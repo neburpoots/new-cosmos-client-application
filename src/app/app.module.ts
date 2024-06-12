@@ -129,6 +129,7 @@ import { PurchaseStatusComponent } from "./views/admin/purchase-status/index/pur
 import { ExcelExportComponent } from "./components/excel-export/excel-export.component";
 import { StockLevelsComponent } from "./views/admin/stock-levels/index/stock-levels.component";
 import { StockLevelsDetailComponent } from "./views/admin/stock-levels/detail/stock-levels-detail.component";
+import { StockAssembliesComponent } from "./views/admin/stock-assemblies/index/stock-assemblies.component";
 registerLocaleData(localeEu);
 
 @NgModule({
@@ -232,7 +233,8 @@ registerLocaleData(localeEu);
     PurchaseStatusComponent,
     ExcelExportComponent,
     StockLevelsComponent,
-    StockLevelsDetailComponent
+    StockLevelsDetailComponent,
+    StockAssembliesComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

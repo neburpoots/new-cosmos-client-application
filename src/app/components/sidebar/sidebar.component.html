@@ -4,21 +4,23 @@
     class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
     <!-- Toggler -->
     <button
-      class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-      type="button" (click)="toggleCollapseShow('bg-white m-2 py-3 px-6')">
+      class=" z-10 cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+      type="button" (click)="toggleCollapseShow('bg-cosmosDarkest m-2 py-3 px-6')">
       <i class="fa fa-bars"></i>
     </button>
     <!-- Brand -->
     <a [routerLink]="['/']"
       class="md:block text-left md:pb-2 text-slate-100 mr-0 inline-block whitespace-nowrap text-sm uppercase font-semibold p-4 px-0">
-      <span class="hidden text-base sm:block"> New Cosmos - BIE
-      </span>
+      <div class="flex items-center  gap-2">
+        <img src="assets/img/cosmos_logo_white.svg" class="w-6" alt="Cosmos Logo">
+        <span class="hidden text-base sm:block"> New Cosmos - BIE
+        </span>
+      </div>
+
     </a>
     <!-- User -->
     <ul class="md:hidden items-center flex flex-wrap list-none">
-      <li class="inline-block relative">
-        <app-notification-dropdown class="block"></app-notification-dropdown>
-      </li>
+
       <li class="inline-block relative">
         <app-user-dropdown class="block"></app-user-dropdown>
       </li>
@@ -29,7 +31,7 @@
       [ngClass]="collapseShow">
       <!-- Collapse header -->
       <div class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-slate-200">
-        <div class="flex flex-wrap">
+        <div class="flex flex-wrap mt-12 md:mt-0">
           <div class="w-6/12">
             <a [routerLink]="['/']"
               class="md:block text-left md:pb-2  text-slate-100 mr-0 inline-block whitespace-nowrap text-sm  font-bold p-4 px-0">
@@ -38,20 +40,15 @@
           </div>
           <div class="w-6/12 flex justify-end">
             <button type="button"
-              class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+              class="cursor-pointer text-black  md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
               (click)="toggleCollapseShow('hidden')">
-              <i class="fa fa-times"></i>
+              <i class="text-white fa fa-times"></i>
             </button>
           </div>
         </div>
       </div>
       <!-- Form -->
-      <form class="mt-6 mb-4 md:hidden">
-        <div class="mb-3 pt-0">
-          <input type="text" placeholder="Search"
-            class="border-0 px-3 py-2 h-12 border border-solid border-slate-500 placeholder-slate-300 text-slate-100 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal" />
-        </div>
-      </form>
+
 
       <!-- Divider -->
       <hr class="my-4 md:min-w-full" />

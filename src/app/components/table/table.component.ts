@@ -90,9 +90,9 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterBuilder.columns = this.columns;
-    this.filterBuilder.currentFilters = this.searchCriteria.filter.and;
-    this.filterBuilder.filterInputs = this.staticSearchFilters;
-    this.filterBuilder.currentFilterInputs = this.staticSearchFilters;
+    this.filterBuilder.currentFilters = [...this.searchCriteria.filter.and];
+      this.filterBuilder.filterInputs = [...this.staticSearchFilters];
+      this.filterBuilder.currentFilterInputs = [...this.staticSearchFilters];
   }
 
 
@@ -185,6 +185,7 @@ export class TableComponent implements OnInit {
   }
 
   returnRoundedValue(round: number, value: number): string {    
+
     return value.toFixed(round);
   }
 
@@ -263,9 +264,26 @@ export class TableComponent implements OnInit {
     this.filterBuilder.filterInputs[filterIndex].selectedFilterType = { id: null};
   }
 
+  checkFilterSelected(id : number, ) {
+
+  }
+
   async selectTypeFilter(selectTypeFilter: number, filterInput: filterInput): Promise<void> {
+
+    console.log(selectTypeFilter)
+
+    console.log(filterInput)
+
+    filterTypes.forEach((filterType) => {
+      filterType.id = +filterType.id;
+    })
+
     
     let selectedFilterType = filterTypes.find((filterType) => filterType.id === selectTypeFilter);
+
+    console.log(filterTypes)
+
+    console.log(selectedFilterType)
 
     //if filter type is changed then remove the current range
     filterInput.range = [];

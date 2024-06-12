@@ -34,12 +34,12 @@
                 <select *ngIf="filterInput.filterTypes"
                   class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
                   [id]="'filter-type-' + activeIndex" #filterTypes
-                  [(ngModel)]="filterInput.selectedFilterType.id"
+                  
                   (change)="selectTypeFilter(+filterTypes.value, filterInput)">
-                  <option [value]="null" disabled >Type of filter</option>
+                  <option [value]="null"  disabled [selected]="!filterInput.selectedFilterType.id">Type of filter</option>
                   <!-- (change)="onPageSizeChange($event)"> -->
-                  <option *ngFor="let filterOption of filterInput.filterTypes" [value]="filterOption.id">{{
-                    filterOption.label }}</option>
+                  <option *ngFor="let filterOption of filterInput.filterTypes" [selected]="filterInput.selectedFilterType.id === filterOption.id" [value]="filterOption.id">{{
+                    filterOption.label }} </option>
                 </select>
                 <div *ngIf="filterInput.selectedFilterType">
                   @if([1,2].includes(filterInput.selectedFilterType.id)) {
@@ -220,7 +220,7 @@
 
               {{ formattedDate(item[column['key']]['value'])}}
               } @else if (column['type'] === 'number') {
-              @if(column['round']) {
+              @if(column['round'] || column['round'] === 0) {
               {{ item[column['key']]['value'] ? returnRoundedValue(column['round'], +item[column['key']]['value']) :
               '-'}}
               } @else {

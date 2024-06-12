@@ -1,0 +1,26 @@
+query allArtikelAssemblyIndices($first: Int, $offset: Int, $filter: ArtikelAssemblyIndexFilter!, $orderBy: [ArtikelAssemblyIndicesOrderBy!]) {
+  allArtikelAssemblyIndices: allArtikelAssemblyIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      cdartikel
+      vrij
+      voorraad
+      verrekenprijs
+      omschr
+      minvoorraad
+      maxvoorraad
+      inkopen
+      gereserveerd
+      besthoeveelheid
+      assemblageArtikel
+      assemblbij
+      advice
+      assemblaf
+    }
+  }
+}

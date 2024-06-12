@@ -17,8 +17,6 @@ describe(`Test Assemblies Multivers`, () => {
 
         cy.get('#login-button').click(); // Select the tbody by its ID
 
-        cy.get('form').submit();
-
         cy.contains('Dashboard');
 
         cy.wait(200);
@@ -42,7 +40,7 @@ describe(`Test Assemblies Multivers`, () => {
 
         cy.get('div.bg-white')
         .children()
-        .should('have.length', 17); // Should have 10 children
+        .should('have.length', 12); // Should have 10 children
 
     });
 

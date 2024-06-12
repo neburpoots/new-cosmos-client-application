@@ -197,7 +197,7 @@
                     {{ line?.aantal }}</td>
                   <td
                     class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
-                    {{ line?.cdartikel }}</td>
+                    <a [href]="'/stock-levels/' + line?.cdartikel">{{ line?.cdartikel }}</a></td>
                   <td
                     class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ line?.omschr }}</td>
@@ -279,7 +279,7 @@
                 <tr class="">
                   <td
                     class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
-                    {{ line?.cdartikel }}</td>
+                    <a [href]="'/stock-levels/' + line?.cdartikel">{{ line?.cdartikel }}</a></td>
                   <td
                     class="border-t-0 px-2 align-middle border-l-0 border-r-0 text-sm font-roboto dark:text-slate-200 text-slate-800 whitespace-nowrap p-1">
                     {{ line?.omschr }}</td>

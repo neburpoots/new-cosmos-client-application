@@ -1,0 +1,36 @@
+<div class="min-h-[100vh] flex px-4 md:px-10 justify-center">
+
+    <div class="h-full w-full flex items-center">
+        <div class="mt-[100px] w-full mb-12 px-4">
+            <table-component [baseOrderBy]="baseOrderBy" [object]="objectSingle"
+                (setTableWidths)="setTableWidths($event)" 
+                [detailPagePrefix]="'/stock-levels/'" [isViewable]="true"
+                [isEditable]="false" [isCreatable]="false" [title]="objectPlural" [searchCriteria]="searchCriteria"
+                (searchCriteriaChange)="fetch($event)" [columns]="tableHeaders" [data]="tableData"
+                [inline_selector]="'areas-form'" [isInlineCreating]="isInlineCreating" (export)="openExportModal()"
+                [staticSearchFilters]="staticFilters"
+(exportExcel)="openExportExcelModal()"
+                [isPdf]="false" 
+                (toggleInlineCreating)="toggleInlineCreating()">
+
+            </table-component>
+            <app-pagination-component [searchCriteria]="searchCriteria" [totalResults]="totalResults"
+                (paginationChange)="fetch($event)"></app-pagination-component>
+
+                
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportModalVisible" (onClose)="closeExportModal()">
+                <export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExportModal()">
+                </export>
+            </modal-component>
+
+            <modal-component [width]="ModalWidth.Large
+            " [isVisible]="isExportExcelModalVisible" (onClose)="closeExcelExportModal()">
+                <excel-export [objectPlural]="objectPlural" [objectSingle]="objectSingle" [data]="tableData"
+                    (export)="exportData($event)" [tableHeaders]="tableHeaders" (closeModal)="closeExcelExportModal()">
+                </excel-export>
+            </modal-component>
+        </div>
+    </div>
+</div>

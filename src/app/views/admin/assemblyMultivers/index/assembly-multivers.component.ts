@@ -86,12 +86,12 @@ export class AssemblyMultiversComponent extends BaseEntity<AssemblyMultiversEnti
     { type: 'string', key: 'omschr', label: "Type", asc: AssemblyMultiversEntitiesOrderBy.OmschrAsc, desc: AssemblyMultiversEntitiesOrderBy.OmschrDesc },
     { type: 'string', key: 'cdartikel', label: "MV Code", asc: AssemblyMultiversEntitiesOrderBy.CdartikelAsc, desc: AssemblyMultiversEntitiesOrderBy.CdartikelDesc },
     { type: 'string', key: 'commentaar', label: "S/N", asc: AssemblyMultiversEntitiesOrderBy.CommentaarAsc, desc: AssemblyMultiversEntitiesOrderBy.CommentaarDesc },
-    { type: 'number', key: 'aantal', label: "Qty", asc: AssemblyMultiversEntitiesOrderBy.AantalAsc, desc: AssemblyMultiversEntitiesOrderBy.AantalDesc },
-    { type: 'number', key: 'voorraad', label: "Free", asc: AssemblyMultiversEntitiesOrderBy.VoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.VoorraadDesc },
-    { type: 'number', key: 'gereserveerd', label: "Res.", asc: AssemblyMultiversEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MinvoorraadDesc },
-    { type: 'number', key: 'minvoorraad', label: "Min", asc: AssemblyMultiversEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MinvoorraadDesc },
-    { type: 'number', key: 'maxvoorraad', label: "Max", asc: AssemblyMultiversEntitiesOrderBy.MaxvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MaxvoorraadDesc },
-    { type: 'string', key: 'status', label: "Status", asc: AssemblyMultiversEntitiesOrderBy.StatusAsc, desc: AssemblyMultiversEntitiesOrderBy.StatusDesc }
+    { type: 'number', round: 0, key: 'aantal', label: "Qty", asc: AssemblyMultiversEntitiesOrderBy.AantalAsc, desc: AssemblyMultiversEntitiesOrderBy.AantalDesc },
+    { type: 'number', round: 0, key: 'voorraad', label: "Free", asc: AssemblyMultiversEntitiesOrderBy.VoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.VoorraadDesc },
+    { type: 'number', round: 0, key: 'gereserveerd', label: "Res.", asc: AssemblyMultiversEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MinvoorraadDesc },
+    { type: 'number', round: 0, key: 'minvoorraad', label: "Min", asc: AssemblyMultiversEntitiesOrderBy.MinvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MinvoorraadDesc },
+    { type: 'number', round: 0, key: 'maxvoorraad', label: "Max", asc: AssemblyMultiversEntitiesOrderBy.MaxvoorraadAsc, desc: AssemblyMultiversEntitiesOrderBy.MaxvoorraadDesc },
+    { type: 'string', round: 0, key: 'status', label: "Status", asc: AssemblyMultiversEntitiesOrderBy.StatusAsc, desc: AssemblyMultiversEntitiesOrderBy.StatusDesc }
   ]
 
 

@@ -9,8 +9,7 @@ describe('Login', () => {
       // Fill in the password field
       cy.get('input[name="password"]').type('Welkom123!');
 
-      cy.get('button[type="submit"]').click();
-      cy.get('form').submit();
+      cy.get('#login-button').click(); // Select the tbody by its ID
 
       // Optionally, you can check for a successful login by asserting that
       // the URL changed or some element that is visible only after login appears

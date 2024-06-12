@@ -57,7 +57,6 @@ crudTestCases.forEach(testCase => {
 
             cy.get('#login-button').click(); // Select the tbody by its ID
 
-            cy.get('form').submit();
 
             cy.contains('Dashboard');
 
