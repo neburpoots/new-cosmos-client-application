@@ -6,3 +6,5 @@ export interface TableHead<T> {
     round?: number;
     type: 'string' | 'number' | 'boolean' | 'datetime' | 'array';
 }
+
+

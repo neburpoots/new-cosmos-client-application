@@ -130,6 +130,8 @@ import { ExcelExportComponent } from "./components/excel-export/excel-export.com
 import { StockLevelsComponent } from "./views/admin/stock-levels/index/stock-levels.component";
 import { StockLevelsDetailComponent } from "./views/admin/stock-levels/detail/stock-levels-detail.component";
 import { StockAssembliesComponent } from "./views/admin/stock-assemblies/index/stock-assemblies.component";
+import { SensorListComponent } from "./views/admin/sensor-list/index/sensor-list.component";
+import { SensorListFormComponent } from "./views/admin/sensor-list/form/sensor-list-form.component";
 registerLocaleData(localeEu);
 
 @NgModule({
@@ -234,7 +236,9 @@ registerLocaleData(localeEu);
     ExcelExportComponent,
     StockLevelsComponent,
     StockLevelsDetailComponent,
-    StockAssembliesComponent
+    StockAssembliesComponent,
+    SensorListComponent,
+    SensorListFormComponent
   ],
   imports: [ToastrModule.forRoot({
     timeOut: 2000, // Set the duration for which the toastr will be displayed (in milliseconds)

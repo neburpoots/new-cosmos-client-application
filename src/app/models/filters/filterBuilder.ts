@@ -80,6 +80,10 @@ export class FilterBuilder {
         });
     }
 
+    async addCustomFilter(filter : any) {
+        this.currentFilters.push();
+    }
+
     //deletes a single filter
     async deleteFilterInput(id: number): Promise<void> {
         console.log(this.filterInputs)

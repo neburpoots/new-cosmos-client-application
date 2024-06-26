@@ -89,9 +89,7 @@ export class ApplicationsComponent extends BaseEntity<Application> {
     { type: 'string', key: 'userByOwnerId$initials', label: "By", asc: ApplicationsOrderBy.UserByOwnerIdInitialsAsc, desc: ApplicationsOrderBy.UserByOwnerIdInitialsDesc },
   ];
 
-
   mapTableData(applications: Application[]): any[] {
-
     return applications.map((application: Application) => {
       return {
         id: { url: null, value: application.id } as TableField,
@@ -102,5 +100,5 @@ export class ApplicationsComponent extends BaseEntity<Application> {
     });
   }
 
-
 }
+

@@ -89,3 +89,36 @@ mutation DeleteAssemblyType($id: Int!)
 		clientMutationId
 	}  
 }
+
+
+query allAssemblyEntities($first: Int, $offset: Int, $filter: AssemblyEntityFilter!, $orderBy: [AssemblyEntitiesOrderBy!]) {
+  allAssemblyEntities: allAssemblyEntities(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      voorraad
+      po
+      name
+      minvoorraad
+      maxvoorraad
+      inkopen
+      initials
+      id
+      gereserveerd
+      created
+      completed
+      code
+      checked
+      cdartikel
+      assemblyTypeId
+      advice
+    }
+  }
+}
+
+
+

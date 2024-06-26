@@ -25,13 +25,13 @@ dayjs.extend(customParseFormat);
   ],
 })
 export class TableComponent implements OnInit {
+
   @Input() columns: TableHead<any>[] = [];
   @Input() data: any[] = [];
   @Input() title: string = "";
   @Input() object: string = "";
   @Input() inline_selector: string = "";
   @Input() isInlineCreateable: boolean = true;
-  // @Input() paginationInfo: any = {};
   @Input() isEditable: boolean = false;
   @Input() isDeletable: boolean = false;
   @Input() isCreatable: boolean = true;
@@ -40,23 +40,20 @@ export class TableComponent implements OnInit {
   @Input() isPdf: boolean = false;
   @Input() detailPagePrefix: string = "";
   @Input() isInlineCreating: boolean = false;
-  //main search filters
   @Input() searchCriteria: any = {
     orderBy: [],
     first: 10,
     offset: 0,
     filter: { and: [] },
   };
-
   //these are filters that should come from the parent component and are loaded in the filter popup
   //Stock levels is an example of this.
   @Input() staticSearchFilters : filterInput[] = [];
+  @Input() popoverComponent: any;
+  @Input() customFilters: any[] = [];
 
-  @Input() popoverComponent: any; // 'any' is used for flexibility; you can use a more specific type if needed
   @Output() pdf = new EventEmitter<number>();
-  // // @Input() criteriaChangeFunction: Function = () => { console.log("test")};
   @Output() searchCriteriaChange: EventEmitter<any> = new EventEmitter<any>();
-  // @Output()
   @Output() create = new EventEmitter<void>();
   @Output() edit = new EventEmitter<number>();
   @Output() delete = new EventEmitter<number>();
@@ -366,6 +363,16 @@ export class TableComponent implements OnInit {
 
   async recoverSavedFilters(): Promise<void> {
     this.filterBuilder.filterInputs = this.filterBuilder.currentFilterInputs;
+  }
+
+
+  async applyCustomFilter(filter: any, id : any): Promise<void> {
+    console.log(filter);
+    console.log(id)
+
+    this.filterBuilder.addCustomFilter(filter);
+
+    // this.filterBuilder.addCustomFilter(filter);
   }
 
 }

@@ -1,0 +1,89 @@
+query detectorSensorLocationIndices($first: Int, $offset: Int, $filter: DetectorSensorLocationsIndexFilter!, $orderBy: [DetectorSensorLocationsIndicesOrderBy!]) {
+  detectorSensorLocationIndices: allDetectorSensorLocationsIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    nodes {
+      detectorId
+      applicationId
+      applicationName
+      areaId
+      areaName
+      buildingId
+      buildingName
+      calFlowRate
+      calGasConcentration
+      calGasEngineeringUnits
+      calGasGasName
+      calResponse
+      detectorLabelDate
+      detectorLocationAddress
+      detectorLocationBus
+      detectorModel
+      simsTag
+      simsChannel
+      sensorTypeSiliconeSheet
+      sensorTypeMembraneSeal
+      sensorSerialNumber
+      sensorModel
+      sensorMaintenanceDueDateLabel
+      sensorMaintenanceDueDate
+      sensorMaintenanceDueClass
+      sensorLabelDate
+      sensorInstallDueDateLabel
+      sensorInstallDueDate
+      sensorInstallDueClass
+      sensorId
+      samplePointName
+      samplePointId
+      remarks
+      rangeLowEu
+      rangeHighEu
+      rangeEngineeringUnits
+      pyrolyserName
+      pyrolyserInstallDueDateLabel
+      pyrolyserInstallDueDate
+      pyrolyserInstallDueClass
+      lastSensorMaintenanceDate
+      oRingName
+      membraneName
+      lastSensorInstallDate
+      lastPyrolyserInstallDate
+      lastFilterInstallDate
+      gasName
+      flowRate
+      floorName
+      filterName
+      filterInstallDueDateLabel
+      filterInstallDueClass
+      filterInstallDueDate
+      endUserName
+      endUserId
+      electrolyteName
+      detectorSerialNumber
+      detectorSensorLocationId
+      detectorPosition
+    }
+    totalCount
+  }
+}
+
+#-------------------------------------------------------------------------------
+query detectorSensorLocationsEndUsers($first: Int, $offset: Int, $filter: DetectorSensorLocationsEndUserFilter!, $orderBy: [DetectorSensorLocationsEndUsersOrderBy!]) {
+  allDetectorSensorLocationsEndUsers: allDetectorSensorLocationsEndUsers(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    nodes {
+        contactName
+      id
+      name
+      contactEmail
+    }
+    totalCount
+  }
+}

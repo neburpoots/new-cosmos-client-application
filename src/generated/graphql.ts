@@ -82764,6 +82764,16 @@ export type DeleteAssemblyTypeMutationVariables = Exact<{
 
 export type DeleteAssemblyTypeMutation = { __typename?: 'Mutation', deleteAssemblyTypeById?: { __typename?: 'DeleteAssemblyTypePayload', clientMutationId?: string | null } | null };
 
+export type AllAssemblyEntitiesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: AssemblyEntityFilter;
+  orderBy?: InputMaybe<Array<AssemblyEntitiesOrderBy> | AssemblyEntitiesOrderBy>;
+}>;
+
+
+export type AllAssemblyEntitiesQuery = { __typename?: 'Query', allAssemblyEntities?: { __typename?: 'AssemblyEntitiesConnection', totalCount: number, nodes: Array<{ __typename?: 'AssemblyEntity', voorraad?: any | null, po?: boolean | null, name?: string | null, minvoorraad?: any | null, maxvoorraad?: any | null, inkopen?: any | null, initials?: string | null, id?: number | null, gereserveerd?: any | null, created?: any | null, completed?: boolean | null, code?: string | null, checked?: boolean | null, cdartikel?: string | null, assemblyTypeId?: number | null, advice?: number | null }> } | null };
+
 export type AllBuildingsNoPaginationQueryVariables = Exact<{
   userId?: InputMaybe<Array<Scalars['Int']['input']> | Scalars['Int']['input']>;
 }>;
@@ -82881,6 +82891,26 @@ export type DashboardQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type DashboardQuery = { __typename?: 'Query', allDashboardTables?: { __typename?: 'DashboardTablesConnection', totalCount: number, nodes: Array<{ __typename?: 'DashboardTable', month?: number | null, totalPerMonth?: any | null, year?: number | null, distinctOffertenummerCount?: any | null }> } | null };
+
+export type DetectorSensorLocationIndicesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: DetectorSensorLocationsIndexFilter;
+  orderBy?: InputMaybe<Array<DetectorSensorLocationsIndicesOrderBy> | DetectorSensorLocationsIndicesOrderBy>;
+}>;
+
+
+export type DetectorSensorLocationIndicesQuery = { __typename?: 'Query', detectorSensorLocationIndices?: { __typename?: 'DetectorSensorLocationsIndicesConnection', totalCount: number, nodes: Array<{ __typename?: 'DetectorSensorLocationsIndex', detectorId?: number | null, applicationId?: number | null, applicationName?: string | null, areaId?: number | null, areaName?: string | null, buildingId?: number | null, buildingName?: string | null, calFlowRate?: number | null, calGasConcentration?: number | null, calGasEngineeringUnits?: string | null, calGasGasName?: string | null, calResponse?: number | null, detectorLabelDate?: any | null, detectorLocationAddress?: number | null, detectorLocationBus?: number | null, detectorModel?: string | null, simsTag?: string | null, simsChannel?: number | null, sensorTypeSiliconeSheet?: boolean | null, sensorTypeMembraneSeal?: boolean | null, sensorSerialNumber?: string | null, sensorModel?: string | null, sensorMaintenanceDueDateLabel?: string | null, sensorMaintenanceDueDate?: any | null, sensorMaintenanceDueClass?: string | null, sensorLabelDate?: any | null, sensorInstallDueDateLabel?: string | null, sensorInstallDueDate?: any | null, sensorInstallDueClass?: string | null, sensorId?: number | null, samplePointName?: string | null, samplePointId?: number | null, remarks?: string | null, rangeLowEu?: number | null, rangeHighEu?: number | null, rangeEngineeringUnits?: string | null, pyrolyserName?: string | null, pyrolyserInstallDueDateLabel?: string | null, pyrolyserInstallDueDate?: any | null, pyrolyserInstallDueClass?: string | null, lastSensorMaintenanceDate?: any | null, oRingName?: string | null, membraneName?: string | null, lastSensorInstallDate?: any | null, lastPyrolyserInstallDate?: any | null, lastFilterInstallDate?: any | null, gasName?: string | null, flowRate?: number | null, floorName?: string | null, filterName?: string | null, filterInstallDueDateLabel?: string | null, filterInstallDueClass?: string | null, filterInstallDueDate?: any | null, endUserName?: string | null, endUserId?: number | null, electrolyteName?: string | null, detectorSerialNumber?: string | null, detectorSensorLocationId?: number | null, detectorPosition?: number | null }> } | null };
+
+export type DetectorSensorLocationsEndUsersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  filter: DetectorSensorLocationsEndUserFilter;
+  orderBy?: InputMaybe<Array<DetectorSensorLocationsEndUsersOrderBy> | DetectorSensorLocationsEndUsersOrderBy>;
+}>;
+
+
+export type DetectorSensorLocationsEndUsersQuery = { __typename?: 'Query', allDetectorSensorLocationsEndUsers?: { __typename?: 'DetectorSensorLocationsEndUsersConnection', totalCount: number, nodes: Array<{ __typename?: 'DetectorSensorLocationsEndUser', contactName?: string | null, id?: number | null, name?: string | null, contactEmail?: string | null }> } | null };
 
 export type DeleteDetectorTypeMutationVariables = Exact<{
   id: Scalars['Int']['input'];
@@ -84361,6 +84391,47 @@ export const DeleteAssemblyTypeDocument = gql`
       super(apollo);
     }
   }
+export const AllAssemblyEntitiesDocument = gql`
+    query allAssemblyEntities($first: Int, $offset: Int, $filter: AssemblyEntityFilter!, $orderBy: [AssemblyEntitiesOrderBy!]) {
+  allAssemblyEntities: allAssemblyEntities(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    totalCount
+    nodes {
+      voorraad
+      po
+      name
+      minvoorraad
+      maxvoorraad
+      inkopen
+      initials
+      id
+      gereserveerd
+      created
+      completed
+      code
+      checked
+      cdartikel
+      assemblyTypeId
+      advice
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class AllAssemblyEntitiesGQL extends Apollo.Query<AllAssemblyEntitiesQuery, AllAssemblyEntitiesQueryVariables> {
+    override document = AllAssemblyEntitiesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const AllBuildingsNoPaginationDocument = gql`
     query allBuildingsNoPagination($userId: [Int!]) {
   allBuildings(filter: {or: [{endUserByEndUserId: {id: {inExpansive: $userId}}}]}) {
@@ -84813,6 +84884,119 @@ export const DashboardDocument = gql`
   })
   export class DashboardGQL extends Apollo.Query<DashboardQuery, DashboardQueryVariables> {
     override document = DashboardDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DetectorSensorLocationIndicesDocument = gql`
+    query detectorSensorLocationIndices($first: Int, $offset: Int, $filter: DetectorSensorLocationsIndexFilter!, $orderBy: [DetectorSensorLocationsIndicesOrderBy!]) {
+  detectorSensorLocationIndices: allDetectorSensorLocationsIndices(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    nodes {
+      detectorId
+      applicationId
+      applicationName
+      areaId
+      areaName
+      buildingId
+      buildingName
+      calFlowRate
+      calGasConcentration
+      calGasEngineeringUnits
+      calGasGasName
+      calResponse
+      detectorLabelDate
+      detectorLocationAddress
+      detectorLocationBus
+      detectorModel
+      simsTag
+      simsChannel
+      sensorTypeSiliconeSheet
+      sensorTypeMembraneSeal
+      sensorSerialNumber
+      sensorModel
+      sensorMaintenanceDueDateLabel
+      sensorMaintenanceDueDate
+      sensorMaintenanceDueClass
+      sensorLabelDate
+      sensorInstallDueDateLabel
+      sensorInstallDueDate
+      sensorInstallDueClass
+      sensorId
+      samplePointName
+      samplePointId
+      remarks
+      rangeLowEu
+      rangeHighEu
+      rangeEngineeringUnits
+      pyrolyserName
+      pyrolyserInstallDueDateLabel
+      pyrolyserInstallDueDate
+      pyrolyserInstallDueClass
+      lastSensorMaintenanceDate
+      oRingName
+      membraneName
+      lastSensorInstallDate
+      lastPyrolyserInstallDate
+      lastFilterInstallDate
+      gasName
+      flowRate
+      floorName
+      filterName
+      filterInstallDueDateLabel
+      filterInstallDueClass
+      filterInstallDueDate
+      endUserName
+      endUserId
+      electrolyteName
+      detectorSerialNumber
+      detectorSensorLocationId
+      detectorPosition
+    }
+    totalCount
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DetectorSensorLocationIndicesGQL extends Apollo.Query<DetectorSensorLocationIndicesQuery, DetectorSensorLocationIndicesQueryVariables> {
+    override document = DetectorSensorLocationIndicesDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const DetectorSensorLocationsEndUsersDocument = gql`
+    query detectorSensorLocationsEndUsers($first: Int, $offset: Int, $filter: DetectorSensorLocationsEndUserFilter!, $orderBy: [DetectorSensorLocationsEndUsersOrderBy!]) {
+  allDetectorSensorLocationsEndUsers: allDetectorSensorLocationsEndUsers(
+    filter: $filter
+    orderBy: $orderBy
+    first: $first
+    offset: $offset
+  ) {
+    nodes {
+      contactName
+      id
+      name
+      contactEmail
+    }
+    totalCount
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DetectorSensorLocationsEndUsersGQL extends Apollo.Query<DetectorSensorLocationsEndUsersQuery, DetectorSensorLocationsEndUsersQueryVariables> {
+    override document = DetectorSensorLocationsEndUsersDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

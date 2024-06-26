@@ -25,20 +25,20 @@
                 <select
                   class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
                   [id]="'filter-name-' + activeIndex" #filter (change)="selectColumnFilter(filter.value, activeIndex)"
-                  [(ngModel)]="filterInput.column"
-                  >
-                  <option [value]="null"  disabled >Select a column</option>
+                  [(ngModel)]="filterInput.column">
+                  <option [value]="null" disabled>Select a column</option>
                   <!-- (change)="onPageSizeChange($event)"> -->
-                  <option *ngFor="let header of columns"  [value]="header.key">{{ header.label }}</option>
+                  <option *ngFor="let header of columns" [value]="header.key">{{ header.label }}</option>
                 </select>
                 <select *ngIf="filterInput.filterTypes"
                   class="font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDarker border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
                   [id]="'filter-type-' + activeIndex" #filterTypes
-                  
                   (change)="selectTypeFilter(+filterTypes.value, filterInput)">
-                  <option [value]="null"  disabled [selected]="!filterInput.selectedFilterType.id">Type of filter</option>
+                  <option [value]="null" disabled [selected]="!filterInput.selectedFilterType.id">Type of filter
+                  </option>
                   <!-- (change)="onPageSizeChange($event)"> -->
-                  <option *ngFor="let filterOption of filterInput.filterTypes" [selected]="filterInput.selectedFilterType.id === filterOption.id" [value]="filterOption.id">{{
+                  <option *ngFor="let filterOption of filterInput.filterTypes"
+                    [selected]="filterInput.selectedFilterType.id === filterOption.id" [value]="filterOption.id">{{
                     filterOption.label }} </option>
                 </select>
                 <div *ngIf="filterInput.selectedFilterType">
@@ -97,8 +97,7 @@
             }
 
             <div class="flex gap-2 mt-4 justify-end">
-              <button type="button" (click)="addInputFilter()"
-              id="addFilterButton"
+              <button type="button" (click)="addInputFilter()" id="addFilterButton"
                 class="text-sm shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer">
                 New Filter +
               </button>
@@ -106,8 +105,7 @@
                 class="text-sm shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer">
                 Clear filters
               </button>
-              <button
-              id="applyFiltersButton"
+              <button id="applyFiltersButton"
                 class="text-sm shadow-lg rounded-2xl bg-cosmosDarker px-4 py-2 text-white font-semibold cursor-pointer"
                 type="button" (click)="applyFilters()">
                 Save filters
@@ -128,9 +126,9 @@
       <fa-icon [size]="'lg'" [icon]="faFileExport"></fa-icon>
     </button>
     <button type="button" (click)="exportExcelTable()" id="exportExcelButton"
-    class="cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:bg-cosmosDarker transition transition-colors hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 hover: font-medium rounded-full text-sm px-[16px] py-2.5 text-center">
-    <fa-icon [size]="'lg'"  [icon]="faFileExcel"></fa-icon>
-  </button>
+      class="cursor-pointer text-white bg-cosmosDark dark:bg-cosmosDarker hover:bg-cosmosDarker transition transition-colors hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-300 hover: font-medium rounded-full text-sm px-[16px] py-2.5 text-center">
+      <fa-icon [size]="'lg'" [icon]="faFileExcel"></fa-icon>
+    </button>
   </div>
 
 
@@ -145,6 +143,17 @@
       +</button>
   </div>
 
+</div>
+<div *ngIf="customFilters.length > 0" class="mb-5">
+  @for(item of customFilters; track item.id) {
+  <select
+    class="dark:bg-cosmosDarker font-semibold px-8 pl-4 py-3 text-sm bg-cosmosDark border-none  focus:border-white text-white focus:border rounded-2xl focus:ring-0 focus:outline-cosmosDark"
+    id="customFilter" (change)="applyCustomFilter(item, $event.target)">
+    <!-- (change)="onPageSizeChange($event)"> -->
+    <option [value]="null" >Select an End User</option>
+  <option *ngFor="let option of item.filter" [value]="option.id">{{option.name}}</option>
+  </select>
+  }
 </div>
 <div [@fadeInOut]="true"
   class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm rounded-2xl bg-slate-50 dark:bg-slate-900 p-4">
@@ -206,7 +215,7 @@
 
           <tr *ngFor="let item of data">
 
-            <td *ngFor="let column of columns"
+            <td *ngFor="let column of columns" [ngClass]="item[column['key']]['color']"
               class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm font-roboto  text-slate-800 dark:text-slate-200 whitespace-nowrap p-3">
               @if (isBoolean(item[column['key']]['value'])) {
               <span class="text-base" *ngIf="item[column['key']]['value']"><i
@@ -230,7 +239,7 @@
               @else {
               {{ item[column['key']]['value'] ? item[column['key']]['value'] : '-'}}
               }
-
+              {{item[column['key']]['condition']}}
             </td>
             <td *ngIf="isDeletable || isEditable || isViewable || isPdf"
               class="mt-2 sticky right-0 flex bg-slate-50 dark:bg-slate-900 gap-1 items-center justify-center">

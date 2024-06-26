@@ -28,6 +28,17 @@ export abstract class BaseEntity<T> {
   abstract objectSingle: string;
   abstract objectPlural: string;
 
+  protected refetchTrigger: Subject<void> = new Subject<void>();
+
+  abstract tableHeaders: TableHead<any>[];
+
+  abstract Key: string;
+
+  //This is the selected item that is used for editing and deleting.
+  selectedItem: T | undefined;
+
+  abstract mapTableData(data: any[]): any[];
+
   //override this to the route of the pdf
   pdfPrefix: string = 'api/'
 
@@ -42,16 +53,9 @@ export abstract class BaseEntity<T> {
     return this.objectPlural!.toLowerCase();
   }
 
-  //This is the selected item that is used for editing and deleting.
-  selectedItem: T | undefined;
 
-  protected refetchTrigger: Subject<void> = new Subject<void>();
 
-  abstract tableHeaders: TableHead<any>[];
 
-  abstract Key: string;
-
-  abstract mapTableData(data: any[]): any[];
 
   tableData: any[] = [];
 

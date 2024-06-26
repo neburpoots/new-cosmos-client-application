@@ -49,6 +49,7 @@ import { PurchaseStatusComponent } from "./views/admin/purchase-status/index/pur
 import { StockLevelsComponent } from "./views/admin/stock-levels/index/stock-levels.component";
 import { StockLevelsDetailComponent } from "./views/admin/stock-levels/detail/stock-levels-detail.component";
 import { StockAssembliesComponent } from "./views/admin/stock-assemblies/index/stock-assemblies.component";
+import { SensorListComponent } from "./views/admin/sensor-list/index/sensor-list.component";
 
 //id is the permission id in db
 export class RoutePermission {
@@ -311,7 +312,7 @@ export const navigationObject: menuItem[] = [
         active: false,
         // icon4: "ni-tv-2 text-primary",
         icon6: faTowerCell,
-        route: new RoutePermission("sensor-types", SensorTypeComponent, 4),
+        route: new RoutePermission("sensor-lists", SensorListComponent, 32),
       },
       {
         title: "Sample Points",

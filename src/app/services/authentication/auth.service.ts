@@ -72,6 +72,7 @@ export class AuthService {
 	}
 
 	login(username: string, password: string) {
+		
 		localStorage.removeItem('jwtToken');
 
 		this.authenticateService.mutate({ username, password }).pipe(
